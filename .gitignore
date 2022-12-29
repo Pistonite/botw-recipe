@@ -1,0 +1,7 @@
+/target
+*.db
+__pycache__
+*.zip
+/temp
+*.bin
+*.yaml
