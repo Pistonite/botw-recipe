@@ -64,6 +64,7 @@ python check.py
 You should see `All is good` in the end.
 **NOTE: You will see some error because the database is currently inaccurate**
 
+## Using the Database
 ### Run the Program
 Run the following command from the root directory (not `dump`)
 ```
