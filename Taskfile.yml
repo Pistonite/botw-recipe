@@ -3,4 +3,6 @@ version: '3'
 tasks:
   repro:
     desc: Reproduce research
+    dir: research
     cmds:
+    - python main.py {{.CLI_ARGS}}
