@@ -1,0 +1,1585 @@
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Campfire Egg
+  - Hard-Boiled Egg
+  SellingPrice: 5
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 140
+  EffectType: None
+  HitPointRecover: 18
+  Names:
+  - Seared Gourmet Steak
+  - Roasted Whole Bird
+  SellingPrice: 35
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: Fireproof
+  HitPointRecover: 0
+  Names:
+  - Smotherwing Butterfly
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 5
+  BoostSuccessRate: 100
+  BuyingPrice: 600
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Naydra's Scale
+  - Dinraal's Scale
+  - Farosh's Scale
+  SellingPrice: 150
+  Tags:
+  - CookLowPrice
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Cane Sugar
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 15
+  BoostSuccessRate: 100
+  BuyingPrice: 1200
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Shard of Dinraal's Horn
+  - Shard of Farosh's Horn
+  - Shard of Naydra's Horn
+  SellingPrice: 300
+  Tags:
+  - CookLowPrice
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 150
+  EffectType: ResistHot
+  HitPointRecover: 12
+  Names:
+  - Frozen Whole Bird
+  - Icy Gourmet Meat
+  SellingPrice: 40
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 95
+  EffectType: None
+  HitPointRecover: 12
+  Names:
+  - Roasted Endura Carrot
+  SellingPrice: 38
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: -1
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Thunder Helm
+  - Sheikah Slate
+  - Paraglider
+  - Bow of Light
+  - Hestu's Maracas
+  - Picture of the Champions
+  - Korok Seed
+  SellingPrice: -1
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 5
+  EffectType: None
+  HitPointRecover: 2
+  Names:
+  - Roasted Tree Nut
+  - Roasted Acorn
+  SellingPrice: 2
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 35
+  EffectType: ResistHot
+  HitPointRecover: 4
+  Names:
+  - Frozen Bird Drumstick
+  - Icy Meat
+  SellingPrice: 15
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 150
+  EffectType: GutsRecover
+  HitPointRecover: 0
+  Names:
+  - Energetic Rhino Beetle
+  SellingPrice: 30
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: GutsRecover
+  HitPointRecover: 0
+  Names:
+  - Restless Cricket
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 16
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Goron Spice
+  SellingPrice: 4
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Hylian Rice
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: ResistElectric
+  HitPointRecover: 0
+  Names:
+  - Electric Darner
+  - Thunderwing Butterfly
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: ResistHot
+  HitPointRecover: 6
+  Names:
+  - Frozen Bird Thigh
+  - Icy Prime Meat
+  SellingPrice: 28
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 13
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Toasty Endura Shroom
+  SellingPrice: 5
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Tabantha Wheat
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 100
+  EffectType: LifeMaxUp
+  HitPointRecover: 16
+  Names:
+  - Hearty Lizard
+  SellingPrice: 20
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Goat Butter
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 58
+  EffectType: None
+  HitPointRecover: 9
+  Names:
+  - Seared Prime Steak
+  SellingPrice: 24
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Bird Egg
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: ResistHot
+  HitPointRecover: 0
+  Names:
+  - Winterwing Butterfly
+  - Cold Darner
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 38
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Roasted Porgy
+  - Roasted Carp
+  SellingPrice: 15
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 2
+  Names:
+  - Fresh Milk
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 25
+  EffectType: Fireproof
+  HitPointRecover: 0
+  Names:
+  - Fireproof Lizard
+  SellingPrice: 5
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 28
+  EffectType: None
+  HitPointRecover: 9
+  Names:
+  - Roasted Bird Thigh
+  SellingPrice: 24
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: LifeMaxUp
+  HitPointRecover: 12
+  Names:
+  - Hearty Durian
+  SellingPrice: 15
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 15
+  EffectType: None
+  HitPointRecover: 3
+  Names:
+  - Toasty Sunshroom
+  - Toasty Zapshroom
+  - Toasty Chillshroom
+  - Roasted Swift Carrot
+  SellingPrice: 6
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: ExGutsMaxUp
+  HitPointRecover: 4
+  Names:
+  - Endura Shroom
+  SellingPrice: 6
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: ResistElectric
+  HitPointRecover: 4
+  Names:
+  - Voltfin Trout
+  SellingPrice: 6
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: Quietness
+  HitPointRecover: 0
+  Names:
+  - Blue Nightshade
+  SellingPrice: 4
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 720
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Topaz
+  SellingPrice: 180
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: ResistHot
+  HitPointRecover: 16
+  Names:
+  - Frozen Hearty Salmon
+  SellingPrice: 18
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 40
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Yellow Chuchu Jelly
+  - White Chuchu Jelly
+  - Red Chuchu Jelly
+  SellingPrice: 10
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 80
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Bokoblin Guts
+  - Keese Eyeball
+  SellingPrice: 20
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Lizalfos Horn
+  - Octorok Tentacle
+  SellingPrice: 10
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 25
+  EffectType: ResistHot
+  HitPointRecover: 4
+  Names:
+  - Frozen Trout
+  - Frozen River Snail
+  SellingPrice: 10
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 240
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Opal
+  SellingPrice: 60
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: DefenseUp
+  HitPointRecover: 0
+  Names:
+  - Armoranth
+  SellingPrice: 5
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: None
+  HitPointRecover: 2
+  Names:
+  - Roasted Mighty Thistle
+  - Roasted Armoranth
+  SellingPrice: 8
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: AttackUp
+  HitPointRecover: 4
+  Names:
+  - Mighty Carp
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: LifeMaxUp
+  HitPointRecover: 12
+  Names:
+  - Big Hearty Truffle
+  SellingPrice: 15
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 140
+  EffectType: None
+  HitPointRecover: 12
+  Names:
+  - Raw Gourmet Meat
+  SellingPrice: 35
+  Tags:
+  - CookMeat
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: MovingSpeed
+  HitPointRecover: 2
+  Names:
+  - Fleet-Lotus Seeds
+  SellingPrice: 5
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Raw Bird Thigh
+  SellingPrice: 15
+  Tags:
+  - CookMeat
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Palm Fruit
+  SellingPrice: 4
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 58
+  EffectType: None
+  HitPointRecover: 24
+  Names:
+  - Roasted Big Radish
+  SellingPrice: 24
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: AttackUp
+  HitPointRecover: 2
+  Names:
+  - Razorshroom
+  SellingPrice: 5
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: DefenseUp
+  HitPointRecover: 4
+  Names:
+  - Armored Porgy
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: MovingSpeed
+  HitPointRecover: 2
+  Names:
+  - Rushroom
+  SellingPrice: 3
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 30
+  EffectType: Quietness
+  HitPointRecover: 4
+  Names:
+  - Silent Princess
+  SellingPrice: 10
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 280
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Luminous Stone
+  SellingPrice: 70
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 32
+  EffectType: ResistHot
+  HitPointRecover: 8
+  Names:
+  - Frozen Bass
+  - Frozen Crab
+  - Frozen Hearty Bass
+  SellingPrice: 14
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 160
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Ancient Shaft
+  SellingPrice: 40
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 32
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Bokoblin Fang
+  SellingPrice: 8
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 800
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Lynel Guts
+  - Giant Ancient Core
+  SellingPrice: 200
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Bokoblin Horn
+  SellingPrice: 3
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Ancient Spring
+  SellingPrice: 15
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 120
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Amber
+  SellingPrice: 30
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: AttackUp
+  HitPointRecover: 4
+  Names:
+  - Mighty Porgy
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: DefenseUp
+  HitPointRecover: 2
+  Names:
+  - Ironshroom
+  SellingPrice: 5
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 30
+  EffectType: None
+  HitPointRecover: 15
+  Names:
+  - Roasted Radish
+  SellingPrice: 12
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: ResistHot
+  HitPointRecover: 2
+  Names:
+  - Hydromelon
+  SellingPrice: 4
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 140
+  EffectType: None
+  HitPointRecover: 12
+  Names:
+  - Raw Whole Bird
+  SellingPrice: 35
+  Tags:
+  - CookMeat
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 32
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Raw Bird Drumstick
+  SellingPrice: 8
+  Tags:
+  - CookMeat
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Raw Prime Meat
+  SellingPrice: 15
+  Tags:
+  - CookMeat
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 2
+  Names:
+  - Wildberry
+  SellingPrice: 3
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 72
+  EffectType: LifeMaxUp
+  HitPointRecover: 8
+  Names:
+  - Hearty Bass
+  SellingPrice: 18
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: None
+  HitPointRecover: 3
+  Names:
+  - Roasted Voltfruit
+  - Roasted Hydromelon
+  - Roasted Mighty Bananas
+  - Baked Fortified Pumpkin
+  - Roasted Lotus Seeds
+  SellingPrice: 8
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 840
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Ruby
+  SellingPrice: 210
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: ResistHot
+  HitPointRecover: 4
+  Names:
+  - Frozen Carp
+  - Frozen Porgy
+  SellingPrice: 18
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: MovingSpeed
+  HitPointRecover: 0
+  Names:
+  - Swift Violet
+  SellingPrice: 10
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 60
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Lizalfos Talon
+  SellingPrice: 15
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 8
+  BoostSuccessRate: 100
+  BuyingPrice: 720
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Dinraal's Claw
+  - Farosh's Claw
+  - Naydra's Claw
+  SellingPrice: 180
+  Tags:
+  - CookLowPrice
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 112
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Lizalfos Tail
+  SellingPrice: 28
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 1040
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Sapphire
+  SellingPrice: 260
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 30
+  EffectType: None
+  HitPointRecover: 18
+  Names:
+  - Roasted Hearty Durian
+  SellingPrice: 12
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: ResistHot
+  HitPointRecover: 4
+  Names:
+  - Chillfin Trout
+  SellingPrice: 6
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: ResistElectric
+  HitPointRecover: 2
+  Names:
+  - Zapshroom
+  SellingPrice: 4
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: ResistElectric
+  HitPointRecover: 2
+  Names:
+  - Voltfruit
+  SellingPrice: 4
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 2
+  Names:
+  - Apple
+  SellingPrice: 3
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 32
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Raw Meat
+  SellingPrice: 8
+  Tags:
+  - CookMeat
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 13
+  EffectType: None
+  HitPointRecover: 3
+  Names:
+  - Toasty Razorshroom
+  - Toasty Rushroom
+  - Charred Pepper
+  - Roasted Wildberry
+  - Toasty Ironshroom
+  - Toasty Stamella Shroom
+  SellingPrice: 5
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: Quietness
+  HitPointRecover: 2
+  Names:
+  - Silent Shroom
+  SellingPrice: 3
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Hyrule Bass
+  SellingPrice: 6
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 2000
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Diamond
+  SellingPrice: 500
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: ResistElectric
+  HitPointRecover: 0
+  Names:
+  - Electric Safflina
+  SellingPrice: 3
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 200
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Lynel Hoof
+  SellingPrice: 50
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 45
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Moblin Fang
+  SellingPrice: 12
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Moblin Horn
+  - Chuchu Jelly
+  - Octo Balloon
+  SellingPrice: 5
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 160
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Lynel Horn
+  SellingPrice: 40
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: MovingSpeed
+  HitPointRecover: 2
+  Names:
+  - Swift Carrot
+  SellingPrice: 4
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: LifeMaxUp
+  HitPointRecover: 8
+  Names:
+  - Hearty Truffle
+  SellingPrice: 6
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: Quietness
+  HitPointRecover: 4
+  Names:
+  - Sneaky River Snail
+  SellingPrice: 6
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 80
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Sanke Carp
+  SellingPrice: 20
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: GutsRecover
+  HitPointRecover: 4
+  Names:
+  - Bright-Eyed Crab
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 4
+  Names:
+  - Hyrule Herb
+  SellingPrice: 3
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 3
+  Names:
+  - Toasty Hylian Shroom
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 72
+  EffectType: GutsRecover
+  HitPointRecover: 4
+  Names:
+  - Staminoka Bass
+  SellingPrice: 18
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 2
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 1
+  Names:
+  - Chickaloo Tree Nut
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 2
+  Names:
+  - Hylian Shroom
+  SellingPrice: 3
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 15
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Baked Palm Fruit
+  SellingPrice: 6
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: LifeMaxUp
+  HitPointRecover: 16
+  Names:
+  - Big Hearty Radish
+  SellingPrice: 15
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 100
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Moblin Guts
+  SellingPrice: 25
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 320
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Hinox Guts
+  - Ancient Core
+  SellingPrice: 80
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 100
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Octorok Eyeball
+  SellingPrice: 25
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 32
+  EffectType: DefenseUp
+  HitPointRecover: 4
+  Names:
+  - Ironshell Crab
+  SellingPrice: 8
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 32
+  EffectType: LifeMaxUp
+  HitPointRecover: 10
+  Names:
+  - Hearty Radish
+  SellingPrice: 8
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: ResistHot
+  HitPointRecover: 12
+  Names:
+  - Icy Hearty Blueshell Snail
+  SellingPrice: 18
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: Quietness
+  HitPointRecover: 4
+  Names:
+  - Stealthfin Trout
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: None
+  HitPointRecover: 12
+  Names:
+  - Toasted Hearty Truffle
+  SellingPrice: 8
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 8
+  EffectType: None
+  HitPointRecover: 3
+  Names:
+  - Toasty Silent Shroom
+  - Baked Apple
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 2
+  BoostSuccessRate: 0
+  BuyingPrice: 8
+  EffectType: None
+  HitPointRecover: 1
+  Names:
+  - Acorn
+  SellingPrice: 2
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 30
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Seared Steak
+  - Roasted Bird Drumstick
+  - Blackened Crab
+  SellingPrice: 12
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 60
+  EffectType: LifeMaxUp
+  HitPointRecover: 12
+  Names:
+  - Hearty Blueshell Snail
+  SellingPrice: 15
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: ResistCold
+  HitPointRecover: 0
+  Names:
+  - Warm Safflina
+  SellingPrice: 3
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 120
+  EffectType: ExGutsMaxUp
+  HitPointRecover: 8
+  Names:
+  - Endura Carrot
+  SellingPrice: 30
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 32
+  EffectType: AttackUp
+  HitPointRecover: 4
+  Names:
+  - Razorclaw Crab
+  SellingPrice: 8
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 440
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Molduga Guts
+  SellingPrice: 110
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 8
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Keese Wing
+  SellingPrice: 2
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 120
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Molduga Fin
+  - Ancient Gear
+  SellingPrice: 30
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 100
+  BuyingPrice: 1500
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Star Fragment
+  SellingPrice: 300
+  Tags:
+  - CookLowPrice
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: AttackUp
+  HitPointRecover: 0
+  Names:
+  - Mighty Thistle
+  SellingPrice: 5
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 24
+  EffectType: ResistCold
+  HitPointRecover: 4
+  Names:
+  - Sizzlefin Trout
+  SellingPrice: 6
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: GutsRecover
+  HitPointRecover: 2
+  Names:
+  - Stamella Shroom
+  SellingPrice: 5
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: DefenseUp
+  HitPointRecover: 2
+  Names:
+  - Fortified Pumpkin
+  SellingPrice: 5
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: AttackUp
+  HitPointRecover: 2
+  Names:
+  - Mighty Bananas
+  SellingPrice: 5
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: ResistCold
+  HitPointRecover: 2
+  Names:
+  - Sunshroom
+  SellingPrice: 4
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: DefenseUp
+  HitPointRecover: 4
+  Names:
+  - Armored Carp
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: ResistHot
+  HitPointRecover: 0
+  Names:
+  - Cool Safflina
+  SellingPrice: 3
+  Tags:
+  - CookPlant
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Rock Salt
+  SellingPrice: 2
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 80
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Hinox Toenail
+  SellingPrice: 20
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 48
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Ancient Screw
+  SellingPrice: 12
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 140
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Hinox Tooth
+  SellingPrice: 35
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Flint
+  SellingPrice: 5
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: LifeMaxUp
+  HitPointRecover: 16
+  Names:
+  - Hearty Salmon
+  SellingPrice: 10
+  Tags:
+  - CookFish
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 16
+  EffectType: ResistHot
+  HitPointRecover: 2
+  Names:
+  - Chillshroom
+  SellingPrice: 4
+  Tags:
+  - CookMushroom
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: ResistCold
+  HitPointRecover: 2
+  Names:
+  - Spicy Pepper
+  SellingPrice: 3
+  Tags:
+  - CookFruit
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Monster Extract
+  SellingPrice: 3
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 100
+  EffectType: ExGutsMaxUp
+  HitPointRecover: 8
+  Names:
+  - Tireless Frog
+  SellingPrice: 20
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 38
+  EffectType: None
+  HitPointRecover: 18
+  Names:
+  - Blueshell Escargot
+  - Roasted Hearty Salmon
+  SellingPrice: 15
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 30
+  BuyingPrice: 140
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Red Lizalfos Tail
+  - Yellow Lizalfos Tail
+  - Icy Lizalfos Tail
+  SellingPrice: 35
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 10
+  BoostSuccessRate: 100
+  BuyingPrice: 1000
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Shard of Farosh's Fang
+  - Shard of Dinraal's Fang
+  - Shard of Naydra's Fang
+  SellingPrice: 250
+  Tags:
+  - CookLowPrice
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: ResistCold
+  HitPointRecover: 0
+  Names:
+  - Warm Darner
+  - Summerwing Butterfly
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: MovingSpeed
+  HitPointRecover: 0
+  Names:
+  - Hot-Footed Frog
+  - Hightail Lizard
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 23
+  EffectType: None
+  HitPointRecover: 6
+  Names:
+  - Sneaky River Escargot
+  - Roasted Trout
+  - Roasted Bass
+  SellingPrice: 9
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 12
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Wood
+  SellingPrice: 2
+  Tags:
+  - CookOre
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 40
+  EffectType: GutsRecover
+  HitPointRecover: 8
+  Names:
+  - Courser Bee Honey
+  SellingPrice: 10
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 10
+  BuyingPrice: 24
+  EffectType: None
+  HitPointRecover: 0
+  Names:
+  - Ice Keese Wing
+  - Electric Keese Wing
+  - Fire Keese Wing
+  SellingPrice: 6
+  Tags:
+  - CookEnemy
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 30
+  EffectType: None
+  HitPointRecover: 12
+  Names:
+  - Roasted Hearty Bass
+  SellingPrice: 12
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: Quietness
+  HitPointRecover: 0
+  Names:
+  - Sunset Firefly
+  SellingPrice: 2
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 58
+  EffectType: None
+  HitPointRecover: 18
+  Names:
+  - Toasted Big Hearty Truffle
+  SellingPrice: 24
+  Tags: []
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: AttackUp
+  HitPointRecover: 0
+  Names:
+  - Bladed Rhino Beetle
+  SellingPrice: 4
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 20
+  EffectType: DefenseUp
+  HitPointRecover: 0
+  Names:
+  - Rugged Rhino Beetle
+  SellingPrice: 4
+  Tags:
+  - CookInsect
+- BoostHitPointRecover: 0
+  BoostSuccessRate: 0
+  BuyingPrice: 10
+  EffectType: None
+  HitPointRecover: 20
+  Names:
+  - Fairy
+  SellingPrice: 2
+  Tags: []

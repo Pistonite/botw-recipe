@@ -1,0 +1,125 @@
+
+- Recipe:
+  - Acorn
+  - Fairy
+  - Fleet-Lotus Seeds
+  - Roasted Big Radish
+  - Roasted Endura Carrot
+  Hp: 120
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Durability Up
+  - Critical Hit
+  - Long Throw
+  - Multishot
+  - Zoom
+  - Surf Up
+- Recipe:
+  - Acorn
+  - Fairy
+  - Roasted Big Radish
+  - Roasted Endura Carrot
+  - Rushroom
+  Hp: 120
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Durability Up
+  - Critical Hit
+  - Multishot
+  - Zoom
+  - Surf Up
+
+- Recipe:
+  - Courser Bee Honey
+  - Fairy
+  - Roasted Endura Carrot
+  - Roasted Radish
+  - Rushroom
+  Hp: 114
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Durability Up
+  - Long Throw
+  - Multishot
+  - Zoom
+  - Surf Up
+
+- Recipe:
+  - Fairy
+  - Fairy
+  - Hearty Radish
+  - Roasted Endura Carrot
+  - Roasted Radish
+  Hp: 120
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Multishot
+  - Zoom
+  - Surf Up
+ 
+- Recipe:
+  - Fairy
+  - Fairy
+  - Roasted Big Radish
+  - Roasted Endura Carrot
+  - Rushroom
+  Hp: 120
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Long Throw
+  - Multishot
+  - Zoom
+  - Surf Up
+  
+- Recipe:
+  - Fairy
+  - Fairy
+  - Roasted Endura Carrot
+  - Rushroom
+  - Toasted Big Hearty Truffle
+  Hp: 120
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Long Throw
+  - Multishot
+  - Zoom
+  - Surf Up
+
+
+- Recipe:
+  - Fairy
+  - Hyrule Bass
+  - Roasted Endura Carrot
+  - Roasted Radish
+  - Silent Princess
+  Hp: 110
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Critical Hit
+  - Long Throw
+  - Multishot
+  - Zoom
+  - Surf Up
+  
+- Recipe:
+  - Fairy
+  - Roasted Big Radish
+  - Roasted Endura Carrot
+  - Rushroom
+  - Rushroom
+  Hp: 120
+  HpCrit: 120
+  Modifiers:
+  - Attack Up
+  - Durability Up
+  - Long Throw
+  - Multishot
+  - Zoom
+  - Surf Up
