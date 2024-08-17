@@ -4,9 +4,18 @@ import subprocess
 import shutil
 
 CLEAN = False
+O = "output"
 
 def sparse_checkout(repo, path, branch, checkout_paths):
-    if CLEAN:
+    clean = CLEAN
+    if not clean:
+        for p in checkout_paths:
+            if not os.path.exists(os.path.join(path, p)):
+                clean = True
+                print(f"{p} not found, forcing re-checkout")
+                break
+
+    if clean:
         if os.path.exists(path):
             shutil.rmtree(path)
     if not os.path.exists(path):
@@ -35,4 +44,21 @@ if __name__ == "__main__":
             "botw_names.json"
         ]
     )
-    
+    sparse_checkout(
+        "https://github.com/leoetlino/botw",
+        "botw-data",
+        "master",
+        [
+            "Actor/",
+            "Message/"
+        ]
+    )
+    if CLEAN:
+        if os.path.exists(O):
+            shutil.rmtree(O)
+    if not os.path.exists(O):
+        os.makedirs(O)
+    subprocess.run(["python", "get-actor-names.py"])
+    subprocess.run(["python", "get-actor-data.py"])
+    subprocess.run(["python", "group-items.py"])
+    subprocess.run(["python", "validate-groups.py"])
