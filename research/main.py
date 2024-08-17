@@ -31,19 +31,24 @@ def sparse_checkout(repo, path, branch, checkout_paths):
             f.write(checkout_path + "\n")
     subprocess.run(["git", "pull", "--depth=1", "origin", branch], cwd=path)
 
+def run_script(script):
+    status = subprocess.run(["python", script])
+    if status.returncode != 0:
+        print(f"{script} failed")
+        sys.exit(status.returncode)
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "clean":
+    if len(sys.argv) > 1 and sys.argv[1] == "--clean":
         CLEAN = True
     # prepare data
-    sparse_checkout(
-        "https://github.com/MrCheeze/botw-tools",
-        "botw-tools",
-        "master",
-        [
-            "botw_names.json"
-        ]
-    )
+    # sparse_checkout(
+    #     "https://github.com/MrCheeze/botw-tools",
+    #     "botw-tools",
+    #     "master",
+    #     [
+    #         "botw_names.json"
+    #     ]
+    # )
     sparse_checkout(
         "https://github.com/leoetlino/botw",
         "botw-data",
@@ -58,7 +63,8 @@ if __name__ == "__main__":
             shutil.rmtree(O)
     if not os.path.exists(O):
         os.makedirs(O)
-    subprocess.run(["python", "get-actor-names.py"])
-    subprocess.run(["python", "get-actor-data.py"])
-    subprocess.run(["python", "group-items.py"])
-    subprocess.run(["python", "validate-groups.py"])
+    run_script("get-actor-names.py")
+    run_script("get-actor-data.py")
+    run_script("group-items.py")
+    run_script("validate-groups.py")
+    run_script("ensure-exhaustiveness.py")

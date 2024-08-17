@@ -210,3 +210,26 @@
 - Item_ChilledFish_08 # Frozen River Snail
 - Item_ChilledFish_09 # Icy Hearty Blueshell Snail
 - Obj_DRStone_Get     # Sheikah Slate
+- dyecolor_00         # Color Selection in Hateno Shop
+- dyecolor_01
+- dyecolor_02
+- dyecolor_03
+- dyecolor_04
+- dyecolor_05
+- dyecolor_06
+- dyecolor_07
+- dyecolor_08
+- dyecolor_09
+- dyecolor_10
+- dyecolor_11
+- dyecolor_12
+- dyecolor_13
+- dyecolor_14
+- dyecolor_15
+- Obj_Photo_Animal    # Pictures sold in Hateno Lab
+- Obj_Photo_BossEnemy
+- Obj_Photo_Enemy
+- Obj_Photo_Material
+- Obj_Photo_Other
+- Obj_Photo_Weapon
+

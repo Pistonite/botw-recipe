@@ -1,3 +1,4 @@
+# Validate that each group has items that are equivalent in terms of tags and data
 import yaml
 import util
 
@@ -5,10 +6,11 @@ IN = [
     "output/items-grouped.yaml",
     "data/ignored-tags.yaml",
     "data/important-tags.yaml",
+    "output/actor-names.yaml",
     "botw-data/Actor/GeneralParamList/*.gparamlist.yml",
     "botw-data/Actor/ActorLink/*.yml",
 ]
-OUT = ["output/total.txt"]
+OUT = ["output/ids.yaml"]
 util.print_stage(__file__, IN, OUT)
 util.extend_yaml()
 
@@ -45,7 +47,10 @@ for group in util.progress(groups, "check data"):
     for item in group["actors"]:
         with open(f"botw-data/Actor/ActorLink/{item}.yml", "r", encoding="utf-8") as f:
             actor_link = yaml.load(f, Loader=yaml.FullLoader)["param_root"]["objects"]
-        tags = list(sorted(set([actor_link["Tags"][tag_n] for tag_n in actor_link["Tags"]]) - IGNORE_TAGS))
+        if "Tags" not in actor_link:
+            tags = []
+        else:
+            tags = list(sorted(set([actor_link["Tags"][tag_n] for tag_n in actor_link["Tags"]]) - IGNORE_TAGS))
         if tags != group["data"]["tags"]:
             print(f"left: {tags}")
             print(f"right: {group['data']['tags']}")
@@ -93,7 +98,7 @@ for group in util.progress(groups, "check data"):
         if not valid:
             raise ValueError(f"{item} has different Item data")
 
-NUM_ITEMS = len(groups)
+NUM_ITEMS = len(groups) + 1 # +1 for the <empty space> item
 NUM_INGR = 5
 # Compute constants
 # bionmial(n, k), k<=NUM_INGR is bino[n][k]
@@ -111,4 +116,19 @@ for n in util.progress(range(1,NUM_ITEMS+NUM_INGR), "compute binomial"):
 NUM_RECORD = bino[NUM_ITEMS+NUM_INGR-1][NUM_INGR]
 print(f"total: {NUM_RECORD}")
 with open(OUT[0], "w", encoding="utf-8") as f:
-    f.write(f"{NUM_RECORD}\n")
+    with open(IN[3], "r", encoding="utf-8") as file:
+        actor_to_name = {}
+        for actor, name in yaml.load(file, Loader=yaml.FullLoader):
+            actor_to_name[actor] = name
+    f.write(f"total: {NUM_RECORD}\n")
+    f.write(f"num: {NUM_ITEMS}\n")
+    f.write(f"ids:\n")
+    f.write(f"  \"0\": \"<None>\",\n")
+    for i, group in enumerate(util.progress(groups, "write id")):
+        actors = group["actors"]
+        if len(actors) == 1:
+            f.write(f"  \"{i+1}\": [ {actors[0]:<20} ] # {actor_to_name[actors[0]]}\n")
+        else:
+            f.write(f"  \"{i+1}\":\n")
+            for item in actors:
+                f.write(f"    - {item:<40} # {actor_to_name[item]}\n")

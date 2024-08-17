@@ -1,3 +1,4 @@
+# Check botw-data message pack to get the English names for the ingredient actors
 import yaml
 import util
 
@@ -24,10 +25,14 @@ for file in IN[1:]:
 output = []
 
 for actor in util.progress(actors, "process actors"):
-    data = items[actor+"_Name"]["contents"]
-    if len(data) != 1:
-        raise ValueError(f"{actor} has {len(data)} names!??")
-    name = data[0]["text"]
+    key = actor+"_Name"
+    if key not in items:
+        name = actor
+    else:
+        data = items[actor+"_Name"]["contents"]
+        if len(data) != 1:
+            raise ValueError(f"{actor} has {len(data)} names!??")
+        name = data[0]["text"]
     output.append((actor, name))
 
 with open(OUT[0], "w", encoding="utf-8") as f:

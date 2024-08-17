@@ -1,3 +1,4 @@
+# Group the items that are equivalent in recipes to reduce the number of recipes that need to be checked
 import yaml
 import util
 

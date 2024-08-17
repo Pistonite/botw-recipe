@@ -22,6 +22,7 @@
 - AutoGenWaterSurface
 - AutoPlacementMaterial
 - CanBalloonParasite
+- CanGetCollectSet
 - CanGetPouch
 - CanStack
 - CanUse
@@ -35,6 +36,7 @@
 - DisableForbidPushJob
 - EatItem
 - GrassDrop
+- Important
 - LiftRockMaterial
 - NestActor
 - ObjectNightGlow

@@ -18,15 +18,16 @@ def print_stage(stage, input, output):
     input = input + [stage]
     stage = os.path.basename(stage)
     if not is_newer(input, output):
-        print(f"=== {stage:<20}: up-to-date")
+        print(f"=== {stage:<30}: up-to-date")
         exit()
-    print(f"=== {stage:<20} ===")
+    print(f"=== {stage:<30} ===")
 
-def progress(iterable, desc):
+def progress(iterable, desc, len=None):
     return tqdm(
         iterable,
         desc=desc,
         ncols=50,
+        total=len,
         bar_format="{desc:<20}{n_fmt:>5}/{total_fmt:>5} {percentage:3.0f}% [{bar}]"
     )
 
@@ -43,3 +44,7 @@ def extend_yaml():
     yaml.add_constructor('!str32', lambda loader, node: str(loader.construct_scalar(node)))
     yaml.add_constructor('!str256', lambda loader, node: str(loader.construct_scalar(node)))
     yaml.add_constructor('!vec3', lambda loader, node: list(loader.construct_sequence(node)))
+
+def assertion(value, message = "Assertion failed"):
+    if not value:
+        raise AssertionError(message)

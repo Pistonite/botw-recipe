@@ -1,3 +1,4 @@
+# Process the actor link and general param list data to get cooking-related data for each ingredient
 import yaml
 import util
 
@@ -44,7 +45,10 @@ for actor, name in util.progress(actors, "load actors"):
         raise ValueError(f"{actor} has {len(actor_data['CookSpice'])} CookSpice params!??")
     if "Item" not in actor_data:
         raise ValueError(f"{actor} has no Item!??")
-    actor_tags = actor_link["Tags"]
+    if "Tags" in actor_link:
+        actor_tags = actor_link["Tags"]
+    else:
+        actor_tags = []
     tags = list(sorted([actor_tags[x] for x in actor_tags if actor_tags[x] in IMPORTANT_TAGS]))
     the_data = {
         "cureItemHitPointRecover": actor_data["CureItem"]["HitPointRecover"],
