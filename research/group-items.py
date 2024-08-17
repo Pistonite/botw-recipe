@@ -1,6 +1,29 @@
 import yaml
 import util
 
+    # Explanation for why grouping is fine w.r.t guaranteed crit mechanics:
+    # The crit chance is num(unique_items) * 5 + max(foreach item, item.success_rate)
+    # The only possible crit chances are 0, 10, 30, 100.
+    # So, the only possible crit chance for any recipe are:
+    # - 0 (guaranteed not crit, i.e. dubious and rock hard)
+    # - 5, 10, 15, 20, 25
+    # - 35, 40, 45, 50, 55
+    # - 100 (over 100 has no effect)
+    # We only consider the case where max(SR) = 30. Since if this case is safe, then the max(SR) = 10 is also safe
+    #   (safe meaning, having the same group of materials all be different is not enough to guarantee a crit)
+    #   Having another ingredient with SR <= 30 from another group has the same effect as having another ingredient
+    #   from the same group:
+    #    if SR(A1) == SR(A2) , then A1+A1+A2 = 40, A1+A1+B = 40,
+    # 
+    #    so we only need to consider the following cases:
+    # Case 1 ingredient: always 35
+    # Case 2 ingredients: A+A = 35, A+B = 40
+    # Case 3 ingredients: A+A+A = 35, A+A+B = 40, A+B+C = 45
+    # Case 4 ingredients: A+A+A+A = 35, A+A+A+B = 40, A+A+B+C = 45, A+B+C+D = 50
+    # Case 5 ingredients: A+A+A+A+A = 35, A+A+A+A+B = 40, A+A+A+B+C = 45, A+A+B+C+D = 50, A+B+C+D+E = 55
+    # In other words, if a recipe is not guaranteed crit, it's not guaranteed crit even if all the materials are different
+    # so we are safe to group these when dumping recipe data, and the real crit chance can be recalculated later
+
 IN = [
     "data/non-group-items.yaml",
     "data/non-group-tags.yaml",
@@ -57,6 +80,7 @@ def item_equivalent(item1, item2):
     for k in KEYS:
         if item1[k] != item2[k]:
             return False
+
     return True
 
 items_grouped_actors = []
