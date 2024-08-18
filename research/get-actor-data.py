@@ -5,8 +5,7 @@ import util
 IN = [
     "output/actor-names.yaml",
     "data/important-tags.yaml",
-    "botw-data/Actor/GeneralParamList/*.gparamlist.yml",
-    "botw-data/Actor/ActorLink/*.yml",
+    "botw-data/Actor/ActorLink/AirWall.yml",
 ]
 OUT = ["output/actor-data.yaml"]
 util.print_stage(__file__, IN, OUT)

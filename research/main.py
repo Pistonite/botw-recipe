@@ -68,3 +68,4 @@ if __name__ == "__main__":
     run_script("group-items.py")
     run_script("validate-groups.py")
     run_script("ensure-exhaustiveness.py")
+    run_script("generate-source.py")

@@ -11,8 +11,7 @@ IN = [
     "data/important-tags.yaml",
     "output/items-grouped.yaml",
     "data/known-filtered-actors.yaml",
-    "botw-data/Actor/GeneralParamList/*.gparamlist.yml",
-    "botw-data/Actor/ActorLink/*.yml",
+    "botw-data/Actor/ActorLink/AirWall.yml",
 ]
 OUT = ["output/extra-actors.yaml"]
 

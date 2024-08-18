@@ -1,7 +1,7 @@
 version: '3'
 
 tasks:
-  repro:
+  research:
     desc: Reproduce research
     dir: research
     cmds:

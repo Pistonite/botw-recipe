@@ -7,8 +7,7 @@ IN = [
     "data/ignored-tags.yaml",
     "data/important-tags.yaml",
     "output/actor-names.yaml",
-    "botw-data/Actor/GeneralParamList/*.gparamlist.yml",
-    "botw-data/Actor/ActorLink/*.yml",
+    "botw-data/Actor/ActorLink/AirWall.yml",
 ]
 OUT = ["output/ids.yaml"]
 util.print_stage(__file__, IN, OUT)
@@ -123,7 +122,7 @@ with open(OUT[0], "w", encoding="utf-8") as f:
     f.write(f"total: {NUM_RECORD}\n")
     f.write(f"num: {NUM_ITEMS}\n")
     f.write(f"ids:\n")
-    f.write(f"  \"0\": \"<None>\",\n")
+    f.write(f"  \"0\": [\"<None>\"]\n")
     for i, group in enumerate(util.progress(groups, "write id")):
         actors = group["actors"]
         if len(actors) == 1:

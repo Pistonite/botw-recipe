@@ -1,0 +1,8 @@
+[package]
+name = "botw-rdata"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+derive_deref = "1.1.1"
+static_assertions = "1.1.0"
