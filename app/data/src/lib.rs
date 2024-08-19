@@ -2,24 +2,8 @@ mod generated;
 
 use derive_deref::Deref;
 use derive_deref::DerefMut;
-/// Number of "ingredients" in a recipe
-///
-/// Equivalent actors are grouped together. This also includes the "<none>" ingredient,
-/// which indicates empty space (for example, a recipe with 4 items has 1 empty space).
-pub use generated::NUM_GROUPS;
-
-/// Number of ingredients in a recipe record. Always 5
-pub const NUM_INGR: usize = 5;
-
-/// Number of total recipe records
-///
-/// This is choosing NUM_INGR from NUM_GROUPS, allowing for repetition.
-/// In other words, binomial(NUM_GROUPS+NUM_INGR-1, NUM_INGR),
-/// or equivalently, NUM_GROUPS multichoose NUM_INGR.
-pub use generated::NUM_TOTAL_RECORDS;
-
-/// Recipe input groups
-pub use generated::Group;
+pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS};
+pub use generated::{Actor, Group};
 
 /// Pre-computed numbers. MULTICHOOSE[i][m] is m multichoose i
 static mut MULTICHOOSE: [[usize; NUM_GROUPS+1]; NUM_INGR+1] = [[0usize; NUM_GROUPS+1]; NUM_INGR+1];
@@ -122,6 +106,29 @@ impl RecipeInputs {
     pub fn from_id(id: usize) -> Option<Self> {
         RecipeId::new(id).map(RecipeInputs::from)
     }
+    pub fn from_groups(groups: &[Group]) -> Self {
+        let len = groups.len();
+        if len > NUM_INGR {
+            panic!("too many inputs in recipe: {}", len);
+        }
+        Self::from_groups_unchecked(groups)
+    }
+    pub fn from_groups_unchecked(groups: &[Group]) -> Self {
+        let len = groups.len();
+        let mut items = [Group::None; NUM_INGR];
+        for i in 0..NUM_INGR {
+            if i < len {
+                items[i] = groups[i];
+            }else{
+                items[i] = Group::None;
+            }
+        }
+        items.into()
+    }
+    pub fn from_actors(actors: &[Actor]) -> Self {
+        let groups = actors.iter().map(Actor::group).collect::<Vec<_>>();
+        Self::from_groups(&groups)
+    }
     // TODO: from groups
     // TODO: from actors
 }
@@ -129,6 +136,13 @@ impl RecipeInputs {
 impl From<RecipeInputs> for [Group; NUM_INGR] {
     fn from(value: RecipeInputs) -> Self {
         value.0
+    }
+}
+
+impl From<[Group; NUM_INGR]> for RecipeInputs {
+    fn from(mut value: [Group; NUM_INGR]) -> Self {
+        value.sort_unstable();
+        RecipeInputs(value)
     }
 }
 

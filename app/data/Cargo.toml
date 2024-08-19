@@ -1,6 +1,6 @@
 [package]
-name = "botw-rdata"
-version = "0.1.0"
+name = "botw-recipe-data"
+version = "0.0.0"
 edition = "2021"
 
 [dependencies]
