@@ -1,3 +1,8 @@
 [workspace]
-members = ["app/data", "dump/emulate"]
+members = [
+    "app/data",
+    "app/old",
+    "dump/check",
+    "dump/emulate"
+]
 resolver = "2"

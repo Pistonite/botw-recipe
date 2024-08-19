@@ -1,0 +1,10 @@
+[package]
+name = "botw-recipe-dump-check"
+version = "0.0.0"
+description = "Tools to check/validate the dump"
+edition = "2021"
+
+[dependencies]
+
+[dependencies.botw-recipe-data]
+path = "../../app/data"

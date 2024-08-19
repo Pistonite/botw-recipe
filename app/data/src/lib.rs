@@ -1,47 +1,18 @@
 mod generated;
 
+use std::io;
+use std::io::Write;
+
 use derive_deref::Deref;
 use derive_deref::DerefMut;
-pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS};
+pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS, CHUNK_SIZE, CHUNK_COUNT, LAST_CHUNK_SIZE};
 pub use generated::{Actor, Group};
 
-/// Pre-computed numbers. MULTICHOOSE[i][m] is m multichoose i
-static mut MULTICHOOSE: [[usize; NUM_GROUPS+1]; NUM_INGR+1] = [[0usize; NUM_GROUPS+1]; NUM_INGR+1];
-
-/// Initialize the module. Please call this before anything else.
-pub fn init() {
-    // initialize MULTICHOOSE by using the binomial coefficient formula
-    // bino[n][k] is bionmial(n, k) for k<=NUM_INGR
-    let mut bino = [[0usize; NUM_INGR+1]; NUM_GROUPS+NUM_INGR];
-    // base cases
-    for n in 0..NUM_GROUPS+NUM_INGR {
-        bino[n][0] = 1;
-    }
-    for k in 0..NUM_INGR+1 {
-        bino[k][k] = 1;
-    }
-    // fill in the rest
-    for n in 1..NUM_GROUPS+NUM_INGR {
-        for k in 1..NUM_INGR+1 {
-            bino[n][k] = bino[n-1][k-1] + bino[n-1][k];
-        }
-    }
-    // data[i][m] is size of choosing i ingredients from m (m multichoose i)
-    // MULTICHOOSE[k][n] is bino[k+n-1][k]
-    for n in 0..NUM_GROUPS+1 {
-        unsafe { MULTICHOOSE[0][n] = 1; }
-    }
-    for n in 1..NUM_INGR+1 {
-        for k in 0..NUM_GROUPS+1 {
-            let i = bino[n+k-1][n];
-            unsafe { MULTICHOOSE[n][k] = i; }
-        }
-    }
-}
-
-/// Get the pre-computed number of ways to choose `k` items from `n` items, allowing for repetition
+/// Get the number of ways to choose `k` items from `n` items, allowing for repetition
+///
+/// The time complexity is O(1) because all values are pre-computed.
 pub fn multichoose(n: usize, k: usize) -> usize {
-    unsafe { MULTICHOOSE[k][n] }
+    generated::MULTICHOOSE[n][k]
 }
 
 /// A valid recipe record id
@@ -188,3 +159,115 @@ impl From<RecipeId> for RecipeInputs {
 
 // use std::fs;
 // use bit_set::BitSet;
+/// This data mirrors uking::ui::PouchItem::CookData, with an extra crit_chance field
+#[derive(Debug, Clone, Copy, PartialEq)]
+#[repr(C)]
+pub struct CookData {
+    /// Number of quarter-hearts. Usually 0-120
+    pub health_recover: i32,
+    /// Effect duration in seconds, usually 0-1800
+    pub effect_duration: i32,
+    /// Price
+    pub sell_price: i32,
+    /// Effect ID, but a float for some reason. -1 is None
+    pub effect_id: f32,
+    /// Effect level, usually 0-3, higher for hearty
+    pub effect_level: f32,
+    /// crit chance, usually 0-100
+    pub crit_chance: i32
+}
+
+impl CookData {
+    pub fn write_to<W: Write>(&self, w: &mut W) -> io::Result<()> {
+        w.write_all(&self.health_recover.to_le_bytes())?;
+        w.write_all(&self.effect_duration.to_le_bytes())?;
+        w.write_all(&self.sell_price.to_le_bytes())?;
+        w.write_all(&self.effect_id.to_le_bytes())?;
+        w.write_all(&self.effect_level.to_le_bytes())?;
+        w.write_all(&self.crit_chance.to_le_bytes())?;
+        Ok(())
+    }
+    /// Return an invalid CookData with all 0 bytes
+    pub fn invalid() -> Self {
+        Self {
+            health_recover: 0,
+            effect_duration: 0,
+            sell_price: 0,
+            effect_id: 0.0,
+            effect_level: 0.0,
+            crit_chance: 0
+        }
+    }
+
+    pub fn is_invalid(&self) -> bool {
+        return self == &Self::invalid();
+    }
+
+    /// Get that the data are in their normal ranges
+    pub fn is_normal(&self) -> bool {
+        if self.health_recover < 0 || self.health_recover > 120 {
+            return false;
+        }
+        if self.effect_duration < 0 || self.effect_duration > 1800 {
+            return false;
+        }
+        if self.sell_price < 0 {
+            return false;
+        }
+        if self.effect_level < 0.0 {
+            return false;
+        }
+        if self.effect_level.round() != self.effect_level {
+            return false;
+        }
+        match self.effect_id {
+            MOD_NONE => {
+                if self.effect_level != 0.0 || self.effect_duration != 0 {
+                    return false;
+                }
+            }
+            MOD_LIFE_RECOVER => {} //what is this??
+            MOD_LIFE_MAX_UP => {
+                if self.effect_duration != 0 {
+                    return false;
+                }
+                if self.effect_level > 25.0 {
+                    // max is 5 big hearty radish which gives 25 hearts
+                    return false;
+                }
+            }
+            MOD_RESIST_HOT | MOD_RESIST_COLD | MOD_FIREPROOF=> {
+                if self.effect_level> 2.0 {
+                    return false;
+                }
+            }
+            MOD_RESIST_ELECTRIC |
+MOD_ATTACK_UP | MOD_DEFENSE_UP | MOD_QUIETNESS | MOD_MOVING_SPEED
+=> {
+                if self.effect_level > 3.0 {
+                    return false;
+                }
+            }
+            MOD_GUTS_RECOVER => {} //TODO
+            MOD_EX_GUTS_MAX_UP => { } //TODO
+            _ => {
+                return false;
+            }
+        }
+
+        true
+    }
+}
+const MOD_LIFE_RECOVER :f32= 1.0;
+const MOD_LIFE_MAX_UP :f32= 2.0;
+const MOD_RESIST_HOT :f32= 4.0;
+const MOD_RESIST_COLD :f32= 5.0;
+const MOD_RESIST_ELECTRIC :f32= 6.0;
+const MOD_ATTACK_UP: f32 = 10.0;
+const MOD_DEFENSE_UP :f32= 11.0;
+const MOD_QUIETNESS :f32= 12.0;
+const MOD_MOVING_SPEED :f32= 13.0;
+const MOD_GUTS_RECOVER :f32= 14.0;
+const MOD_EX_GUTS_MAX_UP :f32= 15.0;
+const MOD_FIREPROOF :f32= 16.0;
+const MOD_NONE :f32= -1.0;

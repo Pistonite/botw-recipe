@@ -97,22 +97,9 @@ for group in util.progress(groups, "check data"):
         if not valid:
             raise ValueError(f"{item} has different Item data")
 
-NUM_ITEMS = len(groups) + 1 # +1 for the <empty space> item
-NUM_INGR = 5
-# Compute constants
-# bionmial(n, k), k<=NUM_INGR is bino[n][k]
-bino = [[0]*(NUM_INGR+1)]*(NUM_ITEMS+NUM_INGR)
+NUM_GROUPS = len(groups) + 1 # +1 for the <empty space> item
+NUM_RECORD = util.total_records(NUM_GROUPS, util.make_multichoose(NUM_GROUPS))
 
-for n in range(NUM_ITEMS+NUM_INGR):
-    bino[n][0] = 1
-
-for k in range(NUM_INGR+1):
-    bino[k][k] = 1
-
-for n in util.progress(range(1,NUM_ITEMS+NUM_INGR), "compute binomial"):
-    for k in range(1,NUM_INGR+1):
-        bino[n][k] = bino[n-1][k-1] + bino[n-1][k]
-NUM_RECORD = bino[NUM_ITEMS+NUM_INGR-1][NUM_INGR]
 print(f"total: {NUM_RECORD}")
 with open(OUT[0], "w", encoding="utf-8") as f:
     with open(IN[3], "r", encoding="utf-8") as file:
@@ -120,7 +107,7 @@ with open(OUT[0], "w", encoding="utf-8") as f:
         for actor, name in yaml.load(file, Loader=yaml.FullLoader):
             actor_to_name[actor] = name
     f.write(f"total: {NUM_RECORD}\n")
-    f.write(f"num: {NUM_ITEMS}\n")
+    f.write(f"num: {NUM_GROUPS}\n")
     f.write(f"ids:\n")
     f.write(f"  \"0\": [\"<None>\"]\n")
     for i, group in enumerate(util.progress(groups, "write id")):

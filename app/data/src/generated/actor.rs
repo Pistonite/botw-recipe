@@ -433,7 +433,7 @@ pub enum Actor {
     Item_ChilledFish_09,
     /// Sheikah Slate
     Obj_DRStone_Get,
-    /// dyecolor_00
+    /// Dye
     dyecolor_00,
     /// Blue
     dyecolor_01,
@@ -693,7 +693,7 @@ impl Actor {
             Self::Item_ChilledFish_08 => "Frozen River Snail",
             Self::Item_ChilledFish_09 => "Icy Hearty Blueshell Snail",
             Self::Obj_DRStone_Get => "Sheikah Slate",
-            Self::dyecolor_00 => "dyecolor_00",
+            Self::dyecolor_00 => "Dye",
             Self::dyecolor_01 => "Blue",
             Self::dyecolor_02 => "Red",
             Self::dyecolor_03 => "Yellow",
@@ -955,7 +955,6 @@ impl Actor {
             Self::Obj_Photo_BossEnemy => Group::Obj_Photo_BossEnemy,
         }
     }
-    ///
     /// Convert item name to actor with case-insenstive comparison
     ///
     /// `<none>` will return `Some(Actor::None)`, while invalid names will return `None`.
@@ -1174,7 +1173,7 @@ impl Actor {
             "frozen river snail" => Some(Actor::Item_ChilledFish_08),
             "icy hearty blueshell snail" => Some(Actor::Item_ChilledFish_09),
             "sheikah slate" => Some(Actor::Obj_DRStone_Get),
-            "dyecolor_00" => Some(Actor::dyecolor_00),
+            "dye" => Some(Actor::dyecolor_00),
             "blue" => Some(Actor::dyecolor_01),
             "red" => Some(Actor::dyecolor_02),
             "yellow" => Some(Actor::dyecolor_03),

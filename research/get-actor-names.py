@@ -25,10 +25,11 @@ for file in IN[1:]:
 output = []
 
 for actor in util.progress(actors, "process actors"):
-    key = actor+"_Name"
-    if key not in items:
-        name = actor
+    # hard-coded dye name
+    if actor == "dyecolor_00":
+        name = "Dye"
     else:
+        key = actor+"_Name"
         data = items[actor+"_Name"]["contents"]
         if len(data) != 1:
             raise ValueError(f"{actor} has {len(data)} names!??")

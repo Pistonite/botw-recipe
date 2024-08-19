@@ -25,7 +25,13 @@ HEADER = """
 """
 
 def write_doc_comment(o, comments):
-    for comment in comments.split("\n"):
+    lines = [l.strip() for l in comments.split("\n")]
+    if not lines:
+        return
+    i = 0
+    while i < len(lines) and not lines[i]:
+        i += 1
+    for comment in lines[i:]:
         o.write(f"/// {comment.strip()}\n")
 
 def make_group_name(actors, group_id):
@@ -38,6 +44,9 @@ def make_group_name(actors, group_id):
 
 def gen_numeric_constants(o, data):
     o.write(HEADER)
+    def print_field(name, value):
+        print(f"{name:<20} = {value}")
+    print_field("num_groups", data['num'])
     write_doc_comment(o, """
         Number of "ingredients" in a recipe
 
@@ -45,10 +54,13 @@ def gen_numeric_constants(o, data):
         which indicates empty space (for example, a recipe with 4 items has 1 empty space).
     """)
     o.write(f"pub const NUM_GROUPS: usize = {data['num']};\n\n")
+    print_field("num_ingr", 5)
     write_doc_comment(o, """
         Number of ingredients in a recipe record. Always 5
     """)
     o.write(f"pub const NUM_INGR: usize = 5;\n\n")
+    total = data['total']
+    print_field("total", data['total'])
     write_doc_comment(o, """
         Number of total recipe records
 
@@ -57,6 +69,39 @@ def gen_numeric_constants(o, data):
         or equivalently, NUM_GROUPS multichoose NUM_INGR.
     """)
     o.write(f"pub const NUM_TOTAL_RECORDS: usize = {data['total']};\n\n")
+    chunk_size, chunk_count, last_chunk_size = util.chunk(total)
+    print_field("chunk_size", chunk_size)
+    write_doc_comment(o, """
+        Number of records in each chunk except last in the data dump
+    """)
+    o.write(f"pub const CHUNK_SIZE: usize = {chunk_size};\n\n")
+    # chunk_count is wrong is total is a multiple of chunk_size
+    util.assertion(total % chunk_size != 0, "total divisible by chunk size")
+    print_field("chunk_count", chunk_count)
+    write_doc_comment(o, """
+        Number of chunks in the data dump
+    """)
+    o.write(f"pub const CHUNK_COUNT: usize = {chunk_count};\n\n")
+    print_field("last_chunk_size", last_chunk_size)
+    write_doc_comment(o, """
+        Number of records in the last chunk in the data dump
+    """)
+    o.write(f"pub const LAST_CHUNK_SIZE: usize = {last_chunk_size};\n\n")
+    write_doc_comment(o, """
+        Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
+
+        MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
+    """)
+    o.write("pub const MULTICHOOSE: [[usize; NUM_INGR+1]; NUM_GROUPS+1] = [\n")
+    multichoose = util.make_multichoose(data['num'])
+    for multichoose_n in multichoose:
+        o.write("[")
+        for k in multichoose_n:
+            o.write(f"{k}, ")
+        o.write("],\n")
+    o.write("];\n")
+
+
 
 def gen_group_enum(o, actor_to_name, groups):
     o.write(HEADER)
@@ -164,6 +209,8 @@ with open("output/actor-names.yaml", "r", encoding="utf-8") as f:
         actors.append(actor)
         actor_to_name[actor] = name
 
+print("generating files")
+
 with open("output/ids.yaml", "r", encoding="utf-8") as f:
     data = yaml.safe_load(f)
 
@@ -176,4 +223,5 @@ with open(OUT[1], "w", encoding="utf-8") as f:
 with open(OUT[2], "w", encoding="utf-8") as f:
     gen_actor_enum(f, actor_to_name, data["ids"])
 
+print("running rustfmt")
 subprocess.run(["rustfmt"] + OUT, check=True)

@@ -354,7 +354,7 @@ pub enum Group {
     Item_ChilledFish_09 = 170,
     /// Sheikah Slate
     Obj_DRStone_Get = 171,
-    /// dyecolor_00, Blue, Red, Yellow, White, Black, Purple, Green, Light Blue, Navy, Orange, Peach, Crimson, Light Yellow, Brown, Gray
+    /// Dye, Blue, Red, Yellow, White, Black, Purple, Green, Light Blue, Navy, Orange, Peach, Crimson, Light Yellow, Brown, Gray
     dyecolor_Grp_172 = 172,
     /// Fauna Picture, Enemy Picture, Material Picture, Other Picture, Weapon Picture
     Obj_Photo_Grp_173 = 173,
