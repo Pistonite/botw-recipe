@@ -9,10 +9,17 @@ clap = { version = "=4.5.4", features = ["derive"] }
 num_cpus = "1.16.0"
 
 [dependencies.cooking]
+# git = "https://github.com/Pistonight/cooking.rs"
+# branch = "consistency"
+# version = "0.1.0"
 path = "../../../cooking.rs"
 
 [dependencies.botw-recipe-data]
 path = "../../app/data"
+
+[lib]
+name = "rdump_emulate"
+path = "src/lib.rs"
 
 [[bin]]
 name = "cook"

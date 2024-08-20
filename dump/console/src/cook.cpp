@@ -121,21 +121,21 @@ bool cook(
 void convert_cook_result(const uking::CookItem& cook_item, CookData& data) {
 
     // hehe
-    auto* last_added_item = reinterpret_cast<uking::ui::PouchItem*>(&data);
+    auto& cook = reinterpret_cast<uking::ui::PouchItem::CookData&>(data);
 
     // mLastAddedItem->getCookData().setEffectDuration(cook_item.effect_time);
-    last_added_item->getCookData().setEffectDuration(cook_item.effect_time);
+    cook.setEffectDuration(cook_item.effect_time);
 
     // mLastAddedItem->getCookData().setHealthRecover(static_cast<int>(cook_item.life_recover));
-    last_added_item->getCookData().setHealthRecover(static_cast<int>(cook_item.life_recover));
+    cook.setHealthRecover(static_cast<int>(cook_item.life_recover));
 
     // mLastAddedItem->getCookData().setSellPrice(cook_item.sell_price);
-    last_added_item->getCookData().setSellPrice(cook_item.sell_price);
+    cook.setSellPrice(cook_item.sell_price);
 
     const int level = int(cook_item.vitality_boost);
     const uking::CookEffectId effect_id = cook_item.effect_id;
     // mLastAddedItem->getCookData().setEffect({float(effect_id), float(level)});
-    last_added_item->getCookData().setEffect({float(effect_id), float(level)});
+    cook.setEffect({float(effect_id), float(level)});
 }
 
 

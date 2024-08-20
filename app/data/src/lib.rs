@@ -144,23 +144,28 @@ impl CookData {
         }
         match self.effect_id {
             MOD_NONE => {
-                if self.effect_level != 1.0 {
-                    // must be fairy tunic
-                    if self.sell_price != 2 {
-                        return Some(CookDataInvalidReason::InvalidNoneEffect {
-                            sell_price: self.sell_price,
-                            effect_level: self.effect_level
-                        });
-                    }
-                }
+                // don't check for now
+                // if self.effect_level != 1.0 {
+                //     // must be fairy tunic
+                //     if self.sell_price != 2 {
+                //         return Some(CookDataInvalidReason::InvalidNoneEffect {
+                //             sell_price: self.sell_price,
+                //             effect_level: self.effect_level
+                //         });
+                //     }
+                // }
             }
             MOD_LIFE_RECOVER => {
                 //supposed to be unused
                 return Some(CookDataInvalidReason::LifeRecover);
             }
             MOD_LIFE_MAX_UP => {
-                if self.effect_level > 25.0 {
-                    // max is 5 big hearty radish which gives 25 hearts
+                // Duration could be anything if ingredients has boost
+                // if self.effect_duration != 0 {
+                //     return Some(CookDataInvalidReason::InvalidEffectDuration(self.effect_duration));
+                // }
+                if self.effect_level > 100.0 {
+                    // max is 5 big hearty radish which gives 25 hearts, or 100 quarter hearts
                     return Some(CookDataInvalidReason::LifeMaxUpTooHigh(self.effect_level));
                 }
             }
@@ -177,12 +182,22 @@ MOD_ATTACK_UP | MOD_DEFENSE_UP | MOD_QUIETNESS | MOD_MOVING_SPEED
                 }
             }
             MOD_GUTS_RECOVER => {
-                if self.effect_level > 1.0 {
+                // Duration could be anything if ingredients has boost
+                // if self.effect_duration != 0 {
+                //     return Some(CookDataInvalidReason::InvalidEffectDuration(self.effect_duration));
+                // }
+                // 3000 is 3 wheels
+                if self.effect_level > 3000.0 {
                     return Some(CookDataInvalidReason::EffectLevelTooHigh(self.effect_level));
                 }
             }
             MOD_EX_GUTS_MAX_UP => {
-                if self.effect_level > 1.0 {
+                // Duration could be anything if ingredients has boost
+                // if self.effect_duration != 0 {
+                //     return Some(CookDataInvalidReason::InvalidEffectDuration(self.effect_duration));
+                // }
+                // 10 is 2 wheels
+                if self.effect_level > 10.0 {
                     return Some(CookDataInvalidReason::EffectLevelTooHigh(self.effect_level));
                 }
             }

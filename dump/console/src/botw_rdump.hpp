@@ -3,7 +3,7 @@
 #include <cstdint>
 
 #define RDUMP_CHUNK_START 0
-#define RDUMP_DUMP_CHUNKS 5
+#define RDUMP_DUMP_CHUNKS 1
 
 namespace nn::fs {
 struct FileHandle;

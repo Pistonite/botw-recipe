@@ -26,12 +26,13 @@ bool open_chunk(uint64_t chunk_id, nn::fs::FileHandle &handle) {
     int b = ((t % 1000) / 100) % 10;
     int c = ((t % 100) / 10) % 10;
     int d = t % 10;
-    char path[16] = "sd:/ck_0000.bin";
-    //---------------0123456789A
-    path[7] = '0' + a;
-    path[8] = '0' + b;
-    path[9] = '0' + c;
-    path[10] = '0' + d;
+    char path[] = "sd:/botwrdump/ck_0000.bin";
+    //-------------0123456789ABCDEF 11
+    //                             10
+    path[0x11] = '0' + a;
+    path[0x12] = '0' + b;
+    path[0x13] = '0' + c;
+    path[0x14] = '0' + d;
 
     int64_t file_size = file_size_by_chunk_id(chunk_id);
 

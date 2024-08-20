@@ -8,7 +8,7 @@ use std::thread::{self, JoinHandle};
 use std::time::Instant;
 
 use botw_recipe_data::{Actor, CookData, RecipeInputs};
-use cooking::{Cook, Recipe, Modifier};
+use cooking::Cook;
 
 fn main() {
     dump(true);
@@ -20,8 +20,10 @@ fn dump(skip_existing: bool) {
         std::fs::create_dir_all(data_path).unwrap();
     }
 
+    let total = 5;//botw_recipe_data::CHUNK_COUNT;
+
     let start_time = Instant::now();
-    let num_workers = num_cpus::get();
+    let num_workers = total.min(num_cpus::get());
     println!("using {} threads", num_workers);
 
     let (output_send, output_recv) = mpsc::channel();
@@ -38,7 +40,6 @@ fn dump(skip_existing: bool) {
     }
     drop(output_send);
 
-    let total = botw_recipe_data::CHUNK_COUNT;
     let count = Arc::new(AtomicUsize::new(0));
     let work_count = Arc::new(AtomicUsize::new(0));
     let counting_thread = {
@@ -106,7 +107,7 @@ fn start_worker_thread(
         let cook = Cook::new().unwrap();
         while let Ok(id) = recv.recv() {
             let did_work = dump_chunk(&cook, id, skip_existing);
-            send.send((thread_id, did_work)).unwrap();
+            let _ = send.send((thread_id, did_work));
         }
         drop(send);
         println!("thread {} finished", thread_id);
@@ -142,7 +143,7 @@ fn dump_chunk(cook: &Cook, chunk_id: usize, skip_existing: bool) -> bool {
             CookData::invalid()
         } else {
             let recipe = cook.cook(&ingr).unwrap();
-            convert_recipe(&recipe)
+            rdump_emulate::convert_recipe(&recipe)
         };
         results.push(data);
     }
@@ -154,33 +155,3 @@ fn dump_chunk(cook: &Cook, chunk_id: usize, skip_existing: bool) -> bool {
     true
 }
 
-fn convert_recipe(recipe: &Recipe) -> CookData {
-        let health_recover: i32 = recipe.hp as i32;
-        let effect_duration: i32 = recipe.time;
-        let price: i32 = recipe.price;
-        let effect_id: f32 = match recipe.effect {
-            Modifier::AttackUp => 10.0,
-            Modifier::DefenseUp => 11.0,
-            Modifier::ResistCold => 5.0,
-            Modifier::ResistHot => 4.0,
-            Modifier::ResistElectric => 6.0,
-            Modifier::Fireproof => 16.0,
-            Modifier::MovingSpeed => 13.0,
-            Modifier::Quietness => 12.0,
-            Modifier::LifeMaxUp => 2.0,
-            Modifier::GutsRecover => 14.0,
-            Modifier::ExGutsMaxUp => 15.0,
-            Modifier::LifeRecover => 1.0,
-            _ => -1.0
-        };
-        let effect_level: f32 = recipe.level as f32;
-        let crit_chance = recipe.crit_rate as i32;
-        CookData {
-            health_recover,
-            effect_duration,
-            sell_price: price,
-            effect_id,
-            effect_level,
-            crit_chance
-        }
-    }

@@ -4,3 +4,4 @@ mput -e target/megaton/none/botwrdump.nso
 mput -e target/megaton/none/main.npdm
 rm -f subsdk9
 mv botwrdump.nso subsdk9
+mkdir -p -f /botwrdump

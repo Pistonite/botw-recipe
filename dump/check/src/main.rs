@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{self, Write, BufReader};
+use std::os::unix::fs::MetadataExt;
 #[cfg(windows)]
 use std::os::windows::fs::MetadataExt;
 use std::path::{Path, PathBuf};
@@ -44,6 +45,10 @@ fn main() {
         check.inspect(chunk_id).unwrap();
         return;
     }
+    if let Some(chunk_id) = check.options.mismatch {
+        check.mismatch(chunk_id).unwrap();
+        return;
+    }
     check.check().unwrap();
 }
 
@@ -72,6 +77,10 @@ struct Options {
     /// Skip checking console dump
     #[clap(long, conflicts_with = "skip_emulate")]
     skip_console: bool,
+
+    /// Inspect mismatch
+    #[clap(short, long)]
+    mismatch: Option<usize>
 }
 
 #[derive(Parser, Debug, Clone, Copy, ValueEnum, PartialEq, Eq)]
@@ -148,7 +157,28 @@ impl Check {
         }
 
         Ok(())
-        
+    }
+
+    fn mismatch(&self, chunk_id: usize) -> Result<(), Error> {
+        let errors_path = Path::new("mismatch.json");
+        if !errors_path.exists() {
+            println!("no mismatch found");
+            return Ok(());
+        }
+        let reader = BufReader::new(File::open(errors_path)?);
+        let errors: Vec<RecipeMismatchData> = serde_json::from_reader(reader)?;
+        let error = errors.iter().find(|e| e.chunk == chunk_id);
+        match error {
+            Some(error) => {
+                println!("{:#?}", error);
+            }
+            None => {
+                println!("no errors found in chunk {}", chunk_id);
+            }
+        }
+
+        Ok(())
+
     }
     /// Check chunk rawdat in path and return the first chunk that fails the check
     /// All chunks are still checked even if a chunk fails
@@ -184,14 +214,18 @@ impl Check {
                 continue;
             }
             let meta = std::fs::metadata(&chunk_path)?;
-            if meta.file_size() != chunk_file_size {
+            #[cfg(not(windows))]
+            let meta_file_size = meta.size();
+            #[cfg(windows)]
+            let meta_file_size = meta.file_size();
+            if meta_file_size != chunk_file_size {
                 checked+=1;
                 first_invalid = first_invalid.min(i);
                 if options.purge {
                     std::fs::remove_file(&chunk_path)?;
                     print_status!(checked, label, "deleted chunk {i}");
                 } else {
-                    print_status!(checked, label, "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}", meta.file_size());
+                    print_status!(checked, label, "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}", meta_file_size);
                 }
                 continue;
             }

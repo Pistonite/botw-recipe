@@ -49,6 +49,9 @@ void worker_main(void*) {
         for (uint64_t i = 0; i < CHUNK_SIZE; i++) {
             update_record_count(i);
             uint64_t recipe_id = r_base + i;
+            if (recipe_id >= NUM_TOTAL_RECORDS) {
+                break;
+            }
             if (recipe_id == 0) {
                 records[batch_i].health_recover = 0;
                 records[batch_i].effect_duration = 0;
@@ -88,14 +91,30 @@ void worker_main(void*) {
                 batch_i = 0;
             }
         }
-        // since chunk size is a multiple of batches, there's no leftovers
+        if (batch_i > 0) {
+            update_screen(chunk_id, 'S');
+            if (!save_to_chunk(
+                handle, 
+                chunk_id, 
+                records, 
+                batch_i, chunk_record_start
+            )) {
+                update_screen(chunk_id, 's');
+                update_error_recipe(CHUNK_SIZE);
+                error = true;
+            }
+            update_screen(chunk_id, 'D');
+        }
         if (!error) {
             update_screen(chunk_id, 'O');
         } else {
             break;
         }
     }
-    update_screen(chunk_id, 'Y');
+    if (!error) {
+        update_record_count(CHUNK_SIZE);
+        update_screen(chunk_id, 'Y');
+    }
     while (true) {
         nn::os::YieldThread();
         nn::os::SleepThread(nn::TimeSpan::FromSeconds(5));
@@ -107,7 +126,7 @@ void start_worker() {
     void* thread_stack = memalign(0x1000, STACK_SIZE);
 
     nn::Result result =
-        nn::os::CreateThread(&s_thread, worker_main, nullptr, thread_stack, STACK_SIZE, 16);
+        nn::os::CreateThread(&s_thread, worker_main, nullptr, thread_stack, STACK_SIZE, 0);
     if (result.IsFailure()) {
         return;
     }

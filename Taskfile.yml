@@ -11,12 +11,59 @@ tasks:
     cmds:
     - python main.py {{.CLI_ARGS}}
 
-  upload-console:
+  uconsole:
     aliases: [uc]
     dir: dump/console
     desc: Upload dumper mod to the console
     cmds:
     - lftp $CONSOLE_ADDR < scripts/lftp-upload.sh
+
+  dump-console:
+    dir: dump/console
+    aliases: [dcon]
+    desc: Download dumps from the console
+    cmds:
+    - mkdir -p raw
+    - mkdir -p data
+    - lftp $CONSOLE_ADDR < scripts/lftp-download.sh
+    - python scripts/rename.py
+    - rm -r raw
+
+  dump-emulate:
+    dir: dump/emulate
+    aliases: [demu]
+    desc: Dump using cooking.rs
+    cmds:
+    - cargo run --release --bin dump
+
+  dcheck:
+    dir: dump/check
+    aliases: [c]
+    desc: Check dumps
+    cmds:
+    - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
+
+  inspect:
+    dir: dump/check
+    aliases: [i]
+    desc: Inspect a dump error
+    cmds:
+    - cargo run --release --bin check --quiet -- --inspect {{.CLI_ARGS}}
+
+  mismatch:
+    dir: dump/check
+    aliases: [m]
+    desc: Inspect a chunk mismatch error
+    cmds:
+    - cargo run --release --bin check --quiet -- --mismatch {{.CLI_ARGS}}
+    
+
+  cook:
+    dir: dump/emulate
+    desc: Cook a recipe with emulator. Separate ingredients with commas
+    cmds:
+    - cargo run --bin cook --quiet -- {{.CLI_ARGS}}
+
 
 
 #

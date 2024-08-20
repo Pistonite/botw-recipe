@@ -14,3 +14,7 @@ threadpool = "1.8.1"
 
 [dependencies.botw-recipe-data]
 path = "../../app/data"
+
+[[bin]]
+name = "check"
+path = "src/main.rs"
