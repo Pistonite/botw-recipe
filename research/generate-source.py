@@ -12,6 +12,8 @@ OUT = [
     "../app/data/src/generated/constants.rs",
     "../app/data/src/generated/group.rs",
     "../app/data/src/generated/actor.rs",
+    "../dump/console/src/generated.cpp",
+    "../dump/console/src/generated.hpp",
 ]
 util.print_stage(__file__, IN, OUT)
 
@@ -100,6 +102,49 @@ def gen_numeric_constants(o, data):
             o.write(f"{k}, ")
         o.write("],\n")
     o.write("];\n")
+
+def gen_numeric_constants_cpp(o, hpp, data):
+    o.write(HEADER)
+    hpp.write(HEADER)
+    hpp.write("#pragma once\n")
+    hpp.write("#include <cstdint>\n")
+    o.write("#include \"generated.hpp\"\n")
+    hpp.write(f"#define NUM_GROUPS {data['num']}\n")
+    hpp.write("#define NUM_INGR 5\n")
+    hpp.write(f"#define NUM_TOTAL_RECORDS {data['total']}\n")
+    chunk_size, chunk_count, last_chunk_size = util.chunk(data['total'])
+    hpp.write(f"#define CHUNK_SIZE {chunk_size}\n")
+    hpp.write(f"#define CHUNK_COUNT {chunk_count}\n")
+    hpp.write(f"#define LAST_CHUNK_SIZE {last_chunk_size}\n")
+    hpp.write("namespace botw::rdump {\n")
+    o.write("namespace botw::rdump {\n")
+    o.write("static uint64_t MULTICHOOSE[NUM_GROUPS+1][NUM_INGR+1] = {\n")
+    multichoose = util.make_multichoose(data['num'])
+    rows = []
+    for multichoose_n in multichoose:
+        k_str = ", ".join(str(k) for k in multichoose_n)
+        rows.append(f"    {{ {k_str} }}")
+    o.write(",\n".join(rows))
+    o.write("};\n")
+    hpp.write("uint64_t multichoose(uint64_t n, uint64_t k);\n")
+    o.write("uint64_t multichoose(uint64_t n, uint64_t k) {\n")
+    o.write("    return MULTICHOOSE[n][k];\n")
+    o.write("}\n")
+    hpp.write("const char* actor_name(uint64_t group);\n")
+    o.write("const char* actor_name(uint64_t group) {\n")
+    o.write("    switch (group) {\n")
+    o.write("    case 0: return \"\";\n")
+    groups = data['ids']
+    for i in range(1, len(groups)):
+        id = str(i)
+        actor = groups[id][0]
+        o.write(f"    case {id}: return \"{actor}\";\n")
+    o.write("    default: return \"\";\n")
+    o.write("    }\n")
+    o.write("}\n")
+
+    hpp.write("}\n")
+    o.write("}\n")
 
 
 
@@ -223,5 +268,9 @@ with open(OUT[1], "w", encoding="utf-8") as f:
 with open(OUT[2], "w", encoding="utf-8") as f:
     gen_actor_enum(f, actor_to_name, data["ids"])
 
+with open(OUT[3], "w", encoding="utf-8") as o:
+    with open(OUT[4], "w", encoding="utf-8") as hpp:
+        gen_numeric_constants_cpp(o, hpp, data)
+
 print("running rustfmt")
-subprocess.run(["rustfmt"] + OUT, check=True)
+subprocess.run(["rustfmt"] + [x for x in OUT if x.endswith(".rs")], check=True)

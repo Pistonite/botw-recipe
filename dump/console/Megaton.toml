@@ -1,0 +1,60 @@
+[module]
+name = "botwrdump"
+title-id = 0x01007ef00011e000
+
+[build]
+entry = "exl_module_init"
+sources = [
+    "src",
+    "libs/exlaunch/source",
+    "libs/botw-pp/src",
+]
+includes = [
+    "libs/exlaunch/source",
+    "libs/botw/src",
+    "libs/botw/lib/sead/include",
+    "libs/botw/lib/NintendoSDK/include",
+    "libs/botw-pp/include",
+]
+ldscripts = [
+    "libs/exlaunch/misc/link.ld",
+    "libs/botw-symbols/ld/ld150.ld",
+    # "link.ld",
+]
+
+[build.flags]
+c = [
+    "<default>",
+    "-DNNSDK",
+    "-DSWITCH",
+    "-D__SWITCH__",
+    "-DEXL_DEBUG",
+    "-DEXL_LOAD_KIND_ENUM=2",
+    "-DEXL_LOAD_KIND=Module",
+    "-DEXL_PROGRAM_ID=0x01007ef00011e000",
+    "-DEXL_MODULE_NAME=\"botwrdump\"",
+    "-DNN_SDK_MAJOR=4",
+    "-DNN_SDK_MINOR=4",
+    "-DNN_SDK_PATCH=0",
+    "-DNN_WARE_MAJOR=4",
+    "-DNN_WARE_MINOR=4",
+    "-DNN_WARE_PATCH=0",
+    "-DBOTW_VERSION=150",
+]
+cxx = [
+    "<default>",
+    "-Wno-invalid-offsetof",
+        # "-Wno-strict-aliasing",
+]
+
+[check]
+ignore = [
+    ".data",
+    ".text",
+]
+symbols = [
+    "libs/botw-symbols/symbols/150/main.syms",
+    "libs/botw-symbols/symbols/150/rtld.syms",
+    "libs/botw-symbols/symbols/150/sdk.syms",
+    "libs/botw-symbols/symbols/150/subsdk0.syms",
+]
