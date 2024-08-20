@@ -5,6 +5,12 @@ description = "Tools to check/validate the dump"
 edition = "2021"
 
 [dependencies]
+clap = { version = "=4.5.4", features = ["derive"] }
+num_cpus = "1.16.0"
+serde = { version = "1.0.208", features = ["derive"] }
+serde_json = "1.0.125"
+thiserror = "1.0.63"
+threadpool = "1.8.1"
 
 [dependencies.botw-recipe-data]
 path = "../../app/data"

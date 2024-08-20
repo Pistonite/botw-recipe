@@ -65,6 +65,13 @@ The selected chunk size is `409600` records. There will be around 4000 chunks.
 Each chunk will be stored as a binary file. Each record will be stored as 
 a binary blob of 24 bytes, using C-layout and little endian for the fields.
 
+90% of the recipes are dubious/rock-hard food, meaning there are good chances
+that many chunks only contain dubious/rock-hard food. However, the database will
+still store them as-is, the reason being:
+1. Dubious food can still have different HP value,
+2. The dubious chunks can be compressed very well, and
+3. The compacted total size of the database is still manageable.
+
 ## Dumping
 The database will be dumped by 2 means: emulated and console.
 

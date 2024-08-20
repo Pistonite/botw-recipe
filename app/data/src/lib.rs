@@ -3,10 +3,12 @@ mod generated;
 use std::io;
 use std::io::Write;
 
-use derive_deref::Deref;
-use derive_deref::DerefMut;
 pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS, CHUNK_SIZE, CHUNK_COUNT, LAST_CHUNK_SIZE};
 pub use generated::{Actor, Group};
+
+mod recipe;
+pub use recipe::*;
+use serde::{Deserialize, Serialize};
 
 /// Get the number of ways to choose `k` items from `n` items, allowing for repetition
 ///
@@ -15,152 +17,25 @@ pub fn multichoose(n: usize, k: usize) -> usize {
     generated::MULTICHOOSE[n][k]
 }
 
-/// A valid recipe record id
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)]
-pub struct RecipeId(usize);
-impl RecipeId {
-    /// Check and create a new RecipeId. Returns None if the id is out of bounds
-    pub fn new(id: usize) -> Option<Self> {
-        if id < NUM_TOTAL_RECORDS {
-            Some(RecipeId(id))
-        }else{
-            None
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Recipe {
+    pub data: CookData,
+    pub inputs: Vec<String>,
+}
+
+impl Recipe {
+    pub fn new(data: CookData, inputs: RecipeInputs) -> Self {
+        Self {
+            data,
+            inputs: inputs.to_names().into_iter().map(|a| a.to_string()).collect(),
         }
     }
 }
-
-impl From<RecipeInputs> for RecipeId {
-    fn from(items: RecipeInputs) -> Self {
-        // This is the inverse of RecipeInputs::from(RecipeId)
-        let mut output = 0usize;
-        // reconstruct rest_items to be at the beginning of last iteration
-        let mut item_lower_bound = NUM_GROUPS - items[NUM_INGR-2].id();
-
-        // reverse the iterations
-        for item in 0..NUM_INGR {
-            // compute index
-            let reverse_item = NUM_INGR-1-item;
-            let m = items[reverse_item].id()+1;
-            let mut index = 0usize;
-            for reverse_m in NUM_GROUPS-item_lower_bound+1..m {
-                index += multichoose(NUM_GROUPS-reverse_m+1, item);
-            }
-            // add to output (reverse input -= index)
-            output += index;
-            // recover rest_items to beginning of last iteration
-            if reverse_item > 1 {
-                item_lower_bound = NUM_GROUPS-items[reverse_item-2].id();
-            }else{
-                item_lower_bound = NUM_GROUPS;
-            }
-        }
-
-        RecipeId(output)
-    }
-}
-
-impl From<RecipeId> for usize {
-    fn from(id: RecipeId) -> Self {
-        id.0
-    }
-}
-
-/// A valid recipe input, which has the following invariants:
-/// - Each group is a valid group
-/// - The groups are sorted in ascending order
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Deref, DerefMut)]
-pub struct RecipeInputs([Group; NUM_INGR]);
-
-impl RecipeInputs {
-    /// Check and create inputs from a recipe id. Returns None if the id is out of bounds
-    pub fn from_id(id: usize) -> Option<Self> {
-        RecipeId::new(id).map(RecipeInputs::from)
-    }
-    pub fn from_groups(groups: &[Group]) -> Self {
-        let len = groups.len();
-        if len > NUM_INGR {
-            panic!("too many inputs in recipe: {}", len);
-        }
-        Self::from_groups_unchecked(groups)
-    }
-    pub fn from_groups_unchecked(groups: &[Group]) -> Self {
-        let len = groups.len();
-        let mut items = [Group::None; NUM_INGR];
-        for i in 0..NUM_INGR {
-            if i < len {
-                items[i] = groups[i];
-            }else{
-                items[i] = Group::None;
-            }
-        }
-        items.into()
-    }
-    pub fn from_actors(actors: &[Actor]) -> Self {
-        let groups = actors.iter().map(Actor::group).collect::<Vec<_>>();
-        Self::from_groups(&groups)
-    }
-    // TODO: from groups
-    // TODO: from actors
-}
-
-impl From<RecipeInputs> for [Group; NUM_INGR] {
-    fn from(value: RecipeInputs) -> Self {
-        value.0
-    }
-}
-
-impl From<[Group; NUM_INGR]> for RecipeInputs {
-    fn from(mut value: [Group; NUM_INGR]) -> Self {
-        value.sort_unstable();
-        RecipeInputs(value)
-    }
-}
-
-impl From<RecipeId> for RecipeInputs {
-    fn from(id: RecipeId) -> Self {
-        // id is the index into the set of all recipes,
-        // in the order of multichoose generation order
-        // This algorithm gets the ingredients in polynomial time compared to number of materials
-        let mut items = [Group::None; NUM_INGR];
-        // how many ids are left
-        let mut rest = id.into();
-        // how many items are left (since the inputs are ascending)
-        let mut item_lower_bound = NUM_GROUPS;
-        
-        for slot in 0..NUM_INGR {
-            let mut good = false;
-            // compute the slot-th item in the input array
-            let mut index = 0usize;
-            for m in NUM_GROUPS-item_lower_bound+1..NUM_GROUPS+1 {
-                // does m overshot rest of the id
-                let next_block_size = multichoose(NUM_GROUPS-m+1, NUM_INGR-1-slot);
-                if index + next_block_size > rest {
-                    // safety: the loop has upper bound NUM_GROUPS+1, so m-1 < NUM_GROUPS
-                    items[slot] = Group::from_id_unchecked(m-1);
-                    good = true;
-                    break;
-                }
-                index += next_block_size;
-            }
-            if !good {
-                panic!("bad recipe id: {}, when processing slot {}", usize::from(id), slot);
-            }
-            item_lower_bound=NUM_GROUPS-items[slot].id();
-            rest -= index;
-        }
-
-        RecipeInputs(items)
-    }
-}
-
-
-// mod multichoose;
 
 // use std::fs;
 // use bit_set::BitSet;
 /// This data mirrors uking::ui::PouchItem::CookData, with an extra crit_chance field
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[repr(C)]
 pub struct CookData {
     /// Number of quarter-hearts. Usually 0-120
@@ -177,6 +52,25 @@ pub struct CookData {
     pub crit_chance: i32
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "reason", content = "data")]
+pub enum CookDataInvalidReason {
+    ExpectedInvalid,
+    InvalidHealthRecover(i32),
+    InvalidEffectDuration(i32),
+    NegativeSellPrice(i32),
+    NegativeEffectLevel(f32),
+    NonIntegerEffectLevel(f32),
+    InvalidNoneEffect {
+        sell_price: i32,
+        effect_level: f32
+    },
+    LifeRecover,
+    LifeMaxUpTooHigh(f32),
+    EffectLevelTooHigh(f32),
+    UnknownEffect(f32),
+}
+
 impl CookData {
     pub fn write_to<W: Write>(&self, w: &mut W) -> io::Result<()> {
         w.write_all(&self.health_recover.to_le_bytes())?;
@@ -186,6 +80,30 @@ impl CookData {
         w.write_all(&self.effect_level.to_le_bytes())?;
         w.write_all(&self.crit_chance.to_le_bytes())?;
         Ok(())
+    }
+
+    pub fn read_from<R: io::Read>(r: &mut R) -> io::Result<Self> {
+        let mut data = [0u8; 4];
+        r.read_exact(&mut data)?;
+        let health_recover = i32::from_le_bytes(data);
+        r.read_exact(&mut data)?;
+        let effect_duration = i32::from_le_bytes(data);
+        r.read_exact(&mut data)?;
+        let sell_price = i32::from_le_bytes(data);
+        r.read_exact(&mut data)?;
+        let effect_id = f32::from_le_bytes(data);
+        r.read_exact(&mut data)?;
+        let effect_level = f32::from_le_bytes(data);
+        r.read_exact(&mut data)?;
+        let crit_chance = i32::from_le_bytes(data);
+        Ok(Self {
+            health_recover,
+            effect_duration,
+            sell_price,
+            effect_id,
+            effect_level,
+            crit_chance
+        })
     }
     /// Return an invalid CookData with all 0 bytes
     pub fn invalid() -> Self {
@@ -199,63 +117,81 @@ impl CookData {
         }
     }
 
-    pub fn is_invalid(&self) -> bool {
-        return self == &Self::invalid();
+    pub fn is_invalid(&self) -> Option<CookDataInvalidReason> {
+        if self == &Self::invalid() {
+            None
+        } else {
+            Some(CookDataInvalidReason::ExpectedInvalid)
+        }
     }
 
     /// Get that the data are in their normal ranges
-    pub fn is_normal(&self) -> bool {
+    pub fn is_normal(&self) -> Option<CookDataInvalidReason> {
         if self.health_recover < 0 || self.health_recover > 120 {
-            return false;
+            return Some(CookDataInvalidReason::InvalidHealthRecover(self.health_recover));
         }
         if self.effect_duration < 0 || self.effect_duration > 1800 {
-            return false;
+            return Some(CookDataInvalidReason::InvalidEffectDuration(self.effect_duration));
         }
         if self.sell_price < 0 {
-            return false;
+            return Some(CookDataInvalidReason::NegativeSellPrice(self.sell_price));
         }
         if self.effect_level < 0.0 {
-            return false;
+            return Some(CookDataInvalidReason::NegativeEffectLevel(self.effect_level));
         }
         if self.effect_level.round() != self.effect_level {
-            return false;
+            return Some(CookDataInvalidReason::NonIntegerEffectLevel(self.effect_level));
         }
         match self.effect_id {
             MOD_NONE => {
-                if self.effect_level != 0.0 || self.effect_duration != 0 {
-                    return false;
+                if self.effect_level != 1.0 {
+                    // must be fairy tunic
+                    if self.sell_price != 2 {
+                        return Some(CookDataInvalidReason::InvalidNoneEffect {
+                            sell_price: self.sell_price,
+                            effect_level: self.effect_level
+                        });
+                    }
                 }
             }
-            MOD_LIFE_RECOVER => {} //what is this??
+            MOD_LIFE_RECOVER => {
+                //supposed to be unused
+                return Some(CookDataInvalidReason::LifeRecover);
+            }
             MOD_LIFE_MAX_UP => {
-                if self.effect_duration != 0 {
-                    return false;
-                }
                 if self.effect_level > 25.0 {
                     // max is 5 big hearty radish which gives 25 hearts
-                    return false;
+                    return Some(CookDataInvalidReason::LifeMaxUpTooHigh(self.effect_level));
                 }
             }
             MOD_RESIST_HOT | MOD_RESIST_COLD | MOD_FIREPROOF=> {
                 if self.effect_level> 2.0 {
-                    return false;
+                    return Some(CookDataInvalidReason::EffectLevelTooHigh(self.effect_level));
                 }
             }
             MOD_RESIST_ELECTRIC |
 MOD_ATTACK_UP | MOD_DEFENSE_UP | MOD_QUIETNESS | MOD_MOVING_SPEED
 => {
                 if self.effect_level > 3.0 {
-                    return false;
+                    return Some(CookDataInvalidReason::EffectLevelTooHigh(self.effect_level));
                 }
             }
-            MOD_GUTS_RECOVER => {} //TODO
-            MOD_EX_GUTS_MAX_UP => { } //TODO
+            MOD_GUTS_RECOVER => {
+                if self.effect_level > 1.0 {
+                    return Some(CookDataInvalidReason::EffectLevelTooHigh(self.effect_level));
+                }
+            }
+            MOD_EX_GUTS_MAX_UP => {
+                if self.effect_level > 1.0 {
+                    return Some(CookDataInvalidReason::EffectLevelTooHigh(self.effect_level));
+                }
+            }
             _ => {
-                return false;
+                return Some(CookDataInvalidReason::UnknownEffect(self.effect_id));
             }
         }
 
-        true
+        None
     }
 }
 const MOD_LIFE_RECOVER :f32= 1.0;

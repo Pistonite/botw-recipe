@@ -11,8 +11,30 @@ use botw_recipe_data::{Actor, CookData, RecipeId, RecipeInputs};
 use cooking::{Cook, Recipe, Modifier};
 
 fn main() {
-    let skip_existing = true;
+    // let inputs = RecipeInputs::from_actors(&[
+    //     Actor::try_from("hearty durian").unwrap(),
+    //     // Actor::try_from("endura carrot").unwrap(),
+    //     // Actor::try_from("endura carrot").unwrap(),
+    //     // Actor::try_from("endura carrot").unwrap(),
+    //     // Actor::try_from("endura carrot").unwrap(),
+    // ]);
+    // let mut ingr = Vec::new();
+    // for group in inputs.iter() {
+    //     let actor = group.first_actor();
+    //     if actor != Actor::None {
+    //         ingr.push(actor.name());
+    //     }
+    // }
+    // println!("{:?}", ingr);
+    // let cook = Cook::new();
+    // let recipe = cook.cook(&ingr);
+    // println!("{:#?}", recipe);
 
+
+    dump(true);
+}
+
+fn dump(skip_existing: bool) {
     let data_path = Path::new("./data");
     if !data_path.exists() {
         std::fs::create_dir_all(data_path).unwrap();
@@ -101,7 +123,7 @@ fn start_worker_thread(
 ) -> JoinHandle<()> {
     thread::spawn(move || {
         println!("thread {} started", thread_id);
-        let cook = Cook::new();
+        let cook = Cook::new().unwrap();
         while let Ok(id) = recv.recv() {
             let did_work = dump_chunk(&cook, id, skip_existing);
             send.send((thread_id, did_work)).unwrap();
@@ -127,8 +149,6 @@ fn dump_chunk(cook: &Cook, chunk_id: usize, skip_existing: bool) -> bool {
 
     let mut results = Vec::with_capacity(chunk_size);
     let mut ingr = Vec::new();
-    // special handling if it has the first record, which is empty
-    let mut has_record_0 = false;
     for id in chunk_start..chunk_end {
         let inputs = RecipeInputs::from_id(id).unwrap();
         ingr.clear();
@@ -138,17 +158,13 @@ fn dump_chunk(cook: &Cook, chunk_id: usize, skip_existing: bool) -> bool {
                 ingr.push(actor.name());
             }
         }
-        if ingr.is_empty() {
-            has_record_0 = true;
+        let data = if ingr.is_empty() {
+            CookData::invalid()
         } else {
-            let recipe = cook.cook(&ingr);
-            let data = convert_recipe(&recipe);
-            results.push(data);
-        }
-    }
-
-    if has_record_0 {
-        writer.write_all(&[0u8; 24]).unwrap();
+            let recipe = cook.cook(&ingr).unwrap();
+            convert_recipe(&recipe)
+        };
+        results.push(data);
     }
 
     for data in results {
