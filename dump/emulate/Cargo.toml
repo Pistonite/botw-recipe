@@ -2,6 +2,7 @@
 name = "botw-recipe-dump-emulate"
 version = "0.0.0"
 edition = "2021"
+default-run = "cook"
 
 [dependencies]
 clap = { version = "=4.5.4", features = ["derive"] }
@@ -12,3 +13,11 @@ path = "../../../cooking.rs"
 
 [dependencies.botw-recipe-data]
 path = "../../app/data"
+
+[[bin]]
+name = "cook"
+path = "src/cook.rs"
+
+[[bin]]
+name = "dump"
+path = "src/dump.rs"

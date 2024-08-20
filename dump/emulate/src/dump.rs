@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::{self, BufWriter, Write};
+use std::io::BufWriter;
 use std::path::Path;
 use std::sync::atomic::AtomicUsize;
 use std::sync::mpsc::{self, Sender, Receiver};
@@ -7,30 +7,10 @@ use std::sync::Arc;
 use std::thread::{self, JoinHandle};
 use std::time::Instant;
 
-use botw_recipe_data::{Actor, CookData, RecipeId, RecipeInputs};
+use botw_recipe_data::{Actor, CookData, RecipeInputs};
 use cooking::{Cook, Recipe, Modifier};
 
 fn main() {
-    // let inputs = RecipeInputs::from_actors(&[
-    //     Actor::try_from("hearty durian").unwrap(),
-    //     // Actor::try_from("endura carrot").unwrap(),
-    //     // Actor::try_from("endura carrot").unwrap(),
-    //     // Actor::try_from("endura carrot").unwrap(),
-    //     // Actor::try_from("endura carrot").unwrap(),
-    // ]);
-    // let mut ingr = Vec::new();
-    // for group in inputs.iter() {
-    //     let actor = group.first_actor();
-    //     if actor != Actor::None {
-    //         ingr.push(actor.name());
-    //     }
-    // }
-    // println!("{:?}", ingr);
-    // let cook = Cook::new();
-    // let recipe = cook.cook(&ingr);
-    // println!("{:#?}", recipe);
-
-
     dump(true);
 }
 
@@ -172,9 +152,6 @@ fn dump_chunk(cook: &Cook, chunk_id: usize, skip_existing: bool) -> bool {
     }
 
     true
-}
-
-struct Cli {
 }
 
 fn convert_recipe(recipe: &Recipe) -> CookData {
