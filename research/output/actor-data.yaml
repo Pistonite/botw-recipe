@@ -1,0 +1,3907 @@
+Item_Fruit_D:                           # Hearty Durian
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 16
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_G:                           # Palm Fruit
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_A:                           # Apple
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_B:                           # Wildberry
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_F:                           # Hydromelon
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_I:                           # Spicy Pepper
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistCold
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_C:                           # Voltfruit
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistElectric
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_E:                           # Fleet-Lotus Seeds
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: MovingSpeed
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Fruit_H:                           # Mighty Bananas
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookFruit
+  - CookMaterial
+  - Material
+
+Item_Mushroom_N:                        # Big Hearty Truffle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 16
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_F:                        # Hearty Truffle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 4
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_O:                        # Endura Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ExGutsMaxUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_E:                        # Hylian Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_A:                        # Stamella Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: GutsRecover
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_B:                        # Chillshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_C:                        # Sunshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ResistCold
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_H:                        # Zapshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ResistElectric
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_MushroomGet_D:                     # Rushroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: MovingSpeed
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_L:                        # Razorshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_M:                        # Ironshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_Mushroom_J:                        # Silent Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: Quietness
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookMushroom
+  - Material
+
+Item_PlantGet_C:                        # Big Hearty Radish
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 20
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 16
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_B:                        # Hearty Radish
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 12
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 10
+  itemBuyingPrice: 32
+  itemSellingPrice: 8
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_Q:                        # Endura Carrot
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 4
+  cureItemEffectType: ExGutsMaxUp
+  cureItemEffectiveTime: 300
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 120
+  itemSellingPrice: 30
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_A:                        # Hyrule Herb
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_M:                        # Swift Carrot
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: MovingSpeed
+  cureItemEffectiveTime: 300
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_Fruit_J:                           # Fortified Pumpkin
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_E:                        # Cool Safflina
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_F:                        # Warm Safflina
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistCold
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_L:                        # Electric Safflina
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistElectric
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_O:                        # Swift Violet
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: MovingSpeed
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_G:                        # Mighty Thistle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_H:                        # Armoranth
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_I:                        # Blue Nightshade
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: Quietness
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_PlantGet_J:                        # Silent Princess
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 3
+  cureItemEffectType: Quietness
+  cureItemEffectiveTime: 1200
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 30
+  itemSellingPrice: 10
+  tags:
+  - CookMaterial
+  - CookPlant
+  - Material
+
+Item_Meat_11:                           # Raw Gourmet Meat
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - CookMaterial
+  - CookMeat
+  - Material
+
+Item_Meat_12:                           # Raw Whole Bird
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - CookMaterial
+  - CookMeat
+  - Material
+
+Item_Meat_02:                           # Raw Prime Meat
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookMaterial
+  - CookMeat
+  - Material
+
+Item_Meat_07:                           # Raw Bird Thigh
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookMaterial
+  - CookMeat
+  - Material
+
+Item_Meat_01:                           # Raw Meat
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 32
+  itemSellingPrice: 8
+  tags:
+  - CookMaterial
+  - CookMeat
+  - Material
+
+Item_Meat_06:                           # Raw Bird Drumstick
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 32
+  itemSellingPrice: 8
+  tags:
+  - CookMaterial
+  - CookMeat
+  - Material
+
+BeeHome:                                # Courser Bee Honey
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: GutsRecover
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookMaterial
+  - CookSpice
+
+Item_Material_03:                       # Hylian Rice
+  cookSpiceBoostEffectiveTime: 30
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Material_04:                       # Bird Egg
+  cookSpiceBoostEffectiveTime: 60
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Material_07:                       # Tabantha Wheat
+  cookSpiceBoostEffectiveTime: 30
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Material_05:                       # Fresh Milk
+  cookSpiceBoostEffectiveTime: 50
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - DrinkItem
+  - Material
+
+Item_Fruit_K:                           # Acorn
+  cookSpiceBoostEffectiveTime: 20
+  cookSpiceBoostHitPointRecover: 2
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 1
+  itemBuyingPrice: 8
+  itemSellingPrice: 2
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Fruit_L:                           # Chickaloo Tree Nut
+  cookSpiceBoostEffectiveTime: 10
+  cookSpiceBoostHitPointRecover: 2
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 1
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Material_01:                       # Cane Sugar
+  cookSpiceBoostEffectiveTime: 50
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Material_06:                       # Goat Butter
+  cookSpiceBoostEffectiveTime: 50
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Material_02:                       # Goron Spice
+  cookSpiceBoostEffectiveTime: 60
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 1
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 16
+  itemSellingPrice: 4
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Ore_H:                             # Rock Salt
+  cookSpiceBoostEffectiveTime: 30
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 2
+  tags:
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Ore_J:                             # Star Fragment
+  cookSpiceBoostEffectiveTime: 60
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1500
+  itemSellingPrice: 300
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - Material
+
+Item_Enemy_38:                          # Dinraal's Scale
+  cookSpiceBoostEffectiveTime: 60
+  cookSpiceBoostHitPointRecover: 5
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 600
+  itemSellingPrice: 150
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_39:                          # Dinraal's Claw
+  cookSpiceBoostEffectiveTime: 180
+  cookSpiceBoostHitPointRecover: 8
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 720
+  itemSellingPrice: 180
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_47:                          # Shard of Dinraal's Fang
+  cookSpiceBoostEffectiveTime: 600
+  cookSpiceBoostHitPointRecover: 10
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1000
+  itemSellingPrice: 250
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_48:                          # Shard of Dinraal's Horn
+  cookSpiceBoostEffectiveTime: 1800
+  cookSpiceBoostHitPointRecover: 15
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1200
+  itemSellingPrice: 300
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_49:                          # Naydra's Scale
+  cookSpiceBoostEffectiveTime: 60
+  cookSpiceBoostHitPointRecover: 5
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 600
+  itemSellingPrice: 150
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_50:                          # Naydra's Claw
+  cookSpiceBoostEffectiveTime: 180
+  cookSpiceBoostHitPointRecover: 8
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 720
+  itemSellingPrice: 180
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_51:                          # Shard of Naydra's Fang
+  cookSpiceBoostEffectiveTime: 600
+  cookSpiceBoostHitPointRecover: 10
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1000
+  itemSellingPrice: 250
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_52:                          # Shard of Naydra's Horn
+  cookSpiceBoostEffectiveTime: 1800
+  cookSpiceBoostHitPointRecover: 15
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1200
+  itemSellingPrice: 300
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_53:                          # Farosh's Scale
+  cookSpiceBoostEffectiveTime: 60
+  cookSpiceBoostHitPointRecover: 5
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 600
+  itemSellingPrice: 150
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_54:                          # Farosh's Claw
+  cookSpiceBoostEffectiveTime: 180
+  cookSpiceBoostHitPointRecover: 8
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 720
+  itemSellingPrice: 180
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_55:                          # Shard of Farosh's Fang
+  cookSpiceBoostEffectiveTime: 600
+  cookSpiceBoostHitPointRecover: 10
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1000
+  itemSellingPrice: 250
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_Enemy_56:                          # Shard of Farosh's Horn
+  cookSpiceBoostEffectiveTime: 1800
+  cookSpiceBoostHitPointRecover: 15
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 100
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1200
+  itemSellingPrice: 300
+  tags:
+  - CookLowPrice
+  - CookMaterial
+  - CookSpice
+  - CookValue1
+  - EnemyMaterial
+
+Item_FishGet_I:                         # Hearty Salmon
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 16
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 16
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_K:                         # Hearty Blueshell Snail
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 12
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_B:                         # Hearty Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 8
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 72
+  itemSellingPrice: 18
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_A:                         # Hyrule Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_L:                         # Staminoka Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 4
+  cureItemEffectType: GutsRecover
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 72
+  itemSellingPrice: 18
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_C:                         # Chillfin Trout
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 3
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_J:                         # Sizzlefin Trout
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 3
+  cureItemEffectType: ResistCold
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_D:                         # Voltfin Trout
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 3
+  cureItemEffectType: ResistElectric
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_X:                         # Stealthfin Trout
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: Quietness
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_E:                         # Mighty Carp
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_H:                         # Armored Carp
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_Z:                         # Sanke Carp
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 80
+  itemSellingPrice: 20
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_F:                         # Mighty Porgy
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 3
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_G:                         # Armored Porgy
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 3
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_FishGet_M:                         # Sneaky River Snail
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: Quietness
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_InsectGet_K:                       # Razorclaw Crab
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 32
+  itemSellingPrice: 8
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_InsectGet_O:                       # Ironshell Crab
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 32
+  itemSellingPrice: 8
+  tags:
+  - CookFish
+  - CookMaterial
+
+Item_InsectGet_Z:                       # Bright-Eyed Crab
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: GutsRecover
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookFish
+  - CookMaterial
+
+Animal_Insect_F:                        # Fairy
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 20
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookMaterial
+  - Fairy
+  - TypeInsect
+
+Animal_Insect_N:                        # Winterwing Butterfly
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_Q:                        # Summerwing Butterfly
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistCold
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_R:                        # Thunderwing Butterfly
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistElectric
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_AB:                       # Smotherwing Butterfly
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: Fireproof
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_C:                        # Cold Darner
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_T:                        # Warm Darner
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ResistCold
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_I:                        # Electric Darner
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ResistElectric
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_H:                        # Restless Cricket
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: GutsRecover
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_G:                        # Bladed Rhino Beetle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: AttackUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 4
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_P:                        # Rugged Rhino Beetle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: DefenseUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 4
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_AA:                       # Energetic Rhino Beetle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 6
+  cureItemEffectType: GutsRecover
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 150
+  itemSellingPrice: 30
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_E:                        # Sunset Firefly
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: Quietness
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_A:                        # Hot-Footed Frog
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: MovingSpeed
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_B:                        # Tireless Frog
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 2
+  cureItemEffectType: ExGutsMaxUp
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 100
+  itemSellingPrice: 20
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_S:                        # Hightail Lizard
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: MovingSpeed
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 10
+  itemSellingPrice: 2
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_M:                        # Hearty Lizard
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 16
+  cureItemEffectType: LifeMaxUp
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 16
+  itemBuyingPrice: 100
+  itemSellingPrice: 20
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Animal_Insect_X:                        # Fireproof Lizard
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: Fireproof
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 25
+  itemSellingPrice: 5
+  tags:
+  - CookInsect
+  - CookMaterial
+  - Material
+  - TypeInsect
+
+Item_Ore_I:                             # Flint
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_F:                             # Amber
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 120
+  itemSellingPrice: 30
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_E:                             # Opal
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 240
+  itemSellingPrice: 60
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_G:                             # Luminous Stone
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 280
+  itemSellingPrice: 70
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_D:                             # Topaz
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 720
+  itemSellingPrice: 180
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_B:                             # Ruby
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 840
+  itemSellingPrice: 210
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_C:                             # Sapphire
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 1040
+  itemSellingPrice: 260
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Ore_A:                             # Diamond
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 2000
+  itemSellingPrice: 500
+  tags:
+  - CookMaterial
+  - CookOre
+  - Material
+
+Item_Enemy_00:                          # Bokoblin Horn
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_01:                          # Bokoblin Fang
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 32
+  itemSellingPrice: 8
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_02:                          # Bokoblin Guts
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 80
+  itemSellingPrice: 20
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_06:                          # Moblin Horn
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_07:                          # Moblin Fang
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 45
+  itemSellingPrice: 12
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_08:                          # Moblin Guts
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: 25
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_03:                          # Lizalfos Horn
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_04:                          # Lizalfos Talon
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_05:                          # Lizalfos Tail
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 112
+  itemSellingPrice: 28
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_42:                          # Icy Lizalfos Tail
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_41:                          # Red Lizalfos Tail
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_43:                          # Yellow Lizalfos Tail
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_12:                          # Lynel Horn
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 160
+  itemSellingPrice: 40
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_13:                          # Lynel Hoof
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 200
+  itemSellingPrice: 50
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_14:                          # Lynel Guts
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 800
+  itemSellingPrice: 200
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_40:                          # Chuchu Jelly
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_17:                          # White Chuchu Jelly
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_15:                          # Red Chuchu Jelly
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_16:                          # Yellow Chuchu Jelly
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_18:                          # Keese Wing
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 8
+  itemSellingPrice: 2
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_46:                          # Ice Keese Wing
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_44:                          # Fire Keese Wing
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_45:                          # Electric Keese Wing
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 24
+  itemSellingPrice: 6
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_19:                          # Keese Eyeball
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 80
+  itemSellingPrice: 20
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_20:                          # Octorok Tentacle
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 40
+  itemSellingPrice: 10
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_21:                          # Octorok Eyeball
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: 25
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_57:                          # Octo Balloon
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_24:                          # Molduga Fin
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 120
+  itemSellingPrice: 30
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_25:                          # Molduga Guts
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 440
+  itemSellingPrice: 110
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_32:                          # Hinox Toenail
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 80
+  itemSellingPrice: 20
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_33:                          # Hinox Tooth
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_34:                          # Hinox Guts
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 320
+  itemSellingPrice: 80
+  tags:
+  - CookEnemy
+  - CookMaterial
+  - EnemyMaterial
+
+Item_Enemy_27:                          # Ancient Screw
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 48
+  itemSellingPrice: 12
+  tags:
+  - CookEnemy
+  - EnemyMaterial
+
+Item_Enemy_28:                          # Ancient Spring
+  cookSpiceBoostEffectiveTime: 40
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 60
+  itemSellingPrice: 15
+  tags:
+  - CookEnemy
+  - EnemyMaterial
+
+Item_Enemy_26:                          # Ancient Gear
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 120
+  itemSellingPrice: 30
+  tags:
+  - CookEnemy
+  - EnemyMaterial
+
+Item_Enemy_29:                          # Ancient Shaft
+  cookSpiceBoostEffectiveTime: 80
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 10
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 160
+  itemSellingPrice: 40
+  tags:
+  - CookEnemy
+  - EnemyMaterial
+
+Item_Enemy_30:                          # Ancient Core
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 320
+  itemSellingPrice: 80
+  tags:
+  - CookEnemy
+  - EnemyMaterial
+
+Item_Enemy_31:                          # Giant Ancient Core
+  cookSpiceBoostEffectiveTime: 160
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 30
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 800
+  itemSellingPrice: 200
+  tags:
+  - CookEnemy
+  - EnemyMaterial
+
+Obj_FireWoodBundle:                     # Wood
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 12
+  itemSellingPrice: 2
+  tags:
+  - CookMaterial
+  - CookOre
+
+Item_Roast_03:                          # Baked Apple
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 8
+  itemSellingPrice: 3
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_10:                          # Baked Palm Fruit
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 15
+  itemSellingPrice: 6
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_07:                          # Roasted Wildberry
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_48:                          # Roasted Acorn
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 5
+  itemSellingPrice: 2
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_52:                          # Roasted Tree Nut
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 5
+  itemSellingPrice: 2
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_09:                          # Roasted Hearty Durian
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 18
+  itemBuyingPrice: 30
+  itemSellingPrice: 12
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_12:                          # Roasted Hydromelon
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_13:                          # Charred Pepper
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_08:                          # Roasted Voltfruit
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_16:                          # Roasted Lotus Seeds
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_11:                          # Roasted Mighty Bananas
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastFruit
+  - RoastItem
+
+Item_Roast_06:                          # Toasty Hylian Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 12
+  itemSellingPrice: 3
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_04:                          # Toasty Stamella Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_53:                          # Toasty Endura Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_05:                          # Toasted Hearty Truffle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_49:                          # Toasted Big Hearty Truffle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 18
+  itemBuyingPrice: 58
+  itemSellingPrice: 24
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_31:                          # Toasty Chillshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 15
+  itemSellingPrice: 6
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_32:                          # Toasty Sunshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 15
+  itemSellingPrice: 6
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_33:                          # Toasty Zapshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 15
+  itemSellingPrice: 6
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_36:                          # Toasty Rushroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_37:                          # Toasty Razorshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_38:                          # Toasty Ironshroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 13
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_39:                          # Toasty Silent Shroom
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 8
+  itemSellingPrice: 3
+  tags:
+  - Material
+  - RoastItem
+  - RoastMushroom
+
+Item_Roast_18:                          # Roasted Radish
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 15
+  itemBuyingPrice: 30
+  itemSellingPrice: 12
+  tags:
+  - Material
+  - RoastItem
+  - RoastVegetable
+
+Item_Roast_19:                          # Roasted Big Radish
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 24
+  itemBuyingPrice: 58
+  itemSellingPrice: 24
+  tags:
+  - Material
+  - RoastItem
+  - RoastVegetable
+
+Item_Roast_24:                          # Roasted Swift Carrot
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 15
+  itemSellingPrice: 6
+  tags:
+  - Material
+  - RoastItem
+  - RoastVegetable
+
+Item_Roast_50:                          # Roasted Endura Carrot
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 95
+  itemSellingPrice: 38
+  tags:
+  - Material
+  - RoastItem
+  - RoastVegetable
+
+Item_Roast_15:                          # Baked Fortified Pumpkin
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 3
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastItem
+  - RoastVegetable
+
+Item_Roast_27:                          # Roasted Mighty Thistle
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastItem
+  - RoastPlant
+
+Item_Roast_28:                          # Roasted Armoranth
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 2
+  itemBuyingPrice: 20
+  itemSellingPrice: 8
+  tags:
+  - Material
+  - RoastItem
+  - RoastPlant
+
+Item_Roast_51:                          # Campfire Egg
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+
+Item_Boiled_01:                         # Hard-Boiled Egg
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 20
+  itemSellingPrice: 5
+  tags:
+  - Material
+  - RoastItem
+
+Item_Roast_01:                          # Seared Steak
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 30
+  itemSellingPrice: 12
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Roast_40:                          # Seared Prime Steak
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 9
+  itemBuyingPrice: 58
+  itemSellingPrice: 24
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Roast_45:                          # Seared Gourmet Steak
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 18
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Roast_02:                          # Roasted Bird Drumstick
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 30
+  itemSellingPrice: 12
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Roast_41:                          # Roasted Bird Thigh
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 9
+  itemBuyingPrice: 28
+  itemSellingPrice: 24
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Roast_46:                          # Roasted Whole Bird
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 900
+  cureItemHitPointRecover: 18
+  itemBuyingPrice: 140
+  itemSellingPrice: 35
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_RoastFish_01:                      # Roasted Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 23
+  itemSellingPrice: 9
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_02:                      # Roasted Hearty Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 30
+  itemSellingPrice: 12
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_04:                      # Roasted Hearty Salmon
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 18
+  itemBuyingPrice: 38
+  itemSellingPrice: 15
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_03:                      # Roasted Trout
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 23
+  itemSellingPrice: 9
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_07:                      # Roasted Carp
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 38
+  itemSellingPrice: 15
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_09:                      # Roasted Porgy
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 38
+  itemSellingPrice: 15
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_13:                      # Sneaky River Escargot
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 23
+  itemSellingPrice: 9
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_11:                      # Blueshell Escargot
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 9000
+  cureItemHitPointRecover: 18
+  itemBuyingPrice: 38
+  itemSellingPrice: 15
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_RoastFish_15:                      # Blackened Crab
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 30
+  itemSellingPrice: 12
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_Chilled_01:                        # Icy Meat
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 35
+  itemSellingPrice: 15
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Chilled_02:                        # Icy Prime Meat
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 60
+  itemSellingPrice: 28
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Chilled_03:                        # Icy Gourmet Meat
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 150
+  itemSellingPrice: 40
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Chilled_04:                        # Frozen Bird Drumstick
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 35
+  itemSellingPrice: 15
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Chilled_05:                        # Frozen Bird Thigh
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 6
+  itemBuyingPrice: 60
+  itemSellingPrice: 28
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_Chilled_06:                        # Frozen Whole Bird
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 150
+  itemSellingPrice: 40
+  tags:
+  - Material
+  - RoastItem
+  - RoastMeat
+
+Item_ChilledFish_01:                    # Frozen Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 32
+  itemSellingPrice: 14
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_06:                    # Frozen Hearty Bass
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 32
+  itemSellingPrice: 14
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_02:                    # Frozen Hearty Salmon
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 16
+  itemBuyingPrice: 40
+  itemSellingPrice: 18
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_03:                    # Frozen Trout
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 25
+  itemSellingPrice: 10
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_04:                    # Frozen Carp
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 18
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_05:                    # Frozen Porgy
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 40
+  itemSellingPrice: 18
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_07:                    # Frozen Crab
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 8
+  itemBuyingPrice: 32
+  itemSellingPrice: 14
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_08:                    # Frozen River Snail
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 4
+  itemBuyingPrice: 25
+  itemSellingPrice: 10
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Item_ChilledFish_09:                    # Icy Hearty Blueshell Snail
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 1
+  cureItemEffectType: ResistHot
+  cureItemEffectiveTime: 1800
+  cureItemHitPointRecover: 12
+  itemBuyingPrice: 40
+  itemSellingPrice: 18
+  tags:
+  - Material
+  - RoastFish
+  - RoastItem
+
+Obj_DRStone_Get:                        # Sheikah Slate
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: -1
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_00:                            # Dye
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_01:                            # Blue
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_02:                            # Red
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_03:                            # Yellow
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_04:                            # White
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_05:                            # Black
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_06:                            # Purple
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_07:                            # Green
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_08:                            # Light Blue
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_09:                            # Navy
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_10:                            # Orange
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_11:                            # Peach
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_12:                            # Crimson
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_13:                            # Light Yellow
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_14:                            # Brown
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+dyecolor_15:                            # Gray
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 20
+  itemSellingPrice: -1
+  tags: []
+
+Obj_Photo_Animal:                       # Fauna Picture
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: -1
+  tags: []
+
+Obj_Photo_BossEnemy:                    # Elite Enemy Picture
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 500
+  itemSellingPrice: -1
+  tags: []
+
+Obj_Photo_Enemy:                        # Enemy Picture
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: -1
+  tags: []
+
+Obj_Photo_Material:                     # Material Picture
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: -1
+  tags: []
+
+Obj_Photo_Other:                        # Other Picture
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: -1
+  tags: []
+
+Obj_Photo_Weapon:                       # Weapon Picture
+  cookSpiceBoostEffectiveTime: 0
+  cookSpiceBoostHitPointRecover: 0
+  cookSpiceBoostMaxHeartLevel: 0
+  cookSpiceBoostStaminaLevel: 0
+  cookSpiceBoostSuccessRate: 0
+  cureItemEffectLevel: 0
+  cureItemEffectType: None
+  cureItemEffectiveTime: 0
+  cureItemHitPointRecover: 0
+  itemBuyingPrice: 100
+  itemSellingPrice: -1
+  tags: []
+

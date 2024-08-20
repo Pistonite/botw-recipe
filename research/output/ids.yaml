@@ -1,0 +1,266 @@
+total: 1447490660
+num: 175
+ids:
+  "0": ["<None>"]
+  "1": [ Item_Fruit_D         ] # Hearty Durian
+  "2": [ Item_Fruit_G         ] # Palm Fruit
+  "3": [ Item_Fruit_A         ] # Apple
+  "4": [ Item_Fruit_B         ] # Wildberry
+  "5": [ Item_Fruit_F         ] # Hydromelon
+  "6": [ Item_Fruit_I         ] # Spicy Pepper
+  "7": [ Item_Fruit_C         ] # Voltfruit
+  "8": [ Item_Fruit_E         ] # Fleet-Lotus Seeds
+  "9": [ Item_Fruit_H         ] # Mighty Bananas
+  "10": [ Item_Mushroom_N      ] # Big Hearty Truffle
+  "11": [ Item_Mushroom_F      ] # Hearty Truffle
+  "12": [ Item_Mushroom_O      ] # Endura Shroom
+  "13": [ Item_Mushroom_E      ] # Hylian Shroom
+  "14": [ Item_Mushroom_A      ] # Stamella Shroom
+  "15": [ Item_Mushroom_B      ] # Chillshroom
+  "16": [ Item_Mushroom_C      ] # Sunshroom
+  "17": [ Item_Mushroom_H      ] # Zapshroom
+  "18": [ Item_MushroomGet_D   ] # Rushroom
+  "19": [ Item_Mushroom_L      ] # Razorshroom
+  "20": [ Item_Mushroom_M      ] # Ironshroom
+  "21": [ Item_Mushroom_J      ] # Silent Shroom
+  "22": [ Item_PlantGet_C      ] # Big Hearty Radish
+  "23": [ Item_PlantGet_B      ] # Hearty Radish
+  "24": [ Item_PlantGet_Q      ] # Endura Carrot
+  "25": [ Item_PlantGet_A      ] # Hyrule Herb
+  "26": [ Item_PlantGet_M      ] # Swift Carrot
+  "27": [ Item_Fruit_J         ] # Fortified Pumpkin
+  "28": [ Item_PlantGet_E      ] # Cool Safflina
+  "29": [ Item_PlantGet_F      ] # Warm Safflina
+  "30": [ Item_PlantGet_L      ] # Electric Safflina
+  "31": [ Item_PlantGet_O      ] # Swift Violet
+  "32": [ Item_PlantGet_G      ] # Mighty Thistle
+  "33": [ Item_PlantGet_H      ] # Armoranth
+  "34": [ Item_PlantGet_I      ] # Blue Nightshade
+  "35": [ Item_PlantGet_J      ] # Silent Princess
+  "36": [ Item_Meat_11         ] # Raw Gourmet Meat
+  "37": [ Item_Meat_12         ] # Raw Whole Bird
+  "38": [ Item_Meat_02         ] # Raw Prime Meat
+  "39": [ Item_Meat_07         ] # Raw Bird Thigh
+  "40": [ Item_Meat_01         ] # Raw Meat
+  "41": [ Item_Meat_06         ] # Raw Bird Drumstick
+  "42": [ BeeHome              ] # Courser Bee Honey
+  "43": [ Item_Material_03     ] # Hylian Rice
+  "44": [ Item_Material_04     ] # Bird Egg
+  "45": [ Item_Material_07     ] # Tabantha Wheat
+  "46": [ Item_Material_05     ] # Fresh Milk
+  "47": [ Item_Fruit_K         ] # Acorn
+  "48": [ Item_Fruit_L         ] # Chickaloo Tree Nut
+  "49": [ Item_Material_01     ] # Cane Sugar
+  "50": [ Item_Material_06     ] # Goat Butter
+  "51": [ Item_Material_02     ] # Goron Spice
+  "52": [ Item_Ore_H           ] # Rock Salt
+  "53": [ Item_Ore_J           ] # Star Fragment
+  "54":
+    - Item_Enemy_38                            # Dinraal's Scale
+    - Item_Enemy_49                            # Naydra's Scale
+    - Item_Enemy_53                            # Farosh's Scale
+  "55":
+    - Item_Enemy_39                            # Dinraal's Claw
+    - Item_Enemy_50                            # Naydra's Claw
+    - Item_Enemy_54                            # Farosh's Claw
+  "56":
+    - Item_Enemy_47                            # Shard of Dinraal's Fang
+    - Item_Enemy_51                            # Shard of Naydra's Fang
+    - Item_Enemy_55                            # Shard of Farosh's Fang
+  "57":
+    - Item_Enemy_48                            # Shard of Dinraal's Horn
+    - Item_Enemy_52                            # Shard of Naydra's Horn
+    - Item_Enemy_56                            # Shard of Farosh's Horn
+  "58": [ Item_FishGet_I       ] # Hearty Salmon
+  "59": [ Item_FishGet_K       ] # Hearty Blueshell Snail
+  "60": [ Item_FishGet_B       ] # Hearty Bass
+  "61": [ Item_FishGet_A       ] # Hyrule Bass
+  "62": [ Item_FishGet_L       ] # Staminoka Bass
+  "63": [ Item_FishGet_C       ] # Chillfin Trout
+  "64": [ Item_FishGet_J       ] # Sizzlefin Trout
+  "65": [ Item_FishGet_D       ] # Voltfin Trout
+  "66": [ Item_FishGet_X       ] # Stealthfin Trout
+  "67": [ Item_FishGet_E       ] # Mighty Carp
+  "68": [ Item_FishGet_H       ] # Armored Carp
+  "69": [ Item_FishGet_Z       ] # Sanke Carp
+  "70": [ Item_FishGet_F       ] # Mighty Porgy
+  "71": [ Item_FishGet_G       ] # Armored Porgy
+  "72": [ Item_FishGet_M       ] # Sneaky River Snail
+  "73": [ Item_InsectGet_K     ] # Razorclaw Crab
+  "74": [ Item_InsectGet_O     ] # Ironshell Crab
+  "75": [ Item_InsectGet_Z     ] # Bright-Eyed Crab
+  "76": [ Animal_Insect_F      ] # Fairy
+  "77": [ Animal_Insect_N      ] # Winterwing Butterfly
+  "78": [ Animal_Insect_Q      ] # Summerwing Butterfly
+  "79": [ Animal_Insect_R      ] # Thunderwing Butterfly
+  "80": [ Animal_Insect_AB     ] # Smotherwing Butterfly
+  "81": [ Animal_Insect_C      ] # Cold Darner
+  "82": [ Animal_Insect_T      ] # Warm Darner
+  "83": [ Animal_Insect_I      ] # Electric Darner
+  "84": [ Animal_Insect_H      ] # Restless Cricket
+  "85": [ Animal_Insect_G      ] # Bladed Rhino Beetle
+  "86": [ Animal_Insect_P      ] # Rugged Rhino Beetle
+  "87": [ Animal_Insect_AA     ] # Energetic Rhino Beetle
+  "88": [ Animal_Insect_E      ] # Sunset Firefly
+  "89": [ Animal_Insect_A      ] # Hot-Footed Frog
+  "90": [ Animal_Insect_B      ] # Tireless Frog
+  "91": [ Animal_Insect_S      ] # Hightail Lizard
+  "92": [ Animal_Insect_M      ] # Hearty Lizard
+  "93": [ Animal_Insect_X      ] # Fireproof Lizard
+  "94": [ Item_Ore_I           ] # Flint
+  "95": [ Item_Ore_F           ] # Amber
+  "96": [ Item_Ore_E           ] # Opal
+  "97": [ Item_Ore_G           ] # Luminous Stone
+  "98": [ Item_Ore_D           ] # Topaz
+  "99": [ Item_Ore_B           ] # Ruby
+  "100": [ Item_Ore_C           ] # Sapphire
+  "101": [ Item_Ore_A           ] # Diamond
+  "102": [ Item_Enemy_00        ] # Bokoblin Horn
+  "103": [ Item_Enemy_01        ] # Bokoblin Fang
+  "104":
+    - Item_Enemy_02                            # Bokoblin Guts
+    - Item_Enemy_19                            # Keese Eyeball
+  "105":
+    - Item_Enemy_06                            # Moblin Horn
+    - Item_Enemy_40                            # Chuchu Jelly
+    - Item_Enemy_57                            # Octo Balloon
+  "106": [ Item_Enemy_07        ] # Moblin Fang
+  "107": [ Item_Enemy_08        ] # Moblin Guts
+  "108":
+    - Item_Enemy_03                            # Lizalfos Horn
+    - Item_Enemy_20                            # Octorok Tentacle
+  "109": [ Item_Enemy_04        ] # Lizalfos Talon
+  "110": [ Item_Enemy_05        ] # Lizalfos Tail
+  "111":
+    - Item_Enemy_42                            # Icy Lizalfos Tail
+    - Item_Enemy_41                            # Red Lizalfos Tail
+    - Item_Enemy_43                            # Yellow Lizalfos Tail
+  "112": [ Item_Enemy_12        ] # Lynel Horn
+  "113": [ Item_Enemy_13        ] # Lynel Hoof
+  "114": [ Item_Enemy_14        ] # Lynel Guts
+  "115":
+    - Item_Enemy_17                            # White Chuchu Jelly
+    - Item_Enemy_15                            # Red Chuchu Jelly
+    - Item_Enemy_16                            # Yellow Chuchu Jelly
+  "116": [ Item_Enemy_18        ] # Keese Wing
+  "117":
+    - Item_Enemy_46                            # Ice Keese Wing
+    - Item_Enemy_44                            # Fire Keese Wing
+    - Item_Enemy_45                            # Electric Keese Wing
+  "118": [ Item_Enemy_21        ] # Octorok Eyeball
+  "119": [ Item_Enemy_24        ] # Molduga Fin
+  "120": [ Item_Enemy_25        ] # Molduga Guts
+  "121": [ Item_Enemy_32        ] # Hinox Toenail
+  "122": [ Item_Enemy_33        ] # Hinox Tooth
+  "123": [ Item_Enemy_34        ] # Hinox Guts
+  "124": [ Item_Enemy_27        ] # Ancient Screw
+  "125": [ Item_Enemy_28        ] # Ancient Spring
+  "126": [ Item_Enemy_26        ] # Ancient Gear
+  "127": [ Item_Enemy_29        ] # Ancient Shaft
+  "128": [ Item_Enemy_30        ] # Ancient Core
+  "129": [ Item_Enemy_31        ] # Giant Ancient Core
+  "130": [ Obj_FireWoodBundle   ] # Wood
+  "131": [ Item_Roast_03        ] # Baked Apple
+  "132": [ Item_Roast_10        ] # Baked Palm Fruit
+  "133": [ Item_Roast_07        ] # Roasted Wildberry
+  "134":
+    - Item_Roast_48                            # Roasted Acorn
+    - Item_Roast_52                            # Roasted Tree Nut
+  "135": [ Item_Roast_09        ] # Roasted Hearty Durian
+  "136":
+    - Item_Roast_12                            # Roasted Hydromelon
+    - Item_Roast_08                            # Roasted Voltfruit
+    - Item_Roast_11                            # Roasted Mighty Bananas
+  "137": [ Item_Roast_13        ] # Charred Pepper
+  "138": [ Item_Roast_16        ] # Roasted Lotus Seeds
+  "139": [ Item_Roast_06        ] # Toasty Hylian Shroom
+  "140":
+    - Item_Roast_04                            # Toasty Stamella Shroom
+    - Item_Roast_36                            # Toasty Rushroom
+    - Item_Roast_37                            # Toasty Razorshroom
+    - Item_Roast_38                            # Toasty Ironshroom
+  "141": [ Item_Roast_53        ] # Toasty Endura Shroom
+  "142": [ Item_Roast_05        ] # Toasted Hearty Truffle
+  "143": [ Item_Roast_49        ] # Toasted Big Hearty Truffle
+  "144":
+    - Item_Roast_31                            # Toasty Chillshroom
+    - Item_Roast_32                            # Toasty Sunshroom
+    - Item_Roast_33                            # Toasty Zapshroom
+  "145": [ Item_Roast_39        ] # Toasty Silent Shroom
+  "146": [ Item_Roast_18        ] # Roasted Radish
+  "147": [ Item_Roast_19        ] # Roasted Big Radish
+  "148": [ Item_Roast_24        ] # Roasted Swift Carrot
+  "149": [ Item_Roast_50        ] # Roasted Endura Carrot
+  "150": [ Item_Roast_15        ] # Baked Fortified Pumpkin
+  "151":
+    - Item_Roast_27                            # Roasted Mighty Thistle
+    - Item_Roast_28                            # Roasted Armoranth
+  "152":
+    - Item_Roast_51                            # Campfire Egg
+    - Item_Boiled_01                           # Hard-Boiled Egg
+  "153":
+    - Item_Roast_01                            # Seared Steak
+    - Item_Roast_02                            # Roasted Bird Drumstick
+  "154": [ Item_Roast_40        ] # Seared Prime Steak
+  "155":
+    - Item_Roast_45                            # Seared Gourmet Steak
+    - Item_Roast_46                            # Roasted Whole Bird
+  "156": [ Item_Roast_41        ] # Roasted Bird Thigh
+  "157": [ Item_RoastFish_01    ] # Roasted Bass
+  "158": [ Item_RoastFish_02    ] # Roasted Hearty Bass
+  "159":
+    - Item_RoastFish_04                        # Roasted Hearty Salmon
+    - Item_RoastFish_11                        # Blueshell Escargot
+  "160":
+    - Item_RoastFish_03                        # Roasted Trout
+    - Item_RoastFish_13                        # Sneaky River Escargot
+  "161":
+    - Item_RoastFish_07                        # Roasted Carp
+    - Item_RoastFish_09                        # Roasted Porgy
+  "162": [ Item_RoastFish_15    ] # Blackened Crab
+  "163":
+    - Item_Chilled_01                          # Icy Meat
+    - Item_Chilled_04                          # Frozen Bird Drumstick
+  "164":
+    - Item_Chilled_02                          # Icy Prime Meat
+    - Item_Chilled_05                          # Frozen Bird Thigh
+  "165":
+    - Item_Chilled_03                          # Icy Gourmet Meat
+    - Item_Chilled_06                          # Frozen Whole Bird
+  "166":
+    - Item_ChilledFish_01                      # Frozen Bass
+    - Item_ChilledFish_06                      # Frozen Hearty Bass
+    - Item_ChilledFish_07                      # Frozen Crab
+  "167": [ Item_ChilledFish_02  ] # Frozen Hearty Salmon
+  "168":
+    - Item_ChilledFish_03                      # Frozen Trout
+    - Item_ChilledFish_08                      # Frozen River Snail
+  "169":
+    - Item_ChilledFish_04                      # Frozen Carp
+    - Item_ChilledFish_05                      # Frozen Porgy
+  "170": [ Item_ChilledFish_09  ] # Icy Hearty Blueshell Snail
+  "171": [ Obj_DRStone_Get      ] # Sheikah Slate
+  "172":
+    - dyecolor_00                              # Dye
+    - dyecolor_01                              # Blue
+    - dyecolor_02                              # Red
+    - dyecolor_03                              # Yellow
+    - dyecolor_04                              # White
+    - dyecolor_05                              # Black
+    - dyecolor_06                              # Purple
+    - dyecolor_07                              # Green
+    - dyecolor_08                              # Light Blue
+    - dyecolor_09                              # Navy
+    - dyecolor_10                              # Orange
+    - dyecolor_11                              # Peach
+    - dyecolor_12                              # Crimson
+    - dyecolor_13                              # Light Yellow
+    - dyecolor_14                              # Brown
+    - dyecolor_15                              # Gray
+  "173":
+    - Obj_Photo_Animal                         # Fauna Picture
+    - Obj_Photo_Enemy                          # Enemy Picture
+    - Obj_Photo_Material                       # Material Picture
+    - Obj_Photo_Other                          # Other Picture
+    - Obj_Photo_Weapon                         # Weapon Picture
+  "174": [ Obj_Photo_BossEnemy  ] # Elite Enemy Picture

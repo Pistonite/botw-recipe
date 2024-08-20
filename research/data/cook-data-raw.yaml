@@ -1,0 +1,869 @@
+Recipes:
+- Actors:
+  - - Fairy
+  HB: '-12'
+  Recipe: Fairy Tonic
+  Tags:
+  - - - CookOre
+  - - - CookInsect
+  - - - CookEnemy
+- Actors:
+  - - Fairy
+  HB: '-12'
+  Recipe: Fairy Tonic
+  Tags:
+  - - - CookInsect
+  - - - CookEnemy
+- Actors:
+  - - Fairy
+  HB: '-12'
+  Recipe: Fairy Tonic
+  Tags:
+  - - - CookOre
+    - - CookEnemy
+    - - CookInsect
+- Recipe: Rock-Hard Food
+  Tags:
+  - - - CookOre
+- Recipe: Elixir
+  Tags:
+  - - - CookEnemy
+  - - - CookInsect
+- Recipe: Dubious Food
+  Tags:
+  - - - CookEnemy
+    - - CookInsect
+- Actors:
+  - - Apple
+    - Wildberry
+  - - Wildberry
+    - Voltfruit
+    - Hydromelon
+    - Mighty Bananas
+    - Hearty Durian
+    - Palm Fruit
+    - Apple
+  - - Tabantha Wheat
+  - - Cane Sugar
+  HB: '4'
+  Recipe: Fruitcake
+- Actors:
+  - - Mighty Porgy
+    - Armored Porgy
+  - - Hearty Blueshell Snail
+  - - Hylian Rice
+  - - Goat Butter
+  - - Rock Salt
+  HB: '8'
+  Recipe: Seafood Paella
+- Actors:
+  - - Hylian Rice
+  - - Goron Spice
+  - - Monster Extract
+  Recipe: Monster Curry
+- Actors:
+  - - Hylian Rice
+  - - Rock Salt
+  - - Monster Extract
+  Recipe: Monster Rice Balls
+- Actors:
+  - - Tabantha Wheat
+  - - Cane Sugar
+  - - Monster Extract
+  - - Goat Butter
+  Recipe: Monster Cake
+- Actors:
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Fresh Milk
+  - - Monster Extract
+  Recipe: Monster Soup
+- Actors:
+  - - Monster Extract
+  Recipe: Monster Stew
+  Tags:
+  - - - CookMeat
+  - - - CookFish
+- Actors:
+  - - Hearty Radish
+    - Big Hearty Radish
+  - - Voltfruit
+  - - Hydromelon
+  - - Fresh Milk
+  Recipe: Creamy Heart Soup
+- Actors:
+  - - Hearty Blueshell Snail
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Goat Butter
+  Recipe: Clam Chowder
+- Actors:
+  - - Fortified Pumpkin
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Goat Butter
+  Recipe: Pumpkin Stew
+- Actors:
+  - - Raw Gourmet Meat
+    - Raw Whole Bird
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Goat Butter
+  Recipe: Gourmet Meat Stew
+- Actors:
+  - - Raw Prime Meat
+    - Raw Bird Thigh
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Goat Butter
+  Recipe: Prime Meat Stew
+- Actors:
+  - - Raw Meat
+    - Raw Bird Drumstick
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Goat Butter
+  Recipe: Meat Stew
+- Actors:
+  - - Raw Gourmet Meat
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Gourmet Meat Curry
+- Actors:
+  - - Raw Whole Bird
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Gourmet Poultry Curry
+- Actors:
+  - - Raw Prime Meat
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Prime Meat Curry
+- Actors:
+  - - Raw Bird Thigh
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Prime Poultry Curry
+- Actors:
+  - - Raw Meat
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Meat Curry
+- Actors:
+  - - Raw Bird Drumstick
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Poultry Curry
+- Actors:
+  - - Hearty Blueshell Snail
+    - Mighty Porgy
+    - Armored Porgy
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Seafood Curry
+- Actors:
+  - - Fortified Pumpkin
+    - Swift Carrot
+    - Endura Carrot
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Vegetable Curry
+- Actors:
+  - - Fortified Pumpkin
+  - - Tabantha Wheat
+  - - Cane Sugar
+  - - Goat Butter
+  Recipe: Pumpkin Pie
+- Actors:
+  - - Swift Carrot
+    - Endura Carrot
+  - - Tabantha Wheat
+  - - Cane Sugar
+  - - Goat Butter
+  Recipe: Carrot Cake
+- Actors:
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Bird Egg
+  - - Cane Sugar
+  - - Wildberry
+  HB: '16'
+  Recipe: Wildberry Crepe
+- Actors:
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Bird Egg
+  - - Cane Sugar
+  - - Courser Bee Honey
+  HB: '4'
+  Recipe: Honey Crepe
+- Actors:
+  - - Tabantha Wheat
+  - - Fresh Milk
+  - - Bird Egg
+  - - Cane Sugar
+  Recipe: Plain Crepe
+- Actors:
+  - - Apple
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Cane Sugar
+  Recipe: Apple Pie
+- Actors:
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Cane Sugar
+  - - Chickaloo Tree Nut
+    - Acorn
+  Recipe: Nutcake
+- Actors:
+  - - Bird Egg
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Cane Sugar
+  Recipe: Egg Tart
+- Actors:
+  - - Bird Egg
+  - - Fresh Milk
+  - - Cane Sugar
+  Recipe: Egg Pudding
+- Actors:
+  - - Mighty Bananas
+  - - Tabantha Wheat
+  - - Cane Sugar
+  Recipe: Fried Bananas
+- Actors:
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Cane Sugar
+  Recipe: Fruit Pie
+  Tags:
+  - - - CookFruit
+- Actors:
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Rock Salt
+  Recipe: Meat Pie
+  Tags:
+  - - - CookMeat
+- Actors:
+  - - Tabantha Wheat
+  - - Goat Butter
+  - - Rock Salt
+  Recipe: Fish Pie
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Hearty Salmon
+  - - Goat Butter
+  - - Tabantha Wheat
+  Recipe: "Salmon Meuni\xE8re"
+- Actors:
+  - - Hearty Salmon
+  - - Hylian Rice
+  - - Rock Salt
+  - - Goat Butter
+  Recipe: Salmon Risotto
+- Actors:
+  - - Razorclaw Crab
+    - Ironshell Crab
+    - Bright-Eyed Crab
+  - - Hylian Rice
+  - - Rock Salt
+  - - Goat Butter
+  Recipe: Crab Risotto
+- Actors:
+  - - Fortified Pumpkin
+    - Swift Carrot
+    - Endura Carrot
+  - - Hylian Rice
+  - - Rock Salt
+  - - Goat Butter
+  Recipe: Vegetable Risotto
+- Actors:
+  - - Hylian Rice
+  - - Rock Salt
+  - - Goat Butter
+  Recipe: Mushroom Risotto
+  Tags:
+  - - - CookMushroom
+- Actors:
+  - - Rock Salt
+  - - Fresh Milk
+  Recipe: Cream of Mushroom Soup
+  Tags:
+  - - - CookMushroom
+  - - []
+    - - CookPlant
+- Actors:
+  - - Fortified Pumpkin
+    - Swift Carrot
+    - Endura Carrot
+  - - Rock Salt
+  - - Fresh Milk
+  Recipe: Veggie Cream Soup
+- Actors:
+  - - Rock Salt
+  - - Fresh Milk
+  Recipe: Creamy Meat Soup
+  Tags:
+  - - - CookMeat
+  - - []
+    - - CookPlant
+- Actors:
+  - - Rock Salt
+  - - Fresh Milk
+  Recipe: Creamy Seafood Soup
+  Tags:
+  - - - CookFish
+  - - []
+    - - CookPlant
+- Actors:
+  - - Rock Salt
+  - - Fresh Milk
+  Recipe: Cream of Vegetable Soup
+  Tags:
+  - - []
+    - - CookPlant
+- Actors:
+  - - Swift Carrot
+    - Endura Carrot
+  - - Goat Butter
+  - - Fresh Milk
+  - - Tabantha Wheat
+  Recipe: Carrot Stew
+- Actors:
+  - - Bird Egg
+  - - Rock Salt
+  - - Goat Butter
+  Recipe: Mushroom Omelet
+  Tags:
+  - - - CookMushroom
+- Actors:
+  - - Razorclaw Crab
+    - Ironshell Crab
+    - Bright-Eyed Crab
+  - - Bird Egg
+  - - Hylian Rice
+  - - Rock Salt
+  Recipe: Crab Omelet with Rice
+- Actors:
+  - - Raw Whole Bird
+  - - Bird Egg
+  - - Hylian Rice
+  - - Goat Butter
+  Recipe: Gourmet Poultry Pilaf
+- Actors:
+  - - Raw Bird Thigh
+  - - Bird Egg
+  - - Hylian Rice
+  - - Goat Butter
+  Recipe: Prime Poultry Pilaf
+- Actors:
+  - - Raw Bird Drumstick
+  - - Bird Egg
+  - - Hylian Rice
+  - - Goat Butter
+  Recipe: Poultry Pilaf
+- Actors:
+  - - Bird Egg
+  - - Goat Butter
+  - - Rock Salt
+  Recipe: Vegetable Omelet
+  Tags:
+  - - []
+    - - CookPlant
+- Actors:
+  - - Mighty Porgy
+    - Armored Porgy
+  - - Goat Butter
+  - - Tabantha Wheat
+  Recipe: "Porgy Meuni\xE8re"
+- Actors:
+  - - Goat Butter
+  - - Tabantha Wheat
+  Recipe: "Seafood Meuni\xE8re"
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Hearty Blueshell Snail
+    - Mighty Porgy
+    - Armored Porgy
+  - - Hylian Rice
+  - - Rock Salt
+  Recipe: Seafood Fried Rice
+- Actors:
+  - - Goron Spice
+  - - Hylian Rice
+  - - Goat Butter
+  Recipe: Curry Pilaf
+- Actors:
+  - - Raw Gourmet Meat
+  - - Hylian Rice
+  - - Rock Salt
+  Recipe: Gourmet Meat and Rice Bowl
+- Actors:
+  - - Raw Prime Meat
+  - - Hylian Rice
+  - - Rock Salt
+  Recipe: Prime Meat and Rice Bowl
+- Actors:
+  - - Raw Meat
+  - - Hylian Rice
+  - - Rock Salt
+  Recipe: Meat and Rice Bowl
+- Actors:
+  - - Hylian Rice
+  - - Bird Egg
+  Recipe: Fried Egg and Rice
+- Actors:
+  - - Hylian Rice
+  Recipe: Meaty Rice Balls
+  Tags:
+  - - - CookMeat
+- Actors:
+  - - Hylian Rice
+  Recipe: Seafood Rice Balls
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Hylian Rice
+  Recipe: Mushroom Rice Balls
+  Tags:
+  - - - CookMushroom
+- Actors:
+  - - Hylian Rice
+  Recipe: Veggie Rice Balls
+  Tags:
+  - - - CookPlant
+    - []
+- Actors:
+  - - Apple
+  - - Goat Butter
+  HB: '4'
+  Recipe: Hot Buttered Apple
+- Actors:
+  - - Fortified Pumpkin
+  Recipe: Meat-Stuffed Pumpkin
+  Tags:
+  - - - CookMeat
+- Actors:
+  - - Courser Bee Honey
+  Recipe: Glazed Meat
+  Tags:
+  - - - CookMeat
+- Actors:
+  - - Courser Bee Honey
+  Recipe: Glazed Seafood
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Courser Bee Honey
+  Recipe: Glazed Mushrooms
+  Tags:
+  - - - CookMushroom
+- Actors:
+  - - Courser Bee Honey
+  Recipe: Glazed Veggies
+  Tags:
+  - - - CookPlant
+    - []
+- Actors:
+  - - Hylian Rice
+  - - Goron Spice
+  Recipe: Curry Rice
+- Actors:
+  - - Apple
+  - - Courser Bee Honey
+  Recipe: Honeyed Apple
+- Actors:
+  - - Courser Bee Honey
+  Recipe: Honeyed Fruits
+  Tags:
+  - - - CookFruit
+- Actors:
+  - - Raw Gourmet Meat
+  - - Goron Spice
+  Recipe: Gourmet Spiced Meat Skewer
+- Actors:
+  - - Raw Prime Meat
+  - - Goron Spice
+  Recipe: Prime Spiced Meat Skewer
+- Actors:
+  - - Raw Meat
+  - - Goron Spice
+  Recipe: Spiced Meat Skewer
+- Actors:
+  - - Goron Spice
+  Recipe: "Fragrant Mushroom Saut\xE9"
+  Tags:
+  - - - CookMushroom
+- Actors:
+  - - Goron Spice
+  Recipe: "Herb Saut\xE9"
+  Tags:
+  - - - CookPlant
+    - []
+- Actors:
+  - - Raw Gourmet Meat
+    - Raw Whole Bird
+  - - Rock Salt
+  Recipe: Salt-Grilled Gourmet Meat
+- Actors:
+  - - Raw Bird Thigh
+    - Raw Prime Meat
+  - - Rock Salt
+  Recipe: Salt-Grilled Prime Meat
+- Actors:
+  - - Raw Meat
+    - Raw Bird Drumstick
+  - - Rock Salt
+  Recipe: Salt-Grilled Meat
+- Actors:
+  - - Razorclaw Crab
+    - Ironshell Crab
+    - Bright-Eyed Crab
+  - - Goron Spice
+  Recipe: Crab Stir-Fry
+- Actors:
+  - - Razorclaw Crab
+    - Ironshell Crab
+    - Bright-Eyed Crab
+  - - Rock Salt
+  Recipe: Salt-Grilled Crab
+- Actors:
+  - - Rock Salt
+  Recipe: Salt-Grilled Fish
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Tabantha Wheat
+  - - Rock Salt
+  Recipe: Wheat Bread
+- Actors:
+  - - Rock Salt
+  Recipe: Salt-Grilled Greens
+  Tags:
+  - - []
+    - - CookPlant
+- Actors:
+  - - Rock Salt
+  Recipe: Salt-Grilled Mushrooms
+  Tags:
+  - - - CookMushroom
+- Recipe: Copious Meat Skewers
+  Tags:
+  - - - CookMeat
+  - - - CookMeat
+  - - - CookMeat
+  - - - CookMeat
+- Recipe: Copious Fried Wild Greens
+  Tags:
+  - - []
+    - - CookPlant
+  - - []
+    - - CookPlant
+  - - []
+    - - CookPlant
+  - - []
+    - - CookPlant
+- Recipe: Copious Simmered Fruit
+  Tags:
+  - - - CookFruit
+  - - - CookFruit
+  - - - CookFruit
+  - - - CookFruit
+- Recipe: Copious Mushroom Skewers
+  Tags:
+  - - - CookMushroom
+  - - - CookMushroom
+  - - - CookMushroom
+  - - - CookMushroom
+- Recipe: Copious Seafood Skewers
+  Tags:
+  - - - CookFish
+  - - - CookFish
+  - - - CookFish
+  - - - CookFish
+- Recipe: Meat Skewer
+  Tags:
+  - - - CookMeat
+  - - - CookMeat
+- Recipe: Simmered Fruit
+  Tags:
+  - - - CookFruit
+  - - - CookFruit
+- Recipe: Mushroom Skewer
+  Tags:
+  - - - CookMushroom
+  - - - CookMushroom
+- Recipe: Fried Wild Greens
+  Tags:
+  - - []
+    - - CookPlant
+  - - []
+    - - CookPlant
+- Actors:
+  - - Raw Gourmet Meat
+    - Raw Whole Bird
+  Recipe: Gourmet Meat and Seafood Fry
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Raw Prime Meat
+    - Raw Bird Thigh
+  Recipe: Prime Meat and Seafood Fry
+  Tags:
+  - - - CookFish
+- Recipe: Meat and Seafood Fry
+  Tags:
+  - - - CookMeat
+  - - - CookFish
+- Actors:
+  - - Spicy Pepper
+  Recipe: Pepper Steak
+  Tags:
+  - - - CookMeat
+- Actors:
+  - - Spicy Pepper
+  Recipe: Pepper Seafood
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Hearty Blueshell Snail
+    - Sneaky River Snail
+    - Razorclaw Crab
+    - Ironshell Crab
+    - Bright-Eyed Crab
+  Recipe: Seafood Skewer
+  Tags:
+  - - - CookFish
+- Recipe: Fish Skewer
+  Tags:
+  - - - CookFish
+  - - - CookFish
+- Recipe: Steamed Meat
+  Tags:
+  - - - CookPlant
+    - []
+  - - - CookMeat
+- Recipe: Steamed Fish
+  Tags:
+  - - - CookPlant
+    - []
+  - - - CookFish
+- Recipe: Steamed Mushrooms
+  Tags:
+  - - - CookPlant
+    - []
+  - - - CookMushroom
+- Recipe: Steamed Fruit
+  Tags:
+  - - - CookPlant
+    - []
+  - - - CookFruit
+- Recipe: Fish and Mushroom Skewer
+  Tags:
+  - - - CookMushroom
+  - - - CookFish
+- Recipe: Meat and Mushroom Skewer
+  Tags:
+  - - - CookMushroom
+  - - - CookMeat
+- Recipe: Fruit and Mushroom Mix
+  Tags:
+  - - - CookMushroom
+  - - - CookFruit
+- Recipe: Meat Skewer
+  Tags:
+  - - - CookMeat
+- Actors:
+  - - Hearty Blueshell Snail
+    - Sneaky River Snail
+    - Razorclaw Crab
+    - Ironshell Crab
+    - Bright-Eyed Crab
+  Recipe: Seafood Skewer
+- Recipe: Fish Skewer
+  Tags:
+  - - - CookFish
+- Actors:
+  - - Bird Egg
+  Recipe: Omelet
+- Actors:
+  - - Fresh Milk
+  Recipe: Milk
+- Recipe: Mushroom Skewer
+  Tags:
+  - - - CookMushroom
+- Recipe: Fried Wild Greens
+  Tags:
+  - - - CookPlant
+- Recipe: Simmered Fruit
+  Tags:
+  - - - CookFruit
+- Actors:
+  - - Acorn
+  - - Chickaloo Tree Nut
+  Recipe: "Saut\xE9ed Nuts"
+- Actors:
+  - - Fairy
+  HB: '-12'
+  Recipe: Fairy Tonic
+
+SingleRecipes:
+- Actors:
+  - Fairy
+  HB: '-12'
+  Num: '1'
+  Recipe: Fairy Tonic
+- Num: '1'
+  Recipe: Rock-Hard Food
+  Tags:
+  - - CookOre
+- Actors:
+  - Spicy Pepper
+  Num: '1'
+  Recipe: "Saut\xE9ed Peppers"
+- Actors:
+  - Bird Egg
+  Num: '1'
+  Recipe: Omelet
+- Num: '1'
+  Recipe: Meat Skewer
+  Tags:
+  - - CookMeat
+- Actors:
+  - Hearty Blueshell Snail
+  - Sneaky River Snail
+  - Razorclaw Crab
+  - Ironshell Crab
+  - Bright-Eyed Crab
+  Num: '1'
+  Recipe: Seafood Skewer
+- Num: '1'
+  Recipe: Fish Skewer
+  Tags:
+  - - CookFish
+- Num: '1'
+  Recipe: Mushroom Skewer
+  Tags:
+  - - CookMushroom
+- Actors:
+  - Courser Bee Honey
+  HB: '-8'
+  Num: '1'
+  Recipe: Honey Candy
+- Actors:
+  - Acorn
+  - Chickaloo Tree Nut
+  HB: '-2'
+  Num: '1'
+  Recipe: "Saut\xE9ed Nuts"
+- Actors:
+  - Fresh Milk
+  HB: '2'
+  Num: '1'
+  Recipe: Milk
+- Num: '1'
+  Recipe: Fried Wild Greens
+  Tags:
+  - - CookPlant
+- Num: '1'
+  Recipe: Simmered Fruit
+  Tags:
+  - - CookFruit
+System:
+  CEI:
+  - BT: '0'
+    MR: '1.399999976158142'
+    Ma: '15'
+    Mi: '1'
+    SSA: '2'
+    T: '0xda60b8cd'
+  - BT: '0'
+    MR: '0.5'
+    Ma: '20'
+    Mi: '1'
+    SSA: '2'
+    T: '0xaeb04704'
+  - BT: '0'
+    MR: '2.0'
+    Ma: '120'
+    Mi: '1'
+    SSA: '12'
+    T: '0x8a0c5420'
+  - BT: '0'
+    MR: '1.0'
+    Ma: '108'
+    Mi: '4'
+    SSA: '4'
+    T: '1334203712'
+  - BT: '120'
+    MR: '0.3499999940395355'
+    Ma: '2'
+    Mi: '1'
+    SSA: '1'
+    T: '1098314820'
+  - BT: '120'
+    MR: '0.3499999940395355'
+    Ma: '2'
+    Mi: '1'
+    SSA: '1'
+    T: '0xbc37a6e9'
+  - BT: '120'
+    MR: '0.5'
+    Ma: '3'
+    Mi: '1'
+    SSA: '1'
+    T: '0xb4125ad4'
+  - BT: '30'
+    MR: '0.44999998807907104'
+    Ma: '3'
+    Mi: '1'
+    SSA: '1'
+    T: '0xbbf0d245'
+  - BT: '20'
+    MR: '0.44999998807907104'
+    Ma: '3'
+    Mi: '1'
+    SSA: '1'
+    T: '1443585033'
+  - BT: '20'
+    MR: '0.44999998807907104'
+    Ma: '3'
+    Mi: '1'
+    SSA: '1'
+    T: '0xcb7e18f4'
+  - BT: '90'
+    MR: '0.3499999940395355'
+    Ma: '3'
+    Mi: '1'
+    SSA: '1'
+    T: '1965985015'
+  - BT: '120'
+    MR: '0.30000001192092896'
+    Ma: '2'
+    Mi: '1'
+    SSA: '1'
+    T: '0x9a303d98'
+  FA: Item_Cook_O_01
+  FALR: '4'
+  FALRMR: '1.0'
+  FCA: Item_Cook_C_16
+  LRMR: '2.0'
+  MEA: Item_Material_08
+  NMMR:
+  - '1.5'
+  - '1.8'
+  - '2.1'
+  - '2.4'
+  - '2.8'
+  NMSSR:
+  - '5'
+  - '10'
+  - '15'
+  - '20'
+  - '25'
+  SFALR: '1'
+  SSAET: '300'

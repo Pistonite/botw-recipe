@@ -1,0 +1,14 @@
+[package]
+name = "botw-recipe-dump-emulate"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "=4.5.4", features = ["derive"] }
+num_cpus = "1.16.0"
+
+[dependencies.cooking]
+path = "../../../cooking.rs"
+
+[dependencies.botw-recipe-data]
+path = "../../app/data"

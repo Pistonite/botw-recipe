@@ -103,7 +103,7 @@ fn execute(command: &str, converter: &recipe::RecipeConverter, crit_mgr: &mut da
             command::get_u32_arg(&cmd_parts, "maxhp").map(|hp|{
                 let hp = cmp::min(120, cmp::max(0, hp)) as u8;
                 query.maxhp = hp;
-                println!("{}", view::query_minhp_detail(query));
+                println!("{}", view::query_maxhp_detail(query));
             })
         },
         "crit" => {

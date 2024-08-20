@@ -1,0 +1,9 @@
+[package]
+name = "botw-recipe-data"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+derive_deref = "1.1.1"
+serde = { version = "1.0.208", features = ["derive"] }
+static_assertions = "1.1.0"

@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  research:
+    desc: Reproduce research
+    dir: research
+    cmds:
+    - python main.py {{.CLI_ARGS}}
