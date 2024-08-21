@@ -2,9 +2,6 @@
 
 #include <cstdint>
 
-#define RDUMP_CHUNK_START 0
-#define RDUMP_DUMP_CHUNKS 1
-
 namespace nn::fs {
 struct FileHandle;
 }
@@ -29,6 +26,7 @@ static_assert(sizeof(CookData) == 24);
 void init_print();
 /** Update the screen */
 void update_screen(uint64_t chunk_id, char status);
+void update_config(uint64_t chunk_start, uint64_t chunk_count);
 void update_record_count(uint64_t record_count);
 void update_error_recipe(uint64_t recipe);
 

@@ -1,18 +1,21 @@
-use std::collections::HashSet;
-
 use clap::Parser;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
 use rdata::{cook::{CookData, CookEffect}, Actor, RecipeInputs};
 
 pub mod ingr;
-use ingr::Ingredients;
+use ingr::{Ingredient, Ingredients};
 pub mod effect;
 pub mod tag;
 pub mod recipe;
 use recipe::Recipes;
 
 use crate::{effect::CookEffectData, tag::Tag};
+
+macro_rules! reference {
+    ($comment:literal, $dummy:ty, $name:ty) => {
+    };
+}
 
 /// BOTW Cooking Simulator CLI for WMC
 #[derive(Parser, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -65,26 +68,50 @@ impl Options {
 fn get_actors_from_ingredients(&self) -> Result<Vec<Actor>, Error> {
         let mut actors = Vec::new();
         for input in self.ingredients.join(" ").split(',') {
-            let input = input.trim();
-            let map = EnumMap::<Actor, usize>::from_fn(|x| distance::damerau_levenshtein(input, x.name()));
+            let input = input.trim().to_lowercase();
+            // try max-common-prefix of the first word first
+            let map = EnumMap::<Actor, usize>::from_fn(|x| {
+                input.chars().zip(x.name().to_lowercase().chars()).take_while(|(a, b)| a == b && *a != ' ').count()
+            });
+            let mut max_prefix = 0;
+            let mut max_actors = Vec::new();
+            for (actor, prefix) in map {
+                if prefix > max_prefix {
+                    max_prefix = prefix;
+                    max_actors.clear();
+                    max_actors.push(actor);
+                } else if prefix == max_prefix {
+                    max_actors.push(actor);
+                }
+            }
+            if max_actors.len() == 1 {
+                actors.push(max_actors[0]);
+                continue;
+            }
+            if max_actors.is_empty() {
+                return Err(Error::ItemNotFound(input.to_string()));
+            }
+            // then try levenshtein distance in the case of ties
             let mut min = usize::MAX;
             let mut min_actors = Vec::new();
-            for (actor, dist) in map {
+            for actor in &max_actors {
+                let dist = distance::levenshtein(&input, &actor.name().to_lowercase());
                 if dist < min {
                     min = dist;
                     min_actors.clear();
-                    min_actors.push(actor);
+                    min_actors.push(*actor);
                 } else if dist == min {
-                    min_actors.push(actor);
+                    min_actors.push(*actor);
                 }
             }
             if min_actors.len() == 1 {
                 actors.push(min_actors[0]);
-            } else if min_actors.is_empty() {
-                return Err(Error::ItemNotFound(input.to_string()));
-            } else {
-                return Err(Error::AmbiguousIngr(input.to_string(), min_actors));
+                continue;
             }
+            if min_actors.is_empty() {
+                return Err(Error::ItemNotFound(input.to_string()));
+            }
+            return Err(Error::AmbiguousIngr(input.to_string(), max_actors));
         }
         Ok(actors)
     }
@@ -132,7 +159,7 @@ impl CookResult {
                 effect_duration: 0,
                 sell_price: 2,
                 effect_id: -1.0,
-                effect_level: 1.0,
+                effect_level: 0.0,
                 crit_chance: 0
             }
         }
@@ -145,7 +172,7 @@ impl CookResult {
                 effect_duration: 0,
                 sell_price: 2,
                 effect_id: -1.0,
-                effect_level: 1.0,
+                effect_level: 0.0,
                 crit_chance: 0
             }
         }
@@ -206,8 +233,13 @@ impl CookingPot {
             let useful_tags = x.tags.iter().filter(|x| x.is_probably_useful()).collect::<Vec<_>>();
             useful_tags.get(0).map(|x|**x).unwrap_or_default()
         }).collect::<Vec<_>>();
-        let unique_count = ingrs.iter().map(|x| x.actor).collect::<HashSet<_>>().len();
-        let recipe = self.recipes.find(&ingrs, &tags, unique_count);
+        let mut unique_ingrs: Vec<&Ingredient> = Vec::with_capacity(5);
+        for ingr in &ingrs {
+            if !unique_ingrs.iter().any(|x| x.actor == ingr.actor) {
+                unique_ingrs.push(ingr);
+            }
+        }
+        let recipe = self.recipes.find(&ingrs, &tags, unique_ingrs.len());
 
         if recipe.is_rock_hard() {
             return Ok(CookResult::new_rock_hard());
@@ -235,28 +267,27 @@ impl CookingPot {
         let effect_data: Option<CookEffectData> = effect.try_into().ok();
 
         // handle other properties
-        let (time, hp, potency, sell_price) = 
+        let (mut time, mut hp, potency, sell_price) = 
         {
             let mut time = 0;
-            if let Some(e) = &effect_data {
-                time += e.base_time;
-            }
+            let base_time = effect_data.map(|x| x.base_time).unwrap_or_default();
 
             let mut hp = 0;
             let mut effect_level = 0;
             let mut sell_price = 0;
             let mut buy_price = 0;
             for ingr in &ingrs {
+                let is_item_effect = ingr.effect == effect;
                 if effect.uses_time() {
-                    // if val.roast_item {
-                    //     time += 30;
-                    // } else {
-                    time += ingr.effect_time / 30; // convert frames to seconds
-                    // }
+                    // every ingredient adds 30s
+                    time += 30;
+                    if is_item_effect {
+                        // effect time is added only if effect matches
+                        time += base_time;
+                    }
                 }
 
-
-                if effect != CookEffect::None {
+                if is_item_effect {
                     effect_level += ingr.effect_level;
                 }
                 hp += ingr.hp;
@@ -275,40 +306,76 @@ impl CookingPot {
             // Selling price is capped at buying price and a limited to a min of 2
             sell_price = sell_price.max(2).min(buy_price);
 
-            let mut hp = hp*HP_MULTIPLIER + recipe.get_extra_hp();
-
-            // add boosts
-            for ingr in &ingrs {
-                // time boost is always added, even if effect doesn't use time
-                time += ingr.boost_effect_time;
-                hp += ingr.boost_hp;
-            }
-            (
-                // cap time at 1800s
-                time.min(30 * 60), 
-                hp, 
-                effect_level, 
-                sell_price, 
-            )
+            ( time, hp, effect_level, sell_price )
         };
 
-        if recipe.is_dubious() {
+        reference!("elixir with no effect gets turned into dubious", uking::CookingMgr::cookCalcIngredientsBoost(), is_medicine);
+        if recipe.is_dubious() || (recipe.is_elixir() && effect == CookEffect::None) {
             return Ok(CookResult::new_dubious(hp));
         }
 
+        // hp multiplier/boosts are added after dubious food
+        reference!("only unique ingredients add boosts", uking::CookingMgr::cookCalcIngredientsBoost(), ingredients);
+        hp *= HP_MULTIPLIER;
+        for ingr in &unique_ingrs {
+            hp += ingr.boost_hp;
+        }
+
+        reference!("enemy spice boosts before after fairy tonic)", uking::CookingMgr::cookCalcIngredientsBoost(), tag::CookEnemy);
+        reference!("boost is only added if an effect is found", uking::CookingMgr::cookCalcIngredientsBoost(), effect_found);
+        reference!("boost is only added if effect has a base time", uking::CookingMgr::cookCalcIngredientsBoost(), boost_time);
+        if effect.uses_time() {
+            reference!("each ingredient add boost, not just unique", uking::CookingMgr::cookCalcIngredientsBoost(), count);
+            for ingr in &ingrs {
+                if !ingr.tags.contains(&Tag::CookEnemy) {
+                    continue;
+                }
+                reference!("this time boost is cleared if no effect", uking::CookingMgr::cookCalcIngredientsBoost(), effect_time);
+                time += ingr.boost_effect_time;
+            }
+        }
+
+        reference!("fairy tonic special case", uking::CookingMgr::cookCalcIngredientsBoost(), is_not_fairy_tonic);
         let (effect, sell_price) = if recipe.is_fairy_tonic() {
+            time = 0;
             (CookEffect::None, 2)
         } else {
             (effect, sell_price)
         };
 
+        // add time boosts
+        reference!("spice boosts added after fairy tonic (i.e. ingredients boost)", uking::CookingMgr::cook(), cookCalcSpiceBoost);
+        reference!("only unique ingredients add boosts", uking::CookingMgr::cookCalcSpiceBoost(), ingredients);
+        for ingr in &unique_ingrs {
+            // this check is relevant because CookEnemy usually have boost for elixirs
+            // and those are added above
+            reference!("only non-CookEnemy CookSpice adds boost", uking::CookingMgr::cookCalcSpiceBoost(), InfoData::hasTag);
+            if ingr.tags.contains(&Tag::CookEnemy) || !ingr.tags.contains(&Tag::CookSpice) {
+                continue;
+            }
+            reference!("time boost is always added, even if effect is not timed", uking::CookingMgr::cookCalcSpiceBoost(), effect_time);
+            time += ingr.boost_effect_time;
+        }
+
+        reference!("recipe extra hp boost", uking::CookingMgr::cookCalcRecipeBoost(), life_recover);
+        hp += recipe.get_extra_hp();
+
+        reference!("no effect min hp to ensure food does something", uking::CookingMgr::cookAdjustItem(), life_recover);
+        if effect == CookEffect::None && hp == 0 {
+            hp = 1;
+        }
+        reference!("max life recover", uking::CookingMgr::cookAdjustItem(), life_recover_max);
+        hp = hp.min(120); // 30 hearts
+        reference!("max time", uking::CookingMgr::cookAdjustItem(), sead::Mathi::clamp);
+        time = time.min(1800); // 30 minutes
+
         // handle crit chance
         let crit_chance = 
-            ingrs.iter()
+            unique_ingrs.iter()
             .map(|x| x.boost_success_rate)
             .max().unwrap_or_default();
-        // TODO: game doesn't cap crit_chance, pretty sure
-        let crit_chance = (crit_chance + BASE_CRIT_CHANCES[unique_count-1]).min(100);
+        // note that game doesn't cap crit_chance
+        let crit_chance = crit_chance + BASE_CRIT_CHANCES[unique_ingrs.len()-1];
 
         // handle effect level
         let effect_level = if let Some(data) = effect_data {
@@ -331,8 +398,12 @@ impl CookingPot {
         let effect_level = match effect {
             CookEffect::LifeMaxUp => {
                 // Hearty, effect_level is 
-                // number of yellow heart = potency / 4
-                potency / 4
+                // number of yellow quarter-heart = potency
+                // note that it's rounded down to nearest whole heart
+                // hp also becomes the value
+                let yellow_hearts = potency / 4;
+                hp = yellow_hearts * 4;
+                hp
             }
             CookEffect::GutsRecover => {
                 // stamina - one wheel is 1000

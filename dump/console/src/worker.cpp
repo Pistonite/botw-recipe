@@ -8,8 +8,29 @@
 #include "generated.hpp"
 #include "mem.h"
 
+#define STACK_SIZE 0x80000
+#define BATCH_SIZE 8192
+static_assert(CHUNK_SIZE % BATCH_SIZE == 0);
+static_assert(sizeof(botw::rdump::CookData) * BATCH_SIZE * 2 < STACK_SIZE);
+
 namespace botw::rdump {
 static nn::os::ThreadType s_thread;
+
+static void trap() {
+    while (true) {
+        nn::os::YieldThread();
+        nn::os::SleepThread(nn::TimeSpan::FromSeconds(5));
+    }
+}
+
+static uint64_t parse_int(const char buf[4]) {
+    uint64_t out = 0;
+    for (int i = 0; i < 4; i++) {
+        uint64_t digit = buf[i] - '0';
+        out = out * 10 + digit;
+    }
+    return out;
+}
 
 void worker_main(void*) {
     while (true) {
@@ -19,17 +40,45 @@ void worker_main(void*) {
         nn::os::YieldThread();
         nn::os::SleepThread(nn::TimeSpan::FromSeconds(5));
     }
-    update_screen(RDUMP_CHUNK_START, 'R');
-    for (int i = 5; i >= 0; i--) {
-        update_screen(RDUMP_CHUNK_START, i + '0');
-        nn::os::SleepThread(nn::TimeSpan::FromSeconds(1));
+    update_screen(0, 'L');
+    // Read config file
+    nn::fs::FileHandle cfg_handle;
+    nn::Result result = nn::fs::OpenFile(&cfg_handle, "sd:/botwrdump/config.txt", nn::fs::OpenMode_Read);
+    if (result.IsFailure()) {
+        update_screen(0, '^');
+        trap();
     }
+    uint64_t size_read;
+    char  buf[8];
+    result = nn::fs::ReadFile(&size_read, cfg_handle, 0, buf, 8);
+    if (result.IsFailure()) {
+        update_screen(0, '7');
+        trap();
+    }
+    if (size_read != 8) {
+        update_screen(0, '8');
+        trap();
+    }
+    uint64_t chunk_start = parse_int(buf);
+    uint64_t chunk_count = parse_int(buf + 4);
+    if (chunk_start >= CHUNK_COUNT || chunk_start + chunk_count > CHUNK_COUNT) {
+        update_screen(0, '9');
+        trap();
+    }
+    update_config(chunk_start, chunk_count);
+    update_screen(chunk_start, 'R');
+    for (int i = 5; i >= 0; i--) {
+        nn::os::SleepThread(nn::TimeSpan::FromSeconds(1));
+        update_screen(chunk_start, i + '0');
+    }
+    nn::os::SleepThread(nn::TimeSpan::FromSeconds(1));
+
     // Start!
     uint64_t group[NUM_INGR];
     // iterate each chunk
-    uint64_t chunk_id = RDUMP_CHUNK_START;
+    uint64_t chunk_id = chunk_start;
     bool error = false;
-    for (; chunk_id < RDUMP_CHUNK_START + RDUMP_DUMP_CHUNKS; chunk_id++) {
+    for (; chunk_id < chunk_start + chunk_count; chunk_id++) {
         nn::fs::FileHandle handle;
         update_screen(chunk_id, 'W');
         if (!open_chunk(chunk_id, handle)) {
@@ -38,12 +87,12 @@ void worker_main(void*) {
             error = true;
             break;
         }
+        update_screen(chunk_id, 'D');
         // iterate each recipe in the chunk
         uint64_t r_base = chunk_id * CHUNK_SIZE;
         uking::CookItem cook_item;
         static_assert(CHUNK_SIZE % 100 == 0);
-        constexpr uint64_t batch_size = CHUNK_SIZE / 100;
-        CookData records[batch_size];
+        CookData records[BATCH_SIZE];
         uint64_t batch_i = 0;
         uint64_t chunk_record_start = 0;
         for (uint64_t i = 0; i < CHUNK_SIZE; i++) {
@@ -73,26 +122,23 @@ void worker_main(void*) {
                 records[batch_i].crit_chance = crit_chance;
             }
             batch_i++;
-            if (batch_i == batch_size) {
-                update_screen(chunk_id, 'S');
+            if (batch_i == BATCH_SIZE) {
                 if (!save_to_chunk(
                     handle, 
                     chunk_id, 
                     records, 
-                    batch_size, chunk_record_start
+                    BATCH_SIZE, chunk_record_start
                 )) {
                     update_screen(chunk_id, 's');
                     update_error_recipe(i);
                     error = true;
                     break;
                 }
-                update_screen(chunk_id, 'D');
-                chunk_record_start += batch_size;
+                chunk_record_start += BATCH_SIZE;
                 batch_i = 0;
             }
         }
         if (batch_i > 0) {
-            update_screen(chunk_id, 'S');
             if (!save_to_chunk(
                 handle, 
                 chunk_id, 
@@ -103,11 +149,8 @@ void worker_main(void*) {
                 update_error_recipe(CHUNK_SIZE);
                 error = true;
             }
-            update_screen(chunk_id, 'D');
         }
-        if (!error) {
-            update_screen(chunk_id, 'O');
-        } else {
+        if (error) {
             break;
         }
     }
@@ -115,14 +158,10 @@ void worker_main(void*) {
         update_record_count(CHUNK_SIZE);
         update_screen(chunk_id, 'Y');
     }
-    while (true) {
-        nn::os::YieldThread();
-        nn::os::SleepThread(nn::TimeSpan::FromSeconds(5));
-    }
+    trap();
 }
 
 void start_worker() {
-    const u64 STACK_SIZE = 0x80000;
     void* thread_stack = memalign(0x1000, STACK_SIZE);
 
     nn::Result result =
@@ -132,4 +171,5 @@ void start_worker() {
     }
     nn::os::StartThread(&s_thread);
 }
+
 }

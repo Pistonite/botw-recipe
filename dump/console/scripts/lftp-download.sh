@@ -1,3 +1,3 @@
 lcd raw
-mget -E /botwrdump/*
-rm -rf /botwrdump/*
+mget -E /botwrdump/*.bin
+rm -rf /botwrdump/*.bin

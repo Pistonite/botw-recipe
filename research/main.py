@@ -44,9 +44,11 @@ if __name__ == "__main__":
     sparse_checkout(
         "https://github.com/Pistonight/cooking.rs",
         "cooking-rs",
-        "main",
+        "consistency",
         [
-            "src/cook_recipes.json"
+            "src/cook_recipes.json",
+            "src/cook_items.json",
+            "src/cook_effects.json"
         ]
     )
     sparse_checkout(

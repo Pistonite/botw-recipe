@@ -6,8 +6,8 @@ use std::os::windows::fs::MetadataExt;
 use std::path::{Path, PathBuf};
 use std::sync::mpsc;
 
-use rdata::{CookDataInvalidReason, Recipe, RecipeInputs};
-use rdata::cook::CookData;
+use rdata::{Recipe, RecipeInputs};
+use rdata::cook::{CookData, CookDataInvalidReason};
 use clap::{Parser, ValueEnum};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -116,7 +116,16 @@ impl Check {
         } else {
             self.check_rawdat(&self.console_path, "check console")?
         };
+        println!();
+        println!();
+        let valid = e_valid.min(c_valid);
+
+        if valid == 0 {
+            println!("no chunks to check. The first chunk is invalid");
+            return Ok(());
+        }
         let matched = self.compare_db(e_valid.min(c_valid))?;
+        println!();
         println!();
         let total = rdata::NUM_TOTAL_RECORDS;
         let percentage = matched as f32 / total as f32 * 100.0;
@@ -128,6 +137,7 @@ impl Check {
             "message": message,
             "color": "blue"
         });
+        println!("{}", message);
         let badge_str = serde_json::to_string(&badge)?;
         let badge_path = Path::new("badge.json");
         std::fs::write(&badge_path, badge_str)?;
@@ -172,7 +182,9 @@ impl Check {
         let error = errors.iter().find(|e| e.chunk == chunk_id);
         match error {
             Some(error) => {
-                println!("{:#?}", error);
+                println!("{:?}", error.recipe_e.inputs);
+                println!("emulate: {:#?}", error.recipe_e.data);
+                println!("console: {:#?}", error.recipe_c.data);
             }
             None => {
                 println!("no errors found in chunk {}", chunk_id);
@@ -211,7 +223,7 @@ impl Check {
             let chunk_path = path.join(format!("chunk_{}.rawdat", i));
             if !chunk_path.exists() {
                 checked+=1;
-                print_status!(checked, label, "Chunk {i}: not found");
+                print_status!(checked, label, "Chunk {i}: ----- not found");
                 first_invalid = first_invalid.min(i);
                 continue;
             }
@@ -225,7 +237,7 @@ impl Check {
                 first_invalid = first_invalid.min(i);
                 if options.purge {
                     std::fs::remove_file(&chunk_path)?;
-                    print_status!(checked, label, "deleted chunk {i}");
+                    print_status!(checked, label, "----- deleted chunk {i}");
                 } else {
                     print_status!(checked, label, "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}", meta_file_size);
                 }
@@ -255,7 +267,7 @@ impl Check {
                     if self.options.purge {
                         let chunk_path = path.join(format!("chunk_{}.rawdat", i));
                         std::fs::remove_file(&chunk_path)?;
-                        print_status!(checked, label, "deleted chunk {i}");
+                        print_status!(checked, label, "----- deleted chunk {i}");
                     } else {
                         print_status!(checked, label, "Chunk {i} failed: {err}");
                         if let Error::InvalidRecord(record, reason, data) = err {
@@ -328,7 +340,7 @@ impl Check {
                 Ok(matched_count) => {
                     matched += matched_count;
                     if self.options.verbose {
-                        print_status!(checked, label, "Chunk {i}: matched");
+                        print_status!(checked, label, "Chunk {i}: ----- matched -----");
                     } else {
                         print_status!(checked, label);
                     }
@@ -361,7 +373,9 @@ impl Check {
             if errors_path.exists() {
                 std::fs::remove_file(&errors_path)?;
             }
-            print_status!(checked, label, "everything matched");
+            println!();
+            println!();
+            println!("everything matched");
         }
 
 
@@ -389,13 +403,13 @@ struct RecipeMismatchData {
 
 #[derive(Debug, thiserror::Error)]
 enum Error {
-    #[error("serialization error")]
+    #[error("!! serialization error")]
     Json(#[from] serde_json::Error),
-    #[error("io error reading chunk")]
+    #[error("!! io error reading chunk")]
     IoError(#[from] io::Error),
-    #[error("invalid record at {0}: {1:?}")]
+    #[error("!! invalid record at {0}: {1:?}")]
     InvalidRecord(usize, CookDataInvalidReason, CookData),
-    #[error("first mismatch at {0}")]
+    #[error("!! first mismatch at {0}")]
     Mismatch(usize, CookData, CookData, usize /*matched_count*/)
 }
 

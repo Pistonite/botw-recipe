@@ -89,6 +89,10 @@ impl RecipeData {
         self.name == "Fairy Tonic"
     }
 
+    pub fn is_elixir(&self) -> bool {
+        self.name == "Elixir"
+    }
+
     pub fn get_extra_hp(&self) -> i32 {
         self.hb
     }
