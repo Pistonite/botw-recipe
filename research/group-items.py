@@ -31,7 +31,7 @@ IN = [
     "output/actor-names.yaml",
     "output/actor-data.yaml"
 ]
-OUT = ["output/items-grouped.yaml", "output/items-grouped-report.txt"]
+OUT = ["output/items-grouped.yaml"]
 util.print_stage(__file__, IN, OUT)
 
 KEYS = (
@@ -116,16 +116,19 @@ for group in items_grouped_actors:
     group_lens[l] += 1
     if l > max_len:
         max_len = l
-report = "group sizes:\n"
+report = [
+    f"# Total Groups: {len(items_grouped_actors)}",
+    "# Group Sizes:"
+]
 for i in range(1, max_len+1):
     if i in group_lens:
-        report += f"  {i}: {group_lens[i]}\n"
-
-with open(OUT[1], "w", encoding="utf-8") as f:
-    f.write(report)
-print(report)
+        item_noun = "item" if i == 1 else "items"
+        report.append(f"# - {group_lens[i]} groups with {i} {item_noun}")
 
 with open(OUT[0], "w", encoding="utf-8") as f:
+    for line in report:
+        print(line)
+        f.write(line + "\n")
     for i, group in enumerate(util.progress(items_grouped_actors, "save groups")):
         s = "- actors:"
         f.write(f"{s:<40}# GROUP {i:03}\n")

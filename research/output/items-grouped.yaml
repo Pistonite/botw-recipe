@@ -1,3 +1,11 @@
+# Total Groups: 174
+# Group Sizes:
+# - 145 groups with 1 item
+# - 15 groups with 2 items
+# - 11 groups with 3 items
+# - 1 groups with 4 items
+# - 1 groups with 5 items
+# - 1 groups with 16 items
 - actors:                               # GROUP 000
   - Item_Fruit_D                        # - Hearty Durian
   data:                                 

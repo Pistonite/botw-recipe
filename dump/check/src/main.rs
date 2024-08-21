@@ -6,7 +6,8 @@ use std::os::windows::fs::MetadataExt;
 use std::path::{Path, PathBuf};
 use std::sync::mpsc;
 
-use botw_recipe_data::{CookData, CookDataInvalidReason, Recipe, RecipeInputs};
+use rdata::{CookDataInvalidReason, Recipe, RecipeInputs};
+use rdata::cook::CookData;
 use clap::{Parser, ValueEnum};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -17,9 +18,9 @@ macro_rules! print_status {
         let mut stdout = std::io::stdout().lock();
         let _ = write!(
             &mut stdout,
-            "\r{}/{} {}",
+            "\r{}/{} {}                     ",
             $cur,
-            botw_recipe_data::CHUNK_COUNT,
+            rdata::CHUNK_COUNT,
             $label,
         );
         stdout.flush().unwrap()
@@ -29,9 +30,9 @@ macro_rules! print_status {
         let _ = write!(&mut stdout, "\r");
         let _ = writeln!(&mut stdout, $($arg)*);
         let _ = write!(&mut stdout,
-            "\r{}/{} {}",
+            "\r{}/{} {}                      ",
             $cur,
-            botw_recipe_data::CHUNK_COUNT,
+            rdata::CHUNK_COUNT,
             $label,
         );
         stdout.flush().unwrap()
@@ -106,24 +107,25 @@ impl Check {
 
     fn check(&self) -> Result<(), Error> {
         let e_valid = if self.options.skip_emulate {
-            botw_recipe_data::NUM_TOTAL_RECORDS
+            rdata::NUM_TOTAL_RECORDS
         } else {
             self.check_rawdat(&self.emulate_path, "check emulate")?
         };
         let c_valid = if self.options.skip_console {
-            botw_recipe_data::NUM_TOTAL_RECORDS
+            rdata::NUM_TOTAL_RECORDS
         } else {
             self.check_rawdat(&self.console_path, "check console")?
         };
         let matched = self.compare_db(e_valid.min(c_valid))?;
         println!();
-        let total = botw_recipe_data::NUM_TOTAL_RECORDS;
+        let total = rdata::NUM_TOTAL_RECORDS;
         let percentage = matched as f32 / total as f32 * 100.0;
         let percentage_str = format!("{:.2}%", percentage);
+        let message = format!("{}/{} ({})", matched, total, percentage_str);
         let badge = json!({
             "schemaVersion": 1,
-            "label": "Validated Recipes",
-            "message": format!("{}/{} ({})", matched, total, percentage_str),
+            "label": "Validated Recipes (Eqiv. Classes)",
+            "message": message,
             "color": "blue"
         });
         let badge_str = serde_json::to_string(&badge)?;
@@ -184,7 +186,7 @@ impl Check {
     /// All chunks are still checked even if a chunk fails
     fn check_rawdat(&self, path: &Path, label: &str) -> Result<usize, Error> {
         print_status!(0, label);
-        let mut first_invalid = botw_recipe_data::CHUNK_COUNT;
+        let mut first_invalid = rdata::CHUNK_COUNT;
         if !path.exists() {
             print_status!(0, label, "path does not exist");
             return Ok(0);
@@ -192,9 +194,9 @@ impl Check {
         let pool = ThreadPool::new(num_cpus::get());
         let (send, recv) = mpsc::channel();
 
-        let chunk_count = botw_recipe_data::CHUNK_COUNT;
-        let chunk_size = botw_recipe_data::CHUNK_SIZE;
-        let last_chunk_size = botw_recipe_data::LAST_CHUNK_SIZE;
+        let chunk_count = rdata::CHUNK_COUNT;
+        let chunk_size = rdata::CHUNK_SIZE;
+        let last_chunk_size = rdata::LAST_CHUNK_SIZE;
 
         let mut checked = 0;
 
@@ -257,7 +259,7 @@ impl Check {
                     } else {
                         print_status!(checked, label, "Chunk {i} failed: {err}");
                         if let Error::InvalidRecord(record, reason, data) = err {
-                            let recipe_id = i * botw_recipe_data::CHUNK_SIZE + record;
+                            let recipe_id = i * rdata::CHUNK_SIZE + record;
                             let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();
                             let error_data = RecipeErrorData {
                                 chunk: i,
@@ -294,9 +296,9 @@ impl Check {
         let pool = ThreadPool::new(num_cpus::get());
         let (send, recv) = mpsc::channel();
 
-        let chunk_count = botw_recipe_data::CHUNK_COUNT;
-        let chunk_size = botw_recipe_data::CHUNK_SIZE;
-        let last_chunk_size = botw_recipe_data::LAST_CHUNK_SIZE;
+        let chunk_count = rdata::CHUNK_COUNT;
+        let chunk_size = rdata::CHUNK_SIZE;
+        let last_chunk_size = rdata::LAST_CHUNK_SIZE;
 
         for i in 0..stop_at_chunk {
             let chunk_size = if i == chunk_count - 1 {
@@ -335,7 +337,7 @@ impl Check {
                     print_status!(checked, label, "Chunk {i} failed: {err}");
                     if let Error::Mismatch(record, data_e, data_c, matched_count) = err {
                         matched += matched_count;
-                        let recipe_id = i * botw_recipe_data::CHUNK_SIZE + record;
+                        let recipe_id = i * rdata::CHUNK_SIZE + record;
                         let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();
                         let error_data = RecipeMismatchData {
                             chunk: i,
@@ -359,6 +361,7 @@ impl Check {
             if errors_path.exists() {
                 std::fs::remove_file(&errors_path)?;
             }
+            print_status!(checked, label, "everything matched");
         }
 
 

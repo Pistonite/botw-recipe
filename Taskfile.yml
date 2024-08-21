@@ -29,14 +29,13 @@ tasks:
     - python scripts/rename.py
     - rm -r raw
 
-  dump-emulate:
+  rdump:
     dir: dump/emulate
-    aliases: [demu]
     desc: Dump using cooking.rs
     cmds:
-    - cargo run --release --bin dump
+    - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
 
-  dcheck:
+  check:
     dir: dump/check
     aliases: [c]
     desc: Check dumps
@@ -58,11 +57,11 @@ tasks:
     - cargo run --release --bin check --quiet -- --mismatch {{.CLI_ARGS}}
     
 
-  cook:
-    dir: dump/emulate
+  rcook:
+    dir: app/cook
     desc: Cook a recipe with emulator. Separate ingredients with commas
     cmds:
-    - cargo run --bin cook --quiet -- {{.CLI_ARGS}}
+    - cargo run --bin rcook --quiet -- {{.CLI_ARGS}}
 
 
 

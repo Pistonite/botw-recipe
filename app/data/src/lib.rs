@@ -6,8 +6,13 @@ use std::io::Write;
 pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS, CHUNK_SIZE, CHUNK_COUNT, LAST_CHUNK_SIZE};
 pub use generated::{Actor, Group};
 
+
 mod recipe;
 pub use recipe::*;
+
+pub mod cook;
+use cook::CookData;
+
 use serde::{Deserialize, Serialize};
 
 /// Get the number of ways to choose `k` items from `n` items, allowing for repetition
@@ -34,23 +39,6 @@ impl Recipe {
 
 // use std::fs;
 // use bit_set::BitSet;
-/// This data mirrors uking::ui::PouchItem::CookData, with an extra crit_chance field
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-#[repr(C)]
-pub struct CookData {
-    /// Number of quarter-hearts. Usually 0-120
-    pub health_recover: i32,
-    /// Effect duration in seconds, usually 0-1800
-    pub effect_duration: i32,
-    /// Price
-    pub sell_price: i32,
-    /// Effect ID, but a float for some reason. -1 is None
-    pub effect_id: f32,
-    /// Effect level, usually 0-3, higher for hearty
-    pub effect_level: f32,
-    /// crit chance, usually 0-100
-    pub crit_chance: i32
-}
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "reason", content = "data")]
@@ -104,17 +92,6 @@ impl CookData {
             effect_level,
             crit_chance
         })
-    }
-    /// Return an invalid CookData with all 0 bytes
-    pub fn invalid() -> Self {
-        Self {
-            health_recover: 0,
-            effect_duration: 0,
-            sell_price: 0,
-            effect_id: 0.0,
-            effect_level: 0.0,
-            crit_chance: 0
-        }
     }
 
     pub fn is_invalid(&self) -> Option<CookDataInvalidReason> {

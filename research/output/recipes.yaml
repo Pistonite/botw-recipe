@@ -1,0 +1,1064 @@
+- actors:
+  - - Animal_Insect_F
+  hb: -12
+  name: Fairy Tonic
+  num: 0
+  tags:
+  - - CookOre
+  - - CookInsect
+  - - CookEnemy
+- actors:
+  - - Animal_Insect_F
+  hb: -12
+  name: Fairy Tonic
+  num: 0
+  tags:
+  - - CookInsect
+  - - CookEnemy
+- actors:
+  - - Animal_Insect_F
+  hb: -12
+  name: Fairy Tonic
+  num: 0
+  tags:
+  - - CookOre
+    - CookEnemy
+    - CookInsect
+- actors: []
+  hb: 0
+  name: Rock-Hard Food
+  num: 0
+  tags:
+  - - CookOre
+- actors: []
+  hb: 0
+  name: Elixir
+  num: 0
+  tags:
+  - - CookEnemy
+  - - CookInsect
+- actors: []
+  hb: 0
+  name: Dubious Food
+  num: 0
+  tags:
+  - - CookEnemy
+    - CookInsect
+- actors:
+  - - Item_Fruit_A
+    - Item_Fruit_B
+  - - Item_Fruit_B
+    - Item_Fruit_C
+    - Item_Fruit_F
+    - Item_Fruit_H
+    - Item_Fruit_D
+    - Item_Fruit_G
+    - Item_Fruit_A
+  - - Item_Material_07
+  - - Item_Material_01
+  hb: 4
+  name: Fruitcake
+  num: 0
+  tags: []
+- actors:
+  - - Item_FishGet_F
+    - Item_FishGet_G
+  - - Item_FishGet_K
+  - - Item_Material_03
+  - - Item_Material_06
+  - - Item_Ore_H
+  hb: 8
+  name: Seafood Paella
+  num: 0
+  tags: []
+- actors:
+  - - Item_PlantGet_B
+    - Item_PlantGet_C
+  - - Item_Fruit_C
+  - - Item_Fruit_F
+  - - Item_Material_05
+  hb: 0
+  name: Creamy Heart Soup
+  num: 0
+  tags: []
+- actors:
+  - - Item_FishGet_K
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_06
+  hb: 0
+  name: Clam Chowder
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_J
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_06
+  hb: 0
+  name: Pumpkin Stew
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_11
+    - Item_Meat_12
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_06
+  hb: 0
+  name: Gourmet Meat Stew
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_02
+    - Item_Meat_07
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_06
+  hb: 0
+  name: Prime Meat Stew
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_01
+    - Item_Meat_06
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_06
+  hb: 0
+  name: Meat Stew
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_11
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Gourmet Meat Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_12
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Gourmet Poultry Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_02
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Prime Meat Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_07
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Prime Poultry Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_01
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Meat Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_06
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Poultry Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_FishGet_K
+    - Item_FishGet_F
+    - Item_FishGet_G
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Seafood Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_J
+    - Item_PlantGet_M
+    - Item_PlantGet_Q
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Vegetable Curry
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_J
+  - - Item_Material_07
+  - - Item_Material_01
+  - - Item_Material_06
+  hb: 0
+  name: Pumpkin Pie
+  num: 0
+  tags: []
+- actors:
+  - - Item_PlantGet_M
+    - Item_PlantGet_Q
+  - - Item_Material_07
+  - - Item_Material_01
+  - - Item_Material_06
+  hb: 0
+  name: Carrot Cake
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_04
+  - - Item_Material_01
+  - - Item_Fruit_B
+  hb: 16
+  name: Wildberry Crepe
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_04
+  - - Item_Material_01
+  - - BeeHome
+  hb: 4
+  name: Honey Crepe
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_07
+  - - Item_Material_05
+  - - Item_Material_04
+  - - Item_Material_01
+  hb: 0
+  name: Plain Crepe
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_A
+  - - Item_Material_07
+  - - Item_Material_06
+  - - Item_Material_01
+  hb: 0
+  name: Apple Pie
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_07
+  - - Item_Material_06
+  - - Item_Material_01
+  - - Item_Fruit_L
+    - Item_Fruit_K
+  hb: 0
+  name: Nutcake
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_04
+  - - Item_Material_07
+  - - Item_Material_06
+  - - Item_Material_01
+  hb: 0
+  name: Egg Tart
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_04
+  - - Item_Material_05
+  - - Item_Material_01
+  hb: 0
+  name: Egg Pudding
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_H
+  - - Item_Material_07
+  - - Item_Material_01
+  hb: 0
+  name: Fried Bananas
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_07
+  - - Item_Material_06
+  - - Item_Material_01
+  hb: 0
+  name: Fruit Pie
+  num: 0
+  tags:
+  - - CookFruit
+- actors:
+  - - Item_Material_07
+  - - Item_Material_06
+  - - Item_Ore_H
+  hb: 0
+  name: Meat Pie
+  num: 0
+  tags:
+  - - CookMeat
+- actors:
+  - - Item_Material_07
+  - - Item_Material_06
+  - - Item_Ore_H
+  hb: 0
+  name: Fish Pie
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_FishGet_I
+  - - Item_Material_06
+  - - Item_Material_07
+  hb: 0
+  name: "Salmon Meuni\xE8re"
+  num: 0
+  tags: []
+- actors:
+  - - Item_FishGet_I
+  - - Item_Material_03
+  - - Item_Ore_H
+  - - Item_Material_06
+  hb: 0
+  name: Salmon Risotto
+  num: 0
+  tags: []
+- actors:
+  - - Item_InsectGet_K
+    - Item_InsectGet_O
+    - Item_InsectGet_Z
+  - - Item_Material_03
+  - - Item_Ore_H
+  - - Item_Material_06
+  hb: 0
+  name: Crab Risotto
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_J
+    - Item_PlantGet_M
+    - Item_PlantGet_Q
+  - - Item_Material_03
+  - - Item_Ore_H
+  - - Item_Material_06
+  hb: 0
+  name: Vegetable Risotto
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_03
+  - - Item_Ore_H
+  - - Item_Material_06
+  hb: 0
+  name: Mushroom Risotto
+  num: 0
+  tags:
+  - - CookMushroom
+- actors:
+  - - Item_Ore_H
+  - - Item_Material_05
+  hb: 0
+  name: Cream of Mushroom Soup
+  num: 0
+  tags:
+  - - CookMushroom
+  - - CookPlant
+- actors:
+  - - Item_Fruit_J
+    - Item_PlantGet_M
+    - Item_PlantGet_Q
+  - - Item_Ore_H
+  - - Item_Material_05
+  hb: 0
+  name: Veggie Cream Soup
+  num: 0
+  tags: []
+- actors:
+  - - Item_Ore_H
+  - - Item_Material_05
+  hb: 0
+  name: Creamy Meat Soup
+  num: 0
+  tags:
+  - - CookMeat
+  - - CookPlant
+- actors:
+  - - Item_Ore_H
+  - - Item_Material_05
+  hb: 0
+  name: Creamy Seafood Soup
+  num: 0
+  tags:
+  - - CookFish
+  - - CookPlant
+- actors:
+  - - Item_Ore_H
+  - - Item_Material_05
+  hb: 0
+  name: Cream of Vegetable Soup
+  num: 0
+  tags:
+  - - CookPlant
+- actors:
+  - - Item_PlantGet_M
+    - Item_PlantGet_Q
+  - - Item_Material_06
+  - - Item_Material_05
+  - - Item_Material_07
+  hb: 0
+  name: Carrot Stew
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_04
+  - - Item_Ore_H
+  - - Item_Material_06
+  hb: 0
+  name: Mushroom Omelet
+  num: 0
+  tags:
+  - - CookMushroom
+- actors:
+  - - Item_InsectGet_K
+    - Item_InsectGet_O
+    - Item_InsectGet_Z
+  - - Item_Material_04
+  - - Item_Material_03
+  - - Item_Ore_H
+  hb: 0
+  name: Crab Omelet with Rice
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_12
+  - - Item_Material_04
+  - - Item_Material_03
+  - - Item_Material_06
+  hb: 0
+  name: Gourmet Poultry Pilaf
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_07
+  - - Item_Material_04
+  - - Item_Material_03
+  - - Item_Material_06
+  hb: 0
+  name: Prime Poultry Pilaf
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_06
+  - - Item_Material_04
+  - - Item_Material_03
+  - - Item_Material_06
+  hb: 0
+  name: Poultry Pilaf
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_04
+  - - Item_Material_06
+  - - Item_Ore_H
+  hb: 0
+  name: Vegetable Omelet
+  num: 0
+  tags:
+  - - CookPlant
+- actors:
+  - - Item_FishGet_F
+    - Item_FishGet_G
+  - - Item_Material_06
+  - - Item_Material_07
+  hb: 0
+  name: "Porgy Meuni\xE8re"
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_06
+  - - Item_Material_07
+  hb: 0
+  name: "Seafood Meuni\xE8re"
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_FishGet_K
+    - Item_FishGet_F
+    - Item_FishGet_G
+  - - Item_Material_03
+  - - Item_Ore_H
+  hb: 0
+  name: Seafood Fried Rice
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_02
+  - - Item_Material_03
+  - - Item_Material_06
+  hb: 0
+  name: Curry Pilaf
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_11
+  - - Item_Material_03
+  - - Item_Ore_H
+  hb: 0
+  name: Gourmet Meat and Rice Bowl
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_02
+  - - Item_Material_03
+  - - Item_Ore_H
+  hb: 0
+  name: Prime Meat and Rice Bowl
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_01
+  - - Item_Material_03
+  - - Item_Ore_H
+  hb: 0
+  name: Meat and Rice Bowl
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_03
+  - - Item_Material_04
+  hb: 0
+  name: Fried Egg and Rice
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_03
+  hb: 0
+  name: Meaty Rice Balls
+  num: 0
+  tags:
+  - - CookMeat
+- actors:
+  - - Item_Material_03
+  hb: 0
+  name: Seafood Rice Balls
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_Material_03
+  hb: 0
+  name: Mushroom Rice Balls
+  num: 0
+  tags:
+  - - CookMushroom
+- actors:
+  - - Item_Material_03
+  hb: 0
+  name: Veggie Rice Balls
+  num: 0
+  tags:
+  - - CookPlant
+- actors:
+  - - Item_Fruit_A
+  - - Item_Material_06
+  hb: 4
+  name: Hot Buttered Apple
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_J
+  hb: 0
+  name: Meat-Stuffed Pumpkin
+  num: 0
+  tags:
+  - - CookMeat
+- actors:
+  - - BeeHome
+  hb: 0
+  name: Glazed Meat
+  num: 0
+  tags:
+  - - CookMeat
+- actors:
+  - - BeeHome
+  hb: 0
+  name: Glazed Seafood
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - BeeHome
+  hb: 0
+  name: Glazed Mushrooms
+  num: 0
+  tags:
+  - - CookMushroom
+- actors:
+  - - BeeHome
+  hb: 0
+  name: Glazed Veggies
+  num: 0
+  tags:
+  - - CookPlant
+- actors:
+  - - Item_Material_03
+  - - Item_Material_02
+  hb: 0
+  name: Curry Rice
+  num: 0
+  tags: []
+- actors:
+  - - Item_Fruit_A
+  - - BeeHome
+  hb: 0
+  name: Honeyed Apple
+  num: 0
+  tags: []
+- actors:
+  - - BeeHome
+  hb: 0
+  name: Honeyed Fruits
+  num: 0
+  tags:
+  - - CookFruit
+- actors:
+  - - Item_Meat_11
+  - - Item_Material_02
+  hb: 0
+  name: Gourmet Spiced Meat Skewer
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_02
+  - - Item_Material_02
+  hb: 0
+  name: Prime Spiced Meat Skewer
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_01
+  - - Item_Material_02
+  hb: 0
+  name: Spiced Meat Skewer
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_02
+  hb: 0
+  name: "Fragrant Mushroom Saut\xE9"
+  num: 0
+  tags:
+  - - CookMushroom
+- actors:
+  - - Item_Material_02
+  hb: 0
+  name: "Herb Saut\xE9"
+  num: 0
+  tags:
+  - - CookPlant
+- actors:
+  - - Item_Meat_11
+    - Item_Meat_12
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Gourmet Meat
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_07
+    - Item_Meat_02
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Prime Meat
+  num: 0
+  tags: []
+- actors:
+  - - Item_Meat_01
+    - Item_Meat_06
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Meat
+  num: 0
+  tags: []
+- actors:
+  - - Item_InsectGet_K
+    - Item_InsectGet_O
+    - Item_InsectGet_Z
+  - - Item_Material_02
+  hb: 0
+  name: Crab Stir-Fry
+  num: 0
+  tags: []
+- actors:
+  - - Item_InsectGet_K
+    - Item_InsectGet_O
+    - Item_InsectGet_Z
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Crab
+  num: 0
+  tags: []
+- actors:
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Fish
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_Material_07
+  - - Item_Ore_H
+  hb: 0
+  name: Wheat Bread
+  num: 0
+  tags: []
+- actors:
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Greens
+  num: 0
+  tags:
+  - - CookPlant
+- actors:
+  - - Item_Ore_H
+  hb: 0
+  name: Salt-Grilled Mushrooms
+  num: 0
+  tags:
+  - - CookMushroom
+- actors: []
+  hb: 0
+  name: Copious Meat Skewers
+  num: 0
+  tags:
+  - - CookMeat
+  - - CookMeat
+  - - CookMeat
+  - - CookMeat
+- actors: []
+  hb: 0
+  name: Copious Fried Wild Greens
+  num: 0
+  tags:
+  - - CookPlant
+  - - CookPlant
+  - - CookPlant
+  - - CookPlant
+- actors: []
+  hb: 0
+  name: Copious Simmered Fruit
+  num: 0
+  tags:
+  - - CookFruit
+  - - CookFruit
+  - - CookFruit
+  - - CookFruit
+- actors: []
+  hb: 0
+  name: Copious Mushroom Skewers
+  num: 0
+  tags:
+  - - CookMushroom
+  - - CookMushroom
+  - - CookMushroom
+  - - CookMushroom
+- actors: []
+  hb: 0
+  name: Copious Seafood Skewers
+  num: 0
+  tags:
+  - - CookFish
+  - - CookFish
+  - - CookFish
+  - - CookFish
+- actors: []
+  hb: 0
+  name: Meat Skewer
+  num: 0
+  tags:
+  - - CookMeat
+  - - CookMeat
+- actors: []
+  hb: 0
+  name: Simmered Fruit
+  num: 0
+  tags:
+  - - CookFruit
+  - - CookFruit
+- actors: []
+  hb: 0
+  name: Mushroom Skewer
+  num: 0
+  tags:
+  - - CookMushroom
+  - - CookMushroom
+- actors: []
+  hb: 0
+  name: Fried Wild Greens
+  num: 0
+  tags:
+  - - CookPlant
+  - - CookPlant
+- actors:
+  - - Item_Meat_11
+    - Item_Meat_12
+  hb: 0
+  name: Gourmet Meat and Seafood Fry
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_Meat_02
+    - Item_Meat_07
+  hb: 0
+  name: Prime Meat and Seafood Fry
+  num: 0
+  tags:
+  - - CookFish
+- actors: []
+  hb: 0
+  name: Meat and Seafood Fry
+  num: 0
+  tags:
+  - - CookMeat
+  - - CookFish
+- actors:
+  - - Item_Fruit_I
+  hb: 0
+  name: Pepper Steak
+  num: 0
+  tags:
+  - - CookMeat
+- actors:
+  - - Item_Fruit_I
+  hb: 0
+  name: Pepper Seafood
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_FishGet_K
+    - Item_FishGet_M
+    - Item_InsectGet_K
+    - Item_InsectGet_O
+    - Item_InsectGet_Z
+  hb: 0
+  name: Seafood Skewer
+  num: 0
+  tags:
+  - - CookFish
+- actors: []
+  hb: 0
+  name: Fish Skewer
+  num: 0
+  tags:
+  - - CookFish
+  - - CookFish
+- actors: []
+  hb: 0
+  name: Steamed Meat
+  num: 0
+  tags:
+  - - CookPlant
+  - - CookMeat
+- actors: []
+  hb: 0
+  name: Steamed Fish
+  num: 0
+  tags:
+  - - CookPlant
+  - - CookFish
+- actors: []
+  hb: 0
+  name: Steamed Mushrooms
+  num: 0
+  tags:
+  - - CookPlant
+  - - CookMushroom
+- actors: []
+  hb: 0
+  name: Steamed Fruit
+  num: 0
+  tags:
+  - - CookPlant
+  - - CookFruit
+- actors: []
+  hb: 0
+  name: Fish and Mushroom Skewer
+  num: 0
+  tags:
+  - - CookMushroom
+  - - CookFish
+- actors: []
+  hb: 0
+  name: Meat and Mushroom Skewer
+  num: 0
+  tags:
+  - - CookMushroom
+  - - CookMeat
+- actors: []
+  hb: 0
+  name: Fruit and Mushroom Mix
+  num: 0
+  tags:
+  - - CookMushroom
+  - - CookFruit
+- actors: []
+  hb: 0
+  name: Meat Skewer
+  num: 0
+  tags:
+  - - CookMeat
+- actors:
+  - - Item_FishGet_K
+    - Item_FishGet_M
+    - Item_InsectGet_K
+    - Item_InsectGet_O
+    - Item_InsectGet_Z
+  hb: 0
+  name: Seafood Skewer
+  num: 0
+  tags: []
+- actors: []
+  hb: 0
+  name: Fish Skewer
+  num: 0
+  tags:
+  - - CookFish
+- actors:
+  - - Item_Material_04
+  hb: 0
+  name: Omelet
+  num: 0
+  tags: []
+- actors:
+  - - Item_Material_05
+  hb: 0
+  name: Milk
+  num: 0
+  tags: []
+- actors: []
+  hb: 0
+  name: Mushroom Skewer
+  num: 0
+  tags:
+  - - CookMushroom
+- actors: []
+  hb: 0
+  name: Fried Wild Greens
+  num: 0
+  tags:
+  - - CookPlant
+- actors: []
+  hb: 0
+  name: Simmered Fruit
+  num: 0
+  tags:
+  - - CookFruit
+- actors:
+  - - Item_Fruit_K
+  - - Item_Fruit_L
+  hb: 0
+  name: "Saut\xE9ed Nuts"
+  num: 0
+  tags: []
+- actors:
+  - - Animal_Insect_F
+  hb: -12
+  name: Fairy Tonic
+  num: 0
+  tags: []
+- actors:
+  - Animal_Insect_F
+  hb: -12
+  name: Fairy Tonic
+  num: 1
+  tags: []
+- actors: []
+  hb: 0
+  name: Rock-Hard Food
+  num: 1
+  tags:
+  - CookOre
+- actors:
+  - Item_Fruit_I
+  hb: 0
+  name: "Saut\xE9ed Peppers"
+  num: 1
+  tags: []
+- actors:
+  - Item_Material_04
+  hb: 0
+  name: Omelet
+  num: 1
+  tags: []
+- actors: []
+  hb: 0
+  name: Meat Skewer
+  num: 1
+  tags:
+  - CookMeat
+- actors:
+  - Item_FishGet_K
+  - Item_FishGet_M
+  - Item_InsectGet_K
+  - Item_InsectGet_O
+  - Item_InsectGet_Z
+  hb: 0
+  name: Seafood Skewer
+  num: 1
+  tags: []
+- actors: []
+  hb: 0
+  name: Fish Skewer
+  num: 1
+  tags:
+  - CookFish
+- actors: []
+  hb: 0
+  name: Mushroom Skewer
+  num: 1
+  tags:
+  - CookMushroom
+- actors:
+  - BeeHome
+  hb: -8
+  name: Honey Candy
+  num: 1
+  tags: []
+- actors:
+  - Item_Fruit_K
+  - Item_Fruit_L
+  hb: -2
+  name: "Saut\xE9ed Nuts"
+  num: 1
+  tags: []
+- actors:
+  - Item_Material_05
+  hb: 2
+  name: Milk
+  num: 1
+  tags: []
+- actors: []
+  hb: 0
+  name: Fried Wild Greens
+  num: 1
+  tags:
+  - CookPlant
+- actors: []
+  hb: 0
+  name: Simmered Fruit
+  num: 1
+  tags:
+  - CookFruit

@@ -1,21 +1,24 @@
 [package]
-name = "botw-recipe-dump-check"
+name = "botw-recipe-cook"
+description = "BOTW WMC cooking simulator"
 version = "0.0.0"
-description = "Tools to check/validate the dump"
 edition = "2021"
 
 [dependencies]
 clap = { version = "=4.5.4", features = ["derive"] }
-num_cpus = "1.16.0"
+distance = "0.4.0"
+enum-map = "2.7.3"
 serde = { version = "1.0.208", features = ["derive"] }
-serde_json = "1.0.125"
+serde_yaml = "0.9.34"
 thiserror = "1.0.63"
-threadpool = "1.8.1"
 
 [dependencies.rdata]
 package = "botw-recipe-data"
-path = "../../app/data"
+path = "../data"
 
 [[bin]]
-name = "check"
+name = "rcook"
 path = "src/main.rs"
+
+[lib]
+path = "src/lib.rs"

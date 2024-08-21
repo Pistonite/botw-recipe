@@ -41,20 +41,21 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--clean":
         CLEAN = True
     # prepare data
-    # sparse_checkout(
-    #     "https://github.com/MrCheeze/botw-tools",
-    #     "botw-tools",
-    #     "master",
-    #     [
-    #         "botw_names.json"
-    #     ]
-    # )
+    sparse_checkout(
+        "https://github.com/Pistonight/cooking.rs",
+        "cooking-rs",
+        "main",
+        [
+            "src/cook_recipes.json"
+        ]
+    )
     sparse_checkout(
         "https://github.com/leoetlino/botw",
         "botw-data",
         "master",
         [
-            "Actor/",
+            "Actor/ActorLink/",
+            "Actor/GeneralParamList/",
             "Message/"
         ]
     )
@@ -69,3 +70,4 @@ if __name__ == "__main__":
     run_script("validate-groups.py")
     run_script("ensure-exhaustiveness.py")
     run_script("generate-source.py")
+    run_script("prepare-recipes.py")

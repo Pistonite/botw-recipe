@@ -11,9 +11,13 @@ IN = [
     "data/important-tags.yaml",
     "output/items-grouped.yaml",
     "data/known-filtered-actors.yaml",
+    "output/actor-names.yaml",
     "botw-data/Actor/ActorLink/AirWall.yml",
 ]
-OUT = ["output/extra-actors.yaml"]
+OUT = [
+    "output/extra-actors.yaml",
+    "output/actor-map.yaml"
+]
 
 def is_actor(actor):
     return os.path.isfile(f"botw-data/Actor/ActorLink/{actor}.yml")
@@ -37,12 +41,13 @@ def check_actor_recur(actor, seen):
     if model_user == "None": 
         return (None, None)
     profile_user = actor_link["LinkTarget"]["ProfileUser"]
-    # Weapon, Armor and Arrow are not holdable
     if profile_user in (
         "WeaponShield", "WeaponSpear", "WeaponSmallSword", "WeaponLargeSword",
         "WeaponBow", "Bullet",
         "ArmorLower", "ArmorUpper", "ArmorHead"
     ):
+        # Weapon, Armor and Arrow are not holdable
+        # Ok, no invalid actors found
         return (None, None)
     
     if "Tags" not in actor_link:
@@ -52,11 +57,13 @@ def check_actor_recur(actor, seen):
     gpuser = actor_link["LinkTarget"]["GParamUser"]
     if gpuser == "Dummy":
         if not tags:
+            # Ok, actor is same as Dummy (Sheikah Slate)
             return (None, None)
         return (actor, None)
     with open(f"botw-data/Actor/GeneralParamList/{gpuser}.gparamlist.yml", "r", encoding="utf-8") as f:
         data = yaml.load(f, Loader=yaml.FullLoader)["param_root"]["objects"]
         if is_equal_to_dummy(data):
+            # Ok, actor is same as Dummy (Sheikah Slate)
             return (None, None)
     # Check if there is a same group actor name
     if "System" in data:
@@ -67,6 +74,7 @@ def check_actor_recur(actor, seen):
                 check, _ = check_actor_recur(sgan, seen)
                 if not check:
                     return (None, None)
+    # Returning a second param as this actor might be equal to a known one
             if sgan:
                 return (actor, sgan)
     return (actor, gpuser)
@@ -141,9 +149,15 @@ if __name__ == "__main__":
         util.assertion(sheika_slate["cureItemEffectiveTime"] == 0)
         util.assertion(sheika_slate["itemSellingPrice"] == -1)
         util.assertion(sheika_slate["itemBuyingPrice"] == -1)
+    # Actors that are filtered out
     with open(IN[3], "r", encoding="utf-8") as f:
         for a in yaml.safe_load(f):
             known_actors.add(a)
+
+    with open(IN[4], "r", encoding="utf-8") as f:
+        actor_to_name = {}
+        for actor, name in yaml.safe_load(f):
+            actor_to_name[actor] = name
 
     def get_actor_name(p):
         util.assertion(p.endswith(".yml"))
@@ -155,18 +169,30 @@ if __name__ == "__main__":
         if name not in known_actors:
             all_actors.append(name)
     
+    actor_map = {} # maps a same group actor to the actor
     extra_actors = []
     with Pool() as pool:
         for actor, same_group_actor in util.progress(pool.imap_unordered(check_actor, all_actors), "check actors", len(all_actors)):
             if actor:
                 if same_group_actor not in known_actors:
                     extra_actors.append(actor)
+                else:
+                    actor_map[actor] = same_group_actor
     
     extra_actors.sort()
     with open(OUT[0], "w", encoding="utf-8") as f:
         yaml.dump(extra_actors, f)
+
+    with open(OUT[1], "w", encoding="utf-8") as f:
+        for actor in sorted(actor_map):
+            target = actor_map[actor]
+            name = actor_to_name[target]
+            actor += ":"
+            f.write(f"{actor:<30} {target:<30} # {name}\n")
     
     if extra_actors:
         print(f"{len(extra_actors)} extra actors found")
     exit(len(extra_actors))
+
+
     

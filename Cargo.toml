@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "app/cook",
     "app/data",
     "app/old",
     "dump/check",

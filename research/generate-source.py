@@ -152,7 +152,7 @@ def gen_group_enum(o, actor_to_name, groups):
     o.write(HEADER)
     o.write("use super::Actor;\n")
     write_doc_comment(o, "Recipe input groups")
-    o.write("#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]\n")
+    o.write("#[derive(enum_map::Enum, serde::Serialize, serde::Deserialize, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]\n")
     o.write("#[allow(non_camel_case_types)]\n")
     o.write("#[repr(usize)]\n")
     o.write("pub enum Group {\n")
@@ -191,7 +191,7 @@ def gen_actor_enum(o, actor_to_name, groups):
     o.write(HEADER)
     o.write("use super::Group;\n")
     write_doc_comment(o, "Ingredients (actors)")
-    o.write("#[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]\n")
+    o.write("#[derive(enum_map::Enum, serde::Serialize, serde::Deserialize, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]\n")
     o.write("#[allow(non_camel_case_types)]\n")
     o.write("pub enum Actor {\n")
     o.write("    #[default]\n")
@@ -202,6 +202,9 @@ def gen_actor_enum(o, actor_to_name, groups):
         o.write(f"    {actor},\n")
     o.write("}\n")
     o.write("impl Actor {\n")
+    write_doc_comment(o, """
+        Get the English name of the actor
+    """)
     o.write("    pub const fn name(&self) -> &'static str {\n")
     o.write("        match self {\n")
     o.write("            Self::None => \"<none>\",\n")
@@ -209,6 +212,20 @@ def gen_actor_enum(o, actor_to_name, groups):
         name = actor_to_name[actor]
         o.write(f"Self::{actor} => \"{name}\",\n")
     o.write("}}\n")
+
+    write_doc_comment(o, """
+        Get the actor name of the actor
+    """)
+    o.write("    pub const fn actor_name(&self) -> &'static str {\n")
+    o.write("        match self {\n")
+    o.write("            Self::None => \"\",\n")
+    for i in range(1, len(groups)):
+        id = str(i)
+        group = groups[id]
+        group_name = make_group_name(group, id)
+        for actor in group:
+            o.write(f"Self::{actor} => \"{actor}\",\n")
+    o.write("}}")
 
     o.write("    pub const fn group(&self) -> Group {\n")
     o.write("        match self {\n")
@@ -239,13 +256,16 @@ def gen_actor_enum(o, actor_to_name, groups):
 
     o.write("impl std::fmt::Debug for Actor {\n")
     o.write("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n")
-    o.write("        f.debug_tuple(\"Actor\").field(&self.name()).finish()\n")
+    o.write("        f.debug_tuple(self.actor_name()).field(&self.name()).finish()\n")
     o.write("    }\n")
     o.write("}\n")
 
-    # for i in range(1, len(groups)):
-    #     id = str(i)
-    #     group = groups[id]
+    o.write("impl std::fmt::Display for Actor {\n")
+    o.write("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n")
+    o.write("        write!(f, \"{}\", self.actor_name())\n")
+    o.write("    }\n")
+    o.write("}\n")
+
 
 with open("output/actor-names.yaml", "r", encoding="utf-8") as f:
     actors = []

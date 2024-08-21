@@ -6,7 +6,20 @@
 
 use super::Actor;
 /// Recipe input groups
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    enum_map::Enum,
+    serde::Serialize,
+    serde::Deserialize,
+    Debug,
+    Default,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+)]
 #[allow(non_camel_case_types)]
 #[repr(usize)]
 pub enum Group {

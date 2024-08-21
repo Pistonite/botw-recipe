@@ -1,9 +1,11 @@
 [package]
 name = "botw-recipe-data"
+description = "BOTW recipe data processing library"
 version = "0.0.0"
 edition = "2021"
 
 [dependencies]
 derive_deref = "1.1.1"
+enum-map = "2.7.3"
 serde = { version = "1.0.208", features = ["derive"] }
 static_assertions = "1.1.0"
