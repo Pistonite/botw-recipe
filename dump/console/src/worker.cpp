@@ -113,11 +113,20 @@ void worker_main(void*) {
                 cook_item.reset();
                 reset_last_crit_chance();
                 if (!cook(chunk_id, group[0], group[1], group[2], group[3], group[4], cook_item)) {
+                    update_screen(chunk_id, '<');
                     update_error_recipe(i);
                     error = true;
                     break;
                 }
                 int32_t crit_chance = get_last_crit_chance();
+                if (cook_item.is_crit) {
+                    // crit handler is turned off so this should never be true
+                    // check here to make sure nothing went wrong
+                    update_screen(chunk_id, 'x');
+                    update_error_recipe(i);
+                    error = true;
+                    break;
+                }
                 convert_cook_result(cook_item, records[batch_i]);
                 records[batch_i].crit_chance = crit_chance;
             }

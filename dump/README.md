@@ -11,7 +11,7 @@ the absence of an ingredient.
 
 ## Recipe ID
 Given the groups `N`, and 5 is the max number of ingredients in a recipe,
-the totel number of recipe is:
+the total number of recipe is:
 ```
 binomial(N+5-1, 5) = binomial(N+4, 5) // or multichoose(N, 5)
 ```
@@ -22,10 +22,10 @@ We use that as the ID of the recipe.
 The recipe ID = 0 corresponds to choosing 5 `None` ingredients. 
 This is not a valid recipe, just a placeholder.
 
-see `/app/data/src/lib.rs` for an efficient algorithm to convert between
+See `/app/data/src/recipe.rs` for an efficient algorithm to convert between
 recipe inputs and recipe ID.
 
-Having recipe ID like this allows us to effciently pack the database.
+Having recipe ID like this allows us to efficiently pack the database.
 Essentially, we don't need to store the input, just the output, and the
 input can be inferred from the position of the output in the entire list.
 
@@ -33,22 +33,27 @@ input can be inferred from the position of the output in the entire list.
 The raw data record for each recipe will have this following format:
 ```c
 struct CookData {
-    // Number of quarter-hearts, usually 0-120
+    // Number of quarter-hearts (or yellow quarter-hearts), usually 0-120
     int32_t health_recover;
     // Effect seconds, usually 0-1800
     int32_t effect_duration;
-    // Price when selling
+    // Price when selling, usually > 0
     int32_t sell_price;
-    // Effect ID but as an float. -1 is None
+    // Effect ID but as an float. -1 is None, but some may have 0.0 as None
     float32_t effect_id;
-    // Effect level, 0f-3f for most effects, hearty is the number of yellow hearts
+    // Effect level:
+    // - potion effect: integer level, usually 0-3
+    // - hearty effect: number of yellow quarter-hearts
+    // - stamina effect: number of wheels * 1000 (3000 max)
+    // - endura effect: number of wheels * 5 (technically 15 max, but in-game max is 10)
     float32_t effect_level;
-    // Chance of critical success, usually 0-100
+    // Chance of critical success, 0-125, note that the game does not cap
+    // this value, but >=100 guarantees critical success
     int32_t crit_chance;
 }
 ```
 Note that the layout is the same as `uking::ui::PouchItem::CookData` in
-the BOTW game, with an extra `crit_chance` in the end.
+BOTW, with an extra `crit_chance` in the end.
 
 The record for recipe ID = 0 should be 24 bytes of `0x00`.
 
@@ -59,30 +64,28 @@ To allow efficient processing, the database will be divided into smaller
 sequencial chunks. The chunk size is selected so that there aren't too many
 chunks, and each chunk efficiently uses disk space.
 
-The selected chunk size is `409600` records. There will be around 4000 chunks.
+The selected chunk size is `409600` records. There will be around 3500 chunks.
 
 ## Storage format
 Each chunk will be stored as a binary file. Each record will be stored as 
 a binary blob of 24 bytes, using C-layout and little endian for the fields.
 
-90% of the recipes are dubious/rock-hard food, meaning there are good chances
-that many chunks only contain dubious/rock-hard food. However, the database will
-still store them as-is, the reason being:
-1. Dubious food can still have different HP value,
-2. The dubious chunks can be compressed very well, and
-3. The compacted total size of the database is still manageable.
-
 ## Dumping
 The database will be dumped by 2 means: emulated and console.
 
-The emulated dumper uses https://github.com/savage13/cooking.rs with
-an adapter to convert the output to the raw record format above.
-This dumper is implemented in `/dump/emulate`
+The emulated dumper is adapted from https://github.com/savage13/cooking.rs.
+The performance is massively (20x) improved by using generated enum instead of string.
+Any inconsistency needs to be fixed to match the console dumper.
 
-The real dumper uses a mod to call the `cook()` function in the game,
+This dumper is implemented in `/dump/emulate`.
+On my machine, it takes around 2 minutes to dump the entire database.
+
+The console dumper uses a mod to call the `cook()` function in the game,
 and write the result to the console's SD card which can be retrieved later.
 Having smaller chunks here helps to prevent data corruption/crashes.
-This dumper is implemented in `/dump/console`
+This dumper is implemented in `/dump/console`.
+On my switch it takes around 1.5 minutes on average to dump a chunk.
+It will take around 90 switch-hours to dump the entire database.
 
 ## Validation
 The data will be cross-validated. The dumps from 2 methods must exactly match.
