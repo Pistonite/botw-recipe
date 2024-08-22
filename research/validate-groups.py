@@ -101,7 +101,7 @@ NUM_GROUPS = len(groups) + 1 # +1 for the <empty space> item
 NUM_RECORD = util.total_records(NUM_GROUPS, util.make_multichoose(NUM_GROUPS))
 
 print(f"total: {NUM_RECORD}")
-with open(OUT[0], "w", encoding="utf-8") as f:
+with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     with open(IN[3], "r", encoding="utf-8") as file:
         actor_to_name = {}
         for actor, name in yaml.load(file, Loader=yaml.FullLoader):

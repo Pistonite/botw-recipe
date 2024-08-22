@@ -38,6 +38,8 @@ pub struct Ingredient {
     pub sell_price: i32,
     /// Tags in ActorLink that might be useful
     pub tags: Vec<Tag>,
+    /// The tag that is important in matching recipes
+    pub recipe_tag: Tag,
 }
 
 pub type Ingredients = EnumMap<Actor, Ingredient>;
@@ -86,6 +88,11 @@ struct IngrData {
 
 impl IngrData {
     pub fn extend(&self, actor: Actor) -> Ingredient {
+        let recipe_tags = self.tags.iter().filter(|x| x.is_probably_useful()).collect::<Vec<_>>();
+        if recipe_tags.len() > 1 {
+            panic!("Actor {:?} has multiple recipe tags: {:?}", actor, recipe_tags);
+        }
+        let recipe_tag = recipe_tags.get(0).map(|x| **x).unwrap_or_default();
 
         Ingredient {
             actor,
@@ -100,7 +107,8 @@ impl IngrData {
             hp: self.cure_item_hit_point_recover,
             buy_price: self.item_buying_price,
             sell_price: self.item_selling_price,
-            tags: self.tags.clone()
+            tags: self.tags.clone(),
+            recipe_tag,
         }
     }
 }

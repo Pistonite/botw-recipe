@@ -125,7 +125,7 @@ for i in range(1, max_len+1):
         item_noun = "item" if i == 1 else "items"
         report.append(f"# - {group_lens[i]} groups with {i} {item_noun}")
 
-with open(OUT[0], "w", encoding="utf-8") as f:
+with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     for line in report:
         print(line)
         f.write(line + "\n")

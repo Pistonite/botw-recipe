@@ -32,7 +32,7 @@ for recipe in util.progress(recipes, "filter recipes"):
     if not filtered:
         filtered_recipes.append(recipe)
 
-with open(OUT[0], "w", encoding="utf-8") as f:
+with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     yaml.dump(filtered_recipes, f)
 
 print(f"filtered {len(recipes) - len(filtered_recipes)} recipes")

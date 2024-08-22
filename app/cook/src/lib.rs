@@ -1,16 +1,17 @@
 use clap::Parser;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
-use rdata::{cook::{CookData, CookEffect}, Actor, RecipeInputs};
+use rdata::Actor;
+use rdata::cook::{CookData, CookEffect};
+use rdata::recipe::RecipeInputs;
 
 pub mod ingr;
 use ingr::{Ingredient, Ingredients};
-pub mod effect;
 pub mod tag;
 pub mod recipe;
 use recipe::Recipes;
 
-use crate::{effect::CookEffectData, tag::Tag};
+use crate::tag::Tag;
 
 macro_rules! reference {
     ($comment:literal, $dummy:ty, $name:ty) => {
@@ -229,10 +230,12 @@ impl CookingPot {
         if ingrs.is_empty() {
             return Err(Error::TooFewIngr);
         }
-        let tags = ingrs.iter().map(|x| {
-            let useful_tags = x.tags.iter().filter(|x| x.is_probably_useful()).collect::<Vec<_>>();
-            useful_tags.get(0).map(|x|**x).unwrap_or_default()
-        }).collect::<Vec<_>>();
+        let tags = ingrs.iter().map(|x| x.recipe_tag
+        //     {
+        //     let useful_tags = x.tags.iter().filter(|x| x.is_probably_useful()).collect::<Vec<_>>();
+        //     useful_tags.get(0).map(|x|**x).unwrap_or_default()
+        // }
+        ).collect::<Vec<_>>();
         let mut unique_ingrs: Vec<&Ingredient> = Vec::with_capacity(5);
         for ingr in &ingrs {
             if !unique_ingrs.iter().any(|x| x.actor == ingr.actor) {
@@ -264,13 +267,13 @@ impl CookingPot {
             }
             effect.unwrap_or(CookEffect::None)
         };
-        let effect_data: Option<CookEffectData> = effect.try_into().ok();
+        let effect_data = effect.data();
 
         // handle other properties
         let (mut time, mut hp, potency, sell_price) = 
         {
             let mut time = 0;
-            let base_time = effect_data.map(|x| x.base_time).unwrap_or_default();
+            let base_time = effect_data.base_time;
 
             let mut hp = 0;
             let mut effect_level = 0;
@@ -378,17 +381,13 @@ impl CookingPot {
         let crit_chance = crit_chance + BASE_CRIT_CHANCES[unique_ingrs.len()-1];
 
         // handle effect level
-        let effect_level = if let Some(data) = effect_data {
-            if effect.uses_potency() {
-                if potency >= data.potency_lv3 {
-                    3
-                } else if potency >= data.potency_lv2 {
-                    2
-                } else {
-                    1
-                }
+        let effect_level = if effect.uses_time() {
+            if potency >= effect_data.potency_lv3 {
+                3
+            } else if potency >= effect_data.potency_lv2 {
+                2
             } else {
-                0
+                1
             }
         } else {
             0
@@ -436,12 +435,10 @@ impl CookingPot {
         };
 
         let mut name = String::new();
-        if let Some(data) = effect_data {
-            let effect_name = data.name;
-            if !effect_name.is_empty() {
-                name.push_str(effect_name);
-                name.push(' ');
-            }
+        let effect_name = effect_data.name;
+        if !effect_name.is_empty() {
+            name.push_str(effect_name);
+            name.push(' ');
         }
         name.push_str(recipe.name());
 

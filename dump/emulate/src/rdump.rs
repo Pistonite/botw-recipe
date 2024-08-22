@@ -13,9 +13,9 @@ use rcook::CookingPot;
 
 #[derive(Parser, Clone)]
 pub struct Cli {
-    /// Overwrite existing files instead of skipping
+    /// Keep existing files instead of overwriting them
     #[clap(short, long)]
-    pub overwrite: bool,
+    pub keep: bool,
 
     /// Chunk id to start from
     #[clap(short, long, default_value = "0")]
@@ -138,7 +138,7 @@ fn start_worker_thread(
 fn dump_chunk(pot: &CookingPot, chunk_id: usize, cli: &Cli) -> bool {
     let data_path = Path::new("./data");
     let data_path = data_path.join(format!("chunk_{}.rawdat", chunk_id));
-    if !cli.overwrite && data_path.exists() {
+    if cli.keep && data_path.exists() {
         println!("chunk {} already exists, skipping", chunk_id);
         return false;
     }

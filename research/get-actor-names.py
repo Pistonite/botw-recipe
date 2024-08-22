@@ -36,6 +36,6 @@ for actor in util.progress(actors, "process actors"):
         name = data[0]["text"]
     output.append((actor, name))
 
-with open(OUT[0], "w", encoding="utf-8") as f:
+with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     for actor, name in util.progress(output, "save output"):
         f.write(f"- [{actor:<20}, {name}]\n")

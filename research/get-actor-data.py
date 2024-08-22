@@ -65,7 +65,7 @@ for actor, name in util.progress(actors, "load actors"):
     }
     data[actor] = the_data
 
-with open(OUT[0], "w", encoding="utf-8") as f:
+with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     for actor, name in util.progress(actors, "save output"):
         obj = yaml.dump({actor: data[actor]})
         lines = obj.split("\n")

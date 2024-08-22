@@ -31,10 +31,16 @@ tasks:
 
   download:
     dir: dump/console
-    desc: Download dumps from the console
+    desc: Download dumps from console and rename them
     cmds:
     - mkdir -p raw
     - lftp $CONSOLE_ADDR < scripts/lftp-download.sh
+    - task: rename
+
+  rename:
+    dir: dump/console
+    desc: Rename dumps form console
+    cmds:
     - python scripts/rename.py
 
   package:
@@ -60,25 +66,11 @@ tasks:
     - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
 
   check:
-    dir: dump/check
+    dir: dump/tools
     aliases: [c]
     desc: Check dumps
     cmds:
     - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
-
-  inspect:
-    dir: dump/check
-    aliases: [i]
-    desc: Inspect a dump error
-    cmds:
-    - cargo run --release --bin check --quiet -- --inspect {{.CLI_ARGS}}
-
-  mismatch:
-    dir: dump/check
-    aliases: [m]
-    desc: Inspect a chunk mismatch error
-    cmds:
-    - cargo run --release --bin check --quiet -- --mismatch {{.CLI_ARGS}}
     
   cook:
     dir: app/cook

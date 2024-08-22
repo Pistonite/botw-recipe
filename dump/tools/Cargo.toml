@@ -1,11 +1,12 @@
 [package]
-name = "botw-recipe-dump-check"
+name = "botw-recipe-dump-tools"
 version = "0.0.0"
 description = "Tools to check/validate the dump"
 edition = "2021"
 
 [dependencies]
 clap = { version = "=4.5.4", features = ["derive"] }
+filetime = "0.2.24"
 num_cpus = "1.16.0"
 serde = { version = "1.0.208", features = ["derive"] }
 serde_json = "1.0.125"
@@ -18,4 +19,4 @@ path = "../../app/data"
 
 [[bin]]
 name = "check"
-path = "src/main.rs"
+path = "src/check.rs"

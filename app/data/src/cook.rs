@@ -5,6 +5,8 @@ use std::io;
 
 use serde::{Deserialize, Serialize};
 
+// use crate::wmc::WeaponData;
+
 /// This data mirrors uking::ui::PouchItem::CookData, with an extra crit_chance field
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[repr(C)]
@@ -40,11 +42,12 @@ impl CookData {
         }
     }
 
-    pub fn as_weapon(&self) -> &WeaponData {
-        unsafe {
-            std::mem::transmute(self)
-        }
-    }
+    // pub fn as_weapon(&self) -> &WeaponData {
+    //     unsafe {
+    //         std::mem::transmute(self)
+    //     }
+    // }
+
     pub fn write_to<W: io::Write>(&self, w: &mut W) -> io::Result<()> {
         w.write_all(&self.health_recover.to_le_bytes())?;
         w.write_all(&self.effect_duration.to_le_bytes())?;
@@ -128,6 +131,7 @@ impl CookData {
             CookEffect::LifeMaxUp => {
                 if self.effect_level > 100.0 {
                     // max is 5 big hearty radish which gives 25 hearts, or 100 quarter hearts
+                    // note that hearty cap is 108 because you have 3 hearts by default
                     return Some(CookDataInvalidReason::LifeMaxUpTooHigh(self.effect_level));
                 }
             }
@@ -179,18 +183,6 @@ pub enum CookDataInvalidReason {
     LifeMaxUpTooHigh(f32),
     EffectLevelTooHigh(f32),
     UnknownEffect(f32),
-}
-
-/// Weapon modifier data
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-#[repr(C)]
-pub struct WeaponData {
-    pub modifier_value: u32,
-    unused: u32,
-    pub modifier_bitset: u32,
-    unused2: f32,
-    unused3: f32,
-    crit_chance: i32
 }
 
 /// Cook modifier that can be converted to uking::CookingMgr::CookEffect
@@ -256,21 +248,30 @@ impl CookEffect {
         self.game_repr() as f32
     }
 
-    /// If effect_time is computed for this effect
-    pub const fn uses_time(self) -> bool {
+    /// Get the data associated with this effect
+    pub fn data(self) -> &'static CookEffectData {
         match self {
-            Self::None | Self::LifeMaxUp | Self::GutsRecover | Self::ExGutsMaxUp => false,
-            _ => true,
+            CookEffect::None => &NONE,
+            CookEffect::LifeRecover => &LIFE_RECOVER,
+            CookEffect::LifeMaxUp => &LIFE_MAX_UP,
+            CookEffect::ResistHot => &RESIST_HOT,
+            CookEffect::ResistCold => &RESIST_COLD,
+            CookEffect::ResistElectric => &RESIST_ELECTRIC,
+            CookEffect::AttackUp => &ATTACK_UP,
+            CookEffect::DefenseUp => &DEFENSE_UP,
+            CookEffect::Quietness => &QUIETNESS,
+            CookEffect::MovingSpeed => &MOVING_SPEED,
+            CookEffect::GutsRecover => &GUTS_RECOVER,
+            CookEffect::ExGutsMaxUp => &EX_GUTS_MAX_UP,
+            CookEffect::Fireproof => &FIREPROOF,
         }
     }
 
-    /// Whether potency is used to calculate effect level
-    pub const fn uses_potency(self) -> bool {
-        match self {
-            Self::None | Self::LifeRecover | Self::LifeMaxUp | Self::GutsRecover | Self::ExGutsMaxUp => false,
-            _ => true,
-        }
+    /// If effect_time is computed for this effect
+    pub fn uses_time(self) -> bool {
+        self.data().base_time != 0
     }
+
 }
 
 impl std::fmt::Display for CookEffect {
@@ -279,109 +280,108 @@ impl std::fmt::Display for CookEffect {
     }
 }
 
-#[repr(u32)]
-pub enum WeaponModifier{
-    None = 0,
-    /// Attack up for swords/bows/shields (lynel)
-    AddAtk = 0x1,
-    /// Durability up
-    AddLife = 0x2,
-    /// Critical hit (sword)
-    AddCrit = 0x4,
-    /// Long throw (sword)
-    AddThrow = 0x8,
-    /// Multishot (bow)
-    ///
-    /// Multishot will be spread fire, and unless the bow is originally
-    /// multishot, the spread will be very big. Multishot + Zoom
-    /// will be focus shot instead of spread
-    AddSpreadFire = 0x10,
-    /// Zoom (bow). 
-    AddZoom = 0x20,
-    /// Quick shot (bow)
-    AddRapidFire = 0x40,
-    /// Slick shield
-    AddSurfMaster = 0x80,
-    /// Guard up (shield)
-    AddGuard = 0x100,
-    /// Yellow modifier
-    IsYellow = 0x80000000,
+/// Data for a [`CookEffect`] used to compute effect duration, level, etc
+#[derive(Debug, Clone, Copy, PartialEq, Deserialize, Serialize)]
+pub struct CookEffectData {
+    /// The base effect time when the cooked result have this effect
+    /// 0 indicates that the cook effect doesn't use time, which
+    /// is important when computing the effect duration
+    pub base_time: i32,
+
+    /// The minimum potency needed for LV2 effect
+    pub potency_lv2: i32,
+    /// The minimum potency needed for LV3 effect
+    pub potency_lv3: i32,
+    /// English name of the effect
+    pub name: &'static str,
 }
 
-impl std::ops::BitOr for WeaponModifier {
-    type Output = Self;
+static NONE: CookEffectData = CookEffectData {
+    base_time: 0, 
+    potency_lv2: -1,
+    potency_lv3: -1,
+    name: "",
+};
 
-    fn bitor(self, rhs: Self) -> Self {
-        unsafe { std::mem::transmute(self as u32 | rhs as u32) }
-    }
-}
+static EX_GUTS_MAX_UP: CookEffectData = CookEffectData {
+    base_time: 0, 
+    potency_lv2: -1,
+    potency_lv3: -1,
+    name: "Enduring",
+};
 
-impl std::ops::BitAnd for WeaponModifier {
-    type Output = Self;
+static GUTS_RECOVER: CookEffectData = CookEffectData {
+    base_time: 0, 
+    potency_lv2: -1,
+    potency_lv3: -1,
+    name: "Energizing",
+};
 
-    fn bitand(self, rhs: Self) -> Self {
-        unsafe { std::mem::transmute(self as u32 & rhs as u32) }
-    }
-}
+static LIFE_RECOVER: CookEffectData = CookEffectData {
+    base_time: 0, 
+    potency_lv2: -1,
+    potency_lv3: -1,
+    name: "",
+};
 
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-pub struct WeaponModifierInfo {
-    /// Attack up +X
-    attack_up: Option<u32>,
-    /// Durability up (value is added directly in inventory, not here)
-    durability_up: bool,
-    /// Critical hit
-    critical_hit: bool,
-    /// Long throw. Value is hp/1000 (max 0.12), so it will become "Short throw"
-    long_throw: Option<f32>,
-    /// Multishot. Value is number of arrows. The value here will be whatever the hp
-    /// is before transmuted, but the game will cap it at 10
-    ///
-    /// Note that the frame rate and bow fire speed will sometimes not allow 10 to be fired
-    multi_shot: Option<u32>,
-    /// Zoom
-    zoom: bool,
-    /// Quick shot. Value is hp/1000 (max 0.12), so it will be "Slow shot"
-    quick_shot: Option<f32>,
-    /// Surf master. Value is friction and max is hp/1000 (max 0.12), so it will be slicky
-    surf_master: Option<f32>,
-    /// Shield guard up +X
-    shield_guard_up: Option<u32>,
-    /// Yellow modifier
-    is_yellow: bool,
-}
+static LIFE_MAX_UP: CookEffectData = CookEffectData {
+    base_time: 0, 
+    potency_lv2: -1,
+    potency_lv3: -1,
+    name: "Hearty",
+};
 
-impl<W: AsRef<WeaponData>> From<W> for WeaponModifierInfo {
-    fn from(value: W) -> Self {
-        let value = value.as_ref();
-let m = value.modifier_bitset;
-        let v = value.modifier_value;
-        let attack_up = (m & WeaponModifier::AddAtk as u32 !=0).then_some(v);
-        let durability_up = m & WeaponModifier::AddLife as u32 != 0;
-        let critical_hit = m & WeaponModifier::AddCrit as u32 != 0;
-        let long_throw = (m & WeaponModifier::AddThrow as u32!=0).then_some(v as f32 / 1000.);
-        let multi_shot = (m & WeaponModifier::AddSpreadFire as u32!=0).then_some(v);
-        let zoom = m & WeaponModifier::AddZoom as u32 != 0;
-        let quick_shot = (m & WeaponModifier::AddRapidFire as u32!=0).then_some(v as f32 / 1000.);
-        let surf_master = (m & WeaponModifier::AddSurfMaster as u32!=0).then_some(v as f32 / 1000.);
-        let shield_guard_up = (m & WeaponModifier::AddGuard as u32!=0).then_some(v);
-        let is_yellow = m & WeaponModifier::IsYellow as u32 != 0;
-        Self {
-            attack_up,
-            durability_up,
-            critical_hit,
-            long_throw,
-            multi_shot,
-            zoom,
-            quick_shot,
-            surf_master,
-            shield_guard_up,
-            is_yellow,
-        }
-    }
-}
+static RESIST_HOT: CookEffectData = CookEffectData {
+    base_time: 120, 
+    potency_lv2: 6,
+    potency_lv3: 999,
+    name: "Chilly",
+};
 
-impl WeaponModifierInfo {
-    // pub fn has(modifier: WeaponModifier) -> bool {
-    // }
-}
+static RESIST_COLD: CookEffectData = CookEffectData {
+    base_time: 120, 
+    potency_lv2: 6,
+    potency_lv3: 999,
+    name: "Spicy",
+};
+
+static RESIST_ELECTRIC: CookEffectData = CookEffectData {
+    base_time: 120, 
+    potency_lv2: 4,
+    potency_lv3: 6,
+    name: "Electro",
+        };
+static MOVING_SPEED: CookEffectData = CookEffectData {
+    base_time: 30, 
+    potency_lv2: 5,
+    potency_lv3: 7,
+    name: "Hasty",
+};
+
+static ATTACK_UP: CookEffectData = CookEffectData {
+    base_time: 20, 
+    potency_lv2: 5,
+    potency_lv3: 7,
+    name: "Mighty",
+};
+
+static DEFENSE_UP: CookEffectData = CookEffectData {
+    base_time: 20, 
+    potency_lv2: 5,
+    potency_lv3: 7,
+    name: "Tough",
+};
+
+static QUIETNESS: CookEffectData = CookEffectData {
+    base_time: 90, 
+    potency_lv2: 6,
+    potency_lv3: 9,
+    name: "Sneaky",
+};
+
+static FIREPROOF: CookEffectData = CookEffectData {
+    base_time: 120, 
+    potency_lv2: 7,
+    potency_lv3: 999,
+    name: "Fireproof",
+};

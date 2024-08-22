@@ -1,16 +1,15 @@
 mod generated;
-
 pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS, CHUNK_SIZE, CHUNK_COUNT, LAST_CHUNK_SIZE};
 pub use generated::{Actor, Group};
 
-
-mod recipe;
-pub use recipe::*;
-
+pub mod recipe;
 pub mod cook;
-use cook::CookData;
+// pub mod wmc;
 
 use serde::{Deserialize, Serialize};
+
+use recipe::RecipeInputs;
+use cook::CookData;
 
 /// Get the number of ways to choose `k` items from `n` items, allowing for repetition
 ///

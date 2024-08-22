@@ -183,7 +183,7 @@ if __name__ == "__main__":
     with open(OUT[0], "w", encoding="utf-8") as f:
         yaml.dump(extra_actors, f)
 
-    with open(OUT[1], "w", encoding="utf-8") as f:
+    with open(OUT[1], "w", encoding="utf-8", newline="\n") as f:
         for actor in sorted(actor_map):
             target = actor_map[actor]
             name = actor_to_name[target]
