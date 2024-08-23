@@ -24,7 +24,7 @@ fn cli() -> Result<(), Error>{
         println!("  - {:?}", actor);
     }
     let pot = CookingPot::new()?;
-    let output = pot.cook_actors(actors)?;
+    let output = pot.cook(actors)?;
     println!("Cooked: {:#?}", output);
 
     Ok(())

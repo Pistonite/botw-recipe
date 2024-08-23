@@ -1,13 +1,17 @@
 
-use rdata::Actor;
+use rdata::{cook::CookItem, Actor};
 use serde::Deserialize;
 
-use crate::{ingr::Ingredient, tag::Tag, Error};
+use crate::{tag::Tag, Error};
 
+/// Recipes for cooking
+#[derive(Debug, Clone, PartialEq)]
 pub struct Recipes {
     /// Recipes for when there is only one unique ingredient
     pub single: Vec<RecipeData>,
+    /// Other recipes
     pub multi: Vec<RecipeData>,
+    /// Dubious food recipe
     pub dubious: RecipeData,
 }
 
@@ -20,290 +24,183 @@ pub fn read_recipes() -> Result<Recipes, Error> {
     let mut multi = Vec::new();
         for d in data {
             if d.num == 1 {
+                d.actors.check_single()?;
+                d.tags.check_single()?;
                 single.push(d);
             } else {
                 multi.push(d);
             }
         }
 
-
     Ok(Recipes { single, multi, dubious })
 }
 
 impl Recipes {
-    pub fn find<'a>(&'a self, items: &[&Ingredient], tags: &[Tag], unique_count: usize) -> &'a RecipeData {
-        let actors = items.iter().map(|x| x.actor).collect::<Vec<_>>();
-
+    pub fn find<'a>(&'a self, actors: &[Actor], tags: &[Tag], unique_count: usize) -> Result<&'a RecipeData, Error> {
         if actors.len() != tags.len() {
-            panic!("Mismatched actor and tag count: {} != {}", actors.len(), tags.len());
+            return Err(Error::Data(
+            format!("Mismatched actor and tag count: {} != {}", actors.len(), tags.len())));
         }
 
         if unique_count == 1 {
             for recipe in &self.single {
-                if recipe.matches(&actors, &tags, true, false) {
-                    return recipe;
+                if recipe.matches_single(&actors, &tags) {
+                    return Ok(recipe);
                 }
             }
         }
         for recipe in &self.multi {
-            if recipe.matches(&actors, &tags, false, false) {
-                return recipe;
+            if recipe.matches(&actors, &tags) {
+                return Ok(recipe);
             }
         }
-        return &self.dubious;
+        Ok(&self.dubious)
     }
 }
 
-
-#[derive(Clone, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize)]
 pub struct RecipeData {
     /// Extra hp to add to the recipe
     hb: i32,
     /// Name of the cooked item
-    name: String,
+    name: CookItem,
     /// Tags to match
-    tags: AVec<Tag>,
+    tags: Matcher<Tag>,
     /// Actors to match
-    actors: AVec<Actor>,
-    /// ???
+    actors: Matcher<Actor>,
+    /// 1 if this is a recipe for one unique item in the input
     num: i32,
 }
 
-pub static ROCK_HARD: &str = "Rock-Hard Food";
-pub static DUBIOUS: &str = "Dubious Food";
+type RemovedFlags = [bool; rdata::NUM_INGR];
 
 impl RecipeData {
-    pub fn name(&self) -> &str {
-        &self.name
+    pub fn item(&self) -> CookItem {
+        self.name
     }
 
     pub fn is_dubious(&self) -> bool {
-        self.name == DUBIOUS
+        self.name == CookItem::Item_Cook_O_01
     }
 
     pub fn is_rock_hard(&self) -> bool {
-        self.name == ROCK_HARD
+        self.name == CookItem::Item_Cook_O_02
     }
 
     pub fn is_fairy_tonic(&self) -> bool {
-        self.name == "Fairy Tonic"
+        self.name == CookItem::Item_Cook_C_16
     }
 
     pub fn is_elixir(&self) -> bool {
-        self.name == "Elixir"
+        self.name == CookItem::Item_Cook_C_17
     }
 
     pub fn get_extra_hp(&self) -> i32 {
         self.hb
     }
+
+    pub fn matches_single(&self, items: &[Actor], tags: &[Tag]) -> bool {
+        let mut removed = [false; rdata::NUM_INGR];
+        if !&self.actors.matches_single( items, &mut removed) {
+            return false;
+        }
+        if !&self.tags.matches_single(tags, &mut removed) {
+            return false;
+        }
+        // because there's only one unique item, we can just check if 
+        // the first is removed
+        removed[0]
+    }
+
+    pub fn matches(&self, items: &[Actor], tags: &[Tag]) -> bool {
+        let mut removed = [false; rdata::NUM_INGR];
+        if !&self.actors.matches_multiple(items, &mut removed) {
+            return false;
+        }
+        if !&self.tags.matches_multiple( tags, &mut removed) {
+            return false;
+        }
+        // it's ok if not all items are removed
+        true
+    }
 }
 
-#[derive(Clone, Deserialize)]
+/// Matcher for tags or actors in recipe
+#[derive(Debug, Clone, PartialEq, Deserialize)]
 #[serde(untagged)]
-pub enum AVec<T> {
-    One(Vec<T>),
-    Two(Vec<Vec<T>>),
+pub enum Matcher<T: std::fmt::Debug + PartialEq + Copy> {
+    /// Matcher defined as a flat list
+    /// 
+    /// Note this has different meaning when the recipe is single
+    Flat(Vec<T>),
+    /// Matcher defined as a nested list
+    Nested(Vec<Vec<T>>),
 }
-impl<T> AVec<T> {
-    fn len(&self) -> usize {
+impl<T: std::fmt::Debug + PartialEq + Copy> Matcher<T> {
+    pub fn check_single(&self) -> Result<(), Error> {
         match self {
-            Self::One(v) => v.len(),
-            Self::Two(v) => v.len(),
+            Self::Flat(_) => Ok(()),
+            Self::Nested(v) => Err(Error::Data(
+                format!("Unexpected multi matcher for single recipe: {:?}", v)
+            )),
         }
     }
-    fn id(&self, i: usize) -> &[T] {
-        match self {
-            Self::One(v) => &v,
-            Self::Two(v) => &v[i],
-        }
-    }
-}
 
-fn inter<T: PartialEq + Clone>(a: &[T], b: &[T]) -> Vec<T> {
-    let mut c = Vec::with_capacity(a.len().max(b.len()));
-    for ai in a {
-        if b.iter().any(|x| x == ai) {
-            c.push(ai.clone())
-        }
-    }
-    c
-}
-
-impl RecipeData {
-    pub fn matches(&self, items: &[Actor], tags: &[Tag], strict: bool, verbose: bool) -> bool {
-        if verbose {
-            println!("-------------------------------------");
-        }
-        if strict {
-            if verbose {
-                // println!("init name {} id {} ", self.name, self.id);
-                println!("strict mode");
-            }
-            // let mut v: Vec<String> = items.iter().map(|x| x.to_string()).collect();
-            // v.sort_unstable();
-            // v.dedup();
-            // if v.len() != 1 {
-            //     if verbose {
-            //         println!("Number of unique items != 1");
-            //         println!("     items: {:?}", v);
-            //     }
-            //     return false;
-            // }
-        }
-        let mut items_t = items.to_vec();
-        let mut tags_t = tags.to_vec();
-        if verbose {
-            // println!("init name {} id {} ", self.name, self.id);
-            println!("     items: {:?}", items_t);
-            println!("      tags: {:?}", tags_t);
-            // println!("    actors: {:?}", self.actors);
-        }
-        if !self.matches_actors(&mut items_t, &mut tags_t, strict, verbose) {
-            return false;
+    /// Check if the matcher matches the values, and remove the matched values
+    /// 
+    /// The flat list is interpreted as [a,b,c] => [[a, b, c]]
+    pub fn matches_single(&self, values: &[T], removed: &mut RemovedFlags) -> bool {
+        let v = match self {
+            Self::Flat(v) => v,
+            Self::Nested(_) => unreachable!(), // we checked this when loading
         };
-
-        if verbose {
-            println!("");
-            println!("     items: {:?}", items_t);
-            println!("      tags: {:?}", tags_t);
-            // println!("recipe tags: {:?}", self.tags);
-        }
-        if !self.matches_tags(&mut items_t, &mut tags_t, strict, verbose) {
-            return false;
-        }
-        if verbose {
-            println!("");
-            println!("     items: {:?}", items_t);
-        }
-        if verbose {
-            println!("done: {} {:?}", self.name, items_t);
-        }
-        if strict {
-            return items_t.len() == 0;
-        }
-        return true;
-    }
-    fn matches_actors(
-        &self,
-        items_t: &mut Vec<Actor>,
-        tags_t: &mut Vec<Tag>,
-        strict: bool,
-        verbose: bool,
-    ) -> bool {
-        if strict {
-            if self.actors.len() == 0 {
-                if verbose {
-                    println!("No actors, returning current values");
-                }
-                return true;
-            }
-            let v = inter(&self.actors.id(0), &items_t);
-            if v.len() == 0 {
-                if verbose {
-                    println!("No matching actors, returning empty");
-                }
-                return false;
-            }
-            if verbose {
-                println!("Found matching actors, removing from items {:?}", v);
-            }
-            let v = &v[0];
-            let mut k = items_t.iter().position(|x| &x == &v);
-            while let Some(k_value) = k {
-                items_t.remove(k_value);
-                tags_t.remove(k_value);
-                k = items_t.iter().position(|x| &x == &v);
-            }
-            if verbose {
-                println!(
-                    "Found matching actors, removing from items {:?} {:?}",
-                    items_t, tags_t
-                );
-            }
+        if v.is_empty() {
             return true;
         }
-        let n = self.actors.len();
-        if verbose {
-            println!("ACTORS {n}");
-        }
-        for i in 0..n {
-            if verbose {
-                println!("{:?} {:?}", self.actors.id(i), items_t);
-            }
-            let v = inter(self.actors.id(i), &items_t);
-            if v.len() == 0 {
-                return false;
-            }
-            let mut k = items_t.iter().position(|x| x == &v[0]);
-            while let Some(k_value) = k {
-                items_t.remove(k_value);
-                tags_t.remove(k_value);
-                k = items_t.iter().position(|x| x == &v[0]);
-            }
-        }
-        return true;
+        find_first_and_remove(v, values, removed)
     }
-    fn matches_tags(
-        &self,
-        items_t: &mut Vec<Actor>,
-        tags_t: &mut Vec<Tag>,
-        strict: bool,
-        verbose: bool,
-    ) -> bool {
-        if verbose {
-            println!("    item tags: {:?}", tags_t);
-        }
-        if strict {
-            if self.tags.len() == 0 {
-                return true;
-            }
-            let v = inter(self.tags.id(0), &tags_t);
-            if v.len() == 0 {
-                return false;
-            }
-            let mut k = tags_t.iter().position(|x| x == &v[0]);
-            while let Some(k_value) = k {
-                items_t.remove(k_value);
-                tags_t.remove(k_value);
-                k = tags_t.iter().position(|x| x == &v[0]);
-            }
-            return true;
-        }
 
-        let tags = match &self.tags {
-            AVec::Two(v) => v,
-            AVec::One(v) => {
-                if v.len() == 0 {
-                    return true;
-                } else {
-                    panic!(":( ")
+    /// Check if the matcher matches the values, and remove the matched values
+    /// 
+    /// The flat list is interpreted as [a,b,c] => [[a], [b], [c]]
+    pub fn matches_multiple(&self, values: &[T], removed: &mut RemovedFlags) -> bool {
+        match self {
+            Self::Flat(v) => {
+                for x in v {
+                    if !find_first_and_remove(&[*x], &values, removed) {
+                        return false;
+                    }   
                 }
             }
-        };
-        let n = tags.len();
-        for i in 0..n {
-            let mut k = None;
-            for j in 0..tags[i].len() {
-                if verbose {
-                    println!("{:?} {:?}, {} {}", tags[i], tags_t, i, j)
+            Self::Nested(v) => {
+                for group in v {
+                    if !find_first_and_remove(group, &values, removed) {
+                        return false;
+                    }   
                 }
-                k = tags_t.iter().position(|x| x == &tags[i][j]);
-                if k.is_some() {
-                    break;
-                }
-            }
-            let k_value = match k {
-                Some(x) => x,
-                None => return false,
-            };
-
-            let item = items_t[k_value].clone();
-            while let Some(k_value) = k {
-                items_t.remove(k_value);
-                tags_t.remove(k_value);
-                k = items_t.iter().position(|x| x == &item);
             }
         }
         true
     }
 }
+
+/// Find the first element in a that is in b
+fn find_first_and_remove<T: PartialEq + Copy>(a: &[T], b: &[T], r: &mut RemovedFlags) -> bool {
+    for ai in a {
+        let ai = *ai;
+        let mut found = false;
+        for (i, bi) in b.iter().enumerate() {
+            if *bi == ai && !r[i] {
+                r[i] = true;
+                found = true;
+            }
+        }
+        if found {
+            return true;
+        }
+    }
+    false
+}
+
+
+

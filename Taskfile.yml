@@ -78,6 +78,12 @@ tasks:
     cmds:
     - cargo run --bin rcook --quiet -- {{.CLI_ARGS}}
 
+  cook-debug:
+    dir: app/cook
+    desc: Cook a recipe in debug mode
+    cmds:
+    - cargo run --bin rcook --features debug-print --features rng-hp {{.CLI_ARGS}}
+
 
 
 #

@@ -85,9 +85,9 @@ fn dump(cli: Cli) {
                     println!("chunks finished {}/{} ({:.02} records/s | ETA {:.02}s)", real_count, total, recipe_per_sec, remaining_seconds);
                     break;
                 }
-                if elapsed > 2.0 {
+                if elapsed > 1.0 {
                     println!("chunks finished {}/{} ({:.02} records/s | ETA {:.02}s)", real_count, total, recipe_per_sec, remaining_seconds);
-                    thread::sleep(std::time::Duration::from_secs(2));
+                    thread::sleep(std::time::Duration::from_secs(1));
                 }
             }
         })

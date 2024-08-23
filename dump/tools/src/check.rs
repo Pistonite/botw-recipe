@@ -298,6 +298,7 @@ impl Check {
 
         let mut checked = 0;
         let mut first_to_check = rdata::CHUNK_COUNT;
+        let mut not_found_count = 0;
 
         for i in 0..chunk_count {
             let options = self.options;
@@ -310,8 +311,9 @@ impl Check {
             let chunk_path = chunk_path(&path, i);
             if !chunk_path.exists() {
                 checked+=1;
-                print_status!(checked,rdata::CHUNK_COUNT, label, "Chunk {i}: ----- not found");
+                // print_status!(checked,rdata::CHUNK_COUNT, label, "Chunk {i}: ----- not found");
                 first_invalid = first_invalid.min(i);
+                not_found_count += 1;
                 continue;
             }
             let meta = std::fs::metadata(&chunk_path)?;
@@ -352,7 +354,7 @@ impl Check {
             match result {
                 Ok(_) => {
                     self.cache.add(&chunk_path);
-                    print_status!(checked,rdata::CHUNK_COUNT, label);
+                    print_status!(checked,rdata::CHUNK_COUNT, format!("{} ({} not found)", label, not_found_count));
                 }
                 Err(err) => {
                     first_invalid = first_invalid.min(i);

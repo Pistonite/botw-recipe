@@ -1,0 +1,113 @@
+Item_Cook_A_01: Mushroom Skewer
+Item_Cook_A_02: Steamed Mushrooms
+Item_Cook_A_03: Steamed Fruit
+Item_Cook_A_04: Steamed Fish
+Item_Cook_A_05: Steamed Meat
+Item_Cook_A_07: Fruit and Mushroom Mix
+Item_Cook_A_08: Fish and Mushroom Skewer
+Item_Cook_A_09: Meat and Mushroom Skewer
+Item_Cook_A_10: Omelet
+Item_Cook_A_11: Glazed Mushrooms
+Item_Cook_A_12: Glazed Meat
+Item_Cook_A_13: Glazed Seafood
+Item_Cook_A_14: Glazed Veggies
+Item_Cook_B_01: Fried Wild Greens
+Item_Cook_B_02: Simmered Fruit
+Item_Cook_B_05: Fish Skewer
+Item_Cook_B_06: Meat Skewer
+Item_Cook_B_11: Copious Fried Wild Greens
+Item_Cook_B_12: Copious Simmered Fruit
+Item_Cook_B_13: Copious Mushroom Skewers
+Item_Cook_B_15: Copious Seafood Skewers
+Item_Cook_B_16: Copious Meat Skewers
+Item_Cook_B_17: Meat and Seafood Fry
+Item_Cook_B_18: Prime Meat and Seafood Fry
+Item_Cook_B_19: Gourmet Meat and Seafood Fry
+Item_Cook_B_20: Meat-Stuffed Pumpkin
+Item_Cook_B_21: "Saut\xE9ed Peppers"
+Item_Cook_B_22: "Saut\xE9ed Nuts"
+Item_Cook_B_23: Seafood Skewer
+Item_Cook_C_16: Fairy Tonic
+Item_Cook_C_17: Elixir
+Item_Cook_D_01: Salt-Grilled Mushrooms
+Item_Cook_D_02: Salt-Grilled Greens
+Item_Cook_D_03: Salt-Grilled Fish
+Item_Cook_D_04: Salt-Grilled Meat
+Item_Cook_D_05: Salt-Grilled Prime Meat
+Item_Cook_D_06: Salt-Grilled Gourmet Meat
+Item_Cook_D_07: Pepper Steak
+Item_Cook_D_08: Pepper Seafood
+Item_Cook_D_09: Salt-Grilled Crab
+Item_Cook_D_10: Crab Stir-Fry
+Item_Cook_E_01: Poultry Pilaf
+Item_Cook_E_02: Prime Poultry Pilaf
+Item_Cook_E_03: Gourmet Poultry Pilaf
+Item_Cook_E_04: Fried Egg and Rice
+Item_Cook_F_01: Creamy Meat Soup
+Item_Cook_F_02: Creamy Seafood Soup
+Item_Cook_F_03: Veggie Cream Soup
+Item_Cook_F_04: Creamy Heart Soup
+Item_Cook_G_02: Seafood Rice Balls
+Item_Cook_G_03: Veggie Rice Balls
+Item_Cook_G_04: Mushroom Rice Balls
+Item_Cook_G_05: Meat and Rice Bowl
+Item_Cook_G_06: Prime Meat and Rice Bowl
+Item_Cook_G_09: Gourmet Meat and Rice Bowl
+Item_Cook_G_10: Seafood Fried Rice
+Item_Cook_G_11: Curry Pilaf
+Item_Cook_G_12: Mushroom Risotto
+Item_Cook_G_13: Vegetable Risotto
+Item_Cook_G_14: Salmon Risotto
+Item_Cook_G_15: Meaty Rice Balls
+Item_Cook_G_16: Crab Omelet with Rice
+Item_Cook_G_17: Crab Risotto
+Item_Cook_H_01: "Seafood Meuni\xE8re"
+Item_Cook_H_02: "Porgy Meuni\xE8re"
+Item_Cook_H_03: "Salmon Meuni\xE8re"
+Item_Cook_I_01: Fruit Pie
+Item_Cook_I_02: Apple Pie
+Item_Cook_I_03: Egg Tart
+Item_Cook_I_04: Meat Pie
+Item_Cook_I_05: Carrot Cake
+Item_Cook_I_06: Pumpkin Pie
+Item_Cook_I_07: Hot Buttered Apple
+Item_Cook_I_08: Honeyed Apple
+Item_Cook_I_09: Honeyed Fruits
+Item_Cook_I_10: Plain Crepe
+Item_Cook_I_11: Wildberry Crepe
+Item_Cook_I_12: Nutcake
+Item_Cook_I_13: Fried Bananas
+Item_Cook_I_14: Egg Pudding
+Item_Cook_I_15: Fish Pie
+Item_Cook_I_16: Honey Candy
+Item_Cook_I_17: Honey Crepe
+Item_Cook_J_01: Curry Rice
+Item_Cook_J_02: Vegetable Curry
+Item_Cook_J_03: Seafood Curry
+Item_Cook_J_04: Poultry Curry
+Item_Cook_J_05: Prime Poultry Curry
+Item_Cook_J_06: Meat Curry
+Item_Cook_J_07: Prime Meat Curry
+Item_Cook_J_08: Gourmet Poultry Curry
+Item_Cook_J_09: Gourmet Meat Curry
+Item_Cook_K_01: Meat Stew
+Item_Cook_K_02: Prime Meat Stew
+Item_Cook_K_03: Pumpkin Stew
+Item_Cook_K_04: Clam Chowder
+Item_Cook_K_05: Gourmet Meat Stew
+Item_Cook_K_06: Cream of Mushroom Soup
+Item_Cook_K_07: Cream of Vegetable Soup
+Item_Cook_K_08: Carrot Stew
+Item_Cook_K_09: Milk
+Item_Cook_M_01: Wheat Bread
+Item_Cook_N_01: Seafood Paella
+Item_Cook_N_02: Fruitcake
+Item_Cook_N_03: Vegetable Omelet
+Item_Cook_N_04: Mushroom Omelet
+Item_Cook_O_01: Dubious Food
+Item_Cook_O_02: Rock-Hard Food
+Item_Cook_P_01: "Fragrant Mushroom Saut\xE9"
+Item_Cook_P_02: "Herb Saut\xE9"
+Item_Cook_P_03: Spiced Meat Skewer
+Item_Cook_P_04: Prime Spiced Meat Skewer
+Item_Cook_P_05: Gourmet Spiced Meat Skewer

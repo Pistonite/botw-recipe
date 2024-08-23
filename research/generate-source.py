@@ -14,6 +14,7 @@ OUT = [
     "../app/data/src/generated/actor.rs",
     "../dump/console/src/generated.cpp",
     "../dump/console/src/generated.hpp",
+    "../app/data/src/generated/cook_item.rs",
 ]
 util.print_stage(__file__, IN, OUT)
 
@@ -266,6 +267,52 @@ def gen_actor_enum(o, actor_to_name, groups):
     o.write("    }\n")
     o.write("}\n")
 
+def gen_cook_item_enum(o, cook_item_to_name):
+    o.write(HEADER)
+    write_doc_comment(o, "Cooked Item (Output of cooking pot)")
+    o.write("#[derive(enum_map::Enum, serde::Serialize, serde::Deserialize, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]\n")
+    o.write("#[allow(non_camel_case_types)]\n")
+    o.write("pub enum CookItem {\n")
+    for actor in cook_item_to_name:
+        name = cook_item_to_name[actor]
+        o.write(f"    /// {name}\n")
+        o.write(f"    {actor},\n")
+    o.write("}\n")
+    o.write("impl CookItem {\n")
+    write_doc_comment(o, """
+        Get the English name of the cook item
+    """)
+    o.write("    pub const fn name(&self) -> &'static str {\n")
+    o.write("        match self {\n")
+    for actor in cook_item_to_name:
+        name = cook_item_to_name[actor]
+        o.write(f"Self::{actor} => \"{name}\",\n")
+    o.write("}}\n")
+
+    write_doc_comment(o, """
+        Get the actor name of the cook item
+    """)
+    o.write("    pub const fn actor_name(&self) -> &'static str {\n")
+    o.write("        match self {\n")
+    for actor in cook_item_to_name:
+        name = cook_item_to_name[actor]
+        o.write(f"Self::{actor} => \"{actor}\",\n")
+    o.write("}}")
+
+    o.write("}\n")
+
+    o.write("impl std::fmt::Debug for CookItem {\n")
+    o.write("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n")
+    o.write("        f.debug_tuple(self.actor_name()).field(&self.name()).finish()\n")
+    o.write("    }\n")
+    o.write("}\n")
+
+    o.write("impl std::fmt::Display for CookItem {\n")
+    o.write("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n")
+    o.write("        write!(f, \"{}\", self.actor_name())\n")
+    o.write("    }\n")
+    o.write("}\n")
+
 
 with open("output/actor-names.yaml", "r", encoding="utf-8") as f:
     actors = []
@@ -291,6 +338,11 @@ with open(OUT[2], "w", encoding="utf-8") as f:
 with open(OUT[3], "w", encoding="utf-8") as o:
     with open(OUT[4], "w", encoding="utf-8") as hpp:
         gen_numeric_constants_cpp(o, hpp, data)
+
+with open(OUT[5], "w", encoding="utf-8") as f:
+    with open("output/recipe-actors.yaml", "r", encoding="utf-8") as g:
+        cook_items = yaml.safe_load(g)
+    gen_cook_item_enum(f, cook_items)
 
 print("running rustfmt")
 subprocess.run(["rustfmt"] + [x for x in OUT if x.endswith(".rs")], check=True)

@@ -5,6 +5,8 @@ use std::io;
 
 use serde::{Deserialize, Serialize};
 
+pub use crate::generated::CookItem;
+
 // use crate::wmc::WeaponData;
 
 /// This data mirrors uking::ui::PouchItem::CookData, with an extra crit_chance field
@@ -30,6 +32,16 @@ pub struct CookData {
 }
 
 impl CookData {
+    pub fn new() -> Self {
+        Self {
+            health_recover: 0,
+            effect_duration: 0,
+            sell_price: 0,
+            effect_id: -1.0,
+            effect_level: 0.,
+            crit_chance: 0
+        }
+    }
     /// Return an invalid CookData with all 0 bytes
     pub fn invalid() -> Self {
         Self {
@@ -287,6 +299,8 @@ pub struct CookEffectData {
     /// 0 indicates that the cook effect doesn't use time, which
     /// is important when computing the effect duration
     pub base_time: i32,
+    /// The maximum level of the effect
+    pub max_level: i32,
 
     /// The minimum potency needed for LV2 effect
     pub potency_lv2: i32,
@@ -298,13 +312,15 @@ pub struct CookEffectData {
 
 static NONE: CookEffectData = CookEffectData {
     base_time: 0, 
+    max_level: 0, // unused
     potency_lv2: -1,
     potency_lv3: -1,
     name: "",
 };
 
 static EX_GUTS_MAX_UP: CookEffectData = CookEffectData {
-    base_time: 0, 
+    base_time: 0,
+    max_level: 15, 
     potency_lv2: -1,
     potency_lv3: -1,
     name: "Enduring",
@@ -312,6 +328,7 @@ static EX_GUTS_MAX_UP: CookEffectData = CookEffectData {
 
 static GUTS_RECOVER: CookEffectData = CookEffectData {
     base_time: 0, 
+    max_level: 3000,
     potency_lv2: -1,
     potency_lv3: -1,
     name: "Energizing",
@@ -319,6 +336,7 @@ static GUTS_RECOVER: CookEffectData = CookEffectData {
 
 static LIFE_RECOVER: CookEffectData = CookEffectData {
     base_time: 0, 
+    max_level: 120,
     potency_lv2: -1,
     potency_lv3: -1,
     name: "",
@@ -326,6 +344,7 @@ static LIFE_RECOVER: CookEffectData = CookEffectData {
 
 static LIFE_MAX_UP: CookEffectData = CookEffectData {
     base_time: 0, 
+    max_level: 108,
     potency_lv2: -1,
     potency_lv3: -1,
     name: "Hearty",
@@ -333,6 +352,7 @@ static LIFE_MAX_UP: CookEffectData = CookEffectData {
 
 static RESIST_HOT: CookEffectData = CookEffectData {
     base_time: 120, 
+    max_level: 2,
     potency_lv2: 6,
     potency_lv3: 999,
     name: "Chilly",
@@ -340,6 +360,7 @@ static RESIST_HOT: CookEffectData = CookEffectData {
 
 static RESIST_COLD: CookEffectData = CookEffectData {
     base_time: 120, 
+    max_level: 2,
     potency_lv2: 6,
     potency_lv3: 999,
     name: "Spicy",
@@ -347,12 +368,14 @@ static RESIST_COLD: CookEffectData = CookEffectData {
 
 static RESIST_ELECTRIC: CookEffectData = CookEffectData {
     base_time: 120, 
+    max_level: 3,
     potency_lv2: 4,
     potency_lv3: 6,
     name: "Electro",
         };
 static MOVING_SPEED: CookEffectData = CookEffectData {
     base_time: 30, 
+    max_level: 3,
     potency_lv2: 5,
     potency_lv3: 7,
     name: "Hasty",
@@ -360,6 +383,7 @@ static MOVING_SPEED: CookEffectData = CookEffectData {
 
 static ATTACK_UP: CookEffectData = CookEffectData {
     base_time: 20, 
+    max_level: 3,
     potency_lv2: 5,
     potency_lv3: 7,
     name: "Mighty",
@@ -367,6 +391,7 @@ static ATTACK_UP: CookEffectData = CookEffectData {
 
 static DEFENSE_UP: CookEffectData = CookEffectData {
     base_time: 20, 
+    max_level: 3,
     potency_lv2: 5,
     potency_lv3: 7,
     name: "Tough",
@@ -374,6 +399,7 @@ static DEFENSE_UP: CookEffectData = CookEffectData {
 
 static QUIETNESS: CookEffectData = CookEffectData {
     base_time: 90, 
+    max_level: 3,
     potency_lv2: 6,
     potency_lv3: 9,
     name: "Sneaky",
@@ -381,6 +407,7 @@ static QUIETNESS: CookEffectData = CookEffectData {
 
 static FIREPROOF: CookEffectData = CookEffectData {
     base_time: 120, 
+    max_level: 2,
     potency_lv2: 7,
     potency_lv3: 999,
     name: "Fireproof",

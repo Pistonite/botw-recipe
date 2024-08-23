@@ -16,6 +16,10 @@ thiserror = "1.0.63"
 package = "botw-recipe-data"
 path = "../data"
 
+[features]
+debug-print = []
+rng-hp = []
+
 [[bin]]
 name = "rcook"
 path = "src/main.rs"
