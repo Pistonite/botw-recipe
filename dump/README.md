@@ -101,6 +101,7 @@ For the modifier flag, we can exclude the yellow modifier, which is `0x80000000`
 only possible with a negative price. This leaves the rest of the 9 flags storable in 9 bits.
 
 With this transformation, every record can be stored in 16 bites, or 2 bytes, compared to 24 bytes.
+The upper 7 bits will be `health_recover`, and the lower 9 bits will be the lower 9 bits of `sell_price`.
 
 However, there's one extra piece of information - critical boost. In WMC, we only really
 care if it's possible for the recipe to have random boost to `health_recover` by critting,
@@ -123,7 +124,7 @@ paths the recipe can go through, and comparing if the output hp are different.
 
 ## Chunking and Indexing
 With the size of the record reduced, we can put more records into a chunk. The new chunk size
-will be `4096000` records per chunk.
+will be `3276800` records per chunk.
 
 We don't want to put too many records into the chunks, because it will be less effective to index
 the chunks. Indexing essentially pre-computes metadata for the chunk, so certain chunks can be skipped directly
@@ -136,4 +137,5 @@ The index will contain the following metadata for each chunk:
 - A bit mask for whether a modifier is enabled by any record
 - A bit mask for whether a modifier is enabled by all records
 - A boolean for whether all recipes contain at least one material only holdable with PE
+- A (hp, price, crit_rng_hp) tuple if all records are the same.
 - SHA-256 hash of the chunk

@@ -87,3 +87,11 @@ def chunk(total):
     last_chunk_size = total % CHUNK_SIZE
     assertion(CHUNK_SIZE*(chunk_count-1) + last_chunk_size == total, "chunk size calculation")
     return CHUNK_SIZE, chunk_count, last_chunk_size
+
+COMPACT_CHUNK_SIZE = 4096 * 800
+def chunk_compact(total):
+    assertion(total % COMPACT_CHUNK_SIZE != 0, "total divisible by chunk size")
+    chunk_count = total//COMPACT_CHUNK_SIZE + 1
+    last_chunk_size = total % COMPACT_CHUNK_SIZE
+    assertion(COMPACT_CHUNK_SIZE*(chunk_count-1) + last_chunk_size == total, "chunk size calculation")
+    return COMPACT_CHUNK_SIZE, chunk_count, last_chunk_size

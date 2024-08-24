@@ -8,11 +8,9 @@
 ///
 /// Equivalent actors are grouped together. This also includes the "<none>" ingredient,
 /// which indicates empty space (for example, a recipe with 4 items has 1 empty space).
-///
 pub const NUM_GROUPS: usize = 175;
 
 /// Number of ingredients in a recipe record. Always 5
-///
 pub const NUM_INGR: usize = 5;
 
 /// Number of total recipe records
@@ -20,26 +18,38 @@ pub const NUM_INGR: usize = 5;
 /// This is choosing NUM_INGR from NUM_GROUPS, allowing for repetition.
 /// In other words, binomial(NUM_GROUPS+NUM_INGR-1, NUM_INGR),
 /// or equivalently, NUM_GROUPS multichoose NUM_INGR.
-///
 pub const NUM_TOTAL_RECORDS: usize = 1447490660;
 
 /// Number of records in each chunk except last in the data dump
-///
 pub const CHUNK_SIZE: usize = 409600;
 
 /// Number of chunks in the data dump
-///
 pub const CHUNK_COUNT: usize = 3534;
 
 /// Number of records in the last chunk in the data dump
-///
 pub const LAST_CHUNK_SIZE: usize = 373860;
 
 /// Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
 ///
 /// MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
-///
-pub const MULTICHOOSE: [[usize; NUM_INGR + 1]; NUM_GROUPS + 1] = [
+/// Number of records in each chunk except last in the compact DB
+pub const COMPACT_CHUNK_SIZE: usize = 3276800;
+
+/// Number of chunks in the compact DB
+pub const COMPACT_CHUNK_COUNT: usize = 442;
+
+/// Number of records in the last chunk in the compact DB
+pub const COMPACT_LAST_CHUNK_SIZE: usize = 2421860;
+
+/// Element size of the crit DB in number of `u32`s
+pub const CRIT_DB_U32_SIZE: usize = 45234084;
+
+pub const CRIT_DB_BYTE_SIZE: usize = 180936336;
+
+/// Number of `u32`s in each chunk of the crit DB
+pub const CRIT_DB_U32_PER_CHUNK: usize = 102400;
+
+pub(crate) const MULTICHOOSE: [[usize; NUM_INGR + 1]; NUM_GROUPS + 1] = [
     [1, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 1, 1],
     [1, 2, 3, 4, 5, 6],

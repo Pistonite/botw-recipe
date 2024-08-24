@@ -492,7 +492,6 @@ pub enum Actor {
 }
 impl Actor {
     /// Get the English name of the actor
-    ///
     pub const fn name(&self) -> &'static str {
         match self {
             Self::None => "<none>",
@@ -732,7 +731,6 @@ impl Actor {
         }
     }
     /// Get the actor name of the actor
-    ///
     pub const fn actor_name(&self) -> &'static str {
         match self {
             Self::None => "",
@@ -1212,7 +1210,6 @@ impl Actor {
     /// Convert item name to actor with case-insenstive comparison
     ///
     /// `<none>` will return `Some(Actor::None)`, while invalid names will return `None`.
-    ///
     pub fn try_from<S: AsRef<str>>(s: S) -> Option<Self> {
         match s.as_ref().to_ascii_lowercase().as_str() {
             "<none>" => Some(Actor::None),
@@ -1450,6 +1447,98 @@ impl Actor {
             "other picture" => Some(Actor::Obj_Photo_Other),
             "weapon picture" => Some(Actor::Obj_Photo_Weapon),
             _ => None,
+        }
+    }
+    /// Get if the actor is only holdable with PE
+    pub const fn pe_only(&self) -> bool {
+        match self {
+            Self::None => false,
+            Self::Item_Roast_03 => true,
+            Self::Item_Roast_10 => true,
+            Self::Item_Roast_07 => true,
+            Self::Item_Roast_48 => true,
+            Self::Item_Roast_52 => true,
+            Self::Item_Roast_09 => true,
+            Self::Item_Roast_12 => true,
+            Self::Item_Roast_13 => true,
+            Self::Item_Roast_08 => true,
+            Self::Item_Roast_16 => true,
+            Self::Item_Roast_11 => true,
+            Self::Item_Roast_06 => true,
+            Self::Item_Roast_04 => true,
+            Self::Item_Roast_53 => true,
+            Self::Item_Roast_05 => true,
+            Self::Item_Roast_49 => true,
+            Self::Item_Roast_31 => true,
+            Self::Item_Roast_32 => true,
+            Self::Item_Roast_33 => true,
+            Self::Item_Roast_36 => true,
+            Self::Item_Roast_37 => true,
+            Self::Item_Roast_38 => true,
+            Self::Item_Roast_39 => true,
+            Self::Item_Roast_18 => true,
+            Self::Item_Roast_19 => true,
+            Self::Item_Roast_24 => true,
+            Self::Item_Roast_50 => true,
+            Self::Item_Roast_15 => true,
+            Self::Item_Roast_27 => true,
+            Self::Item_Roast_28 => true,
+            Self::Item_Roast_51 => true,
+            Self::Item_Boiled_01 => true,
+            Self::Item_Roast_01 => true,
+            Self::Item_Roast_40 => true,
+            Self::Item_Roast_45 => true,
+            Self::Item_Roast_02 => true,
+            Self::Item_Roast_41 => true,
+            Self::Item_Roast_46 => true,
+            Self::Item_RoastFish_01 => true,
+            Self::Item_RoastFish_02 => true,
+            Self::Item_RoastFish_04 => true,
+            Self::Item_RoastFish_03 => true,
+            Self::Item_RoastFish_07 => true,
+            Self::Item_RoastFish_09 => true,
+            Self::Item_RoastFish_13 => true,
+            Self::Item_RoastFish_11 => true,
+            Self::Item_RoastFish_15 => true,
+            Self::Item_Chilled_01 => true,
+            Self::Item_Chilled_02 => true,
+            Self::Item_Chilled_03 => true,
+            Self::Item_Chilled_04 => true,
+            Self::Item_Chilled_05 => true,
+            Self::Item_Chilled_06 => true,
+            Self::Item_ChilledFish_01 => true,
+            Self::Item_ChilledFish_06 => true,
+            Self::Item_ChilledFish_02 => true,
+            Self::Item_ChilledFish_03 => true,
+            Self::Item_ChilledFish_04 => true,
+            Self::Item_ChilledFish_05 => true,
+            Self::Item_ChilledFish_07 => true,
+            Self::Item_ChilledFish_08 => true,
+            Self::Item_ChilledFish_09 => true,
+            Self::Obj_DRStone_Get => true,
+            Self::dyecolor_00 => true,
+            Self::dyecolor_01 => true,
+            Self::dyecolor_02 => true,
+            Self::dyecolor_03 => true,
+            Self::dyecolor_04 => true,
+            Self::dyecolor_05 => true,
+            Self::dyecolor_06 => true,
+            Self::dyecolor_07 => true,
+            Self::dyecolor_08 => true,
+            Self::dyecolor_09 => true,
+            Self::dyecolor_10 => true,
+            Self::dyecolor_11 => true,
+            Self::dyecolor_12 => true,
+            Self::dyecolor_13 => true,
+            Self::dyecolor_14 => true,
+            Self::dyecolor_15 => true,
+            Self::Obj_Photo_Animal => true,
+            Self::Obj_Photo_BossEnemy => true,
+            Self::Obj_Photo_Enemy => true,
+            Self::Obj_Photo_Material => true,
+            Self::Obj_Photo_Other => true,
+            Self::Obj_Photo_Weapon => true,
+            _ => false,
         }
     }
 }

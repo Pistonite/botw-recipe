@@ -1,10 +1,12 @@
 mod generated;
-pub use generated::{NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS, CHUNK_SIZE, CHUNK_COUNT, LAST_CHUNK_SIZE};
+pub use generated::constants::*;
 pub use generated::{Actor, Group};
 
 pub mod recipe;
 pub mod cook;
-// pub mod wmc;
+pub mod wmc;
+//
+pub mod db;
 
 use serde::{Deserialize, Serialize};
 
@@ -15,7 +17,7 @@ use cook::CookData;
 ///
 /// The time complexity is O(1) because all values are pre-computed.
 pub fn multichoose(n: usize, k: usize) -> usize {
-    generated::MULTICHOOSE[n][k]
+    MULTICHOOSE[n][k]
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

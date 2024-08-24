@@ -1,10 +1,6 @@
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{self, Write, BufReader};
-#[cfg(not(windows))]
-use std::os::unix::fs::MetadataExt;
-#[cfg(windows)]
-use std::os::windows::fs::MetadataExt;
 use std::path::{Path, PathBuf};
 use std::sync::mpsc;
 use std::time::Instant;
@@ -317,10 +313,7 @@ impl Check {
                 continue;
             }
             let meta = std::fs::metadata(&chunk_path)?;
-            #[cfg(not(windows))]
-            let meta_file_size = meta.size();
-            #[cfg(windows)]
-            let meta_file_size = meta.file_size();
+            let meta_file_size = meta.len();
             if meta_file_size != chunk_file_size {
                 checked+=1;
                 first_invalid = first_invalid.min(i);

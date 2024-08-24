@@ -1,6 +1,6 @@
 use std::fs::File;
 use std::io::BufWriter;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicUsize;
 use std::sync::mpsc::{self, Sender, Receiver};
 use std::sync::Arc;
@@ -8,7 +8,7 @@ use std::thread::{self, JoinHandle};
 use std::time::Instant;
 
 use clap::Parser;
-use rdata::cook::CookData;
+use rdata::cook::{CookData, CookEffect};
 use rcook::CookingPot;
 
 #[derive(Parser, Clone)]
@@ -30,15 +30,47 @@ fn main() {
     dump(Cli::parse());
 }
 
+#[cfg(not(feature = "compact"))]
+#[inline]
+fn chunk_meta() -> (usize, usize, usize) {
+    (rdata::CHUNK_SIZE, rdata::CHUNK_COUNT, rdata::LAST_CHUNK_SIZE)
+}
+
+#[cfg(feature = "compact")]
+#[inline]
+fn chunk_meta() -> (usize, usize, usize) {
+    (rdata::COMPACT_CHUNK_SIZE, rdata::COMPACT_CHUNK_COUNT, rdata::COMPACT_LAST_CHUNK_SIZE)
+}
+
+fn data_folder() -> &'static str {
+    if cfg!(feature = "compact") {
+        "./compact"
+    } else {
+        "./data"
+    }
+}
+
+#[cfg(not(feature = "compact"))]
+fn chunk_path(base: &Path, id: usize) -> PathBuf {
+    base.join(format!("chunk_{id}.rawdat"))
+}
+
+#[cfg(feature = "compact")]
+fn chunk_path(base: &Path, id: usize) -> PathBuf {
+    base.join(format!("chunk_{id}.rdb"))
+}
+
 fn dump(cli: Cli) {
-    let data_path = Path::new("./data");
+    let data_path = Path::new(data_folder());
     if !data_path.exists() {
         std::fs::create_dir_all(data_path).unwrap();
     }
 
-    let total = cli.count.unwrap_or(rdata::CHUNK_COUNT) - cli.start;
-    if total > rdata::CHUNK_COUNT {
-        eprintln!("total chunks must be less than or equal to {}", rdata::CHUNK_COUNT);
+    let (chunk_size, chunk_count, _) = chunk_meta();
+
+    let total = cli.count.unwrap_or(chunk_count) - cli.start;
+    if total > chunk_count {
+        eprintln!("total chunks must be less than or equal to {}", chunk_count);
         std::process::exit(1);
     }
 
@@ -77,7 +109,7 @@ fn dump(cli: Cli) {
                 } else {
                     let speed = c as f32 / elapsed;
                     let remaining = total - c;
-                    let recipe_count = c * rdata::CHUNK_SIZE;
+                    let recipe_count = c * chunk_size;
                     recipe_per_sec = (recipe_count as f32 / elapsed) as usize;
                     remaining as f32 / speed
                 };
@@ -136,8 +168,7 @@ fn start_worker_thread(
 }
 
 fn dump_chunk(pot: &CookingPot, chunk_id: usize, cli: &Cli) -> bool {
-    let data_path = Path::new("./data");
-    let data_path = data_path.join(format!("chunk_{}.rawdat", chunk_id));
+    let data_path = chunk_path(Path::new(data_folder()), chunk_id);
     if cli.keep && data_path.exists() {
         println!("chunk {} already exists, skipping", chunk_id);
         return false;
@@ -145,24 +176,64 @@ fn dump_chunk(pot: &CookingPot, chunk_id: usize, cli: &Cli) -> bool {
 
     let mut writer = BufWriter::new(File::create(data_path).unwrap());
 
-    let chunk_start = chunk_id * rdata::CHUNK_SIZE;
-    let chunk_end = rdata::NUM_TOTAL_RECORDS.min(chunk_start + rdata::CHUNK_SIZE);
-    let chunk_size = chunk_end - chunk_start;
+    let (chunk_size, _, _) = chunk_meta();
 
-    let mut results = Vec::with_capacity(chunk_size);
-    for id in chunk_start..chunk_end {
+    let chunk_start = chunk_id * chunk_size;
+    let chunk_end = rdata::NUM_TOTAL_RECORDS.min(chunk_start + chunk_size);
+
+    cook_and_write_chunk(pot, chunk_id, chunk_start, chunk_end, &mut writer);
+    true
+}
+
+#[cfg(not(feature = "compact"))]
+fn cook_and_write_chunk(pot: &CookingPot, _id: usize, start: usize, end: usize, writer: &mut BufWriter<File>) {
+    for id in start..end {
         let data = if id == 0 {
             CookData::invalid()
         } else {
             pot.cook_id(id).unwrap().data
         };
-        results.push(data);
+        data.write_to(writer).unwrap();
     }
-
-    for data in results {
-        data.write_to(&mut writer).unwrap();
-    }
-
-    true
 }
 
+#[cfg(feature = "compact")]
+fn cook_and_write_chunk(pot: &CookingPot, id: usize, start: usize, end: usize, writer: &mut BufWriter<File>) {
+    use std::io::Write;
+    let crit_path = Path::new(data_folder()).join(format!("crit_{id}.rawdat"));
+    let mut crit_writer = BufWriter::new(File::create(crit_path).unwrap());
+
+    for id in start..end {
+        let (data, crit_rng_hp) = if id == 0 {
+            (CookData::invalid(), false)
+        } else {
+            let result = pot.cook_id(id).unwrap();
+            (result.data, result.crit_rng_hp)
+        };
+        let mut hp = data.health_recover;
+        if data.crit_chance >= 100 && !crit_rng_hp {
+            // guaranteed crit but no heart rng crit, which means guaranteed heart crit
+            if data.effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
+                // hearty adds 4
+                // technically this should go out of 112, because it's 108 + 4
+                // (max is 108 but game doesn't check the cap when crit)
+                hp += 4;
+                if hp > 112 {
+                    panic!("hp > 112 for id {}: {:?}", id, data);
+                }
+            } else {
+                hp = (hp+12).min(120);
+            }
+        }
+        let price = data.sell_price;
+        // hhhh hhhp pppp pppp
+        let low = (price & 0xFF) as u8;
+        let high = (hp << 1) as u8 | ((price >> 8) & 0x01) as u8;
+        writer.write_all(&[low, high]).unwrap();
+        if crit_rng_hp {
+            crit_writer.write_all(&[1]).unwrap();
+        } else {
+            crit_writer.write_all(&[0]).unwrap();
+        }
+    }
+}

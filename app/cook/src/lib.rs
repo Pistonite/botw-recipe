@@ -63,7 +63,6 @@ impl Options {
         };
         let inputs = RecipeInputs::from_id(recipe_id).ok_or_else(|| Error::InvalidRecipeId(recipe_id))?;
         let mut ingr = Vec::with_capacity(5);
-        ingr.clear();
         for group in inputs.iter() {
             let actor = group.first_actor();
             if actor != Actor::None {

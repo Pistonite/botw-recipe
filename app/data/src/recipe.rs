@@ -98,6 +98,10 @@ impl RecipeInputs {
             }
         ).collect()
     }
+
+    pub fn as_slice(&self) -> &[Group] {
+        &self.0
+    }
 }
 
 impl From<RecipeInputs> for [Group; NUM_INGR] {

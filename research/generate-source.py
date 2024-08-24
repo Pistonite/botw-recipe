@@ -31,6 +31,8 @@ def write_doc_comment(o, comments):
     lines = [l.strip() for l in comments.split("\n")]
     if not lines:
         return
+    while not lines[-1]:
+        lines.pop()
     i = 0
     while i < len(lines) and not lines[i]:
         i += 1
@@ -72,14 +74,14 @@ def gen_numeric_constants(o, data):
         or equivalently, NUM_GROUPS multichoose NUM_INGR.
     """)
     o.write(f"pub const NUM_TOTAL_RECORDS: usize = {data['total']};\n\n")
+
+    # chunking rawdb
     chunk_size, chunk_count, last_chunk_size = util.chunk(total)
     print_field("chunk_size", chunk_size)
     write_doc_comment(o, """
         Number of records in each chunk except last in the data dump
     """)
     o.write(f"pub const CHUNK_SIZE: usize = {chunk_size};\n\n")
-    # chunk_count is wrong is total is a multiple of chunk_size
-    util.assertion(total % chunk_size != 0, "total divisible by chunk size")
     print_field("chunk_count", chunk_count)
     write_doc_comment(o, """
         Number of chunks in the data dump
@@ -95,7 +97,45 @@ def gen_numeric_constants(o, data):
 
         MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
     """)
-    o.write("pub const MULTICHOOSE: [[usize; NUM_INGR+1]; NUM_GROUPS+1] = [\n")
+
+    # chunking compactdb
+    compact_chunk_size, compact_chunk_count, compact_last_chunk_size = util.chunk_compact(total)
+    print_field("compact_chunk_size", compact_chunk_size)
+    write_doc_comment(o, """
+        Number of records in each chunk except last in the compact DB
+    """)
+    o.write(f"pub const COMPACT_CHUNK_SIZE: usize = {compact_chunk_size};\n\n")
+    print_field("compact_chunk_count", compact_chunk_count)
+    write_doc_comment(o, """
+        Number of chunks in the compact DB
+    """)
+    o.write(f"pub const COMPACT_CHUNK_COUNT: usize = {compact_chunk_count};\n\n")
+    print_field("compact_last_chunk_size", compact_last_chunk_size)
+    write_doc_comment(o, """
+        Number of records in the last chunk in the compact DB
+    """)
+    o.write(f"pub const COMPACT_LAST_CHUNK_SIZE: usize = {compact_last_chunk_size};\n\n")
+
+    # crit db int size and byte size
+    crit_db_int_size = total // 32
+    if total % 32 != 0:
+        crit_db_int_size += 1
+    print_field("crit_db_int_size", crit_db_int_size)
+    write_doc_comment(o, """
+        Element size of the crit DB in number of `u32`s
+    """)
+    o.write(f"pub const CRIT_DB_U32_SIZE: usize = {crit_db_int_size};\n\n")
+    print_field("crit_db_byte_size", crit_db_int_size * 4)
+    o.write(f"pub const CRIT_DB_BYTE_SIZE: usize = {crit_db_int_size * 4};\n\n")
+    crit_db_ints_per_chunk = compact_chunk_size // 32
+    util.assertion(compact_chunk_size % 32 == 0, "compact_chunk_size is divisible by 32")
+    print_field("crit_db_ints_per_chunk", crit_db_ints_per_chunk)
+    write_doc_comment(o, """
+        Number of `u32`s in each chunk of the crit DB
+    """)
+    o.write(f"pub const CRIT_DB_U32_PER_CHUNK: usize = {crit_db_ints_per_chunk};\n\n")
+
+    o.write("pub(crate) const MULTICHOOSE: [[usize; NUM_INGR+1]; NUM_GROUPS+1] = [\n")
     multichoose = util.make_multichoose(data['num'])
     for multichoose_n in multichoose:
         o.write("[")
@@ -149,7 +189,7 @@ def gen_numeric_constants_cpp(o, hpp, data):
 
 
 
-def gen_group_enum(o, actor_to_name, groups):
+def gen_group_enum(o, actor_to_name, groups, actor_pe_only):
     o.write(HEADER)
     o.write("use super::Actor;\n")
     write_doc_comment(o, "Recipe input groups")
@@ -186,9 +226,24 @@ def gen_group_enum(o, actor_to_name, groups):
 
     o.write("}}\n")
 
+    write_doc_comment(o, "Get if any actor in the group is only holdable with PE")
+    o.write("pub const fn contains_pe_only(&self) -> bool {\n")
+    o.write("match self {\n")
+    o.write("Self::None => false,\n")
+    for i in range(1, len(groups)):
+        id = str(i)
+        actors = groups[id]
+        name = group_names[id]
+        for actor in actors:
+            if actor in actor_pe_only:
+                o.write(f"Self::{name} => true,\n")
+                break
+    o.write(" _ => false,\n")
+    o.write("}}\n")
+
     o.write("}\n")
 
-def gen_actor_enum(o, actor_to_name, groups):
+def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     o.write(HEADER)
     o.write("use super::Group;\n")
     write_doc_comment(o, "Ingredients (actors)")
@@ -251,6 +306,16 @@ def gen_actor_enum(o, actor_to_name, groups):
         name = actor_to_name[actor].lower()
         o.write(f"\"{name}\" => Some(Actor::{actor}),\n")
     o.write("_ => None,\n")
+    o.write("}}\n")
+
+    write_doc_comment(o, "Get if the actor is only holdable with PE")
+    o.write("pub const fn pe_only(&self) -> bool {\n")
+    o.write("match self {\n")
+    o.write("Self::None => false,\n")
+    for actor in actor_to_name:
+        if actor in actor_pe_only:
+            o.write(f"Self::{actor} => true,\n")
+    o.write(" _ => false,\n")
     o.write("}}\n")
 
     o.write("}\n")
@@ -321,25 +386,42 @@ with open("output/actor-names.yaml", "r", encoding="utf-8") as f:
         actors.append(actor)
         actor_to_name[actor] = name
 
+with open("output/actor-data.yaml", "r", encoding="utf-8") as f:
+    actor_data = yaml.safe_load(f)
+
+actor_pe_only = set(["Obj_DRStone_Get"])
+for actor in actor_data:
+    # special handling
+    if actor.startswith("dyecolor") or actor.startswith("Obj_Photo"):
+        actor_pe_only.add(actor)
+        continue
+
+    tags = actor_data[actor]["tags"]
+    for tag in tags:
+        if tag.startswith("Roast"):
+            # icy are also roasted
+            actor_pe_only.add(actor)
+            break
+
 print("generating files")
 
 with open("output/ids.yaml", "r", encoding="utf-8") as f:
     data = yaml.safe_load(f)
 
-with open(OUT[0], "w", encoding="utf-8") as f:
+with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     gen_numeric_constants(f, data)
 
-with open(OUT[1], "w", encoding="utf-8") as f:
-    gen_group_enum(f, actor_to_name, data["ids"])
+with open(OUT[1], "w", encoding="utf-8", newline="\n") as f:
+    gen_group_enum(f, actor_to_name, data["ids"], actor_pe_only)
 
-with open(OUT[2], "w", encoding="utf-8") as f:
-    gen_actor_enum(f, actor_to_name, data["ids"])
+with open(OUT[2], "w", encoding="utf-8", newline="\n") as f:
+    gen_actor_enum(f, actor_to_name, data["ids"], actor_pe_only)
 
-with open(OUT[3], "w", encoding="utf-8") as o:
+with open(OUT[3], "w", encoding="utf-8", newline="\n") as o:
     with open(OUT[4], "w", encoding="utf-8") as hpp:
         gen_numeric_constants_cpp(o, hpp, data)
 
-with open(OUT[5], "w", encoding="utf-8") as f:
+with open(OUT[5], "w", encoding="utf-8", newline="\n") as f:
     with open("output/recipe-actors.yaml", "r", encoding="utf-8") as g:
         cook_items = yaml.safe_load(g)
     gen_cook_item_enum(f, cook_items)

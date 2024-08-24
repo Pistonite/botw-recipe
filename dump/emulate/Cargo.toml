@@ -15,6 +15,9 @@ path = "../../app/cook"
 package = "botw-recipe-data"
 path = "../../app/data"
 
+[features]
+compact = ["rcook/rng-hp"]
+
 [[bin]]
 name = "rdump"
 path = "src/rdump.rs"

@@ -84,6 +84,17 @@ tasks:
     cmds:
     - cargo run --bin rcook --features debug-print --features rng-hp {{.CLI_ARGS}}
 
+  compact:
+    dir: dump/emulate
+    desc: Dump compact DB
+    cmds:
+    - cargo run --release --bin rdump --features compact --quiet
+
+  compact-optimize:
+    dir: dump/tools
+    cmds:
+    - cargo run --release --bin compact --quiet
+
 
 
 #

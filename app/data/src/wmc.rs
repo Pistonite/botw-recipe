@@ -1,18 +1,10 @@
+use serde::{Deserialize, Serialize};
 
 
-/// Weapon modifier data
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-#[repr(C)]
-pub struct WeaponData {
-    pub modifier_value: u32,
-    unused: u32,
-    pub modifier_bitset: u32,
-    unused2: f32,
-    unused3: f32,
-    crit_chance: i32
-}
 #[repr(u32)]
-pub enum WeaponModifier{
+#[non_exhaustive]
+pub enum WeaponModifier {
     None = 0,
     /// Attack up for swords/bows/shields (lynel)
     AddAtk = 0x1,
@@ -38,6 +30,18 @@ pub enum WeaponModifier{
     AddGuard = 0x100,
     /// Yellow modifier
     IsYellow = 0x80000000,
+}
+
+impl WeaponModifier {
+    pub const fn all() -> Self {
+        unsafe { std::mem::transmute(u32::MAX) }
+    }
+}
+
+impl From<u32> for WeaponModifier {
+    fn from(value: u32) -> Self {
+        unsafe { std::mem::transmute(value) }
+    }
 }
 
 impl std::ops::BitOr for WeaponModifier {
@@ -83,35 +87,35 @@ pub struct WeaponModifierInfo {
     is_yellow: bool,
 }
 
-impl<W: AsRef<WeaponData>> From<W> for WeaponModifierInfo {
-    fn from(value: W) -> Self {
-        let value = value.as_ref();
-let m = value.modifier_bitset;
-        let v = value.modifier_value;
-        let attack_up = (m & WeaponModifier::AddAtk as u32 !=0).then_some(v);
-        let durability_up = m & WeaponModifier::AddLife as u32 != 0;
-        let critical_hit = m & WeaponModifier::AddCrit as u32 != 0;
-        let long_throw = (m & WeaponModifier::AddThrow as u32!=0).then_some(v as f32 / 1000.);
-        let multi_shot = (m & WeaponModifier::AddSpreadFire as u32!=0).then_some(v);
-        let zoom = m & WeaponModifier::AddZoom as u32 != 0;
-        let quick_shot = (m & WeaponModifier::AddRapidFire as u32!=0).then_some(v as f32 / 1000.);
-        let surf_master = (m & WeaponModifier::AddSurfMaster as u32!=0).then_some(v as f32 / 1000.);
-        let shield_guard_up = (m & WeaponModifier::AddGuard as u32!=0).then_some(v);
-        let is_yellow = m & WeaponModifier::IsYellow as u32 != 0;
-        Self {
-            attack_up,
-            durability_up,
-            critical_hit,
-            long_throw,
-            multi_shot,
-            zoom,
-            quick_shot,
-            surf_master,
-            shield_guard_up,
-            is_yellow,
-        }
-    }
-}
+// impl<W: AsRef<WeaponData>> From<W> for WeaponModifierInfo {
+//     fn from(value: W) -> Self {
+//         let value = value.as_ref();
+// let m = value.modifier_bitset;
+//         let v = value.modifier_value;
+//         let attack_up = (m & WeaponModifier::AddAtk as u32 !=0).then_some(v);
+//         let durability_up = m & WeaponModifier::AddLife as u32 != 0;
+//         let critical_hit = m & WeaponModifier::AddCrit as u32 != 0;
+//         let long_throw = (m & WeaponModifier::AddThrow as u32!=0).then_some(v as f32 / 1000.);
+//         let multi_shot = (m & WeaponModifier::AddSpreadFire as u32!=0).then_some(v);
+//         let zoom = m & WeaponModifier::AddZoom as u32 != 0;
+//         let quick_shot = (m & WeaponModifier::AddRapidFire as u32!=0).then_some(v as f32 / 1000.);
+//         let surf_master = (m & WeaponModifier::AddSurfMaster as u32!=0).then_some(v as f32 / 1000.);
+//         let shield_guard_up = (m & WeaponModifier::AddGuard as u32!=0).then_some(v);
+//         let is_yellow = m & WeaponModifier::IsYellow as u32 != 0;
+//         Self {
+//             attack_up,
+//             durability_up,
+//             critical_hit,
+//             long_throw,
+//             multi_shot,
+//             zoom,
+//             quick_shot,
+//             surf_master,
+//             shield_guard_up,
+//             is_yellow,
+//         }
+//     }
+// }
 
 impl WeaponModifierInfo {
     // pub fn has(modifier: WeaponModifier) -> bool {
