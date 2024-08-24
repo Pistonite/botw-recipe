@@ -8,7 +8,7 @@ use std::time::Instant;
 use rdata::Recipe;
 use rdata::recipe::RecipeInputs;
 use rdata::cook::{CookData, CookDataInvalidReason};
-use clap::{Parser, ValueEnum};
+use clap::Parser;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use threadpool::ThreadPool;
@@ -157,12 +157,10 @@ struct Options {
     /// Show the first mismatch in the first chunk that has mismatch
     #[clap(short, long, conflicts_with = "purge", conflicts_with = "inspect")]
     mismatch: bool,
-}
 
-#[derive(Parser, Debug, Clone, Copy, ValueEnum, PartialEq, Eq)]
-enum DB {
-    Emulate,
-    Console,
+    /// Compare all chunks instead of only valid ones
+    #[clap(short,long)]
+    all: bool,
 }
 
 fn chunk_path(path: &Path, i: usize) -> PathBuf {
@@ -190,9 +188,13 @@ impl Check {
         let (e_start, e_end) = self.check_rawdat(self.emulate_path.clone(), "check emulate")?;
         let (c_start, c_end) = self.check_rawdat(self.console_path.clone(), "check console")?;
         println!();
-        let end = e_end.min(c_end);
-        let start = e_start.min(c_start).min(end);
-
+        let (start, end) = if self.options.all {
+            (0, rdata::CHUNK_COUNT)
+        }   else {
+            let end = e_end.min(c_end);
+            let start = e_start.min(c_start).min(end);
+            (start, end)
+        };
         if end == 0 {
             println!("no chunks to check. The first chunk is invalid");
             return Ok(())
@@ -432,20 +434,24 @@ impl Check {
                 }
                 Err(err) => {
                     print_status!(checked, total, label, "Chunk {i} failed: {err}");
-                    if let Error::Mismatch(record, data_e, data_c, matched_count) = err {
-                        matched += matched_count;
-                        let recipe_id = i * rdata::CHUNK_SIZE + record;
-                        let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();
-                        let error_data = RecipeMismatchData {
-                            chunk: i,
-                            record,
-                            recipe_id,
-                            recipe_e: Recipe::new(data_e, recipe_inputs),
-                            recipe_c: Recipe::new(data_c, recipe_inputs),
-                        };
-                        errors_to_emit.push(error_data);
-
+                    match err {
+                        Error::Mismatch(record, data_e, data_c, matched_count) => {
+                            matched += matched_count;
+                            let recipe_id = i * rdata::CHUNK_SIZE + record;
+                            let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();
+                            let error_data = RecipeMismatchData {
+                                chunk: i,
+                                record,
+                                recipe_id,
+                                recipe_e: Recipe::new(data_e, recipe_inputs),
+                                recipe_c: Recipe::new(data_c, recipe_inputs),
+                            };
+                            errors_to_emit.push(error_data);
+    
+                        }
+                        _ => {}
                     }
+                    
                 }
             }
         }
@@ -494,7 +500,9 @@ enum Error {
     #[error("!! invalid record at {0}: {1:?}")]
     InvalidRecord(usize, CookDataInvalidReason, CookData),
     #[error("!! first mismatch at {0}")]
-    Mismatch(usize, CookData, CookData, usize /*matched_count*/)
+    Mismatch(usize, CookData, CookData, usize /*matched_count*/),
+    #[error("!! console or emulate chunk not found, cannot compare")]
+    NotFound,
 }
 
 /// Check if every record in a chunk is valid
@@ -521,6 +529,9 @@ fn check_chunk(id: usize, records: usize, path: &Path) -> Result<(), Error> {
 ///
 /// Returns the number of records that match and the first mismatch if found
 fn compare_chunk(records: usize, path_e: &Path, path_c: &Path) -> Result<usize, Error> {
+    if !path_e.exists() || !path_c.exists() {
+        return Err(Error::NotFound);
+    }
     let mut reader_e = BufReader::new(File::open(path_e)?);
     let mut reader_c = BufReader::new(File::open(path_c)?);
 
