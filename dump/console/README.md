@@ -81,11 +81,12 @@ For example, if I assigned you 50 and 100, you would run `task configure -- 50 1
     ```
     Replace `CHUNK_START` and `CHUNK_END` with the numbers I assigned you.
     For example, if I assigned you 50 and 100, you would run `python scripts/config.py 50 100`
+
     **Without `python`**: Create a file called `config.txt` with the following content:
     ```
     XXXXYYYY
     ```
-    where `XXXX` is the CHUNK_START and `YYYY` is CHUNK_END - CHUNK_START.
+    where `XXXX` is the CHUNK_START and `YYYY` is **CHUNK_END - CHUNK_START** (*note it's different from the command*).
     If the number is not 4 digits, pad it with zeros.
     For example, if CHUNK_START is 50 and CHUNK_END is 100, you would type `00500050`
 2. Open your FTP client and connect to the switch
