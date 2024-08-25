@@ -5,7 +5,8 @@ The fast and complete Breath of the Wild Recipe Database for Weapon Modifier Cor
 
 ## Contents
 - `/research`: Scripts and data for processing ROM and generating item data.
-- `/app/cook`: A fast cooking simulator library for WMC, also a CLI tool for cooking.
+- `/app/cook-cli`: CLI tool for cooking.
+- `/app/data`: Shared data utilities for the recipe database. Includes an implementation of cooking simulator
 - `/dump/emulate`: Harness for generating recipe database using the cooking simulator
 - `/dump/console`: A mod to generate recipes in-game and save them to SD card
 - `/dump/tools`: Tools for cross-validating and compacting the recipe database

@@ -1,9 +1,7 @@
 use serde::{Deserialize, Serialize};
 
-
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[repr(u32)]
-#[non_exhaustive]
 pub enum WeaponModifier {
     None = 0,
     /// Attack up for swords/bows/shields (lynel)
@@ -20,7 +18,7 @@ pub enum WeaponModifier {
     /// multishot, the spread will be very big. Multishot + Zoom
     /// will be focus shot instead of spread
     AddSpreadFire = 0x10,
-    /// Zoom (bow). 
+    /// Zoom (bow).
     AddZoom = 0x20,
     /// Quick shot (bow)
     AddRapidFire = 0x40,
@@ -32,32 +30,74 @@ pub enum WeaponModifier {
     IsYellow = 0x80000000,
 }
 
-impl WeaponModifier {
-    pub const fn all() -> Self {
-        unsafe { std::mem::transmute(u32::MAX) }
-    }
-}
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[repr(transparent)]
+pub struct WeaponModifierSet(u32);
 
-impl From<u32> for WeaponModifier {
+impl From<u32> for WeaponModifierSet {
+    #[inline]
     fn from(value: u32) -> Self {
-        unsafe { std::mem::transmute(value) }
+        Self(value)
     }
 }
 
-impl std::ops::BitOr for WeaponModifier {
-    type Output = Self;
-
-    fn bitor(self, rhs: Self) -> Self {
-        unsafe { std::mem::transmute(self as u32 | rhs as u32) }
+impl From<WeaponModifierSet> for u32 {
+    #[inline]
+    fn from(value: WeaponModifierSet) -> Self {
+        value.0
     }
 }
 
-impl std::ops::BitAnd for WeaponModifier {
-    type Output = Self;
-
-    fn bitand(self, rhs: Self) -> Self {
-        unsafe { std::mem::transmute(self as u32 & rhs as u32) }
+impl WeaponModifierSet {
+    #[inline]
+    pub fn new() -> Self {
+        Self(WeaponModifier::None as u32)
     }
+    #[inline]
+    pub fn all() -> Self {
+        (0x1FF | WeaponModifier::IsYellow as u32).into()
+    }
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.0 == WeaponModifier::None as u32
+    }
+    #[inline]
+    pub fn has(&self, modifier: WeaponModifier) -> bool {
+        self.0 & modifier as u32 != 0
+    }
+    #[inline]
+    pub fn add(&mut self, modifier: WeaponModifier) {
+        self.0 |= modifier as u32;
+    }
+    #[inline]
+    pub fn remove(&mut self, modifier: WeaponModifier) {
+        self.0 &= !(modifier as u32);
+    }
+    #[inline]
+    pub fn union<T: Into<Self>>(&self, other: T) -> Self {
+        Self(self.0 | other.into().0)
+    }
+    #[inline]
+    pub fn intersection<T: Into<Self>>(&self, other: T) -> Self {
+        Self(self.0 & other.into().0)
+    }
+    #[inline]
+    pub fn compliment(&self) -> Self {
+        Self(!self.0).intersection(Self::all())
+    }
+}
+
+#[macro_export]
+macro_rules! weapon_modifier_set {
+    ($($modifier:ident)|*) => {
+        {
+            let mut set = WeaponModifierSet::new();
+            $(
+                set.add(WeaponModifier::$modifier);
+            )*
+            set
+        }
+    };
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]

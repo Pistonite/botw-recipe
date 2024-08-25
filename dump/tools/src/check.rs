@@ -1,18 +1,18 @@
 use std::collections::HashSet;
 use std::fs::File;
-use std::io::{self, Write, BufReader};
+use std::io::{self, BufReader, Write};
 use std::path::{Path, PathBuf};
 use std::sync::mpsc;
 use std::time::Instant;
 
-use rdata::Recipe;
-use rdata::recipe::RecipeInputs;
-use rdata::cook::{CookData, CookDataInvalidReason};
 use clap::Parser;
+use filetime::FileTime;
+use rdata::cook::{CookData, CookDataInvalidReason};
+use rdata::recipe::RecipeInputs;
+use rdata::Recipe;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use threadpool::ThreadPool;
-use filetime::FileTime;
 
 macro_rules! print_status {
     ($cur:expr, $total:expr, $label:expr) => {{
@@ -83,14 +83,15 @@ impl Cache {
     pub fn load() -> Result<Self, Error> {
         let cache_path = Path::new("cache.json");
         let cache_time = if cache_path.exists() {
-            cache_path.metadata().map(
-                |m| FileTime::from_last_modification_time(&m)).ok()
+            cache_path
+                .metadata()
+                .map(|m| FileTime::from_last_modification_time(&m))
+                .ok()
         } else {
             None
         };
         let good = if cache_path.exists() {
-            let v: Vec<String> = serde_json::from_reader(
-                BufReader::new(File::open(cache_path)?))?;
+            let v: Vec<String> = serde_json::from_reader(BufReader::new(File::open(cache_path)?))?;
             v.into_iter().collect()
         } else {
             HashSet::new()
@@ -104,7 +105,7 @@ impl Cache {
     pub fn is_cached_or_remove(&mut self, path: &Path) -> bool {
         let last = match self.time {
             None => return false,
-            Some(last) => last
+            Some(last) => last,
         };
         let s = path.to_string_lossy().to_string();
         if !self.good.contains(&s) {
@@ -159,7 +160,7 @@ struct Options {
     mismatch: bool,
 
     /// Compare all chunks instead of only valid ones
-    #[clap(short,long)]
+    #[clap(short, long)]
     all: bool,
 }
 
@@ -190,18 +191,18 @@ impl Check {
         println!();
         let (start, end) = if self.options.all {
             (0, rdata::CHUNK_COUNT)
-        }   else {
+        } else {
             let end = e_end.min(c_end);
             let start = e_start.min(c_start).min(end);
             (start, end)
         };
         if end == 0 {
             println!("no chunks to check. The first chunk is invalid");
-            return Ok(())
+            return Ok(());
         }
         if start == end {
             println!("no chunk changed, skipping compare");
-            return Ok(())
+            return Ok(());
         }
         let matched = self.compare_db(start, end)?;
         println!();
@@ -273,9 +274,8 @@ impl Check {
                 println!("no mismatch found");
             }
         }
-    
+
         Ok(())
-    
     }
 
     /// Check chunk rawdat in path and return the first chunk that fails the check
@@ -308,7 +308,7 @@ impl Check {
             let chunk_file_size: u64 = (chunk_size * 24).try_into().unwrap();
             let chunk_path = chunk_path(&path, i);
             if !chunk_path.exists() {
-                checked+=1;
+                checked += 1;
                 // print_status!(checked,rdata::CHUNK_COUNT, label, "Chunk {i}: ----- not found");
                 first_invalid = first_invalid.min(i);
                 not_found_count += 1;
@@ -317,18 +317,29 @@ impl Check {
             let meta = std::fs::metadata(&chunk_path)?;
             let meta_file_size = meta.len();
             if meta_file_size != chunk_file_size {
-                checked+=1;
+                checked += 1;
                 first_invalid = first_invalid.min(i);
                 if options.purge {
                     std::fs::remove_file(&chunk_path)?;
-                    print_status!(checked,rdata::CHUNK_COUNT, label, "----- deleted chunk {i}");
+                    print_status!(
+                        checked,
+                        rdata::CHUNK_COUNT,
+                        label,
+                        "----- deleted chunk {i}"
+                    );
                 } else {
-                    print_status!(checked,rdata::CHUNK_COUNT, label, "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}", meta_file_size);
+                    print_status!(
+                        checked,
+                        rdata::CHUNK_COUNT,
+                        label,
+                        "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
+                        meta_file_size
+                    );
                 }
                 continue;
             }
             if self.cache.is_cached_or_remove(&chunk_path) {
-                checked+=1;
+                checked += 1;
                 continue;
             }
             if first_to_check == rdata::CHUNK_COUNT {
@@ -349,15 +360,29 @@ impl Check {
             match result {
                 Ok(_) => {
                     self.cache.add(&chunk_path);
-                    print_status!(checked,rdata::CHUNK_COUNT, format!("{} ({} not found)", label, not_found_count));
+                    print_status!(
+                        checked,
+                        rdata::CHUNK_COUNT,
+                        format!("{} ({} not found)", label, not_found_count)
+                    );
                 }
                 Err(err) => {
                     first_invalid = first_invalid.min(i);
                     if self.options.purge {
                         std::fs::remove_file(&chunk_path)?;
-                        print_status!(checked,rdata::CHUNK_COUNT, label, "----- deleted chunk {i}");
+                        print_status!(
+                            checked,
+                            rdata::CHUNK_COUNT,
+                            label,
+                            "----- deleted chunk {i}"
+                        );
                     } else {
-                        print_status!(checked,rdata::CHUNK_COUNT, label, "Chunk {i} failed: {err}");
+                        print_status!(
+                            checked,
+                            rdata::CHUNK_COUNT,
+                            label,
+                            "Chunk {i} failed: {err}"
+                        );
                         if let Error::InvalidRecord(record, reason, data) = err {
                             let recipe_id = i * rdata::CHUNK_SIZE + record;
                             let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();
@@ -387,12 +412,14 @@ impl Check {
             println!("no errors found");
         }
 
-
         Ok((first_to_check, first_invalid))
     }
 
     fn compare_db(&self, start_at_chunk: usize, stop_at_chunk: usize) -> Result<usize, Error> {
-        let label = format!("compare chunks {start_at_chunk} to {} (inclusive)", stop_at_chunk - 1);
+        let label = format!(
+            "compare chunks {start_at_chunk} to {} (inclusive)",
+            stop_at_chunk - 1
+        );
         let total = stop_at_chunk - start_at_chunk;
         print_status!(0, total, label);
 
@@ -430,7 +457,7 @@ impl Check {
             match result {
                 Ok(matched_count) => {
                     matched += matched_count;
-                print_status!(checked, total, label);
+                    print_status!(checked, total, label);
                 }
                 Err(err) => {
                     print_status!(checked, total, label, "Chunk {i} failed: {err}");
@@ -447,11 +474,9 @@ impl Check {
                                 recipe_c: Recipe::new(data_c, recipe_inputs),
                             };
                             errors_to_emit.push(error_data);
-    
                         }
                         _ => {}
                     }
-                    
                 }
             }
         }
@@ -468,7 +493,6 @@ impl Check {
             println!("everything matched");
         }
 
-
         Ok(matched)
     }
 }
@@ -479,7 +503,7 @@ struct RecipeErrorData {
     pub record: usize,
     pub reason: CookDataInvalidReason,
     pub recipe_id: usize,
-    pub recipe: Recipe
+    pub recipe: Recipe,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -488,7 +512,7 @@ struct RecipeMismatchData {
     pub record: usize,
     pub recipe_id: usize,
     pub recipe_e: Recipe,
-    pub recipe_c: Recipe
+    pub recipe_c: Recipe,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -514,7 +538,7 @@ fn check_chunk(id: usize, records: usize, path: &Path) -> Result<(), Error> {
     for i in 0..records {
         let data = CookData::read_from(&mut reader)?;
         let invalid_reason = if id == 0 && i == 0 {
-            data.is_invalid() 
+            data.is_invalid()
         } else {
             data.is_normal()
         };

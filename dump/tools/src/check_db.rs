@@ -1,8 +1,16 @@
-use std::{fs::File, io::{Read, Seek, SeekFrom}, path::{Path, PathBuf}};
+use std::{
+    fs::File,
+    io::{Read, Seek, SeekFrom},
+    path::{Path, PathBuf},
+};
 
 use clap::Parser;
-use rdata::{cook::CookData, db::{CritDb, Record}, recipe::RecipeInputs};
 use rcook::CookingPot;
+use rdata::{
+    cook::CookData,
+    db::{CritDb, Record},
+    recipe::RecipeInputs,
+};
 
 fn main() {
     let options = Options::parse();
@@ -60,7 +68,12 @@ fn check_db(chunk: usize, id: usize) {
         let hp = data.value();
         let price = data.modifier();
         let crit_db = CritDb::open("../emulate/compact/crit.db").unwrap();
-        println!("Compact DB: hp = {}, price = {}, crit_rng_hp = {}", hp, price, crit_db.get(recipe_id));
+        println!(
+            "Compact DB: hp = {}, price = {}, crit_rng_hp = {}",
+            hp,
+            price,
+            crit_db.get(recipe_id)
+        );
     } else {
         println!("compact data not found");
     }

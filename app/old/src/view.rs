@@ -1,7 +1,6 @@
 use crate::data;
 use crate::recipe;
 
-
 enum Modifier {
     AttackUp = 1 << 0,
     DurabilityUp = 1 << 1,
@@ -11,7 +10,7 @@ enum Modifier {
     Zoom = 1 << 5,
     QuickShot = 1 << 6,
     SurfUp = 1 << 7,
-    GuardUp = 1 << 8
+    GuardUp = 1 << 8,
 }
 
 pub fn material(id: usize, name: &str) -> String {
@@ -143,34 +142,32 @@ pub fn query_detail(query: &data::Query, converter: &recipe::RecipeConverter) ->
         query_maxhp_detail(query),
         query_crit_detail(query),
         query_modifier_detail(query),
-        query_excluded_materials(query, converter)
+        query_excluded_materials(query, converter),
     ];
 
     if query.minhp == 0 && query.maxhp == 120 {
-        list.push(String::from("WARNING: The range of hp values include all recipes. The result might be large."));
+        list.push(String::from(
+            "WARNING: The range of hp values include all recipes. The result might be large.",
+        ));
     }
 
     if query.include_modifiers == 0 && query.exclude_modifiers == 0 {
-        list.push(String::from("WARNING: You have not set a filter on the modifiers. The result might be large."));
+        list.push(String::from(
+            "WARNING: You have not set a filter on the modifiers. The result might be large.",
+        ));
     }
-    
+
     list.join("\n")
 }
 
 /// View detail of minhp
 pub fn query_minhp_detail(query: &data::Query) -> String {
-    format!(
-        "Search will only include hp >= {}",
-        query.minhp
-    )
+    format!("Search will only include hp >= {}", query.minhp)
 }
 
 /// View detail of maxhp
 pub fn query_maxhp_detail(query: &data::Query) -> String {
-    format!(
-        "Search will only include hp <= {}",
-        query.maxhp
-    )
+    format!("Search will only include hp <= {}", query.maxhp)
 }
 
 /// View detail of maxhp
@@ -192,20 +189,22 @@ pub fn query_modifier_detail(query: &data::Query) -> String {
             buf.push_str(&format!("- {}\n", modifier));
         }
     }
-    if query.exclude_modifiers != 0{
+    if query.exclude_modifiers != 0 {
         buf.push_str("Search will NOT include recipes that have any of:\n");
 
         for modifier in modifier_list(query.exclude_modifiers) {
             buf.push_str(&format!("- {}\n", modifier));
         }
     }
-    
-    
+
     buf
 }
 
 /// View detail of excluded materials
-pub fn query_excluded_materials(query: &data::Query, converter: &recipe::RecipeConverter) -> String {
+pub fn query_excluded_materials(
+    query: &data::Query,
+    converter: &recipe::RecipeConverter,
+) -> String {
     let mut buf = String::new();
     if query.exclude_materials.is_empty() {
         return String::from("Search will include recipes with any material");
@@ -213,7 +212,10 @@ pub fn query_excluded_materials(query: &data::Query, converter: &recipe::RecipeC
 
     buf.push_str("Search will exclude recipes that contain any of:\n");
     for material_id in &query.exclude_materials {
-        buf.push_str(&format!("- {}\n", material(material_id, &converter.get_material_name(material_id))));
+        buf.push_str(&format!(
+            "- {}\n",
+            material(material_id, &converter.get_material_name(material_id))
+        ));
     }
 
     buf

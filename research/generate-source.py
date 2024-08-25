@@ -227,7 +227,7 @@ def gen_group_enum(o, actor_to_name, groups, actor_pe_only):
     o.write("}}\n")
 
     write_doc_comment(o, "Get if any actor in the group is only holdable with PE")
-    o.write("pub const fn contains_pe_only(&self) -> bool {\n")
+    o.write("pub const fn any_pe_only(&self) -> bool {\n")
     o.write("match self {\n")
     o.write("Self::None => false,\n")
     for i in range(1, len(groups)):
@@ -238,6 +238,24 @@ def gen_group_enum(o, actor_to_name, groups, actor_pe_only):
             if actor in actor_pe_only:
                 o.write(f"Self::{name} => true,\n")
                 break
+    o.write(" _ => false,\n")
+    o.write("}}\n")
+
+    write_doc_comment(o, "Get if all actor in the group is only holdable with PE. Returns false for None")
+    o.write("pub const fn all_pe_only(&self) -> bool {\n")
+    o.write("match self {\n")
+    o.write("Self::None => false,\n")
+    for i in range(1, len(groups)):
+        id = str(i)
+        actors = groups[id]
+        name = group_names[id]
+        is_all = True
+        for actor in actors:
+            if actor not in actor_pe_only:
+                is_all = False
+                break
+        if is_all:
+            o.write(f"Self::{name} => true,\n")
     o.write(" _ => false,\n")
     o.write("}}\n")
 

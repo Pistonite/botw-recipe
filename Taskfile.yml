@@ -4,6 +4,11 @@ env:
   CONSOLE_ADDR: 192.168.0.161:5000 # can be overriden in .env
 dotenv: [".env"]
 
+includes:
+  rdb:
+    taskfile: ./app/rdb
+    dir: ./app/rdb
+
 tasks:
   research:
     desc: Reproduce research
@@ -41,7 +46,7 @@ tasks:
     dir: dump/console
     desc: Rename dumps form console
     cmds:
-    - python scripts/rename.py
+    - python scripts/rename.py {{.CLI_ARGS}}
 
   package:
     dir: dump/console
@@ -71,29 +76,30 @@ tasks:
     desc: Check dumps
     cmds:
     - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
-    
+
   cook:
-    dir: app/cook
+    dir: dump/tools
     desc: Cook a recipe with emulator. Separate ingredients with commas
     cmds:
-    - cargo run --bin rcook --quiet -- {{.CLI_ARGS}}
+    - cargo run --bin cook-cli --quiet -- {{.CLI_ARGS}}
 
   cook-debug:
     dir: app/cook
     desc: Cook a recipe in debug mode
     cmds:
-    - cargo run --bin rcook --features debug-print --features rng-hp {{.CLI_ARGS}}
+    - cargo run --bin cook-cli --features debug-print {{.CLI_ARGS}}
 
   compact:
     dir: dump/emulate
     desc: Dump compact DB
     cmds:
-    - cargo run --release --bin rdump --features compact --quiet
+    - cargo run --release --bin rdump --quiet -- --compact
+   # - task: compact-optimize
 
   compact-optimize:
     dir: dump/tools
     cmds:
-    - cargo run --release --bin compact --quiet
+    - cargo run --release --bin compact --quiet -- --keep
 
 
 

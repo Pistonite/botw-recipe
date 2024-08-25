@@ -1,16 +1,23 @@
 import os
+import sys
 import shutil
 from multiprocessing import Pool
 
-def copy(filename):
+def copy(args):
+    filename, keep = args
     id = int(filename[3:-4])
     target = f"data/chunk_{id}.rawdat"
+    if keep and os.path.exists(target):
+        return filename, target, False
     if os.path.exists(target):
         os.remove(target)
     shutil.copy(f"raw/{filename}", target)
-    return filename, target
+    return filename, target, True
 
 if __name__ == "__main__":
+    arg = sys.argv[1]
+    keep = arg == "-k" or arg == "--keep"
+
     if not os.path.exists("raw"):
         exit(1)
 
@@ -19,9 +26,9 @@ if __name__ == "__main__":
     jobs = []
     for filename in os.listdir("raw"):
         if filename.startswith("ck_") and filename.endswith(".bin"):
-            jobs.append(filename)
+            jobs.append((filename, keep))
 
     with Pool() as pool:
-        for (filename, target) in pool.imap_unordered(copy, jobs):
-            print(f"cp raw/{filename} {target}")
-
+        for (filename, target, moved) in pool.imap_unordered(copy, jobs):
+            if moved:
+                print(f"cp raw/{filename} {target}")

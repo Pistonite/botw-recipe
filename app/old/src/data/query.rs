@@ -15,7 +15,7 @@ pub struct Query {
     /// consider heart crit
     pub crit: bool,
     /// only include recipes with bits(material) & exclude_materials == 0
-    pub exclude_materials: BitSet
+    pub exclude_materials: BitSet,
 }
 
 impl Query {
@@ -26,21 +26,25 @@ impl Query {
             include_modifiers: self.include_modifiers,
             exclude_modifiers: self.exclude_modifiers,
             crit: self.crit,
-            exclude_materials: self.exclude_materials.clone()
+            exclude_materials: self.exclude_materials.clone(),
         }
     }
     pub fn validate(&self) -> Result<(), Vec<String>> {
         let mut result = vec![];
         if self.minhp > self.maxhp {
-            result.push(String::from("ERROR: minhp is greater than maxhp. There won't be any result."));
+            result.push(String::from(
+                "ERROR: minhp is greater than maxhp. There won't be any result.",
+            ));
         }
         if self.include_modifiers as u16 & self.exclude_modifiers as u16 != 0 {
-            result.push(String::from("ERROR: Some excluded modifiers are also included. There won't be any result."));
+            result.push(String::from(
+                "ERROR: Some excluded modifiers are also included. There won't be any result.",
+            ));
         }
 
         if result.is_empty() {
             Ok(())
-        }else{
+        } else {
             Err(result)
         }
     }
@@ -60,7 +64,7 @@ impl Query {
             return false;
         }
 
-        if self.include_modifiers != 0{
+        if self.include_modifiers != 0 {
             if data.price & self.include_modifiers != self.include_modifiers {
                 return false;
             }
@@ -71,6 +75,5 @@ impl Query {
         }
 
         return true;
-
     }
 }

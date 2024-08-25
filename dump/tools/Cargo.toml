@@ -7,6 +7,8 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.86"
 clap = { version = "=4.5.4", features = ["derive"] }
+distance = "0.4.0"
+enum-map = "2.7.3"
 filetime = "0.2.24"
 num_cpus = "1.16.0"
 serde = { version = "1.0.208", features = ["derive"] }
@@ -19,18 +21,16 @@ threadpool = "1.8.1"
 package = "botw-recipe-data"
 path = "../../app/data"
 
-[dependencies.rcook]
-package = "botw-recipe-cook"
-path = "../../app/cook"
+[features]
+debug-print = ["rdata/debug-print"] # enable debug printing
 
 [[bin]]
 name = "check"
 path = "src/check.rs"
-
-[[bin]]
-name = "compact"
-path = "src/compact.rs"
-
 [[bin]]
 name = "check-db"
 path = "src/check_db.rs"
+
+[[bin]]
+name = "cook-cli"
+path = "src/cook_cli.rs"

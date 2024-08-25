@@ -564,7 +564,58 @@ impl Group {
         }
     }
     /// Get if any actor in the group is only holdable with PE
-    pub const fn contains_pe_only(&self) -> bool {
+    pub const fn any_pe_only(&self) -> bool {
+        match self {
+            Self::None => false,
+            Self::Item_Roast_03 => true,
+            Self::Item_Roast_10 => true,
+            Self::Item_Roast_07 => true,
+            Self::Item_Roast_Grp_134 => true,
+            Self::Item_Roast_09 => true,
+            Self::Item_Roast_Grp_136 => true,
+            Self::Item_Roast_13 => true,
+            Self::Item_Roast_16 => true,
+            Self::Item_Roast_06 => true,
+            Self::Item_Roast_Grp_140 => true,
+            Self::Item_Roast_53 => true,
+            Self::Item_Roast_05 => true,
+            Self::Item_Roast_49 => true,
+            Self::Item_Roast_Grp_144 => true,
+            Self::Item_Roast_39 => true,
+            Self::Item_Roast_18 => true,
+            Self::Item_Roast_19 => true,
+            Self::Item_Roast_24 => true,
+            Self::Item_Roast_50 => true,
+            Self::Item_Roast_15 => true,
+            Self::Item_Roast_Grp_151 => true,
+            Self::Item_Grp_152 => true,
+            Self::Item_Roast_Grp_153 => true,
+            Self::Item_Roast_40 => true,
+            Self::Item_Roast_Grp_155 => true,
+            Self::Item_Roast_41 => true,
+            Self::Item_RoastFish_01 => true,
+            Self::Item_RoastFish_02 => true,
+            Self::Item_RoastFish_Grp_159 => true,
+            Self::Item_RoastFish_Grp_160 => true,
+            Self::Item_RoastFish_Grp_161 => true,
+            Self::Item_RoastFish_15 => true,
+            Self::Item_Chilled_Grp_163 => true,
+            Self::Item_Chilled_Grp_164 => true,
+            Self::Item_Chilled_Grp_165 => true,
+            Self::Item_ChilledFish_Grp_166 => true,
+            Self::Item_ChilledFish_02 => true,
+            Self::Item_ChilledFish_Grp_168 => true,
+            Self::Item_ChilledFish_Grp_169 => true,
+            Self::Item_ChilledFish_09 => true,
+            Self::Obj_DRStone_Get => true,
+            Self::dyecolor_Grp_172 => true,
+            Self::Obj_Photo_Grp_173 => true,
+            Self::Obj_Photo_BossEnemy => true,
+            _ => false,
+        }
+    }
+    /// Get if all actor in the group is only holdable with PE. Returns false for None
+    pub const fn all_pe_only(&self) -> bool {
         match self {
             Self::None => false,
             Self::Item_Roast_03 => true,

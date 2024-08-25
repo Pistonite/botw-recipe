@@ -2,16 +2,16 @@ mod generated;
 pub use generated::constants::*;
 pub use generated::{Actor, Group};
 
-pub mod recipe;
 pub mod cook;
+pub mod recipe;
 pub mod wmc;
 //
 pub mod db;
 
 use serde::{Deserialize, Serialize};
 
-use recipe::RecipeInputs;
 use cook::CookData;
+use recipe::RecipeInputs;
 
 /// Get the number of ways to choose `k` items from `n` items, allowing for repetition
 ///
@@ -30,11 +30,19 @@ impl Recipe {
     pub fn new(data: CookData, inputs: RecipeInputs) -> Self {
         Self {
             data,
-            inputs: inputs.to_names().into_iter().map(|a| a.to_string()).collect(),
+            inputs: inputs
+                .to_names()
+                .into_iter()
+                .map(|a| a.to_string())
+                .collect(),
         }
     }
 }
 
-// use std::fs;
-// use bit_set::BitSet;
-
+macro_rules! debugln {
+    ($($arg:tt)*) => {
+        #[cfg(feature = "debug-print")]
+        println!($($arg)*);
+    }
+}
+pub(crate) use debugln;

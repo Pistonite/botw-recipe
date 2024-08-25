@@ -2,7 +2,11 @@ use crate::data;
 use crate::recipe;
 use crate::view;
 
-pub fn cook(cmd: &[&str], converter: &recipe::RecipeConverter, crit_mgr: &mut data::CritMgr) -> Result<(), String> {
+pub fn cook(
+    cmd: &[&str],
+    converter: &recipe::RecipeConverter,
+    crit_mgr: &mut data::CritMgr,
+) -> Result<(), String> {
     let ids = super::get_material_ids(cmd)?;
 
     let recipe_id = converter.to_recipe_id(&ids)?;

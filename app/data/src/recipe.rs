@@ -1,9 +1,9 @@
 //! Converting between recipe ids and inputs
 
 use derive_deref::{Deref, DerefMut};
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-use crate::{multichoose, NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS, Group, Actor};
+use crate::{multichoose, Actor, Group, NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS};
 
 /// A valid recipe record id
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
@@ -14,9 +14,13 @@ impl RecipeId {
     pub fn new(id: usize) -> Option<Self> {
         if id < NUM_TOTAL_RECORDS {
             Some(RecipeId(id))
-        }else{
+        } else {
             None
         }
+    }
+
+    pub fn new_unchecked(id: usize) -> Self {
+        RecipeId(id)
     }
 }
 
@@ -25,23 +29,23 @@ impl From<RecipeInputs> for RecipeId {
         // This is the inverse of RecipeInputs::from(RecipeId)
         let mut output = 0usize;
         // reconstruct rest_items to be at the beginning of last iteration
-        let mut item_lower_bound = NUM_GROUPS - items[NUM_INGR-2].id();
+        let mut item_lower_bound = NUM_GROUPS - items[NUM_INGR - 2].id();
 
         // reverse the iterations
         for item in 0..NUM_INGR {
             // compute index
-            let reverse_item = NUM_INGR-1-item;
-            let m = items[reverse_item].id()+1;
+            let reverse_item = NUM_INGR - 1 - item;
+            let m = items[reverse_item].id() + 1;
             let mut index = 0usize;
-            for reverse_m in NUM_GROUPS-item_lower_bound+1..m {
-                index += multichoose(NUM_GROUPS-reverse_m+1, item);
+            for reverse_m in NUM_GROUPS - item_lower_bound + 1..m {
+                index += multichoose(NUM_GROUPS - reverse_m + 1, item);
             }
             // add to output (reverse input -= index)
             output += index;
             // recover rest_items to beginning of last iteration
             if reverse_item > 1 {
-                item_lower_bound = NUM_GROUPS-items[reverse_item-2].id();
-            }else{
+                item_lower_bound = NUM_GROUPS - items[reverse_item - 2].id();
+            } else {
                 item_lower_bound = NUM_GROUPS;
             }
         }
@@ -80,7 +84,7 @@ impl RecipeInputs {
         for i in 0..NUM_INGR {
             if i < len {
                 items[i] = groups[i];
-            }else{
+            } else {
                 items[i] = Group::None;
             }
         }
@@ -91,12 +95,12 @@ impl RecipeInputs {
         Self::from_groups(&groups)
     }
     pub fn to_names(&self) -> Vec<&str> {
-        self.iter().filter_map(|x|
-            match x.first_actor() {
+        self.iter()
+            .filter_map(|x| match x.first_actor() {
                 Actor::None => None,
-                actor => Some(actor.name())
-            }
-        ).collect()
+                actor => Some(actor.name()),
+            })
+            .collect()
     }
 
     pub fn as_slice(&self) -> &[Group] {
@@ -127,26 +131,30 @@ impl From<RecipeId> for RecipeInputs {
         let mut rest = id.into();
         // how many items are left (since the inputs are ascending)
         let mut item_lower_bound = NUM_GROUPS;
-        
+
         for slot in 0..NUM_INGR {
             let mut good = false;
             // compute the slot-th item in the input array
             let mut index = 0usize;
-            for m in NUM_GROUPS-item_lower_bound+1..NUM_GROUPS+1 {
+            for m in NUM_GROUPS - item_lower_bound + 1..NUM_GROUPS + 1 {
                 // does m overshot rest of the id
-                let next_block_size = multichoose(NUM_GROUPS-m+1, NUM_INGR-1-slot);
+                let next_block_size = multichoose(NUM_GROUPS - m + 1, NUM_INGR - 1 - slot);
                 if index + next_block_size > rest {
                     // safety: the loop has upper bound NUM_GROUPS+1, so m-1 < NUM_GROUPS
-                    items[slot] = Group::from_id_unchecked(m-1);
+                    items[slot] = Group::from_id_unchecked(m - 1);
                     good = true;
                     break;
                 }
                 index += next_block_size;
             }
             if !good {
-                panic!("bad recipe id: {}, when processing slot {}", usize::from(id), slot);
+                panic!(
+                    "bad recipe id: {}, when processing slot {}",
+                    usize::from(id),
+                    slot
+                );
             }
-            item_lower_bound=NUM_GROUPS-items[slot].id();
+            item_lower_bound = NUM_GROUPS - items[slot].id();
             rest -= index;
         }
 

@@ -4,19 +4,15 @@ version = "0.0.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.86"
 clap = { version = "=4.5.4", features = ["derive"] }
 num_cpus = "1.16.0"
-
-[dependencies.rcook]
-package = "botw-recipe-cook"
-path = "../../app/cook"
+serde_yaml = "0.9.34"
+threadpool = "1.8.1"
 
 [dependencies.rdata]
 package = "botw-recipe-data"
 path = "../../app/data"
-
-[features]
-compact = ["rcook/rng-hp"]
 
 [[bin]]
 name = "rdump"

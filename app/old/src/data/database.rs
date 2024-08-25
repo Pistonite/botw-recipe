@@ -1,6 +1,6 @@
+use positioned_io::RandomAccessFile;
 use std::fs::File;
 use std::io::BufReader;
-use positioned_io::RandomAccessFile;
 
 use super::RecipeData;
 use super::{CHUNK_SIZE, RECORD_SIZE};
@@ -9,7 +9,7 @@ use crate::sys;
 
 struct Chunk {
     path: String,
-    file: RandomAccessFile
+    file: RandomAccessFile,
 }
 
 impl Chunk {
@@ -17,9 +17,12 @@ impl Chunk {
         let mut buf = [0; 2];
         let read_size = sys::read_random_access_file(&self.path, &self.file, offset, &mut buf)?;
         if read_size != RECORD_SIZE {
-            return Err(format!("error reading db: unexpected record size {}", read_size));
+            return Err(format!(
+                "error reading db: unexpected record size {}",
+                read_size
+            ));
         }
-    
+
         Ok(RecipeData::from_bytes(&buf))
     }
 }

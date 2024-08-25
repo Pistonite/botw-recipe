@@ -12,11 +12,15 @@ pub use exclude::exclude_remove;
 
 pub fn get_u32_arg(cmd: &[&str], arg_name: &str) -> Result<u32, String> {
     if cmd.len() < 2 {
-        return Err(format!("Error: command needs 1 non-negative integer argument: {}", arg_name));
+        return Err(format!(
+            "Error: command needs 1 non-negative integer argument: {}",
+            arg_name
+        ));
     }
 
     let arg = cmd[1];
-    arg.parse().map_err(|_| format!("Error: {} must be non-negative integer: {}", arg_name, arg))
+    arg.parse()
+        .map_err(|_| format!("Error: {} must be non-negative integer: {}", arg_name, arg))
 }
 
 pub fn get_arg(cmd: &[&str], arg_name: &str) -> Result<String, String> {
@@ -27,9 +31,16 @@ pub fn get_arg(cmd: &[&str], arg_name: &str) -> Result<String, String> {
     Ok(String::from(cmd[1]))
 }
 
-pub fn get_arg_pair(cmd: &[&str], arg_name1: &str, arg_name2: &str) -> Result<(String,String), String> {
+pub fn get_arg_pair(
+    cmd: &[&str],
+    arg_name1: &str,
+    arg_name2: &str,
+) -> Result<(String, String), String> {
     if cmd.len() < 3 {
-        return Err(format!("Error: command needs 2 arguments: {} and {}", arg_name1, arg_name2));
+        return Err(format!(
+            "Error: command needs 2 arguments: {} and {}",
+            arg_name1, arg_name2
+        ));
     }
 
     Ok((String::from(cmd[1]), String::from(cmd[2])))

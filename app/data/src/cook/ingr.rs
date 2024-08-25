@@ -1,13 +1,12 @@
 use std::collections::HashMap;
 
 use enum_map::EnumMap;
-use rdata::cook::CookEffect;
-use rdata::Actor;
 use serde::{Deserialize, Serialize};
 
-use crate::tag::Tag;
-use crate::Error;
+use super::{CookEffect, Error, Tag};
+use crate::Actor;
 
+/// Ingredient data (associated with every actor)
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct Ingredient {
     /// The actor corresponding to the ingredient
@@ -27,8 +26,6 @@ pub struct Ingredient {
     /// cureItemEffectType
     pub effect: CookEffect,
     /// cureItemEffectiveTime
-    ///
-    /// This is the effect time in frames
     pub effect_time: i32,
     /// cureItemHitPointRecover
     pub hp: i32,
@@ -45,16 +42,24 @@ pub struct Ingredient {
 pub type Ingredients = EnumMap<Actor, Ingredient>;
 
 pub fn read_ingredients() -> Result<Ingredients, Error> {
-    let data = include_str!("../../../research/output/actor-data.yaml");
+    let data = include_str!("../../../../research/output/actor-data.yaml");
     let data: HashMap<String, IngrData> = serde_yaml::from_str(data)?;
     let mut error = vec![];
     let map = Ingredients::from_fn(|actor| {
-        match data.get(actor.actor_name()) {
+        if actor == Actor::None {
+            return Ingredient {
+                actor,
+                ..Default::default()
+            };
+        }
+        let result = match data.get(actor.actor_name()) {
             Some(ingr) => ingr.extend(actor),
-            None => {
-                if actor != Actor::None {
-                    error.push(actor);
-                }
+            None => Err(Error::ItemNotFound(actor.actor_name().to_string())),
+        };
+        match result {
+            Ok(ingr) => ingr,
+            Err(e) => {
+                error.push(e);
                 Ingredient {
                     actor,
                     ..Default::default()
@@ -87,14 +92,21 @@ struct IngrData {
 }
 
 impl IngrData {
-    pub fn extend(&self, actor: Actor) -> Ingredient {
-        let recipe_tags = self.tags.iter().filter(|x| x.is_probably_useful()).collect::<Vec<_>>();
+    pub fn extend(&self, actor: Actor) -> Result<Ingredient, Error> {
+        let recipe_tags = self
+            .tags
+            .iter()
+            .filter(|x| x.is_probably_useful())
+            .collect::<Vec<_>>();
         if recipe_tags.len() > 1 {
-            panic!("Actor {:?} has multiple recipe tags: {:?}", actor, recipe_tags);
+            return Err(Error::Data(format!(
+                "Actor {:?} has multiple recipe tags: {:?}",
+                actor, recipe_tags
+            )));
         }
         let recipe_tag = recipe_tags.get(0).map(|x| **x).unwrap_or_default();
 
-        Ingredient {
+        Ok(Ingredient {
             actor,
             boost_effect_time: self.cook_spice_boost_effective_time,
             boost_hp: self.cook_spice_boost_hit_point_recover,
@@ -109,6 +121,6 @@ impl IngrData {
             sell_price: self.item_selling_price,
             tags: self.tags.clone(),
             recipe_tag,
-        }
+        })
     }
 }
