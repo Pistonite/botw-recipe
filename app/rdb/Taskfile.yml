@@ -16,6 +16,10 @@ tasks:
     - npx tauri dev
 
   build-js:
-    desc: Build RDB Frontend
     cmds:
     - npx tsc && npx vite build
+
+  build:
+    desc: Build RDB (release) binary
+    cmds:
+    - npx tauri build

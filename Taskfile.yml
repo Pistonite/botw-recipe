@@ -71,35 +71,34 @@ tasks:
     - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
 
   check:
-    dir: dump/tools
-    aliases: [c]
-    desc: Check dumps
+    dir: dump/emulate
+    desc: Check dumped data against sane values and compare dumps from console and emulate
     cmds:
     - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
 
   cook:
-    dir: dump/tools
+    dir: dump/emulate
     desc: Cook a recipe with emulator. Separate ingredients with commas
     cmds:
     - cargo run --bin cook-cli --quiet -- {{.CLI_ARGS}}
 
   cook-debug:
-    dir: app/cook
+    dir: dump/emulate
     desc: Cook a recipe in debug mode
     cmds:
-    - cargo run --bin cook-cli --features debug-print {{.CLI_ARGS}}
+    - cargo run --bin cook-cli --features debug-print -- {{.CLI_ARGS}}
 
   compact:
     dir: dump/emulate
     desc: Dump compact DB
     cmds:
     - cargo run --release --bin rdump --quiet -- --compact
-   # - task: compact-optimize
 
-  compact-optimize:
-    dir: dump/tools
+  read-test:
+    dir: dump/emulate
+    desc: Test database reading implementation
     cmds:
-    - cargo run --release --bin compact --quiet -- --keep
+    - cargo run --release --bin test-read --quiet
 
 
 

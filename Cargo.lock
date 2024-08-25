@@ -270,18 +270,6 @@ dependencies = [
  "anyhow",
  "botw-recipe-data",
  "clap",
- "num_cpus",
- "serde_yaml",
- "threadpool",
-]
-
-[[package]]
-name = "botw-recipe-dump-tools"
-version = "0.0.0"
-dependencies = [
- "anyhow",
- "botw-recipe-data",
- "clap",
  "distance",
  "enum-map",
  "filetime",

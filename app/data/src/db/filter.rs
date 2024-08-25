@@ -1,6 +1,7 @@
 use crate::wmc::WeaponModifierSet;
 
 /// Filter for records
+#[derive(Debug, Clone)]
 pub struct Filter {
     pub min_value: i32,
     pub max_value: i32,

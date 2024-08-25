@@ -1,10 +1,11 @@
 use std::fs::File;
 use std::io::BufReader;
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 use crate::cook::CookingPot;
 
-use super::{Error, Index};
+use super::{Chunk, Error, Filter, FilteredChunk, Index};
 
 /// Main database handle
 pub struct Database {
@@ -13,7 +14,7 @@ pub struct Database {
     /// The index data. i-th element corresponds to the i-th chunk
     index: Box<[Index]>,
     /// The cooker, in case we need more information on crit
-    pot: CookingPot,
+    pot: Arc<CookingPot>,
 }
 
 impl Database {
@@ -27,7 +28,15 @@ impl Database {
         let reader = BufReader::new(File::open(&index_path)?);
         let index: Vec<Index> = serde_yaml::from_reader(reader)?;
 
-        let pot = CookingPot::new()?;
+        if index.len() != crate::COMPACT_CHUNK_COUNT {
+            return Err(Error::InvalidDatabase(format!(
+                "Invalid chunk count: {} != {}",
+                index.len(),
+                crate::COMPACT_CHUNK_COUNT
+            )));
+        }
+
+        let pot = Arc::new(CookingPot::new()?);
 
         Ok(Self {
             path,
@@ -36,14 +45,36 @@ impl Database {
         })
     }
 
-    pub fn open_chunk(&self, chunk_id: usize) -> Result<BufReader<File>, Error> {
-        let chunk_path = self.path.join(format!("chunk-{}.db", chunk_id));
+    pub fn chunk_count(&self) -> usize {
+        crate::COMPACT_CHUNK_COUNT
+    }
+
+    pub fn open_chunk(&self, chunk_id: usize) -> Result<Chunk, Error> {
+        let chunk_path = self.path.join(format!("chunk_{}.rdb", chunk_id));
         if !chunk_path.exists() {
             return Err(Error::InvalidDatabase(format!(
-                "chunk-{}.db not found",
+                "Cannot find chunk_{}.rdb",
                 chunk_id
             )));
         }
-        Ok(BufReader::new(File::open(chunk_path)?))
+        Ok(Chunk::open(chunk_id, chunk_path)?)
+    }
+
+    pub fn open_filtered_chunk(
+        &self,
+        chunk_id: usize,
+        filter: &Filter,
+    ) -> Result<Option<FilteredChunk>, Error> {
+        if self.index[chunk_id].can_skip(filter) {
+            return Ok(None);
+        }
+        Ok(Some(
+            self.open_chunk(chunk_id)?
+                .filter(filter, Arc::clone(&self.pot)),
+        ))
+    }
+
+    pub fn pot(&self) -> Arc<CookingPot> {
+        Arc::clone(&self.pot)
     }
 }

@@ -4,6 +4,5 @@ members = [
     "app/old",
     "app/rdb/src-tauri",
     "dump/emulate",
-    "dump/tools"
 ]
 resolver = "2"

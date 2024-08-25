@@ -7,7 +7,7 @@ use std::{
 
 use crate::{cook::CookingPot, generated::get_compact_chunk_record_size, recipe::RecipeId};
 
-use super::{Error, Filter, PositionedRecord, Record};
+use super::{Error, Filter, PositionedRecord};
 
 /// Chunk for sequential access
 pub struct Chunk {
@@ -28,11 +28,23 @@ impl Chunk {
                 file_size
             )));
         }
+        let mut reader = BufReader::new(file);
+        let recipe_next = if chunk_id == 0 {
+            // 0 corresponds to 5 of <none>, skip 2 bytes
+            reader.read_exact(&mut [0; 2])?;
+            1
+        } else {
+            chunk_id * crate::COMPACT_CHUNK_SIZE
+        };
         Ok(Self {
-            reader: BufReader::new(file),
-            recipe_next: chunk_id * crate::COMPACT_CHUNK_SIZE,
-            recipe_end: total,
+            reader,
+            recipe_next,
+            recipe_end: chunk_id * crate::COMPACT_CHUNK_SIZE + total,
         })
+    }
+
+    pub fn filter(self, filter: &Filter, pot: Arc<CookingPot>) -> FilteredChunk {
+        FilteredChunk::new(self, filter.clone(), pot)
     }
 }
 
@@ -45,7 +57,12 @@ impl Iterator for Chunk {
         }
         let mut buf = [0; 2];
         match self.reader.read_exact(&mut buf) {
-            Err(e) => Some(Err(e.into())),
+            Err(e) => {
+                // increment recipe_next so we don't get stuck on
+                // the underlying IO error
+                self.recipe_next += 1;
+                Some(Err(e.into()))
+            }
             Ok(_) => {
                 let recipe_id = self.recipe_next;
                 self.recipe_next += 1;
