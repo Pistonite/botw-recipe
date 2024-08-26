@@ -162,6 +162,10 @@ struct Options {
     /// Compare all chunks instead of only valid ones
     #[clap(short, long)]
     all: bool,
+
+    /// Don't print errors
+    #[clap(short, long)]
+    silent: bool,
 }
 
 fn chunk_path(path: &Path, i: usize) -> PathBuf {
@@ -328,13 +332,16 @@ impl Check {
                         "----- deleted chunk {i}"
                     );
                 } else {
-                    print_status!(
-                        checked,
-                        rdata::CHUNK_COUNT,
-                        label,
-                        "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
-                        meta_file_size
-                    );
+                    if !options.silent {
+                        print_status!(
+                            checked,
+                            rdata::CHUNK_COUNT,
+                            label,
+                            "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
+                            meta_file_size
+                        );
+                    }
+                    
                 }
                 continue;
             }
@@ -377,12 +384,15 @@ impl Check {
                             "----- deleted chunk {i}"
                         );
                     } else {
-                        print_status!(
-                            checked,
-                            rdata::CHUNK_COUNT,
-                            label,
-                            "Chunk {i} failed: {err}"
-                        );
+                        if !self.options.silent {
+                            print_status!(
+                                checked,
+                                rdata::CHUNK_COUNT,
+                                label,
+                                "Chunk {i} failed: {err}"
+                            );
+                        }
+                        
                         if let Error::InvalidRecord(record, reason, data) = err {
                             let recipe_id = i * rdata::CHUNK_SIZE + record;
                             let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();
@@ -404,6 +414,8 @@ impl Check {
         if !errors_to_emit.is_empty() {
             let errors = serde_json::to_string_pretty(&errors_to_emit).unwrap();
             std::fs::write(&errors_path, errors)?;
+            println!();
+            println!("errors found");
         } else {
             if errors_path.exists() {
                 std::fs::remove_file(&errors_path)?;
@@ -460,7 +472,9 @@ impl Check {
                     print_status!(checked, total, label);
                 }
                 Err(err) => {
-                    print_status!(checked, total, label, "Chunk {i} failed: {err}");
+                    if !self.options.silent {
+                        print_status!(checked, total, label, "Chunk {i} failed: {err}");
+                    }
                     match err {
                         Error::Mismatch(record, data_e, data_c, matched_count) => {
                             matched += matched_count;
@@ -483,6 +497,8 @@ impl Check {
         pool.join();
         let errors_path = Path::new("mismatch.json");
         if !errors_to_emit.is_empty() {
+            println!();
+            println!("mismatches found");
             let errors = serde_json::to_string_pretty(&errors_to_emit).unwrap();
             std::fs::write(&errors_path, errors)?;
         } else {
