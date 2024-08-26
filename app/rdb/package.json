@@ -4,16 +4,25 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
+    "@fluentui/react-components": "^9.54.13",
+    "@fluentui/react-icons": "^2.0.255",
+    "@pistonite/pure": "npm:@jsr/pistonite__pure@^0.0.3",
+    "@reduxjs/toolkit": "^2.2.7",
+    "@tauri-apps/api": "^1",
+    "i18next": "^23.14.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@tauri-apps/api": "^1"
+    "react-i18next": "^15.0.1",
+    "react-redux": "^9.1.2",
+    "reselect": "^5.1.1"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",
+    "i18next-parser": "^9.0.2",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1",
-    "@tauri-apps/cli": "^1"
+    "vite": "^5.3.1"
   }
 }

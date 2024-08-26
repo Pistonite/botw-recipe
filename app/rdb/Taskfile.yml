@@ -12,14 +12,23 @@ tasks:
 
   dev:
     desc: Run RDB in dev (watch) mode
+    env:
+      RUST_LOG: info
+      BOTWRDB_PATH: ../../../dump/emulate/compact
     cmds:
     - npx tauri dev
-
-  build-js:
-    cmds:
-    - npx tsc && npx vite build
 
   build:
     desc: Build RDB (release) binary
     cmds:
     - npx tauri build
+
+  dev-js:
+    cmds:
+    - npx vite
+
+  build-js:
+    cmds:
+    - npx tsc && npx vite build
+
+

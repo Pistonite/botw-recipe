@@ -226,6 +226,21 @@ def gen_group_enum(o, actor_to_name, groups, actor_pe_only):
 
     o.write("}}\n")
 
+    write_doc_comment(o, "Get the actors in the group")
+    o.write("pub fn actors(&self) -> &'static [Actor] {\n")
+    o.write("match self {\n")
+    o.write("Self::None => &[],\n")
+    for i in range(1, len(groups)):
+        id = str(i)
+        actors = groups[id]
+        name = group_names[id]
+        o.write(f"Self::{name} => &[")
+        for actor in actors:
+            o.write(f"Actor::{actor}, ")
+        o.write("],\n")
+
+    o.write("}}\n")
+
     write_doc_comment(o, "Get if any actor in the group is only holdable with PE")
     o.write("pub const fn any_pe_only(&self) -> bool {\n")
     o.write("match self {\n")
@@ -267,6 +282,7 @@ def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     write_doc_comment(o, "Ingredients (actors)")
     o.write("#[derive(enum_map::Enum, serde::Serialize, serde::Deserialize, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]\n")
     o.write("#[allow(non_camel_case_types)]\n")
+    o.write("#[repr(usize)]\n")
     o.write("pub enum Actor {\n")
     o.write("    #[default]\n")
     o.write("    None,\n")

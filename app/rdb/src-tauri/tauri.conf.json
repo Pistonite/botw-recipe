@@ -1,6 +1,6 @@
 {
   "build": {
-    "beforeDevCommand": "task dev",
+    "beforeDevCommand": "task dev-js",
     "beforeBuildCommand": "task build-js",
     "devPath": "http://localhost:1420",
     "distDir": "../dist"
@@ -19,8 +19,9 @@
     },
     "windows": [
       {
-        "title": "tauri-app",
-        "width": 800,
+        "title": "Loading...",
+        "url": "index-tauri.html",
+        "width": 1000,
         "height": 600
       }
     ],

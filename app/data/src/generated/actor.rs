@@ -20,6 +20,7 @@ use super::Group;
     Hash,
 )]
 #[allow(non_camel_case_types)]
+#[repr(usize)]
 pub enum Actor {
     #[default]
     None,

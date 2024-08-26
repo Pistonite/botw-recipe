@@ -1,7 +1,10 @@
+use serde::{Deserialize, Serialize};
+
 use crate::wmc::WeaponModifierSet;
 
 /// Filter for records
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Filter {
     pub min_value: i32,
     pub max_value: i32,
