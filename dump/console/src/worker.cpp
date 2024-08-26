@@ -59,12 +59,15 @@ void worker_main(void*) {
         update_screen(0, '8');
         trap();
     }
+
     uint64_t chunk_start = parse_int(buf);
     uint64_t chunk_count = parse_int(buf + 4);
     if (chunk_start >= CHUNK_COUNT || chunk_start + chunk_count > CHUNK_COUNT) {
         update_screen(0, '9');
         trap();
     }
+
+    nn::fs::CloseFile(cfg_handle);
     update_config(chunk_start, chunk_count);
     update_screen(chunk_start, 'R');
     for (int i = 5; i >= 0; i--) {
@@ -162,6 +165,7 @@ void worker_main(void*) {
         if (error) {
             break;
         }
+        close_chunk(handle);
     }
     if (!error) {
         update_record_count(CHUNK_SIZE);
