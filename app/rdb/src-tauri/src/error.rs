@@ -40,7 +40,6 @@ impl<T: Serialize> From<Result<T, Error>> for ResultInterop<T> {
     }
 }
 
-
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("lock was poisoned: {0}")]
@@ -57,7 +56,6 @@ pub enum Error {
     InvalidSearchResult,
     #[error("{0}")]
     Generic(String),
-
 }
 
 impl<T> From<PoisonError<T>> for Error {

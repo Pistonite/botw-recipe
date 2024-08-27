@@ -1,0 +1,47 @@
+version: '3'
+
+tasks:
+  upload:
+    desc: Upload dumper mod to the console
+    cmds:
+    - lftp $CONSOLE_ADDR < scripts/lftp-upload.sh
+
+  configure:
+    desc: "Configure the console dump. Args: START END"
+    cmds:
+    - python scripts/config.py {{.CLI_ARGS}}
+    - lftp $CONSOLE_ADDR < scripts/lftp-config.sh
+
+  build:
+    cmds:
+    - megaton
+
+  download:
+    dir: dump/console
+    desc: Download dumps from console and rename them
+    cmds:
+    - mkdir -p raw
+    - lftp $CONSOLE_ADDR < scripts/lftp-download.sh
+    - task: rename
+
+  rename:
+    dir: dump/console
+    desc: Rename dumps form console
+    cmds:
+    - python scripts/rename.py {{.CLI_ARGS}}
+
+  package:
+    dir: dump/console
+    desc: Package the mod
+    vars:
+      MOD_DIR: "target/package/mods/The Legend of Zelda - Breath of the Wild/Recipe Dumper/contents/01007EF00011E000"
+    cmds:
+      - megaton
+      - rm -rf target/package/mods
+      - mkdir -p "{{.MOD_DIR}}/exefs"
+      - mkdir -p "{{.MOD_DIR}}/romfs"
+      - cp target/megaton/none/main.npdm "{{.MOD_DIR}}/exefs/main.npdm"
+      - cp target/megaton/none/botwrdump.nso "{{.MOD_DIR}}/exefs/subsdk9"
+      - mkdir -p target/package/botwrdump
+      - echo "" > target/package/botwrdump/.keep
+      - cd target/package && zip -r ../botwrdump.zip .

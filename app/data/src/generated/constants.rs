@@ -33,21 +33,13 @@ pub const LAST_CHUNK_SIZE: usize = 51602;
 ///
 /// MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
 /// Number of records in each chunk except last in the compact DB
-pub const COMPACT_CHUNK_SIZE: usize = 4096000;
+pub const COMPACT_CHUNK_SIZE: usize = 2048000;
 
 /// Number of chunks in the compact DB
-pub const COMPACT_CHUNK_COUNT: usize = 441;
+pub const COMPACT_CHUNK_COUNT: usize = 882;
 
 /// Number of records in the last chunk in the compact DB
-pub const COMPACT_LAST_CHUNK_SIZE: usize = 3328402;
-
-/// Element size of the crit DB in number of `u32`s
-pub const CRIT_DB_U32_SIZE: usize = 56424013;
-
-pub const CRIT_DB_BYTE_SIZE: usize = 225696052;
-
-/// Number of `u32`s in each chunk of the crit DB
-pub const CRIT_DB_U32_PER_CHUNK: usize = 128000;
+pub const COMPACT_LAST_CHUNK_SIZE: usize = 1280402;
 
 pub(crate) const MULTICHOOSE: [[usize; NUM_INGR + 1]; NUM_GROUPS + 1] = [
     [1, 0, 0, 0, 0, 0],

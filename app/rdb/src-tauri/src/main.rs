@@ -6,28 +6,26 @@ use std::collections::HashSet;
 use std::ops::Deref;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicUsize};
-use std::sync::{Arc, LazyLock, OnceLock, RwLock};
 use std::sync::mpsc;
+use std::sync::{Arc, LazyLock, OnceLock, RwLock};
 
 use enum_map::{Enum, EnumMap};
 use file_io::save_search_result;
 use itertools::Itertools;
-use log::{info, error};
+use log::{error, info};
+use rdata::db::{Database, Filter};
 use rdata::recipe::{RecipeId, RecipeInputs};
 use rdata::wmc::WeaponModifierSet;
 use rdata::{Actor, Group};
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Manager, State};
-use rdata::db::{Database, Filter};
 
-mod executor;
 mod error;
+mod executor;
 mod file_io;
 
-use executor::Executor;
 use error::{Error, ResultInterop};
-
-
+use executor::Executor;
 
 /// Tauri app global state
 struct Global {
@@ -70,7 +68,7 @@ struct SearchComplete {
     /// Number of recipes found
     result_count: usize,
     /// Actors in those recipes
-    /// 
+    ///
     /// Position corresponds to actor id, value to the number of recipes
     actors: Vec<usize>,
 }
@@ -99,10 +97,10 @@ fn emit_filter_complete(app: &AppHandle, result: ResultInterop<FilterComplete>) 
 #[derive(Debug, Clone, Deserialize)]
 struct InitArg {
     /// Localized window title
-    title: String
+    title: String,
 }
 /// Run initialization in worker threads.
-/// 
+///
 /// JS side should call this after UI load, and prevent calling other commands
 /// until the `initialized` event is received. Otherwise, accessing DB could
 /// block the main thread.
@@ -126,11 +124,10 @@ fn abort(handle: usize, state: State<Global>) -> ResultInterop<()> {
     state.executor.abort(handle).into()
 }
 
-
 /// Starts a DB linear search with the given filter.
 /// Returns a list of handles to abort the search by calling the abort command
 /// for each handle.
-/// 
+///
 /// The search is optimized by skipping chunks that are filtered by index.
 /// The result is emitted through the `search-complete` event. If the event
 /// returns an error, JS side owns aborting the search. JS side should also
@@ -163,7 +160,7 @@ fn search_impl(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<
                         }
                     }
                     result_recipes.extend(recipes);
-                },
+                }
                 Err(err) => {
                     error!("error while searching: {}", err);
                     emit_search_complete(&app, ResultInterop::err(err));
@@ -179,10 +176,13 @@ fn search_impl(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<
             return;
         }
         let actors = actors.into_values().collect();
-        emit_search_complete(&app, ResultInterop::ok(SearchComplete {
-            result_count: result_recipes.len(),
-            actors,
-        }));
+        emit_search_complete(
+            &app,
+            ResultInterop::ok(SearchComplete {
+                result_count: result_recipes.len(),
+                actors,
+            }),
+        );
     });
     for chunk_id in 0..db.chunk_count() {
         let chunk = db.open_filtered_chunk(chunk_id, filter)?;
@@ -236,41 +236,53 @@ fn search_impl(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<
 
 /// Execute filtering on the search result based on what actors should be included.
 /// The filter results are returned through the `filter-complete` event.
-/// 
+///
 /// JS side must ensure that only one filtering is being executed at a time (i.e.
 /// `filter_actors` should not be called before `filter-complete` event is received)
 #[tauri::command]
 fn filter_actors(filter: Vec<usize>, app: AppHandle, state: State<Global>) -> ResultInterop<()> {
-    let mut filter = filter.into_iter().map(Actor::from_usize).collect::<HashSet<_>>();
+    let mut filter = filter
+        .into_iter()
+        .map(Actor::from_usize)
+        .collect::<HashSet<_>>();
     // always include "none" i.e. the empty space
     filter.insert(Actor::None);
     filter_actors_impl(&Arc::new(filter), app, state).into()
 }
 
-fn filter_actors_impl(filter: &Arc<HashSet<Actor>>, app: AppHandle, state: State<Global>) -> Result<(), Error> {
+fn filter_actors_impl(
+    filter: &Arc<HashSet<Actor>>,
+    app: AppHandle,
+    state: State<Global>,
+) -> Result<(), Error> {
     info!("filtering actors: {:?}", filter);
     let mut filter_state = state.filter.write()?;
     // if the new filter is a subset of the last filter, we can reuse the results
-    if filter_state.is_result_loaded &&   filter.intersection(&filter_state.last_filter).copied().collect::<HashSet<_>>() == **filter {
-            info!("reusing filtered results from last filtering");
-            // use the filtered results
-            let results = std::mem::take(&mut filter_state.filtered_results);
-            filter_actors_with_iter(results, filter, app, &state)?;
-
+    if filter_state.is_result_loaded
+        && filter
+            .intersection(&filter_state.last_filter)
+            .copied()
+            .collect::<HashSet<_>>()
+            == **filter
+    {
+        info!("reusing filtered results from last filtering");
+        // use the filtered results
+        let results = std::mem::take(&mut filter_state.filtered_results);
+        filter_actors_with_iter(results, filter, app, &state)?;
     } else {
         info!("filtering from scratch from search result");
         // load the filtered results from saved search result
         let reader = file_io::open_search_result()?;
-        filter_actors_with_iter(
-            reader.map_while(|x| x.ok()), 
-            filter, app, &state)?;
-
+        filter_actors_with_iter(reader.map_while(|x| x.ok()), filter, app, &state)?;
     }
     Ok(())
 }
 
-fn filter_actors_with_iter<I: IntoIterator<Item=RecipeId>>(
-    iter: I, filter: &Arc<HashSet<Actor>>, app: AppHandle, state: &State<Global>
+fn filter_actors_with_iter<I: IntoIterator<Item = RecipeId>>(
+    iter: I,
+    filter: &Arc<HashSet<Actor>>,
+    app: AppHandle,
+    state: &State<Global>,
 ) -> Result<(), Error> {
     // chunking the recipes to 4096 to reduce scheduling overhead
     const CHUNK_SIZE: usize = 4096;
@@ -284,7 +296,7 @@ fn filter_actors_with_iter<I: IntoIterator<Item=RecipeId>>(
                 match result {
                     Ok(filtered) => {
                         recipes.extend(filtered);
-                    },
+                    }
                     Err(err) => {
                         emit_filter_complete(&app, ResultInterop::err(err));
                         return;
@@ -296,15 +308,15 @@ fn filter_actors_with_iter<I: IntoIterator<Item=RecipeId>>(
                 if let Ok(mut filter_state) = filter_state.write() {
                     filter_state.is_result_loaded = true;
                     filter_state.filtered_results.clear();
-                    filter_state.filtered_results.extend(recipes.iter().map(|info| info.recipe_id));
+                    filter_state
+                        .filtered_results
+                        .extend(recipes.iter().map(|info| info.recipe_id));
                     filter_state.last_filter.clear();
                     filter_state.last_filter.extend(filter.iter().copied());
                 }
             }
             info!("filtering complete, {} recipes found", recipes.len());
-            emit_filter_complete(&app, ResultInterop::ok(FilterComplete {
-                results: recipes,
-            }));
+            emit_filter_complete(&app, ResultInterop::ok(FilterComplete { results: recipes }));
         });
     }
     for chunk in &iter.into_iter().chunks(CHUNK_SIZE) {
@@ -339,7 +351,7 @@ fn filter_actors_with_iter<I: IntoIterator<Item=RecipeId>>(
                             value: result.data.health_recover,
                             price: result.data.sell_price,
                         };
-                        
+
                         filtered.push(info);
                         break;
                     }
@@ -352,7 +364,6 @@ fn filter_actors_with_iter<I: IntoIterator<Item=RecipeId>>(
     Ok(())
 }
 
-
 fn main() {
     env_logger::init();
     info!("starting application");
@@ -361,12 +372,11 @@ fn main() {
     info!("current working directory: {}", path.display());
 
     tauri::Builder::default()
-    .manage(Global {
-        executor: Executor::new(),
-        db: Arc::new(file_io::create_database()),
-        filter: Arc::new(RwLock::new(FilterState::default())),
-
-    })
+        .manage(Global {
+            executor: Executor::new(),
+            db: Arc::new(file_io::create_database()),
+            filter: Arc::new(RwLock::new(FilterState::default())),
+        })
         .invoke_handler(tauri::generate_handler![
             initialize,
             abort,

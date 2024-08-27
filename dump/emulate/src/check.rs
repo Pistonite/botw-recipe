@@ -341,7 +341,6 @@ impl Check {
                             meta_file_size
                         );
                     }
-                    
                 }
                 continue;
             }
@@ -392,7 +391,7 @@ impl Check {
                                 "Chunk {i} failed: {err}"
                             );
                         }
-                        
+
                         if let Error::InvalidRecord(record, reason, data) = err {
                             let recipe_id = i * rdata::CHUNK_SIZE + record;
                             let recipe_inputs = RecipeInputs::from_id(recipe_id).unwrap();

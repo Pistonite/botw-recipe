@@ -10,7 +10,6 @@ use rdata::recipe::RecipeId;
 use crate::error::Error;
 
 pub fn create_database() -> LazyLock<Result<Database, Error>> {
-    
     LazyLock::new(|| {
         let path = std::env::var("BOTWRDB_PATH").unwrap_or("database/".to_string());
         info!("opening database from {}", path);
@@ -24,12 +23,11 @@ pub fn create_database() -> LazyLock<Result<Database, Error>> {
     })
 }
 
-
 pub fn save_search_result(result: &[RecipeId]) -> Result<(), Error> {
     info!("saving search result to search_result.bin");
     let mut writer = BufWriter::new(File::create("search_result.bin")?);
     for id in result {
-            writer.write_all(&usize::from(*id).to_le_bytes())?;
+        writer.write_all(&usize::from(*id).to_le_bytes())?;
     }
     info!("search result saved");
     Ok(())

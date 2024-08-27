@@ -9,6 +9,10 @@ includes:
     taskfile: ./app/rdb
     dir: ./app/rdb
 
+  console:
+    taskfile: ./dump/console
+    dir: ./dump/console
+
 tasks:
   research:
     desc: Reproduce research
@@ -16,57 +20,9 @@ tasks:
     cmds:
     - python main.py {{.CLI_ARGS}}
 
-  upload:
-    dir: dump/console
-    desc: Upload dumper mod to the console
-    cmds:
-    - lftp $CONSOLE_ADDR < scripts/lftp-upload.sh
-
-  configure:
-    dir: dump/console
-    desc: "Configure the console dump. Args: START END"
-    cmds:
-    - python scripts/config.py {{.CLI_ARGS}}
-    - lftp $CONSOLE_ADDR < scripts/lftp-config.sh
-
-  megaton:
-    dir: dump/console
-    cmds:
-    - megaton
-
-  download:
-    dir: dump/console
-    desc: Download dumps from console and rename them
-    cmds:
-    - mkdir -p raw
-    - lftp $CONSOLE_ADDR < scripts/lftp-download.sh
-    - task: rename
-
-  rename:
-    dir: dump/console
-    desc: Rename dumps form console
-    cmds:
-    - python scripts/rename.py {{.CLI_ARGS}}
-
-  package:
-    dir: dump/console
-    desc: Package the mod
-    vars:
-      MOD_DIR: "target/package/mods/The Legend of Zelda - Breath of the Wild/Recipe Dumper/contents/01007EF00011E000"
-    cmds:
-      - megaton
-      - rm -rf target/package/mods
-      - mkdir -p "{{.MOD_DIR}}/exefs"
-      - mkdir -p "{{.MOD_DIR}}/romfs"
-      - cp target/megaton/none/main.npdm "{{.MOD_DIR}}/exefs/main.npdm"
-      - cp target/megaton/none/botwrdump.nso "{{.MOD_DIR}}/exefs/subsdk9"
-      - mkdir -p target/package/botwrdump
-      - echo "" > target/package/botwrdump/.keep
-      - cd target/package && zip -r ../botwrdump.zip .
-
   dump:
     dir: dump/emulate
-    desc: Dump using cooking.rs
+    desc: Dump using cooking simulator
     cmds:
     - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
 
@@ -88,31 +44,8 @@ tasks:
     cmds:
     - cargo run --bin cook-cli --features debug-print -- {{.CLI_ARGS}}
 
-  compact:
-    dir: dump/emulate
-    desc: Dump compact DB
-    cmds:
-    - cargo run --release --bin rdump --quiet -- --compact
-
   read-test:
     dir: dump/emulate
     desc: Test database reading implementation
     cmds:
     - cargo run --release --bin test-read --quiet
-
-
-
-#
-# tasks:
-#   build:
-#     aliases: [b]
-#     desc: Build the mod
-#     cmds:
-#       - megaton
-#
-#
-#   download:
-#     desc: Download logs and data from console
-#     cmds:
-#     - mkdir -p target/crash_reports/dumps
-#     - lftp $CONSOLE_ADDR < scripts/lftp-download.sh

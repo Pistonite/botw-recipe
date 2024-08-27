@@ -16,7 +16,7 @@ pub struct Executor {
     bg_pool: ThreadPool,
     next_abortable_id: AtomicUsize,
     abort_senders: Arc<RwLock<HashMap<usize, Abort>>>,
-    abort_finished: Arc<RwLock<HashSet<usize>>>
+    abort_finished: Arc<RwLock<HashSet<usize>>>,
 }
 
 impl Executor {
@@ -26,7 +26,7 @@ impl Executor {
             bg_pool: ThreadPool::new(num_cpus::get() / 2),
             next_abortable_id: AtomicUsize::new(0),
             abort_senders: Arc::new(RwLock::new(HashMap::new())),
-            abort_finished: Arc::new(RwLock::new(HashSet::new()))
+            abort_finished: Arc::new(RwLock::new(HashSet::new())),
         }
     }
     /// Get the underlying thread pool for executing non-abortable tasks directly
@@ -54,12 +54,12 @@ impl Executor {
     }
 
     /// Execute an abortable task.
-    /// 
+    ///
     /// The task must have its own implementation of checking the abort signal
     /// through the provided `oneshot::Receiver<()>`.
     pub fn execute_abortable<F>(&self, f: F) -> Result<usize, Error>
     where
-        F: FnOnce(Receiver<()>) + Send + 'static
+        F: FnOnce(Receiver<()>) + Send + 'static,
     {
         let id = self.next_id()?;
         let (send, recv) = oneshot::channel();
@@ -68,7 +68,7 @@ impl Executor {
             senders.insert(id, Abort(send));
         }
         let finished = Arc::clone(&self.abort_finished);
-        
+
         self.pool.execute(move || {
             // no check here - the task must check the abort signal
             // execute
@@ -86,7 +86,7 @@ impl Executor {
         {
             let senders = self.abort_senders.read()?;
             while senders.contains_key(&id) {
-                id =id.wrapping_add(1);
+                id = id.wrapping_add(1);
                 if id == first_id {
                     return Err(Error::ExecutorIdUnavailable);
                 }
@@ -99,7 +99,7 @@ impl Executor {
     }
 
     /// Abort a task.
-    /// 
+    ///
     /// Does nothing if the task is already completed, or doesn't exist
     pub fn abort(&self, handle_id: usize) -> Result<(), Error> {
         let mut senders = self.abort_senders.write()?;
