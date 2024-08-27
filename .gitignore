@@ -2,6 +2,7 @@
 *.db
 __pycache__
 *.zip
+*.7z
 /temp
 *.bin
 *.nso

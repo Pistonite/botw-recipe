@@ -116,25 +116,6 @@ def gen_numeric_constants(o, data):
     """)
     o.write(f"pub const COMPACT_LAST_CHUNK_SIZE: usize = {compact_last_chunk_size};\n\n")
 
-    # crit db int size and byte size
-    crit_db_int_size = total // 32
-    if total % 32 != 0:
-        crit_db_int_size += 1
-    print_field("crit_db_int_size", crit_db_int_size)
-    write_doc_comment(o, """
-        Element size of the crit DB in number of `u32`s
-    """)
-    o.write(f"pub const CRIT_DB_U32_SIZE: usize = {crit_db_int_size};\n\n")
-    print_field("crit_db_byte_size", crit_db_int_size * 4)
-    o.write(f"pub const CRIT_DB_BYTE_SIZE: usize = {crit_db_int_size * 4};\n\n")
-    crit_db_ints_per_chunk = compact_chunk_size // 32
-    util.assertion(compact_chunk_size % 32 == 0, "compact_chunk_size is divisible by 32")
-    print_field("crit_db_ints_per_chunk", crit_db_ints_per_chunk)
-    write_doc_comment(o, """
-        Number of `u32`s in each chunk of the crit DB
-    """)
-    o.write(f"pub const CRIT_DB_U32_PER_CHUNK: usize = {crit_db_ints_per_chunk};\n\n")
-
     o.write("pub(crate) const MULTICHOOSE: [[usize; NUM_INGR+1]; NUM_GROUPS+1] = [\n")
     multichoose = util.make_multichoose(data['num'])
     for multichoose_n in multichoose:

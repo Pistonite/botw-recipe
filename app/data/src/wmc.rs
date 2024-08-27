@@ -17,13 +17,13 @@ pub enum WeaponModifier {
     /// Multishot will be spread fire, and unless the bow is originally
     /// multishot, the spread will be very big. Multishot + Zoom
     /// will be focus shot instead of spread
-    AddSpreadFire = 0x10,
+    SpreadFire = 0x10,
     /// Zoom (bow).
-    AddZoom = 0x20,
+    Zoom = 0x20,
     /// Quick shot (bow)
-    AddRapidFire = 0x40,
+    RapidFire = 0x40,
     /// Slick shield
-    AddSurfMaster = 0x80,
+    SurfMaster = 0x80,
     /// Guard up (shield)
     AddGuard = 0x100,
     /// Yellow modifier

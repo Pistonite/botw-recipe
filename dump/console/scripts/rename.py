@@ -15,8 +15,7 @@ def copy(args):
     return filename, target, True
 
 if __name__ == "__main__":
-    arg = sys.argv[1]
-    keep = arg == "-k" or arg == "--keep"
+    keep = len(sys.argv) > 1 and (sys.argv[1] == "-k" or sys.argv[1] == "--keep")
 
     if not os.path.exists("raw"):
         exit(1)
