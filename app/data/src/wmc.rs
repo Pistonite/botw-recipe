@@ -5,11 +5,11 @@ use serde::{Deserialize, Serialize};
 pub enum WeaponModifier {
     None = 0,
     /// Attack up for swords/bows/shields (lynel)
-    AddAtk = 0x1,
+    AddPower = 0x1,
     /// Durability up
     AddLife = 0x2,
     /// Critical hit (sword)
-    AddCrit = 0x4,
+    Critical = 0x4,
     /// Long throw (sword)
     AddThrow = 0x8,
     /// Multishot (bow)

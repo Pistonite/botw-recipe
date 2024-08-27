@@ -71,6 +71,9 @@ def item_equivalent(item1, item2):
     item2 = actor_data[item2]
     if set(item1["tags"]) != set(item2["tags"]):
         return False
+    # If item has boostHitPointRecover, it can't be grouped
+    if item1["cookSpiceBoostHitPointRecover"] or item2["cookSpiceBoostHitPointRecover"]:
+        return False
     # If the item has any tag that's important in recipes, it should not be grouped
     for tag in item1["tags"]:
         if tag in non_group_tags:

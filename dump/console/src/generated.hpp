@@ -7,12 +7,12 @@
 
 #pragma once
 #include <cstdint>
-#define NUM_GROUPS 175
+#define NUM_GROUPS 183
 #define NUM_INGR 5
-#define NUM_TOTAL_RECORDS 1447490660
+#define NUM_TOTAL_RECORDS 1805568402
 #define CHUNK_SIZE 409600
-#define CHUNK_COUNT 3534
-#define LAST_CHUNK_SIZE 373860
+#define CHUNK_COUNT 4409
+#define LAST_CHUNK_SIZE 51602
 namespace botw::rdump {
 uint64_t multichoose(uint64_t n, uint64_t k);
 const char* actor_name(uint64_t group);

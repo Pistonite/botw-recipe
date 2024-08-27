@@ -64,8 +64,6 @@ To allow efficient processing, the database will be divided into smaller
 sequencial chunks. The chunk size is selected so that there aren't too many
 chunks, and each chunk efficiently uses disk space.
 
-The selected chunk size is `409600` records. There will be around 3500 chunks.
-
 ## Storage format
 Each chunk will be stored as a binary file. Each record will be stored as 
 a binary blob of 24 bytes, using C-layout and little endian for the fields.

@@ -1,8 +1,8 @@
-# Total Groups: 174
+# Total Groups: 182
 # Group Sizes:
-# - 145 groups with 1 item
+# - 157 groups with 1 item
 # - 15 groups with 2 items
-# - 11 groups with 3 items
+# - 7 groups with 3 items
 # - 1 groups with 4 items
 # - 1 groups with 5 items
 # - 1 groups with 16 items
@@ -803,8 +803,6 @@
     tags: [CookLowPrice, CookMaterial, CookSpice, Material]
 - actors:                               # GROUP 053
   - Item_Enemy_38                       # - Dinraal's Scale
-  - Item_Enemy_49                       # - Naydra's Scale
-  - Item_Enemy_53                       # - Farosh's Scale
   data:                                 
     cookSpiceBoostEffectiveTime: 60
     cookSpiceBoostHitPointRecover: 5
@@ -820,8 +818,6 @@
     tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
 - actors:                               # GROUP 054
   - Item_Enemy_39                       # - Dinraal's Claw
-  - Item_Enemy_50                       # - Naydra's Claw
-  - Item_Enemy_54                       # - Farosh's Claw
   data:                                 
     cookSpiceBoostEffectiveTime: 180
     cookSpiceBoostHitPointRecover: 8
@@ -837,8 +833,6 @@
     tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
 - actors:                               # GROUP 055
   - Item_Enemy_47                       # - Shard of Dinraal's Fang
-  - Item_Enemy_51                       # - Shard of Naydra's Fang
-  - Item_Enemy_55                       # - Shard of Farosh's Fang
   data:                                 
     cookSpiceBoostEffectiveTime: 600
     cookSpiceBoostHitPointRecover: 10
@@ -854,8 +848,6 @@
     tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
 - actors:                               # GROUP 056
   - Item_Enemy_48                       # - Shard of Dinraal's Horn
-  - Item_Enemy_52                       # - Shard of Naydra's Horn
-  - Item_Enemy_56                       # - Shard of Farosh's Horn
   data:                                 
     cookSpiceBoostEffectiveTime: 1800
     cookSpiceBoostHitPointRecover: 15
@@ -870,6 +862,126 @@
     itemSellingPrice: 300
     tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
 - actors:                               # GROUP 057
+  - Item_Enemy_49                       # - Naydra's Scale
+  data:                                 
+    cookSpiceBoostEffectiveTime: 60
+    cookSpiceBoostHitPointRecover: 5
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 600
+    itemSellingPrice: 150
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 058
+  - Item_Enemy_50                       # - Naydra's Claw
+  data:                                 
+    cookSpiceBoostEffectiveTime: 180
+    cookSpiceBoostHitPointRecover: 8
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 720
+    itemSellingPrice: 180
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 059
+  - Item_Enemy_51                       # - Shard of Naydra's Fang
+  data:                                 
+    cookSpiceBoostEffectiveTime: 600
+    cookSpiceBoostHitPointRecover: 10
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 1000
+    itemSellingPrice: 250
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 060
+  - Item_Enemy_52                       # - Shard of Naydra's Horn
+  data:                                 
+    cookSpiceBoostEffectiveTime: 1800
+    cookSpiceBoostHitPointRecover: 15
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 1200
+    itemSellingPrice: 300
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 061
+  - Item_Enemy_53                       # - Farosh's Scale
+  data:                                 
+    cookSpiceBoostEffectiveTime: 60
+    cookSpiceBoostHitPointRecover: 5
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 600
+    itemSellingPrice: 150
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 062
+  - Item_Enemy_54                       # - Farosh's Claw
+  data:                                 
+    cookSpiceBoostEffectiveTime: 180
+    cookSpiceBoostHitPointRecover: 8
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 720
+    itemSellingPrice: 180
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 063
+  - Item_Enemy_55                       # - Shard of Farosh's Fang
+  data:                                 
+    cookSpiceBoostEffectiveTime: 600
+    cookSpiceBoostHitPointRecover: 10
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 1000
+    itemSellingPrice: 250
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 064
+  - Item_Enemy_56                       # - Shard of Farosh's Horn
+  data:                                 
+    cookSpiceBoostEffectiveTime: 1800
+    cookSpiceBoostHitPointRecover: 15
+    cookSpiceBoostMaxHeartLevel: 0
+    cookSpiceBoostStaminaLevel: 0
+    cookSpiceBoostSuccessRate: 100
+    cureItemEffectLevel: 0
+    cureItemEffectType: None
+    cureItemEffectiveTime: 0
+    cureItemHitPointRecover: 0
+    itemBuyingPrice: 1200
+    itemSellingPrice: 300
+    tags: [CookLowPrice, CookMaterial, CookSpice, CookValue1, EnemyMaterial]
+- actors:                               # GROUP 065
   - Item_FishGet_I                      # - Hearty Salmon
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -884,7 +996,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 058
+- actors:                               # GROUP 066
   - Item_FishGet_K                      # - Hearty Blueshell Snail
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -899,7 +1011,7 @@
     itemBuyingPrice: 60
     itemSellingPrice: 15
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 059
+- actors:                               # GROUP 067
   - Item_FishGet_B                      # - Hearty Bass
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -914,7 +1026,7 @@
     itemBuyingPrice: 72
     itemSellingPrice: 18
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 060
+- actors:                               # GROUP 068
   - Item_FishGet_A                      # - Hyrule Bass
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -929,7 +1041,7 @@
     itemBuyingPrice: 24
     itemSellingPrice: 6
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 061
+- actors:                               # GROUP 069
   - Item_FishGet_L                      # - Staminoka Bass
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -944,7 +1056,7 @@
     itemBuyingPrice: 72
     itemSellingPrice: 18
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 062
+- actors:                               # GROUP 070
   - Item_FishGet_C                      # - Chillfin Trout
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -959,7 +1071,7 @@
     itemBuyingPrice: 24
     itemSellingPrice: 6
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 063
+- actors:                               # GROUP 071
   - Item_FishGet_J                      # - Sizzlefin Trout
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -974,7 +1086,7 @@
     itemBuyingPrice: 24
     itemSellingPrice: 6
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 064
+- actors:                               # GROUP 072
   - Item_FishGet_D                      # - Voltfin Trout
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -989,7 +1101,7 @@
     itemBuyingPrice: 24
     itemSellingPrice: 6
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 065
+- actors:                               # GROUP 073
   - Item_FishGet_X                      # - Stealthfin Trout
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1004,7 +1116,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 066
+- actors:                               # GROUP 074
   - Item_FishGet_E                      # - Mighty Carp
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1019,7 +1131,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 067
+- actors:                               # GROUP 075
   - Item_FishGet_H                      # - Armored Carp
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1034,7 +1146,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 068
+- actors:                               # GROUP 076
   - Item_FishGet_Z                      # - Sanke Carp
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1049,7 +1161,7 @@
     itemBuyingPrice: 80
     itemSellingPrice: 20
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 069
+- actors:                               # GROUP 077
   - Item_FishGet_F                      # - Mighty Porgy
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1064,7 +1176,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 070
+- actors:                               # GROUP 078
   - Item_FishGet_G                      # - Armored Porgy
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1079,7 +1191,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 071
+- actors:                               # GROUP 079
   - Item_FishGet_M                      # - Sneaky River Snail
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1094,7 +1206,7 @@
     itemBuyingPrice: 24
     itemSellingPrice: 6
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 072
+- actors:                               # GROUP 080
   - Item_InsectGet_K                    # - Razorclaw Crab
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1109,7 +1221,7 @@
     itemBuyingPrice: 32
     itemSellingPrice: 8
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 073
+- actors:                               # GROUP 081
   - Item_InsectGet_O                    # - Ironshell Crab
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1124,7 +1236,7 @@
     itemBuyingPrice: 32
     itemSellingPrice: 8
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 074
+- actors:                               # GROUP 082
   - Item_InsectGet_Z                    # - Bright-Eyed Crab
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1139,7 +1251,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookFish, CookMaterial]
-- actors:                               # GROUP 075
+- actors:                               # GROUP 083
   - Animal_Insect_F                     # - Fairy
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1154,7 +1266,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookMaterial, Fairy, TypeInsect]
-- actors:                               # GROUP 076
+- actors:                               # GROUP 084
   - Animal_Insect_N                     # - Winterwing Butterfly
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1169,7 +1281,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 077
+- actors:                               # GROUP 085
   - Animal_Insect_Q                     # - Summerwing Butterfly
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1184,7 +1296,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 078
+- actors:                               # GROUP 086
   - Animal_Insect_R                     # - Thunderwing Butterfly
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1199,7 +1311,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 079
+- actors:                               # GROUP 087
   - Animal_Insect_AB                    # - Smotherwing Butterfly
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1214,7 +1326,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 080
+- actors:                               # GROUP 088
   - Animal_Insect_C                     # - Cold Darner
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1229,7 +1341,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 081
+- actors:                               # GROUP 089
   - Animal_Insect_T                     # - Warm Darner
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1244,7 +1356,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 082
+- actors:                               # GROUP 090
   - Animal_Insect_I                     # - Electric Darner
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1259,7 +1371,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 083
+- actors:                               # GROUP 091
   - Animal_Insect_H                     # - Restless Cricket
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1274,7 +1386,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 084
+- actors:                               # GROUP 092
   - Animal_Insect_G                     # - Bladed Rhino Beetle
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1289,7 +1401,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 4
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 085
+- actors:                               # GROUP 093
   - Animal_Insect_P                     # - Rugged Rhino Beetle
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1304,7 +1416,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 4
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 086
+- actors:                               # GROUP 094
   - Animal_Insect_AA                    # - Energetic Rhino Beetle
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1319,7 +1431,7 @@
     itemBuyingPrice: 150
     itemSellingPrice: 30
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 087
+- actors:                               # GROUP 095
   - Animal_Insect_E                     # - Sunset Firefly
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1334,7 +1446,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 088
+- actors:                               # GROUP 096
   - Animal_Insect_A                     # - Hot-Footed Frog
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1349,7 +1461,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 089
+- actors:                               # GROUP 097
   - Animal_Insect_B                     # - Tireless Frog
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1364,7 +1476,7 @@
     itemBuyingPrice: 100
     itemSellingPrice: 20
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 090
+- actors:                               # GROUP 098
   - Animal_Insect_S                     # - Hightail Lizard
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1379,7 +1491,7 @@
     itemBuyingPrice: 10
     itemSellingPrice: 2
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 091
+- actors:                               # GROUP 099
   - Animal_Insect_M                     # - Hearty Lizard
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1394,7 +1506,7 @@
     itemBuyingPrice: 100
     itemSellingPrice: 20
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 092
+- actors:                               # GROUP 100
   - Animal_Insect_X                     # - Fireproof Lizard
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1409,7 +1521,7 @@
     itemBuyingPrice: 25
     itemSellingPrice: 5
     tags: [CookInsect, CookMaterial, Material, TypeInsect]
-- actors:                               # GROUP 093
+- actors:                               # GROUP 101
   - Item_Ore_I                          # - Flint
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1424,7 +1536,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 5
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 094
+- actors:                               # GROUP 102
   - Item_Ore_F                          # - Amber
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1439,7 +1551,7 @@
     itemBuyingPrice: 120
     itemSellingPrice: 30
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 095
+- actors:                               # GROUP 103
   - Item_Ore_E                          # - Opal
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1454,7 +1566,7 @@
     itemBuyingPrice: 240
     itemSellingPrice: 60
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 096
+- actors:                               # GROUP 104
   - Item_Ore_G                          # - Luminous Stone
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1469,7 +1581,7 @@
     itemBuyingPrice: 280
     itemSellingPrice: 70
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 097
+- actors:                               # GROUP 105
   - Item_Ore_D                          # - Topaz
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1484,7 +1596,7 @@
     itemBuyingPrice: 720
     itemSellingPrice: 180
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 098
+- actors:                               # GROUP 106
   - Item_Ore_B                          # - Ruby
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1499,7 +1611,7 @@
     itemBuyingPrice: 840
     itemSellingPrice: 210
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 099
+- actors:                               # GROUP 107
   - Item_Ore_C                          # - Sapphire
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1514,7 +1626,7 @@
     itemBuyingPrice: 1040
     itemSellingPrice: 260
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 100
+- actors:                               # GROUP 108
   - Item_Ore_A                          # - Diamond
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1529,7 +1641,7 @@
     itemBuyingPrice: 2000
     itemSellingPrice: 500
     tags: [CookMaterial, CookOre, Material]
-- actors:                               # GROUP 101
+- actors:                               # GROUP 109
   - Item_Enemy_00                       # - Bokoblin Horn
   data:                                 
     cookSpiceBoostEffectiveTime: 40
@@ -1544,7 +1656,7 @@
     itemBuyingPrice: 12
     itemSellingPrice: 3
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 102
+- actors:                               # GROUP 110
   - Item_Enemy_01                       # - Bokoblin Fang
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1559,7 +1671,7 @@
     itemBuyingPrice: 32
     itemSellingPrice: 8
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 103
+- actors:                               # GROUP 111
   - Item_Enemy_02                       # - Bokoblin Guts
   - Item_Enemy_19                       # - Keese Eyeball
   data:                                 
@@ -1575,7 +1687,7 @@
     itemBuyingPrice: 80
     itemSellingPrice: 20
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 104
+- actors:                               # GROUP 112
   - Item_Enemy_06                       # - Moblin Horn
   - Item_Enemy_40                       # - Chuchu Jelly
   - Item_Enemy_57                       # - Octo Balloon
@@ -1592,7 +1704,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 5
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 105
+- actors:                               # GROUP 113
   - Item_Enemy_07                       # - Moblin Fang
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1607,7 +1719,7 @@
     itemBuyingPrice: 45
     itemSellingPrice: 12
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 106
+- actors:                               # GROUP 114
   - Item_Enemy_08                       # - Moblin Guts
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1622,7 +1734,7 @@
     itemBuyingPrice: 100
     itemSellingPrice: 25
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 107
+- actors:                               # GROUP 115
   - Item_Enemy_03                       # - Lizalfos Horn
   - Item_Enemy_20                       # - Octorok Tentacle
   data:                                 
@@ -1638,7 +1750,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 108
+- actors:                               # GROUP 116
   - Item_Enemy_04                       # - Lizalfos Talon
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1653,7 +1765,7 @@
     itemBuyingPrice: 60
     itemSellingPrice: 15
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 109
+- actors:                               # GROUP 117
   - Item_Enemy_05                       # - Lizalfos Tail
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1668,7 +1780,7 @@
     itemBuyingPrice: 112
     itemSellingPrice: 28
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 110
+- actors:                               # GROUP 118
   - Item_Enemy_42                       # - Icy Lizalfos Tail
   - Item_Enemy_41                       # - Red Lizalfos Tail
   - Item_Enemy_43                       # - Yellow Lizalfos Tail
@@ -1685,7 +1797,7 @@
     itemBuyingPrice: 140
     itemSellingPrice: 35
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 111
+- actors:                               # GROUP 119
   - Item_Enemy_12                       # - Lynel Horn
   data:                                 
     cookSpiceBoostEffectiveTime: 40
@@ -1700,7 +1812,7 @@
     itemBuyingPrice: 160
     itemSellingPrice: 40
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 112
+- actors:                               # GROUP 120
   - Item_Enemy_13                       # - Lynel Hoof
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1715,7 +1827,7 @@
     itemBuyingPrice: 200
     itemSellingPrice: 50
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 113
+- actors:                               # GROUP 121
   - Item_Enemy_14                       # - Lynel Guts
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1730,7 +1842,7 @@
     itemBuyingPrice: 800
     itemSellingPrice: 200
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 114
+- actors:                               # GROUP 122
   - Item_Enemy_17                       # - White Chuchu Jelly
   - Item_Enemy_15                       # - Red Chuchu Jelly
   - Item_Enemy_16                       # - Yellow Chuchu Jelly
@@ -1747,7 +1859,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 10
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 115
+- actors:                               # GROUP 123
   - Item_Enemy_18                       # - Keese Wing
   data:                                 
     cookSpiceBoostEffectiveTime: 40
@@ -1762,7 +1874,7 @@
     itemBuyingPrice: 8
     itemSellingPrice: 2
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 116
+- actors:                               # GROUP 124
   - Item_Enemy_46                       # - Ice Keese Wing
   - Item_Enemy_44                       # - Fire Keese Wing
   - Item_Enemy_45                       # - Electric Keese Wing
@@ -1779,7 +1891,7 @@
     itemBuyingPrice: 24
     itemSellingPrice: 6
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 117
+- actors:                               # GROUP 125
   - Item_Enemy_21                       # - Octorok Eyeball
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1794,7 +1906,7 @@
     itemBuyingPrice: 100
     itemSellingPrice: 25
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 118
+- actors:                               # GROUP 126
   - Item_Enemy_24                       # - Molduga Fin
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1809,7 +1921,7 @@
     itemBuyingPrice: 120
     itemSellingPrice: 30
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 119
+- actors:                               # GROUP 127
   - Item_Enemy_25                       # - Molduga Guts
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1824,7 +1936,7 @@
     itemBuyingPrice: 440
     itemSellingPrice: 110
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 120
+- actors:                               # GROUP 128
   - Item_Enemy_32                       # - Hinox Toenail
   data:                                 
     cookSpiceBoostEffectiveTime: 40
@@ -1839,7 +1951,7 @@
     itemBuyingPrice: 80
     itemSellingPrice: 20
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 121
+- actors:                               # GROUP 129
   - Item_Enemy_33                       # - Hinox Tooth
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1854,7 +1966,7 @@
     itemBuyingPrice: 140
     itemSellingPrice: 35
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 122
+- actors:                               # GROUP 130
   - Item_Enemy_34                       # - Hinox Guts
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1869,7 +1981,7 @@
     itemBuyingPrice: 320
     itemSellingPrice: 80
     tags: [CookEnemy, CookMaterial, EnemyMaterial]
-- actors:                               # GROUP 123
+- actors:                               # GROUP 131
   - Item_Enemy_27                       # - Ancient Screw
   data:                                 
     cookSpiceBoostEffectiveTime: 40
@@ -1884,7 +1996,7 @@
     itemBuyingPrice: 48
     itemSellingPrice: 12
     tags: [CookEnemy, EnemyMaterial]
-- actors:                               # GROUP 124
+- actors:                               # GROUP 132
   - Item_Enemy_28                       # - Ancient Spring
   data:                                 
     cookSpiceBoostEffectiveTime: 40
@@ -1899,7 +2011,7 @@
     itemBuyingPrice: 60
     itemSellingPrice: 15
     tags: [CookEnemy, EnemyMaterial]
-- actors:                               # GROUP 125
+- actors:                               # GROUP 133
   - Item_Enemy_26                       # - Ancient Gear
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1914,7 +2026,7 @@
     itemBuyingPrice: 120
     itemSellingPrice: 30
     tags: [CookEnemy, EnemyMaterial]
-- actors:                               # GROUP 126
+- actors:                               # GROUP 134
   - Item_Enemy_29                       # - Ancient Shaft
   data:                                 
     cookSpiceBoostEffectiveTime: 80
@@ -1929,7 +2041,7 @@
     itemBuyingPrice: 160
     itemSellingPrice: 40
     tags: [CookEnemy, EnemyMaterial]
-- actors:                               # GROUP 127
+- actors:                               # GROUP 135
   - Item_Enemy_30                       # - Ancient Core
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1944,7 +2056,7 @@
     itemBuyingPrice: 320
     itemSellingPrice: 80
     tags: [CookEnemy, EnemyMaterial]
-- actors:                               # GROUP 128
+- actors:                               # GROUP 136
   - Item_Enemy_31                       # - Giant Ancient Core
   data:                                 
     cookSpiceBoostEffectiveTime: 160
@@ -1959,7 +2071,7 @@
     itemBuyingPrice: 800
     itemSellingPrice: 200
     tags: [CookEnemy, EnemyMaterial]
-- actors:                               # GROUP 129
+- actors:                               # GROUP 137
   - Obj_FireWoodBundle                  # - Wood
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1974,7 +2086,7 @@
     itemBuyingPrice: 12
     itemSellingPrice: 2
     tags: [CookMaterial, CookOre]
-- actors:                               # GROUP 130
+- actors:                               # GROUP 138
   - Item_Roast_03                       # - Baked Apple
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -1989,7 +2101,7 @@
     itemBuyingPrice: 8
     itemSellingPrice: 3
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 131
+- actors:                               # GROUP 139
   - Item_Roast_10                       # - Baked Palm Fruit
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2004,7 +2116,7 @@
     itemBuyingPrice: 15
     itemSellingPrice: 6
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 132
+- actors:                               # GROUP 140
   - Item_Roast_07                       # - Roasted Wildberry
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2019,7 +2131,7 @@
     itemBuyingPrice: 13
     itemSellingPrice: 5
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 133
+- actors:                               # GROUP 141
   - Item_Roast_48                       # - Roasted Acorn
   - Item_Roast_52                       # - Roasted Tree Nut
   data:                                 
@@ -2035,7 +2147,7 @@
     itemBuyingPrice: 5
     itemSellingPrice: 2
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 134
+- actors:                               # GROUP 142
   - Item_Roast_09                       # - Roasted Hearty Durian
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2050,7 +2162,7 @@
     itemBuyingPrice: 30
     itemSellingPrice: 12
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 135
+- actors:                               # GROUP 143
   - Item_Roast_12                       # - Roasted Hydromelon
   - Item_Roast_08                       # - Roasted Voltfruit
   - Item_Roast_11                       # - Roasted Mighty Bananas
@@ -2067,7 +2179,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 8
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 136
+- actors:                               # GROUP 144
   - Item_Roast_13                       # - Charred Pepper
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2082,7 +2194,7 @@
     itemBuyingPrice: 13
     itemSellingPrice: 5
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 137
+- actors:                               # GROUP 145
   - Item_Roast_16                       # - Roasted Lotus Seeds
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2097,7 +2209,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 8
     tags: [Material, RoastFruit, RoastItem]
-- actors:                               # GROUP 138
+- actors:                               # GROUP 146
   - Item_Roast_06                       # - Toasty Hylian Shroom
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2112,7 +2224,7 @@
     itemBuyingPrice: 12
     itemSellingPrice: 3
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 139
+- actors:                               # GROUP 147
   - Item_Roast_04                       # - Toasty Stamella Shroom
   - Item_Roast_36                       # - Toasty Rushroom
   - Item_Roast_37                       # - Toasty Razorshroom
@@ -2130,7 +2242,7 @@
     itemBuyingPrice: 13
     itemSellingPrice: 5
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 140
+- actors:                               # GROUP 148
   - Item_Roast_53                       # - Toasty Endura Shroom
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2145,7 +2257,7 @@
     itemBuyingPrice: 13
     itemSellingPrice: 5
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 141
+- actors:                               # GROUP 149
   - Item_Roast_05                       # - Toasted Hearty Truffle
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2160,7 +2272,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 8
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 142
+- actors:                               # GROUP 150
   - Item_Roast_49                       # - Toasted Big Hearty Truffle
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2175,7 +2287,7 @@
     itemBuyingPrice: 58
     itemSellingPrice: 24
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 143
+- actors:                               # GROUP 151
   - Item_Roast_31                       # - Toasty Chillshroom
   - Item_Roast_32                       # - Toasty Sunshroom
   - Item_Roast_33                       # - Toasty Zapshroom
@@ -2192,7 +2304,7 @@
     itemBuyingPrice: 15
     itemSellingPrice: 6
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 144
+- actors:                               # GROUP 152
   - Item_Roast_39                       # - Toasty Silent Shroom
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2207,7 +2319,7 @@
     itemBuyingPrice: 8
     itemSellingPrice: 3
     tags: [Material, RoastItem, RoastMushroom]
-- actors:                               # GROUP 145
+- actors:                               # GROUP 153
   - Item_Roast_18                       # - Roasted Radish
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2222,7 +2334,7 @@
     itemBuyingPrice: 30
     itemSellingPrice: 12
     tags: [Material, RoastItem, RoastVegetable]
-- actors:                               # GROUP 146
+- actors:                               # GROUP 154
   - Item_Roast_19                       # - Roasted Big Radish
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2237,7 +2349,7 @@
     itemBuyingPrice: 58
     itemSellingPrice: 24
     tags: [Material, RoastItem, RoastVegetable]
-- actors:                               # GROUP 147
+- actors:                               # GROUP 155
   - Item_Roast_24                       # - Roasted Swift Carrot
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2252,7 +2364,7 @@
     itemBuyingPrice: 15
     itemSellingPrice: 6
     tags: [Material, RoastItem, RoastVegetable]
-- actors:                               # GROUP 148
+- actors:                               # GROUP 156
   - Item_Roast_50                       # - Roasted Endura Carrot
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2267,7 +2379,7 @@
     itemBuyingPrice: 95
     itemSellingPrice: 38
     tags: [Material, RoastItem, RoastVegetable]
-- actors:                               # GROUP 149
+- actors:                               # GROUP 157
   - Item_Roast_15                       # - Baked Fortified Pumpkin
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2282,7 +2394,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 8
     tags: [Material, RoastItem, RoastVegetable]
-- actors:                               # GROUP 150
+- actors:                               # GROUP 158
   - Item_Roast_27                       # - Roasted Mighty Thistle
   - Item_Roast_28                       # - Roasted Armoranth
   data:                                 
@@ -2298,7 +2410,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 8
     tags: [Material, RoastItem, RoastPlant]
-- actors:                               # GROUP 151
+- actors:                               # GROUP 159
   - Item_Roast_51                       # - Campfire Egg
   - Item_Boiled_01                      # - Hard-Boiled Egg
   data:                                 
@@ -2314,7 +2426,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: 5
     tags: [Material, RoastItem]
-- actors:                               # GROUP 152
+- actors:                               # GROUP 160
   - Item_Roast_01                       # - Seared Steak
   - Item_Roast_02                       # - Roasted Bird Drumstick
   data:                                 
@@ -2330,7 +2442,7 @@
     itemBuyingPrice: 30
     itemSellingPrice: 12
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 153
+- actors:                               # GROUP 161
   - Item_Roast_40                       # - Seared Prime Steak
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2345,7 +2457,7 @@
     itemBuyingPrice: 58
     itemSellingPrice: 24
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 154
+- actors:                               # GROUP 162
   - Item_Roast_45                       # - Seared Gourmet Steak
   - Item_Roast_46                       # - Roasted Whole Bird
   data:                                 
@@ -2361,7 +2473,7 @@
     itemBuyingPrice: 140
     itemSellingPrice: 35
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 155
+- actors:                               # GROUP 163
   - Item_Roast_41                       # - Roasted Bird Thigh
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2376,7 +2488,7 @@
     itemBuyingPrice: 28
     itemSellingPrice: 24
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 156
+- actors:                               # GROUP 164
   - Item_RoastFish_01                   # - Roasted Bass
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2391,7 +2503,7 @@
     itemBuyingPrice: 23
     itemSellingPrice: 9
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 157
+- actors:                               # GROUP 165
   - Item_RoastFish_02                   # - Roasted Hearty Bass
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2406,7 +2518,7 @@
     itemBuyingPrice: 30
     itemSellingPrice: 12
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 158
+- actors:                               # GROUP 166
   - Item_RoastFish_04                   # - Roasted Hearty Salmon
   - Item_RoastFish_11                   # - Blueshell Escargot
   data:                                 
@@ -2422,7 +2534,7 @@
     itemBuyingPrice: 38
     itemSellingPrice: 15
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 159
+- actors:                               # GROUP 167
   - Item_RoastFish_03                   # - Roasted Trout
   - Item_RoastFish_13                   # - Sneaky River Escargot
   data:                                 
@@ -2438,7 +2550,7 @@
     itemBuyingPrice: 23
     itemSellingPrice: 9
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 160
+- actors:                               # GROUP 168
   - Item_RoastFish_07                   # - Roasted Carp
   - Item_RoastFish_09                   # - Roasted Porgy
   data:                                 
@@ -2454,7 +2566,7 @@
     itemBuyingPrice: 38
     itemSellingPrice: 15
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 161
+- actors:                               # GROUP 169
   - Item_RoastFish_15                   # - Blackened Crab
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2469,7 +2581,7 @@
     itemBuyingPrice: 30
     itemSellingPrice: 12
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 162
+- actors:                               # GROUP 170
   - Item_Chilled_01                     # - Icy Meat
   - Item_Chilled_04                     # - Frozen Bird Drumstick
   data:                                 
@@ -2485,7 +2597,7 @@
     itemBuyingPrice: 35
     itemSellingPrice: 15
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 163
+- actors:                               # GROUP 171
   - Item_Chilled_02                     # - Icy Prime Meat
   - Item_Chilled_05                     # - Frozen Bird Thigh
   data:                                 
@@ -2501,7 +2613,7 @@
     itemBuyingPrice: 60
     itemSellingPrice: 28
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 164
+- actors:                               # GROUP 172
   - Item_Chilled_03                     # - Icy Gourmet Meat
   - Item_Chilled_06                     # - Frozen Whole Bird
   data:                                 
@@ -2517,7 +2629,7 @@
     itemBuyingPrice: 150
     itemSellingPrice: 40
     tags: [Material, RoastItem, RoastMeat]
-- actors:                               # GROUP 165
+- actors:                               # GROUP 173
   - Item_ChilledFish_01                 # - Frozen Bass
   - Item_ChilledFish_06                 # - Frozen Hearty Bass
   - Item_ChilledFish_07                 # - Frozen Crab
@@ -2534,7 +2646,7 @@
     itemBuyingPrice: 32
     itemSellingPrice: 14
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 166
+- actors:                               # GROUP 174
   - Item_ChilledFish_02                 # - Frozen Hearty Salmon
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2549,7 +2661,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 18
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 167
+- actors:                               # GROUP 175
   - Item_ChilledFish_03                 # - Frozen Trout
   - Item_ChilledFish_08                 # - Frozen River Snail
   data:                                 
@@ -2565,7 +2677,7 @@
     itemBuyingPrice: 25
     itemSellingPrice: 10
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 168
+- actors:                               # GROUP 176
   - Item_ChilledFish_04                 # - Frozen Carp
   - Item_ChilledFish_05                 # - Frozen Porgy
   data:                                 
@@ -2581,7 +2693,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 18
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 169
+- actors:                               # GROUP 177
   - Item_ChilledFish_09                 # - Icy Hearty Blueshell Snail
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2596,7 +2708,7 @@
     itemBuyingPrice: 40
     itemSellingPrice: 18
     tags: [Material, RoastFish, RoastItem]
-- actors:                               # GROUP 170
+- actors:                               # GROUP 178
   - Obj_DRStone_Get                     # - Sheikah Slate
   data:                                 
     cookSpiceBoostEffectiveTime: 0
@@ -2611,7 +2723,7 @@
     itemBuyingPrice: -1
     itemSellingPrice: -1
     tags: []
-- actors:                               # GROUP 171
+- actors:                               # GROUP 179
   - dyecolor_00                         # - Dye
   - dyecolor_01                         # - Blue
   - dyecolor_02                         # - Red
@@ -2641,7 +2753,7 @@
     itemBuyingPrice: 20
     itemSellingPrice: -1
     tags: []
-- actors:                               # GROUP 172
+- actors:                               # GROUP 180
   - Obj_Photo_Animal                    # - Fauna Picture
   - Obj_Photo_Enemy                     # - Enemy Picture
   - Obj_Photo_Material                  # - Material Picture
@@ -2660,7 +2772,7 @@
     itemBuyingPrice: 100
     itemSellingPrice: -1
     tags: []
-- actors:                               # GROUP 173
+- actors:                               # GROUP 181
   - Obj_Photo_BossEnemy                 # - Elite Enemy Picture
   data:                                 
     cookSpiceBoostEffectiveTime: 0

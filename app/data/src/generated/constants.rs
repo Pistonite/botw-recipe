@@ -8,7 +8,7 @@
 ///
 /// Equivalent actors are grouped together. This also includes the "<none>" ingredient,
 /// which indicates empty space (for example, a recipe with 4 items has 1 empty space).
-pub const NUM_GROUPS: usize = 175;
+pub const NUM_GROUPS: usize = 183;
 
 /// Number of ingredients in a recipe record. Always 5
 pub const NUM_INGR: usize = 5;
@@ -18,36 +18,36 @@ pub const NUM_INGR: usize = 5;
 /// This is choosing NUM_INGR from NUM_GROUPS, allowing for repetition.
 /// In other words, binomial(NUM_GROUPS+NUM_INGR-1, NUM_INGR),
 /// or equivalently, NUM_GROUPS multichoose NUM_INGR.
-pub const NUM_TOTAL_RECORDS: usize = 1447490660;
+pub const NUM_TOTAL_RECORDS: usize = 1805568402;
 
 /// Number of records in each chunk except last in the data dump
 pub const CHUNK_SIZE: usize = 409600;
 
 /// Number of chunks in the data dump
-pub const CHUNK_COUNT: usize = 3534;
+pub const CHUNK_COUNT: usize = 4409;
 
 /// Number of records in the last chunk in the data dump
-pub const LAST_CHUNK_SIZE: usize = 373860;
+pub const LAST_CHUNK_SIZE: usize = 51602;
 
 /// Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
 ///
 /// MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
 /// Number of records in each chunk except last in the compact DB
-pub const COMPACT_CHUNK_SIZE: usize = 3276800;
+pub const COMPACT_CHUNK_SIZE: usize = 4096000;
 
 /// Number of chunks in the compact DB
-pub const COMPACT_CHUNK_COUNT: usize = 442;
+pub const COMPACT_CHUNK_COUNT: usize = 441;
 
 /// Number of records in the last chunk in the compact DB
-pub const COMPACT_LAST_CHUNK_SIZE: usize = 2421860;
+pub const COMPACT_LAST_CHUNK_SIZE: usize = 3328402;
 
 /// Element size of the crit DB in number of `u32`s
-pub const CRIT_DB_U32_SIZE: usize = 45234084;
+pub const CRIT_DB_U32_SIZE: usize = 56424013;
 
-pub const CRIT_DB_BYTE_SIZE: usize = 180936336;
+pub const CRIT_DB_BYTE_SIZE: usize = 225696052;
 
 /// Number of `u32`s in each chunk of the crit DB
-pub const CRIT_DB_U32_PER_CHUNK: usize = 102400;
+pub const CRIT_DB_U32_PER_CHUNK: usize = 128000;
 
 pub(crate) const MULTICHOOSE: [[usize; NUM_INGR + 1]; NUM_GROUPS + 1] = [
     [1, 0, 0, 0, 0, 0],
@@ -226,4 +226,12 @@ pub(crate) const MULTICHOOSE: [[usize; NUM_INGR + 1]; NUM_GROUPS + 1] = [
     [1, 173, 15051, 877975, 38630900, 1367533860],
     [1, 174, 15225, 893200, 39524100, 1407057960],
     [1, 175, 15400, 908600, 40432700, 1447490660],
+    [1, 176, 15576, 924176, 41356876, 1488847536],
+    [1, 177, 15753, 939929, 42296805, 1531144341],
+    [1, 178, 15931, 955860, 43252665, 1574397006],
+    [1, 179, 16110, 971970, 44224635, 1618621641],
+    [1, 180, 16290, 988260, 45212895, 1663834536],
+    [1, 181, 16471, 1004731, 46217626, 1710052162],
+    [1, 182, 16653, 1021384, 47239010, 1757291172],
+    [1, 183, 16836, 1038220, 48277230, 1805568402],
 ];

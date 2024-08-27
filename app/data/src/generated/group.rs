@@ -131,248 +131,264 @@ pub enum Group {
     Item_Ore_H = 52,
     /// Star Fragment
     Item_Ore_J = 53,
-    /// Dinraal's Scale, Naydra's Scale, Farosh's Scale
-    Item_Enemy_Grp_54 = 54,
-    /// Dinraal's Claw, Naydra's Claw, Farosh's Claw
-    Item_Enemy_Grp_55 = 55,
-    /// Shard of Dinraal's Fang, Shard of Naydra's Fang, Shard of Farosh's Fang
-    Item_Enemy_Grp_56 = 56,
-    /// Shard of Dinraal's Horn, Shard of Naydra's Horn, Shard of Farosh's Horn
-    Item_Enemy_Grp_57 = 57,
+    /// Dinraal's Scale
+    Item_Enemy_38 = 54,
+    /// Dinraal's Claw
+    Item_Enemy_39 = 55,
+    /// Shard of Dinraal's Fang
+    Item_Enemy_47 = 56,
+    /// Shard of Dinraal's Horn
+    Item_Enemy_48 = 57,
+    /// Naydra's Scale
+    Item_Enemy_49 = 58,
+    /// Naydra's Claw
+    Item_Enemy_50 = 59,
+    /// Shard of Naydra's Fang
+    Item_Enemy_51 = 60,
+    /// Shard of Naydra's Horn
+    Item_Enemy_52 = 61,
+    /// Farosh's Scale
+    Item_Enemy_53 = 62,
+    /// Farosh's Claw
+    Item_Enemy_54 = 63,
+    /// Shard of Farosh's Fang
+    Item_Enemy_55 = 64,
+    /// Shard of Farosh's Horn
+    Item_Enemy_56 = 65,
     /// Hearty Salmon
-    Item_FishGet_I = 58,
+    Item_FishGet_I = 66,
     /// Hearty Blueshell Snail
-    Item_FishGet_K = 59,
+    Item_FishGet_K = 67,
     /// Hearty Bass
-    Item_FishGet_B = 60,
+    Item_FishGet_B = 68,
     /// Hyrule Bass
-    Item_FishGet_A = 61,
+    Item_FishGet_A = 69,
     /// Staminoka Bass
-    Item_FishGet_L = 62,
+    Item_FishGet_L = 70,
     /// Chillfin Trout
-    Item_FishGet_C = 63,
+    Item_FishGet_C = 71,
     /// Sizzlefin Trout
-    Item_FishGet_J = 64,
+    Item_FishGet_J = 72,
     /// Voltfin Trout
-    Item_FishGet_D = 65,
+    Item_FishGet_D = 73,
     /// Stealthfin Trout
-    Item_FishGet_X = 66,
+    Item_FishGet_X = 74,
     /// Mighty Carp
-    Item_FishGet_E = 67,
+    Item_FishGet_E = 75,
     /// Armored Carp
-    Item_FishGet_H = 68,
+    Item_FishGet_H = 76,
     /// Sanke Carp
-    Item_FishGet_Z = 69,
+    Item_FishGet_Z = 77,
     /// Mighty Porgy
-    Item_FishGet_F = 70,
+    Item_FishGet_F = 78,
     /// Armored Porgy
-    Item_FishGet_G = 71,
+    Item_FishGet_G = 79,
     /// Sneaky River Snail
-    Item_FishGet_M = 72,
+    Item_FishGet_M = 80,
     /// Razorclaw Crab
-    Item_InsectGet_K = 73,
+    Item_InsectGet_K = 81,
     /// Ironshell Crab
-    Item_InsectGet_O = 74,
+    Item_InsectGet_O = 82,
     /// Bright-Eyed Crab
-    Item_InsectGet_Z = 75,
+    Item_InsectGet_Z = 83,
     /// Fairy
-    Animal_Insect_F = 76,
+    Animal_Insect_F = 84,
     /// Winterwing Butterfly
-    Animal_Insect_N = 77,
+    Animal_Insect_N = 85,
     /// Summerwing Butterfly
-    Animal_Insect_Q = 78,
+    Animal_Insect_Q = 86,
     /// Thunderwing Butterfly
-    Animal_Insect_R = 79,
+    Animal_Insect_R = 87,
     /// Smotherwing Butterfly
-    Animal_Insect_AB = 80,
+    Animal_Insect_AB = 88,
     /// Cold Darner
-    Animal_Insect_C = 81,
+    Animal_Insect_C = 89,
     /// Warm Darner
-    Animal_Insect_T = 82,
+    Animal_Insect_T = 90,
     /// Electric Darner
-    Animal_Insect_I = 83,
+    Animal_Insect_I = 91,
     /// Restless Cricket
-    Animal_Insect_H = 84,
+    Animal_Insect_H = 92,
     /// Bladed Rhino Beetle
-    Animal_Insect_G = 85,
+    Animal_Insect_G = 93,
     /// Rugged Rhino Beetle
-    Animal_Insect_P = 86,
+    Animal_Insect_P = 94,
     /// Energetic Rhino Beetle
-    Animal_Insect_AA = 87,
+    Animal_Insect_AA = 95,
     /// Sunset Firefly
-    Animal_Insect_E = 88,
+    Animal_Insect_E = 96,
     /// Hot-Footed Frog
-    Animal_Insect_A = 89,
+    Animal_Insect_A = 97,
     /// Tireless Frog
-    Animal_Insect_B = 90,
+    Animal_Insect_B = 98,
     /// Hightail Lizard
-    Animal_Insect_S = 91,
+    Animal_Insect_S = 99,
     /// Hearty Lizard
-    Animal_Insect_M = 92,
+    Animal_Insect_M = 100,
     /// Fireproof Lizard
-    Animal_Insect_X = 93,
+    Animal_Insect_X = 101,
     /// Flint
-    Item_Ore_I = 94,
+    Item_Ore_I = 102,
     /// Amber
-    Item_Ore_F = 95,
+    Item_Ore_F = 103,
     /// Opal
-    Item_Ore_E = 96,
+    Item_Ore_E = 104,
     /// Luminous Stone
-    Item_Ore_G = 97,
+    Item_Ore_G = 105,
     /// Topaz
-    Item_Ore_D = 98,
+    Item_Ore_D = 106,
     /// Ruby
-    Item_Ore_B = 99,
+    Item_Ore_B = 107,
     /// Sapphire
-    Item_Ore_C = 100,
+    Item_Ore_C = 108,
     /// Diamond
-    Item_Ore_A = 101,
+    Item_Ore_A = 109,
     /// Bokoblin Horn
-    Item_Enemy_00 = 102,
+    Item_Enemy_00 = 110,
     /// Bokoblin Fang
-    Item_Enemy_01 = 103,
+    Item_Enemy_01 = 111,
     /// Bokoblin Guts, Keese Eyeball
-    Item_Enemy_Grp_104 = 104,
+    Item_Enemy_Grp_112 = 112,
     /// Moblin Horn, Chuchu Jelly, Octo Balloon
-    Item_Enemy_Grp_105 = 105,
+    Item_Enemy_Grp_113 = 113,
     /// Moblin Fang
-    Item_Enemy_07 = 106,
+    Item_Enemy_07 = 114,
     /// Moblin Guts
-    Item_Enemy_08 = 107,
+    Item_Enemy_08 = 115,
     /// Lizalfos Horn, Octorok Tentacle
-    Item_Enemy_Grp_108 = 108,
+    Item_Enemy_Grp_116 = 116,
     /// Lizalfos Talon
-    Item_Enemy_04 = 109,
+    Item_Enemy_04 = 117,
     /// Lizalfos Tail
-    Item_Enemy_05 = 110,
+    Item_Enemy_05 = 118,
     /// Icy Lizalfos Tail, Red Lizalfos Tail, Yellow Lizalfos Tail
-    Item_Enemy_Grp_111 = 111,
+    Item_Enemy_Grp_119 = 119,
     /// Lynel Horn
-    Item_Enemy_12 = 112,
+    Item_Enemy_12 = 120,
     /// Lynel Hoof
-    Item_Enemy_13 = 113,
+    Item_Enemy_13 = 121,
     /// Lynel Guts
-    Item_Enemy_14 = 114,
+    Item_Enemy_14 = 122,
     /// White Chuchu Jelly, Red Chuchu Jelly, Yellow Chuchu Jelly
-    Item_Enemy_Grp_115 = 115,
+    Item_Enemy_Grp_123 = 123,
     /// Keese Wing
-    Item_Enemy_18 = 116,
+    Item_Enemy_18 = 124,
     /// Ice Keese Wing, Fire Keese Wing, Electric Keese Wing
-    Item_Enemy_Grp_117 = 117,
+    Item_Enemy_Grp_125 = 125,
     /// Octorok Eyeball
-    Item_Enemy_21 = 118,
+    Item_Enemy_21 = 126,
     /// Molduga Fin
-    Item_Enemy_24 = 119,
+    Item_Enemy_24 = 127,
     /// Molduga Guts
-    Item_Enemy_25 = 120,
+    Item_Enemy_25 = 128,
     /// Hinox Toenail
-    Item_Enemy_32 = 121,
+    Item_Enemy_32 = 129,
     /// Hinox Tooth
-    Item_Enemy_33 = 122,
+    Item_Enemy_33 = 130,
     /// Hinox Guts
-    Item_Enemy_34 = 123,
+    Item_Enemy_34 = 131,
     /// Ancient Screw
-    Item_Enemy_27 = 124,
+    Item_Enemy_27 = 132,
     /// Ancient Spring
-    Item_Enemy_28 = 125,
+    Item_Enemy_28 = 133,
     /// Ancient Gear
-    Item_Enemy_26 = 126,
+    Item_Enemy_26 = 134,
     /// Ancient Shaft
-    Item_Enemy_29 = 127,
+    Item_Enemy_29 = 135,
     /// Ancient Core
-    Item_Enemy_30 = 128,
+    Item_Enemy_30 = 136,
     /// Giant Ancient Core
-    Item_Enemy_31 = 129,
+    Item_Enemy_31 = 137,
     /// Wood
-    Obj_FireWoodBundle = 130,
+    Obj_FireWoodBundle = 138,
     /// Baked Apple
-    Item_Roast_03 = 131,
+    Item_Roast_03 = 139,
     /// Baked Palm Fruit
-    Item_Roast_10 = 132,
+    Item_Roast_10 = 140,
     /// Roasted Wildberry
-    Item_Roast_07 = 133,
+    Item_Roast_07 = 141,
     /// Roasted Acorn, Roasted Tree Nut
-    Item_Roast_Grp_134 = 134,
+    Item_Roast_Grp_142 = 142,
     /// Roasted Hearty Durian
-    Item_Roast_09 = 135,
+    Item_Roast_09 = 143,
     /// Roasted Hydromelon, Roasted Voltfruit, Roasted Mighty Bananas
-    Item_Roast_Grp_136 = 136,
-    /// Charred Pepper
-    Item_Roast_13 = 137,
-    /// Roasted Lotus Seeds
-    Item_Roast_16 = 138,
-    /// Toasty Hylian Shroom
-    Item_Roast_06 = 139,
-    /// Toasty Stamella Shroom, Toasty Rushroom, Toasty Razorshroom, Toasty Ironshroom
-    Item_Roast_Grp_140 = 140,
-    /// Toasty Endura Shroom
-    Item_Roast_53 = 141,
-    /// Toasted Hearty Truffle
-    Item_Roast_05 = 142,
-    /// Toasted Big Hearty Truffle
-    Item_Roast_49 = 143,
-    /// Toasty Chillshroom, Toasty Sunshroom, Toasty Zapshroom
     Item_Roast_Grp_144 = 144,
+    /// Charred Pepper
+    Item_Roast_13 = 145,
+    /// Roasted Lotus Seeds
+    Item_Roast_16 = 146,
+    /// Toasty Hylian Shroom
+    Item_Roast_06 = 147,
+    /// Toasty Stamella Shroom, Toasty Rushroom, Toasty Razorshroom, Toasty Ironshroom
+    Item_Roast_Grp_148 = 148,
+    /// Toasty Endura Shroom
+    Item_Roast_53 = 149,
+    /// Toasted Hearty Truffle
+    Item_Roast_05 = 150,
+    /// Toasted Big Hearty Truffle
+    Item_Roast_49 = 151,
+    /// Toasty Chillshroom, Toasty Sunshroom, Toasty Zapshroom
+    Item_Roast_Grp_152 = 152,
     /// Toasty Silent Shroom
-    Item_Roast_39 = 145,
+    Item_Roast_39 = 153,
     /// Roasted Radish
-    Item_Roast_18 = 146,
+    Item_Roast_18 = 154,
     /// Roasted Big Radish
-    Item_Roast_19 = 147,
+    Item_Roast_19 = 155,
     /// Roasted Swift Carrot
-    Item_Roast_24 = 148,
+    Item_Roast_24 = 156,
     /// Roasted Endura Carrot
-    Item_Roast_50 = 149,
+    Item_Roast_50 = 157,
     /// Baked Fortified Pumpkin
-    Item_Roast_15 = 150,
+    Item_Roast_15 = 158,
     /// Roasted Mighty Thistle, Roasted Armoranth
-    Item_Roast_Grp_151 = 151,
+    Item_Roast_Grp_159 = 159,
     /// Campfire Egg, Hard-Boiled Egg
-    Item_Grp_152 = 152,
+    Item_Grp_160 = 160,
     /// Seared Steak, Roasted Bird Drumstick
-    Item_Roast_Grp_153 = 153,
+    Item_Roast_Grp_161 = 161,
     /// Seared Prime Steak
-    Item_Roast_40 = 154,
+    Item_Roast_40 = 162,
     /// Seared Gourmet Steak, Roasted Whole Bird
-    Item_Roast_Grp_155 = 155,
+    Item_Roast_Grp_163 = 163,
     /// Roasted Bird Thigh
-    Item_Roast_41 = 156,
+    Item_Roast_41 = 164,
     /// Roasted Bass
-    Item_RoastFish_01 = 157,
+    Item_RoastFish_01 = 165,
     /// Roasted Hearty Bass
-    Item_RoastFish_02 = 158,
+    Item_RoastFish_02 = 166,
     /// Roasted Hearty Salmon, Blueshell Escargot
-    Item_RoastFish_Grp_159 = 159,
+    Item_RoastFish_Grp_167 = 167,
     /// Roasted Trout, Sneaky River Escargot
-    Item_RoastFish_Grp_160 = 160,
+    Item_RoastFish_Grp_168 = 168,
     /// Roasted Carp, Roasted Porgy
-    Item_RoastFish_Grp_161 = 161,
+    Item_RoastFish_Grp_169 = 169,
     /// Blackened Crab
-    Item_RoastFish_15 = 162,
+    Item_RoastFish_15 = 170,
     /// Icy Meat, Frozen Bird Drumstick
-    Item_Chilled_Grp_163 = 163,
+    Item_Chilled_Grp_171 = 171,
     /// Icy Prime Meat, Frozen Bird Thigh
-    Item_Chilled_Grp_164 = 164,
+    Item_Chilled_Grp_172 = 172,
     /// Icy Gourmet Meat, Frozen Whole Bird
-    Item_Chilled_Grp_165 = 165,
+    Item_Chilled_Grp_173 = 173,
     /// Frozen Bass, Frozen Hearty Bass, Frozen Crab
-    Item_ChilledFish_Grp_166 = 166,
+    Item_ChilledFish_Grp_174 = 174,
     /// Frozen Hearty Salmon
-    Item_ChilledFish_02 = 167,
+    Item_ChilledFish_02 = 175,
     /// Frozen Trout, Frozen River Snail
-    Item_ChilledFish_Grp_168 = 168,
+    Item_ChilledFish_Grp_176 = 176,
     /// Frozen Carp, Frozen Porgy
-    Item_ChilledFish_Grp_169 = 169,
+    Item_ChilledFish_Grp_177 = 177,
     /// Icy Hearty Blueshell Snail
-    Item_ChilledFish_09 = 170,
+    Item_ChilledFish_09 = 178,
     /// Sheikah Slate
-    Obj_DRStone_Get = 171,
+    Obj_DRStone_Get = 179,
     /// Dye, Blue, Red, Yellow, White, Black, Purple, Green, Light Blue, Navy, Orange, Peach, Crimson, Light Yellow, Brown, Gray
-    dyecolor_Grp_172 = 172,
+    dyecolor_Grp_180 = 180,
     /// Fauna Picture, Enemy Picture, Material Picture, Other Picture, Weapon Picture
-    Obj_Photo_Grp_173 = 173,
+    Obj_Photo_Grp_181 = 181,
     /// Elite Enemy Picture
-    Obj_Photo_BossEnemy = 174,
+    Obj_Photo_BossEnemy = 182,
 }
 impl Group {
     #[inline]
@@ -440,10 +456,18 @@ impl Group {
             Self::Item_Material_02 => Actor::Item_Material_02,
             Self::Item_Ore_H => Actor::Item_Ore_H,
             Self::Item_Ore_J => Actor::Item_Ore_J,
-            Self::Item_Enemy_Grp_54 => Actor::Item_Enemy_38,
-            Self::Item_Enemy_Grp_55 => Actor::Item_Enemy_39,
-            Self::Item_Enemy_Grp_56 => Actor::Item_Enemy_47,
-            Self::Item_Enemy_Grp_57 => Actor::Item_Enemy_48,
+            Self::Item_Enemy_38 => Actor::Item_Enemy_38,
+            Self::Item_Enemy_39 => Actor::Item_Enemy_39,
+            Self::Item_Enemy_47 => Actor::Item_Enemy_47,
+            Self::Item_Enemy_48 => Actor::Item_Enemy_48,
+            Self::Item_Enemy_49 => Actor::Item_Enemy_49,
+            Self::Item_Enemy_50 => Actor::Item_Enemy_50,
+            Self::Item_Enemy_51 => Actor::Item_Enemy_51,
+            Self::Item_Enemy_52 => Actor::Item_Enemy_52,
+            Self::Item_Enemy_53 => Actor::Item_Enemy_53,
+            Self::Item_Enemy_54 => Actor::Item_Enemy_54,
+            Self::Item_Enemy_55 => Actor::Item_Enemy_55,
+            Self::Item_Enemy_56 => Actor::Item_Enemy_56,
             Self::Item_FishGet_I => Actor::Item_FishGet_I,
             Self::Item_FishGet_K => Actor::Item_FishGet_K,
             Self::Item_FishGet_B => Actor::Item_FishGet_B,
@@ -490,20 +514,20 @@ impl Group {
             Self::Item_Ore_A => Actor::Item_Ore_A,
             Self::Item_Enemy_00 => Actor::Item_Enemy_00,
             Self::Item_Enemy_01 => Actor::Item_Enemy_01,
-            Self::Item_Enemy_Grp_104 => Actor::Item_Enemy_02,
-            Self::Item_Enemy_Grp_105 => Actor::Item_Enemy_06,
+            Self::Item_Enemy_Grp_112 => Actor::Item_Enemy_02,
+            Self::Item_Enemy_Grp_113 => Actor::Item_Enemy_06,
             Self::Item_Enemy_07 => Actor::Item_Enemy_07,
             Self::Item_Enemy_08 => Actor::Item_Enemy_08,
-            Self::Item_Enemy_Grp_108 => Actor::Item_Enemy_03,
+            Self::Item_Enemy_Grp_116 => Actor::Item_Enemy_03,
             Self::Item_Enemy_04 => Actor::Item_Enemy_04,
             Self::Item_Enemy_05 => Actor::Item_Enemy_05,
-            Self::Item_Enemy_Grp_111 => Actor::Item_Enemy_42,
+            Self::Item_Enemy_Grp_119 => Actor::Item_Enemy_42,
             Self::Item_Enemy_12 => Actor::Item_Enemy_12,
             Self::Item_Enemy_13 => Actor::Item_Enemy_13,
             Self::Item_Enemy_14 => Actor::Item_Enemy_14,
-            Self::Item_Enemy_Grp_115 => Actor::Item_Enemy_17,
+            Self::Item_Enemy_Grp_123 => Actor::Item_Enemy_17,
             Self::Item_Enemy_18 => Actor::Item_Enemy_18,
-            Self::Item_Enemy_Grp_117 => Actor::Item_Enemy_46,
+            Self::Item_Enemy_Grp_125 => Actor::Item_Enemy_46,
             Self::Item_Enemy_21 => Actor::Item_Enemy_21,
             Self::Item_Enemy_24 => Actor::Item_Enemy_24,
             Self::Item_Enemy_25 => Actor::Item_Enemy_25,
@@ -520,46 +544,46 @@ impl Group {
             Self::Item_Roast_03 => Actor::Item_Roast_03,
             Self::Item_Roast_10 => Actor::Item_Roast_10,
             Self::Item_Roast_07 => Actor::Item_Roast_07,
-            Self::Item_Roast_Grp_134 => Actor::Item_Roast_48,
+            Self::Item_Roast_Grp_142 => Actor::Item_Roast_48,
             Self::Item_Roast_09 => Actor::Item_Roast_09,
-            Self::Item_Roast_Grp_136 => Actor::Item_Roast_12,
+            Self::Item_Roast_Grp_144 => Actor::Item_Roast_12,
             Self::Item_Roast_13 => Actor::Item_Roast_13,
             Self::Item_Roast_16 => Actor::Item_Roast_16,
             Self::Item_Roast_06 => Actor::Item_Roast_06,
-            Self::Item_Roast_Grp_140 => Actor::Item_Roast_04,
+            Self::Item_Roast_Grp_148 => Actor::Item_Roast_04,
             Self::Item_Roast_53 => Actor::Item_Roast_53,
             Self::Item_Roast_05 => Actor::Item_Roast_05,
             Self::Item_Roast_49 => Actor::Item_Roast_49,
-            Self::Item_Roast_Grp_144 => Actor::Item_Roast_31,
+            Self::Item_Roast_Grp_152 => Actor::Item_Roast_31,
             Self::Item_Roast_39 => Actor::Item_Roast_39,
             Self::Item_Roast_18 => Actor::Item_Roast_18,
             Self::Item_Roast_19 => Actor::Item_Roast_19,
             Self::Item_Roast_24 => Actor::Item_Roast_24,
             Self::Item_Roast_50 => Actor::Item_Roast_50,
             Self::Item_Roast_15 => Actor::Item_Roast_15,
-            Self::Item_Roast_Grp_151 => Actor::Item_Roast_27,
-            Self::Item_Grp_152 => Actor::Item_Roast_51,
-            Self::Item_Roast_Grp_153 => Actor::Item_Roast_01,
+            Self::Item_Roast_Grp_159 => Actor::Item_Roast_27,
+            Self::Item_Grp_160 => Actor::Item_Roast_51,
+            Self::Item_Roast_Grp_161 => Actor::Item_Roast_01,
             Self::Item_Roast_40 => Actor::Item_Roast_40,
-            Self::Item_Roast_Grp_155 => Actor::Item_Roast_45,
+            Self::Item_Roast_Grp_163 => Actor::Item_Roast_45,
             Self::Item_Roast_41 => Actor::Item_Roast_41,
             Self::Item_RoastFish_01 => Actor::Item_RoastFish_01,
             Self::Item_RoastFish_02 => Actor::Item_RoastFish_02,
-            Self::Item_RoastFish_Grp_159 => Actor::Item_RoastFish_04,
-            Self::Item_RoastFish_Grp_160 => Actor::Item_RoastFish_03,
-            Self::Item_RoastFish_Grp_161 => Actor::Item_RoastFish_07,
+            Self::Item_RoastFish_Grp_167 => Actor::Item_RoastFish_04,
+            Self::Item_RoastFish_Grp_168 => Actor::Item_RoastFish_03,
+            Self::Item_RoastFish_Grp_169 => Actor::Item_RoastFish_07,
             Self::Item_RoastFish_15 => Actor::Item_RoastFish_15,
-            Self::Item_Chilled_Grp_163 => Actor::Item_Chilled_01,
-            Self::Item_Chilled_Grp_164 => Actor::Item_Chilled_02,
-            Self::Item_Chilled_Grp_165 => Actor::Item_Chilled_03,
-            Self::Item_ChilledFish_Grp_166 => Actor::Item_ChilledFish_01,
+            Self::Item_Chilled_Grp_171 => Actor::Item_Chilled_01,
+            Self::Item_Chilled_Grp_172 => Actor::Item_Chilled_02,
+            Self::Item_Chilled_Grp_173 => Actor::Item_Chilled_03,
+            Self::Item_ChilledFish_Grp_174 => Actor::Item_ChilledFish_01,
             Self::Item_ChilledFish_02 => Actor::Item_ChilledFish_02,
-            Self::Item_ChilledFish_Grp_168 => Actor::Item_ChilledFish_03,
-            Self::Item_ChilledFish_Grp_169 => Actor::Item_ChilledFish_04,
+            Self::Item_ChilledFish_Grp_176 => Actor::Item_ChilledFish_03,
+            Self::Item_ChilledFish_Grp_177 => Actor::Item_ChilledFish_04,
             Self::Item_ChilledFish_09 => Actor::Item_ChilledFish_09,
             Self::Obj_DRStone_Get => Actor::Obj_DRStone_Get,
-            Self::dyecolor_Grp_172 => Actor::dyecolor_00,
-            Self::Obj_Photo_Grp_173 => Actor::Obj_Photo_Animal,
+            Self::dyecolor_Grp_180 => Actor::dyecolor_00,
+            Self::Obj_Photo_Grp_181 => Actor::Obj_Photo_Animal,
             Self::Obj_Photo_BossEnemy => Actor::Obj_Photo_BossEnemy,
         }
     }
@@ -620,26 +644,18 @@ impl Group {
             Self::Item_Material_02 => &[Actor::Item_Material_02],
             Self::Item_Ore_H => &[Actor::Item_Ore_H],
             Self::Item_Ore_J => &[Actor::Item_Ore_J],
-            Self::Item_Enemy_Grp_54 => &[
-                Actor::Item_Enemy_38,
-                Actor::Item_Enemy_49,
-                Actor::Item_Enemy_53,
-            ],
-            Self::Item_Enemy_Grp_55 => &[
-                Actor::Item_Enemy_39,
-                Actor::Item_Enemy_50,
-                Actor::Item_Enemy_54,
-            ],
-            Self::Item_Enemy_Grp_56 => &[
-                Actor::Item_Enemy_47,
-                Actor::Item_Enemy_51,
-                Actor::Item_Enemy_55,
-            ],
-            Self::Item_Enemy_Grp_57 => &[
-                Actor::Item_Enemy_48,
-                Actor::Item_Enemy_52,
-                Actor::Item_Enemy_56,
-            ],
+            Self::Item_Enemy_38 => &[Actor::Item_Enemy_38],
+            Self::Item_Enemy_39 => &[Actor::Item_Enemy_39],
+            Self::Item_Enemy_47 => &[Actor::Item_Enemy_47],
+            Self::Item_Enemy_48 => &[Actor::Item_Enemy_48],
+            Self::Item_Enemy_49 => &[Actor::Item_Enemy_49],
+            Self::Item_Enemy_50 => &[Actor::Item_Enemy_50],
+            Self::Item_Enemy_51 => &[Actor::Item_Enemy_51],
+            Self::Item_Enemy_52 => &[Actor::Item_Enemy_52],
+            Self::Item_Enemy_53 => &[Actor::Item_Enemy_53],
+            Self::Item_Enemy_54 => &[Actor::Item_Enemy_54],
+            Self::Item_Enemy_55 => &[Actor::Item_Enemy_55],
+            Self::Item_Enemy_56 => &[Actor::Item_Enemy_56],
             Self::Item_FishGet_I => &[Actor::Item_FishGet_I],
             Self::Item_FishGet_K => &[Actor::Item_FishGet_K],
             Self::Item_FishGet_B => &[Actor::Item_FishGet_B],
@@ -686,18 +702,18 @@ impl Group {
             Self::Item_Ore_A => &[Actor::Item_Ore_A],
             Self::Item_Enemy_00 => &[Actor::Item_Enemy_00],
             Self::Item_Enemy_01 => &[Actor::Item_Enemy_01],
-            Self::Item_Enemy_Grp_104 => &[Actor::Item_Enemy_02, Actor::Item_Enemy_19],
-            Self::Item_Enemy_Grp_105 => &[
+            Self::Item_Enemy_Grp_112 => &[Actor::Item_Enemy_02, Actor::Item_Enemy_19],
+            Self::Item_Enemy_Grp_113 => &[
                 Actor::Item_Enemy_06,
                 Actor::Item_Enemy_40,
                 Actor::Item_Enemy_57,
             ],
             Self::Item_Enemy_07 => &[Actor::Item_Enemy_07],
             Self::Item_Enemy_08 => &[Actor::Item_Enemy_08],
-            Self::Item_Enemy_Grp_108 => &[Actor::Item_Enemy_03, Actor::Item_Enemy_20],
+            Self::Item_Enemy_Grp_116 => &[Actor::Item_Enemy_03, Actor::Item_Enemy_20],
             Self::Item_Enemy_04 => &[Actor::Item_Enemy_04],
             Self::Item_Enemy_05 => &[Actor::Item_Enemy_05],
-            Self::Item_Enemy_Grp_111 => &[
+            Self::Item_Enemy_Grp_119 => &[
                 Actor::Item_Enemy_42,
                 Actor::Item_Enemy_41,
                 Actor::Item_Enemy_43,
@@ -705,13 +721,13 @@ impl Group {
             Self::Item_Enemy_12 => &[Actor::Item_Enemy_12],
             Self::Item_Enemy_13 => &[Actor::Item_Enemy_13],
             Self::Item_Enemy_14 => &[Actor::Item_Enemy_14],
-            Self::Item_Enemy_Grp_115 => &[
+            Self::Item_Enemy_Grp_123 => &[
                 Actor::Item_Enemy_17,
                 Actor::Item_Enemy_15,
                 Actor::Item_Enemy_16,
             ],
             Self::Item_Enemy_18 => &[Actor::Item_Enemy_18],
-            Self::Item_Enemy_Grp_117 => &[
+            Self::Item_Enemy_Grp_125 => &[
                 Actor::Item_Enemy_46,
                 Actor::Item_Enemy_44,
                 Actor::Item_Enemy_45,
@@ -732,9 +748,9 @@ impl Group {
             Self::Item_Roast_03 => &[Actor::Item_Roast_03],
             Self::Item_Roast_10 => &[Actor::Item_Roast_10],
             Self::Item_Roast_07 => &[Actor::Item_Roast_07],
-            Self::Item_Roast_Grp_134 => &[Actor::Item_Roast_48, Actor::Item_Roast_52],
+            Self::Item_Roast_Grp_142 => &[Actor::Item_Roast_48, Actor::Item_Roast_52],
             Self::Item_Roast_09 => &[Actor::Item_Roast_09],
-            Self::Item_Roast_Grp_136 => &[
+            Self::Item_Roast_Grp_144 => &[
                 Actor::Item_Roast_12,
                 Actor::Item_Roast_08,
                 Actor::Item_Roast_11,
@@ -742,7 +758,7 @@ impl Group {
             Self::Item_Roast_13 => &[Actor::Item_Roast_13],
             Self::Item_Roast_16 => &[Actor::Item_Roast_16],
             Self::Item_Roast_06 => &[Actor::Item_Roast_06],
-            Self::Item_Roast_Grp_140 => &[
+            Self::Item_Roast_Grp_148 => &[
                 Actor::Item_Roast_04,
                 Actor::Item_Roast_36,
                 Actor::Item_Roast_37,
@@ -751,7 +767,7 @@ impl Group {
             Self::Item_Roast_53 => &[Actor::Item_Roast_53],
             Self::Item_Roast_05 => &[Actor::Item_Roast_05],
             Self::Item_Roast_49 => &[Actor::Item_Roast_49],
-            Self::Item_Roast_Grp_144 => &[
+            Self::Item_Roast_Grp_152 => &[
                 Actor::Item_Roast_31,
                 Actor::Item_Roast_32,
                 Actor::Item_Roast_33,
@@ -762,36 +778,36 @@ impl Group {
             Self::Item_Roast_24 => &[Actor::Item_Roast_24],
             Self::Item_Roast_50 => &[Actor::Item_Roast_50],
             Self::Item_Roast_15 => &[Actor::Item_Roast_15],
-            Self::Item_Roast_Grp_151 => &[Actor::Item_Roast_27, Actor::Item_Roast_28],
-            Self::Item_Grp_152 => &[Actor::Item_Roast_51, Actor::Item_Boiled_01],
-            Self::Item_Roast_Grp_153 => &[Actor::Item_Roast_01, Actor::Item_Roast_02],
+            Self::Item_Roast_Grp_159 => &[Actor::Item_Roast_27, Actor::Item_Roast_28],
+            Self::Item_Grp_160 => &[Actor::Item_Roast_51, Actor::Item_Boiled_01],
+            Self::Item_Roast_Grp_161 => &[Actor::Item_Roast_01, Actor::Item_Roast_02],
             Self::Item_Roast_40 => &[Actor::Item_Roast_40],
-            Self::Item_Roast_Grp_155 => &[Actor::Item_Roast_45, Actor::Item_Roast_46],
+            Self::Item_Roast_Grp_163 => &[Actor::Item_Roast_45, Actor::Item_Roast_46],
             Self::Item_Roast_41 => &[Actor::Item_Roast_41],
             Self::Item_RoastFish_01 => &[Actor::Item_RoastFish_01],
             Self::Item_RoastFish_02 => &[Actor::Item_RoastFish_02],
-            Self::Item_RoastFish_Grp_159 => &[Actor::Item_RoastFish_04, Actor::Item_RoastFish_11],
-            Self::Item_RoastFish_Grp_160 => &[Actor::Item_RoastFish_03, Actor::Item_RoastFish_13],
-            Self::Item_RoastFish_Grp_161 => &[Actor::Item_RoastFish_07, Actor::Item_RoastFish_09],
+            Self::Item_RoastFish_Grp_167 => &[Actor::Item_RoastFish_04, Actor::Item_RoastFish_11],
+            Self::Item_RoastFish_Grp_168 => &[Actor::Item_RoastFish_03, Actor::Item_RoastFish_13],
+            Self::Item_RoastFish_Grp_169 => &[Actor::Item_RoastFish_07, Actor::Item_RoastFish_09],
             Self::Item_RoastFish_15 => &[Actor::Item_RoastFish_15],
-            Self::Item_Chilled_Grp_163 => &[Actor::Item_Chilled_01, Actor::Item_Chilled_04],
-            Self::Item_Chilled_Grp_164 => &[Actor::Item_Chilled_02, Actor::Item_Chilled_05],
-            Self::Item_Chilled_Grp_165 => &[Actor::Item_Chilled_03, Actor::Item_Chilled_06],
-            Self::Item_ChilledFish_Grp_166 => &[
+            Self::Item_Chilled_Grp_171 => &[Actor::Item_Chilled_01, Actor::Item_Chilled_04],
+            Self::Item_Chilled_Grp_172 => &[Actor::Item_Chilled_02, Actor::Item_Chilled_05],
+            Self::Item_Chilled_Grp_173 => &[Actor::Item_Chilled_03, Actor::Item_Chilled_06],
+            Self::Item_ChilledFish_Grp_174 => &[
                 Actor::Item_ChilledFish_01,
                 Actor::Item_ChilledFish_06,
                 Actor::Item_ChilledFish_07,
             ],
             Self::Item_ChilledFish_02 => &[Actor::Item_ChilledFish_02],
-            Self::Item_ChilledFish_Grp_168 => {
+            Self::Item_ChilledFish_Grp_176 => {
                 &[Actor::Item_ChilledFish_03, Actor::Item_ChilledFish_08]
             }
-            Self::Item_ChilledFish_Grp_169 => {
+            Self::Item_ChilledFish_Grp_177 => {
                 &[Actor::Item_ChilledFish_04, Actor::Item_ChilledFish_05]
             }
             Self::Item_ChilledFish_09 => &[Actor::Item_ChilledFish_09],
             Self::Obj_DRStone_Get => &[Actor::Obj_DRStone_Get],
-            Self::dyecolor_Grp_172 => &[
+            Self::dyecolor_Grp_180 => &[
                 Actor::dyecolor_00,
                 Actor::dyecolor_01,
                 Actor::dyecolor_02,
@@ -809,7 +825,7 @@ impl Group {
                 Actor::dyecolor_14,
                 Actor::dyecolor_15,
             ],
-            Self::Obj_Photo_Grp_173 => &[
+            Self::Obj_Photo_Grp_181 => &[
                 Actor::Obj_Photo_Animal,
                 Actor::Obj_Photo_Enemy,
                 Actor::Obj_Photo_Material,
@@ -826,46 +842,46 @@ impl Group {
             Self::Item_Roast_03 => true,
             Self::Item_Roast_10 => true,
             Self::Item_Roast_07 => true,
-            Self::Item_Roast_Grp_134 => true,
+            Self::Item_Roast_Grp_142 => true,
             Self::Item_Roast_09 => true,
-            Self::Item_Roast_Grp_136 => true,
+            Self::Item_Roast_Grp_144 => true,
             Self::Item_Roast_13 => true,
             Self::Item_Roast_16 => true,
             Self::Item_Roast_06 => true,
-            Self::Item_Roast_Grp_140 => true,
+            Self::Item_Roast_Grp_148 => true,
             Self::Item_Roast_53 => true,
             Self::Item_Roast_05 => true,
             Self::Item_Roast_49 => true,
-            Self::Item_Roast_Grp_144 => true,
+            Self::Item_Roast_Grp_152 => true,
             Self::Item_Roast_39 => true,
             Self::Item_Roast_18 => true,
             Self::Item_Roast_19 => true,
             Self::Item_Roast_24 => true,
             Self::Item_Roast_50 => true,
             Self::Item_Roast_15 => true,
-            Self::Item_Roast_Grp_151 => true,
-            Self::Item_Grp_152 => true,
-            Self::Item_Roast_Grp_153 => true,
+            Self::Item_Roast_Grp_159 => true,
+            Self::Item_Grp_160 => true,
+            Self::Item_Roast_Grp_161 => true,
             Self::Item_Roast_40 => true,
-            Self::Item_Roast_Grp_155 => true,
+            Self::Item_Roast_Grp_163 => true,
             Self::Item_Roast_41 => true,
             Self::Item_RoastFish_01 => true,
             Self::Item_RoastFish_02 => true,
-            Self::Item_RoastFish_Grp_159 => true,
-            Self::Item_RoastFish_Grp_160 => true,
-            Self::Item_RoastFish_Grp_161 => true,
+            Self::Item_RoastFish_Grp_167 => true,
+            Self::Item_RoastFish_Grp_168 => true,
+            Self::Item_RoastFish_Grp_169 => true,
             Self::Item_RoastFish_15 => true,
-            Self::Item_Chilled_Grp_163 => true,
-            Self::Item_Chilled_Grp_164 => true,
-            Self::Item_Chilled_Grp_165 => true,
-            Self::Item_ChilledFish_Grp_166 => true,
+            Self::Item_Chilled_Grp_171 => true,
+            Self::Item_Chilled_Grp_172 => true,
+            Self::Item_Chilled_Grp_173 => true,
+            Self::Item_ChilledFish_Grp_174 => true,
             Self::Item_ChilledFish_02 => true,
-            Self::Item_ChilledFish_Grp_168 => true,
-            Self::Item_ChilledFish_Grp_169 => true,
+            Self::Item_ChilledFish_Grp_176 => true,
+            Self::Item_ChilledFish_Grp_177 => true,
             Self::Item_ChilledFish_09 => true,
             Self::Obj_DRStone_Get => true,
-            Self::dyecolor_Grp_172 => true,
-            Self::Obj_Photo_Grp_173 => true,
+            Self::dyecolor_Grp_180 => true,
+            Self::Obj_Photo_Grp_181 => true,
             Self::Obj_Photo_BossEnemy => true,
             _ => false,
         }
@@ -877,46 +893,46 @@ impl Group {
             Self::Item_Roast_03 => true,
             Self::Item_Roast_10 => true,
             Self::Item_Roast_07 => true,
-            Self::Item_Roast_Grp_134 => true,
+            Self::Item_Roast_Grp_142 => true,
             Self::Item_Roast_09 => true,
-            Self::Item_Roast_Grp_136 => true,
+            Self::Item_Roast_Grp_144 => true,
             Self::Item_Roast_13 => true,
             Self::Item_Roast_16 => true,
             Self::Item_Roast_06 => true,
-            Self::Item_Roast_Grp_140 => true,
+            Self::Item_Roast_Grp_148 => true,
             Self::Item_Roast_53 => true,
             Self::Item_Roast_05 => true,
             Self::Item_Roast_49 => true,
-            Self::Item_Roast_Grp_144 => true,
+            Self::Item_Roast_Grp_152 => true,
             Self::Item_Roast_39 => true,
             Self::Item_Roast_18 => true,
             Self::Item_Roast_19 => true,
             Self::Item_Roast_24 => true,
             Self::Item_Roast_50 => true,
             Self::Item_Roast_15 => true,
-            Self::Item_Roast_Grp_151 => true,
-            Self::Item_Grp_152 => true,
-            Self::Item_Roast_Grp_153 => true,
+            Self::Item_Roast_Grp_159 => true,
+            Self::Item_Grp_160 => true,
+            Self::Item_Roast_Grp_161 => true,
             Self::Item_Roast_40 => true,
-            Self::Item_Roast_Grp_155 => true,
+            Self::Item_Roast_Grp_163 => true,
             Self::Item_Roast_41 => true,
             Self::Item_RoastFish_01 => true,
             Self::Item_RoastFish_02 => true,
-            Self::Item_RoastFish_Grp_159 => true,
-            Self::Item_RoastFish_Grp_160 => true,
-            Self::Item_RoastFish_Grp_161 => true,
+            Self::Item_RoastFish_Grp_167 => true,
+            Self::Item_RoastFish_Grp_168 => true,
+            Self::Item_RoastFish_Grp_169 => true,
             Self::Item_RoastFish_15 => true,
-            Self::Item_Chilled_Grp_163 => true,
-            Self::Item_Chilled_Grp_164 => true,
-            Self::Item_Chilled_Grp_165 => true,
-            Self::Item_ChilledFish_Grp_166 => true,
+            Self::Item_Chilled_Grp_171 => true,
+            Self::Item_Chilled_Grp_172 => true,
+            Self::Item_Chilled_Grp_173 => true,
+            Self::Item_ChilledFish_Grp_174 => true,
             Self::Item_ChilledFish_02 => true,
-            Self::Item_ChilledFish_Grp_168 => true,
-            Self::Item_ChilledFish_Grp_169 => true,
+            Self::Item_ChilledFish_Grp_176 => true,
+            Self::Item_ChilledFish_Grp_177 => true,
             Self::Item_ChilledFish_09 => true,
             Self::Obj_DRStone_Get => true,
-            Self::dyecolor_Grp_172 => true,
-            Self::Obj_Photo_Grp_173 => true,
+            Self::dyecolor_Grp_180 => true,
+            Self::Obj_Photo_Grp_181 => true,
             Self::Obj_Photo_BossEnemy => true,
             _ => false,
         }

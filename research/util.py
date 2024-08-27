@@ -79,7 +79,7 @@ def make_multichoose(num_groups):
 def total_records(num_groups, multichoose):
     return multichoose[num_groups][NUM_INGR]
 
-CHUNK_SIZE = 409600
+CHUNK_SIZE = 4096 * 100
 def chunk(total):
     """Returns (chunk_size, chunk_count, last_chunk_size)"""
     assertion(total % CHUNK_SIZE != 0, "total divisible by chunk size")
@@ -88,7 +88,7 @@ def chunk(total):
     assertion(CHUNK_SIZE*(chunk_count-1) + last_chunk_size == total, "chunk size calculation")
     return CHUNK_SIZE, chunk_count, last_chunk_size
 
-COMPACT_CHUNK_SIZE = 4096 * 800
+COMPACT_CHUNK_SIZE = 4096 * 1000
 def chunk_compact(total):
     assertion(total % COMPACT_CHUNK_SIZE != 0, "total divisible by chunk size")
     chunk_count = total//COMPACT_CHUNK_SIZE + 1
