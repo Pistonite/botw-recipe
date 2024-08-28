@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import i18n from "i18next";
 import { App } from "./App";
 import { HostContext } from "./HostProvider";
 import { HostImpl } from "./HostImpl";
 import { TauriBinding } from "./TauriHost";
-import { initLocale } from "./i18n/initLocale.ts";
-import i18n from "i18next";
+import { initLocale } from "./i18n/locales.ts";
 
 
 async function main() {
@@ -22,7 +22,8 @@ async function main() {
   );
 
   const title = i18n.t("title");
-  host.initialize({title}).then((result) => console.log(result));
+    await host.bind();
+  await host.initialize({title});
 
 }
 main();

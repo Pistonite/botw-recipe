@@ -1,7 +1,6 @@
 [workspace]
 members = [
     "app/data",
-    "app/old",
     "app/rdb/src-tauri",
     "dump/emulate",
 ]

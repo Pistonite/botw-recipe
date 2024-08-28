@@ -12,7 +12,7 @@ use std::sync::{Arc, LazyLock, OnceLock, RwLock};
 use enum_map::{Enum, EnumMap};
 use file_io::save_search_result;
 use itertools::Itertools;
-use log::{error, info};
+use log::{error, info, debug};
 use rdata::db::{Database, Filter};
 use rdata::recipe::{RecipeId, RecipeInputs};
 use rdata::wmc::WeaponModifierSet;
@@ -142,24 +142,24 @@ fn search_impl(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<
     state.executor.clear_abort_handles()?;
     let db: &Database = get_db(&state)?;
     let mut handles = Vec::with_capacity(db.chunk_count());
-    let (send, recv) = mpsc::channel::<Result<Vec<RecipeId>, String>>();
+    let (send, recv) = mpsc::channel::<Result<RecipeId, String>>();
     // spawn the receiver thread
     state.executor.background_pool().execute(move || {
         let mut result_recipes = Vec::new();
         let mut actors = EnumMap::<Actor, usize>::from_fn(|_| 0);
         for result in recv {
             match result {
-                Ok(recipes) => {
-                    info!("received {} recipes", recipes.len());
-                    for recipe in &recipes {
-                        let inputs: RecipeInputs = (*recipe).into();
-                        for group in inputs.as_slice() {
-                            for actor in group.actors() {
-                                actors[*actor] += 1;
-                            }
-                        }
-                    }
-                    result_recipes.extend(recipes);
+                Ok(recipe) => {
+                    // info!("received {} recipes", recipes.len());
+                    // for recipe in &recipes {
+                        // let inputs: RecipeInputs = recipe.into();
+                        // for group in inputs.as_slice() {
+                        //     for actor in group.actors() {
+                        //         actors[*actor] += 1;
+                        //     }
+                        // }
+                    // }
+                    result_recipes.push(recipe);
                 }
                 Err(err) => {
                     error!("error while searching: {}", err);
@@ -190,42 +190,31 @@ fn search_impl(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<
         let chunk = match chunk {
             Some(chunk) => chunk,
             None => {
-                info!("skipping chunk {} (filtered by index)", chunk_id);
+                debug!("skipping chunk {} (filtered by index)", chunk_id);
                 continue;
             }
         };
         let send = send.clone();
         let handle = state.executor.execute_abortable(move |abort| {
-            let mut result = Vec::new();
-            let mut error = None;
-            let mut aborted = false;
-            let mut last_check_abort_recipe_id = 0;
             for record in chunk {
                 let record = match record {
                     Ok(record) => record,
                     Err(err) => {
-                        error = Some(err);
-                        break;
+                        let _ = send.send(Err(err.to_string()));
+                        return;
                     }
                 };
-                let recipe_id: usize = record.recipe_id.into();
+                // let recipe_id: usize = record.recipe_id.into();
                 // was abort requested?
-                if recipe_id - last_check_abort_recipe_id >= 10000 {
-                    if abort.try_recv().is_ok() {
-                        aborted = true;
-                        break;
-                    }
-                    last_check_abort_recipe_id = recipe_id;
-                }
-                result.push(record.recipe_id);
+                // if recipe_id % 10000 == 0 {
+                    // if abort.try_recv().is_ok() {
+                    //     return;
+                    // }
+                    // last_check_abort_recipe_id = recipe_id;
+                // }
+                // result.push(record.recipe_id);
+                let _ = send.send(Ok(record.recipe_id));
             }
-            if aborted || abort.try_recv().is_ok() {
-                return;
-            }
-            if let Some(err) = error {
-                let _ = send.send(Err(err.to_string()));
-            }
-            let _ = send.send(Ok(result));
         })?;
         handles.push(handle);
     }
@@ -234,7 +223,7 @@ fn search_impl(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<
     return Ok(handles);
 }
 
-/// Execute filtering on the search result based on what actors should be included.
+/// Execute filtering on the sinfearch result based on what actors should be included.
 /// The filter results are returned through the `filter-complete` event.
 ///
 /// JS side must ensure that only one filtering is being executed at a time (i.e.

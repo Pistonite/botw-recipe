@@ -6,7 +6,9 @@ use serde_json::error;
 /// Interop with pure/result in JS side
 #[derive(Debug, Clone, Serialize)]
 pub struct ResultInterop<T> {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub val: Option<T>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub err: Option<String>,
 }
 

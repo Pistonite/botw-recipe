@@ -1,6 +1,8 @@
 import os
 import glob
 from tqdm import tqdm
+import subprocess
+import shutil
 
 def is_newer(a_list, b_list):
     a_list = a_list + [__file__]
@@ -95,3 +97,27 @@ def chunk_compact(total):
     last_chunk_size = total % COMPACT_CHUNK_SIZE
     assertion(COMPACT_CHUNK_SIZE*(chunk_count-1) + last_chunk_size == total, "chunk size calculation")
     return COMPACT_CHUNK_SIZE, chunk_count, last_chunk_size
+
+def sparse_checkout(clean, repo, path, branch, checkout_paths):
+    if not clean:
+        for p in checkout_paths:
+            if not os.path.exists(os.path.join(path, p)):
+                clean = True
+                print(f"{p} not found, forcing re-checkout")
+                break
+
+    if clean:
+        if os.path.exists(path):
+            shutil.rmtree(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    else:
+        print(f"{path} already exists, skipping. use --clean to force re-checkout")
+        return
+    subprocess.run(["git", "init"], cwd=path)
+    subprocess.run(["git", "remote", "add", "origin", repo], cwd=path)
+    subprocess.run(["git", "config", "core.sparseCheckout", "true"], cwd=path)
+    with open(os.path.join(path, ".git", "info", "sparse-checkout"), "w", encoding="utf-8") as f:
+        for checkout_path in checkout_paths:
+            f.write(checkout_path + "\n")
+    subprocess.run(["git", "pull", "--depth=1", "origin", branch], cwd=path)

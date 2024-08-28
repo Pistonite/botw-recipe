@@ -21,8 +21,8 @@
       {
         "title": "Loading...",
         "url": "index-tauri.html",
-        "width": 1000,
-        "height": 600
+        "width": 1400,
+        "height": 900
       }
     ],
     "security": {

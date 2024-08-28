@@ -5,13 +5,20 @@ env:
 dotenv: [".env"]
 
 includes:
+  # BOTW RDB App
   rdb:
     taskfile: ./app/rdb
     dir: ./app/rdb
 
+  # Recipe Dumper Mod
   console:
     taskfile: ./dump/console
     dir: ./dump/console
+
+  # Recipe Dumper and Verifier
+  dump:
+    taskfile: ./dump/emulate
+    dir: ./dump/emulate
 
 tasks:
   research:
@@ -20,32 +27,23 @@ tasks:
     cmds:
     - python main.py {{.CLI_ARGS}}
 
-  dump:
-    dir: dump/emulate
-    desc: Dump using cooking simulator
-    cmds:
-    - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
-
   check:
-    dir: dump/emulate
-    desc: Check dumped data against sane values and compare dumps from console and emulate
-    cmds:
-    - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
+    desc: Check for issues
+    deps:
+    - check:rs
+    #- check:ts
 
-  cook:
-    dir: dump/emulate
-    desc: Cook a recipe with emulator. Separate ingredients with commas
-    cmds:
-    - cargo run --bin cook-cli --quiet -- {{.CLI_ARGS}}
 
-  cook-debug:
-    dir: dump/emulate
-    desc: Cook a recipe in debug mode
+  check:rs:
+    vars:
+      CLIPPY_FLAGS: -D warnings -D clippy::todo
     cmds:
-    - cargo run --bin cook-cli --features debug-print -- {{.CLI_ARGS}}
+    - cargo clippy --package botw-recipe-data --all-targets -- {{.CLIPPY_FLAGS}}
+    - cargo clippy --package botw-recipe-dump-emulate --all-targets -- {{.CLIPPY_FLAGS}}
+    - cargo clippy --package botw-recipe-database --all-targets -- {{.CLIPPY_FLAGS}}
+    - cargo fmt --check
 
-  read-test:
-    dir: dump/emulate
-    desc: Test database reading implementation
+  fix:rs:
+    desc: Fix code issues in .rs
     cmds:
-    - cargo run --release --bin test-read --quiet
+    - cargo fmt --all

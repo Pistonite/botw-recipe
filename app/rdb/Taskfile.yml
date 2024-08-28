@@ -16,7 +16,7 @@ tasks:
       RUST_LOG: info
       BOTWRDB_PATH: ../../../dump/emulate/compact
     cmds:
-    - npx tauri dev
+    - npx tauri dev {{.CLI_ARGS}}
 
   build:
     desc: Build RDB (release) binary
@@ -30,5 +30,29 @@ tasks:
   build-js:
     cmds:
     - npx tsc && npx vite build
+    - node scripts/verifyI18n.cjs
 
+  check:
+    desc: Check for linting and formatting issues
+    aliases: [lint]
+    cmds:
+    # - task: eslint
+    #   vars:
+    #     ESLINT_ARGS: ""
+    - task: prettier
+      vars:
+        PRETTIER_ARGS: --check
+  
+  fix:
+    desc: Fix linting and formatting issues in web client
+    cmds:
+    - task: prettier
+      vars:
+        PRETTIER_ARGS: --write
+    # - task: eslint
+    #   vars:
+    #     ESLINT_ARGS: --fix
 
+  prettier:
+    cmds:
+    - npx prettier "./**/*.{ts,tsx,json,js,jsx,cjs,css}" {{.PRETTIER_ARGS}}

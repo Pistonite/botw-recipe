@@ -1,16 +1,30 @@
 # UI
 title: BotW Recipe Database for WMC
+search.title: Search
+search.desc: Scan all material combinations and select recipes that meet the criteria for modifiers
+search.value.title: Value and Materials
+search.value.min: Min. Modifier Value (HP)
+search.value.max: Max. Modifier Value (HP)
+search.value.rng: Allow RNG HP Crit
+search.value.rng.desc: Include recipes where a non-guaranteed HP crit is needed to meet the minimum HP requirement. Guaranteed HP crit are not affected. (Note that a recipe which guarantees a crit may not guarantee a HP crit.)
+search.value.pe: Allow Unusual Material
+search.value.pe.desc: Include recipes where at least one material needs Prompt Entanglement or is usually unobtainable or uncookable.
+search.modifier.title: Modifiers
+search.modifier.desc: Select "+" for modifiers that must be included, and "-" for modifiers that must be excluded.
+search.modifier.name: Modifier
+search.modifier.option: Option
+search.button: Search
 
 # Modifiers
-AddPower: Attack Up
-AddLife: Durability Up
-Critical: Critical Hit
-LongThrow: Long Throw
-SpreadFire: Multishot
-Zoom: Zoom
-RapidFire: Quick Shot
-SurfMaster: Shield Surf Up
-AddGuard: Shield Guard Up
+modifier.1: Attack Up
+modifier.2: Durability Up
+modifier.4: Critical Hit
+modifier.8: Long Throw
+modifier.16: Multishot
+modifier.32: Zoom
+modifier.64: Quick Shot
+modifier.128: Shield Surf Up
+modifier.256: Shield Guard Up
 
 # DO NOT MODIFY BELOW
 ### AUTOGEN ###

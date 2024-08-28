@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  dump:
+    desc: Dump using cooking simulator
+    cmds:
+    - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
+
+  check:
+    desc: Check dumped data against sane values and compare dumps from console and emulate
+    cmds:
+    - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
+
+  cook:
+    desc: Cook a recipe with emulator. Separate ingredients with commas
+    cmds:
+    - cargo run --bin cook-cli --quiet -- {{.CLI_ARGS}}
+
+  cook-debug:
+    desc: Cook a recipe in debug mode
+    cmds:
+    - cargo run --bin cook-cli --features debug-print -- {{.CLI_ARGS}}
+
+  read-test:
+    desc: Test database reading implementation
+    cmds:
+    - cargo run --release --bin test-read --quiet
