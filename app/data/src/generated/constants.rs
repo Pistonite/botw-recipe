@@ -29,9 +29,6 @@ pub const CHUNK_COUNT: usize = 4409;
 /// Number of records in the last chunk in the data dump
 pub const LAST_CHUNK_SIZE: usize = 51602;
 
-/// Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
-///
-/// MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
 /// Number of records in each chunk except last in the compact DB
 pub const COMPACT_CHUNK_SIZE: usize = 2048000;
 
@@ -41,6 +38,9 @@ pub const COMPACT_CHUNK_COUNT: usize = 882;
 /// Number of records in the last chunk in the compact DB
 pub const COMPACT_LAST_CHUNK_SIZE: usize = 1280402;
 
+/// Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
+///
+/// MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
 pub(crate) const MULTICHOOSE: [[usize; NUM_INGR + 1]; NUM_GROUPS + 1] = [
     [1, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 1, 1],

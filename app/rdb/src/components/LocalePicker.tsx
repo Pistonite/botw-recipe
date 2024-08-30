@@ -3,13 +3,16 @@ import { Menu, MenuButton, MenuItemRadio, MenuList, MenuPopover, MenuTrigger } f
 import { Globe20Regular} from "@fluentui/react-icons";
 
 import { loadLocalePreference, SupportedLocales, switchLanguage } from "i18n/locales.ts";
+import { useHost } from "host/HostProvider.ts";
 
 /** Language Picker */
 export const LocalePicker: React.FC = () => {
     const [locale, setLocale] = useState(loadLocalePreference);
 
+    const host = useHost();
+
     useEffect(() => {
-        switchLanguage(locale);
+        switchLanguage(locale, host);
     }, [locale]);
 
     return (

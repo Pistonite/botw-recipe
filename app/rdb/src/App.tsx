@@ -6,8 +6,8 @@ import { WeaponModifier, WeaponModifiers, WeaponModifierSet } from "data/WeaponM
 import { Modifier, ModifierLabel, ModifierSelection } from "components/Modifier";
 import { LocalePicker } from "components/LocalePicker";
 import { useCallback, useState } from "react";
-import { SearchFilter } from "host";
-import { useHost } from "HostProvider";
+import { SearchFilter } from "host/types.ts";
+import { useHost } from "host/HostProvider.ts";
 
 function parseHp(value: number | undefined | null, displayValue: string | undefined): number {
     if (value !== undefined) {

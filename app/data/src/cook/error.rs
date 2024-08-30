@@ -1,15 +1,17 @@
+use serde::Serialize;
+
 use crate::Actor;
 
-#[derive(Debug, thiserror::Error)]
+/// Cooking-related errors
+#[derive(Debug, Clone, thiserror::Error, Serialize)]
+#[serde(tag = "type", content = "data")]
 pub enum Error {
     #[error("YAML error: {0}")]
-    Yaml(#[from] serde_yaml::Error),
-    #[error("failed to read ingredients for: {0:?}")]
+    Yaml(String),
+    #[error("failed to read ingredients: {0:?}")]
     ReadIngr(Vec<Error>),
     #[error("failed to read recipes: {0}")]
     ReadRecipe(String),
-    #[error("attempting to get data for CookEffect::None")]
-    NoEffectData,
     #[error("cannot find ingredient: {0}.")]
     ItemNotFound(String),
     #[error("ambiguous ingredient: {0}, which can be: {1:?}")]
@@ -22,4 +24,10 @@ pub enum Error {
     InvalidRecipeId(usize),
     #[error("unexpected data error: {0}")]
     Data(String),
+}
+
+impl From<serde_yaml::Error> for Error {
+    fn from(e: serde_yaml::Error) -> Self {
+        Self::Yaml(e.to_string())
+    }
 }

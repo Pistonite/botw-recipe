@@ -92,11 +92,6 @@ def gen_numeric_constants(o, data):
         Number of records in the last chunk in the data dump
     """)
     o.write(f"pub const LAST_CHUNK_SIZE: usize = {last_chunk_size};\n\n")
-    write_doc_comment(o, """
-        Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
-
-        MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
-    """)
 
     # chunking compactdb
     compact_chunk_size, compact_chunk_count, compact_last_chunk_size = util.chunk_compact(total)
@@ -116,6 +111,11 @@ def gen_numeric_constants(o, data):
     """)
     o.write(f"pub const COMPACT_LAST_CHUNK_SIZE: usize = {compact_last_chunk_size};\n\n")
 
+    write_doc_comment(o, """
+        Pre-computed multichoose(n, k) values for 0<=n<=NUM_GROUPS and 0<=k<=NUM_INGR
+
+        MULTICHOOSE[n][k] is the number of ways to choose k items from n items with repetition.
+    """)
     o.write("pub(crate) const MULTICHOOSE: [[usize; NUM_INGR+1]; NUM_GROUPS+1] = [\n")
     multichoose = util.make_multichoose(data['num'])
     for multichoose_n in multichoose:

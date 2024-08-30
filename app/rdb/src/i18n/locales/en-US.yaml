@@ -14,6 +14,12 @@ search.modifier.desc: Select "+" for modifiers that must be included, and "-" fo
 search.modifier.name: Modifier
 search.modifier.option: Option
 search.button: Search
+search.button.cancel: Cancel
+search.progress: "Searching ({{progress}}%)"
+search.result: "Found {{count}} recipes in {{seconds}}s"
+
+error.title: Error
+error.search.title: Error during Search
 
 # Modifiers
 modifier.1: Attack Up

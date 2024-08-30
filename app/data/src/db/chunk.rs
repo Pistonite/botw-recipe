@@ -22,11 +22,7 @@ impl Chunk {
         let total = get_compact_chunk_record_size(chunk_id);
         let file_size = file.metadata()?.len() as usize;
         if file_size != total * 2 {
-            return Err(Error::InvalidDatabase(format!(
-                "wrong chunk size: expected {}, actual {}",
-                total * 2,
-                file_size
-            )));
+            return Err(Error::InvalidChunkSize(total * 2, file_size));
         }
         let mut reader = BufReader::new(file);
         let recipe_next = if chunk_id == 0 {

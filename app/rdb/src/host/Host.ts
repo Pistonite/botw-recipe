@@ -1,49 +1,55 @@
 import { Result, Void } from "@pistonite/pure/result";
-import { ActorFilter, FilterComplete, Host, HostBinding, InitArg, SearchComplete, SearchFilter } from "./host";
+import { HostBinding } from "./HostBinding.ts";
+import type { HostSearchProgressHandler, SearchComplete, SearchFilter } from "./types.ts";
 
-export class HostImpl implements Host {
+export class Host {
     private binding: HostBinding;
     private initializePromise: Promise<Void<string>> | undefined = undefined;
     private searchHandles: number[] = [];
     private searchResolve: ((result: Result<SearchComplete, string>) => void) | undefined = undefined;
-    private filterResolve: ((result: Result<FilterComplete, string>) => void) | undefined = undefined;
-    private filterPromise: Promise<Result<FilterComplete, string>> | undefined = undefined;
+    // private filterResolve: ((result: Result<FilterComplete, string>) => void) | undefined = undefined;
+    // private filterPromise: Promise<Result<FilterComplete, string>> | undefined = undefined;
+    //
 
     constructor(binding: HostBinding) {
         this.binding = binding;
     }
-    public async bind(): Promise<void> {
-        this.binding.setSearchCompleteHandler((result) => {
+
+    /** */
+    public async bind(
+        searchProgressHandler: HostSearchProgressHandler
+    ): Promise<void> {
+        await this.binding.setSearchCompleteHandler((result) => {
             const resolve = this.searchResolve;
             if (resolve) {
                 this.searchResolve = undefined;
-                if (result.err) {
-                    // abort if an error is received
-                    this.cancelSearch().then(() => resolve(result));
-                } else {
-                    resolve(result);
-                }
-            }
-        });
-
-        this.binding.setFilterCompleteHandler((result) => {
-            const resolve = this.filterResolve;
-            if (resolve) {
-                this.filterResolve = undefined;
-                this.filterPromise = undefined;
                 resolve(result);
             }
         });
+        await this.binding.setSearchProgressHandler(searchProgressHandler);
+        //
+        // this.binding.setFilterCompleteHandler((result) => {
+        //     const resolve = this.filterResolve;
+        //     if (resolve) {
+        //         this.filterResolve = undefined;
+        //         this.filterPromise = undefined;
+        //         resolve(result);
+        //     }
+        // });
     }
 
-    public initialize(arg: InitArg): Promise<Void<string>> {
+    public setTitle(title: string): void {
+        this.binding.setTitle(title);
+    }
+
+    public initialize(): Promise<Void<string>> {
         if (this.initializePromise) {
             return this.initializePromise;
         }
         this.initializePromise = new Promise((resolve) => {
             this.binding.setInitializedHandler(() => resolve({}))
             .then(() => {
-                this.binding.initialize(arg).then((result) => {
+                this.binding.initialize().then((result) => {
                     if (result.err) {
                         resolve(result);
                     }
@@ -53,6 +59,7 @@ export class HostImpl implements Host {
         });
         return this.initializePromise;
     }
+
     public async search(filter: SearchFilter): Promise<Result<SearchComplete, string>> {
         const cancelResult = await this.cancelSearch();
         if (cancelResult.err) {
@@ -81,20 +88,20 @@ export class HostImpl implements Host {
         }
         return {};
     }
-    public filterActors(filter: ActorFilter): Promise<Result<FilterComplete, string>> {
-        if (this.filterPromise) {
-            return this.filterPromise;
-        }
-        this.filterPromise = new Promise((resolve) => {
-            this.filterResolve = resolve;
-            this.binding.filterActors(filter).then((result) => {
-                if (result.err) {
-                    resolve({ err: result.err });
-                }
-                // wait for filter complete event
-            });
-        });
-        return this.filterPromise;
-    }
+    // public filterActors(filter: ActorFilter): Promise<Result<FilterComplete, string>> {
+    //     if (this.filterPromise) {
+    //         return this.filterPromise;
+    //     }
+    //     this.filterPromise = new Promise((resolve) => {
+    //         this.filterResolve = resolve;
+    //         this.binding.filterActors(filter).then((result) => {
+    //             if (result.err) {
+    //                 resolve({ err: result.err });
+    //             }
+    //             // wait for filter complete event
+    //         });
+    //     });
+    //     return this.filterPromise;
+    // }
     
 }
