@@ -1,18 +1,10 @@
-/** Filter for searching the database */
-export type SearchFilter = {
-     minValue: number,
-     maxValue: number,
-     includesModifier: number,
-     excludesModifier: number,
-     includeCritRngHp: boolean,
-     includePeOnly: boolean,
-}
+// re-export types generated from rust
+export * from "./types/CookError.ts";
+export * from "./types/DatabaseError.ts";
+import { Error } from "./types/Error.ts";
+export type HostError = Error;
+export * from "./types/SearchFilter.ts";
+export * from "./types/WeaponModifierSet.ts";
+export * from "./types/SearchComplete.ts";
 
-/** Response from search-complete event */
-export type SearchComplete = {
-    foundCount: number,
-    actors: number[],
-}
-
-export type HostErrorHandler = (error: unknown) => void;
 export type HostSearchProgressHandler = (percentage: number) => void;

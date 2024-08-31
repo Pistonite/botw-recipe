@@ -16,6 +16,7 @@ use super::Error;
 /// a list of recipe ids as usize.
 ///
 /// The structure can be used to both read and write, but only one should be used.
+#[derive(Debug, Clone)]
 pub struct TempResult {
     /// Path to the temporary result directory (directory is under <db>/temp/)
     path: PathBuf,
@@ -47,6 +48,14 @@ impl TempResult {
     pub fn writer(&self, file_id: usize) -> Result<TempResultWriter, Error> {
         let path = self.path.join(file_id.to_string());
         TempResultWriter::open(path)
+    }
+
+    /// Clear the temporary result directory
+    pub fn clear(&mut self) -> Result<(), Error> {
+        std::fs::remove_dir_all(&self.path)?;
+        std::fs::create_dir(&self.path)?;
+        self.size = 0;
+        Ok(())
     }
 }
 
@@ -86,21 +95,32 @@ impl Iterator for TempResultIter {
 }
 
 pub struct TempResultWriter {
-    writer: BufWriter<File>,
+    path: PathBuf,
+    writer: Option<BufWriter<File>>,
     size: usize,
 }
 
 impl TempResultWriter {
     pub fn open(path: PathBuf) -> Result<Self, Error> {
-        let file = File::create(path)?;
         Ok(Self {
-            writer: BufWriter::new(file),
+            path,
+            writer: None,
             size: 0,
         })
     }
 
     pub fn write(&mut self, id: RecipeId) -> Result<(), Error> {
-        self.writer.write_all(&usize::from(id).to_le_bytes())?;
+        match self.writer.as_mut() {
+            Some(writer) => {
+                writer.write_all(&usize::from(id).to_le_bytes())?;
+            }
+            None => {
+                let file = File::create(&self.path)?;
+                let mut writer = BufWriter::new(file);
+                writer.write_all(&usize::from(id).to_le_bytes())?;
+                self.writer = Some(writer);
+            }
+        }
         self.size += 1;
         Ok(())
     }

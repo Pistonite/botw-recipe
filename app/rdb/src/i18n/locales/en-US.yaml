@@ -19,7 +19,23 @@ search.progress: "Searching ({{progress}}%)"
 search.result: "Found {{count}} recipes in {{seconds}}s"
 
 error.title: Error
-error.search.title: Error during Search
+error.message.io: "IO Error: {{message}}"
+error.message.yaml: "YAML Error: {{message}}"
+error.message.poison: "Internal Error: Lock is poisoned: {{message}}"
+error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
+error.message.database.invalid_recipe: "Invalid recipe id: {{id}}"
+error.message.database.locked: "Database is locked. You may have another instance of the application running. If not, the application may have crashed earlier. Please delete `database/.lock` manually in that case."
+error.message.database.invalid: "Cannot validate the integrity of the database. It may have been corrupted. Try reinstalling the application. (Error Type: {{errorType}})"
+error.generic: "An error occurred: {{message}}"
+error.internal: "Internal Error: {{errorType}}"
+error.unknown: "Unknown Error: {{message}}"
+error.button: OK
+
+confirm.title: Confirm
+confirm.message.search.abort: Are you sure to cancel the search?
+confirm.button.yes: "Yes"
+confirm.button.no: "No"
+
 
 # Modifiers
 modifier.1: Attack Up

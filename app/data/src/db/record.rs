@@ -1,8 +1,6 @@
-use crate::{
-    cook::{CookData, CookEffect, CookingPot},
-    recipe::{RecipeId, RecipeInputs},
-    wmc::WeaponModifierSet,
-};
+use crate::cook::{CookData, CookEffect, CookingPot};
+use crate::recipe::{RecipeId, RecipeInputs};
+use crate::wmc::WeaponModifierSet;
 
 use super::{Error, Filter};
 

@@ -1,11 +1,11 @@
-use std::{
-    fs::File,
-    io::{BufReader, Read},
-    path::Path,
-    sync::Arc,
-};
+use std::fs::File;
+use std::io::{BufReader, Read};
+use std::path::Path;
+use std::sync::Arc;
 
-use crate::{cook::CookingPot, generated::get_compact_chunk_record_size, recipe::RecipeId};
+use crate::cook::CookingPot;
+use crate::generated::get_compact_chunk_record_size;
+use crate::recipe::RecipeId;
 
 use super::{Error, Filter, PositionedRecord};
 

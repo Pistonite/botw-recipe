@@ -13,7 +13,29 @@ search.modifier.title: 附魔种类
 search.modifier.desc: 选 "+" 代表必须包含该种类， "-" 则代表必须不包含。
 search.modifier.name: 种类
 search.modifier.option: 选项
-search.button: Search
+search.button: 搜索
+search.button.cancel: 取消
+search.progress: "搜索中 ({{progress}}%)"
+search.result: "共找到{{count}}种组合，用时{{seconds}}秒"
+
+error.title: 发生错误
+error.message.io: "IO错误: {{message}}"
+error.message.yaml: "YAML错误: {{message}}"
+error.message.poison: "内部错误: 锁已损坏: {{message}}"
+error.message.executor.unavailable: "没有可用的线程。请尝试重启本软件。"
+error.message.database.invalid_recipe: "无效材料组合ID: {{id}}"
+error.message.database.locked: "另一个实例正在使用数据库。如果没有其他的料理附魔数据库在运行，请手动删除`database/.lock`。"
+error.message.database.invalid: "验证数据库完整性失败。数据库可能损坏。请尝试重新安装本软件 (错误类型: {{errorType}})"
+error.generic: "错误: {{message}}"
+error.internal: "内部错误: {{errorType}}"
+error.unknown: "未知错误: {{message}}"
+error.button: 哦
+
+confirm.title: 确认
+confirm.message.search.abort: 确定取消搜索？
+confirm.button.yes: 是
+confirm.button.no: 否
+
 
 # Modifiers
 modifier.1: 攻击力提升

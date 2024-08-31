@@ -16,7 +16,7 @@ tasks:
       RUST_LOG: info
       BOTWRDB_PATH: ../../../dump/emulate/compact
     cmds:
-    - npx tauri dev {{.CLI_ARGS}}
+    - npx tauri dev --features devtools {{.CLI_ARGS}}
 
   build:
     desc: Build RDB (release) binary
@@ -29,8 +29,22 @@ tasks:
 
   build-js:
     cmds:
-    - npx tsc && npx vite build
     - node scripts/verifyI18n.cjs
+    - npx tsc && npx vite build
+
+  ts-rs:
+    desc: Generate TypeScript bindings
+    dir: .
+    cmds:
+    - coreutils rm -rf ../data/bindings
+    - coreutils rm -rf src-tauri/bindings
+    - coreutils rm -rf src/host/types
+    - coreutils mkdir -p src/host/types
+    - cargo test --package botw-recipe-data --lib
+    - cargo test --package botw-recipe-database
+    - coreutils cp -r ../data/bindings/*.ts src/host/types/
+    - coreutils cp -r src-tauri/bindings/*.ts src/host/types/
+    - npx prettier "./src/host/types/*.ts" --write
 
   check:
     desc: Check for linting and formatting issues

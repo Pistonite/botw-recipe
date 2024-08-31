@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[repr(u32)]
@@ -30,7 +31,8 @@ pub enum WeaponModifier {
     IsYellow = 0x80000000,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[ts(export)]
 #[repr(transparent)]
 pub struct WeaponModifierSet(u32);
 

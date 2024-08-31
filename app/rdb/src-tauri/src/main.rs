@@ -1,26 +1,17 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
+// Prevents additional console window on Windows in release
 #![cfg_attr(not(feature = "devtools"), windows_subsystem = "windows")]
 
-use std::cell::{OnceCell, UnsafeCell};
-use std::collections::HashSet;
 use std::ops::Deref;
-use std::path::Path;
-use std::sync::atomic::{AtomicBool, AtomicUsize};
-use std::sync::mpsc;
-use std::sync::{Arc, LazyLock, OnceLock, RwLock};
+use std::sync::{Arc, LazyLock, Mutex};
 
-use enum_map::{Enum, EnumMap};
-use itertools::Itertools;
-use log::{error, info, debug};
+use log::info;
 use rdata::db::{Database, Filter, TempResult};
-use rdata::recipe::{RecipeId, RecipeInputs};
-use rdata::wmc::WeaponModifierSet;
-use rdata::{Actor, Group, Executor};
-use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Manager, RunEvent, State, WindowEvent};
 
 mod error;
 mod events;
+mod executor;
+use executor::Executor;
 mod file_io;
 mod search;
 
@@ -32,6 +23,7 @@ pub struct Global {
     pub executor: Arc<Executor>,
     /// The database handle
     pub db: Arc<LazyLock<Result<Database, Error>>>,
+    pub search_result: Arc<Mutex<Option<TempResult>>>,
     // /// Filter sub-state
     // filter: Arc<RwLock<FilterState>>,
 }
@@ -46,10 +38,8 @@ impl Global {
     }
 }
 
-
 #[derive(Default)]
 struct FilterState {
-    search_result: Option<TempResult>,
     // filter_result: Option<TempResult>,
     // /Last filter used for the search, used to optimize the next filter
     // last_filter: HashSet<Actor>,
@@ -100,7 +90,6 @@ fn abort(handle: usize, state: State<Global>) -> ResultInterop<()> {
 fn search(filter: Filter, app: AppHandle, state: State<Global>) -> ResultInterop<Vec<usize>> {
     search::run(&filter, app, state).into()
 }
-
 
 // /// Execute filtering on the search result based on what actors should be included.
 // /// The filter results are returned through the `filter-complete` event.
@@ -234,8 +223,7 @@ fn search(filter: Filter, app: AppHandle, state: State<Global>) -> ResultInterop
 
 fn main() {
     env_logger::init();
-    info!("starting application");
-
+    info!("configuring application");
     let executor = Arc::new(Executor::new(num_cpus::get()));
     let db = Arc::new(file_io::create_database());
 
@@ -243,17 +231,16 @@ fn main() {
         .manage(Global {
             executor: Arc::clone(&executor),
             db: Arc::clone(&db),
+            search_result: Arc::new(Mutex::new(None)),
             // filter: Arc::new(RwLock::new(FilterState::default())),
         })
         .invoke_handler(tauri::generate_handler![
-            set_title,
-            initialize,
-            abort,
-            search,
+            set_title, initialize, abort, search,
             // filter_actors
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");
+    info!("starting application");
 
     app.run(move |app_handle, e| match e {
         RunEvent::WindowEvent {
@@ -281,7 +268,7 @@ fn main() {
                 info!("database closed");
             });
         }
-        RunEvent::ExitRequested { ..}=> {
+        RunEvent::ExitRequested { .. } => {
             info!("waiting for executor to finish");
             executor.join();
             info!("exiting application");

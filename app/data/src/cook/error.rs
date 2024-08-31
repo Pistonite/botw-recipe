@@ -1,9 +1,9 @@
 use serde::Serialize;
-
-use crate::Actor;
+use ts_rs::TS;
 
 /// Cooking-related errors
-#[derive(Debug, Clone, thiserror::Error, Serialize)]
+#[derive(Debug, Clone, thiserror::Error, Serialize, TS)]
+#[ts(export, rename = "CookError")]
 #[serde(tag = "type", content = "data")]
 pub enum Error {
     #[error("YAML error: {0}")]
@@ -15,7 +15,7 @@ pub enum Error {
     #[error("cannot find ingredient: {0}.")]
     ItemNotFound(String),
     #[error("ambiguous ingredient: {0}, which can be: {1:?}")]
-    AmbiguousIngr(String, Vec<Actor>),
+    AmbiguousIngr(String, Vec<String>),
     #[error("too many ingredients! At most 5 are allowed.")]
     TooManyIngr,
     #[error("not enough ingredients! At least 1 is required.")]

@@ -1,11 +1,12 @@
 /**
  * Modifier related components
  */
-import { createTableColumn, DataGrid, DataGridBody, DataGridCell, DataGridCellFocusMode, DataGridHeader, DataGridHeaderCell, DataGridRow, Label, LabelProps, makeStyles, shorthands, TableCellLayout, TableColumnId, ToggleButton } from "@fluentui/react-components";
 import { useTranslation } from "react-i18next";
-import { WeaponModifier, WeaponModifiers, WeaponModifierSet } from "data/WeaponModifier.ts";
-import { Add20Filled, Add20Regular, Question20Filled, Question20Regular, Subtract20Filled, Subtract20Regular } from "@fluentui/react-icons";
 import { useMemo } from "react";
+import { createTableColumn, DataGrid, DataGridBody, DataGridCell, DataGridCellFocusMode, DataGridHeader, DataGridHeaderCell, DataGridRow, Label, LabelProps, makeStyles, shorthands, TableCellLayout, TableColumnId, ToggleButton } from "@fluentui/react-components";
+import { WeaponModifier, WeaponModifiers } from "data/WeaponModifier.ts";
+import { Add20Filled, Add20Regular, Question20Filled, Question20Regular, Subtract20Filled, Subtract20Regular } from "@fluentui/react-icons";
+import { WeaponModifierSet } from "host/types.ts";
 
 const useStyles = makeStyles({
     iconContainer: {
@@ -72,14 +73,14 @@ const ModifierSelectionColumns = [
             return (<>
                 <ToggleButton
                         shape="circular"
-                        appearance="subtle"
+                        appearance={included ? "primary" : undefined}
                     checked={included}
                     onClick={() => onSelectInclude(modifier)}
                         icon={included ? <Add20Filled /> : <Add20Regular />}
                 />
                 <ToggleButton
                         shape="circular"
-                        appearance="subtle"
+                        appearance={ignore ? "primary" :undefined}
                     checked={ignore}
                     onClick={() => onSelectIgnore(modifier)}
                         icon={ignore ? <Question20Filled /> : <Question20Regular />}
@@ -87,7 +88,7 @@ const ModifierSelectionColumns = [
                 />
                 <ToggleButton
                         shape="circular"
-                        appearance="subtle"
+                        appearance={excluded ? "primary" :undefined}
                     checked={excluded}
                     onClick={() => onSelectExclude(modifier)}
                         icon={excluded ? <Subtract20Filled /> : <Subtract20Regular />}

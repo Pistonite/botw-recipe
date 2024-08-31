@@ -25,15 +25,20 @@ pub struct Database {
 impl Database {
     /// Open a database and loads the index data
     pub fn open<P: AsRef<Path>>(path: P) -> Result<Self, Error> {
-        let path = path.as_ref().to_path_buf();
-        info!("opening database at {}", path.display());
-
-        let lock_path = path.join(".lock");
+        let lock_path = path.as_ref().join(".lock");
+        info!("locking at {}", lock_path.display());
         if lock_path.exists() {
             return Err(Error::Locked);
         }
         let lock_file = File::create(&lock_path).map_err(|_| Error::Locked)?;
         lock_file.try_lock_exclusive().map_err(|_| Error::Locked)?;
+
+        Self::open_locked(path, lock_file)
+    }
+    /// Open a database, assuming it's already locked
+    pub fn open_locked<P: AsRef<Path>>(path: P, lock_file: File) -> Result<Self, Error> {
+        let path = path.as_ref().to_path_buf();
+        info!("opening database at {}", path.display());
 
         info!("loading index.yaml");
         let index_path = path.join("index.yaml");
@@ -44,7 +49,10 @@ impl Database {
         let index: Vec<Index> = serde_yaml::from_reader(reader)?;
 
         if index.len() != crate::COMPACT_CHUNK_COUNT {
-            return Err(Error::InvalidIndexChunkCount(crate::COMPACT_CHUNK_COUNT, index.len()));
+            return Err(Error::InvalidIndexChunkCount(
+                crate::COMPACT_CHUNK_COUNT,
+                index.len(),
+            ));
         }
 
         info!("loading cooking pot");
@@ -117,8 +125,8 @@ impl Database {
             let hex = format!("{:08x}", id);
             let path = temp_path.join(&hex);
             if !path.exists() && std::fs::create_dir(&path).is_ok() {
-                    info!("created temporary directory with id {}", hex);
-                    return Ok(TempResult::new(path));
+                info!("created temporary directory with id {}", hex);
+                return Ok(TempResult::new(path));
             }
             id = id.wrapping_add(1);
         }
@@ -133,8 +141,11 @@ impl Database {
         if let Err(e) = self.lock.unlock() {
             error!("failed to unlock database: {}", e.to_string());
         }
-        if let Err(e) = std::fs::remove_file(self.path.join(".lock")) {
-            error!("failed to remove lock file: {}", e.to_string());
+        let lock_path = self.path.join(".lock");
+        if lock_path.exists() {
+            if let Err(e) = std::fs::remove_file(lock_path) {
+                error!("failed to remove lock file: {}", e.to_string());
+            }
         }
     }
 }

@@ -8,11 +8,29 @@ use std::time::Instant;
 use clap::Parser;
 use filetime::FileTime;
 use rdata::cook::{CookData, CookDataInvalidReason};
-use rdata::recipe::RecipeInputs;
-use rdata::Recipe;
+use rdata::RecipeInputs;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use threadpool::ThreadPool;
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Recipe {
+    pub data: CookData,
+    pub inputs: Vec<String>,
+}
+
+impl Recipe {
+    pub fn new(data: CookData, inputs: RecipeInputs) -> Self {
+        Self {
+            data,
+            inputs: inputs
+                .to_names()
+                .into_iter()
+                .map(|a| a.to_string())
+                .collect(),
+        }
+    }
+}
 
 macro_rules! print_status {
     ($cur:expr, $total:expr, $label:expr) => {{

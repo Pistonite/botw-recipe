@@ -1,10 +1,8 @@
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-use crate::{
-    cook::{CookData, CookEffect},
-    wmc::WeaponModifierSet,
-};
+use crate::cook::{CookData, CookEffect};
+use crate::wmc::WeaponModifierSet;
 
 use super::{Filter, Record};
 

@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItemRadio, MenuList, MenuPopover, MenuTrigger } f
 import { Globe20Regular} from "@fluentui/react-icons";
 
 import { loadLocalePreference, SupportedLocales, switchLanguage } from "i18n/locales.ts";
-import { useHost } from "host/HostProvider.ts";
+import { useHost } from "host/useHost.ts";
 
 /** Language Picker */
 export const LocalePicker: React.FC = () => {

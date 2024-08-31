@@ -1,12 +1,15 @@
 import { Result, Void } from "@pistonite/pure/result";
+
+import { createUnknownError } from "data/ErrorMessage.ts";
+
 import { HostBinding } from "./HostBinding.ts";
-import type { HostSearchProgressHandler, SearchComplete, SearchFilter } from "./types.ts";
+import type { HostError, HostSearchProgressHandler, SearchComplete, SearchFilter } from "./types.ts";
 
 export class Host {
     private binding: HostBinding;
-    private initializePromise: Promise<Void<string>> | undefined = undefined;
+    private initializePromise: Promise<Void<HostError>> | undefined = undefined;
     private searchHandles: number[] = [];
-    private searchResolve: ((result: Result<SearchComplete, string>) => void) | undefined = undefined;
+    private searchResolve: ((result: Result<SearchComplete, HostError>) => void) | undefined = undefined;
     // private filterResolve: ((result: Result<FilterComplete, string>) => void) | undefined = undefined;
     // private filterPromise: Promise<Result<FilterComplete, string>> | undefined = undefined;
     //
@@ -42,7 +45,7 @@ export class Host {
         this.binding.setTitle(title);
     }
 
-    public initialize(): Promise<Void<string>> {
+    public initialize(): Promise<Void<HostError>> {
         if (this.initializePromise) {
             return this.initializePromise;
         }
@@ -60,7 +63,7 @@ export class Host {
         return this.initializePromise;
     }
 
-    public async search(filter: SearchFilter): Promise<Result<SearchComplete, string>> {
+    public async search(filter: SearchFilter): Promise<Result<SearchComplete, HostError>> {
         const cancelResult = await this.cancelSearch();
         if (cancelResult.err) {
             return cancelResult;
@@ -68,8 +71,9 @@ export class Host {
         return await new Promise((resolve) => {
             this.searchResolve = resolve;
             this.binding.search(filter).then((result) => {
+                console.log(result);
                 if ("err" in result) {
-                    resolve({ err: result.err || "unknown error" });
+                    resolve({ err: result.err || createUnknownError("search")});
                     return;
                 }
                 this.searchHandles = result.val;
@@ -77,7 +81,7 @@ export class Host {
             });
         });
     }
-    public async cancelSearch(): Promise<Void<string>> {
+    public async cancelSearch(): Promise<Void<HostError>> {
         const handles = this.searchHandles;
         this.searchHandles = [];
         const promises = handles.map((handle) => this.binding.abort(handle));

@@ -26,5 +26,4 @@ export const WeaponModifiers = [
     WeaponModifier.AddGuard,
 ] as const;
 
-export type WeaponModifierSet = number;
 export type WeaponModifier = typeof WeaponModifier[keyof typeof WeaponModifier];

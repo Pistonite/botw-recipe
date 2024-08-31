@@ -2,11 +2,12 @@
 
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::{Arc, PoisonError, RwLock};
+use std::sync::{Arc, RwLock};
 
 use oneshot::{Receiver, Sender};
-use serde::Serialize;
 use threadpool::ThreadPool;
+
+use crate::error::Error;
 
 pub struct Executor {
     pool: ThreadPool,
@@ -27,7 +28,7 @@ impl Executor {
         } else {
             2
         };
-        // minimum 1 bg worker
+        // minimum 2 bg worker
         let bg_workers = (main_workers / 2).max(1);
         Self {
             pool: ThreadPool::new(main_workers),
@@ -97,7 +98,7 @@ impl Executor {
             while senders.contains_key(&id) {
                 id = id.wrapping_add(1);
                 if id == first_id {
-                    return Err(Error::Unavailable);
+                    return Err(Error::ExecutorUnavailable);
                 }
             }
             if id != first_id {
@@ -130,17 +131,3 @@ impl Abort {
 // as long as we only let one thread access the sender at a time, it's safe
 // which is guarded by the RwLock on the map
 unsafe impl Sync for Abort {}
-
-#[derive(Debug, Clone, thiserror::Error, Serialize)]
-pub enum Error {
-    #[error("lock was poisoned: {0}")]
-    PoisonError(String),
-    #[error("there are too many tasks pending, probably a leak")]
-    Unavailable,
-}
-
-impl<T> From<PoisonError<T>> for Error {
-    fn from(e: PoisonError<T>) -> Self {
-        Error::PoisonError(e.to_string())
-    }
-}

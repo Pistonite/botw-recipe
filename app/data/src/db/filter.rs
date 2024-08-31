@@ -1,9 +1,11 @@
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 use crate::wmc::WeaponModifierSet;
 
 /// Filter for records
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(export, rename = "SearchFilter")]
 #[serde(rename_all = "camelCase")]
 pub struct Filter {
     pub min_value: i32,

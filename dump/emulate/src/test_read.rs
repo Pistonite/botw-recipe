@@ -4,10 +4,8 @@ use std::sync::Arc;
 use std::thread;
 use std::time::Instant;
 
-use rdata::{
-    cook::{CookEffect, CookingPot},
-    db::{Chunk, Database},
-};
+use rdata::cook::{CookEffect, CookingPot};
+use rdata::db::{Chunk, Database};
 use threadpool::ThreadPool;
 
 fn main() {

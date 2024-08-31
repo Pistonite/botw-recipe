@@ -1,10 +1,7 @@
 use clap::Parser;
 use enum_map::EnumMap;
-use rdata::{
-    cook::{CookingPot, Error},
-    recipe::RecipeInputs,
-    Actor,
-};
+use rdata::cook::{CookingPot, Error};
+use rdata::{Actor, RecipeInputs};
 use serde::{Deserialize, Serialize};
 
 fn main() {
@@ -140,7 +137,10 @@ impl Options {
             if min_actors.is_empty() {
                 return Err(Error::ItemNotFound(input.to_string()));
             }
-            return Err(Error::AmbiguousIngr(input.to_string(), max_actors));
+            return Err(Error::AmbiguousIngr(
+                input.to_string(),
+                max_actors.into_iter().map(|x| format!("{x:?}")).collect(),
+            ));
         }
         Ok(actors)
     }

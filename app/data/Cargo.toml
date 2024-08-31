@@ -10,14 +10,13 @@ derive_deref = "1.1.1"
 enum-map = "2.7.3"
 fs2 = "0.4.3"
 log = "0.4.22"
-oneshot = "0.1.8"
 rand = "0.8.5"
 serde = { version = "1.0.208", features = ["derive"] }
 serde_yaml = "0.9.34"
 sha2 = "0.10.8"
 static_assertions = "1.1.0"
 thiserror = "1.0.63"
-threadpool = "1.8.1"
+ts-rs = "9.0.1"
 
 [features]
 default = []

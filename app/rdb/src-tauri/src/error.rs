@@ -1,6 +1,5 @@
-use std::sync::PoisonError;
-
 use serde::Serialize;
+use ts_rs::TS;
 
 /// Interop with pure/result in JS side
 #[derive(Debug, Clone, Serialize)]
@@ -41,23 +40,25 @@ impl<T: Serialize, E: Into<Error>> From<Result<T, E>> for ResultInterop<T> {
     }
 }
 
-#[derive(Debug, Clone, thiserror::Error, Serialize)]
+#[derive(Debug, Clone, thiserror::Error, Serialize, TS)]
+#[ts(export)]
 #[serde(tag = "type", content = "data")]
 pub enum Error {
     #[error("io error: {0}")]
     IOError(String),
-    // #[error("lock was poisoned: {0}")]
-    // PoisonError(String),
-    // #[error("there are too many tasks pending, probably a leak")]
-    // ExecutorIdUnavailable,
-    #[error("executor error: {0}")]
-    ExecutorError(#[from] rdata::executor::Error),
+    #[error("lock was poisoned: {0}")]
+    PoisonError(String),
+    #[error("there are too many tasks pending, probably a leak")]
+    ExecutorUnavailable,
+    #[error("search is aborted")]
+    SearchAborted,
+
     #[error("database error: {0}")]
     DatabaseError(#[from] rdata::db::Error),
-    #[error("no search result found. Please search first")]
-    MissingSearchResult,
-    #[error("invalid data detected while reading search result. Please search again.")]
-    InvalidSearchResult,
+    // #[error("no search result found. Please search first")]
+    // MissingSearchResult,
+    // #[error("invalid data detected while reading search result. Please search again.")]
+    // InvalidSearchResult,
     #[error("{0}")]
     Generic(String),
 }
@@ -65,5 +66,11 @@ pub enum Error {
 impl From<std::io::Error> for Error {
     fn from(e: std::io::Error) -> Self {
         Error::IOError(e.to_string())
+    }
+}
+
+impl<T> From<std::sync::PoisonError<T>> for Error {
+    fn from(e: std::sync::PoisonError<T>) -> Self {
+        Error::PoisonError(e.to_string())
     }
 }

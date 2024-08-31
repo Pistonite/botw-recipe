@@ -1,7 +1,9 @@
 use serde::Serialize;
+use ts_rs::TS;
 
 /// Database-related errors
-#[derive(Debug, Clone, thiserror::Error, Serialize)]
+#[derive(Debug, Clone, thiserror::Error, Serialize, TS)]
+#[ts(export, rename = "DatabaseError")]
 #[serde(tag = "type", content = "data")]
 pub enum Error {
     // General errors
@@ -27,7 +29,6 @@ pub enum Error {
     InvalidRecipeId(usize),
     #[error("there are too many temporary results. Try closing the app and restart it")]
     TooManyTemporary,
-
 }
 
 impl From<std::io::Error> for Error {
