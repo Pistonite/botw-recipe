@@ -2,6 +2,8 @@ use std::fs::File;
 use std::io::{BufReader, BufWriter, Read, Write};
 use std::path::PathBuf;
 
+use log::info;
+
 use crate::recipe::RecipeId;
 
 use super::Error;
@@ -35,6 +37,10 @@ impl TempResult {
         self.size = size;
     }
 
+    pub fn get_size(&self) -> usize {
+        self.size
+    }
+
     /// Iterator through chunks of the recipes in this result
     pub fn iter(&self) -> TempResultIter {
         TempResultIter {
@@ -52,9 +58,16 @@ impl TempResult {
 
     /// Clear the temporary result directory
     pub fn clear(&mut self) -> Result<(), Error> {
+        info!("clearing temp result: {}", self.path.display());
         std::fs::remove_dir_all(&self.path)?;
         std::fs::create_dir(&self.path)?;
         self.size = 0;
+        Ok(())
+    }
+
+    pub fn remove(self) -> Result<(), Error> {
+        info!("removing temp result: {}", self.path.display());
+        std::fs::remove_dir_all(&self.path)?;
         Ok(())
     }
 }

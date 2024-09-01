@@ -1,12 +1,15 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { WeaponModifier } from "data/WeaponModifier.ts";
 
-import type { SearchComplete, SearchFilter, WeaponModifierSet } from "host/types.ts";
+import type { Stats, SearchFilter, WeaponModifierSet } from "host/types.ts";
 import type { State } from "./store.ts";
 
 type SearchSlice = {
+    /** Filter to use when searching */
     filter: SearchFilter,
+    /** -1 = not started/done, 0-100 = in progress*/
     searchProgress: number,
+    /** -1 = not searched, >= 0 = number of results */
     searchResultCount: number,
     searchDurationSeconds: string,
 }
@@ -57,9 +60,12 @@ const searchSlice = createSlice({
             state.searchResultCount = -1;
         },
         updateSearchProgress: (state, action: PayloadAction<number>) => {
-            state.searchProgress = action.payload;
+            // in case the events come out of order
+            if (state.searchProgress >= 0) {
+                state.searchProgress = action.payload;
+            }
         },
-        finishSearch: (state, action: PayloadAction<SearchComplete & { duration: string }>) => {
+        finishSearch: (state, action: PayloadAction<Stats & { duration: string }>) => {
             state.searchProgress = -1;
             state.searchResultCount = action.payload.foundCount;
             state.searchDurationSeconds = action.payload.duration;
@@ -94,6 +100,9 @@ export const getSearchMessage = createSelector(
         (state: State) => state.search.searchDurationSeconds],
     (progress, count, seconds) => {
         if (progress >= 0) {
+            if (progress >= 100) {
+                return { id: "search.stat_group", values: {} };
+            }
             return { id: "search.progress", values: { progress } };
         }
         if (count < 0) {

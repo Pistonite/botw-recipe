@@ -3,6 +3,7 @@ import yaml
 import util
 import os
 import subprocess
+import shutil
 
 IN = [
     "data/*.yaml",
@@ -15,6 +16,9 @@ OUT = [
     "../dump/console/src/generated.cpp",
     "../dump/console/src/generated.hpp",
     "../app/data/src/generated/cook_item.rs",
+    "../app/rdb/src/data/Group.ts",
+    "../app/rdb/src/data/Actor.ts",
+    "../app/rdb/src/data/Actor.test.ts",
 ]
 util.print_stage(__file__, IN, OUT)
 
@@ -257,7 +261,22 @@ def gen_group_enum(o, actor_to_name, groups, actor_pe_only):
 
     o.write("}\n")
 
-def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
+def gen_group_enum_ts(o, actor_to_name, groups, actor_pe_only):
+    o.write(HEADER)
+    o.write("export const Group = {\n")
+    o.write("    None: 0,\n")
+    group_names = {}
+    for i in range(1, len(groups)):
+        id = str(i)
+        group = groups[id]
+        name = make_group_name(group, id)
+        group_names[id] = name
+        o.write(f"    {name}: {id},\n")
+    o.write("} as const;\n")
+    o.write("export type Group = typeof Group[keyof typeof Group];\n")
+    o.write(f"export function getGroups(): Group[] {{ return Array.from({{ length: {len(groups)} }}, (_, i) => i as Group); }}\n")
+
+def gen_actor_enum(o, actors, actor_to_name, groups, actor_pe_only):
     o.write(HEADER)
     o.write("use super::Group;\n")
     write_doc_comment(o, "Ingredients (actors)")
@@ -267,7 +286,7 @@ def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     o.write("pub enum Actor {\n")
     o.write("    #[default]\n")
     o.write("    None,\n")
-    for actor in actor_to_name:
+    for actor in actors:
         name = actor_to_name[actor]
         o.write(f"    /// {name}\n")
         o.write(f"    {actor},\n")
@@ -279,7 +298,7 @@ def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     o.write("    pub const fn name(&self) -> &'static str {\n")
     o.write("        match self {\n")
     o.write("            Self::None => \"<none>\",\n")
-    for actor in actor_to_name:
+    for actor in actors:
         name = actor_to_name[actor]
         o.write(f"Self::{actor} => \"{name}\",\n")
     o.write("}}\n")
@@ -317,7 +336,7 @@ def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     o.write("    pub fn try_from<S: AsRef<str>>(s: S) -> Option<Self> {\n")
     o.write("        match s.as_ref().to_ascii_lowercase().as_str() {\n")
     o.write("            \"<none>\" => Some(Actor::None),\n")
-    for actor in actor_to_name:
+    for actor in actors:
         name = actor_to_name[actor].lower()
         o.write(f"\"{name}\" => Some(Actor::{actor}),\n")
     o.write("_ => None,\n")
@@ -327,7 +346,7 @@ def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     o.write("pub const fn pe_only(&self) -> bool {\n")
     o.write("match self {\n")
     o.write("Self::None => false,\n")
-    for actor in actor_to_name:
+    for actor in actors:
         if actor in actor_pe_only:
             o.write(f"Self::{actor} => true,\n")
     o.write(" _ => false,\n")
@@ -346,6 +365,48 @@ def gen_actor_enum(o, actor_to_name, groups, actor_pe_only):
     o.write("        write!(f, \"{}\", self.actor_name())\n")
     o.write("    }\n")
     o.write("}\n")
+
+def gen_actor_enum_ts(o, test, actors, actor_to_name, groups, actor_pe_only):
+    o.write(HEADER)
+    test.write(HEADER)
+    test.write("import { Group } from \"./Group.ts\";\n")
+    test.write("import { Actor, ActorToGroup } from \"./Actor.ts\";\n")
+    o.write("import { Group } from \"./Group.ts\";\n")
+    o.write("export const Actor = {\n")
+    o.write("    None: 0,\n")
+    for i, actor in enumerate(actors):
+        o.write(f"    {actor}:  {i+1},\n")
+    o.write("} as const;\n")
+    o.write("export type Actor = typeof Actor[keyof typeof Actor];\n")
+    o.write(f"export function getActors(): Actor[] {{ return Array.from({{ length: {len(actors)+1} }}, (_, i) => i as Actor); }}\n")
+    actor_to_group = {}
+    actor_to_group_elems = ["Group.None" for _ in range(len(actors)+1)]
+    o.write("export const ActorToGroup = [\n")
+    test.write("describe(\"Actor\", () => {\n")
+    test.write("    test(\"ActorToGroup\", () => {\n")
+    for i in range(1, len(groups)):
+        id = str(i)
+        group = groups[id]
+        group_name = make_group_name(group, id)
+        for actor in group:
+            actor_to_group[actor] = group_name
+            test.write(f"expect(ActorToGroup[Actor.{actor}]).toBe(Group.{group_name});\n")
+    for i, actor in enumerate(actors):
+        actor_to_group_elems[i+1] = f"Group.{actor_to_group[actor]}"
+    o.write(",\n".join(actor_to_group_elems))
+    o.write("] as const;\n")
+    test.write("    });\n")
+
+    test.write("    });\n")
+    # o.write("export const ActorNames = {\n")
+    # o.write("            \"\",\n")
+    # for i in range(1, len(groups)):
+    #     id = str(i)
+    #     group = groups[id]
+    #     group_name = make_group_name(group, id)
+    #     for actor in group:
+    #         o.write(f"Self::{actor} => \"{actor}\",\n")
+    # o.write("}}")
 
 def gen_cook_item_enum(o, cook_item_to_name):
     o.write(HEADER)
@@ -430,7 +491,14 @@ with open(OUT[1], "w", encoding="utf-8", newline="\n") as f:
     gen_group_enum(f, actor_to_name, data["ids"], actor_pe_only)
 
 with open(OUT[2], "w", encoding="utf-8", newline="\n") as f:
-    gen_actor_enum(f, actor_to_name, data["ids"], actor_pe_only)
+    gen_actor_enum(f, actors, actor_to_name, data["ids"], actor_pe_only)
+
+with open(OUT[6], "w", encoding="utf-8", newline="\n") as f:
+    gen_group_enum_ts(f, actor_to_name, data["ids"], actor_pe_only)
+
+with open(OUT[7], "w", encoding="utf-8", newline="\n") as f:
+    with open(OUT[8], "w", encoding="utf-8", newline="\n") as test:
+        gen_actor_enum_ts(f, test, actors, actor_to_name, data["ids"], actor_pe_only)
 
 with open(OUT[3], "w", encoding="utf-8", newline="\n") as o:
     with open(OUT[4], "w", encoding="utf-8") as hpp:
@@ -441,5 +509,13 @@ with open(OUT[5], "w", encoding="utf-8", newline="\n") as f:
         cook_items = yaml.safe_load(g)
     gen_cook_item_enum(f, cook_items)
 
+
 print("running rustfmt")
 subprocess.run(["rustfmt"] + [x for x in OUT if x.endswith(".rs")], check=True)
+print("running prettier")
+subprocess.run(
+    [shutil.which("npx"), "prettier", "--write"] + 
+    [os.path.join("../../data", x) for x in OUT if x.endswith(".ts")],
+    check=True, 
+    cwd="../app/rdb"
+)

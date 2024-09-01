@@ -50,13 +50,13 @@ pub enum Error {
     PoisonError(String),
     #[error("there are too many tasks pending, probably a leak")]
     ExecutorUnavailable,
-    #[error("search is aborted")]
-    SearchAborted,
+    #[error("aborted")]
+    Aborted,
 
     #[error("database error: {0}")]
     DatabaseError(#[from] rdata::db::Error),
-    // #[error("no search result found. Please search first")]
-    // MissingSearchResult,
+    #[error("no search result found. Please search first")]
+    MissingSearchResult,
     // #[error("invalid data detected while reading search result. Please search again.")]
     // InvalidSearchResult,
     #[error("{0}")]

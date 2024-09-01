@@ -5,6 +5,7 @@ export type Error =
     | { type: "IOError"; data: string }
     | { type: "PoisonError"; data: string }
     | { type: "ExecutorUnavailable" }
-    | { type: "SearchAborted" }
+    | { type: "Aborted" }
     | { type: "DatabaseError"; data: DatabaseError }
+    | { type: "MissingSearchResult" }
     | { type: "Generic"; data: string };

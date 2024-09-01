@@ -16,7 +16,15 @@ search.modifier.option: Option
 search.button: Search
 search.button.cancel: Cancel
 search.progress: "Searching ({{progress}}%)"
+search.stat_group: Computing material stats
 search.result: "Found {{count}} recipes in {{seconds}}s"
+
+filter.button: Update
+filter.button.cancel: Cancel
+filter.button.reset: Reset
+filter.progress: "Updating filter ({{progress}}%)"
+filter.result: "Updated filter in {{seconds}}s"
+
 
 error.title: Error
 error.message.io: "IO Error: {{message}}"
@@ -33,6 +41,7 @@ error.button: OK
 
 confirm.title: Confirm
 confirm.message.search.abort: Are you sure to cancel the search?
+confirm.message.filter.abort: Are you sure to cancel updating the filter?
 confirm.button.yes: "Yes"
 confirm.button.no: "No"
 

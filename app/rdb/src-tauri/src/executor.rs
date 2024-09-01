@@ -28,11 +28,9 @@ impl Executor {
         } else {
             2
         };
-        // minimum 2 bg worker
-        let bg_workers = (main_workers / 2).max(1);
         Self {
             pool: ThreadPool::new(main_workers),
-            bg_pool: ThreadPool::new(bg_workers),
+            bg_pool: ThreadPool::new(1),
             next_abortable_id: AtomicUsize::new(0),
             abort_senders: Arc::new(RwLock::new(HashMap::new())),
             abort_finished: Arc::new(RwLock::new(HashSet::new())),
@@ -44,9 +42,11 @@ impl Executor {
         &self.pool
     }
 
-    #[inline]
-    pub fn background_pool(&self) -> &ThreadPool {
-        &self.bg_pool
+    pub fn continue_in_background<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        self.bg_pool.execute(f);
     }
 
     pub fn join(&self) {
@@ -55,12 +55,16 @@ impl Executor {
     }
 
     /// Clear previously finished abortable tasks.
-    pub fn clear_abort_handles(&self) -> Result<(), Error> {
+    pub fn abort_all(&self) -> Result<(), Error> {
         // lock in this order
         let mut senders = self.abort_senders.write()?;
         let mut finished = self.abort_finished.write()?;
         for id in finished.iter() {
             senders.remove(id);
+        }
+        let senders = std::mem::take(&mut *senders);
+        for sender in senders.into_values() {
+            let _ = sender.send();
         }
         finished.clear();
 
@@ -73,7 +77,7 @@ impl Executor {
     /// through the provided `oneshot::Receiver<()>`.
     pub fn execute_abortable<F>(&self, f: F) -> Result<usize, Error>
     where
-        F: FnOnce(Receiver<()>) + Send + 'static,
+        F: FnOnce(AbortSignal) + Send + 'static,
     {
         let (send, recv) = oneshot::channel();
         let id = self.add_abort_sender(send)?;
@@ -82,7 +86,7 @@ impl Executor {
         self.pool.execute(move || {
             // no check here - the task must check the abort signal
             // execute
-            f(recv);
+            f(AbortSignal(recv));
             // mark as finish
             finished.write().unwrap().insert(id);
         });
@@ -121,13 +125,23 @@ impl Executor {
     }
 }
 
+#[repr(transparent)]
 struct Abort(Sender<()>);
 impl Abort {
     pub fn send(self) {
         let _ = self.0.send(());
     }
 }
+
 // safety: https://github.com/faern/oneshot/issues/26
 // as long as we only let one thread access the sender at a time, it's safe
 // which is guarded by the RwLock on the map
 unsafe impl Sync for Abort {}
+
+#[repr(transparent)]
+pub struct AbortSignal(Receiver<()>);
+impl AbortSignal {
+    pub fn is_aborted(&self) -> bool {
+        self.0.try_recv().is_ok()
+    }
+}

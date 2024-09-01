@@ -5,6 +5,6 @@ import { Error } from "./types/Error.ts";
 export type HostError = Error;
 export * from "./types/SearchFilter.ts";
 export * from "./types/WeaponModifierSet.ts";
-export * from "./types/SearchComplete.ts";
+export * from "./types/Stats.ts";
 
 export type HostSearchProgressHandler = (percentage: number) => void;

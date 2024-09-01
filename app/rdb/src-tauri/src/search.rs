@@ -6,19 +6,45 @@ use std::{
 
 use enum_map::EnumMap;
 use log::{debug, error, info};
-use rdata::db::{Filter, FilteredChunk, TempResult, TempResultReader, TempResultWriter};
-use rdata::Actor;
-use rdata::RecipeInputs;
+use rdata::{
+    db::{Filter, TempResult},
+    Group,
+};
 use tauri::{AppHandle, State};
 
-use crate::{error::Error, executor::Executor};
+use crate::{
+    error::Error,
+    tasks::{self, CountMsg, ProgressTracker, StatMsg},
+};
 use crate::{events, Global};
 
 const ACTOR_META_TIMEOUT: u64 = 1000;
 
-pub fn run(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<Vec<usize>, Error> {
+pub fn abort(state: State<Global>) -> Result<(), Error> {
+    let mut handles = state.search_handles.lock()?;
+    for handle in handles.iter() {
+        state.executor.abort(*handle)?;
+    }
+    handles.clear();
+    Ok(())
+}
+
+pub fn run(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<(), Error> {
     info!("searching with filter: {:#?}", filter);
-    state.executor.clear_abort_handles()?;
+    let mut handles = state.search_handles.lock()?;
+    {
+        let mut filter_handles = state.filter_handles.lock()?;
+        let mut last_included = state.last_included.lock()?;
+        let mut filter_result = state.filter_result.lock()?;
+        last_included.clear();
+        if let Some(filter_result) = filter_result.take() {
+            info!("removing previous filter result");
+            let _ = filter_result.remove();
+        }
+        state.executor.abort_all()?;
+        filter_handles.clear();
+        handles.clear();
+    }
     let db = state.get_db()?;
     let temp_result = {
         let mut temp_result = state.search_result.lock()?;
@@ -31,14 +57,21 @@ pub fn run(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<Vec<
             None => db.new_temporary()?,
         }
     };
-    let mut handles = Vec::with_capacity(db.chunk_count());
     // channel for workers to send the result statistics
-    let (send, recv) = mpsc::channel::<SearchMsg>();
+    let (send, recv) = mpsc::channel();
     // total search space count used to calculate progress
     let mut total_recipe_count = 0;
     let mut file_id = 0;
+    let mut error = None;
     for chunk_id in 0..db.chunk_count() {
-        let chunk = db.open_filtered_chunk(chunk_id, filter)?;
+        let chunk = match db.open_filtered_chunk(chunk_id, filter) {
+            Ok(chunk) => chunk,
+            Err(e) => {
+                error!("error while opening chunk {}: {}", chunk_id, e);
+                error = Some(Error::from(e));
+                break;
+            }
+        };
         // skip chunks filtered by index
         let chunk = match chunk {
             Some(chunk) => chunk,
@@ -48,97 +81,75 @@ pub fn run(filter: &Filter, app: AppHandle, state: State<Global>) -> Result<Vec<
             }
         };
         // open result writer
-        let writer = temp_result.writer(file_id)?;
+        let writer = match temp_result.writer(file_id) {
+            Ok(writer) => writer,
+            Err(e) => {
+                error!("error while opening temp result writer: {}", e);
+                error = Some(e.into());
+                break;
+            }
+        };
         file_id += 1;
-        let chunk_size = rdata::get_compact_chunk_record_size(chunk_id);
+        let chunk_size = chunk.chunk().remaining();
         total_recipe_count += chunk_size;
         let send = send.clone();
-        let handle = search_task(&state.executor, chunk, writer, send, chunk_size)?;
+        let handle = state.executor.execute_abortable(move |signal| {
+            tasks::scan_filtered_chunk(chunk, writer, send, signal)
+        });
+        let handle = match handle {
+            Ok(handle) => handle,
+            Err(e) => {
+                error!("error while spawning scan task: {}", e);
+                error = Some(e);
+                break;
+            }
+        };
         handles.push(handle);
     }
     drop(send);
-    recv_task(state, &handles, recv, total_recipe_count, app, temp_result);
-    return Ok(handles);
-}
-
-enum SearchMsg {
-    Ok(usize, usize),
-    Err(Error),
-    Abort,
-}
-
-fn search_task(
-    executor: &Executor,
-    chunk: FilteredChunk,
-    mut writer: TempResultWriter,
-    send: mpsc::Sender<SearchMsg>,
-    chunk_size: usize,
-) -> Result<usize, Error> {
-    let handle = executor.execute_abortable(move |abort| {
-        if abort.try_recv().is_ok() {
-            let _ = send.send(SearchMsg::Abort);
-            return;
+    if let Some(e) = error {
+        info!("error while starting search, aborting");
+        for handle in handles.iter() {
+            let _ = state.executor.abort(*handle);
         }
-        for record in chunk {
-            let record = match record {
-                Ok(record) => record,
-                Err(err) => {
-                    let _ = send.send(SearchMsg::Err(err.into()));
-                    return;
-                }
-            };
-            if let Err(e) = writer.write(record.recipe_id) {
-                let _ = send.send(SearchMsg::Err(e.into()));
-                return;
-            }
-            // TODO: abort
-            // let recipe_id: usize = record.recipe_id.into();
-            // was abort requested?
-            // if recipe_id % 10000 == 0 {
-            // if abort.try_recv().is_ok() {
-            //     return;
-            // }
-            // last_check_abort_recipe_id = recipe_id;
-            // }
-            // result.push(record.recipe_id);
-        }
-        let _ = send.send(SearchMsg::Ok(writer.size(), chunk_size));
-    })?;
+        handles.clear();
+        return Err(e);
+    }
+    handle_search_in_background(
+        &state,
+        handles.clone(),
+        recv,
+        total_recipe_count,
+        app,
+        temp_result,
+    );
 
-    Ok(handle)
+    Ok(())
 }
 
-fn recv_task(
-    state: State<Global>,
-    handles: &[usize],
-    recv: mpsc::Receiver<SearchMsg>,
+fn handle_search_in_background(
+    state: &State<Global>,
+    handles: Vec<usize>,
+    recv: mpsc::Receiver<CountMsg>,
     total_recipe_count: usize,
     app: AppHandle,
     mut temp_result: TempResult,
 ) {
     let executor2 = Arc::clone(&state.executor);
-    let handles = handles.to_vec();
     let search_result = Arc::clone(&state.search_result);
-    state.executor.background_pool().execute(move || {
-        let mut last_percentage = 0;
-        let mut searched_count = 0;
+    state.executor.continue_in_background(move || {
+        let mut progress = ProgressTracker::new(total_recipe_count, |c, t, p| {
+            info!("search progress: ({c}/{t}) {p}%");
+            events::emit_search_progress(&app, p);
+        });
         let mut found_count = 0;
         for msg in recv {
             match msg {
-                SearchMsg::Ok(found, searched) => {
-                    searched_count += searched;
+                CountMsg::Ok(found, searched) => {
                     found_count += found;
-                    let progress =
-                        (searched_count as f64 / total_recipe_count as f64 * 100.0) as u32;
-                    if progress != last_percentage {
-                        info!(
-                            "search progress: ({searched_count}/{total_recipe_count}) {progress}%"
-                        );
-                        last_percentage = progress;
-                        events::emit_search_progress(&app, progress);
-                    }
+                    progress.add(searched);
                 }
-                SearchMsg::Err(err) => {
+                CountMsg::Err(err) => {
                     error!("error while searching: {}", err);
                     events::emit_search_complete_err(&app, err);
                     for handle in handles {
@@ -146,21 +157,22 @@ fn recv_task(
                     }
                     return;
                 }
-                SearchMsg::Abort => {
+                CountMsg::Abort => {
                     info!("search aborted");
-                    events::emit_search_complete_err(&app, Error::SearchAborted);
+                    events::emit_search_complete_err(&app, Error::Aborted);
                     return;
                 }
             }
         }
         info!("search complete, {} recipes found.", found_count);
-        info!("processing actor metadata with timeout");
+        temp_result.set_size(found_count);
+        info!("stating groups with timeout");
         // read temp result back from disk
-        let (send, recv) = mpsc::channel::<ActorMetaMsg>();
+        let (send, recv) = mpsc::channel();
         let mut has_error = false;
-        let mut actor_meta_handles = Vec::new();
-        for result in temp_result.iter() {
-            let reader = match result {
+        let mut stat_handles = Vec::new();
+        for reader in temp_result.iter() {
+            let reader = match reader {
                 Ok(reader) => reader,
                 Err(e) => {
                     error!("error while reading temp result: {}", e);
@@ -169,102 +181,72 @@ fn recv_task(
                 }
             };
             let send = send.clone();
-            let handle = match read_actor_meta(&executor2, send, reader) {
+            let result = executor2.execute_abortable(move |signal| {
+                tasks::stat_groups(reader, send, signal);
+            });
+            let handle = match result {
                 Ok(handle) => handle,
                 Err(e) => {
-                    error!("error while spawning actor meta task: {}", e);
+                    error!("error while spawning stat group task: {}", e);
                     has_error = true;
                     break;
                 }
             };
-            actor_meta_handles.push(handle);
+            stat_handles.push(handle);
         }
         drop(send);
-        temp_result.set_size(found_count);
         {
-            let mut search_result = match search_result.lock() {
-                Ok(x) => x,
+            // store the search result
+            match search_result.lock() {
+                Ok(mut search_result) => {
+                    info!("storing search result");
+                    *search_result = Some(temp_result);
+                }
                 Err(e) => {
                     error!("error while locking temp result: {}", e);
                     events::emit_search_complete_err(&app, e);
                     return;
                 }
-            };
-            *search_result = Some(temp_result);
+            }
         }
         if has_error {
             info!("error while reading temp result, aborting actor meta processing");
-            for handle in &actor_meta_handles {
+            for handle in &stat_handles {
                 let _ = executor2.abort(*handle);
             }
-            events::emit_search_complete_no_actors(&app, found_count);
+            events::emit_search_complete_no_stat(&app, found_count);
             return;
         }
-        let mut actors = EnumMap::<Actor, usize>::from_fn(|_| 0);
         let executor3 = Arc::clone(&executor2);
         // we are already in the background, must spawn another thread
         thread::spawn(move || {
             thread::sleep(Duration::from_millis(ACTOR_META_TIMEOUT));
-            for handle in actor_meta_handles {
+            for handle in stat_handles {
                 let _ = executor3.abort(handle);
             }
         });
+        let mut groups = EnumMap::<Group, usize>::from_fn(|_| 0);
         for msg in recv {
             match msg {
-                ActorMetaMsg::Ok(actor) => {
-                    for (a, count) in actor {
-                        actors[a] += count;
+                StatMsg::Ok(group) => {
+                    for (a, count) in group {
+                        groups[a] += count;
                     }
                 }
-                ActorMetaMsg::Err(e) => {
-                    error!("error while receiving actor meta from worker: {}", e);
-                    events::emit_search_complete_no_actors(&app, found_count);
+                StatMsg::Err(e) => {
+                    error!("error while receiving group stat from worker: {}", e);
+                    // let the timeout handle the abort
+                    events::emit_search_complete_no_stat(&app, found_count);
                     return;
                 }
-                ActorMetaMsg::Abort => {
-                    info!("actor meta processing timed out");
-                    events::emit_search_complete_no_actors(&app, found_count);
+                StatMsg::Abort => {
+                    info!("stat group timed out, emitting result with no stat");
+                    events::emit_search_complete_no_stat(&app, found_count);
                     return;
                 }
             }
         }
-        info!("actor metadata processed, emitting search complete");
-        events::emit_search_complete(&app, found_count, &actors);
+        info!("stat group successful, emitting search complete");
+        events::emit_search_complete(&app, found_count, &groups);
     });
-}
-
-enum ActorMetaMsg {
-    Ok(EnumMap<Actor, usize>),
-    Err(Error),
-    Abort,
-}
-
-fn read_actor_meta(
-    executor: &Executor,
-    send: mpsc::Sender<ActorMetaMsg>,
-    reader: TempResultReader,
-) -> Result<usize, Error> {
-    Ok(executor.execute_abortable(move |abort| {
-        if abort.try_recv().is_ok() {
-            let _ = send.send(ActorMetaMsg::Abort);
-            return;
-        }
-        let mut actors = EnumMap::<Actor, usize>::from_fn(|_| 0);
-        for recipe in reader {
-            let recipe = match recipe {
-                Ok(recipe) => recipe,
-                Err(e) => {
-                    let _ = send.send(ActorMetaMsg::Err(e.into()));
-                    return;
-                }
-            };
-            let inputs: RecipeInputs = recipe.into();
-            for group in inputs.as_slice() {
-                for actor in group.actors() {
-                    actors[*actor] += 1;
-                }
-            }
-        }
-        let _ = send.send(ActorMetaMsg::Ok(actors));
-    })?)
 }

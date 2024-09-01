@@ -1,11 +1,14 @@
 // Prevents additional console window on Windows in release
 #![cfg_attr(not(feature = "devtools"), windows_subsystem = "windows")]
 
+use std::collections::HashSet;
 use std::ops::Deref;
 use std::sync::{Arc, LazyLock, Mutex};
 
+use enum_map::Enum;
 use log::info;
 use rdata::db::{Database, Filter, TempResult};
+use rdata::Group;
 use tauri::{AppHandle, Manager, RunEvent, State, WindowEvent};
 
 mod error;
@@ -13,7 +16,9 @@ mod events;
 mod executor;
 use executor::Executor;
 mod file_io;
+mod filter;
 mod search;
+mod tasks;
 
 use error::{Error, ResultInterop};
 
@@ -23,7 +28,15 @@ pub struct Global {
     pub executor: Arc<Executor>,
     /// The database handle
     pub db: Arc<LazyLock<Result<Database, Error>>>,
+    /// Handle for the result of the last search
     pub search_result: Arc<Mutex<Option<TempResult>>>,
+    /// Abort handles for the current search
+    pub search_handles: Arc<Mutex<Vec<usize>>>,
+
+    pub filter_result: Arc<Mutex<Option<TempResult>>>,
+    pub last_included: Arc<Mutex<HashSet<Group>>>,
+    /// Abort handles for the current filter
+    pub filter_handles: Arc<Mutex<Vec<usize>>>,
     // /// Filter sub-state
     // filter: Arc<RwLock<FilterState>>,
 }
@@ -36,13 +49,6 @@ impl Global {
             Err(e) => Err(e.clone()),
         }
     }
-}
-
-#[derive(Default)]
-struct FilterState {
-    // filter_result: Option<TempResult>,
-    // /Last filter used for the search, used to optimize the next filter
-    // last_filter: HashSet<Actor>,
 }
 
 ////////////////////////////////// Commands //////////////////////////////////
@@ -69,157 +75,48 @@ fn initialize(app: AppHandle, state: State<Global>) {
     });
 }
 
-/// Abort a task by its handle
-#[tauri::command]
-fn abort(handle: usize, state: State<Global>) -> ResultInterop<()> {
-    state.executor.abort(handle).into()
-}
-
-/// Starts a DB linear search with the given filter.
+/// Starts a DB scan with the given filter.
 /// Returns a list of handles to abort the search by calling the abort command
 /// for each handle.
 ///
 /// The search is optimized by skipping chunks that are filtered by index.
-/// The result is emitted through the `search-complete` event. If the event
-/// returns an error, JS side owns aborting the search. JS side should also
-/// make sure to abort previous searches before starting a new one.
+/// The result is emitted through the `search-complete` event.
+///
+/// JS side should make sure to abort previous searches before starting a new one.
 ///
 /// One or more `search-progress` event might be emitted during the search.
 /// The payload is a number between 0 and 100 indicating the progress percentage.
 #[tauri::command]
-fn search(filter: Filter, app: AppHandle, state: State<Global>) -> ResultInterop<Vec<usize>> {
+fn search(filter: Filter, app: AppHandle, state: State<Global>) -> ResultInterop<()> {
     search::run(&filter, app, state).into()
 }
 
-// /// Execute filtering on the search result based on what actors should be included.
-// /// The filter results are returned through the `filter-complete` event.
-// ///
-// /// JS side must ensure that only one filtering is being executed at a time (i.e.
-// /// `filter_actors` should not be called before `filter-complete` event is received)
-// #[tauri::command]
-// fn filter_actors(filter: Vec<usize>, app: AppHandle, state: State<Global>) -> ResultInterop<()> {
-//     let mut filter = filter
-//         .into_iter()
-//         .map(Actor::from_usize)
-//         .collect::<HashSet<_>>();
-//     // always include "none" i.e. the empty space
-//     filter.insert(Actor::None);
-//     filter_actors_impl(&Arc::new(filter), app, state).into()
-// }
-//
-// fn filter_actors_impl(
-//     filter: &Arc<HashSet<Actor>>,
-//     app: AppHandle,
-//     state: State<Global>,
-// ) -> Result<(), Error> {
-//     info!("filtering actors: {:?}", filter);
-//     let mut filter_state = state.filter.write()?;
-//     // if the new filter is a subset of the last filter, we can reuse the results
-//     if filter_state.is_result_loaded
-//         && filter
-//             .intersection(&filter_state.last_filter)
-//             .copied()
-//             .collect::<HashSet<_>>()
-//             == **filter
-//     {
-//         info!("reusing filtered results from last filtering");
-//         // use the filtered results
-//         let results = std::mem::take(&mut filter_state.filtered_results);
-//         filter_actors_with_iter(results, filter, app, &state)?;
-//     } else {
-//         info!("filtering from scratch from search result");
-//         // load the filtered results from saved search result
-//         let reader = file_io::open_search_result()?;
-//         filter_actors_with_iter(reader.map_while(|x| x.ok()), filter, app, &state)?;
-//     }
-//     Ok(())
-// }
-//
-// fn filter_actors_with_iter<I: IntoIterator<Item = RecipeId>>(
-//     iter: I,
-//     filter: &Arc<HashSet<Actor>>,
-//     app: AppHandle,
-//     state: &State<Global>,
-// ) -> Result<(), Error> {
-//     // chunking the recipes to 4096 to reduce scheduling overhead
-//     const CHUNK_SIZE: usize = 4096;
-//     let (send, recv) = mpsc::channel::<Result<Vec<events::RecipeInfo>, Error>>();
-//     {
-//         let filter_state = Arc::clone(&state.filter);
-//         let filter = Arc::clone(filter);
-//         state.executor.background_pool().execute(move || {
-//             let mut recipes = Vec::new();
-//             for result in recv {
-//                 match result {
-//                     Ok(filtered) => {
-//                         recipes.extend(filtered);
-//                     }
-//                     Err(err) => {
-//                         events::emit_filter_complete(&app, ResultInterop::err(err));
-//                         return;
-//                     }
-//                 }
-//             }
-//             // update filter_state on completion
-//             {
-//                 if let Ok(mut filter_state) = filter_state.write() {
-//                     filter_state.is_result_loaded = true;
-//                     filter_state.filtered_results.clear();
-//                     filter_state
-//                         .filtered_results
-//                         .extend(recipes.iter().map(|info| info.recipe_id));
-//                     filter_state.last_filter.clear();
-//                     filter_state.last_filter.extend(filter.iter().copied());
-//                 }
-//             }
-//             info!("filtering complete, {} recipes found", recipes.len());
-//             events::emit_filter_complete(&app, ResultInterop::ok(events::FilterComplete { results: recipes }));
-//         });
-//     }
-//     for chunk in &iter.into_iter().chunks(CHUNK_SIZE) {
-//         let chunk: Vec<RecipeId> = chunk.collect();
-//         let filter = Arc::clone(filter);
-//         let send = send.clone();
-//         let pot = get_db(state)?.pot();
-//         state.executor.pool().execute(move || {
-//             let mut filtered = Vec::with_capacity(CHUNK_SIZE);
-//             for recipe_id in chunk {
-//                 // add the recipe if any actor in the recipe is in the filter
-//                 let inputs: RecipeInputs = recipe_id.into();
-//                 for group in inputs.as_slice() {
-//                     if group.actors().iter().any(|actor| filter.contains(actor)) {
-//                         // cook me
-//                         let result = match pot.cook_inputs(recipe_id) {
-//                             Ok(result) => result,
-//                             Err(err) => {
-//                                 let _ = send.send(Err(err.to_string()));
-//                                 return;
-//                             }
-//                         };
-//
-//                         let mut group_ids = [0usize; rdata::NUM_INGR];
-//                         for (i, group) in inputs.as_slice().iter().enumerate() {
-//                             group_ids[i] = *group as usize;
-//                         }
-//
-//                         let info = RecipeInfo {
-//                             recipe_id,
-//                             groups: group_ids,
-//                             value: result.data.health_recover,
-//                             price: result.data.sell_price,
-//                         };
-//
-//                         filtered.push(info);
-//                         break;
-//                     }
-//                 }
-//             }
-//             let _ = send.send(Ok(filtered));
-//         });
-//     }
-//     drop(send);
-//     Ok(())
-// }
+#[tauri::command]
+fn abort_search(state: State<Global>) -> ResultInterop<()> {
+    search::abort(state).into()
+}
+/// Execute filtering on the search result based on what actors should be included.
+/// The filter results are returned through the `filter-complete` event.
+///
+/// JS side should make sure to abort previous filter before starting a new one.
+///
+/// One or more `filter-progress` event might be emitted during the filter.
+/// The payload is a number between 0 and 100 indicating the progress percentage.
+#[tauri::command]
+fn filter(include: Vec<usize>, app: AppHandle, state: State<Global>) -> ResultInterop<()> {
+    let mut filter = include
+        .into_iter()
+        .map(Group::from_usize)
+        .collect::<HashSet<_>>();
+    // always include "none" i.e. the empty space
+    filter.insert(Group::None);
+    filter::run(&Arc::new(filter), app, state).into()
+}
+
+#[tauri::command]
+fn abort_filter(state: State<Global>) -> ResultInterop<()> {
+    filter::abort(state).into()
+}
 
 fn main() {
     env_logger::init();
@@ -232,11 +129,19 @@ fn main() {
             executor: Arc::clone(&executor),
             db: Arc::clone(&db),
             search_result: Arc::new(Mutex::new(None)),
+            search_handles: Arc::new(Mutex::new(Vec::new())),
+            filter_result: Arc::new(Mutex::new(None)),
+            filter_handles: Arc::new(Mutex::new(Vec::new())),
+            last_included: Arc::new(Mutex::new(HashSet::new())),
             // filter: Arc::new(RwLock::new(FilterState::default())),
         })
         .invoke_handler(tauri::generate_handler![
-            set_title, initialize, abort, search,
-            // filter_actors
+            set_title,
+            initialize,
+            search,
+            abort_search,
+            filter,
+            abort_filter
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");

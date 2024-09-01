@@ -17,6 +17,7 @@ pub struct Chunk {
 }
 
 impl Chunk {
+    /// Open a chunk for reading recipes.
     pub fn open<P: AsRef<Path>>(chunk_id: usize, path: P) -> Result<Self, Error> {
         let file = File::open(path.as_ref())?;
         let total = get_compact_chunk_record_size(chunk_id);
@@ -39,8 +40,14 @@ impl Chunk {
         })
     }
 
+    /// Attach a filter to this chunk
     pub fn filter(self, filter: &Filter, pot: Arc<CookingPot>) -> FilteredChunk {
         FilteredChunk::new(self, filter.clone(), pot)
+    }
+
+    /// Get the number of remaining records to read
+    pub fn remaining(&self) -> usize {
+        self.recipe_end - self.recipe_next
     }
 }
 
@@ -80,6 +87,10 @@ pub struct FilteredChunk {
 impl FilteredChunk {
     pub fn new(chunk: Chunk, filter: Filter, pot: Arc<CookingPot>) -> Self {
         Self { chunk, filter, pot }
+    }
+
+    pub fn chunk(&self) -> &Chunk {
+        &self.chunk
     }
 }
 
