@@ -52,27 +52,27 @@ tasks:
     - npx jest
 
   check:
-    desc: Check for linting and formatting issues
+    desc: Check for linting and formatting issues in TS code
     aliases: [lint]
     cmds:
-    # - task: eslint
-    #   vars:
-    #     ESLINT_ARGS: ""
+    - task: eslint
+      vars:
+        ESLINT_ARGS: ""
     - task: prettier
       vars:
         PRETTIER_ARGS: --check
   
   fix:
-    desc: Fix linting and formatting issues in web client
+    desc: Fix linting and formatting issues in TS code
     cmds:
     - task: prettier
       vars:
         PRETTIER_ARGS: --write
-    # - task: eslint
-    #   vars:
-    #     ESLINT_ARGS: --fix
-  #
 
   prettier:
     cmds:
     - npx prettier "./**/*.{ts,tsx,json,js,jsx,cjs,css}" {{.PRETTIER_ARGS}}
+
+  eslint:
+    cmds:
+    - npx eslint src --report-unused-disable-directives --max-warnings 0 --cache {{.ESLINT_ARGS}}
