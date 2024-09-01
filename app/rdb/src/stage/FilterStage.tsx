@@ -19,7 +19,7 @@ export const FilterStage: React.FC = () => {
             style={{width: "100%"}}/>
             <div>
 
-            <Checkbox label="Show items not included in the recipes found" />
+            <Checkbox label="Show excluded items" />
           </div>
          
             </div>

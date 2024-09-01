@@ -30,7 +30,7 @@ tasks:
   build-js:
     cmds:
     # - node scripts/verifyI18n.cjs
-    - npx tsc && npx vite build
+    - npx vite build
 
   ts-rs:
     desc: Generate TypeScript bindings
@@ -61,6 +61,7 @@ tasks:
     - task: prettier
       vars:
         PRETTIER_ARGS: --check
+    - npx tsc
   
   fix:
     desc: Fix linting and formatting issues in TS code

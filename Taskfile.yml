@@ -30,7 +30,7 @@ tasks:
 
   check:
     vars:
-      CLIPPY_FLAGS: -D warnings -D clippy::todo
+      CLIPPY_FLAGS: -D warnings -D clippy::todo -A clippy::comparison-chain
     cmds:
     - cargo clippy --package botw-recipe-data --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-dump-emulate --all-targets -- {{.CLIPPY_FLAGS}}

@@ -1,6 +1,6 @@
-import { 
+import {
     useDispatch as useReduxDispatch,
-    useSelector as useReduxSelector
+    useSelector as useReduxSelector,
 } from "react-redux";
 import type { Dispatch, State } from "./store.ts";
 

@@ -1,7 +1,7 @@
 import Fuse from "fuse.js";
 import { useEffect, useState } from "react";
 
-import { Actor, ActorToName, getActors } from "data/Actor.ts"
+import { Actor, ActorToName, getActors } from "data/Actor.ts";
 
 import { loadLocale } from "./locales.ts";
 
@@ -11,14 +11,17 @@ let currentLocale = "";
 let itemSearch: ItemSearchFn = getActors;
 const subscribers: ((search: ItemSearchFn) => void)[] = [];
 
-export const initLocalizedItemSearch = async (locale: string, translation: Record<string, string>) => {
+export const initLocalizedItemSearch = async (
+    locale: string,
+    translation: Record<string, string>,
+) => {
     if (currentLocale === locale) {
         return;
     }
     console.log("initializing localized item search for locale " + locale);
     currentLocale = locale;
     const englishTranslation = await loadLocale("en-US");
-    const entries = getActors().map(actor => {
+    const entries = getActors().map((actor) => {
         return {
             actor,
             actorName: ActorToName[actor],
@@ -36,13 +39,13 @@ export const initLocalizedItemSearch = async (locale: string, translation: Recor
             return undefined;
         }
         const results = fuse.search(searchText);
-        return results.map(result => result.item.actor);
+        return results.map((result) => result.item.actor);
     };
     console.log("localized item search initialized");
 };
 
 export const useItemSearch = () => {
-    const [search, setSearch] = useState<ItemSearchFn>(getActors);
+    const [search, setSearch] = useState<ItemSearchFn>(itemSearch);
     useEffect(() => {
         const subscriber = (search: ItemSearchFn) => {
             setSearch(search);

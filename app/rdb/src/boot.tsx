@@ -14,27 +14,26 @@ import { updateSearchProgress } from "store/search.ts";
 
 /** Boot the app using the provided host */
 export async function boot(host: Host) {
-  await initLocale();
-  
-  ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <React.StrictMode>
-      <HostContext.Provider value={host}>
-    <FluentProvider theme={webLightTheme}>
-                <AlertProvider>
-                    <ReduxProvider store={store}>
-                        <App />
-                    </ReduxProvider>
-                </AlertProvider>
+    await initLocale();
+
+    ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+        <React.StrictMode>
+            <HostContext.Provider value={host}>
+                <FluentProvider theme={webLightTheme}>
+                    <AlertProvider>
+                        <ReduxProvider store={store}>
+                            <App />
+                        </ReduxProvider>
+                    </AlertProvider>
                 </FluentProvider>
-      </HostContext.Provider>
-    </React.StrictMode>,
-  );
+            </HostContext.Provider>
+        </React.StrictMode>,
+    );
 
     const searchProgressHandler = (percentage: number) => {
         store.dispatch(updateSearchProgress(percentage));
     };
 
     await host.bind(searchProgressHandler);
-  await host.initialize();
-
+    await host.initialize();
 }

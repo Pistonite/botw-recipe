@@ -6,7 +6,7 @@ export const store = configureStore({
     reducer: {
         search: searchReducer,
         filter: filterReducer,
-    }
+    },
 });
 
 export type State = ReturnType<typeof store.getState>;

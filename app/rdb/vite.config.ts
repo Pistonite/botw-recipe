@@ -6,34 +6,34 @@ import griffel from "@griffel/vite-plugin";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => ({
-  plugins: [
-    react(),
-    yaml(),
-    tsconfigPaths(),
+    plugins: [
+        react(),
+        yaml(),
+        tsconfigPaths(),
         command === "build" && griffel(),
-  ],
+    ],
     json: {
         // note: doesn't work on yaml
         // see https://github.com/Modyfi/vite-plugin-yaml/issues/30
         stringify: true,
     },
-  build: {
-    rollupOptions: {
-      input: {
-        tauri: "index-tauri.html",
-      }
-    },
+    build: {
+        rollupOptions: {
+            input: {
+                tauri: "index-tauri.html",
+            },
+        },
         cssCodeSplit: false,
         chunkSizeWarningLimit: 1024,
-  },
-
-  // prevent vite from obscuring rust errors when running from tauri
-  clearScreen: false,
-  server: {
-    port: 1420,
-    strictPort: true,
-    watch: {
-      ignored: ["**/src-tauri/**"],
     },
-  },
+
+    // prevent vite from obscuring rust errors when running from tauri
+    clearScreen: false,
+    server: {
+        port: 1420,
+        strictPort: true,
+        watch: {
+            ignored: ["**/src-tauri/**"],
+        },
+    },
 }));

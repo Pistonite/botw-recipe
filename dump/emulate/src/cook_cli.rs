@@ -75,7 +75,7 @@ impl Options {
             id
         };
         let inputs =
-            RecipeInputs::from_id(recipe_id).ok_or_else(|| Error::InvalidRecipeId(recipe_id))?;
+            RecipeInputs::from_id(recipe_id).ok_or(Error::InvalidRecipeId(recipe_id))?;
         let mut ingr = Vec::with_capacity(5);
         for group in inputs.iter() {
             let actor = group.first_actor();
@@ -87,7 +87,6 @@ impl Options {
     }
 
     fn get_actors_from_ingredients(&self) -> Result<Vec<Actor>, Error> {
-        // TODO - better matching
         let mut actors = Vec::new();
         for input in self.ingredients.join(" ").split(',') {
             let input = input.trim().to_lowercase();

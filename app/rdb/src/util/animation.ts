@@ -7,7 +7,7 @@ setInterval(() => {
     if (animationFrame > 100000) {
         animationFrame = 0;
     }
-    subscribers.forEach(subscriber => subscriber(animationFrame));
+    subscribers.forEach((subscriber) => subscriber(animationFrame));
 }, 1000);
 
 export const useAnimationFrame = (totalFrames: number) => {

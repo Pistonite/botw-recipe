@@ -4,7 +4,7 @@ import { Result, Void } from "@pistonite/pure/result";
 import { errstr } from "@pistonite/pure/utils";
 
 import { HostBinding } from "host/HostBinding.ts";
-import { HostError, SearchComplete, SearchFilter } from "host/types.ts";
+import { HostError, Stats, SearchFilter } from "host/types.ts";
 import { Host } from "host/Host.ts";
 import { createGenericError } from "data/ErrorMessage.ts";
 
@@ -18,8 +18,10 @@ class TauriBinding implements HostBinding {
         }
         this.title = title;
         try {
-            await invoke("set_title", {title});
-        } catch (_) { }
+            await invoke("set_title", { title });
+        } catch (_) {
+            // ignore set title error
+        }
     }
     async initialize(): Promise<Void<HostError>> {
         try {
@@ -40,7 +42,7 @@ class TauriBinding implements HostBinding {
     }
     async search(filter: SearchFilter): Promise<Result<number[], HostError>> {
         try {
-            return await invoke("search", { filter });            
+            return await invoke("search", { filter });
         } catch (e) {
             console.error(e);
             return { err: createGenericError(errstr(e)) };
@@ -57,16 +59,23 @@ class TauriBinding implements HostBinding {
     async setInitializedHandler(handler: () => void): Promise<void> {
         await listen("initialized", handler);
     }
-    async setSearchProgressHandler(handler: (percentage: number) => void): Promise<void> {
-        await listen("search-progress", ({payload}) => handler(payload as number));
+    async setSearchProgressHandler(
+        handler: (percentage: number) => void,
+    ): Promise<void> {
+        await listen("search-progress", ({ payload }) =>
+            handler(payload as number),
+        );
     }
-    async setSearchCompleteHandler(handler: (result: Result<SearchComplete, HostError>) => void): Promise<void> {
-        await listen("search-complete", ({payload}) => handler(payload as Result<SearchComplete, HostError>));
+    async setSearchCompleteHandler(
+        handler: (result: Result<Stats, HostError>) => void,
+    ): Promise<void> {
+        await listen("search-complete", ({ payload }) =>
+            handler(payload as Result<Stats, HostError>),
+        );
     }
     // async setFilterCompleteHandler(handler: (result: Result<FilterComplete, string>) => void): Promise<void> {
     //     await listen("filter-complete", ({payload}) => handler(payload as Result<FilterComplete, string>));
     // }
-
 }
 
 boot(new Host(new TauriBinding()));

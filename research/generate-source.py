@@ -397,7 +397,7 @@ def gen_actor_enum_ts(o, test, actors, actor_to_name, groups, actor_pe_only):
     o.write("] as const;\n")
     test.write("    });\n")
 
-    actor_to_name_elems = ["" for _ in range(len(actors)+1)]
+    actor_to_name_elems = ['""' for _ in range(len(actors)+1)]
     o.write("export const ActorToName = [\n")
     test.write("    test(\"ActorToName\", () => {\n")
     for actor in actors:
