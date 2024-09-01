@@ -21,7 +21,7 @@ tasks:
   build:
     desc: Build RDB (release) binary
     cmds:
-    - npx tauri build
+    - npx tauri build {{.CLI_ARGS}}
 
   dev-js:
     cmds:
