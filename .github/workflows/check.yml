@@ -32,6 +32,9 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - run: task check
 
   check-tools:
