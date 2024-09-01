@@ -16,19 +16,22 @@ jobs:
           - os: ubuntu-latest
             args: ""
             targets: ""
-            label: Ubuntu
+            label: linux
           - os: macos-latest
             args: "--target aarch64-apple-darwin"
             targets: "aarch64-apple-darwin"
-            label: macOS aarch64
+            label: macos-aarch64
+            executable: "target/aarch64-apple-darwin/release/botwrdb"
           - os: macos-latest
             args: "--target x86_64-apple-darwin"
             targets: "x86_64-apple-darwin"
-            label: macOS x86_64
+            label: macos-x86_64
+            executable: "target/x86_64-apple-darwin/release/botwrdb"
           - os: windows-latest
             args: ""
             targets: ""
-            label: Windows
+            label: windows
+            executable: "target/release/botwrdb.exe"
     name: Tauri (${{ matrix.label }})
     runs-on: ${{ matrix.os }}
     steps:
@@ -47,7 +50,12 @@ jobs:
       - if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+          sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
       - run: task rdb:install-ci
       - run: "task rdb:build -- --ci ${{ matrix.args }}"
+      - uses: actions/upload-artifact@v4
+      with:
+        path: ${{ matrix.executable }}
+        name: botwrdb-${{ matrix.label }}
+        retention-days: 3
 
