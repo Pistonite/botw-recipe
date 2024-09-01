@@ -104,7 +104,7 @@ impl IngrData {
                 actor, recipe_tags
             )));
         }
-        let recipe_tag = recipe_tags.get(0).map(|x| **x).unwrap_or_default();
+        let recipe_tag = recipe_tags.first().map(|x| **x).unwrap_or_default();
 
         Ok(Ingredient {
             actor,

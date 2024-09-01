@@ -100,7 +100,7 @@ impl Record {
     }
     #[inline]
     pub fn modifier(self) -> u32 {
-        ((self.0 as u32) & 0x1FF).into()
+        (self.0 as u32) & 0x1FF
     }
     #[inline]
     pub fn modifier_set(self) -> WeaponModifierSet {

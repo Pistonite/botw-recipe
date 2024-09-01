@@ -1,3 +1,4 @@
+use derivative::Derivative;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
@@ -31,7 +32,8 @@ pub enum WeaponModifier {
     IsYellow = 0x80000000,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[derive(Debug, Derivative, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[derivative(Default(new = "true"))]
 #[ts(export)]
 #[repr(transparent)]
 pub struct WeaponModifierSet(u32);
@@ -51,10 +53,6 @@ impl From<WeaponModifierSet> for u32 {
 }
 
 impl WeaponModifierSet {
-    #[inline]
-    pub fn new() -> Self {
-        Self(WeaponModifier::None as u32)
-    }
     #[inline]
     pub fn all() -> Self {
         (0x1FF | WeaponModifier::IsYellow as u32).into()

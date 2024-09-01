@@ -132,6 +132,7 @@ impl From<RecipeId> for RecipeInputs {
         // how many items are left (since the inputs are ascending)
         let mut item_lower_bound = NUM_GROUPS;
 
+        #[allow(clippy::needless_range_loop)]
         for slot in 0..NUM_INGR {
             let mut good = false;
             // compute the slot-th item in the input array
