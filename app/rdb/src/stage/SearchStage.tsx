@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Body1, Button, Caption1, Checkbox, Field, SpinButton, Subtitle2, Title3, Tooltip } from "@fluentui/react-components";
+import { Button, Caption1, Checkbox, Field, SpinButton, Subtitle2, Tooltip } from "@fluentui/react-components";
 import { Info16Regular, Search24Regular } from "@fluentui/react-icons";
 
+import { useAlert } from "components/AlertProvider.tsx";
 import { ModifierSelection } from "components/Modifier.tsx";
 import { StageDivider } from "components/StageDivider.tsx";
-import { useAlert } from "components/AlertProvider.tsx";
+import { StageTitle } from "components/StageTitle.tsx";
 import { useDispatch, useSelector } from "store/hook.ts";
 import { finishSearch, getSearchFilter, getSearchMessage, isSearching, setSearchIncludeCritRngHp, setSearchIncludePeOnly, setSearchMaxValue, setSearchMinValue, setSearchModifiers, startSearch } from "store/search.ts";
 import { WeaponModifierSet } from "host/types.ts";
@@ -71,9 +72,9 @@ export const SearchStage: React.FC = () => {
             dispatch(finishSearch({
                 duration: "0",
                 foundCount: -1,
-                actors: null
+                groupStat: null
             }));
-            if (result.err.type === "SearchAborted") {
+            if (result.err.type === "Aborted") {
                 console.log("search aborted");
                 return;
             }
@@ -90,16 +91,7 @@ export const SearchStage: React.FC = () => {
     }, [abortInProgress, isSearchInProgress, filter, host, alert, dispatch, t]);
 
     return <>
-        <div>
-            <Title3
-                style={{display: "inline-flex", alignItems: "center", gap: 8}}
-                block>
-                <Search24Regular /> 
-                {t("search.title")}
-            </Title3>
-            <Body1 block> {t("search.desc")} </Body1>
-            <StageDivider />
-        </div>
+        <StageTitle title={t("search.title")} icon={Search24Regular} desc={t("search.desc")} />
         <div style={{flex: 1, overflowY: "auto"}}>
             <Subtitle2 block> {t("search.value.title")} </Subtitle2>
             <Field label={t("search.value.min")}>

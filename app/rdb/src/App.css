@@ -16,9 +16,3 @@ body {
   margin: 0px;
   overflow: hidden;
 }
-
-.container {
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #fcfcfc;
-}

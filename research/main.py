@@ -50,3 +50,4 @@ if __name__ == "__main__":
     run_script("prepare-recipes.py")
 
     run_script("generate-source.py")
+    run_script("generate-localization.py")

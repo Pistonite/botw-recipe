@@ -10,6 +10,7 @@ type FilterSlice = {
     actorUsagePercentages: string[] | null,
     /** The actors that are included in the next search */
     nextIncluded: Actor[],
+    favorited: Actor[],
     /** Whether excluded actors are shown in the list */
     showExcluded: boolean,
     filterProgress: number,
@@ -23,6 +24,7 @@ const initialState: FilterSlice = {
     currentIncluded: [],
     actorUsagePercentages: null,
     nextIncluded: [],
+    favorited: [],
     showExcluded: false,
     filterProgress: -1,
     filterResultCount: -1,

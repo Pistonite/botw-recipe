@@ -2,7 +2,7 @@
  * Modifier related components
  */
 import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { createTableColumn, DataGrid, DataGridBody, DataGridCell, DataGridCellFocusMode, DataGridHeader, DataGridHeaderCell, DataGridRow, Label, LabelProps, makeStyles, shorthands, TableCellLayout, TableColumnId, ToggleButton } from "@fluentui/react-components";
 import { WeaponModifier, WeaponModifiers } from "data/WeaponModifier.ts";
 import { Add20Filled, Add20Regular, Question20Filled, Question20Regular, Subtract20Filled, Subtract20Regular } from "@fluentui/react-icons";
@@ -10,12 +10,11 @@ import { WeaponModifierSet } from "host/types.ts";
 
 const useStyles = makeStyles({
     iconContainer: {
-        borderRadius: "4px",
+        backgroundImage: "url(\"/modifiers/bg.png\")",
         minWidth: "26px",
         width: "26px",
         minHeight: "26px",
         height: "26px",
-       backgroundColor: "rgba(0, 0, 0, 0.8)",
        ...shorthands.padding("1px"),
     },
     icon: {
@@ -23,8 +22,6 @@ const useStyles = makeStyles({
         width: "24px",
         minHeight: "24px",
         height: "24px",
-        borderRadius: "2px",
-        ...shorthands.border("1px", "solid", "#888"),
     }
 });
 
@@ -44,13 +41,14 @@ export type ModifierProps = {
     modifier: WeaponModifier;
 }
 
-type ModifierSelectionRowProps = {
+export type ModifierSelectionRowProps = {
     modifier: WeaponModifier;
     included: boolean;
     excluded: boolean;
     onSelectInclude: (modifier: WeaponModifier) => void;
     onSelectExclude: (modifier: WeaponModifier) => void;
     onSelectIgnore: (modifier: WeaponModifier) => void;
+    t: (key: string) => string;
 }
 
 const ModifierSelectionColumns = [
@@ -68,10 +66,11 @@ const ModifierSelectionColumns = [
     createTableColumn<ModifierSelectionRowProps>({
         columnId: "option",
         renderHeaderCell: (t) => (t as (key: string)=>string)("search.modifier.option"),
-        renderCell: ({modifier, included, excluded, onSelectInclude, onSelectExclude, onSelectIgnore}) => {
+        renderCell: ({modifier, included, excluded, onSelectInclude, onSelectExclude, onSelectIgnore, t}) => {
             const ignore = !included && !excluded;
-            return (<>
+            return <>
                 <ToggleButton
+                    aria-label={t("search.modifier.option.include")}
                         shape="circular"
                         appearance={included ? "primary" : undefined}
                     checked={included}
@@ -79,6 +78,7 @@ const ModifierSelectionColumns = [
                         icon={included ? <Add20Filled /> : <Add20Regular />}
                 />
                 <ToggleButton
+                    aria-label={t("search.modifier.option.ignore")}
                         shape="circular"
                         appearance={ignore ? "primary" :undefined}
                     checked={ignore}
@@ -87,13 +87,14 @@ const ModifierSelectionColumns = [
 
                 />
                 <ToggleButton
+                    aria-label={t("search.modifier.option.exclude")}
                         shape="circular"
                         appearance={excluded ? "primary" :undefined}
                     checked={excluded}
                     onClick={() => onSelectExclude(modifier)}
                         icon={excluded ? <Subtract20Filled /> : <Subtract20Regular />}
                 />
-            </>);
+            </>;
         },
     }),
 
@@ -139,23 +140,24 @@ export const ModifierSelection: React.FC<ModifierSelectionProps> = ({
                 onSelectInclude,
                 onSelectExclude,
                 onSelectIgnore,
-            };
+                t
+            } satisfies ModifierSelectionRowProps;
         });
-    }, [selectedInclude, selectedExclude, onSelect]);
+    }, [selectedInclude, selectedExclude, onSelect, t]);
     return (
-    <DataGrid
-        items={items}
-        columns={ModifierSelectionColumns}
+        <DataGrid
+            items={items}
+            columns={ModifierSelectionColumns}
         >
-      <DataGridHeader>
-        <DataGridRow
+            <DataGridHeader>
+                <DataGridRow
 
-        >
-          {({ renderHeaderCell }) => (
-            <DataGridHeaderCell>{renderHeaderCell(t)}</DataGridHeaderCell>
-          )}
-        </DataGridRow>
-      </DataGridHeader>
+                >
+                    {({ renderHeaderCell }) => (
+                        <DataGridHeaderCell>{renderHeaderCell(t)}</DataGridHeaderCell>
+                    )}
+                </DataGridRow>
+            </DataGridHeader>
       <DataGridBody<ModifierSelectionRowProps>>
         {({ item, rowId }) => (
           <DataGridRow<ModifierSelectionRowProps>
@@ -183,7 +185,7 @@ export const ModifierLabel: React.FC<ModifierProps & LabelProps> = ({ modifier, 
 };
 
 /** Component that displays a weapon modifier block */
-export const Modifier: React.FC<ModifierProps> = ({ modifier }) => {
+export const Modifier: React.FC<ModifierProps> = memo(({ modifier }) => {
     const styles = useStyles();
 
     return (
@@ -191,4 +193,4 @@ export const Modifier: React.FC<ModifierProps> = ({ modifier }) => {
             <img className={styles.icon} src={`/modifiers/${modifier}.png`} />
         </div>
     );
-};
+});

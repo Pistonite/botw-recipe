@@ -370,7 +370,7 @@ def gen_actor_enum_ts(o, test, actors, actor_to_name, groups, actor_pe_only):
     o.write(HEADER)
     test.write(HEADER)
     test.write("import { Group } from \"./Group.ts\";\n")
-    test.write("import { Actor, ActorToGroup } from \"./Actor.ts\";\n")
+    test.write("import { Actor, ActorToGroup, ActorToName } from \"./Actor.ts\";\n")
     o.write("import { Group } from \"./Group.ts\";\n")
     o.write("export const Actor = {\n")
     o.write("    None: 0,\n")
@@ -397,16 +397,19 @@ def gen_actor_enum_ts(o, test, actors, actor_to_name, groups, actor_pe_only):
     o.write("] as const;\n")
     test.write("    });\n")
 
+    actor_to_name_elems = ["" for _ in range(len(actors)+1)]
+    o.write("export const ActorToName = [\n")
+    test.write("    test(\"ActorToName\", () => {\n")
+    for actor in actors:
+            test.write(f"expect(ActorToName[Actor.{actor}]).toBe(\"{actor}\");\n")
+    for i, actor in enumerate(actors):
+        actor_to_name_elems[i+1] = '"' + actor + '"'
+    o.write(",\n".join(actor_to_name_elems))
+    o.write("] as const;\n")
     test.write("    });\n")
-    # o.write("export const ActorNames = {\n")
-    # o.write("            \"\",\n")
-    # for i in range(1, len(groups)):
-    #     id = str(i)
-    #     group = groups[id]
-    #     group_name = make_group_name(group, id)
-    #     for actor in group:
-    #         o.write(f"Self::{actor} => \"{actor}\",\n")
-    # o.write("}}")
+
+
+    test.write("    });\n")
 
 def gen_cook_item_enum(o, cook_item_to_name):
     o.write(HEADER)

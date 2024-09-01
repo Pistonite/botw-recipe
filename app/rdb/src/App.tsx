@@ -1,62 +1,53 @@
-import "./App.css";
-import { Body1, Button, Caption1, Checkbox, createTableColumn, DataGrid, DataGridBody, DataGridCell, DataGridCellFocusMode, DataGridHeader, DataGridHeaderCell, DataGridRow, Divider, SearchBox, Subtitle2, TableCellLayout, TableColumnDefinition, TableColumnId, Title3, } from "@fluentui/react-components";
-import { DeleteRegular, EditRegular, Filter24Regular, List24Regular } from "@fluentui/react-icons";
-import { WeaponModifier, WeaponModifiers } from "data/WeaponModifier";
-import { Modifier, ModifierLabel } from "components/Modifier";
-import { LocalePicker } from "components/LocalePicker";
+import { Button, createTableColumn, DataGrid, DataGridBody, DataGridCell, DataGridCellFocusMode, DataGridHeader, DataGridHeaderCell, DataGridRow, Divider, makeStaticStyles, makeStyles, shorthands, TableCellLayout, TableColumnDefinition, TableColumnId, Title3, } from "@fluentui/react-components";
+import { DeleteRegular, EditRegular, List24Regular } from "@fluentui/react-icons";
+
+import { WeaponModifier, WeaponModifiers } from "data/WeaponModifier.ts";
+import { Modifier, ModifierLabel } from "components/Modifier.tsx";
+import { LocalePicker } from "components/LocalePicker.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
+import { FilterStage } from "stage/FilterStage.tsx";
+
+const useStaticStyles = makeStaticStyles({
+    "*": {
+        minWidth: 0,
+        boxSizing: "border-box",
+    },
+    ":root": {
+        fontSynthesis: "none",
+        textRendering: "optimizeLegibility",
+        WebkitFontSmoothing: "antialiased",
+        MozOsxFontSmoothing: "grayscale",
+        WebkitTextSizeAdjust: "100%",
+    },
+    body: {
+        ...shorthands.margin(0),
+        ...shorthands.padding(0),
+        overflow: "hidden",
+    }
+});
+
+const useStyles = makeStyles({
+    stageContainer: {
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        ...shorthands.padding("10px"),
+        backgroundColor: "#fcfcfc",
+    }
+});
 
 export const App: React.FC = () => {
+    useStaticStyles();
+    const styles = useStyles();
 
   return <>
-      <div style={{display: "flex", height: "100vh"}}>
-        <div className="container" style={{minWidth: 300, maxWidth: 360, height: "100%", display: "flex", flexDirection: "column"}}>
+      <div style={{display: "flex", height: "100vh", backgroundColor: "#ccc", gap: 1}}>
+        <div className="container" style={{minWidth: 300, maxWidth: 360, height: "100%", 
+                flexDirection: "column"}}>
                 <SearchStage />
-          
-
         </div>
         <div className="container" style={{minWidth: 400}}>
-        <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
-          <div>
-          <Title3 block>
-            <Filter24Regular />
-            Filter</Title3>
-          <Body1 block>Narrow down the results based on items in the recipes</Body1>
-          <Divider className="divider" />
-
-          <Body1 block>
-            Search for items
-            </Body1>
-            <SearchBox placeholder="Search for items" 
-            style={{width: "100%"}}/>
-            <div>
-
-            <Checkbox label="Show items not included in the recipes found" />
-          </div>
-         
-            </div>
-            <div style={{display: "flex", flexDirection: "column", flex: 1, minHeight: 0}}>
-              <div style={{flex:1, display: "flex", flexDirection: "column", minHeight: 0}}>
-                <Subtitle2 block>Included Items</Subtitle2>
-                <Caption1 block>77 Items. 23 more not in recipes</Caption1>
-                <div style={{flex: 1, minHeight: 0, border: "1px solid #ddd"}}>
-
-
-
-                </div>
-                
-              </div>
-              <div style={{flex:1, display: "flex", flexDirection: "column", minHeight: 0}}>
-              <Subtitle2 block>Excluded Items</Subtitle2>
-              <Caption1 block>77 Items. 23 more not in recipes</Caption1>
-              <div style={{flex: 1, overflowY: "auto", border: "1px solid #ddd"}}>
-
-                </div>
-              </div>
-            </div>
-            
-            
-          </div>
+                <FilterStage />
         </div>
         <div className="container" style={{flex: 1}}>
         <div>

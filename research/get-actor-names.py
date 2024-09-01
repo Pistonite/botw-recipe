@@ -2,21 +2,23 @@
 import yaml
 import util
 
-IN = [
-    "data/inventory-actors.yaml",
-    "botw-data/Message/Msg_USen.product.sarc/ActorType/Item.msyt",
-    "botw-data/Message/Msg_USen.product.sarc/ActorType/CapturedActor.msyt",
-    "botw-data/Message/Msg_USen.product.sarc/ActorType/PlayerItem.msyt",
-]
-OUT = ["output/actor-names.yaml"]
+IN = {
+    "inventory-actors": "data/inventory-actors.yaml",
+    "msg1": "botw-data/Message/Msg_USen.product.sarc/ActorType/Item.msyt",
+    "msg2": "botw-data/Message/Msg_USen.product.sarc/ActorType/CapturedActor.msyt",
+    "msg3": "botw-data/Message/Msg_USen.product.sarc/ActorType/PlayerItem.msyt", 
+}
+OUT = {
+    "actor-names" :"output/actor-names.yaml"
+}
 util.print_stage(__file__, IN, OUT)
 
-with open(IN[0], "r", encoding="utf-8") as f:
+with open(IN["inventory-actors"], "r", encoding="utf-8") as f:
     actors = yaml.safe_load(f)
 
 items = {}
 
-for file in IN[1:]:
+for file in [IN[x] for x in IN if x.startswith("msg")]:
     with open(file, "r", encoding="utf-8") as f:
         x = yaml.safe_load(f)["entries"]
         for n in x:
@@ -36,6 +38,6 @@ for actor in util.progress(actors, "process actors"):
         name = data[0]["text"]
     output.append((actor, name))
 
-with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
+with open(OUT["actor-names"], "w", encoding="utf-8", newline="\n") as f:
     for actor, name in util.progress(output, "save output"):
         f.write(f"- [{actor:<20}, {name}]\n")

@@ -2,6 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import type { Host } from "host/Host.ts";
+import { initLocalizedItemSearch } from "./itemSearch";
 
 export const DefaultLocale = "en-US" as const;
 
@@ -68,19 +69,18 @@ export async function initLocale() {
 }
 
 export async function switchLanguage(locale: string, host: Host) {
-    if (!RESOURCES[locale]) {
-        await loadLocale(locale);
-    }
+    const translation = await loadLocale(locale);
     i18n.changeLanguage(locale);
     host.setTitle(i18n.t("title"));
     saveLocalePreference(locale);
+    await initLocalizedItemSearch(locale, translation);
 }
 
-async function loadLocale(locale: string) {
-    if (RESOURCES[locale]) {
-        return;
+export async function loadLocale(locale: string): Promise<Record<string, string>> {
+    if (!RESOURCES[locale]) {
+        const module = await import(`./locales/${locale}.yaml`);
+        RESOURCES[locale] = {translation: module.default};
     }
-    const module = await import(`./locales/${locale}.yaml`);
-    RESOURCES[locale] = {translation: module.default};
+    return RESOURCES[locale].translation;
 }
 

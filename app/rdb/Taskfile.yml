@@ -46,6 +46,11 @@ tasks:
     - coreutils cp -r src-tauri/bindings/*.ts src/host/types/
     - npx prettier "./src/host/types/*.ts" --write
 
+  test:
+    desc: Run tests
+    cmds:
+    - npx jest
+
   check:
     desc: Check for linting and formatting issues
     aliases: [lint]

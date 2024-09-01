@@ -17,6 +17,10 @@ def is_newer_single(a, b):
     return not os.path.exists(b) or os.path.getmtime(a) > os.path.getmtime(b)
 
 def print_stage(stage, input, output):
+    if isinstance(input, dict):
+        input = list(input.values())
+    if isinstance(output, dict):
+        output = list(output.values())
     input = input + [ stage ]
     stage = os.path.basename(stage)
     if not is_newer(input, output):
