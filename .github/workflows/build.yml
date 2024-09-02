@@ -17,21 +17,22 @@ jobs:
             args: ""
             targets: ""
             label: linux
+            executable: target/release/botwrdb
           - os: macos-latest
             args: "--target aarch64-apple-darwin"
-            targets: "aarch64-apple-darwin"
+            targets: aarch64-apple-darwin
             label: macos-aarch64
-            executable: "target/aarch64-apple-darwin/release/botwrdb"
+            executable: target/aarch64-apple-darwin/release/botwrdb
           - os: macos-latest
             args: "--target x86_64-apple-darwin"
-            targets: "x86_64-apple-darwin"
+            targets: x86_64-apple-darwin
             label: macos-x86_64
-            executable: "target/x86_64-apple-darwin/release/botwrdb"
+            executable: target/x86_64-apple-darwin/release/botwrdb
           - os: windows-latest
             args: ""
             targets: ""
             label: windows
-            executable: "target/release/botwrdb.exe"
+            executable: target/release/botwrdb.exe
     name: Tauri (${{ matrix.label }})
     runs-on: ${{ matrix.os }}
     steps:
