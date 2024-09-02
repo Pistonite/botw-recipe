@@ -43,7 +43,7 @@ impl<T: Serialize, E: Into<Error>> From<Result<T, E>> for ResultInterop<T> {
 #[derive(Debug, Clone, thiserror::Error, Serialize, TS)]
 #[ts(export)]
 #[serde(tag = "type", content = "data")]
-#[allow(clippy::enum_variant_names)]//, reason="readability from TypeScript")]
+#[allow(clippy::enum_variant_names)] //, reason="readability from TypeScript")]
 pub enum Error {
     #[error("io error: {0}")]
     IOError(String),

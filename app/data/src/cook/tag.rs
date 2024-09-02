@@ -34,16 +34,17 @@ pub enum Tag {
 
 impl Tag {
     pub fn is_probably_useful(&self) -> bool {
-        matches!( self ,
+        matches!(
+            self,
             Self::CookOre
-            | Self::CookInsect
-            | Self::CookEnemy
-            | Self::CookMeat
-            | Self::CookFish
-            | Self::CookFruit
-            | Self::CookMushroom
-            | Self::CookPlant
-            | Self::CookSpice
+                | Self::CookInsect
+                | Self::CookEnemy
+                | Self::CookMeat
+                | Self::CookFish
+                | Self::CookFruit
+                | Self::CookMushroom
+                | Self::CookPlant
+                | Self::CookSpice
         )
     }
 }

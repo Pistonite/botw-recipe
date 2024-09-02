@@ -350,13 +350,13 @@ impl Check {
                         "----- deleted chunk {i}"
                     );
                 } else if !options.silent {
-                        print_status!(
-                            checked,
-                            rdata::CHUNK_COUNT,
-                            label,
-                            "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
-                            meta_file_size
-                        );
+                    print_status!(
+                        checked,
+                        rdata::CHUNK_COUNT,
+                        label,
+                        "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
+                        meta_file_size
+                    );
                 }
                 continue;
             }
@@ -490,7 +490,7 @@ impl Check {
                     if !self.options.silent {
                         print_status!(checked, total, label, "Chunk {i} failed: {err}");
                     }
-                    
+
                     #[allow(clippy::single_match)]
                     match err {
                         Error::Mismatch(record, data_e, data_c, matched_count) => {
