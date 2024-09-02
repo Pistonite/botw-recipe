@@ -124,9 +124,7 @@ pub fn filter_and_stat_groups(
         };
         let inputs: RecipeInputs = recipe.into();
         let inputs = inputs.to_unique();
-        let should_include = inputs
-            .iter()
-            .all(|group| included.contains(group));
+        let should_include = inputs.iter().all(|group| included.contains(group));
         if !should_include {
             continue;
         }
