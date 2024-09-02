@@ -26,7 +26,7 @@ filter.title: Filter
 filter.desc: Narrow down the scan results based on what items best fit your needs
 filter.list.title: Select Items
 filter.list.desc:
-  Use the list below to include or exclude items from the search results. 
+  Use the list below to progressively include or exclude items from the search results, until the number of results is low enough for closer inspection.
   Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
 filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
 filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
@@ -41,7 +41,7 @@ filter.favorited: Favorited Items
 filter.prompt: Press Apply to update the filter
 filter.button: Apply
 filter.button.cancel: Cancel
-filter.button.reset: Reset
+filter.button.reset: Clear
 filter.progress: "Applying filter ({{progress}}%)"
 filter.result: "Updated filter in {{seconds}}s"
 
@@ -61,7 +61,7 @@ error.button: OK
 
 confirm.title: Confirm
 confirm.message.search.abort: Are you sure to cancel the search?
-confirm.message.filter.abort: Are you sure to cancel updating the filter?
+confirm.message.filter.abort: Are you sure to cancel applying the filter?
 confirm.button.yes: "Yes"
 confirm.button.no: "No"
 

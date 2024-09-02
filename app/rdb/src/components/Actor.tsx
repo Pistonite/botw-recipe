@@ -176,20 +176,11 @@ const ItemActorSelectionColumns = [
         columnId: "actor",
         renderHeaderCell: (t) =>
             (t as (key: string) => string)("filter.selection.actor"),
-        // renderCell: ({ actor, subtitle }) => {
-        //     return (
-        //         <TableCellLayout media={<ItemActorIcon actor={actor} />}>
-        //             <ItemActorLabel actor={actor} />
-        //             <Caption1 block>{subtitle}&nbsp;</Caption1>
-        //         </TableCellLayout>
-        //     );
-        // },
     }),
     createTableColumn<ItemActorSelectionRowProps>({
         columnId: "option",
         renderHeaderCell: (t) =>
             (t as (key: string) => string)("filter.selection.option"),
-        // renderCell: ActionRenderer,
     }),
 ];
 
@@ -299,7 +290,7 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
                 columnSizingOptions={{
                     actor: {
                         defaultWidth: 300,
-                        minWidth: 300,
+                        minWidth: 240,
                     },
                     option: {
                         defaultWidth: 50,

@@ -36,6 +36,7 @@ const useStyles = makeStyles({
         height: "100%",
         ...shorthands.padding("10px"),
         backgroundColor: "#fcfcfc",
+        flex: 1,
     },
     mainScreen: {
         display: "flex",
@@ -61,8 +62,7 @@ export const App: React.FC = () => {
                 <div
                     className={styles.stageContainer}
                     style={{
-                        minWidth: 440,
-                        width: 440,
+                        minWidth: 356,
                         maxWidth: 440, // 42*10 + 20 = display 10 items
                     }}
                 >

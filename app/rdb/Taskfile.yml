@@ -29,7 +29,7 @@ tasks:
 
   build-js:
     cmds:
-    # - node scripts/verifyI18n.cjs
+    - node scripts/verifyI18n.cjs
     - npx vite build
 
   ts-rs:
