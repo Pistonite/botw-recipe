@@ -106,6 +106,20 @@ impl RecipeInputs {
     pub fn as_slice(&self) -> &[Group] {
         &self.0
     }
+
+    pub fn to_unique(&self) -> Vec<Group> {
+        let mut unique = Vec::with_capacity(NUM_INGR);
+        let mut last = Group::None;
+        for group in self.as_slice() {
+            let group = *group;
+            // it's always sorted so just check last
+            if group != last {
+                unique.push(group);
+                last = group;
+            }
+        }
+        unique
+    }
 }
 
 impl From<RecipeInputs> for [Group; NUM_INGR] {

@@ -1,19 +1,23 @@
-import { Result, Void } from "@pistonite/pure/result";
+import type { Result, Void } from "@pistonite/pure/result";
+
+import type { Group } from "data/Group.ts";
 import type { HostError, Stats, SearchFilter } from "./types.ts";
 
 /** Functions that binds to host functions */
 export interface HostBinding {
     setTitle(title: string): Promise<void>;
     initialize(): Promise<Void<HostError>>;
-    abort(handle: number): Promise<Void<HostError>>;
-    search(filter: SearchFilter): Promise<Result<number[], HostError>>;
-    // filterActors(filter: ActorFilter): Promise<Void<string>>;
     setInitializedHandler(handler: () => void): Promise<void>;
+    search(filter: SearchFilter): Promise<Void<HostError>>;
+    abortSearch(): Promise<Void<HostError>>;
     setSearchCompleteHandler(
         handler: (result: Result<Stats, HostError>) => void,
     ): Promise<void>;
     setSearchProgressHandler(
         handler: (percentage: number) => void,
     ): Promise<void>;
-    // setFilterCompleteHandler(handler: (result: Result<FilterComplete, string>) => void): Promise<void>;
+    filter(filter: Group[]): Promise<Void<HostError>>;
+    abortFilter(): Promise<Void<HostError>>;
+    setFilterCompleteHandler(handler: (result: Result<Stats, HostError>) => void): Promise<void>;
+    setFilterProgressHandler(handler: (percentage: number) => void): Promise<void>;
 }

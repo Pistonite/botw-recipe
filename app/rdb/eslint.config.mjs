@@ -23,6 +23,11 @@ function overrideRule(configs, overrides) {
 const config = tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.strict,
+    {
+        rules: {
+            "@typescript-eslint/consistent-type-imports": "warn",
+        }
+    }
 );
 
 const overrides = {

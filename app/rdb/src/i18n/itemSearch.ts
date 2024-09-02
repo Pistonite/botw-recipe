@@ -1,7 +1,7 @@
 import Fuse from "fuse.js";
 import { useEffect, useState } from "react";
 
-import { Actor, ActorToName, getActors } from "data/Actor.ts";
+import { type Actor, ActorToName, getActors } from "data/Actor.ts";
 
 import { loadLocale } from "./locales.ts";
 
@@ -21,19 +21,37 @@ export const initLocalizedItemSearch = async (
     console.log("initializing localized item search for locale " + locale);
     currentLocale = locale;
     const englishTranslation = await loadLocale("en-US");
+    let extraKeys: Record<string, string> = {};
+    if (locale === "zh-CN") {
+        // load pinyin keys
+        const {default: keys} = await import("./locales/zh-CN.pinyin.yaml");
+        extraKeys = keys;
+    }
     const entries = getActors().map((actor) => {
         const actorName = ActorToName[actor];
         const translationKey = `actor.${actorName}`;
+        const keys: string[] = [];
+        if (locale === "zh-CN") {
+            const words = extraKeys[translationKey+".full"];
+            const initials = extraKeys[translationKey+".initials"];
+            if (words) {
+                keys.push(words);
+            }
+            if (initials) {
+                keys.push(initials);
+            }
+        }
         return {
             actor,
             actorName,
             localizedName: translation[translationKey],
             englishName: englishTranslation[translationKey],
+            keys
         };
     });
     const fuse = new Fuse(entries, {
         threshold: 0.2,
-        keys: ["actorName", "localizedName", "englishName"],
+        keys: ["actorName", "localizedName", "englishName", "keys"],
         shouldSort: true,
     });
     itemSearch = (searchText: string) => {

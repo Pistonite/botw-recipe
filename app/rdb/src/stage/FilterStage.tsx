@@ -1,9 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import {
+    Body1,
     Button,
     Caption1,
     Checkbox,
+    Link,
     makeStyles,
     SearchBox,
     Subtitle2,
@@ -15,7 +18,13 @@ import { StageTitle } from "components/StageTitle.tsx";
 import { ItemActorPool, ItemActorSelection } from "components/Actor.tsx";
 import { StageAction } from "components/StageAction.tsx";
 import { StageDivider } from "components/StageDivider.tsx";
-import { Actor, getActors } from "data/Actor.ts";
+import { useAlert, useConfirm } from "components/AlertProvider.tsx";
+import type { Actor } from "data/Actor.ts";
+import { getFilterStageDisabledMessage } from "store/selectors.ts";
+import { abortFilter, clearFavorites, finishFilter, getActorPercentages, getActorSubtitles, getFavoriteActors, getFilterMessage, getIncludedActors, isFilterInProgress, resetFilter, startFilter, toggleFavoriteActor, toggleIncludedActor } from "store/filter.ts";
+import { useDispatch } from "store/hook.ts";
+import { useHost } from "host/useHost.ts";
+import { getErrorAlertPayload } from "data/ErrorMessage.ts";
 
 const useStyles = makeStyles({
     search: {
@@ -29,38 +38,116 @@ const useStyles = makeStyles({
         // size of item list
         minHeight: 0,
     },
+    mainMessage: {
+        display: "flex",
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        "& > *": {
+            textAlign: "center",
+        }
+    },
     spaceBelow: {
         paddingBottom: "8px",
     },
 });
 
+const useLocalizedSubtitles = () => {
+    const subtitles = useSelector(getActorSubtitles);
+    const { t } = useTranslation();
+    return useMemo(() => {
+        return subtitles.map(({id, values}) => t(id, values));
+    }, [subtitles, t]);
+}
+
 export const FilterStage: React.FC = () => {
-    const [favorited, setFavorited] = useState<Actor[]>([]);
-    const [included, setIncluded] = useState<Actor[]>(getActors);
+
+    const { disabled: stageDisabled, messageId: stageMessageId } = useSelector(getFilterStageDisabledMessage);
+    const included = useSelector(getIncludedActors);
+    const favorited = useSelector(getFavoriteActors);
+    const subtitles = useLocalizedSubtitles();
+    const percentages = useSelector(getActorPercentages);
+    const filterMessage = useSelector(getFilterMessage);
+    const isFilteringInProgress = useSelector(isFilterInProgress);
+    const dispatch = useDispatch();
 
     const toggleFavorited = useCallback((actor: Actor) => {
-        setFavorited((prev) => {
-            if (prev.includes(actor)) {
-                return prev.filter((a) => a !== actor);
-            }
-            return [...prev, actor];
-        });
-    }, []);
+        dispatch(toggleFavoriteActor(actor));
+    }, [dispatch]);
     const toggleIncluded = useCallback((actor: Actor) => {
-        setIncluded((prev) => {
-            if (prev.includes(actor)) {
-                return prev.filter((a) => a !== actor);
-            }
-            return [...prev, actor];
-        });
-    }, []);
+        dispatch(toggleIncludedActor(actor));
+    }, [dispatch]);
 
-    const subtitles = useMemo(() => getActors().map(() => "Test"), []);
 
     const [searchText, setSearchText] = useState("");
+    const [showOnlyIncluded, setShowOnlyIncluded] = useState(true);
 
     const styles = useStyles();
     const { t } = useTranslation();
+    const alert = useAlert();
+    const confirmClearFavorites = useConfirm(t("confirm.message.filter.clear_favorites"));
+    const confirmClearFilter = useConfirm(t("confirm.message.filter.reset"));
+    const confirmAbortFilter = useConfirm(t("confirm.message.filter.abort"));
+
+
+    const host = useHost();
+    const [abortInProgress, setAbortInProgress] = useState(false);
+    const filterHandler = useCallback(async () => {
+        if (stageDisabled) {
+            return;
+        }
+        if (isFilteringInProgress) {
+            if (abortInProgress) {
+                return;
+            }
+            if (!await confirmAbortFilter()) {
+                return;
+            }
+            setAbortInProgress(true);
+            const result = await host.cancelFilter();
+            setAbortInProgress(false);
+            if (result.err) {
+                await alert(getErrorAlertPayload(result.err));
+            }
+            return;
+        }
+        const startTime = performance.now();
+        dispatch(startFilter());
+        setAbortInProgress(false);
+        const result = await host.filter(included);
+        if (result.err) {
+            if (result.err.type === "Aborted") {
+                console.log("filter aborted");
+            dispatch(abortFilter());
+                return;
+            }
+            dispatch(
+                finishFilter({
+                    duration: "0",
+                    foundCount: -1,
+                    groupStat: null,
+                    isFromSearch: false,
+                }),
+            );
+            await alert(getErrorAlertPayload(result.err));
+            return;
+        }
+        const endTime = performance.now();
+        const elapsed = ((endTime - startTime) / 1000).toFixed(2);
+        dispatch(
+            finishFilter({
+                duration: elapsed,
+                isFromSearch: false,
+                ...result.val,
+            })
+        )
+    }, [included, stageDisabled, isFilteringInProgress, confirmAbortFilter, alert,
+            dispatch, host, setAbortInProgress
+        ]);
+
+
+
     return (
         <>
             <StageTitle
@@ -79,6 +166,7 @@ export const FilterStage: React.FC = () => {
                 onChange={(_, data) => {
                     setSearchText(data.value);
                 }}
+                disabled={stageDisabled}
                 contentAfter={
                     <Tooltip
                         relationship="label"
@@ -88,31 +176,64 @@ export const FilterStage: React.FC = () => {
                     </Tooltip>
                 }
             />
-            <Checkbox label={t("filter.hide_excluded")} />
+            <Checkbox 
+                checked={showOnlyIncluded}
+                label={t("filter.hide_excluded")} 
+                disabled={stageDisabled}
+                onChange={(_, data) => setShowOnlyIncluded(!!data.checked)}
+            />
             <div className={styles.mainSection}>
-                <ItemActorSelection
-                    included={included}
-                    favorited={favorited}
-                    searchText={searchText}
-                    showExcluded={true}
-                    actorSubtitles={subtitles}
-                    toggleFavorited={toggleFavorited}
-                    toggleIncluded={toggleIncluded}
-                />
+                {
+                    stageMessageId ? 
+                        <div className={styles.mainMessage}>
+                            <Body1 block>{t(stageMessageId)}</Body1>
+                        </div>
+                    :
+                    <ItemActorSelection
+                        included={included}
+                        favorited={favorited}
+                        disabled={stageDisabled}
+                        searchText={searchText}
+                        showExcluded={!showOnlyIncluded}
+                        actorSubtitles={subtitles}
+                            actorPercentages={percentages}
+                        toggleFavorited={toggleFavorited}
+                        toggleIncluded={toggleIncluded}
+                    />
+                }
                 {favorited.length > 0 && (
                     <div>
                         <StageDivider />
                         <Subtitle2 block className={styles.spaceBelow}>
                             {t("filter.favorited")}
+                            <span aria-hidden role="presentation" style={{display: "inline-block", minWidth: 8}}/>
+                            <Link onClick={async () => {
+                                if (await confirmClearFavorites()) {
+                                    dispatch(clearFavorites())
+                                }
+                            } }>{t("filter.favorited.clear")}</Link>
                         </Subtitle2>
-                        <ItemActorPool actors={favorited} />
+                        <ItemActorPool actors={favorited} disabled={stageDisabled} included={included}/>
                     </div>
                 )}
             </div>
             <StageAction>
-                <Caption1>Press Apply </Caption1>
-                <Button>Reset</Button>
-                <Button appearance="primary">Update</Button>
+                <Caption1>{!stageDisabled && !!filterMessage.id && t(filterMessage.id, filterMessage.values)}</Caption1>
+                <Button disabled={stageDisabled}
+                    onClick={async () => {
+                        if (await confirmClearFilter()) {
+                            dispatch(resetFilter());
+                        }
+                    }}
+                >{t("filter.button.reset")}</Button>
+                <Button disabled={stageDisabled} appearance="primary"
+                    onClick={filterHandler}
+                >
+                    {
+                        isFilteringInProgress ? t("filter.button.cancel") :
+                        t("filter.button")
+                    }
+                </Button>
             </StageAction>
         </>
     );

@@ -148,7 +148,9 @@ fn handle_filter_in_background(
                     progress.add(total);
                     for (group, count) in group_stat.into_iter() {
                         groups[group] += count;
-                        included.insert(group);
+                        if count > 0 {
+                            included.insert(group);
+                        }
                     }
                 }
                 StatCountMsg::Err(err) => {
@@ -164,6 +166,11 @@ fn handle_filter_in_background(
                     events::emit_filter_complete_err(&app, Error::Aborted);
                     return;
                 }
+            }
+        }
+        for (group, count) in &groups {
+            if *count > found_count {
+                error!("unexpected count > found_count: {count} > {found_count} for {group:?}");
             }
         }
         info!("filtering complete, found {} recipes", found_count);

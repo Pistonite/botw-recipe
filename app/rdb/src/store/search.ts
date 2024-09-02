@@ -1,4 +1,4 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { WeaponModifier } from "data/WeaponModifier.ts";
 
 import type { Stats, SearchFilter, WeaponModifierSet } from "host/types.ts";
@@ -9,8 +9,9 @@ type SearchSlice = {
     filter: SearchFilter;
     /** -1 = not started/done, 0-100 = in progress*/
     searchProgress: number;
-    /** -1 = not searched, >= 0 = number of results */
+    /** -1 = never started/in progress, >= 0 = number of results */
     searchResultCount: number;
+    /** Duration of the last search */
     searchDurationSeconds: string;
 };
 
@@ -102,6 +103,10 @@ export function isSearching(state: State) {
     return state.search.searchProgress >= 0;
 }
 
+export function getSearchResultCount(state: State) {
+    return state.search.searchResultCount;
+}
+
 export const getSearchMessage = createSelector(
     [
         (state: State) => state.search.searchProgress,
@@ -109,10 +114,13 @@ export const getSearchMessage = createSelector(
         (state: State) => state.search.searchDurationSeconds,
     ],
     (progress, count, seconds) => {
+        if (progress == 0) {
+                return { id: "search.progress.initial", values: {} };
+        }
+        if (progress >= 100) {
+            return { id: "search.progress.stat_group", values: {} };
+        }
         if (progress >= 0) {
-            if (progress >= 100) {
-                return { id: "search.stat_group", values: {} };
-            }
             return { id: "search.progress", values: { progress } };
         }
         if (count < 0) {

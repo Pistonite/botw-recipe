@@ -1,11 +1,12 @@
-import { Result, Void } from "@pistonite/pure/result";
+import type { Result, Void } from "@pistonite/pure/result";
 
 import { createUnknownError } from "data/ErrorMessage.ts";
+import { ActorToGroup, type Actor } from "data/Actor.ts";
 
-import { HostBinding } from "./HostBinding.ts";
+import type { HostBinding } from "./HostBinding.ts";
 import type {
     HostError,
-    HostSearchProgressHandler,
+    HostProgressHandler,
     Stats,
     SearchFilter,
 } from "./types.ts";
@@ -13,21 +14,19 @@ import type {
 export class Host {
     private binding: HostBinding;
     private initializePromise: Promise<Void<HostError>> | undefined = undefined;
-    private searchHandles: number[] = [];
     private searchResolve:
         | ((result: Result<Stats, HostError>) => void)
         | undefined = undefined;
-    // private filterResolve: ((result: Result<FilterComplete, string>) => void) | undefined = undefined;
-    // private filterPromise: Promise<Result<FilterComplete, string>> | undefined = undefined;
-    //
-
+    private filterResolve: ((result: Result<Stats, HostError>) => void) | undefined = undefined;
+    // private filterPro
     constructor(binding: HostBinding) {
         this.binding = binding;
     }
 
     /** */
     public async bind(
-        searchProgressHandler: HostSearchProgressHandler,
+        searchProgressHandler: HostProgressHandler,
+        filterProgressHandler: HostProgressHandler,
     ): Promise<void> {
         await this.binding.setSearchCompleteHandler((result) => {
             const resolve = this.searchResolve;
@@ -37,15 +36,15 @@ export class Host {
             }
         });
         await this.binding.setSearchProgressHandler(searchProgressHandler);
-        //
-        // this.binding.setFilterCompleteHandler((result) => {
-        //     const resolve = this.filterResolve;
-        //     if (resolve) {
-        //         this.filterResolve = undefined;
-        //         this.filterPromise = undefined;
-        //         resolve(result);
-        //     }
-        // });
+
+        await this.binding.setFilterCompleteHandler((result) => {
+            const resolve = this.filterResolve;
+            if (resolve) {
+                this.filterResolve = undefined;
+                resolve(result);
+            }
+        });
+        await this.binding.setFilterProgressHandler(filterProgressHandler);
     }
 
     public setTitle(title: string): void {
@@ -71,51 +70,41 @@ export class Host {
         return this.initializePromise;
     }
 
-    public async search(
+    public search(
         filter: SearchFilter,
     ): Promise<Result<Stats, HostError>> {
-        const cancelResult = await this.cancelSearch();
-        if (cancelResult.err) {
-            return cancelResult;
-        }
-        return await new Promise((resolve) => {
-            this.searchResolve = resolve;
+        return new Promise((resolve) => {
             this.binding.search(filter).then((result) => {
-                console.log(result);
                 if ("err" in result) {
                     resolve({
                         err: result.err || createUnknownError("search"),
                     });
                     return;
                 }
-                this.searchHandles = result.val;
+                this.searchResolve = resolve;
             });
         });
     }
-    public async cancelSearch(): Promise<Void<HostError>> {
-        const handles = this.searchHandles;
-        this.searchHandles = [];
-        const promises = handles.map((handle) => this.binding.abort(handle));
-        const results = await Promise.all(promises);
-        const err = results.find((result) => "err" in result);
-        if (err) {
-            return err;
-        }
-        return {};
+    public cancelSearch(): Promise<Void<HostError>> {
+        return this.binding.abortSearch();
     }
-    // public filterActors(filter: ActorFilter): Promise<Result<FilterComplete, string>> {
-    //     if (this.filterPromise) {
-    //         return this.filterPromise;
-    //     }
-    //     this.filterPromise = new Promise((resolve) => {
-    //         this.filterResolve = resolve;
-    //         this.binding.filterActors(filter).then((result) => {
-    //             if (result.err) {
-    //                 resolve({ err: result.err });
-    //             }
-    //             // wait for filter complete event
-    //         });
-    //     });
-    //     return this.filterPromise;
-    // }
+    public filter(
+        filter: Actor[],
+    ): Promise<Result<Stats, HostError>> {
+        const groups = filter.map((actor) => ActorToGroup[actor]);
+        return new Promise((resolve) => {
+            this.binding.filter(groups).then((result) => {
+                if ("err" in result) {
+                    resolve({
+                        err: result.err || createUnknownError("filter"),
+                    });
+                    return;
+                }
+                this.filterResolve = resolve;
+            });
+        });
+    }
+    public cancelFilter(): Promise<Void<HostError>> {
+        return this.binding.abortFilter();
+    }
 }

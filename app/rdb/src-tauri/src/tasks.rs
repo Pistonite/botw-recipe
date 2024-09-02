@@ -123,8 +123,8 @@ pub fn filter_and_stat_groups(
             }
         };
         let inputs: RecipeInputs = recipe.into();
+        let inputs = inputs.to_unique();
         let should_include = inputs
-            .as_slice()
             .iter()
             .all(|group| included.contains(group));
         if !should_include {
@@ -134,8 +134,8 @@ pub fn filter_and_stat_groups(
             let _ = send.send(StatCountMsg::Err(e.into()));
             return;
         }
-        for group in inputs.as_slice() {
-            groups[*group] += 1;
+        for group in inputs {
+            groups[group] += 1;
         }
     }
     let _ = send.send(StatCountMsg::Ok(writer.size(), total, Box::new(groups)));

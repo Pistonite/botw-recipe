@@ -15,7 +15,8 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-i18next": "^15.0.1",
-        "react-redux": "^9.1.2"
+        "react-redux": "^9.1.2",
+        "remove-accents": "^0.5.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.1",
@@ -24,12 +25,14 @@
         "@modyfi/vite-plugin-yaml": "^1.1.0",
         "@tauri-apps/cli": "^1",
         "@types/jest": "^29.5.12",
+        "@types/pinyin": "^2.10.2",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
         "@vitejs/plugin-react": "^4.2.1",
         "eslint": "^9.9.1",
         "i18next-parser": "^9.0.2",
         "jest": "^29.7.0",
+        "pinyin": "^4.0.0-alpha.2",
         "prettier": "^3.3.3",
         "ts-jest": "^29.2.5",
         "typescript": "^5.2.2",

@@ -19,16 +19,17 @@ import {
     Caption1,
     createTableColumn,
     Label,
-    LabelProps,
+    type LabelProps,
     makeStyles,
     shorthands,
     TableCellLayout,
-    TableColumnId,
+    type TableColumnId,
     ToggleButton,
     Tooltip,
-    DataGridCellFocusMode,
+    type DataGridCellFocusMode,
     useFluent,
     useScrollbarWidth,
+    DataGridProps,
 } from "@fluentui/react-components";
 import {
     DataGrid,
@@ -37,7 +38,7 @@ import {
     DataGridHeaderCell,
     DataGridBody,
     DataGridCell,
-    RowRenderer,
+    type RowRenderer,
 } from "@fluentui-contrib/react-data-grid-react-window";
 import {
     Add20Filled,
@@ -51,12 +52,19 @@ import { useItemSearch } from "i18n/itemSearch.ts";
 
 const useStyles = makeStyles({
     iconContainer: {
+        position: "relative", // for overlay to anchor
         backgroundImage: 'url("/actors/bg.png")',
         minWidth: "42px",
         width: "42px",
         minHeight: "42px",
         height: "42px",
         ...shorthands.padding("2px"),
+    },
+    disabledOverlay: {
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        position: "absolute",
+        ...shorthands.inset(0),
+        zIndex: 1,
     },
     icon: {
         minWidth: "38px",
@@ -93,25 +101,29 @@ export type ItemActorProps = {
 export type ItemActorSelectionProps = {
     included: Actor[];
     favorited: Actor[];
+    disabled: boolean;
     searchText: string;
     showExcluded: boolean;
     actorSubtitles: string[];
+    actorPercentages: number[] | null;
     toggleIncluded: (actor: Actor) => void;
     toggleFavorited: (actor: Actor) => void;
 };
 
 export type ItemActorSelectionRowProps = {
     actor: Actor;
+    percentage: number;
     included: boolean;
     subtitle: string | null;
     favorited: boolean;
+    disabled: boolean;
     toggleIncluded: (actor: Actor) => void;
     toggleFavorited: (actor: Actor) => void;
     t: (key: string) => string;
 };
 
 const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
-    ({ actor, included, favorited, toggleIncluded, toggleFavorited, t }) => {
+    ({ actor, included, favorited, disabled, toggleIncluded, toggleFavorited, t }) => {
         const favoriteSelected = included && favorited;
         return (
             <>
@@ -125,7 +137,7 @@ const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
                 >
                     <ToggleButton
                         checked={favoriteSelected}
-                        disabled={!included}
+                        disabled={disabled || !included}
                         appearance={favoriteSelected ? "primary" : undefined}
                         onClick={() => toggleFavorited(actor)}
                         icon={
@@ -151,6 +163,7 @@ const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
                     relationship="label"
                 >
                     <Button
+                        disabled={disabled}
                         onClick={() => toggleIncluded(actor)}
                         icon={included ? <Delete20Regular /> : <Add20Filled />}
                     />
@@ -161,9 +174,9 @@ const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
 );
 
 const LabelRenderer: React.FC<ItemActorSelectionRowProps> = memo(
-    ({ actor, subtitle }) => {
+    ({ actor, disabled, subtitle }) => {
         return (
-            <TableCellLayout media={<ItemActorIcon actor={actor} />}>
+            <TableCellLayout media={<ItemActorIcon actor={actor} disabled={disabled}/>}>
                 <ItemActorLabel actor={actor} />
                 <Caption1 block>{subtitle}&nbsp;</Caption1>
             </TableCellLayout>
@@ -174,14 +187,16 @@ const LabelRenderer: React.FC<ItemActorSelectionRowProps> = memo(
 const ItemActorSelectionColumns = [
     createTableColumn<ItemActorSelectionRowProps>({
         columnId: "actor",
-        renderHeaderCell: (t) =>
-            (t as (key: string) => string)("filter.selection.actor"),
+        compare: (a, b) => {
+            if (!a.percentage && !b.percentage) {
+                return a.actor-b.actor;
+            }
+            const aPercentage = a.percentage || 0;
+            const bPercentage = b.percentage || 0;
+            return aPercentage - bPercentage;
+        }
     }),
-    createTableColumn<ItemActorSelectionRowProps>({
-        columnId: "option",
-        renderHeaderCell: (t) =>
-            (t as (key: string) => string)("filter.selection.option"),
-    }),
+    createTableColumn<ItemActorSelectionRowProps>({ columnId: "option" }),
 ];
 
 const getCellFocusMode = (columnId: TableColumnId): DataGridCellFocusMode => {
@@ -191,9 +206,11 @@ const getCellFocusMode = (columnId: TableColumnId): DataGridCellFocusMode => {
 export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
     included,
     favorited,
+    disabled,
     searchText,
     showExcluded,
     actorSubtitles,
+    actorPercentages,
     toggleIncluded,
     toggleFavorited,
 }) => {
@@ -221,8 +238,10 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
             .map((actor) => {
                 return {
                     actor,
+                    percentage: actorPercentages?.[actor] || 0,
                     included: incSet.has(actor),
                     favorited: favSet.has(actor),
+                    disabled,
                     subtitle: actorSubtitles[actor] || null,
                     toggleIncluded,
                     toggleFavorited,
@@ -234,7 +253,9 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
         actors,
         included,
         favorited,
+        disabled,
         actorSubtitles,
+            actorPercentages,
         toggleIncluded,
         toggleFavorited,
         t,
@@ -282,6 +303,11 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
         [],
     );
 
+    const [sortState, setSortState] = useState<DataGridProps["sortState"]>({
+        sortColumn: "actor",
+        sortDirection: "descending"
+    });
+
     return (
         <div ref={divRef} className={styles.actorSelectionContainer}>
             <DataGrid
@@ -299,15 +325,22 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
                     },
                 }}
                 resizableColumns={true}
+                sortable
+                sortState={sortState}
+                onSortChange={(_, next) => setSortState(next)}
             >
                 <DataGridHeader
                     ref={headerRef}
                     style={{ paddingRight: scrollbarWidth }}
                 >
                     <DataGridRow>
-                        {({ renderHeaderCell }) => (
+                        {({ columnId }) => (
                             <DataGridHeaderCell>
-                                {renderHeaderCell(t)}
+                                {
+                                    columnId === "actor" ?
+                                    t("filter.selection.actor", {count: rowProps.length}) :
+                                    t("filter.selection.option")
+                                }
                             </DataGridHeaderCell>
                         )}
                     </DataGridRow>
@@ -325,14 +358,24 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
 
 export type ItemActorPoolProps = {
     actors: Actor[];
+    disabled: boolean;
+    /** Actors not included will display disabled */
+    included: Actor[];
 };
 
-export const ItemActorPool: React.FC<ItemActorPoolProps> = ({ actors }) => {
+export const ItemActorPool: React.FC<ItemActorPoolProps> = ({ actors, disabled, included }) => {
     const styles = useStyles();
+    const props = useMemo(() => {
+        const includedSet = new Set(included);
+        return actors.map((actor) => ({
+            actor,
+            disabled: disabled || !includedSet.has(actor),
+        }));
+    }, [actors, disabled, included]);
     return (
         <div className={styles.poolContainer}>
-            {actors.map((actor, i) => (
-                <ItemActorIconWithTooltip key={i} actor={actor} />
+            {props.map((props, i) => (
+                <ItemActorIconWithTooltip key={i} {...props} />
             ))}
         </div>
     );
@@ -347,30 +390,37 @@ export const ItemActorLabel: React.FC<ItemActorProps & LabelProps> = ({
     return <Label {...rest}>{tActor(t, actor)}</Label>;
 };
 
+export type ItemActorIconProps = ItemActorProps & {
+    disabled?: boolean;
+};
+
 /** A component to display an actor image */
-export const ItemActorIcon: React.FC<ItemActorProps> = memo(({ actor }) => {
+export const ItemActorIcon: React.FC<ItemActorIconProps> = memo(({ actor, disabled }) => {
     const styles = useStyles();
 
     return (
         <div className={styles.iconContainer} aria-hidden>
+            {
+                !!disabled && <div className={styles.disabledOverlay} />
+            }
             <img className={styles.icon} src={getIconUrl(actor)} />
         </div>
     );
 });
 
-export const ItemActorIconWithTooltip: React.FC<ItemActorProps> = ({
-    actor,
+export const ItemActorIconWithTooltip: React.FC<ItemActorIconProps> = ({
+    actor, disabled
 }) => {
     const [ref, setRef] = useState<HTMLSpanElement | null>(null);
     return (
         <Tooltip
             appearance="inverted"
             positioning={{ target: ref }}
-            relationship="description"
+            relationship="label"
             content={<ItemActorDetail actor={actor} />}
         >
             <span ref={setRef}>
-                <ItemActorIcon actor={actor} />
+                <ItemActorIcon actor={actor} disabled={disabled} />
             </span>
         </Tooltip>
     );
