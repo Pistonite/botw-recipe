@@ -14,6 +14,9 @@ for (const file of fs.readdirSync(DIR)) {
     if (file === "en-US.yaml") {
         continue;
     }
+    if (file.endsWith("pinyin.yaml")) {
+        continue;
+    }
 
     const locale = YAML.parse(fs.readFileSync(path.join(DIR, file), "utf8"));
     for (const key in defaultLocale) {
