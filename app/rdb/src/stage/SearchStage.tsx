@@ -31,6 +31,7 @@ import {
 import { WeaponModifierSet } from "host/types.ts";
 import { useHost } from "host/useHost.ts";
 import { getErrorAlertPayload } from "data/ErrorMessage.ts";
+import { StageAction } from "components/StageAction";
 
 function parseHp(
     value: number | undefined | null,
@@ -212,16 +213,7 @@ export const SearchStage: React.FC = () => {
                     onSelect={onSelectSearchModifiers}
                 />
             </div>
-            <div>
-                <StageDivider />
-                <div
-                    style={{
-                        display: "flex",
-                        gap: 10,
-                        justifyContent: "end",
-                        alignItems: "baseline",
-                    }}
-                >
+            <StageAction>
                     <Caption1>
                         {searchMessage.id &&
                             t(searchMessage.id, searchMessage.values)}
@@ -231,8 +223,7 @@ export const SearchStage: React.FC = () => {
                             ? t("search.button.cancel")
                             : t("search.button")}
                     </Button>
-                </div>
-            </div>
+            </StageAction>
         </>
     );
 };

@@ -28,6 +28,7 @@ import { Modifier, ModifierLabel } from "components/Modifier.tsx";
 import { LocalePicker } from "components/LocalePicker.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
 import { FilterStage } from "stage/FilterStage.tsx";
+import { StageTitle } from "components/StageTitle";
 
 const useStaticStyles = makeStaticStyles({
     "*": {
@@ -77,23 +78,19 @@ export const App: React.FC = () => {
                     style={{
                         minWidth: 300,
                         maxWidth: 360,
-                        height: "100%",
-                        flexDirection: "column",
                     }}
                 >
                     <SearchStage />
                 </div>
-                <div className="container" style={{ minWidth: 400 }}>
+                <div className={styles.stageContainer} style={{ 
+                    minWidth: 440,
+                    width: 440,
+                    maxWidth: 440,
+                }}>
                     <FilterStage />
                 </div>
-                <div className="container" style={{ flex: 1 }}>
-                    <div>
-                        <Title3 block>
-                            <List24Regular />
-                            Results
-                        </Title3>
-                        <Divider className="divider" />
-                    </div>
+                <div className={styles.stageContainer} style={{ flex: 1 }}>
+                    <StageTitle title="Results" icon={List24Regular} desc="Recipes here should both have the desired modifiers, and only include the desired items"/>
                 </div>
             </div>
             <div style={{ position: "fixed", right: 10, top: 10 }}>
