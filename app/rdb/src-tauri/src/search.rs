@@ -229,7 +229,7 @@ fn handle_search_in_background(
         for msg in recv {
             match msg {
                 StatMsg::Ok(group) => {
-                    for (a, count) in group {
+                    for (a, count) in *group {
                         groups[a] += count;
                     }
                 }
