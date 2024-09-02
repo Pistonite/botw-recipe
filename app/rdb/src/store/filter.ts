@@ -1,24 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Actor, ActorToGroup, getActors } from "data/Actor.ts"
+import { Actor, ActorToGroup, getActors } from "data/Actor.ts";
 import { Stats } from "host/types.ts";
 
 type FilterSlice = {
     /** The included actors for what's currently displayed */
-    currentIncluded: Actor[],
+    currentIncluded: Actor[];
     /** The percentage usage of each actor. (num of recipes with actor/total recipe) */
-    actorUsagePercentages: string[] | null,
+    actorUsagePercentages: string[] | null;
     /** The actors that are included in the next search */
-    nextIncluded: Actor[],
-    favorited: Actor[],
+    nextIncluded: Actor[];
+    favorited: Actor[];
     /** Whether excluded actors are shown in the list */
-    showExcluded: boolean,
-    filterProgress: number,
-    filterResultCount: number,
-    filterDurationSeconds: string,
+    showExcluded: boolean;
+    filterProgress: number;
+    filterResultCount: number;
+    filterDurationSeconds: string;
     /** Whether the filter was executed as part of search */
-    isFromSearch: boolean,
-}
+    isFromSearch: boolean;
+};
 
 const initialState: FilterSlice = {
     currentIncluded: [],
@@ -37,7 +37,9 @@ const filterSlice = createSlice({
     initialState,
     reducers: {
         resetFilter: (state) => {
-            const nextCurrentIncluded = getActors().filter(actor => actor !== Actor.None);
+            const nextCurrentIncluded = getActors().filter(
+                (actor) => actor !== Actor.None,
+            );
             state.currentIncluded = nextCurrentIncluded;
             state.nextIncluded = nextCurrentIncluded;
             state.actorUsagePercentages = null;
@@ -51,12 +53,17 @@ const filterSlice = createSlice({
                 state.filterProgress = action.payload;
             }
         },
-        finishFilter: (state, action: PayloadAction<Stats & { duration: string, isFromSearch: boolean }>) => {
-            const {duration, isFromSearch, ...stats} = action.payload;
+        finishFilter: (
+            state,
+            action: PayloadAction<
+                Stats & { duration: string; isFromSearch: boolean }
+            >,
+        ) => {
+            const { duration, isFromSearch, ...stats } = action.payload;
             let nextCurrentIncluded;
             const groupStat = stats.groupStat;
             if (groupStat) {
-                nextCurrentIncluded = getActors().filter(actor => {
+                nextCurrentIncluded = getActors().filter((actor) => {
                     if (actor === Actor.None) {
                         return false;
                     }
@@ -66,7 +73,7 @@ const filterSlice = createSlice({
                 if (stats.foundCount === 0) {
                     state.actorUsagePercentages = null;
                 } else {
-                    state.actorUsagePercentages = getActors().map(actor => {
+                    state.actorUsagePercentages = getActors().map((actor) => {
                         if (actor === Actor.None) {
                             return "";
                         }
@@ -74,12 +81,17 @@ const filterSlice = createSlice({
                         if (!groupStat[group]) {
                             return "";
                         }
-                        const percentage = ((groupStat[group] / stats.foundCount) * 100).toFixed(2);
+                        const percentage = (
+                            (groupStat[group] / stats.foundCount) *
+                            100
+                        ).toFixed(2);
                         return percentage;
                     });
                 }
             } else {
-                nextCurrentIncluded = getActors().filter(actor => actor !== Actor.None);
+                nextCurrentIncluded = getActors().filter(
+                    (actor) => actor !== Actor.None,
+                );
                 state.actorUsagePercentages = null;
             }
             state.currentIncluded = nextCurrentIncluded;
@@ -88,8 +100,8 @@ const filterSlice = createSlice({
             state.filterResultCount = stats.foundCount;
             state.filterDurationSeconds = duration;
             state.isFromSearch = isFromSearch;
-        }
-    }
-}); 
+        },
+    },
+});
 
 export const filterReducer = filterSlice.reducer;

@@ -86,7 +86,7 @@ impl Database {
         if !chunk_path.exists() {
             return Err(Error::MissingChunk(chunk_id));
         }
-        Ok(Chunk::open(chunk_id, chunk_path)?)
+        Chunk::open(chunk_id, chunk_path)
     }
 
     pub fn open_filtered_chunk(

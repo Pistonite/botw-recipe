@@ -3,13 +3,20 @@ import { Result, Void } from "@pistonite/pure/result";
 import { createUnknownError } from "data/ErrorMessage.ts";
 
 import { HostBinding } from "./HostBinding.ts";
-import type { HostError, HostSearchProgressHandler, SearchComplete, SearchFilter } from "./types.ts";
+import type {
+    HostError,
+    HostSearchProgressHandler,
+    Stats,
+    SearchFilter,
+} from "./types.ts";
 
 export class Host {
     private binding: HostBinding;
     private initializePromise: Promise<Void<HostError>> | undefined = undefined;
     private searchHandles: number[] = [];
-    private searchResolve: ((result: Result<SearchComplete, HostError>) => void) | undefined = undefined;
+    private searchResolve:
+        | ((result: Result<Stats, HostError>) => void)
+        | undefined = undefined;
     // private filterResolve: ((result: Result<FilterComplete, string>) => void) | undefined = undefined;
     // private filterPromise: Promise<Result<FilterComplete, string>> | undefined = undefined;
     //
@@ -20,7 +27,7 @@ export class Host {
 
     /** */
     public async bind(
-        searchProgressHandler: HostSearchProgressHandler
+        searchProgressHandler: HostSearchProgressHandler,
     ): Promise<void> {
         await this.binding.setSearchCompleteHandler((result) => {
             const resolve = this.searchResolve;
@@ -50,20 +57,23 @@ export class Host {
             return this.initializePromise;
         }
         this.initializePromise = new Promise((resolve) => {
-            this.binding.setInitializedHandler(() => resolve({}))
-            .then(() => {
-                this.binding.initialize().then((result) => {
-                    if (result.err) {
-                        resolve(result);
-                    }
-                    // wait for initialized event
-                })
-            })
+            this.binding
+                .setInitializedHandler(() => resolve({}))
+                .then(() => {
+                    this.binding.initialize().then((result) => {
+                        if (result.err) {
+                            resolve(result);
+                        }
+                        // wait for initialized event
+                    });
+                });
         });
         return this.initializePromise;
     }
 
-    public async search(filter: SearchFilter): Promise<Result<SearchComplete, HostError>> {
+    public async search(
+        filter: SearchFilter,
+    ): Promise<Result<Stats, HostError>> {
         const cancelResult = await this.cancelSearch();
         if (cancelResult.err) {
             return cancelResult;
@@ -73,11 +83,12 @@ export class Host {
             this.binding.search(filter).then((result) => {
                 console.log(result);
                 if ("err" in result) {
-                    resolve({ err: result.err || createUnknownError("search")});
+                    resolve({
+                        err: result.err || createUnknownError("search"),
+                    });
                     return;
                 }
                 this.searchHandles = result.val;
-                
             });
         });
     }
@@ -107,5 +118,4 @@ export class Host {
     //     });
     //     return this.filterPromise;
     // }
-    
 }

@@ -1,18 +1,18 @@
 * {
-  min-width: 0px;
-  box-sizing: border-box;
+    min-width: 0px;
+    box-sizing: border-box;
 }
 
 :root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  padding: 0px;
-  margin: 0px;
-  overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
 }

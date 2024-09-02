@@ -1,7 +1,13 @@
 # botw-recipe
-![badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Pistonight/botw-recipe/main/dump/emulate/badge.json)
 
-The fast and complete Breath of the Wild Recipe Database for Weapon Modifier Corruption (WMC).
+![Build Badge](https://img.shields.io/github/check-runs/Pistonight/botw-recipe/main)
+![License Badge](https://img.shields.io/github/license/Pistonight/botw-recipe)
+![Issue Badge](https://img.shields.io/github/issues/Pistonight/botw-recipe)
+![Downloads Badge](https://img.shields.io/github/downloads/Pistonight/botw-recipe/total)
+<br>
+![Recipe Badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Pistonight/botw-recipe/main/dump/emulate/badge.json)
+
+The fast, accurate and complete Breath of the Wild Recipe Database for Weapon Modifier Corruption (WMC).
 
 ## Contents
 - `/research`: Scripts and data for processing ROM and generating item data.

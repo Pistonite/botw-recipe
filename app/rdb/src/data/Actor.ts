@@ -482,7 +482,7 @@ export const ActorToGroup = [
     Group.Obj_Photo_Grp_181,
 ] as const;
 export const ActorToName = [
-    ,
+    "",
     "Item_Fruit_D",
     "Item_Fruit_G",
     "Item_Fruit_A",

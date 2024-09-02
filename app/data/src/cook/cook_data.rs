@@ -25,6 +25,12 @@ pub struct CookData {
     pub crit_chance: i32,
 }
 
+impl Default for CookData {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CookData {
     pub fn new() -> Self {
         Self {

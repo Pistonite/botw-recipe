@@ -17,19 +17,21 @@ const useStyles = makeStyles({
         display: "inline-flex",
         alignItems: "center",
         gap: "8px",
-    }
+    },
 });
 
-export const StageTitle: React.FC<StageTitleProps> = memo(({title, icon: Icon, desc}) => {
-    const styles = useStyles();
-    return (
-        <div>
-            <Title3 className={styles.title} block>
-                <Icon /> 
-                {title}
-            </Title3>
-            <Body1 block> {desc} </Body1>
-            <StageDivider />
-        </div>
-    );
-});
+export const StageTitle: React.FC<StageTitleProps> = memo(
+    ({ title, icon: Icon, desc }) => {
+        const styles = useStyles();
+        return (
+            <div>
+                <Title3 className={styles.title} block>
+                    <Icon />
+                    {title}
+                </Title3>
+                <Body1 block> {desc} </Body1>
+                <StageDivider />
+            </div>
+        );
+    },
+);

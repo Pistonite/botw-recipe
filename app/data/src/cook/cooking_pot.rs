@@ -48,7 +48,7 @@ impl CookingPot {
     }
 
     pub fn cook_id(&self, id: usize) -> Result<CookResult, Error> {
-        let id = RecipeId::new(id).ok_or_else(|| Error::InvalidRecipeId(id))?;
+        let id = RecipeId::new(id).ok_or(Error::InvalidRecipeId(id))?;
         self.cook_inputs(id)
     }
 
@@ -414,6 +414,7 @@ impl CookingPot {
             output.health_recover = hp * HP_MULTIPLIER;
         }
 
+        #[allow(clippy::collapsible_if)]
         if output.effect_id != -1.0 {
             if output.effect_level > effect.data().max_level as f32 {
                 // game caps it, but it shouldn't happen
@@ -441,7 +442,7 @@ impl CookingPot {
             .max()
             .unwrap_or_default();
         // note that game doesn't cap crit_chance
-        crit_chance = crit_chance + BASE_CRIT_CHANCES[unique_ingrs.len() - 1];
+        crit_chance += BASE_CRIT_CHANCES[unique_ingrs.len() - 1];
         output.crit_chance = crit_chance;
 
         if crit_chance == 0 {
@@ -478,6 +479,7 @@ impl CookingPot {
         let effect_max = effect.data().max_level.max(1); // clampMin
         let effect_maxed = output.effect_level >= effect_max as f32;
 
+        #[allow(clippy::needless_return)]
         match effect {
             CookEffect::None => unreachable!(),
             CookEffect::LifeMaxUp => {

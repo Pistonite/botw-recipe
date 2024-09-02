@@ -47,8 +47,7 @@ pub fn run(
     let new_temp_result = db.new_temporary()?;
     let (send, recv) = mpsc::channel();
     let mut error = None;
-    let mut file_id = 0;
-    for reader in temp_result.iter() {
+    for (file_id, reader) in temp_result.iter().enumerate() {
         let reader = match reader {
             Ok(reader) => reader,
             Err(e) => {
@@ -66,7 +65,6 @@ pub fn run(
                 break;
             }
         };
-        file_id += 1;
         let next_included = Arc::clone(next_included);
         let handle = state.executor.execute_abortable(move |signal| {
             tasks::filter_and_stat_groups(reader, writer, next_included, send, signal);

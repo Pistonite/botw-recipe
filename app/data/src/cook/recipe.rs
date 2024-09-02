@@ -61,13 +61,13 @@ impl Recipes {
 
         if unique_count == 1 {
             for recipe in &self.single {
-                if recipe.matches_single(&actors, &tags) {
+                if recipe.matches_single(actors, tags) {
                     return Ok(recipe);
                 }
             }
         }
         for recipe in &self.multi {
-            if recipe.matches(&actors, &tags) {
+            if recipe.matches(actors, tags) {
                 return Ok(recipe);
             }
         }
@@ -185,14 +185,14 @@ impl<T: std::fmt::Debug + PartialEq + Copy> Matcher<T> {
         match self {
             Self::Flat(v) => {
                 for x in v {
-                    if !find_first_and_remove(&[*x], &values, removed) {
+                    if !find_first_and_remove(&[*x], values, removed) {
                         return false;
                     }
                 }
             }
             Self::Nested(v) => {
                 for group in v {
-                    if !find_first_and_remove(group, &values, removed) {
+                    if !find_first_and_remove(group, values, removed) {
                         return false;
                     }
                 }

@@ -22,7 +22,7 @@ pub enum CountMsg {
 /// Message for stating groups in a recipe set
 pub enum StatMsg {
     /// Finished stating, returns occurence of each group
-    Ok(EnumMap<Group, usize>),
+    Ok(Box<EnumMap<Group, usize>>),
     /// Encountered an error
     Err(Error),
     /// Abort the task
@@ -32,7 +32,7 @@ pub enum StatMsg {
 /// Message for counting and stating groups in a recipe set
 pub enum StatCountMsg {
     /// Finished stating, returns `found`, `total`, occurence of each group
-    Ok(usize, usize, EnumMap<Group, usize>),
+    Ok(usize, usize, Box<EnumMap<Group, usize>>),
     /// Encountered an error
     Err(Error),
     /// Abort the task
@@ -95,7 +95,7 @@ pub fn stat_groups(reader: TempResultReader, send: mpsc::Sender<StatMsg>, signal
             groups[*group] += 1;
         }
     }
-    let _ = send.send(StatMsg::Ok(groups));
+    let _ = send.send(StatMsg::Ok(Box::new(groups)));
 }
 
 /// Task to scan a temp result, count the occurence of each group, and filter
@@ -138,7 +138,7 @@ pub fn filter_and_stat_groups(
             groups[*group] += 1;
         }
     }
-    let _ = send.send(StatCountMsg::Ok(writer.size(), total, groups));
+    let _ = send.send(StatCountMsg::Ok(writer.size(), total, Box::new(groups)));
 }
 
 pub struct ProgressTracker<F> {

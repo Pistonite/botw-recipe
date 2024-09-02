@@ -11,8 +11,8 @@ export const SupportedLocales = {
     "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
 } as const;
 export const SupportedLanguages = {
-    "en": "en-US",
-    "zh": "zh-CN",
+    en: "en-US",
+    zh: "zh-CN",
 } as const;
 
 export function saveLocalePreference(locale: string) {
@@ -46,6 +46,7 @@ function getBrowserLocale(): string {
         try {
             return Intl.NumberFormat().resolvedOptions().locale;
         } catch (_) {
+            // fall through
         }
     }
     if (navigator.languages) {
@@ -54,7 +55,7 @@ function getBrowserLocale(): string {
     return DefaultLocale;
 }
 
-const RESOURCES: Record<string, {translation: Record<string, string>}> = {};
+const RESOURCES: Record<string, { translation: Record<string, string> }> = {};
 
 export async function initLocale() {
     const locale = loadLocalePreference();
@@ -76,11 +77,12 @@ export async function switchLanguage(locale: string, host: Host) {
     await initLocalizedItemSearch(locale, translation);
 }
 
-export async function loadLocale(locale: string): Promise<Record<string, string>> {
+export async function loadLocale(
+    locale: string,
+): Promise<Record<string, string>> {
     if (!RESOURCES[locale]) {
         const module = await import(`./locales/${locale}.yaml`);
-        RESOURCES[locale] = {translation: module.default};
+        RESOURCES[locale] = { translation: module.default };
     }
     return RESOURCES[locale].translation;
 }
-

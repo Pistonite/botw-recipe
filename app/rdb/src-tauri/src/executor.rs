@@ -64,7 +64,7 @@ impl Executor {
         }
         let senders = std::mem::take(&mut *senders);
         for sender in senders.into_values() {
-            let _ = sender.send();
+            sender.send();
         }
         finished.clear();
 
@@ -119,7 +119,7 @@ impl Executor {
     pub fn abort(&self, handle_id: usize) -> Result<(), Error> {
         let mut senders = self.abort_senders.write()?;
         if let Some(sender) = senders.remove(&handle_id) {
-            let _ = sender.send();
+            sender.send();
         }
         Ok(())
     }

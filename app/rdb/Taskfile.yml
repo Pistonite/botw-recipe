@@ -21,7 +21,7 @@ tasks:
   build:
     desc: Build RDB (release) binary
     cmds:
-    - npx tauri build
+    - npx tauri build {{.CLI_ARGS}}
 
   dev-js:
     cmds:
@@ -29,8 +29,8 @@ tasks:
 
   build-js:
     cmds:
-    - node scripts/verifyI18n.cjs
-    - npx tsc && npx vite build
+    # - node scripts/verifyI18n.cjs
+    - npx vite build
 
   ts-rs:
     desc: Generate TypeScript bindings
@@ -52,27 +52,28 @@ tasks:
     - npx jest
 
   check:
-    desc: Check for linting and formatting issues
+    desc: Check for linting and formatting issues in TS code
     aliases: [lint]
     cmds:
-    # - task: eslint
-    #   vars:
-    #     ESLINT_ARGS: ""
+    - task: eslint
+      vars:
+        ESLINT_ARGS: ""
     - task: prettier
       vars:
         PRETTIER_ARGS: --check
+    - npx tsc
   
   fix:
-    desc: Fix linting and formatting issues in web client
+    desc: Fix linting and formatting issues in TS code
     cmds:
     - task: prettier
       vars:
         PRETTIER_ARGS: --write
-    # - task: eslint
-    #   vars:
-    #     ESLINT_ARGS: --fix
-  #
 
   prettier:
     cmds:
     - npx prettier "./**/*.{ts,tsx,json,js,jsx,cjs,css}" {{.PRETTIER_ARGS}}
+
+  eslint:
+    cmds:
+    - npx eslint src --report-unused-disable-directives --max-warnings 0 --cache {{.ESLINT_ARGS}}

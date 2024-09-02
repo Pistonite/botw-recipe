@@ -25,3 +25,7 @@ tasks:
     desc: Test database reading implementation
     cmds:
     - cargo run --release --bin test-read --quiet
+
+  build:
+    cmds:
+    - cargo build --all-targets

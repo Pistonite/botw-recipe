@@ -1,44 +1,44 @@
 {
-  "build": {
-    "beforeDevCommand": "task dev-js",
-    "beforeBuildCommand": "task build-js",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
-  },
-  "package": {
-    "productName": "botwrdb",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      }
+    "build": {
+        "beforeDevCommand": "task dev-js",
+        "beforeBuildCommand": "task build-js",
+        "devPath": "http://localhost:1420",
+        "distDir": "../dist"
     },
-    "windows": [
-      {
-        "title": "Loading...",
-        "url": "index-tauri.html",
-        "width": 1400,
-        "height": 900
-      }
-    ],
-    "security": {
-      "csp": null
+    "package": {
+        "productName": "botwrdb",
+        "version": "0.1.0"
     },
-    "bundle": {
-      "active": false,
-      "targets": "all",
-      "identifier": "com.piston.botwrdb",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ]
+    "tauri": {
+        "allowlist": {
+            "all": false,
+            "shell": {
+                "all": false,
+                "open": true
+            }
+        },
+        "windows": [
+            {
+                "title": "Loading...",
+                "url": "index-tauri.html",
+                "width": 1400,
+                "height": 900
+            }
+        ],
+        "security": {
+            "csp": null
+        },
+        "bundle": {
+            "active": false,
+            "targets": "all",
+            "identifier": "com.piston.botwrdb",
+            "icon": [
+                "icons/32x32.png",
+                "icons/128x128.png",
+                "icons/128x128@2x.png",
+                "icons/icon.icns",
+                "icons/icon.ico"
+            ]
+        }
     }
-  }
 }

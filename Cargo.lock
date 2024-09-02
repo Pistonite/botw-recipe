@@ -218,6 +218,7 @@ name = "botw-recipe-data"
 version = "0.0.0"
 dependencies = [
  "base16ct",
+ "derivative",
  "derive_deref",
  "enum-map",
  "fs2",

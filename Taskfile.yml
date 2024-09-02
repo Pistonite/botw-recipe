@@ -27,23 +27,17 @@ tasks:
     cmds:
     - python main.py {{.CLI_ARGS}}
 
+
   check:
-    desc: Check for issues
-    deps:
-    - check:rs
-    #- check:ts
-
-
-  check:rs:
     vars:
-      CLIPPY_FLAGS: -D warnings -D clippy::todo
+      CLIPPY_FLAGS: -D warnings -D clippy::todo -A clippy::comparison-chain
     cmds:
     - cargo clippy --package botw-recipe-data --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-dump-emulate --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-database --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo fmt --check
 
-  fix:rs:
+  fix:
     desc: Fix code issues in .rs
     cmds:
     - cargo fmt --all

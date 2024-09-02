@@ -6,13 +6,13 @@ import type { State } from "./store.ts";
 
 type SearchSlice = {
     /** Filter to use when searching */
-    filter: SearchFilter,
+    filter: SearchFilter;
     /** -1 = not started/done, 0-100 = in progress*/
-    searchProgress: number,
+    searchProgress: number;
     /** -1 = not searched, >= 0 = number of results */
-    searchResultCount: number,
-    searchDurationSeconds: string,
-}
+    searchResultCount: number;
+    searchDurationSeconds: string;
+};
 
 const initialState: SearchSlice = {
     filter: {
@@ -38,15 +38,21 @@ const searchSlice = createSlice({
         setSearchMaxValue: (state, action: PayloadAction<number>) => {
             state.filter.maxValue = action.payload;
         },
-        setSearchModifiers: (state, action: PayloadAction<{
-            include: WeaponModifierSet,
-            exclude: WeaponModifierSet,
-        }>) => {
+        setSearchModifiers: (
+            state,
+            action: PayloadAction<{
+                include: WeaponModifierSet;
+                exclude: WeaponModifierSet;
+            }>,
+        ) => {
             const { include, exclude } = action.payload;
             state.filter.includesModifier = include;
             state.filter.excludesModifier = exclude;
         },
-        setSearchExcludesModifier: (state, action: PayloadAction<WeaponModifierSet>) => {
+        setSearchExcludesModifier: (
+            state,
+            action: PayloadAction<WeaponModifierSet>,
+        ) => {
             state.filter.excludesModifier = action.payload;
         },
         setSearchIncludeCritRngHp: (state, action: PayloadAction<boolean>) => {
@@ -65,23 +71,26 @@ const searchSlice = createSlice({
                 state.searchProgress = action.payload;
             }
         },
-        finishSearch: (state, action: PayloadAction<Stats & { duration: string }>) => {
+        finishSearch: (
+            state,
+            action: PayloadAction<Stats & { duration: string }>,
+        ) => {
             state.searchProgress = -1;
             state.searchResultCount = action.payload.foundCount;
             state.searchDurationSeconds = action.payload.duration;
-        }
+        },
     },
 });
 
-export const { 
+export const {
     setSearchMinValue,
     setSearchMaxValue,
     setSearchModifiers,
     setSearchIncludeCritRngHp,
     setSearchIncludePeOnly,
-    startSearch, 
+    startSearch,
     updateSearchProgress,
-    finishSearch 
+    finishSearch,
 } = searchSlice.actions;
 export const searchReducer = searchSlice.reducer;
 
@@ -97,7 +106,8 @@ export const getSearchMessage = createSelector(
     [
         (state: State) => state.search.searchProgress,
         (state: State) => state.search.searchResultCount,
-        (state: State) => state.search.searchDurationSeconds],
+        (state: State) => state.search.searchDurationSeconds,
+    ],
     (progress, count, seconds) => {
         if (progress >= 0) {
             if (progress >= 100) {
@@ -109,5 +119,5 @@ export const getSearchMessage = createSelector(
             return { id: "", values: {} };
         }
         return { id: "search.result", values: { count, seconds } };
-    });
-
+    },
+);

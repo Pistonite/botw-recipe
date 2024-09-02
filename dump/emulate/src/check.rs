@@ -150,7 +150,7 @@ impl Cache {
         let cache_path = Path::new("cache.json");
         let v: Vec<String> = self.good.into_iter().collect();
         let s = serde_json::to_string_pretty(&v)?;
-        std::fs::write(&cache_path, s)?;
+        std::fs::write(cache_path, s)?;
         Ok(())
     }
 }
@@ -241,7 +241,7 @@ impl Check {
         println!("{}", message);
         let badge_str = serde_json::to_string(&badge)?;
         let badge_path = Path::new("badge.json");
-        std::fs::write(&badge_path, badge_str)?;
+        std::fs::write(badge_path, badge_str)?;
         println!("saved badge to {}", badge_path.display());
         Ok(())
     }
@@ -349,16 +349,14 @@ impl Check {
                         label,
                         "----- deleted chunk {i}"
                     );
-                } else {
-                    if !options.silent {
-                        print_status!(
-                            checked,
-                            rdata::CHUNK_COUNT,
-                            label,
-                            "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
-                            meta_file_size
-                        );
-                    }
+                } else if !options.silent {
+                    print_status!(
+                        checked,
+                        rdata::CHUNK_COUNT,
+                        label,
+                        "Chunk {i}: wrong file size. expected: {chunk_file_size}, actual: {}",
+                        meta_file_size
+                    );
                 }
                 continue;
             }
@@ -492,6 +490,8 @@ impl Check {
                     if !self.options.silent {
                         print_status!(checked, total, label, "Chunk {i} failed: {err}");
                     }
+
+                    #[allow(clippy::single_match)]
                     match err {
                         Error::Mismatch(record, data_e, data_c, matched_count) => {
                             matched += matched_count;
@@ -517,10 +517,10 @@ impl Check {
             println!();
             println!("mismatches found");
             let errors = serde_json::to_string_pretty(&errors_to_emit).unwrap();
-            std::fs::write(&errors_path, errors)?;
+            std::fs::write(errors_path, errors)?;
         } else {
             if errors_path.exists() {
-                std::fs::remove_file(&errors_path)?;
+                std::fs::remove_file(errors_path)?;
             }
             println!();
             println!("everything matched");
@@ -553,7 +553,7 @@ enum Error {
     #[error("!! serialization error")]
     Json(#[from] serde_json::Error),
     #[error("!! io error reading chunk")]
-    IoError(#[from] io::Error),
+    IO(#[from] io::Error),
     #[error("!! invalid record at {0}: {1:?}")]
     InvalidRecord(usize, CookDataInvalidReason, CookData),
     #[error("!! first mismatch at {0}")]

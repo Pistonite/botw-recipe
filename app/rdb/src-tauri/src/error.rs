@@ -43,6 +43,7 @@ impl<T: Serialize, E: Into<Error>> From<Result<T, E>> for ResultInterop<T> {
 #[derive(Debug, Clone, thiserror::Error, Serialize, TS)]
 #[ts(export)]
 #[serde(tag = "type", content = "data")]
+#[allow(clippy::enum_variant_names)] //, reason="readability from TypeScript")]
 pub enum Error {
     #[error("io error: {0}")]
     IOError(String),
@@ -57,8 +58,6 @@ pub enum Error {
     DatabaseError(#[from] rdata::db::Error),
     #[error("no search result found. Please search first")]
     MissingSearchResult,
-    // #[error("invalid data detected while reading search result. Please search again.")]
-    // InvalidSearchResult,
     #[error("{0}")]
     Generic(String),
 }
