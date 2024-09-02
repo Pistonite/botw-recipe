@@ -9,6 +9,7 @@ import {
     useContext,
     useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 import {
     Button,
     Dialog,
@@ -35,8 +36,21 @@ export type AlertFn = (payload: AlertPayload) => Promise<number>;
 const AlertContext = createContext<AlertFn>(async () => 0);
 
 export const useAlert = () => useContext(AlertContext);
+export const useConfirm = (localizedMessage: string) => {
+    const { t } = useTranslation();
+    const alert = useAlert();
+    return useCallback(async () => {
+        const confirmAction = await alert({
+            title: t("confirm.title"),
+            message: localizedMessage,
+            actions: [t("confirm.button.no"), t("confirm.button.yes")],
+        });
+        return confirmAction === 1;
+    }, [t, alert, localizedMessage]);
+};
 
 export const AlertProvider: React.FC<PropsWithChildren> = ({ children }) => {
+    const [open, setOpen] = useState(false);
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
     const [actions, setActions] = useState<string[]>([]);
@@ -47,6 +61,7 @@ export const AlertProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const alertFn: AlertFn = useCallback(
         ({ title, message, actions }: AlertPayload) => {
             return new Promise<number>((resolve) => {
+                setOpen(true);
                 setTitle(title);
                 setMessage(message);
                 setActions(actions);
@@ -62,10 +77,10 @@ export const AlertProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
             <Dialog
                 modalType="alert"
-                open={!!title}
+                open={open}
                 onOpenChange={(_, data) => {
                     if (!data.open) {
-                        setTitle("");
+                        setOpen(false);
                     }
                 }}
             >
@@ -86,8 +101,10 @@ export const AlertProvider: React.FC<PropsWithChildren> = ({ children }) => {
                                                 : "secondary"
                                         }
                                         onClick={() => {
-                                            setTitle("");
-                                            resolve?.(index);
+                                            // let resolve happen after UI updates
+                                            setTimeout(() => {
+                                                resolve?.(index);
+                                            }, 0);
                                         }}
                                     >
                                         {action}

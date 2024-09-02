@@ -1,7 +1,7 @@
 // @ts-check
 
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
 
 function overrideRule(configs, overrides) {
     if (Array.isArray(configs)) {
@@ -21,14 +21,18 @@ function overrideRule(configs, overrides) {
 }
 
 const config = tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.strict,
+    eslint.configs.recommended,
+    ...tseslint.configs.strict,
+    {
+        rules: {
+            "@typescript-eslint/consistent-type-imports": "warn",
+        },
+    },
 );
 
 const overrides = {
     // typescript has coverage already
     "@typescript-eslint/no-unused-vars": "off",
 };
-
 
 export default overrideRule(config, overrides);

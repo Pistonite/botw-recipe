@@ -6,11 +6,12 @@ import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 import { App } from "./App";
 
 import { AlertProvider } from "components/AlertProvider.tsx";
-import { Host } from "host/Host.ts";
+import type { Host } from "host/Host.ts";
 import { HostContext } from "host/useHost.ts";
 import { initLocale } from "i18n/locales.ts";
 import { store } from "store/store.ts";
 import { updateSearchProgress } from "store/search.ts";
+import { updateFilterProgress } from "store/filter.ts";
 
 /** Boot the app using the provided host */
 export async function boot(host: Host) {
@@ -34,6 +35,10 @@ export async function boot(host: Host) {
         store.dispatch(updateSearchProgress(percentage));
     };
 
-    await host.bind(searchProgressHandler);
+    const filterProgressHandler = (percentage: number) => {
+        store.dispatch(updateFilterProgress(percentage));
+    };
+
+    await host.bind(searchProgressHandler, filterProgressHandler);
     await host.initialize();
 }

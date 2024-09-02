@@ -1,12 +1,13 @@
 import { invoke } from "@tauri-apps/api/tauri";
 import { listen } from "@tauri-apps/api/event";
-import { Result, Void } from "@pistonite/pure/result";
+import type { Result, Void } from "@pistonite/pure/result";
 import { errstr } from "@pistonite/pure/utils";
 
-import { HostBinding } from "host/HostBinding.ts";
-import { HostError, Stats, SearchFilter } from "host/types.ts";
+import type { HostBinding } from "host/HostBinding.ts";
+import type { HostError, Stats, SearchFilter } from "host/types.ts";
 import { Host } from "host/Host.ts";
 import { createGenericError } from "data/ErrorMessage.ts";
+import type { Group } from "data/Group.ts";
 
 import { boot } from "./boot.tsx";
 
@@ -32,32 +33,24 @@ class TauriBinding implements HostBinding {
             return { err: createGenericError(errstr(e)) };
         }
     }
-    async abort(handle: number): Promise<Void<HostError>> {
+    async setInitializedHandler(handler: () => void): Promise<void> {
+        await listen("initialized", handler);
+    }
+    async abortSearch(): Promise<Void<HostError>> {
         try {
-            return await invoke("abort", { handle });
+            return await invoke("abort_search");
         } catch (e) {
             console.error(e);
             return { err: createGenericError(errstr(e)) };
         }
     }
-    async search(filter: SearchFilter): Promise<Result<number[], HostError>> {
+    async search(filter: SearchFilter): Promise<Void<HostError>> {
         try {
             return await invoke("search", { filter });
         } catch (e) {
             console.error(e);
             return { err: createGenericError(errstr(e)) };
         }
-    }
-    // async filterActors(filter: ActorFilter): Promise<Void<string>> {
-    //     try {
-    //         return await invoke("filter_actors", { filter });
-    //     } catch (e) {
-    //         console.error(e);
-    //         return { err: errstr(e) };
-    //     }
-    // }
-    async setInitializedHandler(handler: () => void): Promise<void> {
-        await listen("initialized", handler);
     }
     async setSearchProgressHandler(
         handler: (percentage: number) => void,
@@ -73,9 +66,36 @@ class TauriBinding implements HostBinding {
             handler(payload as Result<Stats, HostError>),
         );
     }
-    // async setFilterCompleteHandler(handler: (result: Result<FilterComplete, string>) => void): Promise<void> {
-    //     await listen("filter-complete", ({payload}) => handler(payload as Result<FilterComplete, string>));
-    // }
+    async abortFilter(): Promise<Void<HostError>> {
+        try {
+            return await invoke("abort_filter");
+        } catch (e) {
+            console.error(e);
+            return { err: createGenericError(errstr(e)) };
+        }
+    }
+    async filter(include: Group[]): Promise<Void<HostError>> {
+        try {
+            return await invoke("filter", { include });
+        } catch (e) {
+            console.error(e);
+            return { err: createGenericError(errstr(e)) };
+        }
+    }
+    async setFilterProgressHandler(
+        handler: (percentage: number) => void,
+    ): Promise<void> {
+        await listen("filter-progress", ({ payload }) =>
+            handler(payload as number),
+        );
+    }
+    async setFilterCompleteHandler(
+        handler: (result: Result<Stats, HostError>) => void,
+    ): Promise<void> {
+        await listen("filter-complete", ({ payload }) =>
+            handler(payload as Result<Stats, HostError>),
+        );
+    }
 }
 
 boot(new Host(new TauriBinding()));

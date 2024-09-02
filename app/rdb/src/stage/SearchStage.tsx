@@ -11,15 +11,17 @@ import {
 } from "@fluentui/react-components";
 import { Info16Regular, Search24Regular } from "@fluentui/react-icons";
 
-import { useAlert } from "components/AlertProvider.tsx";
+import { useAlert, useConfirm } from "components/AlertProvider.tsx";
 import { ModifierSelection } from "components/Modifier.tsx";
 import { StageDivider } from "components/StageDivider.tsx";
 import { StageTitle } from "components/StageTitle.tsx";
+import { StageAction } from "components/StageAction.tsx";
 import { useDispatch, useSelector } from "store/hook.ts";
 import {
     finishSearch,
     getSearchFilter,
     getSearchMessage,
+    getSearchResultCount,
     isSearching,
     setSearchIncludeCritRngHp,
     setSearchIncludePeOnly,
@@ -28,10 +30,10 @@ import {
     setSearchModifiers,
     startSearch,
 } from "store/search.ts";
-import { WeaponModifierSet } from "host/types.ts";
+import { finishFilter, resetFilter } from "store/filter.ts";
+import type { WeaponModifierSet } from "host/types.ts";
 import { useHost } from "host/useHost.ts";
 import { getErrorAlertPayload } from "data/ErrorMessage.ts";
-import { StageAction } from "components/StageAction";
 
 function parseHp(
     value: number | undefined | null,
@@ -54,6 +56,7 @@ export const SearchStage: React.FC = () => {
     const filter = useSelector(getSearchFilter);
     const searchMessage = useSelector(getSearchMessage);
     const isSearchInProgress = useSelector(isSearching);
+    const resultCount = useSelector(getSearchResultCount);
     const [abortInProgress, setAbortInProgress] = useState(false);
     const dispatch = useDispatch();
     const onSelectSearchModifiers = useCallback(
@@ -66,34 +69,35 @@ export const SearchStage: React.FC = () => {
     const alert = useAlert();
 
     const { t } = useTranslation();
+    const confirmAbort = useConfirm(t("confirm.message.search.abort"));
+    const confirmRedo = useConfirm(t("confirm.message.search.redo"));
 
     const searchHandler = useCallback(async () => {
         if (isSearchInProgress) {
             if (abortInProgress) {
                 return;
             }
-            const confirmAction = await alert({
-                title: t("confirm.title"),
-                message: t("confirm.message.search.abort"),
-                actions: [t("confirm.button.no"), t("confirm.button.yes")],
-            });
-            console.log("confirmAction", confirmAction);
-            if (confirmAction === 0) {
-                // no
+            if (!(await confirmAbort())) {
                 return;
             }
-            console.log("sending abort signal");
             setAbortInProgress(true);
             const result = await host.cancelSearch();
+            setAbortInProgress(false);
             if (result.err) {
                 await alert(getErrorAlertPayload(result.err));
             }
             return;
         }
+        if (resultCount > 0) {
+            if (!(await confirmRedo())) {
+                return;
+            }
+        }
         const startTime = performance.now();
         dispatch(startSearch());
-        const result = await host.search(filter);
+        dispatch(resetFilter());
         setAbortInProgress(false);
+        const result = await host.search(filter);
         if (result.err) {
             dispatch(
                 finishSearch({
@@ -117,7 +121,26 @@ export const SearchStage: React.FC = () => {
                 ...result.val,
             }),
         );
-    }, [abortInProgress, isSearchInProgress, filter, host, alert, dispatch, t]);
+        dispatch(
+            finishFilter({
+                duration: elapsed,
+                isFromSearch: true,
+                ...result.val,
+            }),
+        );
+    }, [
+        resultCount,
+        abortInProgress,
+        isSearchInProgress,
+        filter,
+        host,
+        confirmAbort,
+        confirmRedo,
+        setAbortInProgress,
+        alert,
+        dispatch,
+        t,
+    ]);
 
     return (
         <>
@@ -215,7 +238,7 @@ export const SearchStage: React.FC = () => {
             </div>
             <StageAction>
                 <Caption1>
-                    {searchMessage.id &&
+                    {!!searchMessage.id &&
                         t(searchMessage.id, searchMessage.values)}
                 </Caption1>
                 <Button appearance="primary" onClick={searchHandler}>

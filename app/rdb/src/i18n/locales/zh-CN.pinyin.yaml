@@ -1,0 +1,466 @@
+actor.Item_Fruit_D.full: sheng ming liu lian
+actor.Item_Fruit_D.initials: smll
+actor.Item_Fruit_G.full: ye zi
+actor.Item_Fruit_G.initials: yz
+actor.Item_Fruit_A.full: ping guo
+actor.Item_Fruit_A.initials: pg
+actor.Item_Fruit_B.full: cao mei
+actor.Item_Fruit_B.initials: cm
+actor.Item_Fruit_F.full: bing leng mi gua
+actor.Item_Fruit_F.initials: blmg
+actor.Item_Fruit_I.full: nuan nuan cao guo
+actor.Item_Fruit_I.initials: nncg
+actor.Item_Fruit_C.full: su ma shui guo
+actor.Item_Fruit_C.initials: smsg
+actor.Item_Fruit_E.full: su su lian peng
+actor.Item_Fruit_E.initials: sslp
+actor.Item_Fruit_H.full: da jian xiang jiao
+actor.Item_Fruit_H.initials: djxj
+actor.Item_Mushroom_N.full: da ge sheng ming song lu
+actor.Item_Mushroom_N.initials: dgsmsl
+actor.Item_Mushroom_F.full: sheng ming song lu
+actor.Item_Mushroom_F.initials: smsl
+actor.Item_Mushroom_O.full: yi li mo gu
+actor.Item_Mushroom_O.initials: ylmg
+actor.Item_Mushroom_E.full: hai la lu mo gu
+actor.Item_Mushroom_E.initials: hllmg
+actor.Item_Mushroom_A.full: jing li mo gu
+actor.Item_Mushroom_A.initials: jlmg
+actor.Item_Mushroom_B.full: bing leng mo gu
+actor.Item_Mushroom_B.initials: blmg
+actor.Item_Mushroom_C.full: nuan nuan mo gu
+actor.Item_Mushroom_C.initials: nnmg
+actor.Item_Mushroom_H.full: su ma mo gu
+actor.Item_Mushroom_H.initials: smmg
+actor.Item_MushroomGet_D.full: su su mo gu
+actor.Item_MushroomGet_D.initials: ssmg
+actor.Item_Mushroom_L.full: da jian mo gu
+actor.Item_Mushroom_L.initials: djmg
+actor.Item_Mushroom_M.full: kai jia mo gu
+actor.Item_Mushroom_M.initials: kjmg
+actor.Item_Mushroom_J.full: qian xing mo gu
+actor.Item_Mushroom_J.initials: qxmg
+actor.Item_PlantGet_C.full: sheng ming da luo bo
+actor.Item_PlantGet_C.initials: smdlb
+actor.Item_PlantGet_B.full: sheng ming xiao luo bo
+actor.Item_PlantGet_B.initials: smxlb
+actor.Item_PlantGet_Q.full: yi li hu luo bo
+actor.Item_PlantGet_Q.initials: ylhlb
+actor.Item_PlantGet_A.full: hai la lu cao
+actor.Item_PlantGet_A.initials: hllc
+actor.Item_PlantGet_M.full: su su hu luo bo
+actor.Item_PlantGet_M.initials: sshlb
+actor.Item_Fruit_J.full: kai jia nan gua
+actor.Item_Fruit_J.initials: kjng
+actor.Item_PlantGet_E.full: bing leng xiang cao
+actor.Item_PlantGet_E.initials: blxc
+actor.Item_PlantGet_F.full: nuan nuan xiang cao
+actor.Item_PlantGet_F.initials: nnxc
+actor.Item_PlantGet_L.full: su ma xiang cao
+actor.Item_PlantGet_L.initials: smxc
+actor.Item_PlantGet_O.full: su su zi luo lan
+actor.Item_PlantGet_O.initials: sszll
+actor.Item_PlantGet_G.full: da jian cao
+actor.Item_PlantGet_G.initials: djc
+actor.Item_PlantGet_H.full: kai jia cao
+actor.Item_PlantGet_H.initials: kjc
+actor.Item_PlantGet_I.full: qian xing cao
+actor.Item_PlantGet_I.initials: qxc
+actor.Item_PlantGet_J.full: jing mi gong zhu
+actor.Item_PlantGet_J.initials: jmgz
+actor.Item_Meat_11.full: ding ji shou rou
+actor.Item_Meat_11.initials: djsr
+actor.Item_Meat_12.full: ding ji qin rou
+actor.Item_Meat_12.initials: djqr
+actor.Item_Meat_02.full: gao ji shou rou
+actor.Item_Meat_02.initials: gjsr
+actor.Item_Meat_07.full: gao ji qin rou
+actor.Item_Meat_07.initials: gjqr
+actor.Item_Meat_01.full: shou rou
+actor.Item_Meat_01.initials: sr
+actor.Item_Meat_06.full: qin rou
+actor.Item_Meat_06.initials: qr
+actor.BeeHome.full: jing li feng de feng mi
+actor.BeeHome.initials: jlfdfm
+actor.Item_Material_03.full: hai la lu mi
+actor.Item_Material_03.initials: hllm
+actor.Item_Material_04.full: qin dan
+actor.Item_Material_04.initials: qd
+actor.Item_Material_07.full: ta bang ta xiao mai
+actor.Item_Material_07.initials: tbtxm
+actor.Item_Material_05.full: xian nai
+actor.Item_Material_05.initials: xn
+actor.Item_Fruit_K.full: xiang zi
+actor.Item_Fruit_K.initials: xz
+actor.Item_Fruit_L.full: xiao niao de shu guo
+actor.Item_Fruit_L.initials: xndsg
+actor.Item_Material_01.full: zhe tang
+actor.Item_Material_01.initials: zt
+actor.Item_Material_06.full: shan yang huang you
+actor.Item_Material_06.initials: syhy
+actor.Item_Material_02.full: gu long de tiao wei fen
+actor.Item_Material_02.initials: gldtwf
+actor.Item_Ore_H.full: yan yan
+actor.Item_Ore_H.initials: yy
+actor.Item_Ore_J.full: xing xing sui pian
+actor.Item_Ore_J.initials: xxsp
+actor.Item_Enemy_38.full: ao er long de lin pian
+actor.Item_Enemy_38.initials: aeldlp
+actor.Item_Enemy_39.full: ao er long de zhua zi
+actor.Item_Enemy_39.initials: aeldzz
+actor.Item_Enemy_47.full: ao er long de ya chi sui pian
+actor.Item_Enemy_47.initials: aeldycsp
+actor.Item_Enemy_48.full: ao er long de ji jiao sui pian
+actor.Item_Enemy_48.initials: aeldjjsp
+actor.Item_Enemy_49.full: nie er long de lin pian
+actor.Item_Enemy_49.initials: neldlp
+actor.Item_Enemy_50.full: nie er long de zhua zi
+actor.Item_Enemy_50.initials: neldzz
+actor.Item_Enemy_51.full: nie er long de ya chi sui pian
+actor.Item_Enemy_51.initials: neldycsp
+actor.Item_Enemy_52.full: nie er long de ji jiao sui pian
+actor.Item_Enemy_52.initials: neldjjsp
+actor.Item_Enemy_53.full: fei luo long de lin pian
+actor.Item_Enemy_53.initials: flldlp
+actor.Item_Enemy_54.full: fei luo long de zhua zi
+actor.Item_Enemy_54.initials: flldzz
+actor.Item_Enemy_55.full: fei luo long de ya chi sui pian
+actor.Item_Enemy_55.initials: flldycsp
+actor.Item_Enemy_56.full: fei luo long de ji jiao sui pian
+actor.Item_Enemy_56.initials: flldjjsp
+actor.Item_FishGet_I.full: sheng ming san wen yu
+actor.Item_FishGet_I.initials: smswy
+actor.Item_FishGet_K.full: sheng ming hai luo
+actor.Item_FishGet_K.initials: smhl
+actor.Item_FishGet_B.full: sheng ming lu yu
+actor.Item_FishGet_B.initials: smly
+actor.Item_FishGet_A.full: hai la lu lu yu
+actor.Item_FishGet_A.initials: hllly
+actor.Item_FishGet_L.full: jing li lu yu
+actor.Item_FishGet_L.initials: jlly
+actor.Item_FishGet_C.full: bing leng zun yu
+actor.Item_FishGet_C.initials: blzy
+actor.Item_FishGet_J.full: nuan nuan zun yu
+actor.Item_FishGet_J.initials: nnzy
+actor.Item_FishGet_D.full: su ma zun yu
+actor.Item_FishGet_D.initials: smzy
+actor.Item_FishGet_X.full: qian xing zun yu
+actor.Item_FishGet_X.initials: qxzy
+actor.Item_FishGet_E.full: da jian li yu
+actor.Item_FishGet_E.initials: djly
+actor.Item_FishGet_H.full: kai jia li yu
+actor.Item_FishGet_H.initials: kjly
+actor.Item_FishGet_Z.full: san se li yu
+actor.Item_FishGet_Z.initials: ssly
+actor.Item_FishGet_F.full: da jian diao yu
+actor.Item_FishGet_F.initials: djdy
+actor.Item_FishGet_G.full: kai jia diao yu
+actor.Item_FishGet_G.initials: kjdy
+actor.Item_FishGet_M.full: qian xing tian luo
+actor.Item_FishGet_M.initials: qxtl
+actor.Item_InsectGet_K.full: da jian pang xie
+actor.Item_InsectGet_K.initials: djpx
+actor.Item_InsectGet_O.full: kai jia pang xie
+actor.Item_InsectGet_O.initials: kjpx
+actor.Item_InsectGet_Z.full: jing li pang xie
+actor.Item_InsectGet_Z.initials: jlpx
+actor.Animal_Insect_F.full: jing ling
+actor.Animal_Insect_F.initials: jl
+actor.Animal_Insect_N.full: bing leng feng die
+actor.Animal_Insect_N.initials: blfd
+actor.Animal_Insect_Q.full: nuan nuan feng die
+actor.Animal_Insect_Q.initials: nnfd
+actor.Animal_Insect_R.full: su ma feng die
+actor.Animal_Insect_R.initials: smfd
+actor.Animal_Insect_AB.full: nai huo feng die
+actor.Animal_Insect_AB.initials: nhfd
+actor.Animal_Insect_C.full: bing leng qing ting
+actor.Animal_Insect_C.initials: blqt
+actor.Animal_Insect_T.full: nuan nuan qing ting
+actor.Animal_Insect_T.initials: nnqt
+actor.Animal_Insect_I.full: su ma qing ting
+actor.Animal_Insect_I.initials: smqt
+actor.Animal_Insect_H.full: jing li zha meng
+actor.Animal_Insect_H.initials: jlzm
+actor.Animal_Insect_G.full: da jian du jiao xian
+actor.Animal_Insect_G.initials: djdjx
+actor.Animal_Insect_P.full: kai jia du jiao xian
+actor.Animal_Insect_P.initials: kjdjx
+actor.Animal_Insect_AA.full: jing li du jiao xian
+actor.Animal_Insect_AA.initials: jldjx
+actor.Animal_Insect_E.full: jing jing ying huo chong
+actor.Animal_Insect_E.initials: jjyhc
+actor.Animal_Insect_A.full: su su wa
+actor.Animal_Insect_A.initials: ssw
+actor.Animal_Insect_B.full: yi li wa
+actor.Animal_Insect_B.initials: ylw
+actor.Animal_Insect_S.full: su su xi
+actor.Animal_Insect_S.initials: ssx
+actor.Animal_Insect_M.full: sheng ming xi
+actor.Animal_Insect_M.initials: smx
+actor.Animal_Insect_X.full: nai huo xi
+actor.Animal_Insect_X.initials: nhx
+actor.Item_Ore_I.full: da huo shi
+actor.Item_Ore_I.initials: dhs
+actor.Item_Ore_F.full: hu po
+actor.Item_Ore_F.initials: hp
+actor.Item_Ore_E.full: dan bai shi
+actor.Item_Ore_E.initials: dbs
+actor.Item_Ore_G.full: ye guang shi
+actor.Item_Ore_G.initials: ygs
+actor.Item_Ore_D.full: huang yu
+actor.Item_Ore_D.initials: hy
+actor.Item_Ore_B.full: hong bao shi
+actor.Item_Ore_B.initials: hbs
+actor.Item_Ore_C.full: lan bao shi
+actor.Item_Ore_C.initials: lbs
+actor.Item_Ore_A.full: zuan shi
+actor.Item_Ore_A.initials: zs
+actor.Item_Enemy_00.full: bo ke bu lin de ji jiao
+actor.Item_Enemy_00.initials: bkbldjj
+actor.Item_Enemy_01.full: bo ke bu lin de ya chi
+actor.Item_Enemy_01.initials: bkbldyc
+actor.Item_Enemy_02.full: bo ke bu lin de gan zang
+actor.Item_Enemy_02.initials: bkbldgz
+actor.Item_Enemy_06.full: mo li bu lin de ji jiao
+actor.Item_Enemy_06.initials: mlbldjj
+actor.Item_Enemy_07.full: mo li bu lin de ya chi
+actor.Item_Enemy_07.initials: mlbldyc
+actor.Item_Enemy_08.full: mo li bu lin de gan zang
+actor.Item_Enemy_08.initials: mlbldgz
+actor.Item_Enemy_03.full: xi yi zhan shi de ji jiao
+actor.Item_Enemy_03.initials: xyzsdjj
+actor.Item_Enemy_04.full: xi yi zhan shi de zhua zi
+actor.Item_Enemy_04.initials: xyzsdzz
+actor.Item_Enemy_05.full: xi yi zhan shi de wei ba
+actor.Item_Enemy_05.initials: xyzsdwb
+actor.Item_Enemy_42.full: xi yi zhan shi de lan se wei ba
+actor.Item_Enemy_42.initials: xyzsdlswb
+actor.Item_Enemy_41.full: xi yi zhan shi de hong se wei ba
+actor.Item_Enemy_41.initials: xyzsdhswb
+actor.Item_Enemy_43.full: xi yi zhan shi de huang se wei ba
+actor.Item_Enemy_43.initials: xyzsdhswb
+actor.Item_Enemy_12.full: lai ni er de ji jiao
+actor.Item_Enemy_12.initials: lnedjj
+actor.Item_Enemy_13.full: lai ni er de ti zi
+actor.Item_Enemy_13.initials: lnedtz
+actor.Item_Enemy_14.full: lai ni er de gan zang
+actor.Item_Enemy_14.initials: lnedgz
+actor.Item_Enemy_40.full: qiu qiu jiao
+actor.Item_Enemy_40.initials: qqj
+actor.Item_Enemy_17.full: bai se qiu qiu jiao
+actor.Item_Enemy_17.initials: bsqqj
+actor.Item_Enemy_15.full: hong se qiu qiu jiao
+actor.Item_Enemy_15.initials: hsqqj
+actor.Item_Enemy_16.full: huang se qiu qiu jiao
+actor.Item_Enemy_16.initials: hsqqj
+actor.Item_Enemy_18.full: bian fu de chi bang
+actor.Item_Enemy_18.initials: bfdcb
+actor.Item_Enemy_46.full: bing bian fu de chi bang
+actor.Item_Enemy_46.initials: bbfdcb
+actor.Item_Enemy_44.full: huo bian fu de chi bang
+actor.Item_Enemy_44.initials: hbfdcb
+actor.Item_Enemy_45.full: dian bian fu de chi bang
+actor.Item_Enemy_45.initials: dbfdcb
+actor.Item_Enemy_19.full: bian fu de yan zhu
+actor.Item_Enemy_19.initials: bfdyz
+actor.Item_Enemy_20.full: ba zhua guai de jiao
+actor.Item_Enemy_20.initials: bzgdj
+actor.Item_Enemy_21.full: ba zhua guai de yan zhu
+actor.Item_Enemy_21.initials: bzgdyz
+actor.Item_Enemy_57.full: ba zhua guai qi qiu
+actor.Item_Enemy_57.initials: bzgqq
+actor.Item_Enemy_24.full: mo er de la ji ke de bei qi
+actor.Item_Enemy_24.initials: medljkdbq
+actor.Item_Enemy_25.full: mo er de la ji ke de gan zang
+actor.Item_Enemy_25.initials: medljkdgz
+actor.Item_Enemy_32.full: xi nuo ke si de zhua zi
+actor.Item_Enemy_32.initials: xnksdzz
+actor.Item_Enemy_33.full: xi nuo ke si de ya chi
+actor.Item_Enemy_33.initials: xnksdyc
+actor.Item_Enemy_34.full: xi nuo ke si de gan zang
+actor.Item_Enemy_34.initials: xnksdgz
+actor.Item_Enemy_27.full: gu dai luo si
+actor.Item_Enemy_27.initials: gdls
+actor.Item_Enemy_28.full: gu dai tan huang
+actor.Item_Enemy_28.initials: gdth
+actor.Item_Enemy_26.full: gu dai chi lun
+actor.Item_Enemy_26.initials: gdcl
+actor.Item_Enemy_29.full: gu dai chuan dong zhou
+actor.Item_Enemy_29.initials: gdcdz
+actor.Item_Enemy_30.full: gu dai he xin
+actor.Item_Enemy_30.initials: gdhx
+actor.Item_Enemy_31.full: ju da de gu dai he xin
+actor.Item_Enemy_31.initials: jddgdhx
+actor.Obj_FireWoodBundle.full: mu chai kun
+actor.Obj_FireWoodBundle.initials: mck
+actor.Item_Roast_03.full: kao ping guo
+actor.Item_Roast_03.initials: kpg
+actor.Item_Roast_10.full: kao ye zi
+actor.Item_Roast_10.initials: kyz
+actor.Item_Roast_07.full: kao cao mei
+actor.Item_Roast_07.initials: kcm
+actor.Item_Roast_48.full: kao xiang zi
+actor.Item_Roast_48.initials: kxz
+actor.Item_Roast_52.full: kao shu guo
+actor.Item_Roast_52.initials: ksg
+actor.Item_Roast_09.full: kao sheng ming liu lian
+actor.Item_Roast_09.initials: ksmll
+actor.Item_Roast_12.full: kao bing leng mi gua
+actor.Item_Roast_12.initials: kblmg
+actor.Item_Roast_13.full: kao nuan nuan cao guo
+actor.Item_Roast_13.initials: knncg
+actor.Item_Roast_08.full: kao su ma shui guo
+actor.Item_Roast_08.initials: ksmsg
+actor.Item_Roast_16.full: kao su su lian peng
+actor.Item_Roast_16.initials: ksslp
+actor.Item_Roast_11.full: kao da jian xiang jiao
+actor.Item_Roast_11.initials: kdjxj
+actor.Item_Roast_06.full: kao hai la lu mo gu
+actor.Item_Roast_06.initials: khllmg
+actor.Item_Roast_04.full: kao jing li mo gu
+actor.Item_Roast_04.initials: kjlmg
+actor.Item_Roast_53.full: kao yi li mo gu
+actor.Item_Roast_53.initials: kylmg
+actor.Item_Roast_05.full: kao sheng ming song lu
+actor.Item_Roast_05.initials: ksmsl
+actor.Item_Roast_49.full: kao da ge sheng ming song lu
+actor.Item_Roast_49.initials: kdgsmsl
+actor.Item_Roast_31.full: kao bing leng mo gu
+actor.Item_Roast_31.initials: kblmg
+actor.Item_Roast_32.full: kao nuan nuan mo gu
+actor.Item_Roast_32.initials: knnmg
+actor.Item_Roast_33.full: kao su ma mo gu
+actor.Item_Roast_33.initials: ksmmg
+actor.Item_Roast_36.full: kao su su mo gu
+actor.Item_Roast_36.initials: kssmg
+actor.Item_Roast_37.full: kao da jian mo gu
+actor.Item_Roast_37.initials: kdjmg
+actor.Item_Roast_38.full: kao kai jia mo gu
+actor.Item_Roast_38.initials: kkjmg
+actor.Item_Roast_39.full: kao qian xing mo gu
+actor.Item_Roast_39.initials: kqxmg
+actor.Item_Roast_18.full: kao xiao luo bo
+actor.Item_Roast_18.initials: kxlb
+actor.Item_Roast_19.full: kao da luo bo
+actor.Item_Roast_19.initials: kdlb
+actor.Item_Roast_24.full: kao su su hu luo bo
+actor.Item_Roast_24.initials: ksshlb
+actor.Item_Roast_50.full: kao yi li hu luo bo
+actor.Item_Roast_50.initials: kylhlb
+actor.Item_Roast_15.full: kao kai jia nan gua
+actor.Item_Roast_15.initials: kkjng
+actor.Item_Roast_27.full: kao da jian cao
+actor.Item_Roast_27.initials: kdjc
+actor.Item_Roast_28.full: kao kai jia cao
+actor.Item_Roast_28.initials: kkjc
+actor.Item_Roast_51.full: kao dan
+actor.Item_Roast_51.initials: kd
+actor.Item_Boiled_01.full: zhu dan
+actor.Item_Boiled_01.initials: zd
+actor.Item_Roast_01.full: kao shou rou
+actor.Item_Roast_01.initials: ksr
+actor.Item_Roast_40.full: kao gao ji shou rou
+actor.Item_Roast_40.initials: kgjsr
+actor.Item_Roast_45.full: kao ding ji shou rou
+actor.Item_Roast_45.initials: kdjsr
+actor.Item_Roast_02.full: kao qin rou
+actor.Item_Roast_02.initials: kqr
+actor.Item_Roast_41.full: kao gao ji qin rou
+actor.Item_Roast_41.initials: kgjqr
+actor.Item_Roast_46.full: kao ding ji qin rou
+actor.Item_Roast_46.initials: kdjqr
+actor.Item_RoastFish_01.full: kao lu yu
+actor.Item_RoastFish_01.initials: kly
+actor.Item_RoastFish_02.full: kao sheng ming lu yu
+actor.Item_RoastFish_02.initials: ksmly
+actor.Item_RoastFish_04.full: kao sheng ming san wen yu
+actor.Item_RoastFish_04.initials: ksmswy
+actor.Item_RoastFish_03.full: kao zun yu
+actor.Item_RoastFish_03.initials: kzy
+actor.Item_RoastFish_07.full: kao li yu
+actor.Item_RoastFish_07.initials: kly
+actor.Item_RoastFish_09.full: kao diao yu
+actor.Item_RoastFish_09.initials: kdy
+actor.Item_RoastFish_13.full: kao qian xing tian luo
+actor.Item_RoastFish_13.initials: kqxtl
+actor.Item_RoastFish_11.full: kao sheng ming hai luo
+actor.Item_RoastFish_11.initials: ksmhl
+actor.Item_RoastFish_15.full: kao pang xie
+actor.Item_RoastFish_15.initials: kpx
+actor.Item_Chilled_01.full: bing dong shou rou
+actor.Item_Chilled_01.initials: bdsr
+actor.Item_Chilled_02.full: gao ji bing dong shou rou
+actor.Item_Chilled_02.initials: gjbdsr
+actor.Item_Chilled_03.full: ding ji bing dong shou rou
+actor.Item_Chilled_03.initials: djbdsr
+actor.Item_Chilled_04.full: bing dong qin rou
+actor.Item_Chilled_04.initials: bdqr
+actor.Item_Chilled_05.full: gao ji bing dong qin rou
+actor.Item_Chilled_05.initials: gjbdqr
+actor.Item_Chilled_06.full: ding ji bing dong qin rou
+actor.Item_Chilled_06.initials: djbdqr
+actor.Item_ChilledFish_01.full: bing dong lu yu
+actor.Item_ChilledFish_01.initials: bdly
+actor.Item_ChilledFish_06.full: bing dong sheng ming lu yu
+actor.Item_ChilledFish_06.initials: bdsmly
+actor.Item_ChilledFish_02.full: bing dong sheng ming san wen yu
+actor.Item_ChilledFish_02.initials: bdsmswy
+actor.Item_ChilledFish_03.full: bing dong zun yu
+actor.Item_ChilledFish_03.initials: bdzy
+actor.Item_ChilledFish_04.full: bing dong li yu
+actor.Item_ChilledFish_04.initials: bdly
+actor.Item_ChilledFish_05.full: bing dong diao yu
+actor.Item_ChilledFish_05.initials: bddy
+actor.Item_ChilledFish_07.full: bing dong pang xie
+actor.Item_ChilledFish_07.initials: bdpx
+actor.Item_ChilledFish_08.full: bing dong tian luo
+actor.Item_ChilledFish_08.initials: bdtl
+actor.Item_ChilledFish_09.full: bing dong sheng ming hai luo
+actor.Item_ChilledFish_09.initials: bdsmhl
+actor.Obj_DRStone_Get.full: xi ka zhi shi
+actor.Obj_DRStone_Get.initials: xkzs
+actor.dyecolor_00.full: dyecolor_00
+actor.dyecolor_00.initials: dyecolor_00
+actor.dyecolor_01.full: lan se
+actor.dyecolor_01.initials: ls
+actor.dyecolor_02.full: hong se
+actor.dyecolor_02.initials: hs
+actor.dyecolor_03.full: huang se
+actor.dyecolor_03.initials: hs
+actor.dyecolor_04.full: bai se
+actor.dyecolor_04.initials: bs
+actor.dyecolor_05.full: hei se
+actor.dyecolor_05.initials: hs
+actor.dyecolor_06.full: zi se
+actor.dyecolor_06.initials: zs
+actor.dyecolor_07.full: lv se
+actor.dyecolor_07.initials: ls
+actor.dyecolor_08.full: dan lan se
+actor.dyecolor_08.initials: dls
+actor.dyecolor_09.full: shen lan se
+actor.dyecolor_09.initials: sls
+actor.dyecolor_10.full: cheng se
+actor.dyecolor_10.initials: cs
+actor.dyecolor_11.full: tao hong se
+actor.dyecolor_11.initials: ths
+actor.dyecolor_12.full: shen hong se
+actor.dyecolor_12.initials: shs
+actor.dyecolor_13.full: dan huang se
+actor.dyecolor_13.initials: dhs
+actor.dyecolor_14.full: cha se
+actor.dyecolor_14.initials: cs
+actor.dyecolor_15.full: hui se
+actor.dyecolor_15.initials: hs
+actor.Obj_Photo_Animal.full: sheng wu de zhao pian
+actor.Obj_Photo_Animal.initials: swdzp
+actor.Obj_Photo_BossEnemy.full: qiang di de zhao pian
+actor.Obj_Photo_BossEnemy.initials: qddzp
+actor.Obj_Photo_Enemy.full: guai wu de zhao pian
+actor.Obj_Photo_Enemy.initials: gwdzp
+actor.Obj_Photo_Material.full: cai liao de zhao pian
+actor.Obj_Photo_Material.initials: cldzp
+actor.Obj_Photo_Other.full: bao wu de zhao pian
+actor.Obj_Photo_Other.initials: bwdzp
+actor.Obj_Photo_Weapon.full: wu qi de zhao pian
+actor.Obj_Photo_Weapon.initials: wqdzp

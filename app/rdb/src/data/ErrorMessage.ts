@@ -37,10 +37,14 @@ export const getErrorMessage = (error: HostError): string => {
             return i18n.t("error.message.poison", { message: error.data });
         case "ExecutorUnavailable":
             return i18n.t("error.message.executor.unavailable");
+        case "Aborted":
+            return i18n.t("error.message.aborted");
         case "DatabaseError":
             return getDatabaseErrorMessage(error.data);
         case "Generic":
             return i18n.t("error.generic", { message: error.data });
+        case "MissingSearchResult":
+            return getInternalErrorMessage(type);
         default:
             return getUnknownErrorMessage(type);
     }

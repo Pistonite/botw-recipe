@@ -19,36 +19,50 @@ search.modifier.option.ignore: 忽略
 search.button: 搜索
 search.button.cancel: 取消
 search.progress: "搜索中 ({{progress}}%)"
-search.stat_group: 统计材料中
+search.progress.initial: "搜索中..."
+search.progress.stat_group: 统计材料中
 search.result: "共找到{{count}}种组合，用时{{seconds}}秒"
 
 filter.title: 过滤物品
 filter.desc: 根据您所需要的材料来过滤找到的组合
 filter.list.title: 材料列表
 filter.list.desc:
-  请在以下列表中循序渐进地排除不需要的材料，直到结果数量足够低，可以进一步查看每一个结果。
+  请在以下列表中循序渐进地排除不想要的材料，直到结果数量足够低，可以进一步查看每一个结果。
   用星星按钮可以标记该材料。被标记物品在显示结果时将优先展示。
-filter.search.placeholder: "搜索材料，支持拼音和拼音首字母"
+filter.search.placeholder: "搜索支持拼音和首字母，如\"萝卜\"，\"luo bo\"或\"lb\""
 filter.search.desc: 由于所有重要道具料理用途相同，请使用“希卡之石”代替。不支持怪物精华。
 filter.hide_excluded: 仅显示结果中包含的材料
-filter.selection.actor: 材料
+filter.selection.actor: 材料 ({{count}})
 filter.selection.option: 选项
 filter.selection.option.favorite: 标记
 filter.selection.option.unfavorite: 去除标记
 filter.selection.option.include: 取消排除
 filter.selection.option.exclude: 排除
+filter.selection.subtitle.percentage: "{{percentage}}%的剩余组合包含"
+filter.selection.subtitle.percentage.to_exclude: "{{percentage}}%的剩余组合包含，刷新后排除"
+filter.selection.subtitle.no_percentage: 暂无统计数据
+filter.selection.subtitle.no_percentage.to_exclude: 暂无统计数据，刷新后排除
+filter.selection.subtitle.excluded: 已排除
+filter.selection.subtitle.excluded.to_include: 已排除，刷新后取消排除
 filter.favorited: 标记的物品
-filter.prompt: Press Apply to update the filter
+filter.favorited.clear: 清空
+filter.prompt: 刷新列表以应用新条件
 filter.button: 刷新
 filter.button.cancel: 取消
 filter.button.reset: 重置
 filter.progress: "刷新中 ({{progress}}%)"
-filter.result: "刷新完成，用时{{seconds}}秒"
+filter.progress.initial: "刷新中..."
+filter.result: "剩余{{count}}种组合，刷新用时{{seconds}}秒"
+filter.not_ready.not_searched: 请先进行附魔搜索
+filter.not_ready.no_result: 没有找到符合附魔条件的组合。请调整条件后重试
+filter.not_ready.searching: 等待搜索结果中...
+
 
 error.title: 发生错误
 error.message.io: "IO错误: {{message}}"
 error.message.yaml: "YAML错误: {{message}}"
 error.message.poison: "内部错误: 锁已损坏: {{message}}"
+error.message.aborted:  已中止
 error.message.executor.unavailable: "没有可用的线程。请尝试重启本软件。"
 error.message.database.invalid_recipe: "无效材料组合ID: {{id}}"
 error.message.database.locked: "另一个实例正在使用数据库。如果没有其他的料理附魔数据库在运行，请手动删除`database/.lock`。"
@@ -59,10 +73,13 @@ error.unknown: "未知错误: {{message}}"
 error.button: 哦
 
 confirm.title: 确认
-confirm.message.search.abort: 确定取消搜索？
-confirm.message.filter.abort: 确定取消刷新材料列表？
 confirm.button.yes: 是
 confirm.button.no: 否
+confirm.message.search.abort: 确定取消搜索？
+confirm.message.search.redo: 开始新的搜索将删除之前搜索的结果，确定继续吗？
+confirm.message.filter.reset: 确定重置排除的物品和统计数据吗？下一次更新时将重新计算统计数据。标记物品列表不会被清空。
+confirm.message.filter.clear_favorites: 确定清空标记物品列表?
+confirm.message.filter.abort: 确定取消刷新材料列表？
 
 
 # Modifiers
