@@ -214,15 +214,15 @@ export const SearchStage: React.FC = () => {
                 />
             </div>
             <StageAction>
-                    <Caption1>
-                        {searchMessage.id &&
-                            t(searchMessage.id, searchMessage.values)}
-                    </Caption1>
-                    <Button appearance="primary" onClick={searchHandler}>
-                        {isSearchInProgress
-                            ? t("search.button.cancel")
-                            : t("search.button")}
-                    </Button>
+                <Caption1>
+                    {searchMessage.id &&
+                        t(searchMessage.id, searchMessage.values)}
+                </Caption1>
+                <Button appearance="primary" onClick={searchHandler}>
+                    {isSearchInProgress
+                        ? t("search.button.cancel")
+                        : t("search.button")}
+                </Button>
             </StageAction>
         </>
     );

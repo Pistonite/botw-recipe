@@ -4,7 +4,14 @@
  * Things are called ItemActor to distinguish from the Actor enum type
  */
 
-import { memo, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import {
+    memo,
+    useCallback,
+    useDeferredValue,
+    useLayoutEffect,
+    useMemo,
+    useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
     Body1,
@@ -24,6 +31,15 @@ import {
     useScrollbarWidth,
 } from "@fluentui/react-components";
 import {
+    DataGrid,
+    DataGridRow,
+    DataGridHeader,
+    DataGridHeaderCell,
+    DataGridBody,
+    DataGridCell,
+    RowRenderer,
+} from "@fluentui-contrib/react-data-grid-react-window";
+import {
     Add20Filled,
     Delete20Regular,
     Star20Filled,
@@ -32,13 +48,6 @@ import {
 
 import { Actor, ActorToName, getActors } from "data/Actor.ts";
 import { useItemSearch } from "i18n/itemSearch.ts";
-import { DataGrid, DataGridRow, 
-    DataGridHeader,
-    DataGridHeaderCell,
-    DataGridBody,
-    DataGridCell,
-    RowRenderer,
-} from "@fluentui-contrib/react-data-grid-react-window";
 
 const useStyles = makeStyles({
     iconContainer: {
@@ -74,7 +83,7 @@ const useStyles = makeStyles({
         // this is important to avoid update loops
         // when resizing the list
         overflow: "hidden",
-    }
+    },
 });
 
 export type ItemActorProps = {
@@ -101,21 +110,19 @@ export type ItemActorSelectionRowProps = {
     t: (key: string) => string;
 };
 
-const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(({
-            actor,
-            included,
-            favorited,
-            toggleIncluded,
-            toggleFavorited,
-            t,
-}) => {
-            const favoriteSelected = included && favorited;
-            return (
+const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
+    ({ actor, included, favorited, toggleIncluded, toggleFavorited, t }) => {
+        const favoriteSelected = included && favorited;
+        return (
             <>
-                <Tooltip content={
-                    favoriteSelected ? t("filter.selection.option.unfavorite")
-                : t("filter.selection.option.favorite")
-                } relationship="label">
+                <Tooltip
+                    content={
+                        favoriteSelected
+                            ? t("filter.selection.option.unfavorite")
+                            : t("filter.selection.option.favorite")
+                    }
+                    relationship="label"
+                >
                     <ToggleButton
                         checked={favoriteSelected}
                         disabled={!included}
@@ -125,36 +132,44 @@ const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(({
                             favoriteSelected ? (
                                 <Star20Filled />
                             ) : (
-                                    <Star20Regular />
-                                )
+                                <Star20Regular />
+                            )
                         }
                     />
                 </Tooltip>
-                <span aria-hidden role="presentation" style={{minWidth: 4}}></span>
-                <Tooltip content={
-                    included
-                        ? t("filter.selection.option.exclude")
-                        : t("filter.selection.option.include")
-                } relationship="label">
-                        <Button
-                            onClick={() => toggleIncluded(actor)}
-                            icon={included ? <Delete20Regular /> : <Add20Filled />}
-                        />
+                <span
+                    aria-hidden
+                    role="presentation"
+                    style={{ minWidth: 4 }}
+                ></span>
+                <Tooltip
+                    content={
+                        included
+                            ? t("filter.selection.option.exclude")
+                            : t("filter.selection.option.include")
+                    }
+                    relationship="label"
+                >
+                    <Button
+                        onClick={() => toggleIncluded(actor)}
+                        icon={included ? <Delete20Regular /> : <Add20Filled />}
+                    />
                 </Tooltip>
-                </>
-            );
-});
+            </>
+        );
+    },
+);
 
-const LabelRenderer: React.FC<ItemActorSelectionRowProps> = memo(({
-actor, subtitle}) => {
-    return (
-        <TableCellLayout media={<ItemActorIcon actor={actor} />}>
-            <ItemActorLabel actor={actor} />
-            <Caption1 block>{subtitle}&nbsp;</Caption1>
-        </TableCellLayout>
-    );
-});
-
+const LabelRenderer: React.FC<ItemActorSelectionRowProps> = memo(
+    ({ actor, subtitle }) => {
+        return (
+            <TableCellLayout media={<ItemActorIcon actor={actor} />}>
+                <ItemActorLabel actor={actor} />
+                <Caption1 block>{subtitle}&nbsp;</Caption1>
+            </TableCellLayout>
+        );
+    },
+);
 
 const ItemActorSelectionColumns = [
     createTableColumn<ItemActorSelectionRowProps>({
@@ -191,7 +206,7 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
     toggleIncluded,
     toggleFavorited,
 }) => {
-const styles = useStyles();
+    const styles = useStyles();
     const search = useItemSearch();
     const deferredSearchText = useDeferredValue(searchText);
     const searchResult = useMemo(
@@ -199,19 +214,20 @@ const styles = useStyles();
         [deferredSearchText, search],
     );
     const actors = useMemo(() => {
-            const baseActors = showExcluded ? getActors() : included;
-            if (searchResult) {
-                const set = new Set(searchResult);
-                return baseActors.filter((actor) => set.has(actor));
-            }
-            return baseActors;
+        const baseActors = showExcluded ? getActors() : included;
+        if (searchResult) {
+            const set = new Set(searchResult);
+            return baseActors.filter((actor) => set.has(actor));
+        }
+        return baseActors;
     }, [included, searchResult, showExcluded]);
     const { t } = useTranslation();
 
     const rowProps = useMemo(() => {
         const favSet = new Set(favorited);
         const incSet = new Set(included);
-            return actors.map((actor) => {
+        return actors
+            .map((actor) => {
                 return {
                     actor,
                     included: incSet.has(actor),
@@ -221,7 +237,8 @@ const styles = useStyles();
                     toggleFavorited,
                     t,
                 } satisfies ItemActorSelectionRowProps;
-            }).filter(({actor}) => actor !== Actor.None);
+            })
+            .filter(({ actor }) => actor !== Actor.None);
     }, [
         actors,
         included,
@@ -233,7 +250,7 @@ const styles = useStyles();
     ]);
 
     const { targetDocument } = useFluent();
-    const scrollbarWidth = useScrollbarWidth({targetDocument});
+    const scrollbarWidth = useScrollbarWidth({ targetDocument });
 
     const [div, divRef] = useState<HTMLDivElement | null>(null);
     const [header, headerRef] = useState<HTMLDivElement | null>(null);
@@ -250,41 +267,52 @@ const styles = useStyles();
         return () => {
             observer.disconnect();
         };
-    }, [div , header, setHeight]);
+    }, [div, header, setHeight]);
 
-    const renderRow = useCallback<RowRenderer<ItemActorSelectionRowProps>>(({ item, rowId }, style) => {
-        return (
-            <DataGridRow<ItemActorSelectionRowProps> key={rowId} style={style}>
-                {({ columnId }) => (
-                    <DataGridCell focusMode={getCellFocusMode(columnId)} >
-                        {
-                            columnId === "actor" 
-                                ? <LabelRenderer {...item} /> : <ActionRenderer {...item} />
-                        }
-                    </DataGridCell>
-                )}
-            </DataGridRow>
-        );
-    }, []);
+    const renderRow = useCallback<RowRenderer<ItemActorSelectionRowProps>>(
+        ({ item, rowId }, style) => {
+            return (
+                <DataGridRow<ItemActorSelectionRowProps>
+                    key={rowId}
+                    style={style}
+                >
+                    {({ columnId }) => (
+                        <DataGridCell focusMode={getCellFocusMode(columnId)}>
+                            {columnId === "actor" ? (
+                                <LabelRenderer {...item} />
+                            ) : (
+                                <ActionRenderer {...item} />
+                            )}
+                        </DataGridCell>
+                    )}
+                </DataGridRow>
+            );
+        },
+        [],
+    );
 
-        return (
+    return (
         <div ref={divRef} className={styles.actorSelectionContainer}>
-            <DataGrid 
-            items={rowProps} 
-            columns={ItemActorSelectionColumns}
-            columnSizingOptions={{
-                "actor": {
-                    defaultWidth: 300,
-                    minWidth: 300,
-                },
-                "option": { 
-                    defaultWidth: 50,
-                    minWidth: 50,
-                    idealWidth: 50, },
-            }}
-            resizableColumns={true}
-        >
-                <DataGridHeader ref={headerRef} style={{paddingRight: scrollbarWidth}}>
+            <DataGrid
+                items={rowProps}
+                columns={ItemActorSelectionColumns}
+                columnSizingOptions={{
+                    actor: {
+                        defaultWidth: 300,
+                        minWidth: 300,
+                    },
+                    option: {
+                        defaultWidth: 50,
+                        minWidth: 50,
+                        idealWidth: 50,
+                    },
+                }}
+                resizableColumns={true}
+            >
+                <DataGridHeader
+                    ref={headerRef}
+                    style={{ paddingRight: scrollbarWidth }}
+                >
                     <DataGridRow>
                         {({ renderHeaderCell }) => (
                             <DataGridHeaderCell>
@@ -293,12 +321,15 @@ const styles = useStyles();
                         )}
                     </DataGridRow>
                 </DataGridHeader>
-                <DataGridBody<ItemActorSelectionRowProps> itemSize={44} height={height}>
+                <DataGridBody<ItemActorSelectionRowProps>
+                    itemSize={44}
+                    height={height}
+                >
                     {renderRow}
                 </DataGridBody>
             </DataGrid>
         </div>
-        );
+    );
 };
 
 export type ItemActorPoolProps = {
@@ -308,11 +339,11 @@ export type ItemActorPoolProps = {
 export const ItemActorPool: React.FC<ItemActorPoolProps> = ({ actors }) => {
     const styles = useStyles();
     return (
-    <div className={styles.poolContainer}>
-            {
-                actors.map((actor,i ) => <ItemActorIconWithTooltip key={i} actor={actor} />)
-            }
-    </div>
+        <div className={styles.poolContainer}>
+            {actors.map((actor, i) => (
+                <ItemActorIconWithTooltip key={i} actor={actor} />
+            ))}
+        </div>
     );
 };
 
@@ -331,20 +362,19 @@ export const ItemActorIcon: React.FC<ItemActorProps> = memo(({ actor }) => {
 
     return (
         <div className={styles.iconContainer} aria-hidden>
-            <img
-                className={styles.icon}
-                src={getIconUrl(actor)}
-            />
+            <img className={styles.icon} src={getIconUrl(actor)} />
         </div>
     );
 });
 
-export const ItemActorIconWithTooltip: React.FC<ItemActorProps> = ({ actor}) => {
+export const ItemActorIconWithTooltip: React.FC<ItemActorProps> = ({
+    actor,
+}) => {
     const [ref, setRef] = useState<HTMLSpanElement | null>(null);
-        return (
-        <Tooltip 
+    return (
+        <Tooltip
             appearance="inverted"
-            positioning={{target:ref}}
+            positioning={{ target: ref }}
             relationship="description"
             content={<ItemActorDetail actor={actor} />}
         >
@@ -352,9 +382,7 @@ export const ItemActorIconWithTooltip: React.FC<ItemActorProps> = ({ actor}) => 
                 <ItemActorIcon actor={actor} />
             </span>
         </Tooltip>
-        
-        );
-
+    );
 };
 
 /** A component to display detail of the Actor*/
@@ -363,10 +391,7 @@ export const ItemActorDetail: React.FC<ItemActorProps> = ({ actor }) => {
     const { t } = useTranslation();
     return (
         <div className={styles.detailContainer}>
-            <img
-                className={styles.bigIcon}
-                src={getIconUrl(actor)}
-            />
+            <img className={styles.bigIcon} src={getIconUrl(actor)} />
             <Body1>{tActor(t, actor)}</Body1>
             <Caption1>{ActorToName[actor]}</Caption1>
         </div>

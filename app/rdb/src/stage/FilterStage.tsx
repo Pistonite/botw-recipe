@@ -31,11 +31,10 @@ const useStyles = makeStyles({
     },
     spaceBelow: {
         paddingBottom: "8px",
-    }
+    },
 });
 
 export const FilterStage: React.FC = () => {
-
     const [favorited, setFavorited] = useState<Actor[]>([]);
     const [included, setIncluded] = useState<Actor[]>(getActors);
 
@@ -58,9 +57,7 @@ export const FilterStage: React.FC = () => {
 
     const subtitles = useMemo(() => getActors().map(() => "Test"), []);
 
-
     const [searchText, setSearchText] = useState("");
-
 
     const styles = useStyles();
     const { t } = useTranslation();
@@ -72,46 +69,50 @@ export const FilterStage: React.FC = () => {
                 desc={t("filter.desc")}
             />
             <Subtitle2>{t("filter.list.title")}</Subtitle2>
-            <Caption1 className={styles.spaceBelow}>{t("filter.list.desc")}</Caption1>
+            <Caption1 className={styles.spaceBelow}>
+                {t("filter.list.desc")}
+            </Caption1>
             <SearchBox
                 value={searchText}
                 className={styles.search}
                 placeholder={t("filter.search.placeholder")}
-                onChange={(_, data)=> {
+                onChange={(_, data) => {
                     setSearchText(data.value);
                 }}
                 contentAfter={
-                <Tooltip relationship="label" content={t("filter.search.desc")}>
+                    <Tooltip
+                        relationship="label"
+                        content={t("filter.search.desc")}
+                    >
                         <Info20Regular />
-                </Tooltip>}
+                    </Tooltip>
+                }
             />
-            <Checkbox label={t("filter.hide_excluded")}/>
-            <div className={styles.mainSection} >
-                <ItemActorSelection 
+            <Checkbox label={t("filter.hide_excluded")} />
+            <div className={styles.mainSection}>
+                <ItemActorSelection
                     included={included}
                     favorited={favorited}
                     searchText={searchText}
-                    showExcluded={true} 
+                    showExcluded={true}
                     actorSubtitles={subtitles}
                     toggleFavorited={toggleFavorited}
-                    toggleIncluded={toggleIncluded}    
+                    toggleIncluded={toggleIncluded}
                 />
-                { favorited.length > 0 &&
+                {favorited.length > 0 && (
                     <div>
                         <StageDivider />
-                        <Subtitle2 block className={styles.spaceBelow}>{t("filter.favorited")}</Subtitle2>
+                        <Subtitle2 block className={styles.spaceBelow}>
+                            {t("filter.favorited")}
+                        </Subtitle2>
                         <ItemActorPool actors={favorited} />
                     </div>
-                }
+                )}
             </div>
             <StageAction>
-                    <Caption1>Press Apply </Caption1>
-                <Button>
-                    Reset
-                </Button>
-                <Button appearance="primary" >
-                    Update
-                </Button>
+                <Caption1>Press Apply </Caption1>
+                <Button>Reset</Button>
+                <Button appearance="primary">Update</Button>
             </StageAction>
         </>
     );

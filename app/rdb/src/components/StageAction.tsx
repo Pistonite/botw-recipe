@@ -9,19 +9,17 @@ const useStyles = makeStyles({
         gap: "10px",
         justifyContent: "end",
         alignItems: "baseline",
-    }
+    },
 });
 
 /** Component at the end of a stage for actions */
-export const StageAction: React.FC<PropsWithChildren> = ({children}) => {
+export const StageAction: React.FC<PropsWithChildren> = ({ children }) => {
     const styles = useStyles();
 
     return (
         <div>
             <StageDivider />
-            <div className={styles.actions}>
-                {children}
-            </div>
+            <div className={styles.actions}>{children}</div>
         </div>
     );
-}
+};
