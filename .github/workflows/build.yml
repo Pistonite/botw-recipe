@@ -55,8 +55,8 @@ jobs:
       - run: task rdb:install-ci
       - run: "task rdb:build -- --ci ${{ matrix.args }}"
       - uses: actions/upload-artifact@v4
-      with:
-        path: ${{ matrix.executable }}
-        name: botwrdb-${{ matrix.label }}
-        retention-days: 3
+        with:
+          path: ${{ matrix.executable }}
+          name: botwrdb-${{ matrix.label }}
+          retention-days: 3
 
