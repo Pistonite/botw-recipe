@@ -22,15 +22,17 @@ export const initLocalizedItemSearch = async (
     currentLocale = locale;
     const englishTranslation = await loadLocale("en-US");
     const entries = getActors().map((actor) => {
+        const actorName = ActorToName[actor];
+        const translationKey = `actor.${actorName}`;
         return {
             actor,
-            actorName: ActorToName[actor],
-            localizedName: translation[`actor.${actor}`],
-            englishName: englishTranslation[`actor.${actor}`],
+            actorName,
+            localizedName: translation[translationKey],
+            englishName: englishTranslation[translationKey],
         };
     });
     const fuse = new Fuse(entries, {
-        threshold: 0.3,
+        threshold: 0.2,
         keys: ["actorName", "localizedName", "englishName"],
         shouldSort: true,
     });
@@ -41,14 +43,16 @@ export const initLocalizedItemSearch = async (
         const results = fuse.search(searchText);
         return results.map((result) => result.item.actor);
     };
+    subscribers.forEach((subscriber) => subscriber(itemSearch));
     console.log("localized item search initialized");
 };
 
 export const useItemSearch = () => {
-    const [search, setSearch] = useState<ItemSearchFn>(itemSearch);
+    const [search, setSearch] = useState<ItemSearchFn>(() => itemSearch);
     useEffect(() => {
+        setSearch(() => itemSearch);
         const subscriber = (search: ItemSearchFn) => {
-            setSearch(search);
+            setSearch(() => search);
         };
         subscribers.push(subscriber);
         return () => {

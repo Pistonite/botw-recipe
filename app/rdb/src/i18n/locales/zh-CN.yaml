@@ -13,10 +13,37 @@ search.modifier.title: 附魔种类
 search.modifier.desc: 选 "+" 代表必须包含该种类， "-" 则代表必须不包含。
 search.modifier.name: 种类
 search.modifier.option: 选项
+search.modifier.option.include: 必须包含
+search.modifier.option.exclude: 必须不包含
+search.modifier.option.ignore: 忽略
 search.button: 搜索
 search.button.cancel: 取消
 search.progress: "搜索中 ({{progress}}%)"
+search.stat_group: 统计材料中
 search.result: "共找到{{count}}种组合，用时{{seconds}}秒"
+
+filter.title: 过滤物品
+filter.desc: 根据您所需要的材料来过滤找到的组合
+filter.list.title: 材料列表
+filter.list.desc:
+  请在以下列表中循序渐进地排除不需要的材料，直到结果数量足够低，可以进一步查看每一个结果。
+  用星星按钮可以标记该材料。被标记物品在显示结果时将优先展示。
+filter.search.placeholder: "搜索材料，支持拼音和拼音首字母"
+filter.search.desc: 由于所有重要道具料理用途相同，请使用“希卡之石”代替。不支持怪物精华。
+filter.hide_excluded: 仅显示结果中包含的材料
+filter.selection.actor: 材料
+filter.selection.option: 选项
+filter.selection.option.favorite: 标记
+filter.selection.option.unfavorite: 去除标记
+filter.selection.option.include: 取消排除
+filter.selection.option.exclude: 排除
+filter.favorited: 标记的物品
+filter.prompt: Press Apply to update the filter
+filter.button: 刷新
+filter.button.cancel: 取消
+filter.button.reset: 重置
+filter.progress: "刷新中 ({{progress}}%)"
+filter.result: "刷新完成，用时{{seconds}}秒"
 
 error.title: 发生错误
 error.message.io: "IO错误: {{message}}"
@@ -33,6 +60,7 @@ error.button: 哦
 
 confirm.title: 确认
 confirm.message.search.abort: 确定取消搜索？
+confirm.message.filter.abort: 确定取消刷新材料列表？
 confirm.button.yes: 是
 confirm.button.no: 否
 
