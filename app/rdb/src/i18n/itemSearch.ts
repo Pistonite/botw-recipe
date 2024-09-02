@@ -24,7 +24,7 @@ export const initLocalizedItemSearch = async (
     let extraKeys: Record<string, string> = {};
     if (locale === "zh-CN") {
         // load pinyin keys
-        const {default: keys} = await import("./locales/zh-CN.pinyin.yaml");
+        const { default: keys } = await import("./locales/zh-CN.pinyin.yaml");
         extraKeys = keys;
     }
     const entries = getActors().map((actor) => {
@@ -32,8 +32,8 @@ export const initLocalizedItemSearch = async (
         const translationKey = `actor.${actorName}`;
         const keys: string[] = [];
         if (locale === "zh-CN") {
-            const words = extraKeys[translationKey+".full"];
-            const initials = extraKeys[translationKey+".initials"];
+            const words = extraKeys[translationKey + ".full"];
+            const initials = extraKeys[translationKey + ".initials"];
             if (words) {
                 keys.push(words);
             }
@@ -46,7 +46,7 @@ export const initLocalizedItemSearch = async (
             actorName,
             localizedName: translation[translationKey],
             englishName: englishTranslation[translationKey],
-            keys
+            keys,
         };
     });
     const fuse = new Fuse(entries, {

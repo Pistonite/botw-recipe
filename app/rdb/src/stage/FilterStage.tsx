@@ -21,7 +21,21 @@ import { StageDivider } from "components/StageDivider.tsx";
 import { useAlert, useConfirm } from "components/AlertProvider.tsx";
 import type { Actor } from "data/Actor.ts";
 import { getFilterStageDisabledMessage } from "store/selectors.ts";
-import { abortFilter, clearFavorites, finishFilter, getActorPercentages, getActorSubtitles, getFavoriteActors, getFilterMessage, getIncludedActors, isFilterInProgress, resetFilter, startFilter, toggleFavoriteActor, toggleIncludedActor } from "store/filter.ts";
+import {
+    abortFilter,
+    clearFavorites,
+    finishFilter,
+    getActorPercentages,
+    getActorSubtitles,
+    getFavoriteActors,
+    getFilterMessage,
+    getIncludedActors,
+    isFilterInProgress,
+    resetFilter,
+    startFilter,
+    toggleFavoriteActor,
+    toggleIncludedActor,
+} from "store/filter.ts";
 import { useDispatch } from "store/hook.ts";
 import { useHost } from "host/useHost.ts";
 import { getErrorAlertPayload } from "data/ErrorMessage.ts";
@@ -46,7 +60,7 @@ const useStyles = makeStyles({
         justifyContent: "center",
         "& > *": {
             textAlign: "center",
-        }
+        },
     },
     spaceBelow: {
         paddingBottom: "8px",
@@ -57,13 +71,14 @@ const useLocalizedSubtitles = () => {
     const subtitles = useSelector(getActorSubtitles);
     const { t } = useTranslation();
     return useMemo(() => {
-        return subtitles.map(({id, values}) => t(id, values));
+        return subtitles.map(({ id, values }) => t(id, values));
     }, [subtitles, t]);
-}
+};
 
 export const FilterStage: React.FC = () => {
-
-    const { disabled: stageDisabled, messageId: stageMessageId } = useSelector(getFilterStageDisabledMessage);
+    const { disabled: stageDisabled, messageId: stageMessageId } = useSelector(
+        getFilterStageDisabledMessage,
+    );
     const included = useSelector(getIncludedActors);
     const favorited = useSelector(getFavoriteActors);
     const subtitles = useLocalizedSubtitles();
@@ -72,13 +87,18 @@ export const FilterStage: React.FC = () => {
     const isFilteringInProgress = useSelector(isFilterInProgress);
     const dispatch = useDispatch();
 
-    const toggleFavorited = useCallback((actor: Actor) => {
-        dispatch(toggleFavoriteActor(actor));
-    }, [dispatch]);
-    const toggleIncluded = useCallback((actor: Actor) => {
-        dispatch(toggleIncludedActor(actor));
-    }, [dispatch]);
-
+    const toggleFavorited = useCallback(
+        (actor: Actor) => {
+            dispatch(toggleFavoriteActor(actor));
+        },
+        [dispatch],
+    );
+    const toggleIncluded = useCallback(
+        (actor: Actor) => {
+            dispatch(toggleIncludedActor(actor));
+        },
+        [dispatch],
+    );
 
     const [searchText, setSearchText] = useState("");
     const [showOnlyIncluded, setShowOnlyIncluded] = useState(true);
@@ -86,10 +106,11 @@ export const FilterStage: React.FC = () => {
     const styles = useStyles();
     const { t } = useTranslation();
     const alert = useAlert();
-    const confirmClearFavorites = useConfirm(t("confirm.message.filter.clear_favorites"));
+    const confirmClearFavorites = useConfirm(
+        t("confirm.message.filter.clear_favorites"),
+    );
     const confirmClearFilter = useConfirm(t("confirm.message.filter.reset"));
     const confirmAbortFilter = useConfirm(t("confirm.message.filter.abort"));
-
 
     const host = useHost();
     const [abortInProgress, setAbortInProgress] = useState(false);
@@ -101,7 +122,7 @@ export const FilterStage: React.FC = () => {
             if (abortInProgress) {
                 return;
             }
-            if (!await confirmAbortFilter()) {
+            if (!(await confirmAbortFilter())) {
                 return;
             }
             setAbortInProgress(true);
@@ -119,7 +140,7 @@ export const FilterStage: React.FC = () => {
         if (result.err) {
             if (result.err.type === "Aborted") {
                 console.log("filter aborted");
-            dispatch(abortFilter());
+                dispatch(abortFilter());
                 return;
             }
             dispatch(
@@ -140,13 +161,18 @@ export const FilterStage: React.FC = () => {
                 duration: elapsed,
                 isFromSearch: false,
                 ...result.val,
-            })
-        )
-    }, [included, stageDisabled, isFilteringInProgress, confirmAbortFilter, alert,
-            dispatch, host, setAbortInProgress
-        ]);
-
-
+            }),
+        );
+    }, [
+        included,
+        stageDisabled,
+        isFilteringInProgress,
+        confirmAbortFilter,
+        alert,
+        dispatch,
+        host,
+        setAbortInProgress,
+    ]);
 
     return (
         <>
@@ -176,19 +202,18 @@ export const FilterStage: React.FC = () => {
                     </Tooltip>
                 }
             />
-            <Checkbox 
+            <Checkbox
                 checked={showOnlyIncluded}
-                label={t("filter.hide_excluded")} 
+                label={t("filter.hide_excluded")}
                 disabled={stageDisabled}
                 onChange={(_, data) => setShowOnlyIncluded(!!data.checked)}
             />
             <div className={styles.mainSection}>
-                {
-                    stageMessageId ? 
-                        <div className={styles.mainMessage}>
-                            <Body1 block>{t(stageMessageId)}</Body1>
-                        </div>
-                    :
+                {stageMessageId ? (
+                    <div className={styles.mainMessage}>
+                        <Body1 block>{t(stageMessageId)}</Body1>
+                    </div>
+                ) : (
                     <ItemActorSelection
                         included={included}
                         favorited={favorited}
@@ -196,43 +221,63 @@ export const FilterStage: React.FC = () => {
                         searchText={searchText}
                         showExcluded={!showOnlyIncluded}
                         actorSubtitles={subtitles}
-                            actorPercentages={percentages}
+                        actorPercentages={percentages}
                         toggleFavorited={toggleFavorited}
                         toggleIncluded={toggleIncluded}
                     />
-                }
+                )}
                 {favorited.length > 0 && (
                     <div>
                         <StageDivider />
                         <Subtitle2 block className={styles.spaceBelow}>
                             {t("filter.favorited")}
-                            <span aria-hidden role="presentation" style={{display: "inline-block", minWidth: 8}}/>
-                            <Link onClick={async () => {
-                                if (await confirmClearFavorites()) {
-                                    dispatch(clearFavorites())
-                                }
-                            } }>{t("filter.favorited.clear")}</Link>
+                            <span
+                                aria-hidden
+                                role="presentation"
+                                style={{ display: "inline-block", minWidth: 8 }}
+                            />
+                            <Link
+                                onClick={async () => {
+                                    if (await confirmClearFavorites()) {
+                                        dispatch(clearFavorites());
+                                    }
+                                }}
+                            >
+                                {t("filter.favorited.clear")}
+                            </Link>
                         </Subtitle2>
-                        <ItemActorPool actors={favorited} disabled={stageDisabled} included={included}/>
+                        <ItemActorPool
+                            actors={favorited}
+                            disabled={stageDisabled}
+                            included={included}
+                        />
                     </div>
                 )}
             </div>
             <StageAction>
-                <Caption1>{!stageDisabled && !!filterMessage.id && t(filterMessage.id, filterMessage.values)}</Caption1>
-                <Button disabled={stageDisabled}
+                <Caption1>
+                    {!stageDisabled &&
+                        !!filterMessage.id &&
+                        t(filterMessage.id, filterMessage.values)}
+                </Caption1>
+                <Button
+                    disabled={stageDisabled}
                     onClick={async () => {
                         if (await confirmClearFilter()) {
                             dispatch(resetFilter());
                         }
                     }}
-                >{t("filter.button.reset")}</Button>
-                <Button disabled={stageDisabled} appearance="primary"
+                >
+                    {t("filter.button.reset")}
+                </Button>
+                <Button
+                    disabled={stageDisabled}
+                    appearance="primary"
                     onClick={filterHandler}
                 >
-                    {
-                        isFilteringInProgress ? t("filter.button.cancel") :
-                        t("filter.button")
-                    }
+                    {isFilteringInProgress
+                        ? t("filter.button.cancel")
+                        : t("filter.button")}
                 </Button>
             </StageAction>
         </>

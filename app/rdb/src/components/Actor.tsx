@@ -29,7 +29,7 @@ import {
     type DataGridCellFocusMode,
     useFluent,
     useScrollbarWidth,
-    DataGridProps,
+    type DataGridProps,
 } from "@fluentui/react-components";
 import {
     DataGrid,
@@ -123,7 +123,15 @@ export type ItemActorSelectionRowProps = {
 };
 
 const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
-    ({ actor, included, favorited, disabled, toggleIncluded, toggleFavorited, t }) => {
+    ({
+        actor,
+        included,
+        favorited,
+        disabled,
+        toggleIncluded,
+        toggleFavorited,
+        t,
+    }) => {
         const favoriteSelected = included && favorited;
         return (
             <>
@@ -176,7 +184,9 @@ const ActionRenderer: React.FC<ItemActorSelectionRowProps> = memo(
 const LabelRenderer: React.FC<ItemActorSelectionRowProps> = memo(
     ({ actor, disabled, subtitle }) => {
         return (
-            <TableCellLayout media={<ItemActorIcon actor={actor} disabled={disabled}/>}>
+            <TableCellLayout
+                media={<ItemActorIcon actor={actor} disabled={disabled} />}
+            >
                 <ItemActorLabel actor={actor} />
                 <Caption1 block>{subtitle}&nbsp;</Caption1>
             </TableCellLayout>
@@ -189,12 +199,12 @@ const ItemActorSelectionColumns = [
         columnId: "actor",
         compare: (a, b) => {
             if (!a.percentage && !b.percentage) {
-                return a.actor-b.actor;
+                return a.actor - b.actor;
             }
             const aPercentage = a.percentage || 0;
             const bPercentage = b.percentage || 0;
             return aPercentage - bPercentage;
-        }
+        },
     }),
     createTableColumn<ItemActorSelectionRowProps>({ columnId: "option" }),
 ];
@@ -255,7 +265,7 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
         favorited,
         disabled,
         actorSubtitles,
-            actorPercentages,
+        actorPercentages,
         toggleIncluded,
         toggleFavorited,
         t,
@@ -305,7 +315,7 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
 
     const [sortState, setSortState] = useState<DataGridProps["sortState"]>({
         sortColumn: "actor",
-        sortDirection: "descending"
+        sortDirection: "descending",
     });
 
     return (
@@ -336,11 +346,11 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
                     <DataGridRow>
                         {({ columnId }) => (
                             <DataGridHeaderCell>
-                                {
-                                    columnId === "actor" ?
-                                    t("filter.selection.actor", {count: rowProps.length}) :
-                                    t("filter.selection.option")
-                                }
+                                {columnId === "actor"
+                                    ? t("filter.selection.actor", {
+                                          count: rowProps.length,
+                                      })
+                                    : t("filter.selection.option")}
                             </DataGridHeaderCell>
                         )}
                     </DataGridRow>
@@ -363,7 +373,11 @@ export type ItemActorPoolProps = {
     included: Actor[];
 };
 
-export const ItemActorPool: React.FC<ItemActorPoolProps> = ({ actors, disabled, included }) => {
+export const ItemActorPool: React.FC<ItemActorPoolProps> = ({
+    actors,
+    disabled,
+    included,
+}) => {
     const styles = useStyles();
     const props = useMemo(() => {
         const includedSet = new Set(included);
@@ -395,21 +409,22 @@ export type ItemActorIconProps = ItemActorProps & {
 };
 
 /** A component to display an actor image */
-export const ItemActorIcon: React.FC<ItemActorIconProps> = memo(({ actor, disabled }) => {
-    const styles = useStyles();
+export const ItemActorIcon: React.FC<ItemActorIconProps> = memo(
+    ({ actor, disabled }) => {
+        const styles = useStyles();
 
-    return (
-        <div className={styles.iconContainer} aria-hidden>
-            {
-                !!disabled && <div className={styles.disabledOverlay} />
-            }
-            <img className={styles.icon} src={getIconUrl(actor)} />
-        </div>
-    );
-});
+        return (
+            <div className={styles.iconContainer} aria-hidden>
+                {!!disabled && <div className={styles.disabledOverlay} />}
+                <img className={styles.icon} src={getIconUrl(actor)} />
+            </div>
+        );
+    },
+);
 
 export const ItemActorIconWithTooltip: React.FC<ItemActorIconProps> = ({
-    actor, disabled
+    actor,
+    disabled,
 }) => {
     const [ref, setRef] = useState<HTMLSpanElement | null>(null);
     return (

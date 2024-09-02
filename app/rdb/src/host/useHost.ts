@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { Host } from "./Host.ts";
+import type { Host } from "./Host.ts";
 
 export const HostContext = createContext<Host>(null as unknown as Host);
 

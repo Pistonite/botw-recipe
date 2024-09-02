@@ -8,19 +8,18 @@ import {
     DataGrid,
     DataGridBody,
     DataGridCell,
-    DataGridCellFocusMode,
+    type DataGridCellFocusMode,
     DataGridHeader,
     DataGridHeaderCell,
     DataGridRow,
     Label,
-    LabelProps,
+    type LabelProps,
     makeStyles,
     shorthands,
     TableCellLayout,
-    TableColumnId,
+    type TableColumnId,
     ToggleButton,
 } from "@fluentui/react-components";
-import { WeaponModifier, WeaponModifiers } from "data/WeaponModifier.ts";
 import {
     Add20Filled,
     Add20Regular,
@@ -29,7 +28,9 @@ import {
     Subtract20Filled,
     Subtract20Regular,
 } from "@fluentui/react-icons";
-import { WeaponModifierSet } from "host/types.ts";
+
+import { type WeaponModifier, WeaponModifiers } from "data/WeaponModifier.ts";
+import type { WeaponModifierSet } from "host/types.ts";
 
 const useStyles = makeStyles({
     iconContainer: {

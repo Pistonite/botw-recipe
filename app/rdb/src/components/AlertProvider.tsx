@@ -37,7 +37,7 @@ const AlertContext = createContext<AlertFn>(async () => 0);
 
 export const useAlert = () => useContext(AlertContext);
 export const useConfirm = (localizedMessage: string) => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const alert = useAlert();
     return useCallback(async () => {
         const confirmAction = await alert({

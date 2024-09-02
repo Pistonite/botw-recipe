@@ -1,4 +1,8 @@
-import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+    createSelector,
+    createSlice,
+    type PayloadAction,
+} from "@reduxjs/toolkit";
 import { WeaponModifier } from "data/WeaponModifier.ts";
 
 import type { Stats, SearchFilter, WeaponModifierSet } from "host/types.ts";
@@ -115,7 +119,7 @@ export const getSearchMessage = createSelector(
     ],
     (progress, count, seconds) => {
         if (progress == 0) {
-                return { id: "search.progress.initial", values: {} };
+            return { id: "search.progress.initial", values: {} };
         }
         if (progress >= 100) {
             return { id: "search.progress.stat_group", values: {} };

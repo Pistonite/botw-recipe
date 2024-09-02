@@ -72,7 +72,6 @@ export const SearchStage: React.FC = () => {
     const confirmAbort = useConfirm(t("confirm.message.search.abort"));
     const confirmRedo = useConfirm(t("confirm.message.search.redo"));
 
-
     const searchHandler = useCallback(async () => {
         if (isSearchInProgress) {
             if (abortInProgress) {
@@ -127,13 +126,21 @@ export const SearchStage: React.FC = () => {
                 duration: elapsed,
                 isFromSearch: true,
                 ...result.val,
-            })
-        )
-    }, [resultCount, 
-            abortInProgress, 
-            isSearchInProgress, filter, host, 
-            confirmAbort, confirmRedo, setAbortInProgress,
-            alert, dispatch, t]);
+            }),
+        );
+    }, [
+        resultCount,
+        abortInProgress,
+        isSearchInProgress,
+        filter,
+        host,
+        confirmAbort,
+        confirmRedo,
+        setAbortInProgress,
+        alert,
+        dispatch,
+        t,
+    ]);
 
     return (
         <>

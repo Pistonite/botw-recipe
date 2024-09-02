@@ -1,4 +1,8 @@
-import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+    createSelector,
+    createSlice,
+    type PayloadAction,
+} from "@reduxjs/toolkit";
 
 import { Actor, ActorToGroup, getActors } from "data/Actor.ts";
 import type { Stats } from "host/types.ts";
@@ -77,7 +81,9 @@ const filterSlice = createSlice({
             if (!state.nextIncluded.includes(actor)) {
                 state.nextIncluded.push(actor);
             } else {
-                state.nextIncluded = state.nextIncluded.filter((a) => a !== actor);
+                state.nextIncluded = state.nextIncluded.filter(
+                    (a) => a !== actor,
+                );
             }
         },
         resetFilter: (state) => {
@@ -134,10 +140,8 @@ const filterSlice = createSlice({
                         if (!groupStat[group]) {
                             return 0;
                         }
-                        const percentage = (
-                            (groupStat[group] / stats.foundCount) *
-                            100
-                        );
+                        const percentage =
+                            (groupStat[group] / stats.foundCount) * 100;
                         return percentage;
                     });
                 }
@@ -157,27 +161,33 @@ const filterSlice = createSlice({
     },
 });
 
-export const { 
+export const {
     clearFavorites,
     abortFilter,
-    toggleIncludedActor, toggleFavoriteActor, resetFilter, startFilter, updateFilterProgress, finishFilter } = filterSlice.actions;
+    toggleIncludedActor,
+    toggleFavoriteActor,
+    resetFilter,
+    startFilter,
+    updateFilterProgress,
+    finishFilter,
+} = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;
 
 export const isFilterInProgress = (state: State) => {
     return state.filter.filterProgress >= 0;
-}
+};
 
 export const getFavoriteActors = (state: State) => {
     return state.filter.favorited;
-}
+};
 
 export const getIncludedActors = (state: State) => {
     return state.filter.nextIncluded;
-}
+};
 
 export const getActorPercentages = (state: State) => {
     return state.filter.actorUsagePercentages;
-}
+};
 
 export const getActorSubtitles = createSelector(
     [
@@ -190,7 +200,7 @@ export const getActorSubtitles = createSelector(
         const nextIncludedSet = new Set(nextIncluded);
         return getActors().map((actor) => {
             if (actor === Actor.None) {
-                return {id: "", values: {}};
+                return { id: "", values: {} };
             }
             const prefix = "filter.selection.subtitle";
             let isCurrentExcluded = !currentIncludedSet.has(actor);
@@ -202,23 +212,31 @@ export const getActorSubtitles = createSelector(
             const isNextIncluded = nextIncludedSet.has(actor);
             if (isCurrentExcluded) {
                 if (isNextIncluded) {
-                    return {id: `${prefix}.excluded.to_include`, values: {}};
+                    return { id: `${prefix}.excluded.to_include`, values: {} };
                 }
-                return {id: `${prefix}.excluded`, values: {}};
+                return { id: `${prefix}.excluded`, values: {} };
             }
             if (actorUsagePercentages) {
-                const percentage = getStringPercentage(actorUsagePercentages[actor]);
+                const percentage = getStringPercentage(
+                    actorUsagePercentages[actor],
+                );
                 if (isNextIncluded) {
-                    return {id: `${prefix}.percentage`, values: {percentage}};
+                    return {
+                        id: `${prefix}.percentage`,
+                        values: { percentage },
+                    };
                 }
-                return {id: `${prefix}.percentage.to_exclude`, values: {percentage}};
+                return {
+                    id: `${prefix}.percentage.to_exclude`,
+                    values: { percentage },
+                };
             }
-                if (isNextIncluded) {
-                    return {id: `${prefix}.no_percentage`, values: {}};
-                }
-                return {id: `${prefix}.no_percentage.to_exclude`, values: {}};
+            if (isNextIncluded) {
+                return { id: `${prefix}.no_percentage`, values: {} };
+            }
+            return { id: `${prefix}.no_percentage.to_exclude`, values: {} };
         });
-    }
+    },
 );
 
 function getStringPercentage(percentage: number) {
@@ -240,7 +258,7 @@ export const getFilterMessage = createSelector(
     ],
     (progress, count, seconds, isFromSearch) => {
         if (progress == 0) {
-                return { id: "filter.progress.initial", values: {} };
+            return { id: "filter.progress.initial", values: {} };
         }
         if (progress >= 0) {
             return { id: "filter.progress", values: { progress } };

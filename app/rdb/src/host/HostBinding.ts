@@ -18,6 +18,10 @@ export interface HostBinding {
     ): Promise<void>;
     filter(filter: Group[]): Promise<Void<HostError>>;
     abortFilter(): Promise<Void<HostError>>;
-    setFilterCompleteHandler(handler: (result: Result<Stats, HostError>) => void): Promise<void>;
-    setFilterProgressHandler(handler: (percentage: number) => void): Promise<void>;
+    setFilterCompleteHandler(
+        handler: (result: Result<Stats, HostError>) => void,
+    ): Promise<void>;
+    setFilterProgressHandler(
+        handler: (percentage: number) => void,
+    ): Promise<void>;
 }

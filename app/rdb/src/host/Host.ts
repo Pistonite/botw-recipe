@@ -17,13 +17,13 @@ export class Host {
     private searchResolve:
         | ((result: Result<Stats, HostError>) => void)
         | undefined = undefined;
-    private filterResolve: ((result: Result<Stats, HostError>) => void) | undefined = undefined;
-    // private filterPro
+    private filterResolve:
+        | ((result: Result<Stats, HostError>) => void)
+        | undefined = undefined;
     constructor(binding: HostBinding) {
         this.binding = binding;
     }
 
-    /** */
     public async bind(
         searchProgressHandler: HostProgressHandler,
         filterProgressHandler: HostProgressHandler,
@@ -70,9 +70,7 @@ export class Host {
         return this.initializePromise;
     }
 
-    public search(
-        filter: SearchFilter,
-    ): Promise<Result<Stats, HostError>> {
+    public search(filter: SearchFilter): Promise<Result<Stats, HostError>> {
         return new Promise((resolve) => {
             this.binding.search(filter).then((result) => {
                 if ("err" in result) {
@@ -88,9 +86,7 @@ export class Host {
     public cancelSearch(): Promise<Void<HostError>> {
         return this.binding.abortSearch();
     }
-    public filter(
-        filter: Actor[],
-    ): Promise<Result<Stats, HostError>> {
+    public filter(filter: Actor[]): Promise<Result<Stats, HostError>> {
         const groups = filter.map((actor) => ActorToGroup[actor]);
         return new Promise((resolve) => {
             this.binding.filter(groups).then((result) => {

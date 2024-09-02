@@ -1,12 +1,10 @@
 // Generate Pin Yin search keys
-const { pinyin }= require("pinyin");
+const { pinyin } = require("pinyin");
 const YAML = require("yaml");
 const path = require("path");
 const fs = require("fs");
 
-const FILES = [
-    "zh-CN",
-];
+const FILES = ["zh-CN"];
 const SEGMENTER = "segmentit";
 
 // the segmenter can handle some but not ones specific to the game
@@ -28,10 +26,8 @@ const heteronymDictionary = {
         "\u4f20\u52a8\u8f74": "\u8239\u52a8\u8f74", // Chuan Dong Zhou (Shaft)
         "\u5e0c\u5361": "\u5e0c\u5494", // Xi Ka (Sheika)
         "\u7eff\u8272": "\u94dd\u8272", // Lv Se (Green)
-
-
-    }
-}
+    },
+};
 
 const DIR = path.join(__dirname, "../src/i18n/locales");
 
@@ -46,7 +42,9 @@ function checkHeteronym(msg, output) {
 
 for (const file of FILES) {
     console.log(file);
-    const locale = YAML.parse(fs.readFileSync(path.join(DIR, `${file}.yaml`), "utf8"));
+    const locale = YAML.parse(
+        fs.readFileSync(path.join(DIR, `${file}.yaml`), "utf8"),
+    );
 
     const output = {};
     const dictionary = heteronymDictionary[file] || {};
@@ -59,22 +57,27 @@ for (const file of FILES) {
             msg = msg.replaceAll(phrase, dictionary[phrase]);
         }
         // full segmented words without accents
-        const fullWords = checkHeteronym(msg, pinyin(msg, {
-            heteronym: true,
-            segment: SEGMENTER,
-            group: false,
-            style: "normal"
-        })).join(" ");
-        const initials = checkHeteronym(msg, pinyin(msg, {
-            heteronym: true,
-            segment: SEGMENTER,
-            group: false,
-            style: "first_letter" // note it's not "initials"
-        })).join("");
-        output[key+".full"] = fullWords;
-        output[key+".initials"] = initials;
+        const fullWords = checkHeteronym(
+            msg,
+            pinyin(msg, {
+                heteronym: true,
+                segment: SEGMENTER,
+                group: false,
+                style: "normal",
+            }),
+        ).join(" ");
+        const initials = checkHeteronym(
+            msg,
+            pinyin(msg, {
+                heteronym: true,
+                segment: SEGMENTER,
+                group: false,
+                style: "first_letter", // note it's not "initials"
+            }),
+        ).join("");
+        output[key + ".full"] = fullWords;
+        output[key + ".initials"] = initials;
     }
     const outputString = YAML.stringify(output, null, 2);
     fs.writeFileSync(path.join(DIR, `${file}.pinyin.yaml`), outputString);
 }
-

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { makeStyles } from "@fluentui/react-components";
 
 import { StageDivider } from "./StageDivider.tsx";
