@@ -37,10 +37,9 @@ jobs:
     - name: package windows
       run: |
         cp package/database.7z package/botwrdb-bundle-windows.7z
-        7z u package/botwrdb-bundle-windows.7z package/botwrdb.exe
-        7z a package/botwrdb-windows.7z package/botwrdb.exe
+        7z u package/botwrdb-bundle-windows.7z package/botwrdb-windows/botwrdb.exe
+        7z a package/botwrdb-windows.7z package/botwrdb-windows/botwrdb.exe
     - uses: softprops/action-gh-release@v2
-      # if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
         body_path: .github/RELEASE_NOTES.md
