@@ -12,7 +12,7 @@ import {
 import { Info16Regular, Search24Regular } from "@fluentui/react-icons";
 
 import { useAlert, useConfirm } from "components/AlertProvider.tsx";
-import { ModifierSelection } from "components/Modifier.tsx";
+import { ModifierSelection } from "components/ModifierSelection.tsx";
 import { StageDivider } from "components/StageDivider.tsx";
 import { StageTitle } from "components/StageTitle.tsx";
 import { StageAction } from "components/StageAction.tsx";
@@ -31,9 +31,11 @@ import {
     startSearch,
 } from "store/search.ts";
 import { finishFilter, resetFilter } from "store/filter.ts";
+import { setResultFilter } from "store/result.ts";
 import type { WeaponModifierSet } from "host/types.ts";
 import { useHost } from "host/useHost.ts";
 import { getErrorAlertPayload } from "data/ErrorMessage.ts";
+import { useResultCooker } from "util/useResultCooker.ts";
 
 function parseHp(
     value: number | undefined | null,
@@ -67,12 +69,13 @@ export const SearchStage: React.FC = () => {
     );
     const host = useHost();
     const alert = useAlert();
+    const cook = useResultCooker();
 
     const { t } = useTranslation();
     const confirmAbort = useConfirm(t("confirm.message.search.abort"));
     const confirmRedo = useConfirm(t("confirm.message.search.redo"));
 
-    const searchHandler = useCallback(async () => {
+    const searchHandler = async () => {
         if (isSearchInProgress) {
             if (abortInProgress) {
                 return;
@@ -95,6 +98,7 @@ export const SearchStage: React.FC = () => {
         }
         const startTime = performance.now();
         dispatch(startSearch());
+        dispatch(setResultFilter(filter));
         dispatch(resetFilter());
         setAbortInProgress(false);
         const result = await host.search(filter);
@@ -128,19 +132,8 @@ export const SearchStage: React.FC = () => {
                 ...result.val,
             }),
         );
-    }, [
-        resultCount,
-        abortInProgress,
-        isSearchInProgress,
-        filter,
-        host,
-        confirmAbort,
-        confirmRedo,
-        setAbortInProgress,
-        alert,
-        dispatch,
-        t,
-    ]);
+        cook();
+    };
 
     return (
         <>

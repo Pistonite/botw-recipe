@@ -11,11 +11,13 @@ use rdata::db::{Database, Filter, TempResult};
 use rdata::Group;
 use tauri::{AppHandle, Manager, RunEvent, State, WindowEvent};
 
+mod config;
+use config::Config;
+mod cook;
 mod error;
 mod events;
 mod executor;
 use executor::Executor;
-mod file_io;
 mod filter;
 mod search;
 mod tasks;
@@ -24,6 +26,8 @@ use error::{Error, ResultInterop};
 
 /// Tauri app global state
 pub struct Global {
+    /// The config file
+    pub config: Config,
     /// The task executor
     pub executor: Arc<Executor>,
     /// The database handle
@@ -32,13 +36,12 @@ pub struct Global {
     pub search_result: Arc<Mutex<Option<TempResult>>>,
     /// Abort handles for the current search
     pub search_handles: Arc<Mutex<Vec<usize>>>,
-
     pub filter_result: Arc<Mutex<Option<TempResult>>>,
     pub last_included: Arc<Mutex<HashSet<Group>>>,
     /// Abort handles for the current filter
     pub filter_handles: Arc<Mutex<Vec<usize>>>,
-    // /// Filter sub-state
-    // filter: Arc<RwLock<FilterState>>,
+    /// Abort handle for the background cooking process
+    pub cooking_handle: Arc<Mutex<Option<usize>>>,
 }
 
 impl Global {
@@ -118,14 +121,31 @@ fn abort_filter(state: State<Global>) -> ResultInterop<()> {
     filter::abort(state).into()
 }
 
+#[tauri::command]
+fn load_override_localization_json(state: State<Global>) -> String {
+    state.config.load_override_localization_json()
+}
+
+#[tauri::command]
+fn get_result_limit(state: State<Global>) -> usize {
+    state.config.result_limit
+}
+
+#[tauri::command]
+fn cook(app: AppHandle, state: State<Global>) -> ResultInterop<()> {
+    cook::run(app, state).into()
+}
+
 fn main() {
     env_logger::init();
     info!("configuring application");
     let executor = Arc::new(Executor::new(num_cpus::get()));
-    let db = Arc::new(file_io::create_database());
+    let config = Config::load();
+    let db = Arc::new(config::create_database());
 
     let app = tauri::Builder::default()
         .manage(Global {
+            config,
             executor: Arc::clone(&executor),
             db: Arc::clone(&db),
             search_result: Arc::new(Mutex::new(None)),
@@ -133,15 +153,18 @@ fn main() {
             filter_result: Arc::new(Mutex::new(None)),
             filter_handles: Arc::new(Mutex::new(Vec::new())),
             last_included: Arc::new(Mutex::new(HashSet::new())),
-            // filter: Arc::new(RwLock::new(FilterState::default())),
+            cooking_handle: Arc::new(Mutex::new(None)),
         })
         .invoke_handler(tauri::generate_handler![
             set_title,
             initialize,
+            load_override_localization_json,
             search,
             abort_search,
             filter,
-            abort_filter
+            abort_filter,
+            cook,
+            get_result_limit
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");

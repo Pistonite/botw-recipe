@@ -1,0 +1,7 @@
+# Path to the database folder
+database_path: database
+# Maximum result to compute and show in the result page
+# Warning: If this is too big, your computer may run out of memory
+result_limit: 40000
+# Set to a path to override the localization
+localization_override: null

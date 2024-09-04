@@ -6,7 +6,6 @@
 
 import {
     memo,
-    useCallback,
     useDeferredValue,
     useLayoutEffect,
     useMemo,
@@ -188,7 +187,7 @@ const LabelRenderer: React.FC<ItemActorSelectionRowProps> = memo(
                 media={<ItemActorIcon actor={actor} disabled={disabled} />}
             >
                 <ItemActorLabel actor={actor} />
-                <Caption1 block>{subtitle}&nbsp;</Caption1>
+                <Caption1 block>{subtitle}</Caption1>
             </TableCellLayout>
         );
     },
@@ -291,28 +290,6 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
         };
     }, [div, header, setHeight]);
 
-    const renderRow = useCallback<RowRenderer<ItemActorSelectionRowProps>>(
-        ({ item, rowId }, style) => {
-            return (
-                <DataGridRow<ItemActorSelectionRowProps>
-                    key={rowId}
-                    style={style}
-                >
-                    {({ columnId }) => (
-                        <DataGridCell focusMode={getCellFocusMode(columnId)}>
-                            {columnId === "actor" ? (
-                                <LabelRenderer {...item} />
-                            ) : (
-                                <ActionRenderer {...item} />
-                            )}
-                        </DataGridCell>
-                    )}
-                </DataGridRow>
-            );
-        },
-        [],
-    );
-
     const [sortState, setSortState] = useState<DataGridProps["sortState"]>({
         sortColumn: "actor",
         sortDirection: "descending",
@@ -365,10 +342,28 @@ export const ItemActorSelection: React.FC<ItemActorSelectionProps> = ({
         </div>
     );
 };
+const renderRow: RowRenderer<ItemActorSelectionRowProps> = (
+    { item, rowId },
+    style,
+) => {
+    return (
+        <DataGridRow<ItemActorSelectionRowProps> key={rowId} style={style}>
+            {({ columnId }) => (
+                <DataGridCell focusMode={getCellFocusMode(columnId)}>
+                    {columnId === "actor" ? (
+                        <LabelRenderer {...item} />
+                    ) : (
+                        <ActionRenderer {...item} />
+                    )}
+                </DataGridCell>
+            )}
+        </DataGridRow>
+    );
+};
 
 export type ItemActorPoolProps = {
     actors: Actor[];
-    disabled: boolean;
+    disabled?: boolean;
     /** Actors not included will display disabled */
     included: Actor[];
 };
@@ -422,6 +417,7 @@ export const ItemActorIcon: React.FC<ItemActorIconProps> = memo(
     },
 );
 
+/** A component to display an actor image with tooltip as a label */
 export const ItemActorIconWithTooltip: React.FC<ItemActorIconProps> = ({
     actor,
     disabled,
@@ -441,7 +437,7 @@ export const ItemActorIconWithTooltip: React.FC<ItemActorIconProps> = ({
     );
 };
 
-/** A component to display detail of the Actor*/
+/** A component to display detail of the Actor */
 export const ItemActorDetail: React.FC<ItemActorProps> = ({ actor }) => {
     const styles = useStyles();
     const { t } = useTranslation();

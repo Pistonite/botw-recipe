@@ -10,7 +10,7 @@ setInterval(() => {
     subscribers.forEach((subscriber) => subscriber(animationFrame));
 }, 1000);
 
-export const useAnimationFrame = (totalFrames: number) => {
+export const useItemAnimationFrame = (totalFrames: number) => {
     const [frame, setFrame] = useState(0);
     useEffect(() => {
         const subscriber = (f: number) => {

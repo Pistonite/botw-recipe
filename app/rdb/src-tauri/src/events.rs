@@ -4,6 +4,7 @@ use serde::Serialize;
 use tauri::{AppHandle, Manager};
 use ts_rs::TS;
 
+use crate::cook::OptimizedRecipeData;
 use crate::error::{Error, ResultInterop};
 
 /// Database is initialized and ready to use
@@ -73,4 +74,9 @@ pub fn emit_search_progress(app: &AppHandle, percentage: u32) {
 /// Send filter progress as a percentage between 0 and 100
 pub fn emit_filter_progress(app: &AppHandle, percentage: u32) {
     let _ = app.emit_all("filter-progress", percentage);
+}
+
+/// Send event for ready to display cooking results
+pub fn emit_cook_complete(app: &AppHandle, result: Result<Vec<OptimizedRecipeData>, Error>) {
+    let _ = app.emit_all("cook-complete", ResultInterop::from(result));
 }

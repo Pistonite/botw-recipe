@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import { searchReducer } from "./search.ts";
 import { filterReducer, getFavoriteActors, saveFavorites } from "./filter.ts";
+import { resultReducer } from "./result.ts";
 
 export const store = configureStore({
     reducer: {
         search: searchReducer,
         filter: filterReducer,
+        result: resultReducer,
     },
 });
 

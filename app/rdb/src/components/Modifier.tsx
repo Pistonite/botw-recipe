@@ -2,34 +2,16 @@
  * Modifier related components
  */
 import { useTranslation } from "react-i18next";
-import { memo, useMemo } from "react";
+import { memo, useState } from "react";
 import {
-    createTableColumn,
-    DataGrid,
-    DataGridBody,
-    DataGridCell,
-    type DataGridCellFocusMode,
-    DataGridHeader,
-    DataGridHeaderCell,
-    DataGridRow,
     Label,
     type LabelProps,
     makeStyles,
     shorthands,
-    TableCellLayout,
-    type TableColumnId,
-    ToggleButton,
+    Tooltip,
 } from "@fluentui/react-components";
-import {
-    Add20Filled,
-    Add20Regular,
-    Question20Filled,
-    Question20Regular,
-    Subtract20Filled,
-    Subtract20Regular,
-} from "@fluentui/react-icons";
 
-import { type WeaponModifier, WeaponModifiers } from "data/WeaponModifier.ts";
+import { WeaponModifiers, type WeaponModifier } from "data/WeaponModifier.ts";
 import type { WeaponModifierSet } from "host/types.ts";
 
 const useStyles = makeStyles({
@@ -47,180 +29,14 @@ const useStyles = makeStyles({
         minHeight: "24px",
         height: "24px",
     },
+    dataContainer: {
+        display: "flex",
+    },
 });
-
-export type ModifierSelectionProps = {
-    /** the currently selected included modifiers */
-    selectedInclude: WeaponModifierSet;
-    /** the currently selected excluded modifiers */
-    selectedExclude: WeaponModifierSet;
-
-    /** callback for when a modifier is selected */
-    onSelect: (
-        includeModifiers: WeaponModifierSet,
-        excludeModifiers: WeaponModifierSet,
-    ) => void;
-};
 
 export type ModifierProps = {
     /** which modifier to display */
     modifier: WeaponModifier;
-};
-
-export type ModifierSelectionRowProps = {
-    modifier: WeaponModifier;
-    included: boolean;
-    excluded: boolean;
-    onSelectInclude: (modifier: WeaponModifier) => void;
-    onSelectExclude: (modifier: WeaponModifier) => void;
-    onSelectIgnore: (modifier: WeaponModifier) => void;
-    t: (key: string) => string;
-};
-
-const ModifierSelectionColumns = [
-    createTableColumn<ModifierSelectionRowProps>({
-        columnId: "modifier",
-        renderHeaderCell: (t) =>
-            (t as (key: string) => string)("search.modifier.name"),
-        renderCell: ({ modifier }) => {
-            return (
-                <TableCellLayout media={<Modifier modifier={modifier} />}>
-                    <ModifierLabel modifier={modifier} />
-                </TableCellLayout>
-            );
-        },
-    }),
-    createTableColumn<ModifierSelectionRowProps>({
-        columnId: "option",
-        renderHeaderCell: (t) =>
-            (t as (key: string) => string)("search.modifier.option"),
-        renderCell: ({
-            modifier,
-            included,
-            excluded,
-            onSelectInclude,
-            onSelectExclude,
-            onSelectIgnore,
-            t,
-        }) => {
-            const ignore = !included && !excluded;
-            return (
-                <>
-                    <ToggleButton
-                        aria-label={t("search.modifier.option.include")}
-                        shape="circular"
-                        appearance={included ? "primary" : undefined}
-                        checked={included}
-                        onClick={() => onSelectInclude(modifier)}
-                        icon={included ? <Add20Filled /> : <Add20Regular />}
-                    />
-                    <ToggleButton
-                        aria-label={t("search.modifier.option.ignore")}
-                        shape="circular"
-                        appearance={ignore ? "primary" : undefined}
-                        checked={ignore}
-                        onClick={() => onSelectIgnore(modifier)}
-                        icon={
-                            ignore ? (
-                                <Question20Filled />
-                            ) : (
-                                <Question20Regular />
-                            )
-                        }
-                    />
-                    <ToggleButton
-                        aria-label={t("search.modifier.option.exclude")}
-                        shape="circular"
-                        appearance={excluded ? "primary" : undefined}
-                        checked={excluded}
-                        onClick={() => onSelectExclude(modifier)}
-                        icon={
-                            excluded ? (
-                                <Subtract20Filled />
-                            ) : (
-                                <Subtract20Regular />
-                            )
-                        }
-                    />
-                </>
-            );
-        },
-    }),
-];
-const getCellFocusMode = (columnId: TableColumnId): DataGridCellFocusMode => {
-    return columnId === "modifier" ? "cell" : "group";
-};
-
-export const ModifierSelection: React.FC<ModifierSelectionProps> = ({
-    selectedInclude,
-    selectedExclude,
-    onSelect,
-}) => {
-    const { t } = useTranslation();
-    const items = useMemo(() => {
-        const onSelectIgnore = (modifier: WeaponModifier) => {
-            const newInclude = selectedInclude & ~modifier;
-            const newExclude = selectedExclude & ~modifier;
-            onSelect(newInclude, newExclude);
-        };
-        const onSelectInclude = (modifier: WeaponModifier) => {
-            if (selectedInclude & modifier) {
-                onSelectIgnore(modifier);
-                return;
-            }
-            const newExclude = selectedExclude & ~modifier;
-            const newInclude = selectedInclude | modifier;
-            onSelect(newInclude, newExclude);
-        };
-        const onSelectExclude = (modifier: WeaponModifier) => {
-            if (selectedExclude & modifier) {
-                onSelectIgnore(modifier);
-                return;
-            }
-            const newInclude = selectedInclude & ~modifier;
-            const newExclude = selectedExclude | modifier;
-            onSelect(newInclude, newExclude);
-        };
-        return WeaponModifiers.map((modifier) => {
-            const included = Boolean(selectedInclude & modifier);
-            const excluded = Boolean(selectedExclude & modifier);
-            return {
-                modifier,
-                included,
-                excluded,
-                onSelectInclude,
-                onSelectExclude,
-                onSelectIgnore,
-                t,
-            } satisfies ModifierSelectionRowProps;
-        });
-    }, [selectedInclude, selectedExclude, onSelect, t]);
-    return (
-        <DataGrid items={items} columns={ModifierSelectionColumns}>
-            <DataGridHeader>
-                <DataGridRow>
-                    {({ renderHeaderCell }) => (
-                        <DataGridHeaderCell>
-                            {renderHeaderCell(t)}
-                        </DataGridHeaderCell>
-                    )}
-                </DataGridRow>
-            </DataGridHeader>
-            <DataGridBody<ModifierSelectionRowProps>>
-                {({ item, rowId }) => (
-                    <DataGridRow<ModifierSelectionRowProps> key={rowId}>
-                        {({ renderCell, columnId }) => (
-                            <DataGridCell
-                                focusMode={getCellFocusMode(columnId)}
-                            >
-                                {renderCell(item)}
-                            </DataGridCell>
-                        )}
-                    </DataGridRow>
-                )}
-            </DataGridBody>
-        </DataGrid>
-    );
 };
 
 /** A localized modifier label */
@@ -230,6 +46,57 @@ export const ModifierLabel: React.FC<ModifierProps & LabelProps> = ({
 }) => {
     const { t } = useTranslation();
     return <Label {...rest}>{t(`modifier.${modifier}`)}</Label>;
+};
+
+export type ModifierDataProps = {
+    modifiers: WeaponModifierSet;
+    value: number;
+};
+
+export const ModifierData: React.FC<ModifierDataProps> = memo(
+    ({ modifiers, value }) => {
+        const styles = useStyles();
+        return (
+            <div className={styles.dataContainer}>
+                {WeaponModifiers.map((modifier) => {
+                    if (!(modifiers & modifier)) {
+                        return null;
+                    }
+                    return (
+                        <ModifierWithValueTooltip
+                            key={modifier}
+                            modifier={modifier}
+                            value={value}
+                        />
+                    );
+                })}
+            </div>
+        );
+    },
+);
+
+export const ModifierWithValueTooltip: React.FC<
+    ModifierProps & { value: number }
+> = ({ modifier, value }) => {
+    const [ref, setRef] = useState<HTMLSpanElement | null>(null);
+    const { t } = useTranslation();
+    const values = {
+        value,
+        valueThousandth: (value / 1000).toFixed(3),
+        valueMax10: Math.min(value, 10),
+    };
+    return (
+        <Tooltip
+            positioning={{ target: ref }}
+            appearance="inverted"
+            content={t(`modifier.${modifier}.value`, values)}
+            relationship="label"
+        >
+            <span ref={setRef}>
+                <Modifier modifier={modifier} />
+            </span>
+        </Tooltip>
+    );
 };
 
 /** Component that displays a weapon modifier block */

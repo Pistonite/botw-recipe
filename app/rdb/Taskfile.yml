@@ -14,7 +14,7 @@ tasks:
     desc: Run RDB in dev (watch) mode
     env:
       RUST_LOG: info
-      BOTWRDB_PATH: ../../../dump/emulate/compact
+      BOTWRDB_CONFIG_PATH: ../../../app/rdb/rdb.config.yaml
     cmds:
     - npx tauri dev --features devtools {{.CLI_ARGS}}
 
