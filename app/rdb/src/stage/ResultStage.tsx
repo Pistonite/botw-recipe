@@ -21,6 +21,7 @@ import {
 } from "store/result.ts";
 import { getFilterStageDisabledMessage } from "store/selectors.ts";
 import { getFavoriteActors, getFilterResultCount } from "store/filter.ts";
+import { getErrorMessage } from "data/ErrorMessage";
 
 const useStyles = makeStyles({
     progressContainer: {
@@ -117,8 +118,7 @@ const ResultStageBody: React.FC = () => {
                         <ErrorCircle20Filled className={styles.errorIcon} />
                         <Body1>
                             {t("result.error", {
-                                message:
-                                    "test long long long long long long long",
+                                message: getErrorMessage(error),
                             })}
                         </Body1>
                     </div>

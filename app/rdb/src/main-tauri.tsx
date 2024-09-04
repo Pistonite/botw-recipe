@@ -128,7 +128,7 @@ class TauriBinding implements HostBinding {
             return await invoke("get_result_limit");
         } catch (e) {
             console.error(e);
-            return 2000;
+            return 5000;
         }
     }
 }

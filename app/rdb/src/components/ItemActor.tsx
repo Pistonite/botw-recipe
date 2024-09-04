@@ -52,7 +52,6 @@ import { useItemSearch } from "i18n/itemSearch.ts";
 const useStyles = makeStyles({
     iconContainer: {
         position: "relative", // for overlay to anchor
-        display: "inline-block",
         backgroundImage: 'url("/actors/bg.png")',
         minWidth: "42px",
         width: "42px",

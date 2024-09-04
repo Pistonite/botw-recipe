@@ -1,7 +1,7 @@
+use std::fs::File;
 use std::io::BufReader;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
-use std::{fs::File, path::Path};
 
 use log::{error, info};
 use rdata::db::Database;
@@ -23,7 +23,7 @@ fn default_database_path() -> String {
 }
 
 const fn default_result_limit() -> usize {
-    40000
+    5000
 }
 
 impl Config {

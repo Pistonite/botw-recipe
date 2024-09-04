@@ -1,23 +1,20 @@
 //! Cook result
 
-use std::{
-    cmp::Reverse,
-    collections::{HashMap, HashSet},
-    sync::Arc,
-};
+use std::cmp::Reverse;
+use std::collections::{HashMap, HashSet};
+use std::sync::Arc;
 
 use log::{error, info};
+use rdata::cook::{CookEffect, CookingPot};
 use rdata::db::TempResult;
-use rdata::{
-    cook::{CookEffect, CookingPot},
-    Actor,
-};
-use rdata::{Group, RecipeId, RecipeInputs};
+use rdata::{Actor, Group, RecipeId, RecipeInputs};
 use serde::Serialize;
 use tauri::{AppHandle, State};
 use ts_rs::TS;
 
-use crate::{error::Error, events, executor::AbortSignal, Global};
+use crate::error::Error;
+use crate::executor::AbortSignal;
+use crate::{events, Global};
 
 #[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
@@ -139,15 +136,6 @@ fn optimize_results(results: Vec<RecipeData>) -> Vec<OptimizedRecipeData> {
     // key -> (id, extra_group)
     let mut recipe_map = HashMap::new();
     for data in &results {
-        // // we only optimize recipes with 5 ingredients
-        // if data.inputs[0] == Group::None {
-        //     seen.insert(data.id);
-        //     optimized.push(OptimizedRecipeData {
-        //         actors: inputs_to_actors(&data.inputs),
-        //         values: data.values.clone(),
-        //     });
-        //     continue;
-        // }
         // extract 5 keys from each data
         for exclude in 0..rdata::NUM_INGR {
             let key = RecipeKey::from_inputs(&data.inputs, exclude, data.values.clone());
@@ -189,11 +177,6 @@ fn optimize_results(results: Vec<RecipeData>) -> Vec<OptimizedRecipeData> {
                 values: values.clone().unwrap(),
             });
         }
-        // let optimized_data = OptimizedRecipeData {
-        //     actors,
-        //     values: values.unwrap(),
-        // };
-        // optimized.push(optimized_data);
     }
 
     let seen_len = seen.len();
@@ -245,17 +228,6 @@ impl RecipeKey {
     }
 }
 
-// fn inputs_to_actors(inputs: &RecipeInputs) -> Vec<Vec<usize>> {
-//     let mut actors = Vec::with_capacity(rdata::NUM_INGR);
-//     for group in inputs.as_slice() {
-//         if *group == Group::None {
-//             continue;
-//         }
-//         actors.push(group.actors().iter().map(|a| *a as usize).collect());
-//     }
-//     actors
-// }
-
 /// if any of the actors is None, will be forked into multiple outputs
 ///
 /// For example:
@@ -263,15 +235,6 @@ impl RecipeKey {
 ///     [ [y], [z] ],
 ///     [ [x], [y], [z] ],
 /// ]
-///
-/// A recursive algorithm is used:
-/// extract([ ... , [x, .., y] ]) = [ [...A, [x, .., y]] for A in extract([ ...]) ]
-/// extract([ ... , [none, x] ]) = [
-///     [...A, [x]] for A in extract([ ...])
-/// ] + [
-///     [...A] for A in extract([ ...])
-/// ]
-/// extract([]) = [[]]
 fn extract_none_actor(mut actors: Vec<Vec<usize>>) -> Vec<Vec<Vec<usize>>> {
     let mut last = match actors.pop() {
         Some(last) => last,
@@ -282,7 +245,7 @@ fn extract_none_actor(mut actors: Vec<Vec<usize>>) -> Vec<Vec<Vec<usize>>> {
         NoneState::HadOnlyNone => {
             // if last has only none, then don't append anything
         }
-        NoneState::HasNoneAndOther => {
+        NoneState::HadNoneAndOther => {
             // last has None and other
             let result_without_last = recur_result.clone();
             // first, append last without None to all results
@@ -304,7 +267,7 @@ fn extract_none_actor(mut actors: Vec<Vec<usize>>) -> Vec<Vec<Vec<usize>>> {
 
 enum NoneState {
     HadOnlyNone,
-    HasNoneAndOther,
+    HadNoneAndOther,
     NoNone,
 }
 
@@ -318,7 +281,7 @@ fn remove_all_nones(actors: &mut Vec<usize>) -> NoneState {
         return NoneState::HadOnlyNone;
     }
     if removed {
-        return NoneState::HasNoneAndOther;
+        return NoneState::HadNoneAndOther;
     }
     NoneState::NoNone
 }
