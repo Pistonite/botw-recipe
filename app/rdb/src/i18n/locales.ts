@@ -2,7 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import type { Host } from "host/Host.ts";
-import { initLocalizedItemSearch } from "./itemSearch";
+import { initLocalizedItemSearch } from "./itemSearch.ts";
+import { getTranslationOverride } from "./override.ts";
 
 export const DefaultLocale = "en-US" as const;
 
@@ -80,6 +81,11 @@ export async function switchLanguage(locale: string, host: Host) {
 export async function loadLocale(
     locale: string,
 ): Promise<Record<string, string>> {
+    const override = getTranslationOverride();
+    if (override) {
+        RESOURCES[locale] = { translation: override };
+        return override;
+    }
     if (!RESOURCES[locale]) {
         const module = await import(`./locales/${locale}.yaml`);
         RESOURCES[locale] = { translation: module.default };
