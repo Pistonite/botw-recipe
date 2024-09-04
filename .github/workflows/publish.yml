@@ -3,10 +3,6 @@ on:
   push:
     tags:
       - v*.*.*
-  # for testing
-  pull_request:
-    branches:
-      - main
 
 jobs:
   publish:
@@ -25,8 +21,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         workflow: build.yml
-        # commit: ${{ github.sha }}
-        commit: 87464f9edb46579f5fa90f2035523980e9dbb41b
+        commit: ${{ github.sha }}
         path: package
     - uses: robinraju/release-downloader@v1
       with:

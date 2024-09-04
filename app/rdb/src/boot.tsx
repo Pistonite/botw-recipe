@@ -8,7 +8,11 @@ import { App } from "./App";
 import { AlertProvider } from "components/AlertProvider.tsx";
 import type { Host } from "host/Host.ts";
 import { HostContext } from "host/useHost.ts";
-import { initLocale, loadLocalePreference, switchLanguage } from "i18n/locales.ts";
+import {
+    initLocale,
+    loadLocalePreference,
+    switchLanguage,
+} from "i18n/locales.ts";
 import { setTranslationOverride } from "i18n/override.ts";
 import { store } from "store/store.ts";
 import { updateSearchProgress } from "store/search.ts";
@@ -17,12 +21,14 @@ import { setResultLimit } from "store/result.ts";
 
 /** Boot the app using the provided host */
 export async function boot(host: Host) {
-    host.getBinding().loadOverrideLocalizationJson().then((json) => {
-        if (json) {
-            setTranslationOverride(json);
-            switchLanguage(loadLocalePreference(), host);
-        }
-    });
+    host.getBinding()
+        .loadOverrideLocalizationJson()
+        .then((json) => {
+            if (json) {
+                setTranslationOverride(json);
+                switchLanguage(loadLocalePreference(), host);
+            }
+        });
     await initLocale();
 
     ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

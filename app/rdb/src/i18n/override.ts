@@ -1,5 +1,5 @@
 /**
- * System for side-loading localization to make it easier 
+ * System for side-loading localization to make it easier
  * for translators to test their translations.
  */
 
@@ -10,8 +10,8 @@ export const setTranslationOverride = (jsonString: string) => {
         console.log("using side-loaded translation");
         override = JSON.parse(jsonString);
     }
-}
+};
 
 export const getTranslationOverride = () => {
     return override;
-}
+};
