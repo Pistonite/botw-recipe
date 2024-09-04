@@ -38,7 +38,7 @@ jobs:
       id: release-notes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run:
+    - run: |
         echo "${{ steps.release-notes.outputs.release-notes }}" > .github/RELEASE_NOTES.md
         cat .github/RELEASE_NOTES_FOOTER.md >> .github/RELEASE_NOTES.md
     - name: Package (windows)
@@ -48,10 +48,37 @@ jobs:
         7z u package/botwrdb-bundle-windows.7z botwrdb.exe
         7z a package/botwrdb-windows.7z botwrdb.exe
         rm botwrdb.exe
+    - name: Package (linux)
+      run: |
+        cp package/database.7z package/botwrdb-bundle-linux.7z
+        cp package/botwrdb-linux/botwrdb .
+        7z u package/botwrdb-bundle-linux.7z botwrdb
+        7z a package/botwrdb-linux.7z botwrdb
+        rm botwrdb
+    - name: Package (macos-x86_64)
+      run: |
+        cp package/database.7z package/botwrdb-bundle-macos-x86_64.7z
+        cp package/botwrdb-macos-x86_64/botwrdb .
+        7z u package/botwrdb-bundle-macos-x86_64.7z botwrdb
+        7z a package/botwrdb-macos-x86_64.7z botwrdb
+        rm botwrdb
+    - name: Package (macos-aarch64)
+      run: |
+        cp package/database.7z package/botwrdb-bundle-macos-aarch64.7z
+        cp package/botwrdb-macos-aarch64/botwrdb .
+        7z u package/botwrdb-bundle-macos-aarch64.7z botwrdb
+        7z a package/botwrdb-macos-aarch64.7z botwrdb
+        rm botwrdb
     - uses: softprops/action-gh-release@v2
       with:
         draft: true
         body_path: .github/RELEASE_NOTES.md
         files: |
           package/botwrdb-bundle-windows.7z
+          package/botwrdb-bundle-linux.7z
+          package/botwrdb-bundle-macos-x86_64.7z
+          package/botwrdb-bundle-macos-aarch64.7z
           package/botwrdb-windows.7z
+          package/botwrdb-linux.7z
+          package/botwrdb-macos-x86_64.7z
+          package/botwrdb-macos-aarch64.7z
