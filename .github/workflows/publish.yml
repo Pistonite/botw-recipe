@@ -34,11 +34,20 @@ jobs:
         fileName: database.7z
         out-file-path: package
         extract: false
-    - name: package windows
+    - uses: johnyherangi/create-release-notes@v1
+      id: release-notes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run:
+        echo "${{ steps.release-notes.outputs.release-notes }}" > .github/RELEASE_NOTES.md
+        cat .github/RELEASE_NOTES_FOOTER.md >> .github/RELEASE_NOTES.md
+    - name: Package (windows)
       run: |
         cp package/database.7z package/botwrdb-bundle-windows.7z
-        7z u package/botwrdb-bundle-windows.7z package/botwrdb-windows/botwrdb.exe
-        7z a package/botwrdb-windows.7z package/botwrdb-windows/botwrdb.exe
+        cp package/botwrdb-windows/botwrdb.exe .
+        7z u package/botwrdb-bundle-windows.7z botwrdb.exe
+        7z a package/botwrdb-windows.7z botwrdb.exe
+        rm botwrdb.exe
     - uses: softprops/action-gh-release@v2
       with:
         draft: true
