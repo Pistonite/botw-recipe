@@ -18,6 +18,9 @@ const useStyles = makeStyles({
         alignItems: "center",
         gap: "8px",
     },
+    subtitle: {
+        minHeight: "40px",
+    },
 });
 
 export const StageTitle: React.FC<StageTitleProps> = memo(
@@ -29,7 +32,9 @@ export const StageTitle: React.FC<StageTitleProps> = memo(
                     <Icon />
                     {title}
                 </Title3>
-                <Body1 block> {desc} </Body1>
+                <div className={styles.subtitle}>
+                    <Body1 block> {desc} </Body1>
+                </div>
                 <StageDivider />
             </div>
         );

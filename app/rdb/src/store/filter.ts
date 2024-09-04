@@ -249,6 +249,10 @@ function getStringPercentage(percentage: number) {
     return result;
 }
 
+export const getFilterResultCount = (state: State) => {
+    return state.filter.filterResultCount;
+};
+
 export const getFilterMessage = createSelector(
     [
         (state: State) => state.filter.filterProgress,

@@ -165,8 +165,15 @@ impl CookingPot {
             );
             time_boost += ingr.boost_effect_time;
             hp_boost += ingr.boost_hp;
+            debugln!(
+                "adding {} hp_boost from {}, now {} ",
+                ingr.boost_hp,
+                ingr.actor,
+                hp_boost
+            );
         }
         output.health_recover += hp_boost;
+        debugln!("hp+=hp_boost, now {}", output.health_recover);
         output.effect_duration += time_boost;
 
         // Recipe Boost
@@ -177,6 +184,11 @@ impl CookingPot {
             life_recover
         );
         output.health_recover += recipe.get_extra_hp();
+        debugln!(
+            "recipe extra hp is {}, hp is now {}",
+            recipe.get_extra_hp(),
+            output.health_recover
+        );
 
         // Adjust Item
 
@@ -187,12 +199,14 @@ impl CookingPot {
         );
         if effect == CookEffect::None && output.health_recover == 0 {
             output.health_recover = 1;
+            debugln!("hp is 0 and food has no effect, setting hp to 1");
         }
         reference!(
             "max life recover",
             uking::CookingMgr::cookAdjustItem(),
             life_recover_max
         );
+        debugln!("hp is {}, and will be capped at 120", output.health_recover);
         output.health_recover = output.health_recover.min(120); // 30 hearts
         reference!(
             "max time",
@@ -208,6 +222,10 @@ impl CookingPot {
                 life_recover
             );
             output.health_recover = output.effect_level as i32;
+            debugln!(
+                "hearty effect, hp is set to number of yellow quarter-hearts, which is {}",
+                output.health_recover
+            );
         }
 
         // We handle crit at the end, so we can know what the final hp is
@@ -287,6 +305,7 @@ impl CookingPot {
                 }
             } else {
                 hp += ingr.hp;
+                debugln!("adding {} hp from {}, now {}", ingr.hp, ingr.actor, hp);
                 let is_effect_item = ingr.effect == effect && effect != CookEffect::None;
                 if effect.uses_time() {
                     // every ingredient adds 30s
@@ -410,8 +429,10 @@ impl CookingPot {
 
         if dubious {
             output.health_recover = hp;
+            debugln!("result is dubious, hp*1, which is {}", hp);
         } else {
             output.health_recover = hp * HP_MULTIPLIER;
+            debugln!("result is not dubious, hp={hp}*2={}", output.health_recover);
         }
 
         #[allow(clippy::collapsible_if)]

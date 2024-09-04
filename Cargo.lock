@@ -246,6 +246,7 @@ dependencies = [
  "oneshot",
  "serde",
  "serde_json",
+ "serde_yaml",
  "tauri",
  "tauri-build",
  "thiserror",

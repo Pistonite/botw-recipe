@@ -57,6 +57,22 @@ filter.not_ready.not_searched: No search result found. Please search for recipes
 filter.not_ready.no_result: Did not find any recipe that matched the modifiers. Please adjust the criteria and search again.
 filter.not_ready.searching: Waiting for search to finish...
 
+result.title: Results
+result.desc: Recipes with the desired modifiers and only include the wanted items
+result.progress: Cooking the results
+result.error: "Error while cooking the results: {{message}}"
+result.button.retry: Retry
+result.count: Showing {{count}} recipes after grouping
+result.limited: Results exceeded the limit of {{limit}}, showing only the first {{count}} recipes after grouping. Keep in mind this is NOT the full result list. Please keep filtering to reduce the number of results.
+result.list.note: (Value marked with * requires a non-guaranteed HP crit)
+result.header.recipe: Recipe
+result.header.recipe_desc: Recipe (Most favorited)
+result.header.recipe_asc: Recipe (Least favorited)
+result.header.value: Value
+result.header.modifier: Modifiers
+result.nothing: No recipe found
+result.not_ready: Results will be displayed here once the search is executed
+result.any_of: "Any of:"
 
 error.title: Error
 error.message.io: "IO Error: {{message}}"
@@ -84,14 +100,23 @@ confirm.message.filter.abort: Are you sure to cancel applying the filter?
 
 # Modifiers
 modifier.1: Attack Up
+modifier.1.value: Attack Up + {{value}}
 modifier.2: Durability Up
+modifier.2.value: Durability Up
 modifier.4: Critical Hit
+modifier.4.value: Critical Hit
 modifier.8: Long Throw
+modifier.8.value: Throw Range/Speed x {{valueThousandth}}
 modifier.16: Multishot
+modifier.16.value: Max {{valueMax10}}-shot
 modifier.32: Zoom
+modifier.32.value: Zoom
 modifier.64: Quick Shot
+modifier.64.value: Shooting Speed x {{valueThousandth}}
 modifier.128: Shield Surf Up
+modifier.128.value: Surf Friction x {{valueThousandth}}
 modifier.256: Shield Guard Up
+modifier.256.value: Shield Guard Up + {{value}}
 
 # DO NOT MODIFY BELOW
 ### AUTOGEN ###

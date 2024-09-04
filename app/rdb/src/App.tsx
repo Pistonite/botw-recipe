@@ -1,14 +1,14 @@
 import {
+    Button,
     makeStaticStyles,
     makeStyles,
     shorthands,
 } from "@fluentui/react-components";
-import { List24Regular } from "@fluentui/react-icons";
 
 import { LocalePicker } from "components/LocalePicker.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
 import { FilterStage } from "stage/FilterStage.tsx";
-import { StageTitle } from "components/StageTitle";
+import { ResultStage } from "stage/ResultStage.tsx";
 
 const useStaticStyles = makeStaticStyles({
     "*": {
@@ -44,6 +44,11 @@ const useStyles = makeStyles({
         backgroundColor: "#ccc",
         gap: "1px", // for border
     },
+    corner: {
+        position: "fixed",
+        right: "10px",
+        top: "10px",
+    },
 });
 
 export const App: React.FC = () => {
@@ -68,15 +73,18 @@ export const App: React.FC = () => {
                 >
                     <FilterStage />
                 </div>
-                <div className={styles.stageContainer} style={{ flex: 1 }}>
-                    <StageTitle
-                        title="Results"
-                        icon={List24Regular}
-                        desc="Recipes here should both have the desired modifiers, and only include the desired items"
-                    />
+                <div className={styles.stageContainer}>
+                    <ResultStage />
                 </div>
             </div>
-            <div style={{ position: "fixed", right: 10, top: 10 }}>
+            <div className={styles.corner}>
+                <Button
+                    as="a"
+                    appearance="subtle"
+                    icon={<img src="/github-mark.svg" />}
+                    href="https://github.com/Pistonight/botw-recipe"
+                    target="_blank"
+                />
                 <LocalePicker />
             </div>
         </>

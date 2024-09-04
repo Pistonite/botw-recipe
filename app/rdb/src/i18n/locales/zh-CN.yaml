@@ -57,6 +57,22 @@ filter.not_ready.not_searched: 请先进行附魔搜索
 filter.not_ready.no_result: 没有找到符合附魔条件的组合。请调整条件后重试
 filter.not_ready.searching: 等待搜索结果中...
 
+result.title: 可用组合
+result.desc: 符合附魔条件，且仅包含未排除材料的组合
+result.progress: 正在制作料理
+result.error: "计算料理时发生错误: {{message}}"
+result.button.retry: 重试
+result.count: 合并后共有{{count}}种组合
+result.limited: 搜索结果数量超过了{{limit}}的限制，仅显示合并后的共{{count}}种。注意这并不是完整列表。请继续排除材料以缩小结果数量。
+result.list.note: （标"*"的数值表示必须触发随机的心心暴击）
+result.header.recipe: 组合
+result.header.recipe_desc: 组合（标记优先）
+result.header.recipe_asc: 组合（非标记优先）
+result.header.value: 数值
+result.header.modifier: 附魔
+result.nothing: 没有找到任何组合
+result.not_ready: 结果在搜索后才会显示
+result.any_of: "以下任一："
 
 error.title: 发生错误
 error.message.io: "IO错误: {{message}}"
@@ -84,14 +100,23 @@ confirm.message.filter.abort: 确定取消刷新材料列表？
 
 # Modifiers
 modifier.1: 攻击力提升
+modifier.1.value: 攻击力提升 + {{value}}
 modifier.2: 耐力提升
+modifier.2.value: 耐力提升
 modifier.4: 结束暴击
+modifier.4.value: 结束暴击
 modifier.8: 远距离投掷
+modifier.8.value: 远距离投掷 x {{valueThousandth}}
 modifier.16: 多连发
+modifier.16.value: 最多{{valueMax10}}连发
 modifier.32: 倍镜
+modifier.32.value: 倍镜
 modifier.64: 速射
+modifier.64.value: 射速 x {{valueThousandth}}
 modifier.128: 盾滑行提升
+modifier.128.value: 滑行摩擦力 x {{valueThousandth}}
 modifier.256: 盾防护提升
+modifier.256.value: 盾防护提升 + {{value}}
 
 # DO NOT MODIFY BELOW
 ### AUTOGEN ###

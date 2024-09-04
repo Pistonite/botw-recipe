@@ -1,4 +1,5 @@
-import type { Result, Void } from "@pistonite/pure/result";
+import type { Err, Result, Void } from "@pistonite/pure/result";
+import { SerialEvent } from "@pistonite/pure/sync";
 
 import { createUnknownError } from "data/ErrorMessage.ts";
 import { ActorToGroup, type Actor } from "data/Actor.ts";
@@ -9,6 +10,7 @@ import type {
     HostProgressHandler,
     Stats,
     SearchFilter,
+    OptimizedRecipeData,
 } from "./types.ts";
 
 export class Host {
@@ -20,31 +22,51 @@ export class Host {
     private filterResolve:
         | ((result: Result<Stats, HostError>) => void)
         | undefined = undefined;
+    private cookResolve:
+        | ((result: Result<OptimizedRecipeData[], HostError>) => void)
+        | undefined = undefined;
+    private cookEvent: SerialEvent;
+
     constructor(binding: HostBinding) {
         this.binding = binding;
+        this.cookEvent = new SerialEvent();
+    }
+
+    public getBinding(): HostBinding {
+        return this.binding;
     }
 
     public async bind(
         searchProgressHandler: HostProgressHandler,
         filterProgressHandler: HostProgressHandler,
     ): Promise<void> {
-        await this.binding.setSearchCompleteHandler((result) => {
-            const resolve = this.searchResolve;
-            if (resolve) {
-                this.searchResolve = undefined;
-                resolve(result);
-            }
-        });
-        await this.binding.setSearchProgressHandler(searchProgressHandler);
+        await Promise.all([
+            this.binding.setSearchCompleteHandler((result) => {
+                const resolve = this.searchResolve;
+                if (resolve) {
+                    this.searchResolve = undefined;
+                    resolve(result);
+                }
+            }),
+            this.binding.setSearchProgressHandler(searchProgressHandler),
 
-        await this.binding.setFilterCompleteHandler((result) => {
-            const resolve = this.filterResolve;
-            if (resolve) {
-                this.filterResolve = undefined;
-                resolve(result);
-            }
-        });
-        await this.binding.setFilterProgressHandler(filterProgressHandler);
+            this.binding.setFilterCompleteHandler((result) => {
+                const resolve = this.filterResolve;
+                if (resolve) {
+                    this.filterResolve = undefined;
+                    resolve(result);
+                }
+            }),
+            this.binding.setFilterProgressHandler(filterProgressHandler),
+
+            this.binding.setCookCompleteHandler((result) => {
+                const resolve = this.cookResolve;
+                if (resolve) {
+                    this.cookResolve = undefined;
+                    resolve(result);
+                }
+            }),
+        ]);
     }
 
     public setTitle(title: string): void {
@@ -83,9 +105,11 @@ export class Host {
             });
         });
     }
+
     public cancelSearch(): Promise<Void<HostError>> {
         return this.binding.abortSearch();
     }
+
     public filter(filter: Actor[]): Promise<Result<Stats, HostError>> {
         const groups = filter.map((actor) => ActorToGroup[actor]);
         return new Promise((resolve) => {
@@ -100,7 +124,31 @@ export class Host {
             });
         });
     }
+
     public cancelFilter(): Promise<Void<HostError>> {
         return this.binding.abortFilter();
+    }
+
+    public async cook(): Promise<Result<OptimizedRecipeData[], HostError>> {
+        const result = await this.cookEvent.run<
+            Result<OptimizedRecipeData[], HostError>
+        >(() => {
+            return new Promise((resolve) => {
+                this.binding.cook().then((result) => {
+                    if ("err" in result) {
+                        resolve({
+                            err: result.err || createUnknownError("cook"),
+                        });
+                        return;
+                    }
+                    this.cookResolve = resolve;
+                });
+            });
+        });
+        if (result.err === "cancel") {
+            // convert to a host error
+            return { err: { type: "Aborted" } } satisfies Err<HostError>;
+        }
+        return result;
     }
 }

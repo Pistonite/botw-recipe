@@ -15,7 +15,7 @@ import {
 import { Filter24Regular, Info20Regular } from "@fluentui/react-icons";
 
 import { StageTitle } from "components/StageTitle.tsx";
-import { ItemActorPool, ItemActorSelection } from "components/Actor.tsx";
+import { ItemActorPool, ItemActorSelection } from "components/ItemActor.tsx";
 import { StageAction } from "components/StageAction.tsx";
 import { StageDivider } from "components/StageDivider.tsx";
 import { useAlert, useConfirm } from "components/AlertProvider.tsx";
@@ -39,6 +39,7 @@ import {
 import { useDispatch } from "store/hook.ts";
 import { useHost } from "host/useHost.ts";
 import { getErrorAlertPayload } from "data/ErrorMessage.ts";
+import { useResultCooker } from "util/useResultCooker.ts";
 
 const useStyles = makeStyles({
     search: {
@@ -113,8 +114,9 @@ export const FilterStage: React.FC = () => {
     const confirmAbortFilter = useConfirm(t("confirm.message.filter.abort"));
 
     const host = useHost();
+    const cook = useResultCooker();
     const [abortInProgress, setAbortInProgress] = useState(false);
-    const filterHandler = useCallback(async () => {
+    const filterHandler = async () => {
         if (stageDisabled) {
             return;
         }
@@ -163,16 +165,8 @@ export const FilterStage: React.FC = () => {
                 ...result.val,
             }),
         );
-    }, [
-        included,
-        stageDisabled,
-        isFilteringInProgress,
-        confirmAbortFilter,
-        alert,
-        dispatch,
-        host,
-        setAbortInProgress,
-    ]);
+        cook();
+    };
 
     return (
         <>

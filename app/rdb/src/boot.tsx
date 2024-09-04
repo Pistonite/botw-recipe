@@ -12,6 +12,7 @@ import { initLocale } from "i18n/locales.ts";
 import { store } from "store/store.ts";
 import { updateSearchProgress } from "store/search.ts";
 import { updateFilterProgress } from "store/filter.ts";
+import { setResultLimit } from "store/result.ts";
 
 /** Boot the app using the provided host */
 export async function boot(host: Host) {
@@ -39,6 +40,12 @@ export async function boot(host: Host) {
         store.dispatch(updateFilterProgress(percentage));
     };
 
-    await host.bind(searchProgressHandler, filterProgressHandler);
-    await host.initialize();
+    host.initialize();
+    host.bind(searchProgressHandler, filterProgressHandler);
+    host.getBinding()
+        .getResultLimit()
+        .then((limit) => {
+            console.log("setting result limit to " + limit);
+            store.dispatch(setResultLimit(limit));
+        });
 }
