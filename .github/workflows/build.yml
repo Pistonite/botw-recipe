@@ -58,5 +58,5 @@ jobs:
         with:
           path: ${{ matrix.executable }}
           name: botwrdb-${{ matrix.label }}
-          retention-days: 3
+          retention-days: 30
 

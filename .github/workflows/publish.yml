@@ -1,0 +1,49 @@
+name: Publish
+on:
+  push:
+    tags:
+      - v*.*.*
+  # for testing
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: arduino/setup-task@v2
+      with:
+        version: 3.x
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - run: mkdir -p package
+    - uses: dawidd6/action-download-artifact@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        workflow: build.yml
+        # commit: ${{ github.sha }}
+        commit: 87464f9edb46579f5fa90f2035523980e9dbb41b
+        path: package
+    - uses: robinraju/release-downloader@v1
+      with:
+        tag: compactdb
+        fileName: database.7z
+        out-file-path: package
+        extract: false
+    - name: package windows
+      run: |
+        cp package/database.7z package/botwrdb-bundle-windows.7z
+        7z u package/botwrdb-bundle-windows.7z package/botwrdb.exe
+        7z a package/botwrdb-windows.7z package/botwrdb.exe
+    - uses: softprops/action-gh-release@v2
+      # if: startsWith(github.ref, 'refs/tags/')
+      with:
+        draft: true
+        body_path: .github/RELEASE_NOTES.md
+        files: |
+          package/botwrdb-bundle-windows.7z
+          package/botwrdb-windows.7z
