@@ -91,8 +91,8 @@ pub fn stat_groups(reader: TempResultReader, send: mpsc::Sender<StatMsg>, signal
             }
         };
         let inputs: RecipeInputs = recipe.into();
-        for group in inputs.as_slice() {
-            groups[*group] += 1;
+        for group in inputs.to_unique() {
+            groups[group] += 1;
         }
     }
     let _ = send.send(StatMsg::Ok(Box::new(groups)));
