@@ -19,6 +19,15 @@ If you would like to contribute, please see [CONTRIBUTING.md](app/rdb/src/i18n/C
 ## Troubleshooting
 If you are having issue on Arch Linux + Nvidia Driver, you may need to set the variable `__NV_PRIME_RENDER_OFFLOAD=1` to run the app.
 
+## FAQ
+
+#### Q: Monster Extract is missing
+Monster Extract randomizes the HP value, which makes it not that useful for WMC, especially for speedruns (which is the primary use of this tool).
+It might be added in the future.
+
+#### Q: Key items other than Sheikah Slate are missing
+Other key items such as Korok Seeds have parameters exactly like Sheikah Slate. Whenever you see Sheikah Slate in the result, you can replace it with the key item you want.
+
 ## Build
 You need:
 - Python
