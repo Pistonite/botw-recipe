@@ -7,10 +7,12 @@ import { getTranslationOverride } from "./override.ts";
 
 export const DefaultLocale = "en-US" as const;
 
+/** Locale code to native language name */
 export const SupportedLocales = {
     "en-US": "English",
     "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
 } as const;
+/** Language code to locale code as fallback */
 export const SupportedLanguages = {
     en: "en-US",
     zh: "zh-CN",
@@ -81,10 +83,12 @@ export async function switchLanguage(locale: string, host: Host) {
 export async function loadLocale(
     locale: string,
 ): Promise<Record<string, string>> {
-    const override = getTranslationOverride();
+    const override = await getTranslationOverride();
     if (override) {
-        RESOURCES[locale] = { translation: override };
-        return override;
+        console.log("reloading override translation");
+        const translation = JSON.parse(override);
+        RESOURCES[locale] = { translation };
+        return translation;
     }
     if (!RESOURCES[locale]) {
         const module = await import(`./locales/${locale}.yaml`);

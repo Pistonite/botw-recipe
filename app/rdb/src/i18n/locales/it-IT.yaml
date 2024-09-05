@@ -1,0 +1,358 @@
+# Translation needed! Please see CONTRIBUTING.md
+
+# UI
+title: BotW Recipe Database for WMC
+search.title: Search
+search.desc: Scan all material combinations and select recipes that meet the criteria for modifiers
+search.value.title: Value and Materials
+search.value.min: Min. Modifier Value (HP)
+search.value.max: Max. Modifier Value (HP)
+search.value.rng: Allow RNG HP Crit
+search.value.rng.desc: Include recipes where a non-guaranteed HP crit is needed to meet the minimum HP requirement. Guaranteed HP crit are not affected. (Note that a recipe which guarantees a crit may not guarantee a HP crit.)
+search.value.pe: Allow Unusual Material
+search.value.pe.desc: Include recipes where at least one material needs Prompt Entanglement or is usually unobtainable or uncookable.
+search.modifier.title: Modifiers
+search.modifier.desc: Select "+" for modifiers that must be included, and "-" for modifiers that must be excluded.
+search.modifier.name: Modifier
+search.modifier.option: Option
+search.modifier.option.include: Included
+search.modifier.option.exclude: Excluded
+search.modifier.option.ignore: Ignored
+search.button: Search
+search.button.cancel: Cancel
+search.progress: "Searching ({{progress}}%)"
+search.progress.initial: "Searching..."
+search.progress.stat_group: Computing material stats
+search.result: "Found {{count}} recipes in {{seconds}}s"
+
+filter.title: Filter
+filter.desc: Narrow down the scan results based on what items best fit your needs
+filter.list.title: Select Items
+filter.list.desc: Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection. Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
+filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
+filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
+filter.hide_excluded: Show only items included in results
+filter.selection.actor: Item ({{count}})
+filter.selection.option: Options
+filter.selection.option.favorite: Favorite
+filter.selection.option.unfavorite: Favorited
+filter.selection.option.include: Include
+filter.selection.option.exclude: Exclude
+filter.selection.subtitle.percentage: In {{percentage}}% of remaining recipes
+filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% of remaining recipes, will exclude
+filter.selection.subtitle.no_percentage: Statistics not available
+filter.selection.subtitle.no_percentage.to_exclude: Statistics not available, will exclude
+filter.selection.subtitle.excluded: Excluded
+filter.selection.subtitle.excluded.to_include: Excluded, will include
+filter.favorited: Favorited Items
+filter.favorited.clear: Clear
+filter.prompt: Press Apply to update the filter
+filter.button: Apply
+filter.button.cancel: Cancel
+filter.button.reset: Clear
+filter.progress: "Applying filter ({{progress}}%)"
+filter.progress.initial: "Applying filter..."
+filter.result: "Done in {{seconds}}s, {{count}} recipes left"
+filter.not_ready.not_searched: No search result found. Please search for recipes with modifier criteria first.
+filter.not_ready.no_result: Did not find any recipe that matched the modifiers. Please adjust the criteria and search again.
+filter.not_ready.searching: Waiting for search to finish...
+
+result.title: Results
+result.desc: Recipes with the desired modifiers and only include the wanted items
+result.progress: Cooking the results
+result.error: "Error while cooking the results: {{message}}"
+result.button.retry: Retry
+result.count: Showing {{count}} recipes after grouping
+result.limited: Results exceeded the limit of {{limit}}, showing only the first {{count}} recipes after grouping. Keep in mind this is NOT the full result list. Please keep filtering to reduce the number of results.
+result.list.note: (Value marked with * requires a non-guaranteed HP crit)
+result.header.recipe: Recipe
+result.header.recipe_desc: Recipe (Most favorited)
+result.header.recipe_asc: Recipe (Least favorited)
+result.header.value: Value
+result.header.modifier: Modifiers
+result.nothing: No recipe found
+result.not_ready: Results will be displayed here once the search is executed
+result.any_of: "Any of:"
+
+error.title: Error
+error.message.io: "IO Error: {{message}}"
+error.message.yaml: "YAML Error: {{message}}"
+error.message.poison: "Internal Error: Lock is poisoned: {{message}}"
+error.message.aborted: Aborted
+error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
+error.message.database.invalid_recipe: "Invalid recipe id: {{id}}"
+error.message.database.locked: "Database is locked. You may have another instance of the application running. If not, the application may have crashed earlier. Please delete `database/.lock` manually in that case."
+error.message.database.invalid: "Cannot validate the integrity of the database. It may have been corrupted. Try reinstalling the application. (Error Type: {{errorType}})"
+error.generic: "An error occurred: {{message}}"
+error.internal: "Internal Error: {{errorType}}"
+error.unknown: "Unknown Error: {{message}}"
+error.button: OK
+
+confirm.title: Confirm
+confirm.button.yes: "Yes"
+confirm.button.no: "No"
+confirm.message.search.abort: Are you sure to cancel the search?
+confirm.message.search.redo: Starting another search will delete the previous results. Are you sure to continue?
+confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
+confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
+confirm.message.filter.abort: Are you sure to cancel applying the filter?
+
+
+
+# Modifiers - please fix the ones marked with FIXME
+modifier.1: Attacco +
+modifier.1.value: Attacco + {{value}}
+modifier.2: Resistente
+modifier.2.value: Resistente
+modifier.4: Colpo di grazia
+modifier.4.value: Colpo di grazia
+modifier.8: Lunga gittata
+modifier.8.value: Throw Range/Speed x {{valueThousandth}} # FIXME
+modifier.16: Raffica da 5  # FIXME - change from 5-shot to multishot
+modifier.16.value: Max {{valueMax10}}-shot # FIXME
+modifier.32: Zoom # FIXME
+modifier.32.value: Zoom # FIXME
+modifier.64: Tiro rapido
+modifier.64.value: Shooting Speed x {{valueThousandth}} # FIXME
+modifier.128: Ottima scivolosità
+modifier.128.value: Surf Friction x {{valueThousandth}} # FIXME
+modifier.256: Parata +
+modifier.256.value: Parata + {{value}}
+
+# Please verify the auto-generated translations below, thanks :)
+
+# DO NOT MODIFY BELOW
+### AUTOGEN ###
+actor.Item_Fruit_D: Durian vivax
+actor.Item_Fruit_G: Noce di palma
+actor.Item_Fruit_A: Mela
+actor.Item_Fruit_B: Fragola
+actor.Item_Fruit_F: Melone fresco
+actor.Item_Fruit_I: Caldoperone
+actor.Item_Fruit_C: Frutto shock
+actor.Item_Fruit_E: Slancioloto
+actor.Item_Fruit_H: Bananalame
+actor.Item_Mushroom_N: Cuortufo bianco
+actor.Item_Mushroom_F: Cuortufo nero
+actor.Item_Mushroom_O: Gagliardello
+actor.Item_Mushroom_E: Hyrulino
+actor.Item_Mushroom_A: Vigorino
+actor.Item_Mushroom_B: Ghiaccino
+actor.Item_Mushroom_C: Caldoncello
+actor.Item_Mushroom_H: Fulminaccio
+actor.Item_MushroomGet_D: Scattola
+actor.Item_Mushroom_L: Spadarolo
+actor.Item_Mushroom_M: Chiodone
+actor.Item_Mushroom_J: Furtivolo
+actor.Item_PlantGet_C: Cuoranello grande
+actor.Item_PlantGet_B: Cuoranello
+actor.Item_PlantGet_Q: Briocarota
+actor.Item_PlantGet_A: Erba di Hyrule
+actor.Item_PlantGet_M: Carota sprint
+actor.Item_Fruit_J: Corazzucca
+actor.Item_PlantGet_E: Erba del gelo
+actor.Item_PlantGet_F: Erba del sole
+actor.Item_PlantGet_L: Erba shock
+actor.Item_PlantGet_O: Viola sprint
+actor.Item_PlantGet_G: Spadacciofo
+actor.Item_PlantGet_H: Carapacciofo
+actor.Item_PlantGet_I: Silentella
+actor.Item_PlantGet_J: Principessa serena
+actor.Item_Meat_11: Carne XXL
+actor.Item_Meat_12: Pollame XXL
+actor.Item_Meat_02: Carne XL
+actor.Item_Meat_07: Pollame XL
+actor.Item_Meat_01: Carne
+actor.Item_Meat_06: Pollame
+actor.BeeHome: Miele di ape briosa
+actor.Item_Material_03: Riso di Hyrule
+actor.Item_Material_04: Uovo
+actor.Item_Material_07: Grano di Colbacco
+actor.Item_Material_05: Latte fresco
+actor.Item_Fruit_K: Ghianda
+actor.Item_Fruit_L: Nocciola degli uccellini
+actor.Item_Material_01: Canna da zucchero
+actor.Item_Material_06: Burro di capra
+actor.Item_Material_02: Spezie Goron
+actor.Item_Ore_H: Salgemma
+actor.Item_Ore_J: Scheggia di stella
+actor.Item_Enemy_38: Squama di Oldra
+actor.Item_Enemy_39: Artiglio di Oldra
+actor.Item_Enemy_47: Dente di Oldra
+actor.Item_Enemy_48: Pezzo di corno di Oldra
+actor.Item_Enemy_49: Squama di Neldra
+actor.Item_Enemy_50: Artiglio di Neldra
+actor.Item_Enemy_51: Dente di Neldra
+actor.Item_Enemy_52: Pezzo di corno di Neldra
+actor.Item_Enemy_53: Squama di Firodra
+actor.Item_Enemy_54: Artiglio di Firodra
+actor.Item_Enemy_55: Dente di Firodra
+actor.Item_Enemy_56: Pezzo di corno di Firodra
+actor.Item_FishGet_I: Salmone vivax
+actor.Item_FishGet_K: Lumaca vivax
+actor.Item_FishGet_B: Aspio vivax
+actor.Item_FishGet_A: Aspio Hyrule
+actor.Item_FishGet_L: Aspio vigor
+actor.Item_FishGet_C: Trota gelida
+actor.Item_FishGet_J: Trota ignea
+actor.Item_FishGet_D: Trota scossa
+actor.Item_FishGet_X: Trota fugace
+actor.Item_FishGet_E: Carpa spada
+actor.Item_FishGet_H: Carpa corazzata
+actor.Item_FishGet_Z: Carpa tricolore
+actor.Item_FishGet_F: Orata spada
+actor.Item_FishGet_G: Orata corazzata
+actor.Item_FishGet_M: Lumaca silente
+actor.Item_InsectGet_K: Granchio spadaccino
+actor.Item_InsectGet_O: Granchio corazzato
+actor.Item_InsectGet_Z: Granchio podista
+actor.Animal_Insect_F: Fata
+actor.Animal_Insect_N: Farfalla del gelo
+actor.Animal_Insect_Q: Farfalla del sole
+actor.Animal_Insect_R: Farfalla saetta
+actor.Animal_Insect_AB: Farfalla ignifuga
+actor.Animal_Insect_C: Libellula del gelo
+actor.Animal_Insect_T: Libellula del sole
+actor.Animal_Insect_I: Libellula saetta
+actor.Animal_Insect_H: Cavalletta vigor
+actor.Animal_Insect_G: Scarabeo spadaccino
+actor.Animal_Insect_P: Scarabeo corazzato
+actor.Animal_Insect_AA: Scarabeo aitante
+actor.Animal_Insect_E: Lucciola silente
+actor.Animal_Insect_A: Rana lesta
+actor.Animal_Insect_B: Rana tosta
+actor.Animal_Insect_S: Lucertola velox
+actor.Animal_Insect_M: Lucertola vivax
+actor.Animal_Insect_X: Lucertola focus
+actor.Item_Ore_I: Pietra focaia
+actor.Item_Ore_F: Ambra
+actor.Item_Ore_E: Opale
+actor.Item_Ore_G: Lumiserite
+actor.Item_Ore_D: Topazio
+actor.Item_Ore_B: Rubino
+actor.Item_Ore_C: Zaffiro
+actor.Item_Ore_A: Diamante
+actor.Item_Enemy_00: Corno di boblin
+actor.Item_Enemy_01: Zanna di boblin
+actor.Item_Enemy_02: Cuore di boblin
+actor.Item_Enemy_06: Corno di grublin
+actor.Item_Enemy_07: Zanna di grublin
+actor.Item_Enemy_08: Cuore di grublin
+actor.Item_Enemy_03: Corno di lizalfos
+actor.Item_Enemy_04: Artiglio di lizalfos
+actor.Item_Enemy_05: Coda di lizalfos
+actor.Item_Enemy_42: Coda di lizalfos glaciale
+actor.Item_Enemy_41: Coda di lizalfos igneo
+actor.Item_Enemy_43: Coda di lizalfos elettrico
+actor.Item_Enemy_12: Corno di lynel
+actor.Item_Enemy_13: Zoccolo di lynel
+actor.Item_Enemy_14: Cuore di lynel
+actor.Item_Enemy_40: Gelatina chuchu
+actor.Item_Enemy_17: Gelatina chuchu bianca
+actor.Item_Enemy_15: Gelatina chuchu rossa
+actor.Item_Enemy_16: Gelatina chuchu gialla
+actor.Item_Enemy_18: Ala di pipistrello
+actor.Item_Enemy_46: Ala di pipistrello glaciale
+actor.Item_Enemy_44: Ala di pipistrello igneo
+actor.Item_Enemy_45: Ala di pipistrello elettrico
+actor.Item_Enemy_19: Occhio di pipistrello
+actor.Item_Enemy_20: Tentacolo octo
+actor.Item_Enemy_21: Occhio octo
+actor.Item_Enemy_57: Octopallone
+actor.Item_Enemy_24: Pinna di moldenottera
+actor.Item_Enemy_25: Cuore di moldenottera
+actor.Item_Enemy_32: Unghia di hinox
+actor.Item_Enemy_33: Dente di hinox
+actor.Item_Enemy_34: Cuore di hinox
+actor.Item_Enemy_27: Vite ancestrale
+actor.Item_Enemy_28: Molla ancestrale
+actor.Item_Enemy_26: Ingranaggio ancestrale
+actor.Item_Enemy_29: Asse ancestrale
+actor.Item_Enemy_30: Nucleo ancestrale
+actor.Item_Enemy_31: Gran nucleo ancestrale
+actor.Obj_FireWoodBundle: Fascio di legna
+actor.Item_Roast_03: Mela cotta
+actor.Item_Roast_10: Noce di palma cotta
+actor.Item_Roast_07: Fragola cotta
+actor.Item_Roast_48: Ghianda cotta
+actor.Item_Roast_52: Nocciola cotta
+actor.Item_Roast_09: Durian vivax cotto
+actor.Item_Roast_12: Melone fresco cotto
+actor.Item_Roast_13: Caldoperone cotto
+actor.Item_Roast_08: Frutto shock cotto
+actor.Item_Roast_16: Slancioloto cotto
+actor.Item_Roast_11: Bananalame cotte
+actor.Item_Roast_06: Hyrulino cotto
+actor.Item_Roast_04: Vigorino cotto
+actor.Item_Roast_53: Gagliardello cotto
+actor.Item_Roast_05: Cuortufo nero cotto
+actor.Item_Roast_49: Cuortufo bianco cotto
+actor.Item_Roast_31: Ghiaccino cotto
+actor.Item_Roast_32: Caldoncello cotto
+actor.Item_Roast_33: Fulminaccio cotto
+actor.Item_Roast_36: Scattola cotta
+actor.Item_Roast_37: Spadarolo cotto
+actor.Item_Roast_38: Chiodone cotto
+actor.Item_Roast_39: Furtivolo cotto
+actor.Item_Roast_18: Cuoranello cotto
+actor.Item_Roast_19: Cuoranello grande cotto
+actor.Item_Roast_24: Carota sprint cotta
+actor.Item_Roast_50: Briocarota cotta
+actor.Item_Roast_15: Corazzucca cotta
+actor.Item_Roast_27: Spadacciofo cotto
+actor.Item_Roast_28: Carapacciofo cotto
+actor.Item_Roast_51: Uovo cotto
+actor.Item_Boiled_01: Uovo bollito
+actor.Item_Roast_01: Carne cotta
+actor.Item_Roast_40: Carne cotta XL
+actor.Item_Roast_45: Carne cotta XXL
+actor.Item_Roast_02: Pollame cotto
+actor.Item_Roast_41: Pollame cotto XL
+actor.Item_Roast_46: Pollame cotto XXL
+actor.Item_RoastFish_01: Aspio cotto
+actor.Item_RoastFish_02: Aspio vivax cotto
+actor.Item_RoastFish_04: Salmone vivax cotto
+actor.Item_RoastFish_03: Trota cotta
+actor.Item_RoastFish_07: Carpa cotta
+actor.Item_RoastFish_09: Orata cotta
+actor.Item_RoastFish_13: Lumaca silente cotta
+actor.Item_RoastFish_11: Lumaca vivax cotta
+actor.Item_RoastFish_15: Granchio cotto
+actor.Item_Chilled_01: Carne congelata
+actor.Item_Chilled_02: Carne congelata XL
+actor.Item_Chilled_03: Carne congelata XXL
+actor.Item_Chilled_04: Pollame congelato
+actor.Item_Chilled_05: Pollame congelato XL
+actor.Item_Chilled_06: Pollame congelato XXL
+actor.Item_ChilledFish_01: Aspio congelato
+actor.Item_ChilledFish_06: Aspio vivax congelato
+actor.Item_ChilledFish_02: Salmone vivax congelato
+actor.Item_ChilledFish_03: Trota congelata
+actor.Item_ChilledFish_04: Carpa congelata
+actor.Item_ChilledFish_05: Orata congelata
+actor.Item_ChilledFish_07: Granchio congelato
+actor.Item_ChilledFish_08: Lumaca silente congelata
+actor.Item_ChilledFish_09: Lumaca vivax congelata
+actor.Obj_DRStone_Get: Tavoletta Sheikah
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Blu
+actor.dyecolor_02: Rosso
+actor.dyecolor_03: Giallo
+actor.dyecolor_04: Bianco
+actor.dyecolor_05: Nero
+actor.dyecolor_06: Viola
+actor.dyecolor_07: Verde
+actor.dyecolor_08: Azzurro
+actor.dyecolor_09: Blu marino
+actor.dyecolor_10: Arancione
+actor.dyecolor_11: Rosa
+actor.dyecolor_12: Cremisi
+actor.dyecolor_13: Beige
+actor.dyecolor_14: Marrone
+actor.dyecolor_15: Grigio
+actor.Obj_Photo_Animal: Immagine di fauna
+actor.Obj_Photo_BossEnemy: Immagine di mostro forte
+actor.Obj_Photo_Enemy: Immagine di mostri
+actor.Obj_Photo_Material: Immagine di materiali
+actor.Obj_Photo_Other: Immagine di un tesoro
+actor.Obj_Photo_Weapon: Immagine di armi

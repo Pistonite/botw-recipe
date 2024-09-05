@@ -1,0 +1,358 @@
+# Translation needed! Please see CONTRIBUTING.md
+
+# UI
+title: BotW Recipe Database for WMC
+search.title: Search
+search.desc: Scan all material combinations and select recipes that meet the criteria for modifiers
+search.value.title: Value and Materials
+search.value.min: Min. Modifier Value (HP)
+search.value.max: Max. Modifier Value (HP)
+search.value.rng: Allow RNG HP Crit
+search.value.rng.desc: Include recipes where a non-guaranteed HP crit is needed to meet the minimum HP requirement. Guaranteed HP crit are not affected. (Note that a recipe which guarantees a crit may not guarantee a HP crit.)
+search.value.pe: Allow Unusual Material
+search.value.pe.desc: Include recipes where at least one material needs Prompt Entanglement or is usually unobtainable or uncookable.
+search.modifier.title: Modifiers
+search.modifier.desc: Select "+" for modifiers that must be included, and "-" for modifiers that must be excluded.
+search.modifier.name: Modifier
+search.modifier.option: Option
+search.modifier.option.include: Included
+search.modifier.option.exclude: Excluded
+search.modifier.option.ignore: Ignored
+search.button: Search
+search.button.cancel: Cancel
+search.progress: "Searching ({{progress}}%)"
+search.progress.initial: "Searching..."
+search.progress.stat_group: Computing material stats
+search.result: "Found {{count}} recipes in {{seconds}}s"
+
+filter.title: Filter
+filter.desc: Narrow down the scan results based on what items best fit your needs
+filter.list.title: Select Items
+filter.list.desc: Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection. Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
+filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
+filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
+filter.hide_excluded: Show only items included in results
+filter.selection.actor: Item ({{count}})
+filter.selection.option: Options
+filter.selection.option.favorite: Favorite
+filter.selection.option.unfavorite: Favorited
+filter.selection.option.include: Include
+filter.selection.option.exclude: Exclude
+filter.selection.subtitle.percentage: In {{percentage}}% of remaining recipes
+filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% of remaining recipes, will exclude
+filter.selection.subtitle.no_percentage: Statistics not available
+filter.selection.subtitle.no_percentage.to_exclude: Statistics not available, will exclude
+filter.selection.subtitle.excluded: Excluded
+filter.selection.subtitle.excluded.to_include: Excluded, will include
+filter.favorited: Favorited Items
+filter.favorited.clear: Clear
+filter.prompt: Press Apply to update the filter
+filter.button: Apply
+filter.button.cancel: Cancel
+filter.button.reset: Clear
+filter.progress: "Applying filter ({{progress}}%)"
+filter.progress.initial: "Applying filter..."
+filter.result: "Done in {{seconds}}s, {{count}} recipes left"
+filter.not_ready.not_searched: No search result found. Please search for recipes with modifier criteria first.
+filter.not_ready.no_result: Did not find any recipe that matched the modifiers. Please adjust the criteria and search again.
+filter.not_ready.searching: Waiting for search to finish...
+
+result.title: Results
+result.desc: Recipes with the desired modifiers and only include the wanted items
+result.progress: Cooking the results
+result.error: "Error while cooking the results: {{message}}"
+result.button.retry: Retry
+result.count: Showing {{count}} recipes after grouping
+result.limited: Results exceeded the limit of {{limit}}, showing only the first {{count}} recipes after grouping. Keep in mind this is NOT the full result list. Please keep filtering to reduce the number of results.
+result.list.note: (Value marked with * requires a non-guaranteed HP crit)
+result.header.recipe: Recipe
+result.header.recipe_desc: Recipe (Most favorited)
+result.header.recipe_asc: Recipe (Least favorited)
+result.header.value: Value
+result.header.modifier: Modifiers
+result.nothing: No recipe found
+result.not_ready: Results will be displayed here once the search is executed
+result.any_of: "Any of:"
+
+error.title: Error
+error.message.io: "IO Error: {{message}}"
+error.message.yaml: "YAML Error: {{message}}"
+error.message.poison: "Internal Error: Lock is poisoned: {{message}}"
+error.message.aborted: Aborted
+error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
+error.message.database.invalid_recipe: "Invalid recipe id: {{id}}"
+error.message.database.locked: "Database is locked. You may have another instance of the application running. If not, the application may have crashed earlier. Please delete `database/.lock` manually in that case."
+error.message.database.invalid: "Cannot validate the integrity of the database. It may have been corrupted. Try reinstalling the application. (Error Type: {{errorType}})"
+error.generic: "An error occurred: {{message}}"
+error.internal: "Internal Error: {{errorType}}"
+error.unknown: "Unknown Error: {{message}}"
+error.button: OK
+
+confirm.title: Confirm
+confirm.button.yes: "Yes"
+confirm.button.no: "No"
+confirm.message.search.abort: Are you sure to cancel the search?
+confirm.message.search.redo: Starting another search will delete the previous results. Are you sure to continue?
+confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
+confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
+confirm.message.filter.abort: Are you sure to cancel applying the filter?
+
+
+
+# Modifiers - please fix the ones marked with FIXME
+modifier.1: Attaque ↑
+modifier.1.value: Attaque ↑ + {{value}}
+modifier.2: Durabilité ↑
+modifier.2.value: Durabilité ↑
+modifier.4: Coup de grâce
+modifier.4.value: Coup de grâce
+modifier.8: Distance lancers ↑
+modifier.8.value: Throw Range/Speed x {{valueThousandth}} # FIXME
+modifier.16: Tirs x 5 # FIXME - change from 5-shot to multishot
+modifier.16.value: Max {{valueMax10}}-shot # FIXME
+modifier.32: Zoom # FIXME
+modifier.32.value: Zoom # FIXME
+modifier.64: Visée rapide
+modifier.64.value: Shooting Speed x {{valueThousandth}} # FIXME
+modifier.128: Glisse ↑
+modifier.128.value: Surf Friction x {{valueThousandth}} # FIXME
+modifier.256: Garde ↑
+modifier.256.value: Garde ↑ + {{value}}
+
+# Please verify the auto-generated translations below, thanks :)
+
+# DO NOT MODIFY BELOW
+### AUTOGEN ###
+actor.Item_Fruit_D: Durian max
+actor.Item_Fruit_G: Noix de coco
+actor.Item_Fruit_A: Pomme
+actor.Item_Fruit_B: Baie
+actor.Item_Fruit_F: Melon glagla
+actor.Item_Fruit_I: Piment
+actor.Item_Fruit_C: Fruit volt
+actor.Item_Fruit_E: Fruit de lotus tempo
+actor.Item_Fruit_H: Bananes lame
+actor.Item_Mushroom_N: Grosse truffe max
+actor.Item_Mushroom_F: Truffe max
+actor.Item_Mushroom_O: Champi vigueur
+actor.Item_Mushroom_E: Champi d'Hyrule
+actor.Item_Mushroom_A: Champi enduro
+actor.Item_Mushroom_B: Champi glagla
+actor.Item_Mushroom_C: Champi piment
+actor.Item_Mushroom_H: Champi volt
+actor.Item_MushroomGet_D: Champi tempo
+actor.Item_Mushroom_L: Champi lame
+actor.Item_Mushroom_M: Champi armo
+actor.Item_Mushroom_J: Champi silencio
+actor.Item_PlantGet_C: Gros radis max
+actor.Item_PlantGet_B: Radis max
+actor.Item_PlantGet_Q: Carotte vigueur
+actor.Item_PlantGet_A: Herbes d'Hyrule
+actor.Item_PlantGet_M: Carotte tempo
+actor.Item_Fruit_J: Citrouille armo
+actor.Item_PlantGet_E: Herbes glagla
+actor.Item_PlantGet_F: Herbes piment
+actor.Item_PlantGet_L: Herbes volt
+actor.Item_PlantGet_O: Violettes tempo
+actor.Item_PlantGet_G: Fleur lame
+actor.Item_PlantGet_H: Fleur armo
+actor.Item_PlantGet_I: Fleur silencio
+actor.Item_PlantGet_J: Princesse de la sérénité
+actor.Item_Meat_11: Venaison divine
+actor.Item_Meat_12: Volaille divine
+actor.Item_Meat_02: Venaison fine
+actor.Item_Meat_07: Viande de volaille fine
+actor.Item_Meat_01: Venaison
+actor.Item_Meat_06: Viande de volaille
+actor.BeeHome: Rayon de miel enduro
+actor.Item_Material_03: Boisseau de riz
+actor.Item_Material_04: Œuf de volatile
+actor.Item_Material_07: Boisseau de blé
+actor.Item_Material_05: Bouteille de lait frais
+actor.Item_Fruit_K: Gland
+actor.Item_Fruit_L: Fruit d'oiseau
+actor.Item_Material_01: Canne à sucre
+actor.Item_Material_06: Motte de beurre
+actor.Item_Material_02: Flacon d'épices gorons
+actor.Item_Ore_H: Cristal de sel
+actor.Item_Ore_J: Fragment d'étoile
+actor.Item_Enemy_38: Écaille d'Ordrac
+actor.Item_Enemy_39: Griffe d'Ordrac
+actor.Item_Enemy_47: Éclat de croc d'Ordrac
+actor.Item_Enemy_48: Éclat de corne d'Ordrac
+actor.Item_Enemy_49: Écaille de Nedrac
+actor.Item_Enemy_50: Griffe de Nedrac
+actor.Item_Enemy_51: Éclat de croc de Nedrac
+actor.Item_Enemy_52: Éclat de corne de Nedrac
+actor.Item_Enemy_53: Écaille de Rordrac
+actor.Item_Enemy_54: Griffe de Rordrac
+actor.Item_Enemy_55: Éclat de croc de Rordrac
+actor.Item_Enemy_56: Éclat de corne de Rordrac
+actor.Item_FishGet_I: Saumon max
+actor.Item_FishGet_K: Turbo max
+actor.Item_FishGet_B: Perche max
+actor.Item_FishGet_A: Perche d'Hyrule
+actor.Item_FishGet_L: Perche enduro
+actor.Item_FishGet_C: Truite glagla
+actor.Item_FishGet_J: Truite piment
+actor.Item_FishGet_D: Truite volt
+actor.Item_FishGet_X: Truite silencio
+actor.Item_FishGet_E: Carpe lame
+actor.Item_FishGet_H: Carpe armo
+actor.Item_FishGet_Z: Carpe tricolore
+actor.Item_FishGet_F: Daurade lame
+actor.Item_FishGet_G: Daurade armo
+actor.Item_FishGet_M: Escargot silencio
+actor.Item_InsectGet_K: Crabe lame
+actor.Item_InsectGet_O: Crabe armo
+actor.Item_InsectGet_Z: Crabe enduro
+actor.Animal_Insect_F: Fée
+actor.Animal_Insect_N: Papillon glagla
+actor.Animal_Insect_Q: Papillon piment
+actor.Animal_Insect_R: Papillon volt
+actor.Animal_Insect_AB: Papillon ignifus
+actor.Animal_Insect_C: Libellule glagla
+actor.Animal_Insect_T: Libellule piment
+actor.Animal_Insect_I: Libellule volt
+actor.Animal_Insect_H: Sauterelle enduro
+actor.Animal_Insect_G: Scarabée lame
+actor.Animal_Insect_P: Scarabée armo
+actor.Animal_Insect_AA: Scarabée enduro
+actor.Animal_Insect_E: Luciole de la sérénité
+actor.Animal_Insect_A: Grenouille tempo
+actor.Animal_Insect_B: Grenouille vigueur
+actor.Animal_Insect_S: Lézard tempo
+actor.Animal_Insect_M: Lézard max
+actor.Animal_Insect_X: Lézard ignifus
+actor.Item_Ore_I: Silex
+actor.Item_Ore_F: Ambre brut
+actor.Item_Ore_E: Opale brute
+actor.Item_Ore_G: Gemme nox
+actor.Item_Ore_D: Topaze brute
+actor.Item_Ore_B: Rubis brut
+actor.Item_Ore_C: Saphir brut
+actor.Item_Ore_A: Diamant brut
+actor.Item_Enemy_00: Corne de Bokoblin
+actor.Item_Enemy_01: Croc de Bokoblin
+actor.Item_Enemy_02: Viscère de Bokoblin
+actor.Item_Enemy_06: Corne de Moblin
+actor.Item_Enemy_07: Croc de Moblin
+actor.Item_Enemy_08: Viscère de Moblin
+actor.Item_Enemy_03: Corne de Lézalfos
+actor.Item_Enemy_04: Griffe de Lézalfos
+actor.Item_Enemy_05: Queue de Lézalfos
+actor.Item_Enemy_42: Queue bleue de Lézalfos
+actor.Item_Enemy_41: Queue rouge de Lézalfos
+actor.Item_Enemy_43: Queue jaune de Lézalfos
+actor.Item_Enemy_12: Corne de Lynel
+actor.Item_Enemy_13: Sabot de Lynel
+actor.Item_Enemy_14: Viscère de Lynel
+actor.Item_Enemy_40: Gelée chuchu
+actor.Item_Enemy_17: Gelée chuchu blanche
+actor.Item_Enemy_15: Gelée chuchu rouge
+actor.Item_Enemy_16: Gelée chuchu jaune
+actor.Item_Enemy_18: Aile griffue
+actor.Item_Enemy_46: Aile de glace
+actor.Item_Enemy_44: Aile de feu
+actor.Item_Enemy_45: Aile électrique
+actor.Item_Enemy_19: Œil de Chauve-souris
+actor.Item_Enemy_20: Tentacule octo
+actor.Item_Enemy_21: Œil octo
+actor.Item_Enemy_57: Baudruche octo
+actor.Item_Enemy_24: Aileron de Moldarquor
+actor.Item_Enemy_25: Viscère de Moldarquor
+actor.Item_Enemy_32: Ongle d'Hinox
+actor.Item_Enemy_33: Dent d'Hinox
+actor.Item_Enemy_34: Viscère d'Hinox
+actor.Item_Enemy_27: Vis antique
+actor.Item_Enemy_28: Ressort antique
+actor.Item_Enemy_26: Rouage antique
+actor.Item_Enemy_29: Arbre antique
+actor.Item_Enemy_30: Cœur antique
+actor.Item_Enemy_31: Cœur antique géant
+actor.Obj_FireWoodBundle: Fagot de bois
+actor.Item_Roast_03: Pomme grillée
+actor.Item_Roast_10: Noix de coco grillée
+actor.Item_Roast_07: Baie grillée
+actor.Item_Roast_48: Gland grillé
+actor.Item_Roast_52: Fruit grillé
+actor.Item_Roast_09: Durian max grillé
+actor.Item_Roast_12: Melon glagla grillé
+actor.Item_Roast_13: Piment grillé
+actor.Item_Roast_08: Fruit volt grillé
+actor.Item_Roast_16: Fruit de lotus tempo grillé
+actor.Item_Roast_11: Bananes lame grillées
+actor.Item_Roast_06: Champi d'Hyrule grillé
+actor.Item_Roast_04: Champi enduro grillé
+actor.Item_Roast_53: Champi vigueur grillé
+actor.Item_Roast_05: Truffe max grillée
+actor.Item_Roast_49: Grosse truffe max grillée
+actor.Item_Roast_31: Champi glagla grillé
+actor.Item_Roast_32: Champi piment grillé
+actor.Item_Roast_33: Champi volt grillé
+actor.Item_Roast_36: Champi tempo grillé
+actor.Item_Roast_37: Champi lame grillé
+actor.Item_Roast_38: Champi armo grillé
+actor.Item_Roast_39: Champi silencio grillé
+actor.Item_Roast_18: Radis max grillé
+actor.Item_Roast_19: Gros radis max grillé
+actor.Item_Roast_24: Carotte tempo grillée
+actor.Item_Roast_50: Carotte vigueur grillée
+actor.Item_Roast_15: Citrouille armo grillée
+actor.Item_Roast_27: Fleur lame grillée
+actor.Item_Roast_28: Fleur armo grillée
+actor.Item_Roast_51: Œuf grillé
+actor.Item_Boiled_01: Œuf dur
+actor.Item_Roast_01: Viande grillée
+actor.Item_Roast_40: Viande fine grillée
+actor.Item_Roast_45: Viande divine grillée
+actor.Item_Roast_02: Volaille grillée
+actor.Item_Roast_41: Volaille fine grillée
+actor.Item_Roast_46: Volaille divine grillée
+actor.Item_RoastFish_01: Perche grillée
+actor.Item_RoastFish_02: Perche max grillée
+actor.Item_RoastFish_04: Saumon max grillé
+actor.Item_RoastFish_03: Truite grillée
+actor.Item_RoastFish_07: Carpe grillée
+actor.Item_RoastFish_09: Daurade grillée
+actor.Item_RoastFish_13: Escargot silencio grillé
+actor.Item_RoastFish_11: Turbo max grillé
+actor.Item_RoastFish_15: Crabe grillé
+actor.Item_Chilled_01: Viande congelée
+actor.Item_Chilled_02: Viande fine congelée
+actor.Item_Chilled_03: Viande divine congelée
+actor.Item_Chilled_04: Volaille congelée
+actor.Item_Chilled_05: Volaille fine congelée
+actor.Item_Chilled_06: Volaille divine congelée
+actor.Item_ChilledFish_01: Perche congelée
+actor.Item_ChilledFish_06: Perche max congelée
+actor.Item_ChilledFish_02: Saumon max congelé
+actor.Item_ChilledFish_03: Truite congelée
+actor.Item_ChilledFish_04: Carpe congelée
+actor.Item_ChilledFish_05: Daurade congelée
+actor.Item_ChilledFish_07: Crabe congelé
+actor.Item_ChilledFish_08: Escargot congelé
+actor.Item_ChilledFish_09: Turbo max congelé
+actor.Obj_DRStone_Get: Tablette sheikah
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Bleu
+actor.dyecolor_02: Rouge
+actor.dyecolor_03: Jaune
+actor.dyecolor_04: Blanc
+actor.dyecolor_05: Noir
+actor.dyecolor_06: Violet
+actor.dyecolor_07: Vert
+actor.dyecolor_08: Bleu clair
+actor.dyecolor_09: Bleu marine
+actor.dyecolor_10: Orange
+actor.dyecolor_11: Rose
+actor.dyecolor_12: Rouge foncé
+actor.dyecolor_13: Jaune clair
+actor.dyecolor_14: Marron
+actor.dyecolor_15: Gris
+actor.Obj_Photo_Animal: Photo d'animal
+actor.Obj_Photo_BossEnemy: Photo d'ennemi fort
+actor.Obj_Photo_Enemy: Photo de monstre
+actor.Obj_Photo_Material: Photo de matériau
+actor.Obj_Photo_Other: Photo de trésor
+actor.Obj_Photo_Weapon: Photo d'arme

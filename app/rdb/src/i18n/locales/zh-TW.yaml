@@ -1,0 +1,356 @@
+# Translation needed! Please see CONTRIBUTING.md
+
+# UI
+title: BotW Recipe Database for WMC
+search.title: Search
+search.desc: Scan all material combinations and select recipes that meet the criteria for modifiers
+search.value.title: Value and Materials
+search.value.min: Min. Modifier Value (HP)
+search.value.max: Max. Modifier Value (HP)
+search.value.rng: Allow RNG HP Crit
+search.value.rng.desc: Include recipes where a non-guaranteed HP crit is needed to meet the minimum HP requirement. Guaranteed HP crit are not affected. (Note that a recipe which guarantees a crit may not guarantee a HP crit.)
+search.value.pe: Allow Unusual Material
+search.value.pe.desc: Include recipes where at least one material needs Prompt Entanglement or is usually unobtainable or uncookable.
+search.modifier.title: Modifiers
+search.modifier.desc: Select "+" for modifiers that must be included, and "-" for modifiers that must be excluded.
+search.modifier.name: Modifier
+search.modifier.option: Option
+search.modifier.option.include: Included
+search.modifier.option.exclude: Excluded
+search.modifier.option.ignore: Ignored
+search.button: Search
+search.button.cancel: Cancel
+search.progress: "Searching ({{progress}}%)"
+search.progress.initial: "Searching..."
+search.progress.stat_group: Computing material stats
+search.result: "Found {{count}} recipes in {{seconds}}s"
+
+filter.title: Filter
+filter.desc: Narrow down the scan results based on what items best fit your needs
+filter.list.title: Select Items
+filter.list.desc: Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection. Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
+filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
+filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
+filter.hide_excluded: Show only items included in results
+filter.selection.actor: Item ({{count}})
+filter.selection.option: Options
+filter.selection.option.favorite: Favorite
+filter.selection.option.unfavorite: Favorited
+filter.selection.option.include: Include
+filter.selection.option.exclude: Exclude
+filter.selection.subtitle.percentage: In {{percentage}}% of remaining recipes
+filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% of remaining recipes, will exclude
+filter.selection.subtitle.no_percentage: Statistics not available
+filter.selection.subtitle.no_percentage.to_exclude: Statistics not available, will exclude
+filter.selection.subtitle.excluded: Excluded
+filter.selection.subtitle.excluded.to_include: Excluded, will include
+filter.favorited: Favorited Items
+filter.favorited.clear: Clear
+filter.prompt: Press Apply to update the filter
+filter.button: Apply
+filter.button.cancel: Cancel
+filter.button.reset: Clear
+filter.progress: "Applying filter ({{progress}}%)"
+filter.progress.initial: "Applying filter..."
+filter.result: "Done in {{seconds}}s, {{count}} recipes left"
+filter.not_ready.not_searched: No search result found. Please search for recipes with modifier criteria first.
+filter.not_ready.no_result: Did not find any recipe that matched the modifiers. Please adjust the criteria and search again.
+filter.not_ready.searching: Waiting for search to finish...
+
+result.title: Results
+result.desc: Recipes with the desired modifiers and only include the wanted items
+result.progress: Cooking the results
+result.error: "Error while cooking the results: {{message}}"
+result.button.retry: Retry
+result.count: Showing {{count}} recipes after grouping
+result.limited: Results exceeded the limit of {{limit}}, showing only the first {{count}} recipes after grouping. Keep in mind this is NOT the full result list. Please keep filtering to reduce the number of results.
+result.list.note: (Value marked with * requires a non-guaranteed HP crit)
+result.header.recipe: Recipe
+result.header.recipe_desc: Recipe (Most favorited)
+result.header.recipe_asc: Recipe (Least favorited)
+result.header.value: Value
+result.header.modifier: Modifiers
+result.nothing: No recipe found
+result.not_ready: Results will be displayed here once the search is executed
+result.any_of: "Any of:"
+
+error.title: Error
+error.message.io: "IO Error: {{message}}"
+error.message.yaml: "YAML Error: {{message}}"
+error.message.poison: "Internal Error: Lock is poisoned: {{message}}"
+error.message.aborted: Aborted
+error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
+error.message.database.invalid_recipe: "Invalid recipe id: {{id}}"
+error.message.database.locked: "Database is locked. You may have another instance of the application running. If not, the application may have crashed earlier. Please delete `database/.lock` manually in that case."
+error.message.database.invalid: "Cannot validate the integrity of the database. It may have been corrupted. Try reinstalling the application. (Error Type: {{errorType}})"
+error.generic: "An error occurred: {{message}}"
+error.internal: "Internal Error: {{errorType}}"
+error.unknown: "Unknown Error: {{message}}"
+error.button: OK
+
+confirm.title: Confirm
+confirm.button.yes: "Yes"
+confirm.button.no: "No"
+confirm.message.search.abort: Are you sure to cancel the search?
+confirm.message.search.redo: Starting another search will delete the previous results. Are you sure to continue?
+confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
+confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
+confirm.message.filter.abort: Are you sure to cancel applying the filter?
+
+
+
+# Modifiers - please change the ones marked with FIXME to traditional characters
+modifier.1: 攻擊力提升
+modifier.1.value: 攻擊力提升 + {{value}}
+modifier.2: 耐用度提升
+modifier.2.value: 耐用度提升
+modifier.4: 最後暴擊
+modifier.4.value: 最後暴擊
+modifier.8: 遠距離投擲
+modifier.8.value: 遠距離投擲 x {{valueThousandth}}
+modifier.16: 多連發
+modifier.16.value: 最多{{valueMax10}}連發
+modifier.32: 倍镜 # FIXME
+modifier.32.value: 倍镜 # FIXME
+modifier.64: 速射
+modifier.64.value: 射速 x {{valueThousandth}} # FIXME
+modifier.128: 盾滑行提升 # FIXME
+modifier.128.value: 滑行摩擦力 x {{valueThousandth}} # FIXME
+modifier.256: 盾防禦提升
+modifier.256.value: 盾防禦提升 + {{value}}
+
+# DO NOT MODIFY BELOW
+### AUTOGEN ###
+actor.Item_Fruit_D: 生命榴槤
+actor.Item_Fruit_G: 椰子
+actor.Item_Fruit_A: 蘋果
+actor.Item_Fruit_B: 草莓
+actor.Item_Fruit_F: 冰冷蜜瓜
+actor.Item_Fruit_I: 暖暖草果
+actor.Item_Fruit_C: 酥麻水果
+actor.Item_Fruit_E: 速速蓮蓬
+actor.Item_Fruit_H: 大劍香蕉
+actor.Item_Mushroom_N: 大生命松露
+actor.Item_Mushroom_F: 生命松露
+actor.Item_Mushroom_O: 毅力蘑菇
+actor.Item_Mushroom_E: 海拉魯蘑菇
+actor.Item_Mushroom_A: 精力蘑菇
+actor.Item_Mushroom_B: 冰冷蘑菇
+actor.Item_Mushroom_C: 暖暖蘑菇
+actor.Item_Mushroom_H: 酥麻蘑菇
+actor.Item_MushroomGet_D: 速速蘑菇
+actor.Item_Mushroom_L: 大劍蘑菇
+actor.Item_Mushroom_M: 鎧甲蘑菇
+actor.Item_Mushroom_J: 潛行蘑菇
+actor.Item_PlantGet_C: 生命大蘿蔔
+actor.Item_PlantGet_B: 生命小蘿蔔
+actor.Item_PlantGet_Q: 毅力胡蘿蔔
+actor.Item_PlantGet_A: 海拉魯草
+actor.Item_PlantGet_M: 速速胡蘿蔔
+actor.Item_Fruit_J: 鎧甲南瓜
+actor.Item_PlantGet_E: 冰冷香草
+actor.Item_PlantGet_F: 暖暖香草
+actor.Item_PlantGet_L: 酥麻香草
+actor.Item_PlantGet_O: 速速紫羅蘭
+actor.Item_PlantGet_G: 大劍草
+actor.Item_PlantGet_H: 鎧甲草
+actor.Item_PlantGet_I: 潛行草
+actor.Item_PlantGet_J: 寧靜公主
+actor.Item_Meat_11: 頂級獸肉
+actor.Item_Meat_12: 頂級禽肉
+actor.Item_Meat_02: 高級獸肉
+actor.Item_Meat_07: 高級禽肉
+actor.Item_Meat_01: 獸肉
+actor.Item_Meat_06: 禽肉
+actor.BeeHome: 能量蜂的蜂蜜
+actor.Item_Material_03: 海拉魯米
+actor.Item_Material_04: 禽蛋
+actor.Item_Material_07: 塔邦撻小麥
+actor.Item_Material_05: 鮮奶
+actor.Item_Fruit_K: 橡子
+actor.Item_Fruit_L: 小鳥的樹果
+actor.Item_Material_01: 蔗糖
+actor.Item_Material_06: 山羊奶油
+actor.Item_Material_02: 鼓隆的調味粉
+actor.Item_Ore_H: 岩鹽
+actor.Item_Ore_J: 星星碎片
+actor.Item_Enemy_38: 奧爾龍的鱗片
+actor.Item_Enemy_39: 奧爾龍的爪子
+actor.Item_Enemy_47: 奧爾龍的牙齒碎片
+actor.Item_Enemy_48: 奧爾龍的犄角碎片
+actor.Item_Enemy_49: 聶爾龍的鱗片
+actor.Item_Enemy_50: 聶爾龍的爪子
+actor.Item_Enemy_51: 聶爾龍的牙齒碎片
+actor.Item_Enemy_52: 聶爾龍的犄角碎片
+actor.Item_Enemy_53: 費羅龍的鱗片
+actor.Item_Enemy_54: 費羅龍的爪子
+actor.Item_Enemy_55: 費羅龍的牙齒碎片
+actor.Item_Enemy_56: 費羅龍的犄角碎片
+actor.Item_FishGet_I: 生命鮭魚
+actor.Item_FishGet_K: 生命海螺
+actor.Item_FishGet_B: 生命鱸魚
+actor.Item_FishGet_A: 海拉魯鱸魚
+actor.Item_FishGet_L: 精力鱸魚
+actor.Item_FishGet_C: 冰冷鱒魚
+actor.Item_FishGet_J: 暖暖鱒魚
+actor.Item_FishGet_D: 酥麻鱒魚
+actor.Item_FishGet_X: 潛行鱒魚
+actor.Item_FishGet_E: 大劍鯉魚
+actor.Item_FishGet_H: 鎧甲鯉魚
+actor.Item_FishGet_Z: 三色鯉魚
+actor.Item_FishGet_F: 大劍鯛魚
+actor.Item_FishGet_G: 鎧甲鯛魚
+actor.Item_FishGet_M: 潛行田螺
+actor.Item_InsectGet_K: 大劍螃蟹
+actor.Item_InsectGet_O: 鎧甲螃蟹
+actor.Item_InsectGet_Z: 精力螃蟹
+actor.Animal_Insect_F: 妖精
+actor.Animal_Insect_N: 冰冷鳳蝶
+actor.Animal_Insect_Q: 暖暖鳳蝶
+actor.Animal_Insect_R: 酥麻鳳蝶
+actor.Animal_Insect_AB: 耐火鳳蝶
+actor.Animal_Insect_C: 冰冷蜻蜓
+actor.Animal_Insect_T: 暖暖蜻蜓
+actor.Animal_Insect_I: 酥麻蜻蜓
+actor.Animal_Insect_H: 能量蚱蜢
+actor.Animal_Insect_G: 大劍獨角仙
+actor.Animal_Insect_P: 鎧甲獨角仙
+actor.Animal_Insect_AA: 能量獨角仙
+actor.Animal_Insect_E: 靜靜螢火蟲
+actor.Animal_Insect_A: 速速青蛙
+actor.Animal_Insect_B: 毅力青蛙
+actor.Animal_Insect_S: 速速蜥蜴
+actor.Animal_Insect_M: 生命蜥蜴
+actor.Animal_Insect_X: 耐火蜥蜴
+actor.Item_Ore_I: 打火石
+actor.Item_Ore_F: 琥珀
+actor.Item_Ore_E: 蛋白石
+actor.Item_Ore_G: 夜光石
+actor.Item_Ore_D: 黃玉
+actor.Item_Ore_B: 紅寶石
+actor.Item_Ore_C: 藍寶石
+actor.Item_Ore_A: 鑽石
+actor.Item_Enemy_00: 波克布林的犄角
+actor.Item_Enemy_01: 波克布林的牙齒
+actor.Item_Enemy_02: 波克布林的肝臟
+actor.Item_Enemy_06: 莫力布林的犄角
+actor.Item_Enemy_07: 莫力布林的牙齒
+actor.Item_Enemy_08: 莫力布林的肝臟
+actor.Item_Enemy_03: 蜥蜴戰士的犄角
+actor.Item_Enemy_04: 蜥蜴戰士的爪子
+actor.Item_Enemy_05: 蜥蜴戰士的尾巴
+actor.Item_Enemy_42: 蜥蜴戰士的藍色尾巴
+actor.Item_Enemy_41: 蜥蜴戰士的紅色尾巴
+actor.Item_Enemy_43: 蜥蜴戰士的黃色尾巴
+actor.Item_Enemy_12: 萊尼爾的犄角
+actor.Item_Enemy_13: 萊尼爾的蹄子
+actor.Item_Enemy_14: 萊尼爾的肝臟
+actor.Item_Enemy_40: 丘丘膠
+actor.Item_Enemy_17: 白色丘丘膠
+actor.Item_Enemy_15: 紅色丘丘膠
+actor.Item_Enemy_16: 黃色丘丘膠
+actor.Item_Enemy_18: 蝙蝠的翅膀
+actor.Item_Enemy_46: 冰蝙蝠的翅膀
+actor.Item_Enemy_44: 火蝙蝠的翅膀
+actor.Item_Enemy_45: 電蝙蝠的翅膀
+actor.Item_Enemy_19: 蝙蝠的眼珠
+actor.Item_Enemy_20: 八爪怪的腳
+actor.Item_Enemy_21: 八爪怪的眼珠
+actor.Item_Enemy_57: 八爪怪氣球
+actor.Item_Enemy_24: 莫爾德拉吉克的背鰭
+actor.Item_Enemy_25: 莫爾德拉吉克的肝臟
+actor.Item_Enemy_32: 西諾克斯的爪子
+actor.Item_Enemy_33: 西諾克斯的牙齒
+actor.Item_Enemy_34: 西諾克斯的肝臟
+actor.Item_Enemy_27: 古代螺絲
+actor.Item_Enemy_28: 古代彈簧
+actor.Item_Enemy_26: 古代齒輪
+actor.Item_Enemy_29: 古代傳動軸
+actor.Item_Enemy_30: 古代核心
+actor.Item_Enemy_31: 巨大的古代核心
+actor.Obj_FireWoodBundle: 木柴束
+actor.Item_Roast_03: 烤蘋果
+actor.Item_Roast_10: 烤椰子
+actor.Item_Roast_07: 烤草莓
+actor.Item_Roast_48: 烤橡子
+actor.Item_Roast_52: 烤樹果
+actor.Item_Roast_09: 烤生命榴槤
+actor.Item_Roast_12: 烤冰冷蜜瓜
+actor.Item_Roast_13: 烤暖暖草果
+actor.Item_Roast_08: 烤酥麻水果
+actor.Item_Roast_16: 烤速速蓮蓬
+actor.Item_Roast_11: 烤大劍香蕉
+actor.Item_Roast_06: 烤海拉魯蘑菇
+actor.Item_Roast_04: 烤精力蘑菇
+actor.Item_Roast_53: 烤毅力蘑菇
+actor.Item_Roast_05: 烤生命松露
+actor.Item_Roast_49: 烤大生命松露
+actor.Item_Roast_31: 烤冰冷蘑菇
+actor.Item_Roast_32: 烤暖暖蘑菇
+actor.Item_Roast_33: 烤酥麻蘑菇
+actor.Item_Roast_36: 烤速速蘑菇
+actor.Item_Roast_37: 烤大劍蘑菇
+actor.Item_Roast_38: 烤鎧甲蘑菇
+actor.Item_Roast_39: 烤潛行蘑菇
+actor.Item_Roast_18: 烤小蘿蔔
+actor.Item_Roast_19: 烤大蘿蔔
+actor.Item_Roast_24: 烤速速胡蘿蔔
+actor.Item_Roast_50: 烤毅力胡蘿蔔
+actor.Item_Roast_15: 烤鎧甲南瓜
+actor.Item_Roast_27: 烤大劍草
+actor.Item_Roast_28: 烤鎧甲草
+actor.Item_Roast_51: 烤蛋
+actor.Item_Boiled_01: 水煮蛋
+actor.Item_Roast_01: 烤獸肉
+actor.Item_Roast_40: 烤高級獸肉
+actor.Item_Roast_45: 烤頂級獸肉
+actor.Item_Roast_02: 烤禽肉
+actor.Item_Roast_41: 烤高級禽肉
+actor.Item_Roast_46: 烤頂級禽肉
+actor.Item_RoastFish_01: 烤鱸魚
+actor.Item_RoastFish_02: 烤生命鱸魚
+actor.Item_RoastFish_04: 烤生命鮭魚
+actor.Item_RoastFish_03: 烤鱒魚
+actor.Item_RoastFish_07: 烤鯉魚
+actor.Item_RoastFish_09: 烤鯛魚
+actor.Item_RoastFish_13: 烤潛行田螺
+actor.Item_RoastFish_11: 烤生命海螺
+actor.Item_RoastFish_15: 烤螃蟹
+actor.Item_Chilled_01: 冰凍獸肉
+actor.Item_Chilled_02: 高級冰凍獸肉
+actor.Item_Chilled_03: 頂級冰凍獸肉
+actor.Item_Chilled_04: 冰凍禽肉
+actor.Item_Chilled_05: 高級冰凍禽肉
+actor.Item_Chilled_06: 頂級冰凍禽肉
+actor.Item_ChilledFish_01: 冰凍鱸魚
+actor.Item_ChilledFish_06: 冰凍生命鱸魚
+actor.Item_ChilledFish_02: 冰凍生命鮭魚
+actor.Item_ChilledFish_03: 冰凍鱒魚
+actor.Item_ChilledFish_04: 冰凍鯉魚
+actor.Item_ChilledFish_05: 冰凍鯛魚
+actor.Item_ChilledFish_07: 冰凍螃蟹
+actor.Item_ChilledFish_08: 冰凍田螺
+actor.Item_ChilledFish_09: 冰凍生命海螺
+actor.Obj_DRStone_Get: 希卡之石
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: 藍色
+actor.dyecolor_02: 紅色
+actor.dyecolor_03: 黃色
+actor.dyecolor_04: 白色
+actor.dyecolor_05: 黑色
+actor.dyecolor_06: 紫色
+actor.dyecolor_07: 綠色
+actor.dyecolor_08: 淺藍色
+actor.dyecolor_09: 深藍色
+actor.dyecolor_10: 橙色
+actor.dyecolor_11: 桃紅色
+actor.dyecolor_12: 深紅色
+actor.dyecolor_13: 淺黃色
+actor.dyecolor_14: 茶色
+actor.dyecolor_15: 灰色
+actor.Obj_Photo_Animal: 生物的照片
+actor.Obj_Photo_BossEnemy: 強敵的照片
+actor.Obj_Photo_Enemy: 怪物的照片
+actor.Obj_Photo_Material: 材料的照片
+actor.Obj_Photo_Other: 寶物的照片
+actor.Obj_Photo_Weapon: 武器的照片

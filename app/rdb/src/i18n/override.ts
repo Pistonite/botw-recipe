@@ -3,15 +3,12 @@
  * for translators to test their translations.
  */
 
-let override: Record<string, string> | undefined = undefined;
+let overrideGetter: (() => Promise<string>) | undefined = undefined;
 
-export const setTranslationOverride = (jsonString: string) => {
-    if (jsonString) {
-        console.log("using side-loaded translation");
-        override = JSON.parse(jsonString);
-    }
+export const setTranslationOverride = (getter: () => Promise<string>) => {
+    overrideGetter = getter;
 };
 
-export const getTranslationOverride = () => {
-    return override;
+export const getTranslationOverride = (): Promise<string> => {
+    return overrideGetter ? overrideGetter() : Promise.resolve("");
 };

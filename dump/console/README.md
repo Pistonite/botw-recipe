@@ -50,7 +50,7 @@ want to use the automated scripts
 1. Open a terminal and run the following commands. Please
    make sure you know which directory you are running the commands in.
     ```bash
-    git clone https://github.com/Pistonight/botw-recipe
+    git clone https://github.com/Pistonite/botw-recipe
     ```
 2. Create a file called `.env` in the root of the repo, then add the following line to it. Change the IP address
     and port to the address displayed in `ftpd` on the switch.

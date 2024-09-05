@@ -82,7 +82,7 @@ export const App: React.FC = () => {
                     as="a"
                     appearance="subtle"
                     icon={<img src="/github-mark.svg" />}
-                    href="https://github.com/Pistonight/botw-recipe"
+                    href="https://github.com/Pistonite/botw-recipe"
                     target="_blank"
                 />
                 <LocalePicker />
