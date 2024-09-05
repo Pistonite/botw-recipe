@@ -56,7 +56,7 @@ filter.not_ready.no_result: Did not find any recipe that matched the modifiers. 
 filter.not_ready.searching: Waiting for search to finish...
 
 result.title: Results
-result.desc: Recipes with the desired modifiers and only include the wanted items
+result.desc: Recipes with the desired modifiers and that only include the wanted items
 result.progress: Cooking the results
 result.error: "Error while cooking the results: {{message}}"
 result.button.retry: Retry
@@ -91,7 +91,7 @@ confirm.button.yes: "Yes"
 confirm.button.no: "No"
 confirm.message.search.abort: Are you sure to cancel the search?
 confirm.message.search.redo: Starting another search will delete the previous results. Are you sure to continue?
-confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
+confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next time you apply the filter. Favorited items will not be cleared.
 confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
 confirm.message.filter.abort: Are you sure to cancel applying the filter?
 
