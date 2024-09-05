@@ -11,7 +11,6 @@ The following languages need owner for localization:
 
 - German | de-DE
 - Spanish | es-ES
-- French | fr-FR
 - Italian | it-IT
 - Japanese | ja-JP
 - Korean | ko-KR
@@ -57,9 +56,5 @@ Currently, the item search is a simple fuzzy search using the item name. If your
 
 You can see the Pinyin search I implemented for Simplified Chinese as an example.
 
-## Adding to Supported List
-Lastly, the language needs to be marked as supported for it to show up in the UI.
-
-Please add it in `app/rdb/src/i18n/locales/locales.ts` in the `SupportedLocales` list.
-
-If you are unsure how to do this part, you can instead mention in the PR what the language is called in that language and I will add it for you.
+## Enabling the language
+Lastly, the language needs to be uncommented in `app/rdb/src/i18n/locales/locales.ts` to show in the language picker.

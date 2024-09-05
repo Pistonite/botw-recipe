@@ -1,3 +1,5 @@
+import type { WeaponModifierSet } from "host/types.ts";
+
 /**
  * Weapon modifier bitset implementation
  */
@@ -28,3 +30,13 @@ export const WeaponModifiers = [
 
 export type WeaponModifier =
     (typeof WeaponModifier)[keyof typeof WeaponModifier];
+
+export const hasMultishotAndDoesNotExcludeQuickShot = (
+    include: WeaponModifierSet,
+    exclude: WeaponModifierSet,
+) => {
+    return (
+        (include & WeaponModifier.SpreadFire) !== 0 &&
+        (exclude & WeaponModifier.RapidFire) === 0
+    );
+};

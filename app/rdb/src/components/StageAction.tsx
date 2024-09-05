@@ -8,7 +8,7 @@ const useStyles = makeStyles({
         display: "flex",
         gap: "10px",
         justifyContent: "end",
-        alignItems: "baseline",
+        alignItems: "last baseline",
     },
 });
 

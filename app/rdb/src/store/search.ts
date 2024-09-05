@@ -107,6 +107,10 @@ export function isSearching(state: State) {
     return state.search.searchProgress >= 0;
 }
 
+export function isSearchCalculatingStats(state: State) {
+    return state.search.searchProgress >= 100;
+}
+
 export function getSearchResultCount(state: State) {
     return state.search.searchResultCount;
 }

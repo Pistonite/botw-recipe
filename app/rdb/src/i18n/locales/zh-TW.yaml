@@ -96,7 +96,7 @@ confirm.message.search.redo: Starting another search will delete the previous re
 confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
 confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
 confirm.message.filter.abort: Are you sure to cancel applying the filter?
-
+confirm.message.quick_shot: You selected Multishot without excluding Quick Shot. This will make the bow shoot very slowly because the maximum modifier value is 120 whereas the normal shooting speed is 1000. Are you sure to continue?
 
 
 # Modifiers - please change the ones marked with FIXME to traditional characters
