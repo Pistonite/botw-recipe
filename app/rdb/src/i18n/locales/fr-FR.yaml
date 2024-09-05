@@ -29,7 +29,7 @@ filter.title: Filtrer
 filter.desc: Affiner les résultats en fonction des matériaux qui vous conviennent
 filter.list.title: Selectionner les objets
 filter.list.desc: Utilisez la liste ci-dessous pour exclure petit à petit les objets non souhaités des résultats, jusqu'à ce qu'il y ait assez peu de résultats pour y voir clair. Les objets favoris sont priorisés lors de l'affichage des résultats. Utilisez le bouton étoile dans la liste d'objets pour marquer les objets favoris.
-filter.search.placeholder: Rechercher un objet (par exemple "Pomme", "Poisson")
+filter.search.placeholder: Rechercher un objet (par exemple "Pomme", "Fish")
 filter.search.desc: Utilisez "Tablette sheikah" pour les objets-clés, comme ils sont équivalents. L'Extrait de monstre n'est pas disponible.
 filter.hide_excluded: Montrer uniquement les objets inclus dans les résultats
 filter.selection.actor: Objet ({{count}})
