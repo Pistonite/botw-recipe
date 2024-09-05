@@ -117,9 +117,6 @@ export const FilterStage: React.FC = () => {
     const cook = useResultCooker();
     const [abortInProgress, setAbortInProgress] = useState(false);
     const filterHandler = async () => {
-        if (stageDisabled) {
-            return;
-        }
         if (isFilteringInProgress) {
             if (abortInProgress) {
                 return;
@@ -133,6 +130,9 @@ export const FilterStage: React.FC = () => {
             if (result.err) {
                 await alert(getErrorAlertPayload(result.err));
             }
+            return;
+        }
+        if (stageDisabled) {
             return;
         }
         const startTime = performance.now();
@@ -250,7 +250,7 @@ export const FilterStage: React.FC = () => {
             </div>
             <StageAction>
                 <Caption1>
-                    {!stageDisabled &&
+                    {(!stageDisabled || isFilteringInProgress)&&
                         !!filterMessage.id &&
                         t(filterMessage.id, filterMessage.values)}
                 </Caption1>
@@ -265,7 +265,7 @@ export const FilterStage: React.FC = () => {
                     {t("filter.button.reset")}
                 </Button>
                 <Button
-                    disabled={stageDisabled}
+                    disabled={stageDisabled && !isFilteringInProgress}
                     appearance="primary"
                     onClick={filterHandler}
                 >

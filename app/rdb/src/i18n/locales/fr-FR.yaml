@@ -94,9 +94,9 @@ confirm.message.search.redo: Commencer une autre recherche supprimera les résul
 confirm.message.filter.reset: Supprimer les objets exclus et les statistiques du filtre ? Les statistiques seront disponibles la prochaine fois que vous appliquerez le filtre. Les objets favoris ne seront pas supprimés.
 confirm.message.filter.clear_favorites: Voulez-vous vraiment supprimer vos objets favoris ?
 confirm.message.filter.abort: Voulez-vous vraiment annuler l'application du filtre ?
+confirm.message.quick_shot: Vous avez sélectionné Multitirs sans avoir exclu Visée rapide. Votre arc tirera extrêmement lentement parce que la valeur maximale du bonus est 120, alors que la vitesse de tir normale est de 1000. Êtes-vous sûr de vouloir continuer?
 
 # Modifiers
-
 modifier.1: Attaque ↑
 modifier.1.value: Attaque ↑ + {{value}}
 modifier.2: Durabilité ↑

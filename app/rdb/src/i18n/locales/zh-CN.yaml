@@ -94,7 +94,7 @@ confirm.message.search.redo: 开始新的搜索将删除之前搜索的结果，
 confirm.message.filter.reset: 确定重置排除的物品和统计数据吗？下一次更新时将重新计算统计数据。标记物品列表不会被清空。
 confirm.message.filter.clear_favorites: 确定清空标记物品列表?
 confirm.message.filter.abort: 确定取消刷新材料列表？
-
+confirm.message.quick_shot: 您选择了包含“多连发”但是没有选择不包含“速射”。由于普通射速数值为1000，而附魔数值最高为120，速射附魔会导致弓射速非常慢。确定继续吗？
 
 # Modifiers
 modifier.1: 攻击力提升

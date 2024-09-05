@@ -9,12 +9,29 @@ export const DefaultLocale = "en-US" as const;
 
 /** Locale code to native language name */
 export const SupportedLocales = {
+    // "de-DE": "Deutsch",
     "en-US": "English",
+    // "es-ES": "Español",
+    "fr-FR": "Français",
+    // "it-IT": "Italiano",
+    // "ja-JP": "\u65e5\u672c\u8a9e",
+    // "ko-KR": "\ud55c\uad6d\uc5b4",
+    // "nl-NL": "Nederlands",
+    // "ru-RU": "Pусский",
     "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
+    // "zh-TW": "\u7e41\u9ad4\u4e2d\u6587"
 } as const;
 /** Language code to locale code as fallback */
 export const SupportedLanguages = {
+    // de: "de-DE",
     en: "en-US",
+    // es: "es-ES",
+    fr: "fr-FR",
+    // it: "it-IT",
+    // ja: "ja-JP",
+    // ko: "ko-KR",
+    // nl: "nl-NL",
+    // ru: "ru-RU",
     zh: "zh-CN",
 } as const;
 

@@ -16,6 +16,9 @@ Please see the [releases](https://github.com/Pistonite/botw-recipe/releases) for
 I am planning to support the languages supported by the game. 
 If you would like to contribute, please see [CONTRIBUTING.md](app/rdb/src/i18n/CONTRIBUTING.md)
 
+## Troubleshooting
+If you are having issue on Arch Linux + Nvidia Driver, you may need to set the variable `__NV_PRIME_RENDER_OFFLOAD=1` to run the app.
+
 ## Build
 You need:
 - Python

@@ -22,6 +22,7 @@ import {
     getSearchFilter,
     getSearchMessage,
     getSearchResultCount,
+    isSearchCalculatingStats,
     isSearching,
     setSearchIncludeCritRngHp,
     setSearchIncludePeOnly,
@@ -36,6 +37,7 @@ import type { WeaponModifierSet } from "host/types.ts";
 import { useHost } from "host/useHost.ts";
 import { getErrorAlertPayload } from "data/ErrorMessage.ts";
 import { useResultCooker } from "util/useResultCooker.ts";
+import { hasMultishotAndDoesNotExcludeQuickShot } from "data/WeaponModifier";
 
 function parseHp(
     value: number | undefined | null,
@@ -58,6 +60,7 @@ export const SearchStage: React.FC = () => {
     const filter = useSelector(getSearchFilter);
     const searchMessage = useSelector(getSearchMessage);
     const isSearchInProgress = useSelector(isSearching);
+    const isCalculatingStats = useSelector(isSearchCalculatingStats);
     const resultCount = useSelector(getSearchResultCount);
     const [abortInProgress, setAbortInProgress] = useState(false);
     const dispatch = useDispatch();
@@ -74,6 +77,8 @@ export const SearchStage: React.FC = () => {
     const { t } = useTranslation();
     const confirmAbort = useConfirm(t("confirm.message.search.abort"));
     const confirmRedo = useConfirm(t("confirm.message.search.redo"));
+    const confirmQuickShot = useConfirm(t("confirm.message.quick_shot"));
+
 
     const searchHandler = async () => {
         if (isSearchInProgress) {
@@ -93,6 +98,11 @@ export const SearchStage: React.FC = () => {
         }
         if (resultCount > 0) {
             if (!(await confirmRedo())) {
+                return;
+            }
+        }
+        if (hasMultishotAndDoesNotExcludeQuickShot(filter.includesModifier, filter.excludesModifier)) {
+            if (!(await confirmQuickShot())) {
                 return;
             }
         }
@@ -234,7 +244,9 @@ export const SearchStage: React.FC = () => {
                     {!!searchMessage.id &&
                         t(searchMessage.id, searchMessage.values)}
                 </Caption1>
-                <Button appearance="primary" onClick={searchHandler}>
+                <Button appearance="primary" onClick={searchHandler}
+                    disabled={isCalculatingStats}
+                >
                     {isSearchInProgress
                         ? t("search.button.cancel")
                         : t("search.button")}
