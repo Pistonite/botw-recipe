@@ -79,7 +79,6 @@ export const SearchStage: React.FC = () => {
     const confirmRedo = useConfirm(t("confirm.message.search.redo"));
     const confirmQuickShot = useConfirm(t("confirm.message.quick_shot"));
 
-
     const searchHandler = async () => {
         if (isSearchInProgress) {
             if (abortInProgress) {
@@ -101,7 +100,12 @@ export const SearchStage: React.FC = () => {
                 return;
             }
         }
-        if (hasMultishotAndDoesNotExcludeQuickShot(filter.includesModifier, filter.excludesModifier)) {
+        if (
+            hasMultishotAndDoesNotExcludeQuickShot(
+                filter.includesModifier,
+                filter.excludesModifier,
+            )
+        ) {
             if (!(await confirmQuickShot())) {
                 return;
             }
@@ -244,7 +248,9 @@ export const SearchStage: React.FC = () => {
                     {!!searchMessage.id &&
                         t(searchMessage.id, searchMessage.values)}
                 </Caption1>
-                <Button appearance="primary" onClick={searchHandler}
+                <Button
+                    appearance="primary"
+                    onClick={searchHandler}
                     disabled={isCalculatingStats}
                 >
                     {isSearchInProgress

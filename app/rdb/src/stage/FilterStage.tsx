@@ -250,7 +250,7 @@ export const FilterStage: React.FC = () => {
             </div>
             <StageAction>
                 <Caption1>
-                    {(!stageDisabled || isFilteringInProgress)&&
+                    {(!stageDisabled || isFilteringInProgress) &&
                         !!filterMessage.id &&
                         t(filterMessage.id, filterMessage.values)}
                 </Caption1>

@@ -31,6 +31,12 @@ export const WeaponModifiers = [
 export type WeaponModifier =
     (typeof WeaponModifier)[keyof typeof WeaponModifier];
 
-export const hasMultishotAndDoesNotExcludeQuickShot = (include: WeaponModifierSet, exclude: WeaponModifierSet) => {
-    return (include & WeaponModifier.SpreadFire) !== 0 && (exclude & WeaponModifier.RapidFire) === 0;
-}
+export const hasMultishotAndDoesNotExcludeQuickShot = (
+    include: WeaponModifierSet,
+    exclude: WeaponModifierSet,
+) => {
+    return (
+        (include & WeaponModifier.SpreadFire) !== 0 &&
+        (exclude & WeaponModifier.RapidFire) === 0
+    );
+};
