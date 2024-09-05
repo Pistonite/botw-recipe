@@ -95,9 +95,8 @@ confirm.message.filter.reset: Supprimer les objets exclus et les statistiques du
 confirm.message.filter.clear_favorites: Voulez-vous vraiment supprimer vos objets favoris ?
 confirm.message.filter.abort: Voulez-vous vraiment annuler l'application du filtre ?
 
+# Modifiers
 
-
-# Modifiers - please fix the ones marked with FIXME
 modifier.1: Attaque ↑
 modifier.1.value: Attaque ↑ + {{value}}
 modifier.2: Durabilité ↑
@@ -116,8 +115,6 @@ modifier.128: Glisse ↑
 modifier.128.value: Friction de glisse x {{valueThousandth}}
 modifier.256: Garde ↑
 modifier.256.value: Garde ↑ + {{value}}
-
-# Please verify the auto-generated translations below, thanks :)
 
 # DO NOT MODIFY BELOW
 ### AUTOGEN ###
