@@ -1,0 +1,260 @@
+# Translation needed! Please see CONTRIBUTING.md
+
+
+# Modifiers - please fix the ones marked with FIXME
+modifier.1: Angriffskraft ↑
+modifier.1.value: Angriffskraft + {{value}}
+modifier.2: Haltbarkeit ↑
+modifier.2.value: Haltbarkeit ↑
+modifier.4: Gnadenstoß
+modifier.4.value: Gnadenstoß
+modifier.8: Weitwurf
+modifier.8.value: Throw Range/Speed x {{valueThousandth}} # FIXME
+modifier.16: 5 Schüsse # FIXME - change from 5-shot to multishot
+modifier.16.value: Max {{valueMax10}}-shot # FIXME
+modifier.32: Zoom # FIXME
+modifier.32.value: Zoom # FIXME
+modifier.64: Schnellfeuer
+modifier.64.value: Shooting Speed x {{valueThousandth}} # FIXME
+modifier.128: Schlittern ↑
+modifier.128.value: Surf Friction x {{valueThousandth}} # FIXME
+modifier.256: Schildblock ↑
+modifier.256.value: Schildblock + {{value}}
+
+# Please verify the auto-generated item translations below, thanks :)
+
+# DO NOT MODIFY BELOW
+### AUTOGEN ###
+actor.Item_Fruit_D: Maxi-Durian
+actor.Item_Fruit_G: Palmfrucht
+actor.Item_Fruit_A: Apfel
+actor.Item_Fruit_B: Wildbeere
+actor.Item_Fruit_F: Frostmelone
+actor.Item_Fruit_I: Chili
+actor.Item_Fruit_C: Zitterfrucht
+actor.Item_Fruit_E: Spurtlotos
+actor.Item_Fruit_H: Schwertbanane
+actor.Item_Mushroom_N: Maxi-Edeltrüffel
+actor.Item_Mushroom_F: Maxi-Trüffel
+actor.Item_Mushroom_O: Fittling
+actor.Item_Mushroom_E: Hyrule-Pilz
+actor.Item_Mushroom_A: Ausdauerling
+actor.Item_Mushroom_B: Frostling
+actor.Item_Mushroom_C: Glutling
+actor.Item_Mushroom_H: Zitterling
+actor.Item_MushroomGet_D: Spurtling
+actor.Item_Mushroom_L: Schwertling
+actor.Item_Mushroom_M: Rüstling
+actor.Item_Mushroom_J: Schleichling
+actor.Item_PlantGet_C: Große Maxi-Rübe
+actor.Item_PlantGet_B: Maxi-Rübe
+actor.Item_PlantGet_Q: Fitkarotte
+actor.Item_PlantGet_A: Hyrule-Gras
+actor.Item_PlantGet_M: Spurtkarotte
+actor.Item_Fruit_J: Rüstungskürbis
+actor.Item_PlantGet_E: Frostkraut
+actor.Item_PlantGet_F: Glutkraut
+actor.Item_PlantGet_L: Zitterkraut
+actor.Item_PlantGet_O: Spurtveilchen
+actor.Item_PlantGet_G: Schwertgras
+actor.Item_PlantGet_H: Rüstgras
+actor.Item_PlantGet_I: Schleichglöckchen
+actor.Item_PlantGet_J: Prinzessinnen-Enzian
+actor.Item_Meat_11: Luxuswild
+actor.Item_Meat_12: Luxusgeflügel
+actor.Item_Meat_02: Edelwild
+actor.Item_Meat_07: Edelgeflügel
+actor.Item_Meat_01: Wild
+actor.Item_Meat_06: Geflügel
+actor.BeeHome: Ausdauerhonig
+actor.Item_Material_03: Hyrule-Reis
+actor.Item_Material_04: Ei
+actor.Item_Material_07: Tabanta-Weizen
+actor.Item_Material_05: Milch
+actor.Item_Fruit_K: Eichel
+actor.Item_Fruit_L: Vogelnuss
+actor.Item_Material_01: Rohrzucker
+actor.Item_Material_06: Ziegenbutter
+actor.Item_Material_02: Goronengewürz
+actor.Item_Ore_H: Steinsalz
+actor.Item_Ore_J: Sternensplitter
+actor.Item_Enemy_38: Eldra-Schuppe
+actor.Item_Enemy_39: Eldra-Klaue
+actor.Item_Enemy_47: Eldra-Zahn
+actor.Item_Enemy_48: Eldra-Hornsplitter
+actor.Item_Enemy_49: Naydra-Schuppe
+actor.Item_Enemy_50: Naydra-Klaue
+actor.Item_Enemy_51: Naydra-Zahn
+actor.Item_Enemy_52: Naydra-Hornsplitter
+actor.Item_Enemy_53: Farodra-Schuppe
+actor.Item_Enemy_54: Farodra-Klaue
+actor.Item_Enemy_55: Farodra-Zahn
+actor.Item_Enemy_56: Farodra-Hornsplitter
+actor.Item_FishGet_I: Maxi-Lachs
+actor.Item_FishGet_K: Maxi-Muschel
+actor.Item_FishGet_B: Maxi-Barsch
+actor.Item_FishGet_A: Hyrulebarsch
+actor.Item_FishGet_L: Ausdauerbarsch
+actor.Item_FishGet_C: Frostforelle
+actor.Item_FishGet_J: Glutforelle
+actor.Item_FishGet_D: Zitterforelle
+actor.Item_FishGet_X: Schleichforelle
+actor.Item_FishGet_E: Schwertkarpfen
+actor.Item_FishGet_H: Rüstungskarpfen
+actor.Item_FishGet_Z: Dreifarb-Karpfen
+actor.Item_FishGet_F: Schwertschnapper
+actor.Item_FishGet_G: Rüstungsschnapper
+actor.Item_FishGet_M: Schleichschnecke
+actor.Item_InsectGet_K: Schwertkrabbe
+actor.Item_InsectGet_O: Rüstungskrabbe
+actor.Item_InsectGet_Z: Ausdauerkrabbe
+actor.Animal_Insect_F: Fee
+actor.Animal_Insect_N: Frostflügler
+actor.Animal_Insect_Q: Glutflügler
+actor.Animal_Insect_R: Zitterflügler
+actor.Animal_Insect_AB: Löschflügler
+actor.Animal_Insect_C: Frostlibelle
+actor.Animal_Insect_T: Glutlibelle
+actor.Animal_Insect_I: Zitterlibelle
+actor.Animal_Insect_H: Ausdauerschrecke
+actor.Animal_Insect_G: Schwertkäfer
+actor.Animal_Insect_P: Rüstungskäfer
+actor.Animal_Insect_AA: Ausdauerkäfer
+actor.Animal_Insect_E: Schleichwürmchen
+actor.Animal_Insect_A: Spurtkröte
+actor.Animal_Insect_B: Fitkröte
+actor.Animal_Insect_S: Spurtechse
+actor.Animal_Insect_M: Maxi-Echse
+actor.Animal_Insect_X: Löschechse
+actor.Item_Ore_I: Feuerstein
+actor.Item_Ore_F: Bernstein
+actor.Item_Ore_E: Opal
+actor.Item_Ore_G: Leuchtstein
+actor.Item_Ore_D: Topas
+actor.Item_Ore_B: Rhodonit
+actor.Item_Ore_C: Saphir
+actor.Item_Ore_A: Diamant
+actor.Item_Enemy_00: Bokblin-Horn
+actor.Item_Enemy_01: Bokblin-Hauer
+actor.Item_Enemy_02: Bokblin-Herz
+actor.Item_Enemy_06: Moblin-Horn
+actor.Item_Enemy_07: Moblin-Hauer
+actor.Item_Enemy_08: Moblin-Herz
+actor.Item_Enemy_03: Echsalfos-Horn
+actor.Item_Enemy_04: Echsalfos-Sporn
+actor.Item_Enemy_05: Echsalfos-Schwanz
+actor.Item_Enemy_42: Echsalfos-Schwanz (blau)
+actor.Item_Enemy_41: Echsalfos-Schwanz (rot)
+actor.Item_Enemy_43: Echsalfos-Schwanz (gelb)
+actor.Item_Enemy_12: Leunen-Horn
+actor.Item_Enemy_13: Leunen-Huf
+actor.Item_Enemy_14: Leunen-Herz
+actor.Item_Enemy_40: Schleim-Gelee
+actor.Item_Enemy_17: Weißes Schleim-Gelee
+actor.Item_Enemy_15: Rotes Schleim-Gelee
+actor.Item_Enemy_16: Gelbes Schleim-Gelee
+actor.Item_Enemy_18: Flederbeißerflügel
+actor.Item_Enemy_46: Eis-Flederbeißerflügel
+actor.Item_Enemy_44: Feuer-Flederbeißerflügel
+actor.Item_Enemy_45: Elektro-Flederbeißerflügel
+actor.Item_Enemy_19: Flederbeißerauge
+actor.Item_Enemy_20: Oktorok-Tentakel
+actor.Item_Enemy_21: Oktorok-Auge
+actor.Item_Enemy_57: Oktorok-Ballon
+actor.Item_Enemy_24: Moldora-Flosse
+actor.Item_Enemy_25: Moldora-Herz
+actor.Item_Enemy_32: Hinox-Fußnagel
+actor.Item_Enemy_33: Hinox-Zahn
+actor.Item_Enemy_34: Hinox-Herz
+actor.Item_Enemy_27: Antike Schraube
+actor.Item_Enemy_28: Antike Feder
+actor.Item_Enemy_26: Antikes Zahnrad
+actor.Item_Enemy_29: Antike Achse
+actor.Item_Enemy_30: Antiker Reaktorkern
+actor.Item_Enemy_31: Antiker Riesenkern
+actor.Obj_FireWoodBundle: Holzbündel
+actor.Item_Roast_03: Röstapfel
+actor.Item_Roast_10: Röst-Palmfrucht
+actor.Item_Roast_07: Röst-Wildbeere
+actor.Item_Roast_48: Rösteichel
+actor.Item_Roast_52: Röstkastanie
+actor.Item_Roast_09: Röst-Maxi-Durian
+actor.Item_Roast_12: Röst-Frostmelone
+actor.Item_Roast_13: Röst-Chili
+actor.Item_Roast_08: Röst-Zitterfrucht
+actor.Item_Roast_16: Röst-Spurtlotos
+actor.Item_Roast_11: Röst-Schwertbanane
+actor.Item_Roast_06: Röst-Hyrule-Pilz
+actor.Item_Roast_04: Röstausdauerling
+actor.Item_Roast_53: Röstfittling
+actor.Item_Roast_05: Röst-Trüffel
+actor.Item_Roast_49: Röst-Edeltrüffel
+actor.Item_Roast_31: Röstfrostling
+actor.Item_Roast_32: Röstglutling
+actor.Item_Roast_33: Röstzitterling
+actor.Item_Roast_36: Röstspurtling
+actor.Item_Roast_37: Röstschwertling
+actor.Item_Roast_38: Röstrüstling
+actor.Item_Roast_39: Röstschleichling
+actor.Item_Roast_18: Röstrübe
+actor.Item_Roast_19: Große Röstrübe
+actor.Item_Roast_24: Röst-Spurtkarotte
+actor.Item_Roast_50: Röst-Fitkarotte
+actor.Item_Roast_15: Röst-Rüstungskürbis
+actor.Item_Roast_27: Röst-Schwertgras
+actor.Item_Roast_28: Röst-Rüstgras
+actor.Item_Roast_51: Röstei
+actor.Item_Boiled_01: Gekochtes Ei
+actor.Item_Roast_01: Grill-Wild
+actor.Item_Roast_40: Grill-Edelwild
+actor.Item_Roast_45: Grill-Luxuswild
+actor.Item_Roast_02: Grill-Geflügel
+actor.Item_Roast_41: Grill-Edelgeflügel
+actor.Item_Roast_46: Grill-Luxusgeflügel
+actor.Item_RoastFish_01: Röstbarsch
+actor.Item_RoastFish_02: Röst-Maxi-Barsch
+actor.Item_RoastFish_04: Röst-Maxi-Lachs
+actor.Item_RoastFish_03: Röstforelle
+actor.Item_RoastFish_07: Röstkarpfen
+actor.Item_RoastFish_09: Röstschnapper
+actor.Item_RoastFish_13: Röst-Schleichschnecke
+actor.Item_RoastFish_11: Röst-Maxi-Muschel
+actor.Item_RoastFish_15: Röstkrabbe
+actor.Item_Chilled_01: Gefrorenes Wild
+actor.Item_Chilled_02: Gefrorenes Edelwild
+actor.Item_Chilled_03: Gefrorenes Luxuswild
+actor.Item_Chilled_04: Gefrorenes Geflügel
+actor.Item_Chilled_05: Gefrorenes Edelgeflügel
+actor.Item_Chilled_06: Gefrorenes Luxusgeflügel
+actor.Item_ChilledFish_01: Gefrorener Barsch
+actor.Item_ChilledFish_06: Gefrorener Maxi-Barsch
+actor.Item_ChilledFish_02: Gefrorener Maxi-Lachs
+actor.Item_ChilledFish_03: Gefrorene Forelle
+actor.Item_ChilledFish_04: Gefrorener Karpfen
+actor.Item_ChilledFish_05: Gefrorene Meerbrasse
+actor.Item_ChilledFish_07: Gefrorene Krabbe
+actor.Item_ChilledFish_08: Gefrorene Schnecke
+actor.Item_ChilledFish_09: Gefrorene Maxi-Muschel
+actor.Obj_DRStone_Get: Shiekah-Stein
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Farbe (Blau)
+actor.dyecolor_02: Farbe (Rot)
+actor.dyecolor_03: Farbe (Gelb)
+actor.dyecolor_04: Farbe (Weiß)
+actor.dyecolor_05: Farbe (Schwarz)
+actor.dyecolor_06: Farbe (Lila)
+actor.dyecolor_07: Farbe (Grün)
+actor.dyecolor_08: Farbe (Hellblau)
+actor.dyecolor_09: Farbe (Dunkelblau)
+actor.dyecolor_10: Farbe (Orange)
+actor.dyecolor_11: Farbe (Rosa)
+actor.dyecolor_12: Farbe (Karmesinrot)
+actor.dyecolor_13: Farbe (Hellgelb)
+actor.dyecolor_14: Farbe (Braun)
+actor.dyecolor_15: Farbe (Grau)
+actor.Obj_Photo_Animal: Tier-Foto
+actor.Obj_Photo_BossEnemy: Bossgegner-Foto
+actor.Obj_Photo_Enemy: Monster-Foto
+actor.Obj_Photo_Material: Zutaten-Foto
+actor.Obj_Photo_Other: Schatz-Foto
+actor.Obj_Photo_Weapon: Waffen-Foto

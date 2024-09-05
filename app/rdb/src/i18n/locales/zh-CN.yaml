@@ -26,9 +26,7 @@ search.result: "共找到{{count}}种组合，用时{{seconds}}秒"
 filter.title: 过滤物品
 filter.desc: 根据您所需要的材料来过滤找到的组合
 filter.list.title: 材料列表
-filter.list.desc:
-  请在以下列表中循序渐进地排除不想要的材料，直到结果数量足够低，可以进一步查看每一个结果。
-  用星星按钮可以标记该材料。被标记物品在显示结果时将优先展示。
+filter.list.desc: 请在以下列表中循序渐进地排除不想要的材料，直到结果数量足够低，可以进一步查看每一个结果。用星星按钮可以标记该材料。被标记物品在显示结果时将优先展示。
 filter.search.placeholder: "搜索支持拼音和首字母，如\"萝卜\"，\"luo bo\"或\"lb\""
 filter.search.desc: 由于所有重要道具料理用途相同，请使用“希卡之石”代替。不支持怪物精华。
 filter.hide_excluded: 仅显示结果中包含的材料

@@ -81,10 +81,12 @@ export async function switchLanguage(locale: string, host: Host) {
 export async function loadLocale(
     locale: string,
 ): Promise<Record<string, string>> {
-    const override = getTranslationOverride();
+    const override = await getTranslationOverride();
     if (override) {
-        RESOURCES[locale] = { translation: override };
-        return override;
+        console.log("reloading override translation");
+        const translation = JSON.parse(override);
+        RESOURCES[locale] = { translation };
+        return translation;
     }
     if (!RESOURCES[locale]) {
         const module = await import(`./locales/${locale}.yaml`);

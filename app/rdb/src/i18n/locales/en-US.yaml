@@ -26,9 +26,7 @@ search.result: "Found {{count}} recipes in {{seconds}}s"
 filter.title: Filter
 filter.desc: Narrow down the scan results based on what items best fit your needs
 filter.list.title: Select Items
-filter.list.desc:
-  Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection.
-  Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
+filter.list.desc: Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection. Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
 filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
 filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
 filter.hide_excluded: Show only items included in results
@@ -40,7 +38,7 @@ filter.selection.option.include: Include
 filter.selection.option.exclude: Exclude
 filter.selection.subtitle.percentage: In {{percentage}}% of remaining recipes
 filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% of remaining recipes, will exclude
-filter.selection.subtitle.no_percentage: Statistics not available 
+filter.selection.subtitle.no_percentage: Statistics not available
 filter.selection.subtitle.no_percentage.to_exclude: Statistics not available, will exclude
 filter.selection.subtitle.excluded: Excluded
 filter.selection.subtitle.excluded.to_include: Excluded, will include

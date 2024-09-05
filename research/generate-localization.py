@@ -2,12 +2,22 @@
 
 import yaml
 import util
+import os
 
 GEN_TAG = "### AUTOGEN ###"
 
 LOCALE_MAP = {
     "en-US": "USen",
-    "zh-CN": "CNzh"
+    "ja-JP": "JPja",
+    "de-DE": "EUde",
+    "es-ES": "EUes",
+    "it-IT": "EUit",
+    "fr-FR": "EUfr",
+    "ru-RU": "EUru",
+    "zh-CN": "CNzh",
+    "zh-TW": "TWzh",
+    "ko-KR": "KRko",
+    "nl-NL": "EUnl",
 }
 
 NAMELESS = set(["dyecolor_00"])
@@ -27,13 +37,14 @@ with open(IN["inventory-actors"], "r", encoding="utf-8") as f:
 
 def write_names(locale, actors):
     lines = []
-    with open(OUT[locale], "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line == GEN_TAG:
-                lines.append(GEN_TAG)
-                break
-            lines.append(line)
+    if os.path.exists(OUT[locale]):
+        with open(OUT[locale], "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line == GEN_TAG:
+                    break
+                lines.append(line)
+    lines.append(GEN_TAG)
     for actor in actors:
         lines.append(f"actor.{actor}: {actors[actor]}")
     with open(OUT[locale], "w", encoding="utf-8", newline="\n") as f:
@@ -60,9 +71,32 @@ for locale, locale_code in LOCALE_MAP.items():
         else:
             key = actor+"_Name"
             data = items[actor+"_Name"]["contents"]
-            if len(data) != 1:
-                raise ValueError(f"{actor} has {len(data)} names!??")
-            name = data[0]["text"]
+            if len(data) == 1:
+                name = data[0]["text"]
+            else:
+                if locale == "ja-JP":
+                    # handling for Japanese: control.zero.zero.field_3 is how many bytes to remove
+                    name = ""
+                    last_control = None
+                    for x in data:
+                        if "text" in x:
+                            if last_control:
+                                name += x["text"][last_control:]
+                                last_control = None
+                            else:
+                                name += x["text"]
+                        elif "control" in x:
+                            last_control = x["control"]["zero"]["zero"]["field_3"] 
+                            # divided by 2 because it's in bytes
+                            if last_control % 2 != 0:
+                                raise ValueError(f"{actor} has an odd number of bytes to remove!??")
+                            last_control = last_control // 2
+                        else:
+                            raise ValueError(f"{actor} has {x} in its name!??")
+                else:
+                    # ignore control for other languages
+                    name = "".join([x["text"] for x in data if "text" in x])
+                    #raise ValueError(f"{actor} has {len(data)} names!??")
         output[actor] = name
     write_names(locale, output)
 

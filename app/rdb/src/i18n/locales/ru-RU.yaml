@@ -1,0 +1,257 @@
+# Translation needed! Please see CONTRIBUTING.md
+
+# Modifiers - please fix the ones marked with FIXME
+modifier.1: Атака +
+modifier.1.value: Атака + {{value}}
+modifier.2: Прочность +
+modifier.2.value: Прочность +
+modifier.4: Критический удар
+modifier.4.value: Критический удар
+modifier.8: Дальний бросок
+modifier.8.value: Throw Range/Speed x {{valueThousandth}} # FIXME
+modifier.16: Multishot # FIXME - change from 5-shot to multishot
+modifier.16.value: Max {{valueMax10}}-shot # FIXME
+modifier.32: Zoom # FIXME
+modifier.32.value: Zoom # FIXME
+modifier.64: Скорострельность
+modifier.64.value: Shooting Speed x {{valueThousandth}} # FIXME
+modifier.128: Для щитбординга
+modifier.128.value: Surf Friction x {{valueThousandth}} # FIXME
+modifier.256: Защита +
+modifier.256.value: Защита + {{value}}
+
+# DO NOT MODIFY BELOW
+### AUTOGEN ###
+actor.Item_Fruit_D: Чудо-дуриан
+actor.Item_Fruit_G: Кокос
+actor.Item_Fruit_A: Яблоко
+actor.Item_Fruit_B: Малина
+actor.Item_Fruit_F: Морозный арбуз
+actor.Item_Fruit_I: Жгучий перец
+actor.Item_Fruit_C: Грозалис
+actor.Item_Fruit_E: Прыть-лотос
+actor.Item_Fruit_H: Клинковый банан
+actor.Item_Mushroom_N: Супертрюфель
+actor.Item_Mushroom_F: Чудо-трюфель
+actor.Item_Mushroom_O: Живушка
+actor.Item_Mushroom_E: Хайруловик
+actor.Item_Mushroom_A: Бодренок
+actor.Item_Mushroom_B: Подморозовик
+actor.Item_Mushroom_C: Жаромор
+actor.Item_Mushroom_H: Грозовик
+actor.Item_MushroomGet_D: Прытковик
+actor.Item_Mushroom_L: Клинковик
+actor.Item_Mushroom_M: Латновик
+actor.Item_Mushroom_J: Скрытоежка
+actor.Item_PlantGet_C: Суперредис
+actor.Item_PlantGet_B: Чудо-редис
+actor.Item_PlantGet_Q: Жив-морковь
+actor.Item_PlantGet_A: Хайрулея
+actor.Item_PlantGet_M: Прыть-морковь
+actor.Item_Fruit_J: Латная тыква
+actor.Item_PlantGet_E: Морозоцвет
+actor.Item_PlantGet_F: Жароцвет
+actor.Item_PlantGet_L: Грозоцвет
+actor.Item_PlantGet_O: Прыть-фиалка
+actor.Item_PlantGet_G: Клинкоцвет
+actor.Item_PlantGet_H: Латноцвет
+actor.Item_PlantGet_I: Скрытоцвет
+actor.Item_PlantGet_J: Принцесса тишины
+actor.Item_Meat_11: Сырая рулька
+actor.Item_Meat_12: Сырая тушка
+actor.Item_Meat_02: Сырой огузок
+actor.Item_Meat_07: Сырой окорок
+actor.Item_Meat_01: Сырое филе
+actor.Item_Meat_06: Сырая ножка
+actor.BeeHome: Мед бодрых пчел
+actor.Item_Material_03: Хайрульский рис
+actor.Item_Material_04: Яйцо
+actor.Item_Material_07: Табантская пшеница
+actor.Item_Material_05: Молоко
+actor.Item_Fruit_K: Желудь
+actor.Item_Fruit_L: Птичий орех
+actor.Item_Material_01: Сахарный тростник
+actor.Item_Material_06: Козье масло
+actor.Item_Material_02: Приправа горонов
+actor.Item_Ore_H: Каменная соль
+actor.Item_Ore_J: Осколок звезды
+actor.Item_Enemy_38: Чешуйка Динраля
+actor.Item_Enemy_39: Коготь Динраля
+actor.Item_Enemy_47: Фрагмент зуба Динраля
+actor.Item_Enemy_48: Фрагмент рога Динраля
+actor.Item_Enemy_49: Чешуйка Нейдры
+actor.Item_Enemy_50: Коготь Нейдры
+actor.Item_Enemy_51: Фрагмент зуба Нейдры
+actor.Item_Enemy_52: Фрагмент рога Нейдры
+actor.Item_Enemy_53: Чешуйка Фароша
+actor.Item_Enemy_54: Коготь Фароша
+actor.Item_Enemy_55: Фрагмент зуба Фароша
+actor.Item_Enemy_56: Фрагмент рога Фароша
+actor.Item_FishGet_I: Чудо-семга
+actor.Item_FishGet_K: Чудо-скрытница
+actor.Item_FishGet_B: Чудо-окунь
+actor.Item_FishGet_A: Хайрульский окунь
+actor.Item_FishGet_L: Бодрый окунь
+actor.Item_FishGet_C: Морозная форель
+actor.Item_FishGet_J: Жар-форель
+actor.Item_FishGet_D: Грозовая форель
+actor.Item_FishGet_X: Тишь-форель
+actor.Item_FishGet_E: Клинковый сазан
+actor.Item_FishGet_H: Латный сазан
+actor.Item_FishGet_Z: Карп санке
+actor.Item_FishGet_F: Клинковый пагр
+actor.Item_FishGet_G: Латный пагр
+actor.Item_FishGet_M: Улитка-тихоход
+actor.Item_InsectGet_K: Клинковый краб
+actor.Item_InsectGet_O: Латный краб
+actor.Item_InsectGet_Z: Бодрый краб
+actor.Animal_Insect_F: Фея
+actor.Animal_Insect_N: Морозная бабочка
+actor.Animal_Insect_Q: Жар-бабочка
+actor.Animal_Insect_R: Грозовая бабочка
+actor.Animal_Insect_AB: Пожарная бабочка
+actor.Animal_Insect_C: Морозная стрекоза
+actor.Animal_Insect_T: Жар-стрекоза
+actor.Animal_Insect_I: Грозовая стрекоза
+actor.Animal_Insect_H: Бодрый сверчок
+actor.Animal_Insect_G: Клинковый жук
+actor.Animal_Insect_P: Латный жук
+actor.Animal_Insect_AA: Бодрый жук
+actor.Animal_Insect_E: Тихий светлячок
+actor.Animal_Insect_A: Прыть-лягушка
+actor.Animal_Insect_B: Живучая лягушка
+actor.Animal_Insect_S: Прыть-ящерица
+actor.Animal_Insect_M: Чудо-ящерица
+actor.Animal_Insect_X: Пожарная ящерица
+actor.Item_Ore_I: Кремень
+actor.Item_Ore_F: Янтарь
+actor.Item_Ore_E: Опал
+actor.Item_Ore_G: Фосфолит
+actor.Item_Ore_D: Топаз
+actor.Item_Ore_B: Рубин
+actor.Item_Ore_C: Сапфир
+actor.Item_Ore_A: Алмаз
+actor.Item_Enemy_00: Рог бокоблина
+actor.Item_Enemy_01: Зуб бокоблина
+actor.Item_Enemy_02: Сердце бокоблина
+actor.Item_Enemy_06: Рог моблина
+actor.Item_Enemy_07: Зуб моблина
+actor.Item_Enemy_08: Сердце моблина
+actor.Item_Enemy_03: Рог заврофоса
+actor.Item_Enemy_04: Коготь заврофоса
+actor.Item_Enemy_05: Заврохвост
+actor.Item_Enemy_42: Синий заврохвост
+actor.Item_Enemy_41: Красный заврохвост
+actor.Item_Enemy_43: Желтый заврохвост
+actor.Item_Enemy_12: Рог левра
+actor.Item_Enemy_13: Копыто левра
+actor.Item_Enemy_14: Сердце левра
+actor.Item_Enemy_40: Желе чучу
+actor.Item_Enemy_17: Белое желе чучу
+actor.Item_Enemy_15: Красное желе чучу
+actor.Item_Enemy_16: Желтое желе чучу
+actor.Item_Enemy_18: Крыло куса
+actor.Item_Enemy_46: Крыло ледяного куса
+actor.Item_Enemy_44: Крыло огненного куса
+actor.Item_Enemy_45: Крыло грозового куса
+actor.Item_Enemy_19: Глаз куса
+actor.Item_Enemy_20: Щупальце осьминоса
+actor.Item_Enemy_21: Глаз осьминоса
+actor.Item_Enemy_57: Зоб осьминоса
+actor.Item_Enemy_24: Плавник молдоры
+actor.Item_Enemy_25: Сердце молдоры
+actor.Item_Enemy_32: Ноготь хинокса
+actor.Item_Enemy_33: Зуб хинокса
+actor.Item_Enemy_34: Сердце хинокса
+actor.Item_Enemy_27: Древний винт
+actor.Item_Enemy_28: Древняя пружина
+actor.Item_Enemy_26: Древняя шестерня
+actor.Item_Enemy_29: Древний вал
+actor.Item_Enemy_30: Древнее ядро
+actor.Item_Enemy_31: Древнее суперъядро
+actor.Obj_FireWoodBundle: Дрова
+actor.Item_Roast_03: Печеное яблоко
+actor.Item_Roast_10: Печеный кокос
+actor.Item_Roast_07: Печеная малина
+actor.Item_Roast_48: Жареный желудь
+actor.Item_Roast_52: Жареный орех
+actor.Item_Roast_09: Печеный чудо-дуриан
+actor.Item_Roast_12: Печеный арбуз
+actor.Item_Roast_13: Жареный перец
+actor.Item_Roast_08: Печеный грозалис
+actor.Item_Roast_16: Печеный прыть-лотос
+actor.Item_Roast_11: Печеный банан
+actor.Item_Roast_06: Жареный хайруловик
+actor.Item_Roast_04: Жареный бодренок
+actor.Item_Roast_53: Жареная живушка
+actor.Item_Roast_05: Жареный чудо-трюфель
+actor.Item_Roast_49: Жареный супертрюфель
+actor.Item_Roast_31: Жареный подморозовик
+actor.Item_Roast_32: Жареный жаромор
+actor.Item_Roast_33: Жареный грозовик
+actor.Item_Roast_36: Жареный прытковик
+actor.Item_Roast_37: Жареный клинковик
+actor.Item_Roast_38: Жареный латновик
+actor.Item_Roast_39: Жареная скрытоежка
+actor.Item_Roast_18: Печеный редис
+actor.Item_Roast_19: Печеный суперредис
+actor.Item_Roast_24: Печеная прыть-морковь
+actor.Item_Roast_50: Печеная жив-морковь
+actor.Item_Roast_15: Печеная латная тыква
+actor.Item_Roast_27: Жженый клинкоцвет
+actor.Item_Roast_28: Жженый латноцвет
+actor.Item_Roast_51: Печеное яйцо
+actor.Item_Boiled_01: Вареное яйцо
+actor.Item_Roast_01: Жареное филе
+actor.Item_Roast_40: Жареный огузок
+actor.Item_Roast_45: Жареная рулька
+actor.Item_Roast_02: Жареная ножка
+actor.Item_Roast_41: Жареный окорок
+actor.Item_Roast_46: Жареная тушка
+actor.Item_RoastFish_01: Жареный окунь
+actor.Item_RoastFish_02: Жареный чудо-окунь
+actor.Item_RoastFish_04: Жареная чудо-семга
+actor.Item_RoastFish_03: Жареная форель
+actor.Item_RoastFish_07: Жареный сазан
+actor.Item_RoastFish_09: Жареный пагр
+actor.Item_RoastFish_13: Жареный тихоход
+actor.Item_RoastFish_11: Жареная скрытница
+actor.Item_RoastFish_15: Жареный краб
+actor.Item_Chilled_01: Мерзлое филе
+actor.Item_Chilled_02: Мерзлый огузок
+actor.Item_Chilled_03: Мерзлая рулька
+actor.Item_Chilled_04: Мерзлая ножка
+actor.Item_Chilled_05: Мерзлый окорок
+actor.Item_Chilled_06: Мерзлая тушка
+actor.Item_ChilledFish_01: Мерзлый окунь
+actor.Item_ChilledFish_06: Мерзлый чудо-окунь
+actor.Item_ChilledFish_02: Мерзлая чудо-семга
+actor.Item_ChilledFish_03: Мерзлая форель
+actor.Item_ChilledFish_04: Мерзлый сазан
+actor.Item_ChilledFish_05: Мерзлый пагр
+actor.Item_ChilledFish_07: Мерзлый краб
+actor.Item_ChilledFish_08: Мерзлый тихоход
+actor.Item_ChilledFish_09: Мерзлая скрытница
+actor.Obj_DRStone_Get: Камень шиика
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Синий
+actor.dyecolor_02: Красный
+actor.dyecolor_03: Желтый
+actor.dyecolor_04: Белый
+actor.dyecolor_05: Черный
+actor.dyecolor_06: Фиолетовый
+actor.dyecolor_07: Зеленый
+actor.dyecolor_08: Голубой
+actor.dyecolor_09: Темно-синий
+actor.dyecolor_10: Оранжевый
+actor.dyecolor_11: Персиковый
+actor.dyecolor_12: Темно-красный
+actor.dyecolor_13: Бледно-желтый
+actor.dyecolor_14: Коричневый
+actor.dyecolor_15: Серый
+actor.Obj_Photo_Animal: «Фауна»
+actor.Obj_Photo_BossEnemy: «Боссы»
+actor.Obj_Photo_Enemy: «Враги»
+actor.Obj_Photo_Material: «Материалы»
+actor.Obj_Photo_Other: «Прочее»
+actor.Obj_Photo_Weapon: «Оружие»
