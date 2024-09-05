@@ -17,7 +17,7 @@ search.modifier.option.include: Inclus
 search.modifier.option.exclude: Exclus
 search.modifier.option.ignore: Ignoré
 search.button: Chercher
-search.button.cancel: Cancel
+search.button.cancel: Annuler
 search.progress: "Recherche ({{progress}}%)"
 search.progress.initial: "Recherche..."
 search.progress.stat_group: Calcul des statistiques des inrgédients
