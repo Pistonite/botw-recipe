@@ -1,5 +1,104 @@
 # Translation needed! Please see CONTRIBUTING.md
 
+# UI
+title: BotW Recipe Database for WMC
+search.title: Search
+search.desc: Scan all material combinations and select recipes that meet the criteria for modifiers
+search.value.title: Value and Materials
+search.value.min: Min. Modifier Value (HP)
+search.value.max: Max. Modifier Value (HP)
+search.value.rng: Allow RNG HP Crit
+search.value.rng.desc: Include recipes where a non-guaranteed HP crit is needed to meet the minimum HP requirement. Guaranteed HP crit are not affected. (Note that a recipe which guarantees a crit may not guarantee a HP crit.)
+search.value.pe: Allow Unusual Material
+search.value.pe.desc: Include recipes where at least one material needs Prompt Entanglement or is usually unobtainable or uncookable.
+search.modifier.title: Modifiers
+search.modifier.desc: Select "+" for modifiers that must be included, and "-" for modifiers that must be excluded.
+search.modifier.name: Modifier
+search.modifier.option: Option
+search.modifier.option.include: Included
+search.modifier.option.exclude: Excluded
+search.modifier.option.ignore: Ignored
+search.button: Search
+search.button.cancel: Cancel
+search.progress: "Searching ({{progress}}%)"
+search.progress.initial: "Searching..."
+search.progress.stat_group: Computing material stats
+search.result: "Found {{count}} recipes in {{seconds}}s"
+
+filter.title: Filter
+filter.desc: Narrow down the scan results based on what items best fit your needs
+filter.list.title: Select Items
+filter.list.desc: Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection. Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
+filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
+filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
+filter.hide_excluded: Show only items included in results
+filter.selection.actor: Item ({{count}})
+filter.selection.option: Options
+filter.selection.option.favorite: Favorite
+filter.selection.option.unfavorite: Favorited
+filter.selection.option.include: Include
+filter.selection.option.exclude: Exclude
+filter.selection.subtitle.percentage: In {{percentage}}% of remaining recipes
+filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% of remaining recipes, will exclude
+filter.selection.subtitle.no_percentage: Statistics not available
+filter.selection.subtitle.no_percentage.to_exclude: Statistics not available, will exclude
+filter.selection.subtitle.excluded: Excluded
+filter.selection.subtitle.excluded.to_include: Excluded, will include
+filter.favorited: Favorited Items
+filter.favorited.clear: Clear
+filter.prompt: Press Apply to update the filter
+filter.button: Apply
+filter.button.cancel: Cancel
+filter.button.reset: Clear
+filter.progress: "Applying filter ({{progress}}%)"
+filter.progress.initial: "Applying filter..."
+filter.result: "Done in {{seconds}}s, {{count}} recipes left"
+filter.not_ready.not_searched: No search result found. Please search for recipes with modifier criteria first.
+filter.not_ready.no_result: Did not find any recipe that matched the modifiers. Please adjust the criteria and search again.
+filter.not_ready.searching: Waiting for search to finish...
+
+result.title: Results
+result.desc: Recipes with the desired modifiers and only include the wanted items
+result.progress: Cooking the results
+result.error: "Error while cooking the results: {{message}}"
+result.button.retry: Retry
+result.count: Showing {{count}} recipes after grouping
+result.limited: Results exceeded the limit of {{limit}}, showing only the first {{count}} recipes after grouping. Keep in mind this is NOT the full result list. Please keep filtering to reduce the number of results.
+result.list.note: (Value marked with * requires a non-guaranteed HP crit)
+result.header.recipe: Recipe
+result.header.recipe_desc: Recipe (Most favorited)
+result.header.recipe_asc: Recipe (Least favorited)
+result.header.value: Value
+result.header.modifier: Modifiers
+result.nothing: No recipe found
+result.not_ready: Results will be displayed here once the search is executed
+result.any_of: "Any of:"
+
+error.title: Error
+error.message.io: "IO Error: {{message}}"
+error.message.yaml: "YAML Error: {{message}}"
+error.message.poison: "Internal Error: Lock is poisoned: {{message}}"
+error.message.aborted: Aborted
+error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
+error.message.database.invalid_recipe: "Invalid recipe id: {{id}}"
+error.message.database.locked: "Database is locked. You may have another instance of the application running. If not, the application may have crashed earlier. Please delete `database/.lock` manually in that case."
+error.message.database.invalid: "Cannot validate the integrity of the database. It may have been corrupted. Try reinstalling the application. (Error Type: {{errorType}})"
+error.generic: "An error occurred: {{message}}"
+error.internal: "Internal Error: {{errorType}}"
+error.unknown: "Unknown Error: {{message}}"
+error.button: OK
+
+confirm.title: Confirm
+confirm.button.yes: "Yes"
+confirm.button.no: "No"
+confirm.message.search.abort: Are you sure to cancel the search?
+confirm.message.search.redo: Starting another search will delete the previous results. Are you sure to continue?
+confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
+confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
+confirm.message.filter.abort: Are you sure to cancel applying the filter?
+
+
+
 # Modifiers - please fix the ones marked with FIXME
 modifier.1: Ataque
 modifier.1.value: Ataque + {{value}}

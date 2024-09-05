@@ -25,8 +25,9 @@ export async function boot(host: Host) {
         .loadOverrideLocalizationJson()
         .then((json) => {
             if (json) {
-                setTranslationOverride(() => host.getBinding()
-                .loadOverrideLocalizationJson());
+                setTranslationOverride(() =>
+                    host.getBinding().loadOverrideLocalizationJson(),
+                );
                 switchLanguage(loadLocalePreference(), host);
             }
         });

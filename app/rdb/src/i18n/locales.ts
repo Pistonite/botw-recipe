@@ -7,10 +7,12 @@ import { getTranslationOverride } from "./override.ts";
 
 export const DefaultLocale = "en-US" as const;
 
+/** Locale code to native language name */
 export const SupportedLocales = {
     "en-US": "English",
     "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
 } as const;
+/** Language code to locale code as fallback */
 export const SupportedLanguages = {
     en: "en-US",
     zh: "zh-CN",

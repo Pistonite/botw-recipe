@@ -32,7 +32,7 @@ The items are auto-generated. Please check if the translations are correct. **If
 The modifiers are mostly done from the game's data. However, there are a few things that need cleaning up. Please look at the `#FIXME` comments.
 
 ### 4. UI
-The UI texts need to be written from scratch. Copy from `en-US.yaml` (or another language that's already done). For the UI languages, it does not have to exactly word-for-word. You should make it look natural in the UI context.
+The UI texts need to be written from scratch. Stubs were copied from `en-US.yaml` and you need to change them. For the UI languages, it does not have to exactly word-for-word. You should make it look natural in the UI context.
 
 You can test the UI translation by following the steps below
 
@@ -56,3 +56,10 @@ Side-loading makes it easier to test WIP localizations as you can see the result
 Currently, the item search is a simple fuzzy search using the item name. If your language as a preferred search method, please let me know, and I will see if I can implement it. (Or implement it yourself and open a PR)
 
 You can see the Pinyin search I implemented for Simplified Chinese as an example.
+
+## Adding to Supported List
+Lastly, the language needs to be marked as supported for it to show up in the UI.
+
+Please add it in `app/rdb/src/i18n/locales/locales.ts` in the `SupportedLocales` list.
+
+If you are unsure how to do this part, you can instead mention in the PR what the language is called in that language and I will add it for you.

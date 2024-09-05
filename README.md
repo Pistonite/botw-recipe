@@ -14,7 +14,7 @@ Please see the [releases](https://github.com/Pistonite/botw-recipe/releases) for
 
 ## Language Support
 I am planning to support the languages supported by the game. 
-If you would like to contribute, please see [CONTRIBUTING.md](app/rdb/src/i18n/locales/CONTRIBUTING.md)
+If you would like to contribute, please see [CONTRIBUTING.md](app/rdb/src/i18n/CONTRIBUTING.md)
 
 ## Build
 You need:
