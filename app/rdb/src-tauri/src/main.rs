@@ -58,8 +58,17 @@ impl Global {
 #[tauri::command]
 fn set_title(title: String, app: AppHandle) {
     if let Some(window) = app.get_window("main") {
+        // showing window here because at this point, JS side has
+        // definitely finished initial rendering, so we don't
+        // get a white window in dark mode
+        info!("showing window");
+        if let Err(e) = window.show() {
+            log::error!("fail to show window: {}", e);
+        }
         info!("setting window title to {}", title);
-        let _ = window.set_title(&title);
+        if let Err(e) = window.set_title(&title) {
+            log::error!("fail to set window title: {}", e);
+        }
     }
 }
 

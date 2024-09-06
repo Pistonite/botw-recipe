@@ -7,7 +7,7 @@
     },
     "package": {
         "productName": "botwrdb",
-        "version": "0.1.1"
+        "version": "0.1.2"
     },
     "tauri": {
         "allowlist": {
@@ -22,7 +22,8 @@
                 "title": "Loading...",
                 "url": "index-tauri.html",
                 "width": 1400,
-                "height": 900
+                "height": 900,
+                "visible": false
             }
         ],
         "security": {

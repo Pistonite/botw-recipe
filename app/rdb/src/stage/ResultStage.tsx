@@ -6,6 +6,7 @@ import {
     Button,
     Caption1,
     makeStyles,
+    mergeClasses,
     shorthands,
     Spinner,
 } from "@fluentui/react-components";
@@ -21,7 +22,8 @@ import {
 } from "store/result.ts";
 import { getFilterStageDisabledMessage } from "store/selectors.ts";
 import { getFavoriteActors, getFilterResultCount } from "store/filter.ts";
-import { getErrorMessage } from "data/ErrorMessage";
+import { getErrorMessage } from "data/ErrorMessage.ts";
+import { useTheme } from "components/ThemeProvider.tsx";
 
 const useStyles = makeStyles({
     progressContainer: {
@@ -30,10 +32,16 @@ const useStyles = makeStyles({
         justifyContent: "center",
         position: "absolute",
         zIndex: 1,
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
         ...shorthands.inset("0"),
         ...shorthands.padding("10px"),
     },
+    progressContainerLight: {
+        backgroundColor: "rgba(255, 255, 255, 0.95)",
+    },
+    progressContainerDark: {
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+
     errorContainer: {
         backgroundColor: "#fde7e7",
         padding: "10px",
@@ -102,6 +110,7 @@ const ResultStageBody: React.FC = () => {
         getFilterStageDisabledMessage,
     );
     const favorited = useSelector(getFavoriteActors);
+    const { isDarkMode } = useTheme();
 
     if (!results.length && stageDisabled) {
         return (
@@ -131,7 +140,14 @@ const ResultStageBody: React.FC = () => {
             )}
             <div className={styles.mainSection}>
                 {isInProgress && (
-                    <div className={styles.progressContainer}>
+                    <div
+                        className={mergeClasses(
+                            styles.progressContainer,
+                            isDarkMode
+                                ? styles.progressContainerDark
+                                : styles.progressContainerLight,
+                        )}
+                    >
                         <Spinner
                             size="huge"
                             labelPosition="below"
