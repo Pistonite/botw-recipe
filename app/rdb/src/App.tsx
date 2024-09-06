@@ -5,16 +5,16 @@ import {
     mergeClasses,
     shorthands,
 } from "@fluentui/react-components";
-
-import { LocalePicker } from "components/LocalePicker.tsx";
-import { SearchStage } from "stage/SearchStage.tsx";
-import { FilterStage } from "stage/FilterStage.tsx";
-import { ResultStage } from "stage/ResultStage.tsx";
 import {
     WeatherMoon20Regular,
     WeatherSunny20Regular,
 } from "@fluentui/react-icons";
-import { useTheme } from "components/ThemeProvider";
+
+import { LocalePicker } from "components/LocalePicker.tsx";
+import { useTheme } from "components/ThemeProvider.tsx";
+import { SearchStage } from "stage/SearchStage.tsx";
+import { FilterStage } from "stage/FilterStage.tsx";
+import { ResultStage } from "stage/ResultStage.tsx";
 
 const useStaticStyles = makeStaticStyles({
     "*": {

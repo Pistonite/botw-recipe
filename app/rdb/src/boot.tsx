@@ -17,7 +17,6 @@ import { AppWrapper } from "./AppWrapper.tsx";
 
 /** Boot the app using the provided host */
 export async function boot(host: Host) {
-    host.initialize();
     host.getBinding()
         .loadOverrideLocalizationJson()
         .then((json) => {
@@ -44,6 +43,7 @@ export async function boot(host: Host) {
         store.dispatch(updateFilterProgress(percentage));
     };
 
+    host.initialize();
     host.bind(searchProgressHandler, filterProgressHandler);
     host.getBinding()
         .getResultLimit()

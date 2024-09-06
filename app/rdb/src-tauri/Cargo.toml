@@ -1,6 +1,6 @@
 [package]
 name = "botw-recipe-database"
-version = "0.1.1"
+version = "0.1.2"
 description = "BotW Recipe Database"
 edition = "2021"
 
