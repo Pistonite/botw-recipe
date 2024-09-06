@@ -1,101 +1,101 @@
 # Translation needed! Please see CONTRIBUTING.md
 # UI
-title: BotW Recipe Database for WMC
-search.title: Search
-search.desc: Scan all material combinations and select recipes that meet the criteria for modifiers
-search.value.title: Value and Materials
-search.value.min: Min. Modifier Value (HP)
-search.value.max: Max. Modifier Value (HP)
-search.value.rng: Allow RNG HP Crit
-search.value.rng.desc: Include recipes where a non-guaranteed HP crit is needed to meet the minimum HP requirement. Guaranteed HP crit are not affected. (Note that a recipe which guarantees a crit may not guarantee a HP crit.)
-search.value.pe: Allow Unusual Material
-search.value.pe.desc: Include recipes where at least one material needs Prompt Entanglement or is usually unobtainable or uncookable.
-search.modifier.title: Modifiers
-search.modifier.desc: Select "+" for modifiers that must be included, and "-" for modifiers that must be excluded.
-search.modifier.name: Modifier
+title: BotW Gerichtdatenbank für WMC
+search.title: Suche
+search.desc: Suche alle Zutatenkombinationen und wähle die zutreffenden Kriterien 
+search.value.title: Wert und Materialien
+search.value.min: Minimaler modifikator Wert (HP)
+search.value.max: Maximaler modifikator Wert (HP)
+search.value.rng: Erlaube kritisches Kochen (RNG)
+search.value.rng.desc: Inkludiere Gerichte welche einen nicht garantierten HP krit benötigen um dem minimalen HP Wert zu erfüllen. Garantiertes kritisches Kochen ist nicht beeinträchtigt. (Gerichte mit 100% kritisches Kochwarscheinlichkeit müssen nicht unbedingt immer einen HP-Krit bekommen.)
+search.value.pe: Erlaube ungewöhnliche Materialien
+search.value.pe.desc: Inkludiere Gerichte mit mindestens einer Zutat welche Prompt Entanglement benötigt oder nicht nicht kochbar ist oder unmöglich zum Erhalten ist.
+search.modifier.title: Modifikatoren
+search.modifier.desc: Wähle "+" für Modifikatoren welche inkludiert sein müssen, und "-" für ausgeschlossene Modifikatoren.
+search.modifier.name: Modifikator
 search.modifier.option: Option
-search.modifier.option.include: Included
-search.modifier.option.exclude: Excluded
-search.modifier.option.ignore: Ignored
-search.button: Search
-search.button.cancel: Cancel
-search.progress: "Searching ({{progress}}%)"
-search.progress.initial: "Searching..."
-search.progress.stat_group: Computing material stats
-search.result: "Found {{count}} recipes in {{seconds}}s"
+search.modifier.option.include: Inkludiert
+search.modifier.option.exclude: Exkludiert
+search.modifier.option.ignore: Ignoriert
+search.button: Suche
+search.button.cancel: Abbrechen
+search.progress: "Suche ({{progress}}%)"
+search.progress.initial: "Suchen..."
+search.progress.stat_group: Materialstatistiken berechnen
+search.result: "Hat {{count}} Gerichte in {{seconds}}s gefunden"
 
 filter.title: Filter
-filter.desc: Narrow down the scan results based on what items best fit your needs
-filter.list.title: Select Items
-filter.list.desc: Use the list below to progressively exclude unwanted items from the search results, until the number of results is low enough for closer inspection. Favorited items are prioritized when diaplaying search results. Use the star button in the item list above to mark favorited items.
-filter.search.placeholder: Search for items (e.g. "Apple", "Fish")
-filter.search.desc: Use "Sheika Slate" for key items as they are equipvalent. Monster Extract is not available.
-filter.hide_excluded: Show only items included in results
+filter.desc: Grenze die Scanergebnisse bassierend auf die bevorzugten Materialien
+filter.list.title: Wähle Items
+filter.list.desc: Nutzt die untere Liste um nach und nach ungewollte Items von den Suchergebnissen auszuschließen, bis die Anzahl der Ergebnisse niedrig genug ist für genauere Untersuchung. Bevorzugte Items haben Vorrang bei den angezeigten Ergebnissen. Nutze den Sternknopf in der Itemliste weiter oben um diese Items festzulegen.
+filter.search.placeholder: Suche für Items (z.B. "Apfel", "Holz")
+filter.search.desc: Nutze "Sheikah Tablet" für "wichtige Items" da diese alle gleich sind. Monster Extrakt ist nicht verfügbar.
+filter.hide_excluded: Zeige nur items welche in den Ergebnissen vorhanden sind
 filter.selection.actor: Item ({{count}})
-filter.selection.option: Options
-filter.selection.option.favorite: Favorite
-filter.selection.option.unfavorite: Favorited
-filter.selection.option.include: Include
-filter.selection.option.exclude: Exclude
-filter.selection.subtitle.percentage: In {{percentage}}% of remaining recipes
-filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% of remaining recipes, will exclude
-filter.selection.subtitle.no_percentage: Statistics not available
-filter.selection.subtitle.no_percentage.to_exclude: Statistics not available, will exclude
-filter.selection.subtitle.excluded: Excluded
-filter.selection.subtitle.excluded.to_include: Excluded, will include
-filter.favorited: Favorited Items
-filter.favorited.clear: Clear
-filter.prompt: Press Apply to update the filter
-filter.button: Apply
-filter.button.cancel: Cancel
-filter.button.reset: Clear
-filter.progress: "Applying filter ({{progress}}%)"
-filter.progress.initial: "Applying filter..."
-filter.result: "Done in {{seconds}}s, {{count}} recipes left"
-filter.not_ready.not_searched: No search result found. Please search for recipes with modifier criteria first.
-filter.not_ready.no_result: Did not find any recipe that matched the modifiers. Please adjust the criteria and search again.
-filter.not_ready.searching: Waiting for search to finish...
+filter.selection.option: Optionen
+filter.selection.option.favorite: Favoriten
+filter.selection.option.unfavorite: Favorit
+filter.selection.option.include: Inkludiert
+filter.selection.option.exclude: Exkludiert
+filter.selection.subtitle.percentage: In {{percentage}}% von übrigen Gerichten
+filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% von übrigen Gerichten, wird exkludiert
+filter.selection.subtitle.no_percentage: Statistiken nicht verfügbar
+filter.selection.subtitle.no_percentage.to_exclude: Statistiken nicht verfügbar, wird exkludiert
+filter.selection.subtitle.excluded: Exkludiert
+filter.selection.subtitle.excluded.to_include: Exkludiert, wird inkludiert
+filter.favorited: Bevorzugte Items
+filter.favorited.clear: Leeren
+filter.prompt: Drücke "Anwenden" um den Filter zu aktualisieren
+filter.button: Anwenden
+filter.button.cancel: Abbrechen
+filter.button.reset: Leeren
+filter.progress: "Filter anwenden ({{progress}}%)"
+filter.progress.initial: "filter anwenden..."
+filter.result: "In {{seconds}}s erledigt, {{count}} Gerichte übrig"
+filter.not_ready.not_searched: Keine Suchergebnisse gefunden. Bitte suche zuerst für Gerichte mit Modifikationskriterien.
+filter.not_ready.no_result: Keine Gerichte gefunden welche mit den Modifikatoren übereinstimmen. Bitte passe die Kriterien an und suche nochmal.
+filter.not_ready.searching: Warten bis die Suche beendet wird...
 
-result.title: Results
-result.desc: Recipes with the desired modifiers and only include the wanted items
-result.progress: Cooking the results
-result.error: "Error while cooking the results: {{message}}"
-result.button.retry: Retry
-result.count: Showing {{count}} recipes after grouping
-result.limited: Results exceeded the limit of {{limit}}, showing only the first {{count}} recipes after grouping. Keep in mind this is NOT the full result list. Please keep filtering to reduce the number of results.
-result.list.note: (Value marked with * requires a non-guaranteed HP crit)
-result.header.recipe: Recipe
-result.header.recipe_desc: Recipe (Most favorited)
-result.header.recipe_asc: Recipe (Least favorited)
-result.header.value: Value
-result.header.modifier: Modifiers
-result.nothing: No recipe found
-result.not_ready: Results will be displayed here once the search is executed
-result.any_of: "Any of:"
+result.title: Ergebnisse
+result.desc: Gerichte mit den gewünschten Modifikatoren, inkludiere nur die gewünschten Zutaten
+result.progress: Die Ergebnisse kochen
+result.error: "Ein Fehler ist aufgetreten während die Ergebnisse gekocht wurden: {{message}}"
+result.button.retry: Wiederhole
+result.count: Es werden {{count}} Gerichte nach Gruppierung angezeigt
+result.limited: Ergebnisse überschritten das Limit von {{limit}}, es werden nur die ersten {{count}} Gerichte nach Gruppierung angezeigt. Das ist nicht das komplette Suchergebnis. Filtere, um die Anzahl der Ergebnisse zu reduzieren.
+result.list.note: (Werte markiert mit * benötigen einen nicht garantierten HP Krit)
+result.header.recipe: Gericht
+result.header.recipe_desc: Gericht (Am meisten bevorzugt)
+result.header.recipe_asc: Gericht (am wenigsten bevorzugt)
+result.header.value: Wert
+result.header.modifier: Modifikator
+result.nothing: Kein Gericht gefunden
+result.not_ready: Ergebnis wird angezeigt sobald die Suche fertig ist
+result.any_of: "Egal:"
 
-error.title: Error
-error.message.io: "IO Error: {{message}}"
-error.message.yaml: "YAML Error: {{message}}"
-error.message.poison: "Internal Error: Lock is poisoned: {{message}}"
-error.message.aborted: Aborted
-error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
-error.message.database.invalid_recipe: "Invalid recipe id: {{id}}"
-error.message.database.locked: "Database is locked. You may have another instance of the application running. If not, the application may have crashed earlier. Please delete `database/.lock` manually in that case."
-error.message.database.invalid: "Cannot validate the integrity of the database. It may have been corrupted. Try reinstalling the application. (Error Type: {{errorType}})"
-error.generic: "An error occurred: {{message}}"
-error.internal: "Internal Error: {{errorType}}"
-error.unknown: "Unknown Error: {{message}}"
+error.title: Fehler
+error.message.io: "IO Fehler: {{message}}"
+error.message.yaml: "YAML Fehler: {{message}}"
+error.message.poison: "Interner Fehler: Lock is poisoned: {{message}}"
+error.message.aborted: Abgebrochen
+error.message.executor.unavailable: "Ausführung ist nicht verfügbar. Falls das Problem weiterhin besteht, starte das Programm neu."
+error.message.database.invalid_recipe: "Ungültige Rezept-ID: {{id}}"
+error.message.database.locked: "Es kann nicht auf die Datenbank zugegriffen werden. Eine weitere Instanz des Programms ist eventuell offen. Falls das nicht der Fall ist, ist das Programm eventuell abgestürzt. Bitte lösche in diesem Fall `database/.lock` manuell."
+error.message.database.invalid: "Die Integrität der Datenbank kann nicht überprüft werden. Sie ist möglicherweise beschädigt. Versuche die Anwendung neu zu installieren. (Fehler: {{errorType}})"
+error.generic: "Ein Fehler ist aufgetreten: {{message}}"
+error.internal: "Interner Fehler: {{errorType}}"
+error.unknown: "Unbekannter Fehler: {{message}}"
 error.button: OK
 
-confirm.title: Confirm
-confirm.button.yes: "Yes"
-confirm.button.no: "No"
-confirm.message.search.abort: Are you sure to cancel the search?
-confirm.message.search.redo: Starting another search will delete the previous results. Are you sure to continue?
-confirm.message.filter.reset: Clear excluded items and statistics in the filter? Statistics will be available the next you apply the filter. Favorited items will not be cleared.
-confirm.message.filter.clear_favorites: Are you sure to clear favorited items?
-confirm.message.filter.abort: Are you sure to cancel applying the filter?
-confirm.message.quick_shot: You selected Multishot without excluding Quick Shot. This will make the bow shoot very slowly because the maximum modifier value is 120 whereas the normal shooting speed is 1000. Are you sure to continue?
+confirm.title: Bestätigen
+confirm.button.yes: "Ja"
+confirm.button.no: "Nein"
+confirm.message.search.abort: Möchtest du die Suche abbrechen?
+confirm.message.search.redo: Eine neue Suche zu starten wird die vorherige Suche löschen. Fortsetzen?
+confirm.message.filter.reset: Leere exkludierte Items und Statistiken im Filter? Statistiken werden bei der nächsten Filteranwendung verfügbar sein. Bevorzugte Items werden nicht entfernt werden.
+confirm.message.filter.clear_favorites: Bist du dir sicher, dass du die bevorzugten Items zurücksetzen möchtest?
+confirm.message.filter.abort: Bist du dir sicher, dass du das Anwenden des Filters abbrechen möchtest?
+confirm.message.quick_shot: Du hast Mehrfachschuss gewählt ohne Schnellschuss abzuwählen. Dadurch schießt der Bogen sehr langsam, da der maximale Modifikatorwert 120 beträgt, während die normale Schussgeschwindigkeit 1000 beträgt. Fortfahren?
 
 # Modifiers - please fix the ones marked with FIXME
 modifier.1: Angriffskraft ↑
@@ -105,15 +105,15 @@ modifier.2.value: Haltbarkeit ↑
 modifier.4: Gnadenstoß
 modifier.4.value: Gnadenstoß
 modifier.8: Weitwurf
-modifier.8.value: Throw Range/Speed x {{valueThousandth}} # FIXME
-modifier.16: 5 Schüsse # FIXME - change from 5-shot to multishot
+modifier.8.value: Wurfreichweite/Wurfgeschwindigkeit x {{valueThousandth}} # FIXME
+modifier.16: Mehrfachschuss # FIXME - change from 5-shot to multishot
 modifier.16.value: Max {{valueMax10}}-shot # FIXME
-modifier.32: Zoom # FIXME
-modifier.32.value: Zoom # FIXME
+modifier.32: Zoom # FIXME (Zoom is already good)
+modifier.32.value: Zoom # FIXME (Zoom is already good)
 modifier.64: Schnellfeuer
-modifier.64.value: Shooting Speed x {{valueThousandth}} # FIXME
+modifier.64.value: Schussgeschwindigkeit x {{valueThousandth}} # FIXME
 modifier.128: Schlittern ↑
-modifier.128.value: Surf Friction x {{valueThousandth}} # FIXME
+modifier.128.value: Surf Reibung x {{valueThousandth}} # FIXME
 modifier.256: Schildblock ↑
 modifier.256.value: Schildblock + {{value}}
 
