@@ -1,4 +1,3 @@
-# Translation needed! Please see CONTRIBUTING.md
 # UI
 title: BotW Gerichtdatenbank für WMC
 search.title: Suche
@@ -97,7 +96,6 @@ confirm.message.filter.clear_favorites: Bist du dir sicher, dass du die bevorzug
 confirm.message.filter.abort: Bist du dir sicher, dass du das Anwenden des Filters abbrechen möchtest?
 confirm.message.quick_shot: Du hast Mehrfachschuss gewählt ohne Schnellschuss abzuwählen. Dadurch schießt der Bogen sehr langsam, da der maximale Modifikatorwert 120 beträgt, während die normale Schussgeschwindigkeit 1000 beträgt. Fortfahren?
 
-# Modifiers - please fix the ones marked with FIXME
 modifier.1: Angriffskraft ↑
 modifier.1.value: Angriffskraft + {{value}}
 modifier.2: Haltbarkeit ↑
@@ -105,21 +103,18 @@ modifier.2.value: Haltbarkeit ↑
 modifier.4: Gnadenstoß
 modifier.4.value: Gnadenstoß
 modifier.8: Weitwurf
-modifier.8.value: Wurfreichweite/Wurfgeschwindigkeit x {{valueThousandth}} # FIXME
-modifier.16: Mehrfachschuss # FIXME - change from 5-shot to multishot
-modifier.16.value: Max {{valueMax10}}-shot # FIXME
-modifier.32: Zoom # FIXME (Zoom is already good)
-modifier.32.value: Zoom # FIXME (Zoom is already good)
+modifier.8.value: Wurfreichweite/Wurfgeschwindigkeit x {{valueThousandth}}
+modifier.16: Mehrfachschuss
+modifier.16.value: Max {{valueMax10}}-shot
+modifier.32: Zoom
+modifier.32.value: Zoom
 modifier.64: Schnellfeuer
-modifier.64.value: Schussgeschwindigkeit x {{valueThousandth}} # FIXME
+modifier.64.value: Schussgeschwindigkeit x {{valueThousandth}}
 modifier.128: Schlittern ↑
-modifier.128.value: Surf Reibung x {{valueThousandth}} # FIXME
+modifier.128.value: Surf Reibung x {{valueThousandth}}
 modifier.256: Schildblock ↑
 modifier.256.value: Schildblock + {{value}}
 
-# Please verify the auto-generated item translations below, thanks :)
-
-# DO NOT MODIFY BELOW
 ### AUTOGEN ###
 actor.Item_Fruit_D: Maxi-Durian
 actor.Item_Fruit_G: Palmfrucht
