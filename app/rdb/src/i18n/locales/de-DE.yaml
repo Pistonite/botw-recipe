@@ -105,7 +105,7 @@ modifier.4.value: Gnadenstoß
 modifier.8: Weitwurf
 modifier.8.value: Wurfreichweite/Wurfgeschwindigkeit x {{valueThousandth}}
 modifier.16: Mehrfachschuss
-modifier.16.value: Max {{valueMax10}}-shot
+modifier.16.value: Maximal {{valueMax10}}-schuss
 modifier.32: Zoom
 modifier.32.value: Zoom
 modifier.64: Schnellfeuer
