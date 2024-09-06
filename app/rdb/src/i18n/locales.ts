@@ -9,7 +9,7 @@ export const DefaultLocale = "en-US" as const;
 
 /** Locale code to native language name */
 export const SupportedLocales = {
-    // "de-DE": "Deutsch",
+    "de-DE": "Deutsch",
     "en-US": "English",
     // "es-ES": "Español",
     "fr-FR": "Français",
@@ -23,7 +23,7 @@ export const SupportedLocales = {
 } as const;
 /** Language code to locale code as fallback */
 export const SupportedLanguages = {
-    // de: "de-DE",
+    de: "de-DE",
     en: "en-US",
     // es: "es-ES",
     fr: "fr-FR",
