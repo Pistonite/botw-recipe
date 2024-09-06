@@ -116,6 +116,7 @@ modifier.256: Schildblock ↑
 modifier.256.value: Schildblock + {{value}}
 
 ### AUTOGEN ###
+# DO NOT MODIFY BELOW
 actor.Item_Fruit_D: Maxi-Durian
 actor.Item_Fruit_G: Palmfrucht
 actor.Item_Fruit_A: Apfel
