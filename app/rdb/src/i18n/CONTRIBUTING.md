@@ -9,7 +9,6 @@ Preferably, you should have a GitHub account and contribute by opening a Pull Re
 ## Status
 The following languages need owner for localization:
 
-- German | de-DE
 - Spanish | es-ES
 - Italian | it-IT
 - Japanese | ja-JP
