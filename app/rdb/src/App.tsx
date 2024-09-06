@@ -2,6 +2,7 @@ import {
     Button,
     makeStaticStyles,
     makeStyles,
+    mergeClasses,
     shorthands,
 } from "@fluentui/react-components";
 
@@ -9,6 +10,11 @@ import { LocalePicker } from "components/LocalePicker.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
 import { FilterStage } from "stage/FilterStage.tsx";
 import { ResultStage } from "stage/ResultStage.tsx";
+import {
+    WeatherMoon20Regular,
+    WeatherSunny20Regular,
+} from "@fluentui/react-icons";
+import { useTheme } from "components/ThemeProvider";
 
 const useStaticStyles = makeStaticStyles({
     "*": {
@@ -35,14 +41,17 @@ const useStyles = makeStyles({
         flexDirection: "column",
         height: "100%",
         ...shorthands.padding("10px"),
-        backgroundColor: "#fcfcfc",
         flex: 1,
+    },
+    stageContainerDark: {
+        borderLeft: "1px solid #888",
+    },
+    stageContainerLight: {
+        borderLeft: "1px solid #ccc",
     },
     mainScreen: {
         display: "flex",
         height: "100vh",
-        backgroundColor: "#ccc",
-        gap: "1px", // for border
     },
     corner: {
         position: "fixed",
@@ -54,6 +63,12 @@ const useStyles = makeStyles({
 export const App: React.FC = () => {
     useStaticStyles();
     const styles = useStyles();
+    const { isDarkMode, setIsDarkMode } = useTheme();
+
+    const stageContainerClass = mergeClasses(
+        styles.stageContainer,
+        isDarkMode ? styles.stageContainerDark : styles.stageContainerLight,
+    );
 
     return (
         <>
@@ -65,7 +80,7 @@ export const App: React.FC = () => {
                     <SearchStage />
                 </div>
                 <div
-                    className={styles.stageContainer}
+                    className={stageContainerClass}
                     style={{
                         minWidth: 356,
                         maxWidth: 440, // 42*10 + 20 = display 10 items
@@ -73,15 +88,34 @@ export const App: React.FC = () => {
                 >
                     <FilterStage />
                 </div>
-                <div className={styles.stageContainer}>
+                <div className={stageContainerClass}>
                     <ResultStage />
                 </div>
             </div>
             <div className={styles.corner}>
                 <Button
+                    appearance="subtle"
+                    icon={
+                        isDarkMode ? (
+                            <WeatherSunny20Regular />
+                        ) : (
+                            <WeatherMoon20Regular />
+                        )
+                    }
+                    onClick={() => setIsDarkMode(!isDarkMode)}
+                />
+                <Button
                     as="a"
                     appearance="subtle"
-                    icon={<img src="/github-mark.svg" />}
+                    icon={
+                        <img
+                            src={
+                                isDarkMode
+                                    ? "/github-mark-white.svg"
+                                    : "/github-mark.svg"
+                            }
+                        />
+                    }
                     href="https://github.com/Pistonite/botw-recipe"
                     target="_blank"
                 />
