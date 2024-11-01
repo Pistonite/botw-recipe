@@ -7,19 +7,18 @@ entry = "exl_module_init"
 sources = [
     "src",
     "libs/exlaunch/source",
-    "libs/botw-pp/src",
+    "libs/botw-symbols/src",
 ]
 includes = [
     "libs/exlaunch/source",
     "libs/botw/src",
     "libs/botw/lib/sead/include",
     "libs/botw/lib/NintendoSDK/include",
-    "libs/botw-pp/include",
+    "libs/botw-symbols/src",
 ]
 ldscripts = [
     "libs/exlaunch/misc/link.ld",
     "libs/botw-symbols/ld/ld150.ld",
-    # "link.ld",
 ]
 
 [build.flags]
