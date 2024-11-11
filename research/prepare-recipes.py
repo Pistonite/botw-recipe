@@ -1,4 +1,7 @@
-# Process recipes and remove the ones that are uncookable (i.e. has monster extract)
+"""
+    Process recipes and remove the ones that are uncookable 
+    (i.e. has monster extract)
+"""
 
 import json
 import yaml
@@ -9,7 +12,10 @@ IN = [
     "data/known-filtered-actors.yaml",
     "botw-data/Message/Msg_USen.product.sarc/ActorType/CookResult.msyt",
 ]
-OUT = ["output/recipes.yaml", "output/recipe-actors.yaml"]
+OUT = [
+    util.output("recipes.yaml"), 
+    util.output("recipe-actors.yaml")
+]
 util.print_stage(__file__, IN, OUT)
 
 with open(IN[0], "r", encoding="utf-8") as f:

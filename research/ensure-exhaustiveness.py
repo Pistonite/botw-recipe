@@ -4,6 +4,7 @@ import util
 import os
 from multiprocessing import Pool
 
+# manual extend needed because of multiprocessing
 util.extend_yaml()
 
 IN = [

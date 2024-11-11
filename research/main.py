@@ -7,7 +7,7 @@ import shutil
 O = "output"
 
 def run_script(script):
-    status = subprocess.run(["python", script])
+    status = subprocess.run([sys.executable, script])
     if status.returncode != 0:
         print(f"{script} failed")
         sys.exit(status.returncode)
@@ -34,7 +34,8 @@ if __name__ == "__main__":
         [
             "Actor/ActorLink/",
             "Actor/GeneralParamList/",
-            "Message/"
+            "Message/",
+            "Cooking/"
         ]
     )
     if clean:
@@ -44,9 +45,11 @@ if __name__ == "__main__":
         os.makedirs(O)
     run_script("get-actor-names.py")
     run_script("get-actor-data.py")
+    run_script("compute-crc32.py")
     run_script("group-items.py")
     run_script("validate-groups.py")
     run_script("ensure-exhaustiveness.py")
+    run_script("decode-recipes.py")
     run_script("prepare-recipes.py")
 
     run_script("generate-source.py")

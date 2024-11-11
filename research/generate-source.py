@@ -1,4 +1,5 @@
 # Generate downstream source code
+import sys
 import yaml
 import util
 import os
@@ -513,11 +514,26 @@ with open(OUT[5], "w", encoding="utf-8", newline="\n") as f:
     gen_cook_item_enum(f, cook_items)
 
 
+def wh(cmd):
+    cmd = shutil.which(cmd)
+    if not cmd:
+        print(f"{cmd} not found!")
+        sys.exit(1)
+
+    return cmd
+
+
 print("running rustfmt")
-subprocess.run(["rustfmt"] + [x for x in OUT if x.endswith(".rs")], check=True)
+RUSTFMT = wh("rustfmt")
+subprocess.run([RUSTFMT] + [x for x in OUT if x.endswith(".rs")], check=True)
+node_modules = "../app/rdb/node_modules"
+if not os.path.exists(node_modules):
+    print("node_modules not found, please install dependencies first in rdb")
+    sys.exit(1)
+
 print("running prettier")
 subprocess.run(
-    [shutil.which("npx"), "prettier", "--write"] + 
+    [wh("npx"), "prettier", "--write"] + 
     [os.path.join("../../data", x) for x in OUT if x.endswith(".ts")],
     check=True, 
     cwd="../app/rdb"

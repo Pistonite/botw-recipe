@@ -1,3 +1,4 @@
+import sys
 import os
 import glob
 from tqdm import tqdm
@@ -28,6 +29,10 @@ def print_stage(stage, input, output):
         exit()
     print(f"=== {stage:<30} ===")
 
+def output(path):
+    """Get output file path"""
+    return os.path.join(os.path.dirname(__file__), "output", path)
+
 def progress(iterable, desc, len=None):
     return tqdm(
         iterable,
@@ -39,17 +44,30 @@ def progress(iterable, desc, len=None):
 
 def extend_yaml():
     import yaml
-    def constructor(loader, node):
+    def dict_ctor(loader, node):
         values = loader.construct_mapping(node)
         return dict(values)
 
-    yaml.add_constructor('!list', constructor)
-    yaml.add_constructor('!obj', constructor)
-    yaml.add_constructor('!io', constructor)
-    yaml.add_constructor('!str64', lambda loader, node: str(loader.construct_scalar(node)))
-    yaml.add_constructor('!str32', lambda loader, node: str(loader.construct_scalar(node)))
-    yaml.add_constructor('!str256', lambda loader, node: str(loader.construct_scalar(node)))
-    yaml.add_constructor('!vec3', lambda loader, node: list(loader.construct_sequence(node)))
+    def str_ctor(loader, node):
+        values = loader.construct_scalar(node)
+        return str(values)
+
+    def int_ctor(loader, node):
+        values = loader.construct_scalar(node)
+        return int(values, 0)
+
+    def list_ctor(loader, node):
+        values = loader.construct_sequence(node)
+        return list(values)
+
+    yaml.add_constructor('!list', dict_ctor)
+    yaml.add_constructor('!obj', dict_ctor)
+    yaml.add_constructor('!io', dict_ctor)
+    yaml.add_constructor('!str64', str_ctor)
+    yaml.add_constructor('!str32', str_ctor)
+    yaml.add_constructor('!str256', str_ctor)
+    yaml.add_constructor('!vec3', list_ctor)
+    yaml.add_constructor('!u', int_ctor)
 
 def assertion(value, message = "Assertion failed"):
     if not value:
@@ -102,6 +120,13 @@ def chunk_compact(total):
     assertion(COMPACT_CHUNK_SIZE*(chunk_count-1) + last_chunk_size == total, "chunk size calculation")
     return COMPACT_CHUNK_SIZE, chunk_count, last_chunk_size
 
+def which(cmd):
+    cmd = shutil.which(cmd)
+    if not cmd:
+        print(f"{cmd} is not installed!")
+        sys.exit(1)
+    return cmd
+
 def sparse_checkout(clean, repo, path, branch, checkout_paths):
     if not clean:
         for p in checkout_paths:
@@ -118,10 +143,11 @@ def sparse_checkout(clean, repo, path, branch, checkout_paths):
     else:
         print(f"{path} already exists, skipping. use --clean to force re-checkout")
         return
-    subprocess.run(["git", "init"], cwd=path)
-    subprocess.run(["git", "remote", "add", "origin", repo], cwd=path)
-    subprocess.run(["git", "config", "core.sparseCheckout", "true"], cwd=path)
+    git = which("git")
+    subprocess.run([git, "init"], cwd=path)
+    subprocess.run([git, "remote", "add", "origin", repo], cwd=path)
+    subprocess.run([git, "config", "core.sparseCheckout", "true"], cwd=path)
     with open(os.path.join(path, ".git", "info", "sparse-checkout"), "w", encoding="utf-8") as f:
         for checkout_path in checkout_paths:
             f.write(checkout_path + "\n")
-    subprocess.run(["git", "pull", "--depth=1", "origin", branch], cwd=path)
+    subprocess.run([git, "pull", "--depth=1", "origin", branch], cwd=path)
