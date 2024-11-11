@@ -34,7 +34,8 @@ for actor in util.progress(actors, "compute crc32 for actors"):
     add_crc32(actor, "actor")
 
 with open(OUT["crc32"], "w", encoding="utf-8", newline="\n") as f:
-    for hash, data in hash_map.items():
+    for hash in sorted(hash_map):
+        data = hash_map[hash]
         value = next(f"{key+':':<10}{v}" for key, v in data.items())
         f.write(f"'{hash}': {{ {value} }}\n")
 

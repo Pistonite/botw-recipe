@@ -1,0 +1,11 @@
+[package]
+name = "bruteforce"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "4.5.20"
+crc = "3.2.1"
+itertools = "0.13.0"
+num_cpus = "1.16.0"
+threadpool = "1.8.1"
