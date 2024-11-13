@@ -38,11 +38,19 @@ if __name__ == "__main__":
             "Cooking/"
         ]
     )
+
     if clean:
         if os.path.exists(O):
             shutil.rmtree(O)
     if not os.path.exists(O):
         os.makedirs(O)
+
+    util.wget(
+        "https://raw.githubusercontent.com/david47k/top-english-wordlists/master/top_english_words_lower_50000.txt",
+        util.output("words.txt"),
+        clean
+    )
+
     run_script("get-actor-names.py")
     run_script("get-actor-data.py")
     run_script("compute-crc32.py")

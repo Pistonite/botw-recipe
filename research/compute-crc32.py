@@ -33,6 +33,13 @@ actors = [ x[:-4] for x in os.listdir("botw-data/Actor/ActorLink") if x.endswith
 for actor in util.progress(actors, "compute crc32 for actors"):
     add_crc32(actor, "actor")
 
+# Extra ones figured out using bruteforce
+add_crc32("CookVegetable", "tag")      #  0x00bed71d
+add_crc32("StaminaRecover", "effect")  #  0xda60b8cd
+add_crc32("GutsPerformance", "effect") #  0xaeb04704
+add_crc32("LifeRecover", "effect")     #  0x8a0c5420
+add_crc32("AllSpeed", "effect")        #  0xbbf0d245
+
 with open(OUT["crc32"], "w", encoding="utf-8", newline="\n") as f:
     for hash in sorted(hash_map):
         data = hash_map[hash]

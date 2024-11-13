@@ -1,0 +1,66 @@
+
+# Keys are based on guesses from the data and decomp
+# CEI:    cook_effect_index
+# BT:     base_time
+# MR:     multiplier
+# Ma:     max
+# Mi:     min
+# SSA:    super_success_amount
+# T:      type
+# FA:     failure_actor
+# FALR:   faliure_actor_life_recover
+# FALRMR: faliure_actor_life_recover_multiplier
+# FCA:    fairy_cook_actor
+# LRMR:   life_recover_multiplier
+# MEA:    monster_extract_actor
+# NMMR:   num_matrial_multiplier
+# NMSSR:  num_material_super_success_rate
+# SFALR:  stone_food_actor_life_recover
+# SSAET:  super_success_additional_effect_time
+cook_effect_index:
+  - { type: StaminaRecover,          base_time: 0         ,
+      max: 15 , min: 1  , super_success_amount: 2         ,
+      multiplier: 1.399999976158142                       }
+  - { type: GutsPerformance,         base_time: 0         ,
+      max: 20 , min: 1  , super_success_amount: 2         ,
+      multiplier: 0.5                                     }
+  - { type: LifeRecover,             base_time: 0         ,
+      max: 120, min: 1  , super_success_amount: 12        ,
+      multiplier: 2.0                                     }
+  - { type: LifeMaxUp,               base_time: 0         ,
+      max: 108, min: 4  , super_success_amount: 4         ,
+      multiplier: 1.0                                     }
+  - { type: ResistHot,               base_time: 120       ,
+      max: 2  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.3499999940395355                      }
+  - { type: ResistCold,              base_time: 120       ,
+      max: 2  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.3499999940395355                      }
+  - { type: ResistElectric,          base_time: 120       ,
+      max: 3  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.5                                     }
+  - { type: AllSpeed,                base_time: 30        ,
+      max: 3  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.44999998807907104                     }
+  - { type: AttackUp,                base_time: 20        ,
+      max: 3  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.44999998807907104                     }
+  - { type: DefenseUp,               base_time: 20        ,
+      max: 3  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.44999998807907104                     }
+  - { type: Quietness,               base_time: 90        ,
+      max: 3  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.3499999940395355                      }
+  - { type: Fireproof,               base_time: 120       ,
+      max: 2  , min: 1  , super_success_amount: 1         ,
+      multiplier: 0.30000001192092896                     }
+failure_actor: Item_Cook_O_01
+failure_actor_life_recover: 4
+failure_actor_life_recover_multiplier: 1.0
+fairy_cook_actor: Item_Cook_C_16
+life_recover_multiplier: 2.0
+monster_extract_actor: Item_Material_08
+num_material_multiplier: [1.5, 1.7999999523162842, 2.0999999046325684, 2.4000000953674316, 2.799999952316284]
+num_material_super_success_rate: [5, 10, 15, 20, 25]
+stone_food_actor_life_recover: 1
+super_success_additional_effect_time: 300

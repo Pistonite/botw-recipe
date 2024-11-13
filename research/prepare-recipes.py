@@ -14,7 +14,8 @@ IN = [
 ]
 OUT = [
     util.output("recipes.yaml"), 
-    util.output("recipe-actors.yaml")
+    util.output("recipe-actors.yaml"),
+    util.output("recipes-with-monster.yaml"), 
 ]
 util.print_stage(__file__, IN, OUT)
 
@@ -45,6 +46,7 @@ for entry in util.progress(items, "process lang entries"):
             name_to_actor[name] = actor
             break
 
+all_recipes = []
 filtered_recipes = []
 output_actor_to_name = {}
 for recipe in util.progress(recipes, "filter recipes"):
@@ -58,14 +60,18 @@ for recipe in util.progress(recipes, "filter recipes"):
                 break
         if filtered:
             break
+    name = recipe["name"]
+    if name not in name_to_actor:
+        raise ValueError(f"no actor for {name}")
+    actor = name_to_actor[name]
+    recipe["name"] = actor
+    output_actor_to_name[actor] = name
     if not filtered:
-        name = recipe["name"]
-        if name not in name_to_actor:
-            raise ValueError(f"no actor for {name}")
-        actor = name_to_actor[name]
-        recipe["name"] = actor
-        output_actor_to_name[actor] = name
         filtered_recipes.append(recipe)
+    all_recipes.append(recipe)
+
+with open(OUT[2], "w", encoding="utf-8", newline="\n") as f:
+    yaml.dump(all_recipes, f)
 
 with open(OUT[0], "w", encoding="utf-8", newline="\n") as f:
     yaml.dump(filtered_recipes, f)

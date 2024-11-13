@@ -151,3 +151,23 @@ def sparse_checkout(clean, repo, path, branch, checkout_paths):
         for checkout_path in checkout_paths:
             f.write(checkout_path + "\n")
     subprocess.run([git, "pull", "--depth=1", "origin", branch], cwd=path)
+
+
+def wget(url, output, clean):
+    """Download using wget"""
+    if not clean and os.path.exists(output):
+            print(f"{output} already exists, skipping. use --clean to force re-download")
+            return
+
+    if os.path.exists(output):
+        os.remove(output)
+
+    print(f"downloading {url} to {output}")
+
+    wget = which("wget")
+    subprocess.run([wget, "-O", output, url], check=True)
+
+    if not os.path.exists(output):
+        print(f"failed to download {url}")
+        sys.exit(1)
+    

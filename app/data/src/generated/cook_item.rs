@@ -221,6 +221,16 @@ pub enum CookItem {
     Item_Cook_K_08,
     /// Milk
     Item_Cook_K_09,
+    /// Monster Stew
+    Item_Cook_L_01,
+    /// Monster Soup
+    Item_Cook_L_02,
+    /// Monster Cake
+    Item_Cook_L_03,
+    /// Monster Rice Balls
+    Item_Cook_L_04,
+    /// Monster Curry
+    Item_Cook_L_05,
     /// Wheat Bread
     Item_Cook_M_01,
     /// Seafood Paella
@@ -351,6 +361,11 @@ impl CookItem {
             Self::Item_Cook_K_07 => "Cream of Vegetable Soup",
             Self::Item_Cook_K_08 => "Carrot Stew",
             Self::Item_Cook_K_09 => "Milk",
+            Self::Item_Cook_L_01 => "Monster Stew",
+            Self::Item_Cook_L_02 => "Monster Soup",
+            Self::Item_Cook_L_03 => "Monster Cake",
+            Self::Item_Cook_L_04 => "Monster Rice Balls",
+            Self::Item_Cook_L_05 => "Monster Curry",
             Self::Item_Cook_M_01 => "Wheat Bread",
             Self::Item_Cook_N_01 => "Seafood Paella",
             Self::Item_Cook_N_02 => "Fruitcake",
@@ -469,6 +484,11 @@ impl CookItem {
             Self::Item_Cook_K_07 => "Item_Cook_K_07",
             Self::Item_Cook_K_08 => "Item_Cook_K_08",
             Self::Item_Cook_K_09 => "Item_Cook_K_09",
+            Self::Item_Cook_L_01 => "Item_Cook_L_01",
+            Self::Item_Cook_L_02 => "Item_Cook_L_02",
+            Self::Item_Cook_L_03 => "Item_Cook_L_03",
+            Self::Item_Cook_L_04 => "Item_Cook_L_04",
+            Self::Item_Cook_L_05 => "Item_Cook_L_05",
             Self::Item_Cook_M_01 => "Item_Cook_M_01",
             Self::Item_Cook_N_01 => "Item_Cook_N_01",
             Self::Item_Cook_N_02 => "Item_Cook_N_02",

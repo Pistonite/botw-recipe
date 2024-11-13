@@ -83,5 +83,42 @@ for entry in system["CEI"]:
 with open(OUT["recipes"], "w", encoding="utf-8", newline="\n") as f:
     yaml.dump(recipes, f)
 
+# Save System
+KEYWORDS = """
+# Keys are based on guesses from the data and decomp
+# CEI:    cook_effect_index
+# BT:     base_time
+# MR:     multiplier
+# Ma:     max
+# Mi:     min
+# SSA:    super_success_amount
+# T:      type
+# FA:     failure_actor
+# FALR:   faliure_actor_life_recover
+# FALRMR: faliure_actor_life_recover_multiplier
+# FCA:    fairy_cook_actor
+# LRMR:   life_recover_multiplier
+# MEA:    monster_extract_actor
+# NMMR:   num_matrial_multiplier
+# NMSSR:  num_material_super_success_rate
+# SFALR:  stone_food_actor_life_recover
+# SSAET:  super_success_additional_effect_time
+"""
+
 with open(OUT["system"], "w", encoding="utf-8", newline="\n") as f:
-    yaml.dump(system, f)
+    f.write(KEYWORDS)
+    f.write("cook_effect_index:\n")
+    for entry in system["CEI"]:
+        f.write(f"  - {{ type: {entry["T"] + ",":<24} base_time: {entry["BT"]:<10},\n")
+        f.write(f"      max: {entry["Ma"]:<3}, min: {entry["Mi"]:<3}, super_success_amount: {entry["SSA"]:<10},\n")
+        f.write(f"      multiplier: {entry["MR"]:<39} }}\n")
+    f.write(f"failure_actor: {system["FA"]}\n")
+    f.write(f"failure_actor_life_recover: {system["FALR"]}\n")
+    f.write(f"failure_actor_life_recover_multiplier: {system["FALRMR"]}\n")
+    f.write(f"fairy_cook_actor: {system["FCA"]}\n")
+    f.write(f"life_recover_multiplier: {system["LRMR"]}\n")
+    f.write(f"monster_extract_actor: {system["MEA"]}\n")
+    f.write(f"num_material_multiplier: {system["NMMR"]}\n")
+    f.write(f"num_material_super_success_rate: {system["NMSSR"]}\n")
+    f.write(f"stone_food_actor_life_recover: {system["SFALR"]}\n")
+    f.write(f"super_success_additional_effect_time: {system["SSAET"]}\n")
