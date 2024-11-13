@@ -65,8 +65,8 @@ for recipe in util.progress(recipes, "filter recipes"):
         raise ValueError(f"no actor for {name}")
     actor = name_to_actor[name]
     recipe["name"] = actor
-    output_actor_to_name[actor] = name
     if not filtered:
+        output_actor_to_name[actor] = name
         filtered_recipes.append(recipe)
     all_recipes.append(recipe)
 
