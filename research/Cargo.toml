@@ -1,6 +1,6 @@
 [package]
-name = "bfcrc32"
-description = "bruteforce reverse CRC32 using a dictionary"
+name = "research"
+description = "research scripts"
 version = "0.0.0"
 edition = "2021"
 
