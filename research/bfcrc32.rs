@@ -33,11 +33,9 @@ struct Cli {
     // /// Disallow output to start with these prefixes (exact)
     // #[clap(short, long)]
     // blacklist: Option<String>,
-
     /// The starting position, delimited by comma
     #[clap(short, long)]
     start: Option<String>,
-    
     // /// Maximum number of words in the output. Each digit and symbol is counted as one word
     // #[clap(short, long)]
     // limit: Option<usize>,
@@ -60,12 +58,8 @@ enum Casing {
 fn main() {
     let cli = Cli::parse();
     let target = match cli.input.strip_prefix("0x") {
-        Some(t) => {
-            u32::from_str_radix(t, 16).unwrap()
-        }
-        None => {
-            cli.input.parse().unwrap()
-        }
+        Some(t) => u32::from_str_radix(t, 16).unwrap(),
+        None => cli.input.parse().unwrap(),
     };
     let cpus = match num_cpus::get() {
         0..1 => 1,
@@ -180,9 +174,10 @@ impl Permutation {
         //     Some(bl) => bl.split(',').map(|s| s.to_string()).collect(),
         //     None => Vec::new(),
         // };
-        Self { words, 
-            i, 
-            casing: cli.casing.unwrap_or_default(), 
+        Self {
+            words,
+            i,
+            casing: cli.casing.unwrap_or_default(),
             prefix: cli.prefix.as_ref().cloned().unwrap_or_default(),
             // blacklist,
         }
@@ -198,7 +193,7 @@ impl Iterator for Permutation {
         let l = self.words.len();
 
         // limit to 2 words
-        if self.i > l * l * l+ 1 {
+        if self.i > l * l * l + 1 {
             return None;
         }
 
