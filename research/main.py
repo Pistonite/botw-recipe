@@ -7,7 +7,7 @@ import shutil
 O = "output"
 
 def run_script(script):
-    status = subprocess.run(["python", script])
+    status = subprocess.run([sys.executable, script])
     if status.returncode != 0:
         print(f"{script} failed")
         sys.exit(status.returncode)
@@ -34,19 +34,30 @@ if __name__ == "__main__":
         [
             "Actor/ActorLink/",
             "Actor/GeneralParamList/",
-            "Message/"
+            "Message/",
+            "Cooking/"
         ]
     )
+
     if clean:
         if os.path.exists(O):
             shutil.rmtree(O)
     if not os.path.exists(O):
         os.makedirs(O)
+
+    util.wget(
+        "https://raw.githubusercontent.com/david47k/top-english-wordlists/master/top_english_words_lower_50000.txt",
+        util.output("words.txt"),
+        clean
+    )
+
     run_script("get-actor-names.py")
     run_script("get-actor-data.py")
+    run_script("compute-crc32.py")
     run_script("group-items.py")
     run_script("validate-groups.py")
     run_script("ensure-exhaustiveness.py")
+    run_script("decode-recipes.py")
     run_script("prepare-recipes.py")
 
     run_script("generate-source.py")

@@ -31,6 +31,7 @@ Other key items such as Korok Seeds have parameters exactly like Sheikah Slate. 
 ## Build
 You need:
 - Python
+  - Install pip packages: `pip install tqdm`
 - Rust toolchain and compilers for your platform
 - Node.js
 - [Task](https://taskfile.dev/#/installation) (Optional)
