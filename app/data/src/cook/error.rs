@@ -26,8 +26,8 @@ pub enum Error {
     Data(String),
 }
 
-impl From<serde_yaml::Error> for Error {
-    fn from(e: serde_yaml::Error) -> Self {
+impl From<serde_yaml_ng::Error> for Error {
+    fn from(e: serde_yaml_ng::Error) -> Self {
         Self::Yaml(e.to_string())
     }
 }

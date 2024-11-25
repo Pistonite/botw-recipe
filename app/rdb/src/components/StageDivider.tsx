@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { Divider, makeStyles, shorthands } from "@fluentui/react-components";
+import { Divider, makeStyles } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
     divider: {
-        ...shorthands.padding("10px", "0px"),
+        padding: "10px 0px",
     },
 });
 

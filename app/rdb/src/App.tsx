@@ -3,7 +3,6 @@ import {
     makeStaticStyles,
     makeStyles,
     mergeClasses,
-    shorthands,
 } from "@fluentui/react-components";
 import {
     WeatherMoon20Regular,
@@ -29,8 +28,8 @@ const useStaticStyles = makeStaticStyles({
         WebkitTextSizeAdjust: "100%",
     },
     body: {
-        ...shorthands.margin(0),
-        ...shorthands.padding(0),
+        margin: 0,
+        padding: 0,
         overflow: "hidden",
     },
 });
@@ -40,7 +39,7 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        ...shorthands.padding("10px"),
+        padding: "10px",
         flex: 1,
     },
     stageContainerDark: {

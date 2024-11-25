@@ -63,7 +63,7 @@ impl Config {
             }
         };
 
-        match serde_yaml::from_reader(BufReader::new(file)) {
+        match serde_yaml_ng::from_reader(BufReader::new(file)) {
             Ok(config) => config,
             Err(e) => {
                 error!("failed to parse config file: {}", e);
@@ -93,7 +93,7 @@ impl Config {
                 return String::new();
             }
         };
-        let value: serde_json::Value = match serde_yaml::from_reader(BufReader::new(file)) {
+        let value: serde_json::Value = match serde_yaml_ng::from_reader(BufReader::new(file)) {
             Ok(value) => value,
             Err(e) => {
                 error!("failed to parse localization override file: {}", e);

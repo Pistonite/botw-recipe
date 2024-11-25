@@ -4,11 +4,11 @@ tasks:
   install:
     desc: Install JS dependencies
     cmds:
-    - npm install
+    - deno install
 
   install-ci:
     cmds:
-    - npm ci
+    - deno install --frozen
 
   dev:
     desc: Run RDB in dev (watch) mode
@@ -61,7 +61,7 @@ tasks:
     - task: prettier
       vars:
         PRETTIER_ARGS: --check
-    - npx tsc
+    - npx tsc --build
   
   fix:
     desc: Fix linting and formatting issues in TS code

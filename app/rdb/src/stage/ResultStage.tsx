@@ -7,7 +7,6 @@ import {
     Caption1,
     makeStyles,
     mergeClasses,
-    shorthands,
     Spinner,
 } from "@fluentui/react-components";
 
@@ -32,8 +31,8 @@ const useStyles = makeStyles({
         justifyContent: "center",
         position: "absolute",
         zIndex: 1,
-        ...shorthands.inset("0"),
-        ...shorthands.padding("10px"),
+        inset: 0,
+        padding: "10px",
     },
     progressContainerLight: {
         backgroundColor: "rgba(255, 255, 255, 0.95)",

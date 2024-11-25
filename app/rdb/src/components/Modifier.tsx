@@ -7,7 +7,6 @@ import {
     Label,
     type LabelProps,
     makeStyles,
-    shorthands,
     Tooltip,
 } from "@fluentui/react-components";
 
@@ -21,7 +20,7 @@ const useStyles = makeStyles({
         width: "26px",
         minHeight: "26px",
         height: "26px",
-        ...shorthands.padding("1px"),
+        padding: "1px",
     },
     icon: {
         minWidth: "24px",

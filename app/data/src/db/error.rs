@@ -37,8 +37,8 @@ impl From<std::io::Error> for Error {
     }
 }
 
-impl From<serde_yaml::Error> for Error {
-    fn from(e: serde_yaml::Error) -> Self {
+impl From<serde_yaml_ng::Error> for Error {
+    fn from(e: serde_yaml_ng::Error) -> Self {
         Error::YAML(e.to_string())
     }
 }

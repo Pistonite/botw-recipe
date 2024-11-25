@@ -17,6 +17,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20.x
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
       - run: task rdb:install-ci
       - run: task rdb:check
       - run: task rdb:test
