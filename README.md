@@ -28,13 +28,13 @@ It might be added in the future.
 #### Q: Key items other than Sheikah Slate are missing
 Other key items such as Korok Seeds have parameters exactly like Sheikah Slate. Whenever you see Sheikah Slate in the result, you can replace it with the key item you want.
 
-## Build
-You need:
-- Python
+## Build from Source
+To build the app from source:
+- Python (only for running research scripts)
   - Install pip packages: `pip install tqdm`
 - Rust toolchain and compilers for your platform
-- Node.js
-- [Task](https://taskfile.dev/#/installation) (Optional)
+- Node v20 and Deno v2
+- [Task](https://taskfile.dev/#/installation)
 
 Install dependencies
 ```
@@ -47,15 +47,6 @@ task dump:dump -- -C
 At this point, you can run the app using development mode
 ```
 task rdb:dev -- --release
-```
-
-Without `task`, the commands are
-```
-cd dump/emulate
-cargo run --release --bin rdump -- -C
-cd ../../app/rdb
-npm install
-npx tauri dev --release --features devtools
 ```
 
 To build the standalone binary (Output is in `/target/release`)
