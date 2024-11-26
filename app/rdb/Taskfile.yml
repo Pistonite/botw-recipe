@@ -61,7 +61,7 @@ tasks:
       - task: prettier
         vars:
           PRETTIER_ARGS: --check
-      - deno run npm:tsc --build
+      - deno run -A npm:typescript/tsc --build
   
   fix:
     desc: Fix linting and formatting issues in TS code
