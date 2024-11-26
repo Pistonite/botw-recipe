@@ -4,8 +4,6 @@
 
 If you would like to improve or add missing translations, please read this first.
 
-Preferably, you should have a GitHub account and contribute by opening a Pull Request with the updated translation.
-
 ## Status
 The following languages need owner for localization:
 
@@ -17,10 +15,22 @@ The following languages need owner for localization:
 - Russian | ru-RU 
 - Traditional Chinese | zh-TW
 
+## Process
+Preferably, you should have a GitHub account and contribute by opening a Pull Request with the updated translation.
+
+If you are not familiar with Git, this is the general flow:
+- You fork this repository on GitHub.
+- You download your fork to your computer, called "cloning".
+- You edit the localization file and test it (see [side-loading](#setting-up-localization-side-loading) below).
+- You commit your changes to your fork and push the changes to GitHub
+- You open a PR from your fork to this repository.
+- I review the changes and merge them if they are correct.
+
 ## Guidelines
 Generally, please follow these steps to contribute:
 ### 1. See what is already done
-You can find the localization files in `app/rdb/src/i18n/locales/`. Look for the language you want to contribute to.
+You can find the localization files in `app/rdb/src/i18n/locales/`.
+Look for the language you want to contribute to.
 I already generated some entries from the game's data.
 
 ### 2. Items
@@ -34,10 +44,19 @@ The UI texts need to be written from scratch. Stubs were copied from `en-US.yaml
 
 You can test the UI translation by following the steps below
 
+### 5. Testing
+Make sure to test the localization in the app, especially the UI text,
+to make sure they make sense in the context.
+
+### 6. Cleaning up
+Make sure you do the following before making a PR:
+- Remove any "TODO" comments in the file.
+- Uncommented (remove the `//`) the language in `app/rdb/src/i18n/locales/locales.ts`.
+
 ## Setting up localization side-loading
 Side-loading makes it easier to test WIP localizations as you can see the results in the app.
 
-1. Fork and clone the repository. Find the language files in `app/rdb/src/i18n/locales/`.
+1. Find the language files in `app/rdb/src/i18n/locales/`.
 2. Once you started the application once, there will be a `config.yaml` file next to the executable. Open it and change:
     ```yaml
     localization_override: null
@@ -51,9 +70,7 @@ Side-loading makes it easier to test WIP localizations as you can see the result
 4. When you change the file, you can change to another language in the language picker. That will cause the app to reload the language file.
 
 ## Optimizing Item Search
-Currently, the item search is a simple fuzzy search using the item name. If your language as a preferred search method, please let me know, and I will see if I can implement it. (Or implement it yourself and open a PR)
+Currently, the item search is a simple fuzzy search using the item name.
+If your language as a preferred search method, please let me know, and I will see if I can implement it. (Or implement it yourself and open a PR)
 
 You can see the Pinyin search I implemented for Simplified Chinese as an example.
-
-## Enabling the language
-Lastly, the language needs to be uncommented in `app/rdb/src/i18n/locales/locales.ts` to show in the language picker.

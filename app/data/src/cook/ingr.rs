@@ -43,7 +43,7 @@ pub type Ingredients = EnumMap<Actor, Ingredient>;
 
 pub fn read_ingredients() -> Result<Ingredients, Error> {
     let data = include_str!("../../../../research/output/actor-data.yaml");
-    let data: HashMap<String, IngrData> = serde_yaml::from_str(data)?;
+    let data: HashMap<String, IngrData> = serde_yaml_ng::from_str(data)?;
     let mut error = vec![];
     let map = Ingredients::from_fn(|actor| {
         if actor == Actor::None {

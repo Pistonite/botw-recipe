@@ -20,7 +20,6 @@ import {
     Label,
     type LabelProps,
     makeStyles,
-    shorthands,
     TableCellLayout,
     type TableColumnId,
     ToggleButton,
@@ -57,12 +56,12 @@ const useStyles = makeStyles({
         width: "42px",
         minHeight: "42px",
         height: "42px",
-        ...shorthands.padding("2px"),
+        padding: "2px",
     },
     disabledOverlay: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         position: "absolute",
-        ...shorthands.inset(0),
+        inset: 0,
         zIndex: 1,
     },
     icon: {

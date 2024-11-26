@@ -204,7 +204,7 @@ fn dump(cli: Cli) -> anyhow::Result<()> {
         let writer = BufWriter::new(File::create(
             Path::new(data_folder(&cli)).join("index.yaml"),
         )?);
-        serde_yaml::to_writer(writer, &index_vec)?;
+        serde_yaml_ng::to_writer(writer, &index_vec)?;
     }
 
     println!("done in {:.2}s", start_time.elapsed().as_secs_f32());

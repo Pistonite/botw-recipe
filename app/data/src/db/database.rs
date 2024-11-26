@@ -46,7 +46,7 @@ impl Database {
             return Err(Error::MissingIndex);
         }
         let reader = BufReader::new(File::open(&index_path)?);
-        let index: Vec<Index> = serde_yaml::from_reader(reader)?;
+        let index: Vec<Index> = serde_yaml_ng::from_reader(reader)?;
 
         if index.len() != crate::COMPACT_CHUNK_COUNT {
             return Err(Error::InvalidIndexChunkCount(

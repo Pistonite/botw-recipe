@@ -370,6 +370,7 @@ def gen_actor_enum(o, actors, actor_to_name, groups, actor_pe_only):
 def gen_actor_enum_ts(o, test, actors, actor_to_name, groups, actor_pe_only):
     o.write(HEADER)
     test.write(HEADER)
+    test.write("import { describe, expect, test } from \"vitest\";\n")
     test.write("import { Group } from \"./Group.ts\";\n")
     test.write("import { Actor, ActorToGroup, ActorToName } from \"./Actor.ts\";\n")
     o.write("import { Group } from \"./Group.ts\";\n")
@@ -505,7 +506,7 @@ with open(OUT[7], "w", encoding="utf-8", newline="\n") as f:
         gen_actor_enum_ts(f, test, actors, actor_to_name, data["ids"], actor_pe_only)
 
 with open(OUT[3], "w", encoding="utf-8", newline="\n") as o:
-    with open(OUT[4], "w", encoding="utf-8") as hpp:
+    with open(OUT[4], "w", encoding="utf-8", newline="\n") as hpp:
         gen_numeric_constants_cpp(o, hpp, data)
 
 with open(OUT[5], "w", encoding="utf-8", newline="\n") as f:

@@ -2,6 +2,7 @@ import {
     hasMultishotAndDoesNotExcludeQuickShot,
     WeaponModifier,
 } from "./WeaponModifier";
+import { describe, expect, test } from "vitest";
 
 const W = WeaponModifier;
 

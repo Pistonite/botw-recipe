@@ -1,32 +1,44 @@
 import Fuse from "fuse.js";
-import { useEffect, useState } from "react";
+import i18next from "i18next";
+import { create } from "zustand";
 
 import { type Actor, ActorToName, getActors } from "data/Actor.ts";
 
-import { loadLocale } from "./locales.ts";
-
 export type ItemSearchFn = (searchText: string) => Actor[] | undefined;
 
-let currentLocale = "";
-let itemSearch: ItemSearchFn = getActors;
-const subscribers: ((search: ItemSearchFn) => void)[] = [];
+type Store = {
+    fn: ItemSearchFn;
+};
+const store = create<Store>()(() => ({
+    fn: () => undefined,
+}));
+export const useItemSearch = () => {
+    return store((state) => state.fn);
+};
 
-export const initLocalizedItemSearch = async (
-    locale: string,
-    translation: Record<string, string>,
-) => {
+let currentLocale = "";
+
+export const initLocalizedItemSearch = async (locale: string) => {
     if (currentLocale === locale) {
         return;
     }
     console.log("initializing localized item search for locale " + locale);
     currentLocale = locale;
-    const englishTranslation = await loadLocale("en-US");
+
+    // Searching item by its English name is always supported
+    const { default: englishTranslation } = await import(
+        "./locales/en-US.yaml"
+    );
+
+    // Locale can have extra locale-specific keys.
+    // like pinyin for Chinese
     let extraKeys: Record<string, string> = {};
     if (locale === "zh-CN") {
-        // load pinyin keys
         const { default: keys } = await import("./locales/zh-CN.pinyin.yaml");
         extraKeys = keys;
     }
+
+    // Process the items
     const entries = getActors().map((actor) => {
         const actorName = ActorToName[actor];
         const translationKey = `actor.${actorName}`;
@@ -44,41 +56,26 @@ export const initLocalizedItemSearch = async (
         return {
             actor,
             actorName,
-            localizedName: translation[translationKey],
+            localizedName: i18next.t(translationKey),
             englishName: englishTranslation[translationKey],
             keys,
         };
     });
+
+    // Initialize search engine
     const fuse = new Fuse(entries, {
         threshold: 0.2,
         keys: ["actorName", "localizedName", "englishName", "keys"],
         shouldSort: true,
     });
-    itemSearch = (searchText: string) => {
+
+    const itemSearch = (searchText: string) => {
         if (!searchText) {
             return undefined;
         }
         const results = fuse.search(searchText);
         return results.map((result) => result.item.actor);
     };
-    subscribers.forEach((subscriber) => subscriber(itemSearch));
     console.log("localized item search initialized");
-};
-
-export const useItemSearch = () => {
-    const [search, setSearch] = useState<ItemSearchFn>(() => itemSearch);
-    useEffect(() => {
-        setSearch(() => itemSearch);
-        const subscriber = (search: ItemSearchFn) => {
-            setSearch(() => search);
-        };
-        subscribers.push(subscriber);
-        return () => {
-            const index = subscribers.indexOf(subscriber);
-            if (index !== -1) {
-                subscribers.splice(index, 1);
-            }
-        };
-    }, []);
-    return search;
+    store.setState({ fn: itemSearch });
 };

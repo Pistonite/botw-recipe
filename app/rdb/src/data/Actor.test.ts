@@ -4,6 +4,7 @@
 //!
 //! Run `cd research && python main.py` (or `task research`) to regenerate.
 
+import { describe, expect, test } from "vitest";
 import { Group } from "./Group.ts";
 import { Actor, ActorToGroup, ActorToName } from "./Actor.ts";
 describe("Actor", () => {

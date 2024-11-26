@@ -17,7 +17,7 @@ pub struct Recipes {
 
 pub fn read_recipes() -> Result<Recipes, Error> {
     let data = include_str!("../../../../research/output/recipes.yaml");
-    let data: Vec<RecipeData> = serde_yaml::from_str(data)?;
+    let data: Vec<RecipeData> = serde_yaml_ng::from_str(data)?;
     let dubious = data
         .iter()
         .find(|x| x.is_dubious())

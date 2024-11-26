@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
     Menu,
     MenuButton,
@@ -8,29 +7,22 @@ import {
     MenuTrigger,
 } from "@fluentui/react-components";
 import { Globe20Regular } from "@fluentui/react-icons";
+import { useLocale } from "@pistonite/pure-react";
+import { getLocalizedLanguageName } from "@pistonite/pure/pref";
 
-import {
-    loadLocalePreference,
-    SupportedLocales,
-    switchLanguage,
-} from "i18n/locales.ts";
+import { SupportedLocales, switchLanguage } from "i18n/locales.ts";
 import { useHost } from "host/useHost.ts";
 
 /** Language Picker */
 export const LocalePicker: React.FC = () => {
-    const [locale, setLocale] = useState(loadLocalePreference);
-
+    const locale = useLocale();
     const host = useHost();
-
-    useEffect(() => {
-        switchLanguage(locale, host);
-    }, [locale]);
 
     return (
         <Menu
             checkedValues={{ locale: [locale] }}
             onCheckedValueChange={(_, { checkedItems }) => {
-                setLocale(checkedItems[0]);
+                switchLanguage(checkedItems[0], host);
             }}
         >
             <MenuTrigger disableButtonEnhancement>
@@ -38,9 +30,9 @@ export const LocalePicker: React.FC = () => {
             </MenuTrigger>
             <MenuPopover>
                 <MenuList>
-                    {Object.entries(SupportedLocales).map(([key, value]) => (
+                    {SupportedLocales.map((key) => (
                         <MenuItemRadio key={key} name="locale" value={key}>
-                            {value}
+                            {getLocalizedLanguageName(key)}
                         </MenuItemRadio>
                     ))}
                 </MenuList>

@@ -3,15 +3,15 @@ import {
     makeStaticStyles,
     makeStyles,
     mergeClasses,
-    shorthands,
 } from "@fluentui/react-components";
 import {
     WeatherMoon20Regular,
     WeatherSunny20Regular,
 } from "@fluentui/react-icons";
+import { useDark } from "@pistonite/pure-react";
+import { setDark } from "@pistonite/pure/pref";
 
 import { LocalePicker } from "components/LocalePicker.tsx";
-import { useTheme } from "components/ThemeProvider.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
 import { FilterStage } from "stage/FilterStage.tsx";
 import { ResultStage } from "stage/ResultStage.tsx";
@@ -29,8 +29,8 @@ const useStaticStyles = makeStaticStyles({
         WebkitTextSizeAdjust: "100%",
     },
     body: {
-        ...shorthands.margin(0),
-        ...shorthands.padding(0),
+        margin: 0,
+        padding: 0,
         overflow: "hidden",
     },
 });
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        ...shorthands.padding("10px"),
+        padding: "10px",
         flex: 1,
     },
     stageContainerDark: {
@@ -63,7 +63,7 @@ const useStyles = makeStyles({
 export const App: React.FC = () => {
     useStaticStyles();
     const styles = useStyles();
-    const { isDarkMode, setIsDarkMode } = useTheme();
+    const isDarkMode = useDark();
 
     const stageContainerClass = mergeClasses(
         styles.stageContainer,
@@ -102,7 +102,7 @@ export const App: React.FC = () => {
                             <WeatherMoon20Regular />
                         )
                     }
-                    onClick={() => setIsDarkMode(!isDarkMode)}
+                    onClick={() => setDark(!isDarkMode)}
                 />
                 <Button
                     as="a"
