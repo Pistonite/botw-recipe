@@ -23,11 +23,7 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
 
-        "types": [
-            "vite/client",
-            "@modyfi/vite-plugin-yaml/modules",
-            "@types/jest"
-        ],
+        "types": ["vite/client", "@modyfi/vite-plugin-yaml/modules"],
         "baseUrl": "src"
     },
     "include": ["src"]

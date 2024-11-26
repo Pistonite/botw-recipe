@@ -370,6 +370,7 @@ def gen_actor_enum(o, actors, actor_to_name, groups, actor_pe_only):
 def gen_actor_enum_ts(o, test, actors, actor_to_name, groups, actor_pe_only):
     o.write(HEADER)
     test.write(HEADER)
+    test.write("import { describe, expect, test } from \"vitest\";\n")
     test.write("import { Group } from \"./Group.ts\";\n")
     test.write("import { Actor, ActorToGroup, ActorToName } from \"./Actor.ts\";\n")
     o.write("import { Group } from \"./Group.ts\";\n")

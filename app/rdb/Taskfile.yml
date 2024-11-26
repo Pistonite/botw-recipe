@@ -49,7 +49,7 @@ tasks:
   test:
     desc: Run tests
     cmds:
-      - deno run -A npm:jest
+      - deno run -A npm:vitest
 
   check:
     desc: Check for linting and formatting issues in TS code

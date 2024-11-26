@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import yaml from "@modyfi/vite-plugin-yaml";
@@ -28,6 +29,8 @@ export default defineConfig((/*{ command }*/) => ({
         cssCodeSplit: false,
         chunkSizeWarningLimit: 1024,
     },
+
+    test: {},
 
     // prevent vite from obscuring rust errors when running from tauri
     clearScreen: false,
