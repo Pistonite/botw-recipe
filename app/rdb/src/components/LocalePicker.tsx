@@ -10,10 +10,7 @@ import { Globe20Regular } from "@fluentui/react-icons";
 import { useLocale } from "@pistonite/pure-react";
 import { getLocalizedLanguageName } from "@pistonite/pure/pref";
 
-import {
-    SupportedLocales,
-    switchLanguage,
-} from "i18n/locales.ts";
+import { SupportedLocales, switchLanguage } from "i18n/locales.ts";
 import { useHost } from "host/useHost.ts";
 
 /** Language Picker */

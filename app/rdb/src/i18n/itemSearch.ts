@@ -8,19 +8,17 @@ export type ItemSearchFn = (searchText: string) => Actor[] | undefined;
 
 type Store = {
     fn: ItemSearchFn;
-}
+};
 const store = create<Store>()(() => ({
-    fn: () => undefined
+    fn: () => undefined,
 }));
 export const useItemSearch = () => {
     return store((state) => state.fn);
-}
+};
 
 let currentLocale = "";
 
-export const initLocalizedItemSearch = async (
-    locale: string,
-) => {
+export const initLocalizedItemSearch = async (locale: string) => {
     if (currentLocale === locale) {
         return;
     }
@@ -28,7 +26,9 @@ export const initLocalizedItemSearch = async (
     currentLocale = locale;
 
     // Searching item by its English name is always supported
-    const { default: englishTranslation } = await import("./locales/en-US.yaml");
+    const { default: englishTranslation } = await import(
+        "./locales/en-US.yaml"
+    );
 
     // Locale can have extra locale-specific keys.
     // like pinyin for Chinese

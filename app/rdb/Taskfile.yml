@@ -1,11 +1,5 @@
 version: '3'
 
-env:
-  TASK_PWD:
-    sh: pwd
-  # PATH: 
-  #   $TASK_PWD/node_modules/.bin:$PATH
-
 tasks:
   install:
     desc: Install JS dependencies
@@ -42,14 +36,14 @@ tasks:
     desc: Generate TypeScript bindings
     dir: .
     cmds:
-      - coreutils rm -rf ../data/bindings
-      - coreutils rm -rf src-tauri/bindings
-      - coreutils rm -rf src/host/types
-      - coreutils mkdir -p src/host/types
+      - rm -rf ../data/bindings
+      - rm -rf src-tauri/bindings
+      - rm -rf src/host/types
+      - mkdir -p src/host/types
       - cargo test --package botw-recipe-data --lib
       - cargo test --package botw-recipe-database
-      - coreutils cp -r ../data/bindings/*.ts src/host/types/
-      - coreutils cp -r src-tauri/bindings/*.ts src/host/types/
+      - cp -r ../data/bindings/*.ts src/host/types/
+      - cp -r src-tauri/bindings/*.ts src/host/types/
       - deno run -A npm:prettier "./src/host/types/*.ts" --write
 
   test:

@@ -10,6 +10,7 @@ import {
     MessageBar,
     Spinner,
 } from "@fluentui/react-components";
+import { useDark } from "@pistonite/pure-react";
 
 import { StageTitle } from "components/StageTitle.tsx";
 import { ResultList } from "components/ResultList.tsx";
@@ -23,7 +24,6 @@ import {
 import { getFilterStageDisabledMessage } from "store/selectors.ts";
 import { getFavoriteActors, getFilterResultCount } from "store/filter.ts";
 import { getErrorMessage } from "data/ErrorMessage.ts";
-import { useDark } from "@pistonite/pure-react";
 
 const useStyles = makeStyles({
     progressContainer: {
@@ -161,22 +161,21 @@ const ResultStageBody: React.FC = () => {
                     </div>
                 ) : (
                     <>
-                            {
-                                rawResultCount > limit
-                                ? <MessageBar intent="warning" layout="multiline">
-                                        {t(
-                                                "result.limited",
-                                            { limit, count: results.length },
-                                        )}
-                                </MessageBar>
-                                :
-                                    <Body1 className={styles.countMessage} block>
-                                        {t(
-                                                 "result.count",
-                                            { limit, count: results.length },
-                                        )}
-                                    </Body1>
-                            }
+                        {rawResultCount > limit ? (
+                            <MessageBar intent="warning" layout="multiline">
+                                {t("result.limited", {
+                                    limit,
+                                    count: results.length,
+                                })}
+                            </MessageBar>
+                        ) : (
+                            <Body1 className={styles.countMessage} block>
+                                {t("result.count", {
+                                    limit,
+                                    count: results.length,
+                                })}
+                            </Body1>
+                        )}
                         <Caption1 className={styles.noteMessage} block>
                             {t("result.list.note")}
                         </Caption1>

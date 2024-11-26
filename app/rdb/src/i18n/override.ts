@@ -3,15 +3,18 @@
  * for translators to test their translations.
  */
 
-let overrideGetter: (() => Promise<string>) = async () => "";
+let overrideGetter: () => Promise<string> = async () => "";
 
 export const setTranslationOverride = (getter: () => Promise<string>) => {
     overrideGetter = getter;
 };
 
-export const getTranslationOverrideResource = async (): Promise<{
-    translation: Record<string, string>;
-} | undefined > => {
+export const getTranslationOverrideResource = async (): Promise<
+    | {
+          translation: Record<string, string>;
+      }
+    | undefined
+> => {
     const override = await getTranslationOverride();
     if (!override) {
         return undefined;
@@ -23,7 +26,7 @@ export const getTranslationOverrideResource = async (): Promise<{
         console.error("failed to parse override translation", e);
     }
     return { translation };
-}
+};
 
 export const getTranslationOverride = (): Promise<string> => {
     return overrideGetter();

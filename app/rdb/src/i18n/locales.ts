@@ -1,10 +1,17 @@
 import i18next, { type BackendModule } from "i18next";
 import { initReactI18next } from "react-i18next";
+import {
+    initLocale as initPureLocale,
+    convertToSupportedLocaleOrDefault,
+    detectLocale,
+} from "@pistonite/pure/pref";
 
 import type { Host } from "host/Host.ts";
 import { initLocalizedItemSearch } from "./itemSearch.ts";
-import { getTranslationOverrideResource, setTranslationOverride } from "./override.ts";
-import { initLocale as initPureLocale, convertToSupportedLocaleOrDefault, detectLocale } from "@pistonite/pure/pref";
+import {
+    getTranslationOverrideResource,
+    setTranslationOverride,
+} from "./override.ts";
 
 export const SupportedLocales = [
     "de-DE",
@@ -20,7 +27,10 @@ export const SupportedLocales = [
     // "zh-TW"
 ] as const;
 
-const OVERRIDE_RESOURCE: Record<string, { translation: Record<string, string> }> = {};
+const OVERRIDE_RESOURCE: Record<
+    string,
+    { translation: Record<string, string> }
+> = {};
 
 export async function initLocale(host: Host) {
     if (await host.getBinding().loadOverrideLocalizationJson()) {
@@ -46,10 +56,7 @@ export async function initLocale(host: Host) {
         return;
     }
 
-    await i18next
-    .use(detectLocale)
-    .use(backend)
-    .use(initReactI18next).init();
+    await i18next.use(detectLocale).use(backend).use(initReactI18next).init();
 }
 
 export async function switchLanguage(locale: string, host: Host) {
@@ -60,14 +67,14 @@ export async function switchLanguage(locale: string, host: Host) {
 
     i18next.changeLanguage(locale);
     host.setTitle(i18next.t("title"));
-    await initLocalizedItemSearch(locale );
+    await initLocalizedItemSearch(locale);
 }
 
 const backend: BackendModule = {
     type: "backend",
     init: () => {},
 
-    read: async (language: string, namespace: string) =>{
+    read: async (language: string, namespace: string) => {
         if (namespace !== "translation") {
             return undefined;
         }
@@ -75,5 +82,5 @@ const backend: BackendModule = {
         const locale = convertToSupportedLocaleOrDefault(language) || "en-US";
         const module = await import(`./locales/${locale}.yaml`);
         return module.default;
-    }
-}
+    },
+};

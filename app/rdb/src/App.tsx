@@ -8,13 +8,13 @@ import {
     WeatherMoon20Regular,
     WeatherSunny20Regular,
 } from "@fluentui/react-icons";
+import { useDark } from "@pistonite/pure-react";
+import { setDark } from "@pistonite/pure/pref";
 
 import { LocalePicker } from "components/LocalePicker.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
 import { FilterStage } from "stage/FilterStage.tsx";
 import { ResultStage } from "stage/ResultStage.tsx";
-import { useDark } from "@pistonite/pure-react";
-import { setDark } from "@pistonite/pure/pref";
 
 const useStaticStyles = makeStaticStyles({
     "*": {

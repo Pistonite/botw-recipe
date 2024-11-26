@@ -1,18 +1,16 @@
+import i18next from "i18next";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { initDark } from "@pistonite/pure/pref";
 
 import type { Host } from "host/Host.ts";
-import {
-    initLocale,
-} from "i18n/locales.ts";
+import { initLocale } from "i18n/locales.ts";
 import { store } from "store/store.ts";
 import { updateSearchProgress } from "store/search.ts";
 import { updateFilterProgress } from "store/filter.ts";
 import { setResultLimit } from "store/result.ts";
 
 import { AppWrapper } from "./AppWrapper.tsx";
-import i18next from "i18next";
 
 /** Boot the app using the provided host */
 export async function boot(host: Host) {
