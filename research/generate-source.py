@@ -506,7 +506,7 @@ with open(OUT[7], "w", encoding="utf-8", newline="\n") as f:
         gen_actor_enum_ts(f, test, actors, actor_to_name, data["ids"], actor_pe_only)
 
 with open(OUT[3], "w", encoding="utf-8", newline="\n") as o:
-    with open(OUT[4], "w", encoding="utf-8") as hpp:
+    with open(OUT[4], "w", encoding="utf-8", newline="\n") as hpp:
         gen_numeric_constants_cpp(o, hpp, data)
 
 with open(OUT[5], "w", encoding="utf-8", newline="\n") as f:
