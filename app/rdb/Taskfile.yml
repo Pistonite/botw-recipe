@@ -1,5 +1,11 @@
 version: '3'
 
+env:
+  TASK_PWD:
+    sh: pwd
+  # PATH: 
+  #   $TASK_PWD/node_modules/.bin:$PATH
+
 tasks:
   install:
     desc: Install JS dependencies
@@ -16,52 +22,52 @@ tasks:
       RUST_LOG: info
       BOTWRDB_CONFIG_PATH: ../../../app/rdb/rdb.config.yaml
     cmds:
-    - npx tauri dev --features devtools {{.CLI_ARGS}}
+      - deno run -A npm:@tauri-apps/cli dev --features devtools {{.CLI_ARGS}}
 
   build:
     desc: Build RDB (release) binary
     cmds:
-    - npx tauri build {{.CLI_ARGS}}
+      - deno run -A npm:@tauri-apps/cli build {{.CLI_ARGS}}
 
   dev-js:
     cmds:
-    - npx vite
+      - deno run -A npm:vite
 
   build-js:
     cmds:
-    - node scripts/verifyI18n.cjs
-    - npx vite build
+      - node scripts/verifyI18n.cjs
+      - deno run -A npm:vite build
 
   ts-rs:
     desc: Generate TypeScript bindings
     dir: .
     cmds:
-    - coreutils rm -rf ../data/bindings
-    - coreutils rm -rf src-tauri/bindings
-    - coreutils rm -rf src/host/types
-    - coreutils mkdir -p src/host/types
-    - cargo test --package botw-recipe-data --lib
-    - cargo test --package botw-recipe-database
-    - coreutils cp -r ../data/bindings/*.ts src/host/types/
-    - coreutils cp -r src-tauri/bindings/*.ts src/host/types/
-    - npx prettier "./src/host/types/*.ts" --write
+      - coreutils rm -rf ../data/bindings
+      - coreutils rm -rf src-tauri/bindings
+      - coreutils rm -rf src/host/types
+      - coreutils mkdir -p src/host/types
+      - cargo test --package botw-recipe-data --lib
+      - cargo test --package botw-recipe-database
+      - coreutils cp -r ../data/bindings/*.ts src/host/types/
+      - coreutils cp -r src-tauri/bindings/*.ts src/host/types/
+      - deno run -A npm:prettier "./src/host/types/*.ts" --write
 
   test:
     desc: Run tests
     cmds:
-    - npx jest
+      - deno run -A npm:jest
 
   check:
     desc: Check for linting and formatting issues in TS code
     aliases: [lint]
     cmds:
-    - task: eslint
-      vars:
-        ESLINT_ARGS: ""
-    - task: prettier
-      vars:
-        PRETTIER_ARGS: --check
-    - npx tsc --build
+      - task: eslint
+        vars:
+          ESLINT_ARGS: ""
+      - task: prettier
+        vars:
+          PRETTIER_ARGS: --check
+      - deno run npm:tsc --build
   
   fix:
     desc: Fix linting and formatting issues in TS code
@@ -72,8 +78,8 @@ tasks:
 
   prettier:
     cmds:
-    - npx prettier "./**/*.{ts,tsx,json,js,mjs,cjs,css}" {{.PRETTIER_ARGS}}
+      - deno run -A npm:prettier "./**/*.{ts,tsx,json,js,mjs,cjs,css}" {{.PRETTIER_ARGS}}
 
   eslint:
     cmds:
-    - npx eslint src --report-unused-disable-directives --max-warnings 0 --cache {{.ESLINT_ARGS}}
+      - deno run -A npm:eslint src --report-unused-disable-directives --max-warnings 0 --cache {{.ESLINT_ARGS}}

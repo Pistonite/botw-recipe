@@ -10,10 +10,11 @@ import {
 } from "@fluentui/react-icons";
 
 import { LocalePicker } from "components/LocalePicker.tsx";
-import { useTheme } from "components/ThemeProvider.tsx";
 import { SearchStage } from "stage/SearchStage.tsx";
 import { FilterStage } from "stage/FilterStage.tsx";
 import { ResultStage } from "stage/ResultStage.tsx";
+import { useDark } from "@pistonite/pure-react";
+import { setDark } from "@pistonite/pure/pref";
 
 const useStaticStyles = makeStaticStyles({
     "*": {
@@ -62,7 +63,7 @@ const useStyles = makeStyles({
 export const App: React.FC = () => {
     useStaticStyles();
     const styles = useStyles();
-    const { isDarkMode, setIsDarkMode } = useTheme();
+    const isDarkMode = useDark();
 
     const stageContainerClass = mergeClasses(
         styles.stageContainer,
@@ -101,7 +102,7 @@ export const App: React.FC = () => {
                             <WeatherMoon20Regular />
                         )
                     }
-                    onClick={() => setIsDarkMode(!isDarkMode)}
+                    onClick={() => setDark(!isDarkMode)}
                 />
                 <Button
                     as="a"

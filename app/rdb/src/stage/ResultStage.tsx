@@ -7,6 +7,7 @@ import {
     Caption1,
     makeStyles,
     mergeClasses,
+    MessageBar,
     Spinner,
 } from "@fluentui/react-components";
 
@@ -22,7 +23,7 @@ import {
 import { getFilterStageDisabledMessage } from "store/selectors.ts";
 import { getFavoriteActors, getFilterResultCount } from "store/filter.ts";
 import { getErrorMessage } from "data/ErrorMessage.ts";
-import { useTheme } from "components/ThemeProvider.tsx";
+import { useDark } from "@pistonite/pure-react";
 
 const useStyles = makeStyles({
     progressContainer: {
@@ -109,7 +110,7 @@ const ResultStageBody: React.FC = () => {
         getFilterStageDisabledMessage,
     );
     const favorited = useSelector(getFavoriteActors);
-    const { isDarkMode } = useTheme();
+    const isDarkMode = useDark();
 
     if (!results.length && stageDisabled) {
         return (
@@ -160,14 +161,22 @@ const ResultStageBody: React.FC = () => {
                     </div>
                 ) : (
                     <>
-                        <Body1 className={styles.countMessage} block>
-                            {t(
+                            {
                                 rawResultCount > limit
-                                    ? "result.limited"
-                                    : "result.count",
-                                { limit, count: results.length },
-                            )}
-                        </Body1>
+                                ? <MessageBar intent="warning" layout="multiline">
+                                        {t(
+                                                "result.limited",
+                                            { limit, count: results.length },
+                                        )}
+                                </MessageBar>
+                                :
+                                    <Body1 className={styles.countMessage} block>
+                                        {t(
+                                                 "result.count",
+                                            { limit, count: results.length },
+                                        )}
+                                    </Body1>
+                            }
                         <Caption1 className={styles.noteMessage} block>
                             {t("result.list.note")}
                         </Caption1>

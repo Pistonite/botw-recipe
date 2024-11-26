@@ -69,6 +69,8 @@ fn set_title(title: String, app: AppHandle) {
         if let Err(e) = window.set_title(&title) {
             log::error!("fail to set window title: {}", e);
         }
+    } else {
+        log::error!("main window not found!!");
     }
 }
 

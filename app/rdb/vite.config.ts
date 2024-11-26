@@ -2,15 +2,17 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import yaml from "@modyfi/vite-plugin-yaml";
 import tsconfigPaths from "vite-tsconfig-paths";
-import griffel from "@griffel/vite-plugin";
+// import griffel from "@griffel/vite-plugin";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => ({
+export default defineConfig((/*{ command }*/) => ({
     plugins: [
         react(),
         yaml(),
         tsconfigPaths(),
-        command === "build" && griffel(),
+        // temporarily disabled due to incompatibility with deno
+        // fixed in the next version of griffel
+        // command === "build" && griffel(),
     ],
     json: {
         // note: doesn't work on yaml
