@@ -1,4 +1,3 @@
-#include <exl/lib.hpp>
 #include <toolkit/msg/screen.hpp>
 #include <gfx/seadTextWriter.h>
 #include <Game/UI/uiPauseMenuDataMgr.h>

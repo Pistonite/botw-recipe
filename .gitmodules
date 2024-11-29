@@ -1,10 +1,6 @@
 [submodule "botw"]
 	path = dump/console/libs/botw
-	url = https://github.com/zeldaret/botw
-	branch = master
-[submodule "exlaunch"]
-	path = dump/console/libs/exlaunch
-	url = https://github.com/Pistonight/exlaunch
+	url = https://github.com/Pistonight/botw-decomp
 	branch = dev
 [submodule "botw-symbols"]
 	path = dump/console/libs/botw-symbols

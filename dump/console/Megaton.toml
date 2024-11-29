@@ -3,21 +3,17 @@ name = "botwrdump"
 title-id = 0x01007ef00011e000
 
 [build]
-entry = "exl_module_init"
 sources = [
     "src",
-    "libs/exlaunch/source",
     "libs/botw-symbols/src",
 ]
 includes = [
-    "libs/exlaunch/source",
     "libs/botw/src",
     "libs/botw/lib/sead/include",
     "libs/botw/lib/NintendoSDK/include",
-    "libs/botw-symbols/src",
+    "libs/botw-symbols/include",
 ]
 ldscripts = [
-    "libs/exlaunch/misc/link.ld",
     "libs/botw-symbols/ld/ld150.ld",
 ]
 
@@ -27,11 +23,6 @@ c = [
     "-DNNSDK",
     "-DSWITCH",
     "-D__SWITCH__",
-    "-DEXL_DEBUG",
-    "-DEXL_LOAD_KIND_ENUM=2",
-    "-DEXL_LOAD_KIND=Module",
-    "-DEXL_PROGRAM_ID=0x01007ef00011e000",
-    "-DEXL_MODULE_NAME=\"botwrdump\"",
     "-DNN_SDK_MAJOR=4",
     "-DNN_SDK_MINOR=4",
     "-DNN_SDK_PATCH=0",
@@ -47,10 +38,6 @@ cxx = [
 ]
 
 [check]
-ignore = [
-    ".data",
-    ".text",
-]
 symbols = [
     "libs/botw-symbols/symbols/150/main.syms",
     "libs/botw-symbols/symbols/150/rtld.syms",
