@@ -1,4 +1,4 @@
-#include <exl/lib.hpp>
+#include <megaton/hook.h>
 #include <Game/Cooking/cookManager.h>
 #include <Game/UI/uiPauseMenuDataMgr.h>
 #include "generated.hpp"
@@ -9,31 +9,34 @@ namespace botw::rdump {
 static volatile bool s_cookmgr_initialized = false;
 static volatile int32_t s_last_crit_chance = 0;
 
-HOOK_DEFINE_TRAMPOLINE(cookmgr_handle_crit) {
-    static void Callback(void* a, void* ingr, void* cook_item) {
+struct hook_replace_(cookmgr_handle_crit) {
+    target_offset_(0x008A0BA0);
+    static void call(void* a, void* ingr, void* cook_item) {
         // don't do anything when crit happens
         return;
     }
 };
 
-HOOK_DEFINE_INLINE(cookmgr_crit_chance) {
-    static void Callback(exl::hook::InlineCtx* ctx) {
+struct hook_inline_(cookmgr_crit_chance) {
+    target_offset_(0x008A09D8);
+    static void call(megaton::hook::InlineCtx* ctx) {
         // 0x008A09D8 CMP W8, W22
-        s_last_crit_chance = ctx->W[22];
+        s_last_crit_chance = ctx->w<22>();
     }
 };
 
-HOOK_DEFINE_TRAMPOLINE(cookmgr_init) {
-    static void Callback(void* a, void* b) {
+struct hook_trampoline_(cookmgr_init) {
+    target_offset_(0x008A17B0);
+    static void call(void* a, void* b) {
         s_cookmgr_initialized = true;
-        Orig(a, b);
+        call_original(a, b);
     }
 };
 
 void init_cook() {
-    cookmgr_handle_crit::InstallAtOffset(0x008A0BA0);
-    cookmgr_crit_chance::InstallAtOffset(0x008A09D8);
-    cookmgr_init::InstallAtOffset(0x008A17B0);
+    cookmgr_handle_crit::install();
+    cookmgr_crit_chance::install();
+    cookmgr_init::install();
 }
 
 int32_t get_last_crit_chance() {

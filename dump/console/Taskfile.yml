@@ -14,7 +14,7 @@ tasks:
 
   build:
     cmds:
-    - megaton
+    - megaton build
 
   download:
     dir: dump/console
@@ -36,7 +36,7 @@ tasks:
     vars:
       MOD_DIR: "target/package/mods/The Legend of Zelda - Breath of the Wild/Recipe Dumper/contents/01007EF00011E000"
     cmds:
-      - megaton
+      - task: build
       - rm -rf target/package/mods
       - mkdir -p "{{.MOD_DIR}}/exefs"
       - mkdir -p "{{.MOD_DIR}}/romfs"
