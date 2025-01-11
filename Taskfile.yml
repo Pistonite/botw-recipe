@@ -40,7 +40,7 @@ tasks:
 
   test-rs:
     cmds:
-      - cargo test --all-targets --all-features --release
+      - cargo test --package botw-recipe-data --all-targets --all-features --release
 
   check:
     vars:

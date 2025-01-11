@@ -25,7 +25,7 @@ jobs:
       - run: task rdb:test
 
   check-rust:
-    name: Clippy
+    name: Cargo Clippy, Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
