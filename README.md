@@ -29,6 +29,7 @@ It might be added in the future.
 Other key items such as Korok Seeds have parameters exactly like Sheikah Slate. Whenever you see Sheikah Slate in the result, you can replace it with the key item you want.
 
 ## Build from Source
+**Currently this doesn't work as I am refactoring the core library to integrate with the IST simulator**
 To build the app from source:
 - Python (only for running research scripts)
   - Install pip packages: `pip install tqdm`
