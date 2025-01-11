@@ -2,7 +2,7 @@
 members = [
     "app/data",
     "app/rdb/src-tauri",
-    "dump/emulate",
+    "dump/emulate", "packages/data-utils",
     "research",
 ]
 resolver = "2"

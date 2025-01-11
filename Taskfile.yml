@@ -34,13 +34,20 @@ tasks:
     cmds:
     - cargo run --release --bin bfcrc32 -- {{.CLI_ARGS}}
 
+  # test:
+  #   desc: Run tests
+  #   deps: [rdb:test, test-rs] TODO: fix rdb:test automatically running in watch mode
+
+  test-rs:
+    cmds:
+      - cargo test --package botw-recipe-data --all-targets --all-features --release
 
   check:
     vars:
       CLIPPY_FLAGS: -D warnings -D clippy::todo -A clippy::comparison-chain
     cmds:
     - cargo clippy --package botw-recipe-data --all-targets -- {{.CLIPPY_FLAGS}}
-    - cargo clippy --package botw-recipe-dump-emulate --all-targets -- {{.CLIPPY_FLAGS}}
+    - cargo clippy --package botw-recipe-data-utils --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-database --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo fmt --check
 

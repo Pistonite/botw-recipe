@@ -25,7 +25,7 @@ jobs:
       - run: task rdb:test
 
   check-rust:
-    name: Clippy
+    name: Cargo Clippy, Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,6 +39,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
       - run: task check
+      - run: task test-rs
 
   check-tools:
     name: Build Tools
@@ -51,4 +52,4 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - run: task dump:build
+      - run: cargo build --release --bin botw-recipe-data-utils

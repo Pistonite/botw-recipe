@@ -54,12 +54,6 @@ impl CookData {
         }
     }
 
-    // pub fn as_weapon(&self) -> &WeaponData {
-    //     unsafe {
-    //         std::mem::transmute(self)
-    //     }
-    // }
-
     pub fn write_to<W: io::Write>(&self, w: &mut W) -> io::Result<()> {
         w.write_all(&self.health_recover.to_le_bytes())?;
         w.write_all(&self.effect_duration.to_le_bytes())?;

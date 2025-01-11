@@ -1,0 +1,34 @@
+version: '3'
+
+tasks:
+  pull:
+    desc: Pull known-good database files from github and extract them (requires wget and 7z)
+    cmds:
+      - wget -O rawdbv1.7z https://github.com/Pistonite/botw-recipe/releases/download/rawdb/data.7z
+      - 7z x rawdbv1.7z
+      - mv data rawdbv1
+      - wget -O compactdbv1.7z https://github.com/Pistonite/botw-recipe/releases/download/compactdb/database.7z
+      - 7z x compactdbv1.7z
+      - mv database compactdbv1
+
+  check:
+    desc: Check the dumped RawDB match the known good RawDB
+    cmds:
+      - cargo run --release --bin botw-recipe-data-utils -- check rawdbv1 rawdbvnext
+
+  dump:
+    desc: Dump the CompactDB using the simulator
+    cmds:
+      - rm -rf compactdbvnext
+      - cargo run --release --bin botw-recipe-data-utils -- dump compactdbvnext --compact
+
+  dump-raw:
+    desc: Dump the RawDB using the simulator
+    cmds:
+      - rm -rf rawdbvnext
+      - cargo run --release --bin botw-recipe-data-utils -- dump rawdbvnext
+
+  test:
+    desc: Test the CompactDB using the Database API
+    cmds:
+      - cargo run --release --bin botw-recipe-data-utils -- read-test compactdbvnext

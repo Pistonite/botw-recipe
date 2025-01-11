@@ -24,17 +24,5 @@ path = "../../app/data"
 debug-print = ["rdata/debug-print"] # enable debug printing
 
 [[bin]]
-name = "rdump"
-path = "src/rdump.rs"
-
-[[bin]]
-name = "check"
-path = "src/check.rs"
-
-[[bin]]
-name = "test-read"
-path = "src/test_read.rs"
-
-[[bin]]
 name = "cook-cli"
 path = "src/cook_cli.rs"

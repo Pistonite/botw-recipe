@@ -1,10 +1,37 @@
+use std::fs::File;
+use std::io::{BufReader, BufWriter};
+use std::path::{Path, PathBuf};
+
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use crate::cook::{CookData, CookEffect};
 use crate::wmc::WeaponModifierSet;
 
-use super::{Filter, Record};
+use super::{Error, Filter, Record};
+
+/// Save the database index file to the given path
+pub fn save_index(path: impl AsRef<Path>, index: &[Index]) -> Result<(), Error> {
+    let writer = BufWriter::new(File::create(path)?);
+    serde_yaml_ng::to_writer(writer, index)?;
+    Ok(())
+}
+
+/// Load the database index file from the given path
+pub fn load_index(path: impl AsRef<Path>) -> Result<Vec<Index>, Error> {
+    let reader = BufReader::new(File::open(path)?);
+    let expected_size = crate::fsdb::meta::compact_v1().chunk_count();
+    let index: Vec<Index> = serde_yaml_ng::from_reader(reader)?;
+    if index.len() != expected_size {
+        return Err(Error::InvalidIndexChunkCount(expected_size, index.len()));
+    }
+    Ok(index)
+}
+
+/// Get the index file path from database directory
+pub fn index_path(db_path: impl AsRef<Path>) -> PathBuf {
+    db_path.as_ref().join("index.yaml")
+}
 
 /// Index metadata for a chunk. Used to skip chunks when searching for recipes
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -33,6 +60,7 @@ pub struct Index {
     pub sha256: String,
 }
 
+/// Builder for [`Index`]
 pub struct IndexBuilder {
     chunk: usize,
     hasher: Sha256,
@@ -46,6 +74,7 @@ pub struct IndexBuilder {
 }
 
 impl IndexBuilder {
+    /// Create a new builder for a chunk
     pub fn new(chunk_id: usize) -> Self {
         Self {
             chunk: chunk_id,
@@ -60,6 +89,7 @@ impl IndexBuilder {
         }
     }
 
+    /// Update the current state with data of a new record
     pub fn update(&mut self, data: &CookData, crit_rng_hp: bool) {
         let record = Record::from_data(data, crit_rng_hp);
         self.hasher.update(u16::from(record).to_le_bytes());
@@ -83,6 +113,7 @@ impl IndexBuilder {
         self.all_includes_modifier = self.all_includes_modifier.intersection(modifier);
     }
 
+    /// Build the index
     pub fn build(self) -> Index {
         // max crit value is at least max value
         let max_value_crit_rng = self.max_value_crit_rng.max(self.max_value);

@@ -1,5 +1,4 @@
 use std::fs::File;
-use std::io::BufReader;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
@@ -41,19 +40,11 @@ impl Database {
         info!("opening database at {}", path.display());
 
         info!("loading index.yaml");
-        let index_path = path.join("index.yaml");
+        let index_path = crate::fsdb::index_path(&path);
         if !index_path.exists() {
             return Err(Error::MissingIndex);
         }
-        let reader = BufReader::new(File::open(&index_path)?);
-        let index: Vec<Index> = serde_yaml_ng::from_reader(reader)?;
-
-        if index.len() != crate::COMPACT_CHUNK_COUNT {
-            return Err(Error::InvalidIndexChunkCount(
-                crate::COMPACT_CHUNK_COUNT,
-                index.len(),
-            ));
-        }
+        let index = crate::fsdb::load_index(index_path)?;
 
         info!("loading cooking pot");
         let pot = Arc::new(CookingPot::new()?);
@@ -78,11 +69,11 @@ impl Database {
     }
 
     pub fn chunk_count(&self) -> usize {
-        crate::COMPACT_CHUNK_COUNT
+        crate::fsdb::meta::compact_v1().chunk_count()
     }
 
     pub fn open_chunk(&self, chunk_id: usize) -> Result<Chunk, Error> {
-        let chunk_path = self.path.join(format!("chunk_{}.rdb", chunk_id));
+        let chunk_path = crate::fsdb::meta::compact_chunk_path(&self.path, chunk_id);
         if !chunk_path.exists() {
             return Err(Error::MissingChunk(chunk_id));
         }
@@ -138,7 +129,7 @@ impl Database {
         if let Err(e) = self.delete_temporary() {
             error!("failed to delete temporary directory: {}", e.to_string());
         }
-        if let Err(e) = self.lock.unlock() {
+        if let Err(e) = fs2::FileExt::unlock(&self.lock) {
             error!("failed to unlock database: {}", e.to_string());
         }
         let lock_path = self.path.join(".lock");

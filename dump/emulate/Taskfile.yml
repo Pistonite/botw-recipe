@@ -6,11 +6,6 @@ tasks:
     cmds:
     - cargo run --release --bin rdump --quiet -- {{.CLI_ARGS}}
 
-  check:
-    desc: Check dumped data against sane values and compare dumps from console and emulate
-    cmds:
-    - cargo run --release --bin check --quiet -- {{.CLI_ARGS}}
-
   cook:
     desc: Cook a recipe with emulator. Separate ingredients with commas
     cmds:

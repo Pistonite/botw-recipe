@@ -7,7 +7,7 @@ use crate::cook::CookingPot;
 use crate::generated::get_compact_chunk_record_size;
 use crate::recipe::RecipeId;
 
-use super::{Error, Filter, PositionedRecord};
+use super::{Error, Filter, PositionedRecord, Record};
 
 /// Chunk for sequential access
 pub struct Chunk {
@@ -71,7 +71,7 @@ impl Iterator for Chunk {
                 self.recipe_next += 1;
                 Some(Ok(PositionedRecord {
                     recipe_id: RecipeId::new_unchecked(recipe_id),
-                    record: u16::from_le_bytes(buf).into(),
+                    record: Record::from_slice(&buf),
                 }))
             }
         }

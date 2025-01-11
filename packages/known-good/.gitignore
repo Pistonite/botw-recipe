@@ -1,0 +1,10 @@
+*.rawdat
+*.rdb
+*.7z
+*.zip
+/data
+/database
+/rawdbv1
+/rawdbvnext
+/compactdbv1
+/compactdbvnext

@@ -1,3 +1,5 @@
+use std::io::Write;
+
 use crate::cook::{CookData, CookEffect, CookingPot};
 use crate::recipe::{RecipeId, RecipeInputs};
 use crate::wmc::WeaponModifierSet;
@@ -105,5 +107,15 @@ impl Record {
     #[inline]
     pub fn modifier_set(self) -> WeaponModifierSet {
         self.modifier().into()
+    }
+
+    /// Create a record from raw slice read from the database
+    pub fn from_slice(slice: &[u8]) -> Self {
+        u16::from_le_bytes([slice[0], slice[1]]).into()
+    }
+
+    /// Write the record to a writer
+    pub fn write<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+        writer.write_all(&self.0.to_le_bytes())
     }
 }
