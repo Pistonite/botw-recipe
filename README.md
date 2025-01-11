@@ -4,7 +4,7 @@
 ![License Badge](https://img.shields.io/github/license/Pistonite/botw-recipe)
 ![Issue Badge](https://img.shields.io/github/issues/Pistonite/botw-recipe)
 ![Downloads Badge](https://img.shields.io/github/downloads/Pistonite/botw-recipe/total)
-![Recipe Badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Pistonite/botw-recipe/main/dump/emulate/badge.json)
+![Recipe Badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Pistonite/botw-recipe/main/packages/known-good/badge.json)
 
 The fast, accurate and complete Breath of the Wild Recipe Database for Weapon Modifier Corruption (WMC).
 
