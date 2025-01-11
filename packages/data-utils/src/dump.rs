@@ -2,16 +2,16 @@
 //! in both compact and raw formats
 
 use std::fs::{self, File};
-use std::path::Path;
 use std::io::BufWriter;
+use std::path::Path;
 use std::sync::{mpsc, Arc};
 use std::time::{Duration, Instant};
 
 use anyhow::bail;
 
+use botw_recipe::cook::{CookData, CookingPot};
 use botw_recipe::db::{Index, IndexBuilder, Record};
 use botw_recipe::fsdb;
-use botw_recipe::cook::{CookData, CookingPot};
 
 use crate::util;
 
@@ -24,7 +24,7 @@ pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
     if !path.exists() {
         fs::create_dir_all(path)?;
     }
-    
+
     let mut progress = spp::printer(chunk_count, format!("Dumping RawDB to {}", path.display()));
     progress.set_throttle_duration(Duration::from_secs(1));
     let pool = crate::thread_pool();
@@ -36,23 +36,21 @@ pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
         let pot = Arc::clone(&pot);
         let (start, end) = meta.record_range(chunk_id);
         let chunk_path = fsdb::meta::raw_chunk_path(path, chunk_id);
-        pool.execute(move || {
-            match dump_raw_chunk(&pot, &chunk_path, start, end) {
+        pool.execute(
+            move || match dump_raw_chunk(&pot, &chunk_path, start, end) {
                 Ok(_) => {
                     let _ = send.send((chunk_id, Ok(())));
                 }
                 Err(e) => {
                     let _ = send.send((chunk_id, Err(e.to_string())));
                 }
-            }
-        });
+            },
+        );
     }
     drop(send);
-    let mut count = 0;
     let mut errors = vec![];
-    for (chunk_id, result) in recv {
-        progress.print(count, format!("Finished Chunk {}", chunk_id));
-        count += 1;
+    for (i, (chunk_id, result)) in recv.into_iter().enumerate() {
+        progress.print(i, format!("Finished Chunk {}", chunk_id));
         if let Err(e) = result {
             errors.push((chunk_id, e));
         }
@@ -61,10 +59,9 @@ pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
     util::check_errors(&errors)?;
 
     println!("Done in {:.2}s", start_time.elapsed().as_secs_f32());
-    
+
     Ok(())
 }
-
 
 /// Cook recipes from start to end IDs and write them to a RawDB chunk file
 pub fn dump_raw_chunk(
@@ -95,8 +92,11 @@ pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
     if !path.exists() {
         fs::create_dir_all(path)?;
     }
-    
-    let mut progress = spp::printer(chunk_count, format!("Dumping CompactDB to {}", path.display()));
+
+    let mut progress = spp::printer(
+        chunk_count,
+        format!("Dumping CompactDB to {}", path.display()),
+    );
     progress.set_throttle_duration(Duration::from_secs(1));
     let pool = crate::thread_pool();
     let pot = Arc::new(CookingPot::new()?);
@@ -107,24 +107,22 @@ pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
         let pot = Arc::clone(&pot);
         let (start, end) = meta.record_range(chunk_id);
         let chunk_path = fsdb::meta::compact_chunk_path(path, chunk_id);
-        pool.execute(move || {
-            match dump_compact_chunk(&pot, chunk_id, &chunk_path, start, end) {
+        pool.execute(
+            move || match dump_compact_chunk(&pot, chunk_id, &chunk_path, start, end) {
                 Ok(index) => {
                     let _ = send.send((chunk_id, Ok(index)));
                 }
                 Err(e) => {
                     let _ = send.send((chunk_id, Err(e.to_string())));
                 }
-            }
-        });
+            },
+        );
     }
     drop(send);
-    let mut count = 0;
     let mut index_vec = Vec::new();
     let mut errors = vec![];
-    for (chunk_id, result) in recv {
-        progress.print(count, format!("Finished Chunk {}", chunk_id));
-        count += 1;
+    for (i, (chunk_id, result)) in recv.into_iter().enumerate() {
+        progress.print(i, format!("Finished Chunk {}", chunk_id));
         match result {
             Ok(index) => {
                 index_vec.push(index);
@@ -141,17 +139,14 @@ pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
 
     for (i, index) in index_vec.iter().enumerate() {
         if index.chunk != i {
-            bail!(
-                "Index for chunk {} is out of order",
-                index.chunk
-            );
+            bail!("Index for chunk {} is out of order", index.chunk);
         }
     }
 
     fsdb::save_index(fsdb::index_path(path), &index_vec)?;
 
     println!("Done in {:.2}s", start_time.elapsed().as_secs_f32());
-    
+
     Ok(())
 }
 

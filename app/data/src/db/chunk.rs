@@ -71,7 +71,7 @@ impl Iterator for Chunk {
                 self.recipe_next += 1;
                 Some(Ok(PositionedRecord {
                     recipe_id: RecipeId::new_unchecked(recipe_id),
-                    record: Record::from_slice(&buf)
+                    record: Record::from_slice(&buf),
                 }))
             }
         }

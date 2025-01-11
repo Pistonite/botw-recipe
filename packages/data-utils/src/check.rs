@@ -37,14 +37,17 @@ pub fn check_raw_db(path: &Path) -> anyhow::Result<()> {
     }
     progress.done();
     util::check_errors(&errors)
-
 }
-
 
 /// Check if every record in a raw chunk is valid
 ///
 /// Returns the first invalid record if found
-pub fn check_raw_chunk(id: usize, records: usize, size_bytes: usize, path: &Path) -> Result<(), Error> {
+pub fn check_raw_chunk(
+    id: usize,
+    records: usize,
+    size_bytes: usize,
+    path: &Path,
+) -> Result<(), Error> {
     let file_size = path.metadata()?.len() as usize;
     if file_size != size_bytes {
         return Err(Error::InvalidSize(file_size, size_bytes));
@@ -71,7 +74,10 @@ pub fn check_raw_chunk(id: usize, records: usize, size_bytes: usize, path: &Path
 pub fn compare_raw_db(path_a: &Path, path_b: &Path) -> anyhow::Result<()> {
     let meta = fsdb::meta::raw_v1();
     let chunk_count = meta.chunk_count();
-    let progress = spp::printer(chunk_count, format!("Comparing {} and {}", path_a.display(), path_b.display()));
+    let progress = spp::printer(
+        chunk_count,
+        format!("Comparing {} and {}", path_a.display(), path_b.display()),
+    );
     let mut errors = Vec::new();
     let pool = crate::thread_pool();
     let (send, recv) = mpsc::channel();

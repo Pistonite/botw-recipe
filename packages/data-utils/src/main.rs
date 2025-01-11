@@ -12,10 +12,7 @@ struct Cli {
 #[derive(Debug, Clone, Subcommand)]
 pub enum Command {
     /// Check 2 RawDBs to make sure db1 is valid and db2 is the same as db1.
-    Check {
-        db1: PathBuf,
-        db2: PathBuf,
-    },
+    Check { db1: PathBuf, db2: PathBuf },
     Dump {
         /// Path to save the dumped files
         path: PathBuf,
@@ -27,11 +24,10 @@ pub enum Command {
     ReadTest {
         /// Path to the CompactDB
         path: PathBuf,
-    }
-
+    },
 }
 
-pub fn main() -> ExitCode{
+pub fn main() -> ExitCode {
     if let Err(e) = main_internal() {
         eprintln!("Error: {:?}", e);
         return ExitCode::FAILURE;

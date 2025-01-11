@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 #[derive(Debug, Clone, PartialEq)]
 pub struct DbMeta {
     /// If the database is in raw or compact format
-    /// 
+    ///
     /// Raw format contains more information about the cook result,
     /// and should be used for validation and comparison. Compact format
     /// is packed to only have the necessary information for WMC search.
@@ -52,7 +52,6 @@ pub const fn compact_v1() -> DbMeta {
     }
 }
 impl DbMeta {
-
     /// Get if self is in raw format
     #[inline]
     pub const fn is_raw(&self) -> bool {

@@ -1,11 +1,11 @@
 //! Testing reading from CompactDB, and compare the result
 //! from the simulator
-//! 
+//!
 //! This is used to verify CompactDB is correctly generated
 
 use std::path::Path;
-use std::time::{Duration, Instant};
 use std::sync::{mpsc, Arc};
+use std::time::{Duration, Instant};
 
 use anyhow::bail;
 use botw_recipe::cook::{CookEffect, CookingPot};
@@ -19,7 +19,10 @@ pub fn test_read_db(path: &Path) -> anyhow::Result<()> {
     let start_time = Instant::now();
     let database = Database::open(path)?;
     let chunk_count = database.chunk_count();
-    let mut progress = spp::printer(chunk_count, format!("Read-testing CompactDB at {}", path.display()));
+    let mut progress = spp::printer(
+        chunk_count,
+        format!("Read-testing CompactDB at {}", path.display()),
+    );
     progress.set_throttle_duration(Duration::from_secs(1));
 
     let pool = crate::thread_pool();
@@ -31,23 +34,19 @@ pub fn test_read_db(path: &Path) -> anyhow::Result<()> {
         let chunk = database.open_chunk(chunk_id)?;
         let pot = Arc::clone(&pot);
 
-        pool.execute(move || {
-            match test_read_chunk(chunk, &pot) {
-                Ok(()) => {
-                    let _ = send.send((chunk_id, Ok(())));
-                }
-                Err(e) => {
-                    let _ = send.send((chunk_id, Err(e.to_string())));
-                }
+        pool.execute(move || match test_read_chunk(chunk, &pot) {
+            Ok(()) => {
+                let _ = send.send((chunk_id, Ok(())));
+            }
+            Err(e) => {
+                let _ = send.send((chunk_id, Err(e.to_string())));
             }
         });
     }
     drop(send);
-    let mut count = 0;
     let mut errors = vec![];
-    for (chunk_id, result) in recv {
-        progress.print(count, format!("Finished Chunk {}", chunk_id));
-        count += 1;
+    for (i, (chunk_id, result)) in recv.into_iter().enumerate() {
+        progress.print(i, format!("Finished Chunk {}", chunk_id));
         if let Err(e) = result {
             errors.push((chunk_id, e));
         }

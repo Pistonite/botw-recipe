@@ -1,6 +1,6 @@
-use std::path::{Path, PathBuf};
-use std::io::{BufReader, BufWriter};
 use std::fs::File;
+use std::io::{BufReader, BufWriter};
+use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -23,10 +23,7 @@ pub fn load_index(path: impl AsRef<Path>) -> Result<Vec<Index>, Error> {
     let expected_size = crate::fsdb::meta::compact_v1().chunk_count();
     let index: Vec<Index> = serde_yaml_ng::from_reader(reader)?;
     if index.len() != expected_size {
-        return Err(Error::InvalidIndexChunkCount(
-            expected_size,
-            index.len(),
-        ));
+        return Err(Error::InvalidIndexChunkCount(expected_size, index.len()));
     }
     Ok(index)
 }

@@ -34,6 +34,13 @@ tasks:
     cmds:
     - cargo run --release --bin bfcrc32 -- {{.CLI_ARGS}}
 
+  # test:
+  #   desc: Run tests
+  #   deps: [rdb:test, test-rs] TODO: fix rdb:test automatically running in watch mode
+
+  test-rs:
+    cmds:
+      - cargo test --all-targets --all-features --release
 
   check:
     vars:
