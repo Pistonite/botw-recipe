@@ -129,7 +129,7 @@ impl Database {
         if let Err(e) = self.delete_temporary() {
             error!("failed to delete temporary directory: {}", e.to_string());
         }
-        if let Err(e) = self.lock.unlock() {
+        if let Err(e) = fs2::FileExt::unlock(&self.lock) {
             error!("failed to unlock database: {}", e.to_string());
         }
         let lock_path = self.path.join(".lock");

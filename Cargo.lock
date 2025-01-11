@@ -241,8 +241,6 @@ dependencies = [
  "botw-recipe-data",
  "clap",
  "num_cpus",
- "serde_json",
- "serde_yaml_ng",
  "spp",
  "terminal_size",
  "thiserror 2.0.11",

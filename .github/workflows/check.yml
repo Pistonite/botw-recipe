@@ -51,4 +51,4 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - run: task dump:build
+      - run: cargo build --release --bin botw-recipe-data-utils

@@ -3,8 +3,6 @@ use botw_recipe::cook::{CookData, CookDataInvalidReason};
 /// Enum for the data utils
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
-    #[error("!! serialization error")]
-    Json(#[from] serde_json::Error),
     #[error("!! io error reading chunk")]
     IO(#[from] std::io::Error),
     #[error("!! invalid size: actual {0} != expected {1}")]
