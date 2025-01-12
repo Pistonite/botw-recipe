@@ -1,6 +1,8 @@
 use serde::Deserialize;
 
-use super::{CookItem, Error, Tag};
+use botw_recipe_generated::CookItem;
+
+use super::{Error, Tag};
 
 use crate::Actor;
 

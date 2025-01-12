@@ -18,5 +18,4 @@ pub use ingr::*;
 mod recipe;
 pub use recipe::*;
 mod tag;
-pub use crate::generated::CookItem;
 pub use tag::*;

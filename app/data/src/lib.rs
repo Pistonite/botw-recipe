@@ -1,6 +1,5 @@
 mod generated;
 pub use generated::constants::*;
-pub use generated::{get_compact_chunk_record_size, get_raw_chunk_record_size};
 pub use generated::{Actor, Group};
 
 pub mod cook;
