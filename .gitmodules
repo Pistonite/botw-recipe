@@ -6,3 +6,7 @@
 	path = dump/console/libs/botw-symbols
 	url = https://github.com/Pistonight/botw-symbols
 	branch = main
+[submodule "mono-dev"]
+	path = packages/mono-dev
+	url = https://github.com/Pistonight/mono-dev
+	branch = main
