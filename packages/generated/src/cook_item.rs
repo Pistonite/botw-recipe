@@ -1,23 +1,12 @@
 //! Automatically generated.
 //!
-//! DO NOT EDIT
-//!
-//! Run `cd research && python main.py` (or `task research`) to regenerate.
+//! DO NOT EDIT. See packages/generated/README.md for more information.
 
 /// Cooked Item (Output of cooking pot)
-#[derive(
-    enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
-    Copy,
-    Clone,
-    PartialEq,
-    Eq,
-    PartialOrd,
-    Ord,
-    Hash,
-)]
+#[derive(enum_map::Enum, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(serde::Serialize, serde::Deserialize)] // TODO: feature flag this
 #[allow(non_camel_case_types)]
+#[repr(u8)]
 pub enum CookItem {
     /// Mushroom Skewer
     Item_Cook_A_01,
@@ -221,6 +210,16 @@ pub enum CookItem {
     Item_Cook_K_08,
     /// Milk
     Item_Cook_K_09,
+    /// Monster Stew
+    Item_Cook_L_01,
+    /// Monster Soup
+    Item_Cook_L_02,
+    /// Monster Cake
+    Item_Cook_L_03,
+    /// Monster Rice Balls
+    Item_Cook_L_04,
+    /// Monster Curry
+    Item_Cook_L_05,
     /// Wheat Bread
     Item_Cook_M_01,
     /// Seafood Paella
@@ -247,7 +246,8 @@ pub enum CookItem {
     Item_Cook_P_05,
 }
 impl CookItem {
-    /// Get the English name of the cook item
+    /// Get the English name of the cook item actor
+    #[cfg(feature = "english-names")]
     pub const fn name(&self) -> &'static str {
         match self {
             Self::Item_Cook_A_01 => "Mushroom Skewer",
@@ -351,6 +351,11 @@ impl CookItem {
             Self::Item_Cook_K_07 => "Cream of Vegetable Soup",
             Self::Item_Cook_K_08 => "Carrot Stew",
             Self::Item_Cook_K_09 => "Milk",
+            Self::Item_Cook_L_01 => "Monster Stew",
+            Self::Item_Cook_L_02 => "Monster Soup",
+            Self::Item_Cook_L_03 => "Monster Cake",
+            Self::Item_Cook_L_04 => "Monster Rice Balls",
+            Self::Item_Cook_L_05 => "Monster Curry",
             Self::Item_Cook_M_01 => "Wheat Bread",
             Self::Item_Cook_N_01 => "Seafood Paella",
             Self::Item_Cook_N_02 => "Fruitcake",
@@ -366,6 +371,7 @@ impl CookItem {
         }
     }
     /// Get the actor name of the cook item
+    #[cfg(feature = "actor-names")]
     pub const fn actor_name(&self) -> &'static str {
         match self {
             Self::Item_Cook_A_01 => "Item_Cook_A_01",
@@ -469,6 +475,11 @@ impl CookItem {
             Self::Item_Cook_K_07 => "Item_Cook_K_07",
             Self::Item_Cook_K_08 => "Item_Cook_K_08",
             Self::Item_Cook_K_09 => "Item_Cook_K_09",
+            Self::Item_Cook_L_01 => "Item_Cook_L_01",
+            Self::Item_Cook_L_02 => "Item_Cook_L_02",
+            Self::Item_Cook_L_03 => "Item_Cook_L_03",
+            Self::Item_Cook_L_04 => "Item_Cook_L_04",
+            Self::Item_Cook_L_05 => "Item_Cook_L_05",
             Self::Item_Cook_M_01 => "Item_Cook_M_01",
             Self::Item_Cook_N_01 => "Item_Cook_N_01",
             Self::Item_Cook_N_02 => "Item_Cook_N_02",
@@ -484,6 +495,8 @@ impl CookItem {
         }
     }
 }
+
+#[cfg(all(feature = "english-names", feature = "actor-names"))]
 impl std::fmt::Debug for CookItem {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_tuple(self.actor_name())
@@ -491,8 +504,15 @@ impl std::fmt::Debug for CookItem {
             .finish()
     }
 }
+#[cfg(all(not(feature = "english-names"), feature = "actor-names"))]
+impl std::fmt::Debug for CookItem {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.actor_name().fmt(f)
+    }
+}
+#[cfg(feature = "actor-names")]
 impl std::fmt::Display for CookItem {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.actor_name())
+        self.actor_name().fmt(f)
     }
 }

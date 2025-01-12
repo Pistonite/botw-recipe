@@ -46,6 +46,7 @@ tasks:
     vars:
       CLIPPY_FLAGS: -D warnings -D clippy::todo -A clippy::comparison-chain
     cmds:
+    - cargo clippy --package botw-recipe-generated --all-features --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-data --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-data-utils --all-targets -- {{.CLIPPY_FLAGS}}
     - cargo clippy --package botw-recipe-database --all-targets -- {{.CLIPPY_FLAGS}}

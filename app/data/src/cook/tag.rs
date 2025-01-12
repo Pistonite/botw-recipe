@@ -33,7 +33,7 @@ pub enum Tag {
 }
 
 impl Tag {
-    pub fn is_probably_useful(&self) -> bool {
+    pub fn is_used_in_recipe_matching(&self) -> bool {
         matches!(
             self,
             Self::CookOre

@@ -4,7 +4,6 @@ use std::path::Path;
 use std::sync::Arc;
 
 use crate::cook::CookingPot;
-use crate::generated::get_compact_chunk_record_size;
 use crate::recipe::RecipeId;
 
 use super::{Error, Filter, PositionedRecord, Record};
@@ -20,9 +19,10 @@ impl Chunk {
     /// Open a chunk for reading recipes.
     pub fn open<P: AsRef<Path>>(chunk_id: usize, path: P) -> Result<Self, Error> {
         let file = File::open(path.as_ref())?;
-        let total = get_compact_chunk_record_size(chunk_id);
+        let meta = crate::fsdb::meta::compact_v1();
+        let total = meta.chunk_size(chunk_id);
         let file_size = file.metadata()?.len() as usize;
-        if file_size != total * 2 {
+        if file_size != meta.chunk_size_bytes(chunk_id) {
             return Err(Error::InvalidChunkSize(total * 2, file_size));
         }
         let mut reader = BufReader::new(file);

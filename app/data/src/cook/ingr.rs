@@ -96,7 +96,7 @@ impl IngrData {
         let recipe_tags = self
             .tags
             .iter()
-            .filter(|x| x.is_probably_useful())
+            .filter(|x| x.is_used_in_recipe_matching())
             .collect::<Vec<_>>();
         if recipe_tags.len() > 1 {
             return Err(Error::Data(format!(

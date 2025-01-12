@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use super::{CookData, CookItem};
+use botw_recipe_generated::CookItem;
+
+use super::CookData;
 
 /// Result of cooking
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
