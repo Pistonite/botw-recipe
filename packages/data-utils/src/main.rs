@@ -50,7 +50,7 @@ fn main_internal() -> anyhow::Result<()> {
             }
         }
         Command::ReadTest { path } => {
-            botw_recipe_data_utils::readtest::test_read_db(&path)?;
+            botw_recipe_data_utils::read_test::test_read_db(&path)?;
         }
     }
     Ok(())

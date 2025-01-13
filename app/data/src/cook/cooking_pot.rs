@@ -2,8 +2,10 @@ use super::{
     CookData, CookEffect, CookResult, Error, Ingredient, Ingredients, RecipeData, Recipes, Tag,
 };
 
+use botw_recipe_generated::Actor;
+
 use crate::recipe::{RecipeId, RecipeInputs};
-use crate::{debugln, Actor};
+use crate::debugln;
 
 macro_rules! reference {
     ($dummy:ty) => {};
@@ -41,7 +43,7 @@ impl CookingPot {
         for name in names {
             let name = name.as_ref();
             let actor =
-                Actor::try_from(name).ok_or_else(|| Error::ItemNotFound(name.to_string()))?;
+                Actor::from_actor_name(name).ok_or_else(|| Error::ItemNotFound(name.to_string()))?;
             actors.push(actor);
         }
         self.cook(actors)

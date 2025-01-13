@@ -3,7 +3,9 @@
 use derive_deref::{Deref, DerefMut};
 use serde::{Deserialize, Serialize};
 
-use crate::{multichoose, Actor, Group, NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS};
+use botw_recipe_generated::Actor;
+
+use crate::{multichoose, Group, NUM_GROUPS, NUM_INGR, NUM_TOTAL_RECORDS};
 
 /// A valid recipe record id
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
@@ -91,8 +93,9 @@ impl RecipeInputs {
         items.into()
     }
     pub fn from_actors(actors: &[Actor]) -> Self {
-        let groups = actors.iter().map(Actor::group).collect::<Vec<_>>();
-        Self::from_groups(&groups)
+        todo!()
+        // let groups = actors.iter().map(Actor::group).collect::<Vec<_>>();
+        // Self::from_groups(&groups)
     }
     pub fn to_names(&self) -> Vec<&str> {
         self.iter()

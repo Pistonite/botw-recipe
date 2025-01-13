@@ -21,6 +21,12 @@ includes:
     dir: ./dump/emulate
 
 tasks:
+  install:
+    desc: Install dependencies
+    cmds:
+      - magoo install
+      # TODO: pnpm
+
   research:
     desc: Reproduce research (--clean to re-download data)
     dir: research

@@ -22,7 +22,7 @@ ts-rs = "9.0.1"
 
 [dependencies.botw-recipe-generated]
 path = "../../packages/generated"
-features = ["actor-names", "english-names"]
+features = ["full"]
 
 [features]
 default = []

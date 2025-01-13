@@ -7,11 +7,55 @@ license = "MIT"
 description = "Data binding generated from parameters"
 
 [dependencies]
-enum-map = "2.7.3"
-serde = { version = "1.0.217", features = ["derive"] }
+enum-map = { version = "2.7.3", optional = true }
+enumset = { version = "1.1.5", optional = true }
+phf = { version = "0.11.3", optional = true, features = ["macros"] }
+serde = { version = "1.0.217", optional = true }
 
 [features]
-# Enable getting the actor names for generated enums
-actor-names = []
-# Enable getting the english names for generated enums
-english-names = []
+full = [
+    "cook-item-enum-map",
+    "cook-item-enum-set",
+    "cook-item-to-actor",
+    "cook-item-from-actor",
+    "cook-item-serde-serialize-actor",
+    "cook-item-serde-deserialize-actor",
+    "cook-item-english",
+
+    "actor-enum-map",
+    "actor-enum-set",
+    "actor-to-actor",
+    "actor-from-actor",
+    "actor-serde-serialize-actor",
+    "actor-serde-deserialize-actor",
+    "actor-english",
+
+]
+
+# See README.md for feature descriptions
+
+## CookItem features
+cook-item = []
+cook-item-enum-map = ["cook-item", "dep:enum-map"]
+cook-item-enum-set = ["cook-item", "dep:enumset"]
+cook-item-to-actor = ["cook-item"]
+cook-item-from-actor = ["cook-item", "dep:phf"]
+cook-item-serde-serialize-actor = ["dep:serde", "cook-item-to-actor"]
+cook-item-serde-deserialize-actor = ["dep:serde", "cook-item-from-actor"]
+cook-item-serde-serialize-value = ["dep:serde", "cook-item"]
+cook-item-serde-deserialize-value = ["dep:serde", "cook-item"]
+cook-item-english = ["cook-item"]
+
+## Actor features
+actor = []
+actor-enum-map = ["actor", "dep:enum-map"]
+actor-enum-set = ["actor", "dep:enumset"]
+actor-to-actor = ["actor"]
+actor-from-actor = ["actor", "dep:phf"]
+actor-serde-serialize-actor = ["dep:serde", "actor-to-actor"]
+actor-serde-deserialize-actor = ["dep:serde", "actor-from-actor"]
+actor-serde-serialize-value = ["dep:serde", "actor"]
+actor-serde-deserialize-value = ["dep:serde", "actor"]
+actor-english = ["actor"]
+
+prompt-entanglement = ["actor"]

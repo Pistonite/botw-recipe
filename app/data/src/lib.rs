@@ -1,6 +1,6 @@
 mod generated;
 pub use generated::constants::*;
-pub use generated::{Actor, Group};
+pub use generated::{Group};
 
 pub mod cook;
 mod recipe;

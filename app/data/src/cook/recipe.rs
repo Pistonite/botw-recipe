@@ -1,10 +1,8 @@
 use serde::Deserialize;
 
-use botw_recipe_generated::CookItem;
+use botw_recipe_generated::{Actor, CookItem};
 
 use super::{Error, Tag};
-
-use crate::Actor;
 
 /// Recipes for cooking
 #[derive(Debug, Clone, PartialEq)]
