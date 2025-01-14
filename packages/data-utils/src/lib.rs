@@ -1,7 +1,7 @@
 pub mod check;
 pub mod dump;
 pub mod read_test;
-pub mod verify_group;
+pub mod equiv_test;
 
 mod error;
 pub use error::Error;

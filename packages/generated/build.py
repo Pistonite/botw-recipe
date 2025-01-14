@@ -18,6 +18,70 @@ COMMON_ENUM_DERIVES = [
     "Copy", "Clone", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash"
 ]
 
+# Tags referenced in the cooking code
+EXTRA_TAGS = [
+    "CookLowPrice",
+    "CookEnemy",
+    "CookSpice"
+]
+
+def generate_tags(tags: list[str]):
+    with open(output_file("recipe-meta.yaml"), "r", encoding="utf-8") as f:
+        recipe_meta = yaml.safe_load(f)
+    recipe_tags = set(recipe_meta["tags_used_for_matching"])
+    enum_lines = []
+    tag_str_lines = []
+    tag_from_str_lines = []
+    used_in_matching_lines = []
+    for tag in tags:
+        enum_lines.append(f"    {tag},")
+        tag_str_lines.append(f"Self::{tag} => \"{tag}\",")
+        tag_from_str_lines.append(f"    \"{tag}\" => Tag::{tag},")
+        if tag in recipe_tags:
+            used_in_matching_lines.append(f"Self::{tag} => true,")
+    used_in_matching_lines.append("_ => false")
+
+    lines = [
+        "/// Tags used in the cooking code/recipes",
+        f"#[cfg_attr(feature = \"tag-enum-map\", derive(enum_map::Enum))]",
+        f"#[cfg_attr(feature = \"tag-enum-set\", derive(enumset::EnumSetType, PartialOrd, Ord, Hash))]",
+        f"#[cfg_attr(not(feature = \"tag-enum-set\"), derive({",".join(COMMON_ENUM_DERIVES)}))]",
+        "#[allow(non_camel_case_types)]",
+        "#[derive(Default)]",
+        "#[repr(u8)]",
+        "pub enum Tag {",
+        "/// No tag. This is used to make recipe matching implementation cleaner",
+        "#[default]",
+        "None = 0,",
+    ] + enum_lines + [
+        "}",
+        "impl Tag {",
+        "/// Get the string representation of the tag",
+        "#[cfg(feature = \"tag-to-str\")]",
+        "pub const fn as_str(&self) -> &'static str {",
+        "match self {",
+        "Self::None => \"<none>\",",
+    ] + tag_str_lines + [
+        "}}",
+        "/// Check if the tag is used in recipe matching",
+        "///",
+        "/// Each actor should have at most 1 of these tags",
+        "pub const fn is_used_in_recipe_matching(&self) -> bool {",
+        "match self {",
+    ] + used_in_matching_lines + [
+        "}}",
+        "/// Get the tag from string representation",
+        "#[cfg(feature = \"tag-from-str\")]",
+        "pub fn from_str(name: &str) -> Option<Self> {",
+        "TAG_STR_MAP.get(name).copied()",
+        "}}",
+        "#[cfg(feature = \"tag-from-str\")]",
+        "static TAG_STR_MAP: phf::Map<&'static str, Tag> = phf::phf_map! {",
+    ] + tag_from_str_lines + [
+        "};",
+    ] + generate_rust_count_macro("tag", len(tags))
+
+    write_rust_source(src_file("tag.rs"), lines)
 
 def generate_group(
     actors: list[str],
@@ -28,7 +92,6 @@ def generate_group(
     actor_to_english_name = {}
     for actor in actors:
         actor_to_english_name[actor] = get_actor_english_name(actor)
-    last_group = groups[-1][0]
     enum_lines = [
         "/// \"Empty\" slot in recipe input",
         "#[default]",
@@ -79,7 +142,7 @@ def generate_group(
     ] + enum_lines + [
         "}",
         "impl Group {",
-    ] + generate_rust_from_repr_fn(last_group, "u8") + [
+    ] + [
         "/// Get the [`Actor`]s in the group",
         "pub const fn actors(&self) -> &'static [Actor] {",
         "match self {",
@@ -96,9 +159,8 @@ def generate_group(
         "pub const fn all_pe_only(&self) -> bool {",
         "match self {",
     ] + all_pe_only_lines + [
-        "}}",
-        "}"
-    ]
+        "}}}",
+    ] + generate_rust_count_macro("group", len(groups) + 1)
 
     write_rust_source(src_file("group.rs"), lines)
 
@@ -111,7 +173,6 @@ def generate_actor(
     # note for input items we don't sort, but use the inventory sorting order
     # as defined in seed-actors.yaml
     actor_and_english_name = [(actor, get_actor_english_name(actor)) for actor in actors]
-    last_actor = actor_and_english_name[-1][0]
     enum_lines = [
         "/// \"Empty\" slot in recipe input",
         "#[default]",
@@ -155,7 +216,7 @@ def generate_actor(
     ] + enum_lines + [
         "}",
         "impl Actor {",
-    ] + generate_rust_from_repr_fn(last_actor, "u8") + [
+    ] + [
         "/// Get the [`Group`] of the actor",
         "pub const fn group(&self) -> Group {",
         "match self {",
@@ -188,7 +249,7 @@ def generate_actor(
         "static ACTOR_NAME_MAP: phf::Map<&'static str, Actor> = phf::phf_map! {",
     ] + from_actor_name_lines + [
         "};",
-    ]
+    ] + generate_rust_count_macro("actor", len(actors) + 1)
 
     write_rust_source(src_file("actor.rs"), lines)
 
@@ -198,7 +259,6 @@ def generate_cook_item():
     output_actors = recipe_meta["output_actors"]
     print("CookItem:", len(output_actors))
     actor_and_english_name = [(actor, get_actor_english_name(actor)) for actor in sorted(output_actors)]
-    last_actor = actor_and_english_name[-1][0]
     enum_lines = []
     english_name_lines = []
     actor_name_lines = []
@@ -226,7 +286,7 @@ def generate_cook_item():
     ] + enum_lines + [
         "}",
         "impl CookItem {",
-    ] + generate_rust_from_repr_fn(last_actor, "u8") + [
+    ] + [
         "/// Get the English name of the cook item actor",
         "#[cfg(feature = \"cook-item-english\")]",
         "pub const fn name(&self) -> &'static str {",
@@ -248,22 +308,19 @@ def generate_cook_item():
         "static ACTOR_NAME_MAP: phf::Map<&'static str, CookItem> = phf::phf_map! {",
     ] + from_actor_name_lines + [
         "};",
-    ]
+    ] + generate_rust_count_macro("cook_item", len(output_actors))
 
     write_rust_source(src_file("cook_item.rs"), lines)
 
-def generate_rust_from_repr_fn(variant: str, repr_type: str) -> list[str]:
+def generate_rust_count_macro(enum_name: str, count: int) -> list[str]:
     return [
-        "/// Convert from the representation type to the enum type."
+        f"/// Get the count of the {enum_name} enum",
         "///",
-        "/// Note this does not correspond to any meaning in the game,",
-        "/// and is not guaranteed to be the same as the EnumMap/EnumSet",
-        "/// implementation. It can also break when there is an update",
-        f"pub fn from_{repr_type}(v: {repr_type}) -> Option<Self> {{",
-        f"if v <= Self::{variant}.as_{repr_type}() {{",
-        f"Some(unsafe {{ std::mem::transmute(v) }})",
-        "} else {None",
-        "}}",
+        "/// `count - 1` is the last valid enum variant",
+        "#[macro_export]",
+        f"macro_rules! {enum_name}_count {{",
+        f"() => {{ {count} }}",
+        "}",
     ]
 
 def write_rust_source(path: str, lines: list[str]):
@@ -384,6 +441,11 @@ def load_actors_and_groups() -> tuple[
 
     return actors, groups, actor_to_group_idx
 
+def load_tags() -> list[str]:
+    with open(output_file("recipe-meta.yaml"), "r", encoding="utf-8") as f:
+        recipe_meta = yaml.safe_load(f)
+    return list(sorted(set(recipe_meta["tags_used_for_matching"] + EXTRA_TAGS)))
+
 def make_group_name(actors: list[str], output_group_idx: int):
     if len(actors) == 1:
         return actors[0]
@@ -404,7 +466,10 @@ if __name__ == "__main__":
     print("Actors:", len(actors))
     print("Groups:", len(groups))
     pe_only_actors = get_pe_only_actors()
+    tags = load_tags()
+    print("Tags:", len(tags))
     generate_cook_item()
     generate_actor(actors, groups, actor_to_group_idx, pe_only_actors)
     generate_group(actors, groups, actor_to_group_idx, pe_only_actors)
+    generate_tags(tags)
 

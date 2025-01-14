@@ -44,7 +44,7 @@ impl Tag {
                 | Self::CookFruit
                 | Self::CookMushroom
                 | Self::CookPlant
-                | Self::CookSpice
+                // | Self::CookSpice
         )
     }
 }

@@ -1,8 +1,8 @@
 use serde::Deserialize;
 
-use botw_recipe_generated::{Actor, CookItem};
+use botw_recipe_generated::{num_ingr, Actor, CookItem, Tag};
 
-use super::{Error, Tag};
+use super::Error;
 
 /// Recipes for cooking
 #[derive(Debug, Clone, PartialEq)]
@@ -89,7 +89,7 @@ pub struct RecipeData {
     num: i32,
 }
 
-type RemovedFlags = [bool; crate::NUM_INGR];
+type RemovedFlags = [bool; num_ingr!()];
 
 impl RecipeData {
     pub fn item(&self) -> CookItem {
@@ -117,7 +117,7 @@ impl RecipeData {
     }
 
     pub fn matches_single(&self, items: &[Actor], tags: &[Tag]) -> bool {
-        let mut removed = [false; crate::NUM_INGR];
+        let mut removed = [false; num_ingr!()];
         if !&self.actors.matches_single(items, &mut removed) {
             return false;
         }
@@ -130,7 +130,7 @@ impl RecipeData {
     }
 
     pub fn matches(&self, items: &[Actor], tags: &[Tag]) -> bool {
-        let mut removed = [false; crate::NUM_INGR];
+        let mut removed = [false; num_ingr!()];
         if !&self.actors.matches_multiple(items, &mut removed) {
             return false;
         }

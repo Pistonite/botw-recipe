@@ -25,6 +25,11 @@ pub enum Command {
         /// Path to the CompactDB
         path: PathBuf,
     },
+    EquivTest {
+        actors: Vec<String>,
+        #[clap(short, long)]
+        all: bool,
+    }
 }
 
 pub fn main() -> ExitCode {
@@ -51,6 +56,13 @@ fn main_internal() -> anyhow::Result<()> {
         }
         Command::ReadTest { path } => {
             botw_recipe_data_utils::read_test::test_read_db(&path)?;
+        }
+        Command::EquivTest { actors, all } => {
+            if all {
+                botw_recipe_data_utils::equiv_test::check_all_groups()?;
+            } else {
+                botw_recipe_data_utils::equiv_test::check_equiv(&actors)?;
+            }
         }
     }
     Ok(())

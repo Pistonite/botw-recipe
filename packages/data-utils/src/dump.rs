@@ -18,20 +18,20 @@ use crate::util;
 /// Dump the RawDB to the given path
 pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
     let start_time = Instant::now();
-    let meta = fsdb::meta::raw_v1();
+    let meta = fsdb::meta::raw_v2();
     let chunk_count = meta.chunk_count();
 
     if !path.exists() {
         fs::create_dir_all(path)?;
     }
 
-    let mut progress = spp::printer(chunk_count, format!("Dumping RawDB to {}", path.display()));
+    let mut progress = spp::printer(chunk_count as usize, format!("Dumping RawDB to {}", path.display()));
     progress.set_throttle_duration(Duration::from_secs(1));
     let pool = crate::thread_pool();
     let pot = Arc::new(CookingPot::new()?);
     let (send, recv) = mpsc::channel();
 
-    for chunk_id in 0..chunk_count {
+    for chunk_id in 0..chunk_count as u32{
         let send = send.clone();
         let pot = Arc::clone(&pot);
         let (start, end) = meta.record_range(chunk_id);
@@ -67,8 +67,8 @@ pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
 pub fn dump_raw_chunk(
     pot: &CookingPot,
     chunk_path: &Path,
-    start: usize,
-    end: usize,
+    start: u64,
+    end: u64,
 ) -> anyhow::Result<()> {
     let mut writer = BufWriter::new(File::create(chunk_path)?);
     for id in start..end {
@@ -86,7 +86,7 @@ pub fn dump_raw_chunk(
 /// Dump the CompactDB to the given path
 pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
     let start_time = Instant::now();
-    let meta = fsdb::meta::compact_v1();
+    let meta = fsdb::meta::compact_v2();
     let chunk_count = meta.chunk_count();
 
     if !path.exists() {
@@ -94,7 +94,7 @@ pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
     }
 
     let mut progress = spp::printer(
-        chunk_count,
+        chunk_count as usize,
         format!("Dumping CompactDB to {}", path.display()),
     );
     progress.set_throttle_duration(Duration::from_secs(1));
@@ -102,7 +102,7 @@ pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
     let pot = Arc::new(CookingPot::new()?);
     let (send, recv) = mpsc::channel();
 
-    for chunk_id in 0..chunk_count {
+    for chunk_id in 0..chunk_count as u32 {
         let send = send.clone();
         let pot = Arc::clone(&pot);
         let (start, end) = meta.record_range(chunk_id);
@@ -153,12 +153,12 @@ pub fn dump_compact_db(path: &Path) -> anyhow::Result<()> {
 /// Cook recipes from start to end IDs and write them to a CompactDB chunk file and index
 pub fn dump_compact_chunk(
     pot: &CookingPot,
-    chunk_id: usize,
+    chunk_id: u32,
     chunk_path: &Path,
-    start: usize,
-    end: usize,
+    start: u64,
+    end: u64,
 ) -> anyhow::Result<Index> {
-    let mut index = IndexBuilder::new(chunk_id);
+    let mut index = IndexBuilder::new(chunk_id as usize);
     let mut writer = BufWriter::new(File::create(chunk_path)?);
     for id in start..end {
         let (data, crit_rng_hp) = if id == 0 {

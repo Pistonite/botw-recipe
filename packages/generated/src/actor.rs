@@ -489,17 +489,6 @@ pub enum Actor {
     Obj_Photo_Weapon,
 }
 impl Actor {
-    /// Convert from the representation type to the enum type.///
-    /// Note this does not correspond to any meaning in the game,
-    /// and is not guaranteed to be the same as the EnumMap/EnumSet
-    /// implementation. It can also break when there is an update
-    pub fn from_u8(v: u8) -> Option<Self> {
-        if v <= Self::Obj_Photo_Weapon.as_u8() {
-            Some(unsafe { std::mem::transmute(v) })
-        } else {
-            None
-        }
-    }
     /// Get the [`Group`] of the actor
     pub const fn group(&self) -> Group {
         match self {
@@ -1553,3 +1542,12 @@ static ACTOR_NAME_MAP: phf::Map<&'static str, Actor> = phf::phf_map! {
     "Obj_Photo_Other" => Actor::Obj_Photo_Other,
     "Obj_Photo_Weapon" => Actor::Obj_Photo_Weapon,
 };
+/// Get the count of the actor enum
+///
+/// `count - 1` is the last valid enum variant
+#[macro_export]
+macro_rules! actor_count {
+    () => {
+        234
+    };
+}

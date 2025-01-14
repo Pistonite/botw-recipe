@@ -11,44 +11,45 @@ pub struct DbMeta {
     is_raw: bool,
 
     /// Number of records in each chunk, except for the last chunk
-    chunk_size: usize,
+    chunk_size: u32,
 
     /// Number of chunks in the database
-    chunk_count: usize,
+    chunk_count: u32,
 
     /// Number of total records in the database
-    total_record: usize,
+    total_record: u64,
 }
 
 /// Get the raw chunk path for a given chunk ID in the database directory
 #[inline]
-pub fn raw_chunk_path(db_path: &Path, chunk_id: usize) -> PathBuf {
+pub fn raw_chunk_path(db_path: &Path, chunk_id: impl std::fmt::Display) -> PathBuf {
     db_path.join(format!("chunk_{}.rawdat", chunk_id))
 }
 
 /// Get the compact chunk path for a given chunk ID in the database directory
 #[inline]
-pub fn compact_chunk_path(db_path: &Path, chunk_id: usize) -> PathBuf {
+pub fn compact_chunk_path(db_path: &Path, chunk_id: impl std::fmt::Display) -> PathBuf {
     db_path.join(format!("chunk_{}.rdb", chunk_id))
 }
 
-/// Get the metadata for RawDB V1 (no monster extract)
-pub const fn raw_v1() -> DbMeta {
+/// Get the metadata for RawDB v2
+#[inline]
+pub const fn raw_v2() -> DbMeta {
     DbMeta {
         is_raw: true,
         chunk_size: 409600,
-        chunk_count: 4409,
-        total_record: 1805568402,
+        chunk_count: 3534,
+        total_record: 1447490660,
     }
 }
-
-/// Get the metadata for CompactDB V1 (no monster extract)
-pub const fn compact_v1() -> DbMeta {
+/// Get the metadata for CompactDB v2
+#[inline]
+pub const fn compact_v2() -> DbMeta {
     DbMeta {
         is_raw: false,
         chunk_size: 2048000,
-        chunk_count: 882,
-        total_record: 1805568402,
+        chunk_count: 707,
+        total_record: 1447490660,
     }
 }
 impl DbMeta {
@@ -70,39 +71,67 @@ impl DbMeta {
 
     /// Get the number of records in a chunk
     #[inline]
-    pub const fn chunk_size(&self, chunk_id: usize) -> usize {
+    pub const fn chunk_size(&self, chunk_id: u32) -> usize {
         if chunk_id == self.chunk_count - 1 {
-            self.total_record - self.chunk_size * (self.chunk_count - 1)
+            (self.total_record - 
+            (self.chunk_size * (self.chunk_count - 1)) as u64) as usize
         } else {
-            self.chunk_size
+            self.chunk_size as usize
         }
     }
 
     /// Get the byte size of a chunk
     #[inline]
-    pub const fn chunk_size_bytes(&self, chunk_id: usize) -> usize {
+    pub const fn chunk_size_bytes(&self, chunk_id: u32) -> usize {
         self.chunk_size(chunk_id) * self.record_size()
     }
 
     /// Get the number of chunks in the database
     #[inline]
-    pub const fn chunk_count(&self) -> usize {
+    pub const fn chunk_count(&self) -> u32 {
         self.chunk_count
     }
 
     /// Get the record id range in a chunk [start, end)
     #[inline]
-    pub fn record_range(&self, chunk_id: usize) -> (usize, usize) {
-        let chunk_size = self.chunk_size;
-        let start = chunk_id * chunk_size;
+    pub fn record_range(&self, chunk_id: u32) -> (u64, u64) {
+        let chunk_size = self.chunk_size as u64;
+        let start = (chunk_id as u64) * chunk_size;
         let end = self.total_record.min(start + chunk_size);
         (start, end)
+    }
+
+    /// Get the total number of records in the database
+    #[inline]
+    pub const fn total_record(&self) -> u64 {
+        self.total_record
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+/// Get the metadata for RawDB V1 (no monster extract)
+#[inline]
+const fn raw_v1() -> DbMeta {
+    DbMeta {
+        is_raw: true,
+        chunk_size: 409600,
+        chunk_count: 4409,
+        total_record: 1805568402,
+    }
+}
+
+/// Get the metadata for CompactDB V1 (no monster extract)
+#[inline]
+const fn compact_v1() -> DbMeta {
+    DbMeta {
+        is_raw: false,
+        chunk_size: 2048000,
+        chunk_count: 882,
+        total_record: 1805568402,
+    }
+}
 
     #[test]
     fn test_record_sizes() {

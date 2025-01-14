@@ -8,8 +8,9 @@ use std::sync::{mpsc, Arc};
 use std::time::{Duration, Instant};
 
 use anyhow::bail;
-use botw_recipe::cook::{CookEffect, CookingPot};
+use botw_recipe::cook::CookingPot;
 use botw_recipe::db::{Chunk, Database};
+use botw_recipe_generated::CookEffect;
 
 use crate::util;
 
@@ -20,7 +21,7 @@ pub fn test_read_db(path: &Path) -> anyhow::Result<()> {
     let database = Database::open(path)?;
     let chunk_count = database.chunk_count();
     let mut progress = spp::printer(
-        chunk_count,
+        chunk_count as usize,
         format!("Read-testing CompactDB at {}", path.display()),
     );
     progress.set_throttle_duration(Duration::from_secs(1));
@@ -62,12 +63,12 @@ pub fn test_read_db(path: &Path) -> anyhow::Result<()> {
 pub fn test_read_chunk(chunk: Chunk, pot: &CookingPot) -> anyhow::Result<()> {
     for record in chunk {
         let record = record?;
-        let cooked = pot.cook_inputs(record.recipe_id)?;
+        let cooked = pot.cook_id(record.recipe_id)?;
         let expected_value = cooked.data.sell_price & 0x1FF;
         if expected_value != record.record.modifier() as i32 {
             bail!(
                 "Recipe {}, Mismatched modifier/price: expected {}, got {}",
-                usize::from(record.recipe_id),
+                u64::from(record.recipe_id),
                 expected_value,
                 record.record.modifier()
             );
@@ -84,7 +85,7 @@ pub fn test_read_chunk(chunk: Chunk, pot: &CookingPot) -> anyhow::Result<()> {
         if expected_hp != record.record.value() {
             bail!(
                 "Recipe {}, Mismatched value/hp: expected {}, got {}",
-                usize::from(record.recipe_id),
+                u64::from(record.recipe_id),
                 expected_hp,
                 record.record.value()
             );

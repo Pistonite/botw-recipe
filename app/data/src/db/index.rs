@@ -2,10 +2,11 @@ use std::fs::File;
 use std::io::{BufReader, BufWriter};
 use std::path::{Path, PathBuf};
 
+use botw_recipe_generated::CookEffect;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-use crate::cook::{CookData, CookEffect};
+use crate::cook::CookData;
 use crate::wmc::WeaponModifierSet;
 
 use super::{Error, Filter, Record};
@@ -20,10 +21,10 @@ pub fn save_index(path: impl AsRef<Path>, index: &[Index]) -> Result<(), Error> 
 /// Load the database index file from the given path
 pub fn load_index(path: impl AsRef<Path>) -> Result<Vec<Index>, Error> {
     let reader = BufReader::new(File::open(path)?);
-    let expected_size = crate::fsdb::meta::compact_v1().chunk_count();
+    let expected_size = crate::fsdb::meta::compact_v2().chunk_count();
     let index: Vec<Index> = serde_yaml_ng::from_reader(reader)?;
-    if index.len() != expected_size {
-        return Err(Error::InvalidIndexChunkCount(expected_size, index.len()));
+    if index.len() != expected_size as usize {
+        return Err(Error::InvalidIndexChunkCount(expected_size, index.len() as u32));
     }
     Ok(index)
 }

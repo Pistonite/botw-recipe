@@ -9,6 +9,9 @@ description = "Common data processing utilities for tools in the botwrdb project
 package = "botw-recipe-data"
 path = "../../app/data"
 
+[dependencies.botw-recipe-generated]
+path = "../generated"
+
 [dependencies]
 anyhow = "1.0.95"
 clap = { version = "4.5.26", features = ["derive"] }

@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 /// Cook modifier that can be converted to uking::CookingMgr::CookEffect
 #[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq, Hash, Default, Deserialize)]
+#[repr(u8)]
 pub enum CookEffect {
     AttackUp,
     DefenseUp,

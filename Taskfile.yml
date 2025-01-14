@@ -20,6 +20,11 @@ includes:
     taskfile: ./dump/emulate
     dir: ./dump/emulate
 
+  generated:
+    taskfile: ./packages/generated
+    dir: ./packages/generated
+    internal: true
+
 tasks:
   install:
     desc: Install dependencies
@@ -46,6 +51,7 @@ tasks:
 
   test-rs:
     cmds:
+      - task: generated:test
       - cargo test --package botw-recipe-data --all-targets --all-features --release
 
   check:

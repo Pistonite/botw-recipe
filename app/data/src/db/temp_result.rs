@@ -4,7 +4,7 @@ use std::path::PathBuf;
 
 use log::info;
 
-use crate::recipe::RecipeId;
+// use crate::fsdb::convert::RecipeId;
 
 use super::Error;
 
@@ -74,7 +74,7 @@ impl TempResult {
 
 pub struct TempResultIter {
     path: PathBuf,
-    next_file_id: usize,
+    next_file_id: u32,
     had_error: bool,
 }
 
@@ -86,7 +86,7 @@ impl Iterator for TempResultIter {
             return None;
         }
         loop {
-            if self.next_file_id >= crate::COMPACT_CHUNK_COUNT {
+            if self.next_file_id >= crate::fsdb::meta::compact_v2().chunk_count() {
                 return None;
             }
             let path = self.path.join(self.next_file_id.to_string());
@@ -122,15 +122,15 @@ impl TempResultWriter {
         })
     }
 
-    pub fn write(&mut self, id: RecipeId) -> Result<(), Error> {
+    pub fn write(&mut self, id: u64) -> Result<(), Error> {
         match self.writer.as_mut() {
             Some(writer) => {
-                writer.write_all(&usize::from(id).to_le_bytes())?;
+                writer.write_all(&id.to_le_bytes())?;
             }
             None => {
                 let file = File::create(&self.path)?;
                 let mut writer = BufWriter::new(file);
-                writer.write_all(&usize::from(id).to_le_bytes())?;
+                writer.write_all(&id.to_le_bytes())?;
                 self.writer = Some(writer);
             }
         }
@@ -157,7 +157,7 @@ impl TempResultReader {
     }
 }
 impl Iterator for TempResultReader {
-    type Item = Result<RecipeId, Error>;
+    type Item = Result<u64, Error>;
 
     fn next(&mut self) -> Option<Self::Item> {
         if self.had_error {
@@ -166,11 +166,8 @@ impl Iterator for TempResultReader {
         let mut buf = [0u8; 8];
         match self.reader.read_exact(&mut buf) {
             Ok(()) => {
-                let id = usize::from_le_bytes(buf);
-                match RecipeId::new(id) {
-                    Some(id) => Some(Ok(id)),
-                    None => Some(Err(Error::InvalidRecipeId(id))),
-                }
+                let id = u64::from_le_bytes(buf);
+                Some(Ok(id))
             }
             Err(e) => {
                 if e.kind() == std::io::ErrorKind::UnexpectedEof {

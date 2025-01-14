@@ -1,7 +1,7 @@
-use crate::CookItem;
+use crate::Tag;
 
-impl CookItem {
-    /// Convert the CookItem to an integer representation
+impl Tag {
+    /// Convert the Tag to an integer representation
     ///
     /// Note this does not have any meaning in the Game,
     /// and it is not guaranteed to be the same as EnumMap/EnumSet
@@ -13,7 +13,7 @@ impl CookItem {
 
     #[inline]
     pub const fn from_u8(v: u8) -> Option<Self> {
-        if v < crate::cook_item_count!() {
+        if v < crate::tag_count!() {
             Some(unsafe { std::mem::transmute(v) })
         } else {
             None
@@ -21,89 +21,66 @@ impl CookItem {
     }
 }
 
-#[cfg(all(feature = "cook-item-english", feature = "cook-item-to-actor"))]
-impl std::fmt::Debug for CookItem {
+#[cfg(feature = "tag-to-str")]
+impl std::fmt::Debug for Tag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_tuple(self.actor_name())
-            .field(&self.name())
-            .finish()
+        self.as_str().fmt(f)
     }
 }
 
-#[cfg(all(not(feature = "cook-item-english"), feature = "cook-item-to-actor"))]
-impl std::fmt::Debug for CookItem {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.actor_name().fmt(f)
-    }
-}
-
-#[cfg(all(not(feature = "cook-item-english"), not(feature = "cook-item-to-actor")))]
-impl std::fmt::Debug for CookItem {
+#[cfg(not(feature = "tag-to-str"))]
+impl std::fmt::Debug for Tag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         self.as_u8().fmt(f)
     }
 }
 
-#[cfg(feature = "cook-item-english")]
-impl std::fmt::Display for CookItem {
+#[cfg(feature = "tag-to-str")]
+impl std::fmt::Display for Tag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.name().fmt(f)
+        self.as_str().fmt(f)
     }
 }
 
-#[cfg(all(not(feature = "cook-item-english"), feature = "cook-item-to-actor"))]
-impl std::fmt::Display for CookItem {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.actor_name().fmt(f)
+#[cfg(feature = "tag-serde-serialize-str")]
+impl serde::Serialize for Tag {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        self.as_str().serialize(serializer)
     }
 }
 
-#[cfg(all(not(feature = "cook-item-english"), not(feature = "cook-item-to-actor")))]
-impl std::fmt::Display for CookItem {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.as_u8().fmt(f)
-    }
-}
-
-#[cfg(feature = "cook-item-serde-serialize-value")]
-impl serde::Serialize for CookItem {
+#[cfg(feature = "tag-serde-serialize-value")]
+impl serde::Serialize for Tag {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         self.as_u8().serialize(serializer)
     }
 }
 
-#[cfg(feature = "cook-item-serde-serialize-actor")]
-impl serde::Serialize for CookItem {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        self.actor_name().serialize(serializer)
-    }
-}
-
-#[cfg(any(feature = "cook-item-serde-deserialize-actor", feature = "cook-item-serde-deserialize-value"))]
-impl<'de> serde::Deserialize<'de> for CookItem {
+#[cfg(any(feature = "tag-serde-deserialize-str", feature = "tag-serde-deserialize-value"))]
+impl<'de> serde::Deserialize<'de> for Tag {
     fn deserialize<D>(d: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de> {
         struct Visitor;
         impl<'d> serde::de::Visitor<'d> for Visitor {
-            type Value=CookItem;
+            type Value=Tag;
 
-            #[cfg(all(feature = "cook-item-serde-deserialize-actor", not(feature = "cook-item-serde-deserialize-value")))]
+            #[cfg(all(feature = "tag-serde-deserialize-str", not(feature = "tag-serde-deserialize-value")))]
             fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
                 use std::fmt::Display;
-                "a valid cook item actor name starting with Item_Cook_".fmt(formatter)
+                "a valid tag name".fmt(formatter)
             }
 
-            #[cfg(all(not(feature = "cook-item-serde-deserialize-actor"), feature = "cook-item-serde-deserialize-value"))]
+            #[cfg(all(not(feature = "tag-serde-deserialize-str"), feature = "tag-serde-deserialize-value"))]
             fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
                 use std::fmt::Display;
-                "a valid integer representing a CookItem enum".fmt(formatter)
+                "a valid integer representing a Tag enum".fmt(formatter)
             }
 
-            #[cfg(all(feature = "cook-item-serde-deserialize-actor", feature = "cook-item-serde-deserialize-value"))]
+            #[cfg(all(feature = "tag-serde-deserialize-str", feature = "tag-serde-deserialize-value"))]
             fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
                 use std::fmt::Display;
-                "a valid integer representing a CookItem enum, or a valid cook item actor name starting with Item_Cook_".fmt(formatter)
+                "a valid integer representing a Tag enum, or a valid tag name".fmt(formatter)
             }
 
             fn visit_i8<E>(self, v: i8) -> Result<Self::Value, E>
@@ -145,7 +122,7 @@ impl<'de> serde::Deserialize<'de> for CookItem {
             where
                 E: serde::de::Error,
             {
-                match CookItem::from_u8(v) {
+                match Tag::from_u8(v) {
                     Some(item) => Ok(item),
                     None => Err(serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v as u64), &self)),
                 }
@@ -179,12 +156,12 @@ impl<'de> serde::Deserialize<'de> for CookItem {
                 self.visit_u8(v as u8)
             }
 
-            #[cfg(feature = "cook-item-serde-deserialize-actor")]
+            #[cfg(feature = "tag-serde-deserialize-str")]
             fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
             where
                 E: serde::de::Error,
             {
-                match CookItem::from_actor_name(v) {
+                match Tag::from_str(v) {
                     Some(item) => Ok(item),
                     None => Err(serde::de::Error::invalid_value(serde::de::Unexpected::Str(v), &self)),
                 }

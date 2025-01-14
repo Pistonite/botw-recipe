@@ -1,10 +1,9 @@
 use super::{
-    CookData, CookEffect, CookResult, Error, Ingredient, Ingredients, RecipeData, Recipes, Tag,
+    CookData, CookResult, Error, Ingredient, Ingredients, RecipeData, Recipes,
 };
 
-use botw_recipe_generated::Actor;
+use botw_recipe_generated::{num_ingr, Actor, Group, GroupMnr, Tag, CookEffect};
 
-use crate::recipe::{RecipeId, RecipeInputs};
 use crate::debugln;
 
 macro_rules! reference {
@@ -49,21 +48,19 @@ impl CookingPot {
         self.cook(actors)
     }
 
-    pub fn cook_id(&self, id: usize) -> Result<CookResult, Error> {
-        let id = RecipeId::new(id).ok_or(Error::InvalidRecipeId(id))?;
-        self.cook_inputs(id)
-    }
-
-    pub fn cook_inputs<T: Into<RecipeInputs>>(&self, inputs: T) -> Result<CookResult, Error> {
-        let inputs = inputs.into();
-        let mut ingr = Vec::with_capacity(5);
-        for group in inputs.iter() {
-            let actor = group.first_actor();
-            if actor != Actor::None {
-                ingr.push(actor);
-            }
+    pub fn cook_id(&self, id: u64) -> Result<CookResult, Error> {
+        let mut groups = [Group::None; num_ingr!()];
+        if !GroupMnr::<{num_ingr!()}>::default().to_groups(id, &mut groups) {
+            return Err(Error::InvalidRecipeId(id));
         }
-        self.cook(ingr)
+        self.cook_groups(groups)
+    }
+    pub fn cook_groups<G: IntoIterator<Item = T>, T: Into<Group>>(
+        &self,
+        groups: G,
+    ) -> Result<CookResult, Error> {
+        let actors: Vec<Actor> = groups.into_iter().map(|x| x.into().first_actor()).collect::<Vec<_>>();
+        self.cook(actors)
     }
 
     pub fn cook<A: IntoIterator<Item = T>, T: Into<Actor>>(

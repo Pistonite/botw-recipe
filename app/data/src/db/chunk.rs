@@ -4,39 +4,41 @@ use std::path::Path;
 use std::sync::Arc;
 
 use crate::cook::CookingPot;
-use crate::recipe::RecipeId;
 
 use super::{Error, Filter, PositionedRecord, Record};
 
 /// Chunk for sequential access
 pub struct Chunk {
     reader: BufReader<File>,
-    recipe_next: usize,
-    recipe_end: usize,
+    /// The next ID to read
+    recipe_next: u64,
+    /// The last ID to read
+    recipe_end: u64,
 }
 
 impl Chunk {
     /// Open a chunk for reading recipes.
-    pub fn open<P: AsRef<Path>>(chunk_id: usize, path: P) -> Result<Self, Error> {
+    pub fn open<P: AsRef<Path>>(chunk_id: u32, path: P) -> Result<Self, Error> {
         let file = File::open(path.as_ref())?;
-        let meta = crate::fsdb::meta::compact_v1();
+        let meta = crate::fsdb::meta::compact_v2();
         let total = meta.chunk_size(chunk_id);
         let file_size = file.metadata()?.len() as usize;
         if file_size != meta.chunk_size_bytes(chunk_id) {
             return Err(Error::InvalidChunkSize(total * 2, file_size));
         }
         let mut reader = BufReader::new(file);
+        let (start, end) = meta.record_range(chunk_id);
         let recipe_next = if chunk_id == 0 {
             // 0 corresponds to 5 of <none>, skip 2 bytes
             reader.read_exact(&mut [0; 2])?;
             1
         } else {
-            chunk_id * crate::COMPACT_CHUNK_SIZE
+            start
         };
         Ok(Self {
             reader,
             recipe_next,
-            recipe_end: chunk_id * crate::COMPACT_CHUNK_SIZE + total,
+            recipe_end: end,
         })
     }
 
@@ -47,7 +49,7 @@ impl Chunk {
 
     /// Get the number of remaining records to read
     pub fn remaining(&self) -> usize {
-        self.recipe_end - self.recipe_next
+        (self.recipe_end - self.recipe_next) as usize
     }
 }
 
@@ -70,7 +72,7 @@ impl Iterator for Chunk {
                 let recipe_id = self.recipe_next;
                 self.recipe_next += 1;
                 Some(Ok(PositionedRecord {
-                    recipe_id: RecipeId::new_unchecked(recipe_id),
+                    recipe_id,
                     record: Record::from_slice(&buf),
                 }))
             }

@@ -20,13 +20,13 @@ pub enum Error {
     #[error("cannot find index.yaml")]
     MissingIndex,
     #[error("invalid chunk count: expected {0}, got {1}")]
-    InvalidIndexChunkCount(usize, usize),
+    InvalidIndexChunkCount(u32, u32),
     #[error("cannot find chunk_{0}.rdb")]
-    MissingChunk(usize),
+    MissingChunk(u32),
     #[error("invalid chunk size: expected {0} bytes, got {1} bytes")]
     InvalidChunkSize(usize, usize),
     #[error("invalid recipe id from temporary result: {0}")]
-    InvalidRecipeId(usize),
+    InvalidRecipeId(u64),
     #[error("there are too many temporary results. Try closing the app and restart it")]
     TooManyTemporary,
 }

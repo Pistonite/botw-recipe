@@ -374,17 +374,6 @@ pub enum Group {
     Obj_Photo_BossEnemy = 174,
 }
 impl Group {
-    /// Convert from the representation type to the enum type.///
-    /// Note this does not correspond to any meaning in the game,
-    /// and is not guaranteed to be the same as the EnumMap/EnumSet
-    /// implementation. It can also break when there is an update
-    pub fn from_u8(v: u8) -> Option<Self> {
-        if v <= Self::Obj_Photo_BossEnemy.as_u8() {
-            Some(unsafe { std::mem::transmute(v) })
-        } else {
-            None
-        }
-    }
     /// Get the [`Actor`]s in the group
     pub const fn actors(&self) -> &'static [Actor] {
         match self {
@@ -724,4 +713,13 @@ impl Group {
             _ => false,
         }
     }
+}
+/// Get the count of the group enum
+///
+/// `count - 1` is the last valid enum variant
+#[macro_export]
+macro_rules! group_count {
+    () => {
+        175
+    };
 }

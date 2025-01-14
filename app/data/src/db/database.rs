@@ -68,11 +68,11 @@ impl Database {
         Arc::clone(&self.pot)
     }
 
-    pub fn chunk_count(&self) -> usize {
-        crate::fsdb::meta::compact_v1().chunk_count()
+    pub fn chunk_count(&self) -> u32 {
+        crate::fsdb::meta::compact_v2().chunk_count()
     }
 
-    pub fn open_chunk(&self, chunk_id: usize) -> Result<Chunk, Error> {
+    pub fn open_chunk(&self, chunk_id: u32) -> Result<Chunk, Error> {
         let chunk_path = crate::fsdb::meta::compact_chunk_path(&self.path, chunk_id);
         if !chunk_path.exists() {
             return Err(Error::MissingChunk(chunk_id));
@@ -82,10 +82,10 @@ impl Database {
 
     pub fn open_filtered_chunk(
         &self,
-        chunk_id: usize,
+        chunk_id: u32,
         filter: &Filter,
     ) -> Result<Option<FilteredChunk>, Error> {
-        if self.index[chunk_id].can_skip(filter) {
+        if self.index[chunk_id as usize].can_skip(filter) {
             return Ok(None);
         }
         Ok(Some(

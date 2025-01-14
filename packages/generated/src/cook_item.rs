@@ -253,17 +253,6 @@ pub enum CookItem {
     Item_Cook_P_05,
 }
 impl CookItem {
-    /// Convert from the representation type to the enum type.///
-    /// Note this does not correspond to any meaning in the game,
-    /// and is not guaranteed to be the same as the EnumMap/EnumSet
-    /// implementation. It can also break when there is an update
-    pub fn from_u8(v: u8) -> Option<Self> {
-        if v <= Self::Item_Cook_P_05.as_u8() {
-            Some(unsafe { std::mem::transmute(v) })
-        } else {
-            None
-        }
-    }
     /// Get the English name of the cook item actor
     #[cfg(feature = "cook-item-english")]
     pub const fn name(&self) -> &'static str {
@@ -639,3 +628,12 @@ static ACTOR_NAME_MAP: phf::Map<&'static str, CookItem> = phf::phf_map! {
     "Item_Cook_P_04" => CookItem::Item_Cook_P_04,
     "Item_Cook_P_05" => CookItem::Item_Cook_P_05,
 };
+/// Get the count of the cook_item enum
+///
+/// `count - 1` is the last valid enum variant
+#[macro_export]
+macro_rules! cook_item_count {
+    () => {
+        118
+    };
+}

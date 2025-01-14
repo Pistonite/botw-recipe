@@ -1,13 +1,17 @@
 use std::io::Write;
 
-use crate::cook::{CookData, CookEffect, CookingPot};
-use crate::recipe::{RecipeId, RecipeInputs};
+use botw_recipe_generated::{num_ingr, Group, GroupMnr, CookEffect};
+
+use crate::cook::{CookData, CookingPot};
 use crate::wmc::WeaponModifierSet;
 
 use super::{Error, Filter};
 
+/// Holder of the record with its recipe id
 pub struct PositionedRecord {
-    pub recipe_id: RecipeId,
+    /// The recipe id
+    pub recipe_id: u64,
+    /// The record
     pub record: Record,
 }
 
@@ -32,7 +36,7 @@ impl PositionedRecord {
                 return Ok(false);
             }
             // if within 12, it's possible to crit to the min value
-            let result = pot.cook_inputs(self.recipe_id)?;
+            let result = pot.cook_id(self.recipe_id)?;
             if !result.crit_rng_hp {
                 return Ok(false);
             }
@@ -46,8 +50,12 @@ impl PositionedRecord {
             }
         }
         if !filter.include_pe_only {
-            let inputs: RecipeInputs = self.recipe_id.into();
-            for group in inputs.as_slice() {
+            let mut groups = [Group::None; num_ingr!()];
+            if !GroupMnr::<{num_ingr!()}>::new().to_groups(self.recipe_id, &mut groups) {
+                // invalid ID - shouldn't happen
+                return Ok(false);
+            }
+            for group in groups {
                 if group.all_pe_only() {
                     return Ok(false);
                 }

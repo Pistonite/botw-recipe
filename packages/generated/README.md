@@ -12,9 +12,10 @@ To regenerate/update:
     cd packages/research-scripts
     task install build
     ```
-- Run the python script in this directory
+- Run the python script(s) in this directory to regenerate the parts you need
     ```bash
     python build.py
+    python build_multichoose.py
     ```
 
 ## Rust Crate

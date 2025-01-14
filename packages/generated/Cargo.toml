@@ -7,29 +7,20 @@ license = "MIT"
 description = "Data binding generated from parameters"
 
 [dependencies]
+bit-iter = { version = "1.2.0", optional = true }
 enum-map = { version = "2.7.3", optional = true }
 enumset = { version = "1.1.5", optional = true }
+no-panic = "0.1.33"
 phf = { version = "0.11.3", optional = true, features = ["macros"] }
 serde = { version = "1.0.217", optional = true }
 
 [features]
 full = [
-    "cook-item-enum-map",
-    "cook-item-enum-set",
-    "cook-item-to-actor",
-    "cook-item-from-actor",
-    "cook-item-serde-serialize-actor",
-    "cook-item-serde-deserialize-actor",
-    "cook-item-english",
-
-    "actor-enum-map",
-    "actor-enum-set",
-    "actor-to-actor",
-    "actor-from-actor",
-    "actor-serde-serialize-actor",
-    "actor-serde-deserialize-actor",
-    "actor-english",
-
+    "cook-item-full",
+    "actor-full",
+    "tag-full",
+    "actor-data",
+    "multichoose"
 ]
 
 # See README.md for feature descriptions
@@ -45,6 +36,15 @@ cook-item-serde-deserialize-actor = ["dep:serde", "cook-item-from-actor"]
 cook-item-serde-serialize-value = ["dep:serde", "cook-item"]
 cook-item-serde-deserialize-value = ["dep:serde", "cook-item"]
 cook-item-english = ["cook-item"]
+cook-item-full = [
+    "cook-item-enum-map",
+    "cook-item-enum-set",
+    "cook-item-to-actor",
+    "cook-item-from-actor",
+    "cook-item-serde-serialize-actor",
+    "cook-item-serde-deserialize-actor",
+    "cook-item-english",
+]
 
 ## Actor features
 actor = []
@@ -57,5 +57,39 @@ actor-serde-deserialize-actor = ["dep:serde", "actor-from-actor"]
 actor-serde-serialize-value = ["dep:serde", "actor"]
 actor-serde-deserialize-value = ["dep:serde", "actor"]
 actor-english = ["actor"]
-
 prompt-entanglement = ["actor"]
+actor-full = [
+    "actor-enum-map",
+    "actor-enum-set",
+    "actor-to-actor",
+    "actor-from-actor",
+    "actor-serde-serialize-actor",
+    "actor-serde-deserialize-actor",
+    "actor-english",
+    "prompt-entanglement",
+]
+
+## Actor Tag features
+tag = []
+tag-enum-map = ["tag", "dep:enum-map"]
+tag-enum-set = ["tag", "dep:enumset"]
+tag-to-str = ["tag"]
+tag-from-str = ["tag"]
+tag-serde-serialize-str = ["dep:serde", "tag-to-str"]
+tag-serde-deserialize-str = ["dep:serde", "tag-from-str"]
+tag-serde-serialize-value = ["dep:serde", "tag"]
+tag-serde-deserialize-value = ["dep:serde", "tag"]
+tag-full = [
+    "tag-enum-map",
+    "tag-enum-set",
+    "tag-to-str",
+    "tag-from-str",
+    "tag-serde-serialize-str",
+    "tag-serde-deserialize-str",
+]
+
+## Actor Data (parameter) features
+actor-data = ["tag", "actor-enum-set", "dep:bit-iter"]
+
+multichoose = []
+

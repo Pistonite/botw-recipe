@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  test:
+    desc: Run tests
+    cmds:
+      - cargo test --features full --release
+
+  equiv-test:
+    desc: Exhaustively verify actor groups
+    dir: ../..
+    cmds:
+      - cargo run --release --bin botw-recipe-data-utils -- equiv-test {{.CLI_ARGS}}
+    

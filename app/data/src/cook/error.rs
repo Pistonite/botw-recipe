@@ -21,7 +21,7 @@ pub enum Error {
     #[error("not enough ingredients! At least 1 is required.")]
     TooFewIngr,
     #[error("invalid recipe id: {0}")]
-    InvalidRecipeId(usize),
+    InvalidRecipeId(u64),
     #[error("unexpected data error: {0}")]
     Data(String),
 }

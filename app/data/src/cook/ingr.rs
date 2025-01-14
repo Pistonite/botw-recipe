@@ -3,9 +3,9 @@ use std::collections::HashMap;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
 
-use botw_recipe_generated::Actor;
+use botw_recipe_generated::{Actor, Tag, CookEffect};
 
-use super::{CookEffect, Error, Tag};
+use super::Error;
 
 /// Ingredient data (associated with every actor)
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
