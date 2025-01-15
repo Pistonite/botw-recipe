@@ -11,9 +11,5 @@ pub use cooking_pot::*;
 mod error;
 pub use error::*;
 
-mod ingr;
-pub use ingr::*;
 mod recipe;
 pub use recipe::*;
-// mod tag;
-// pub use tag::*;

@@ -10,7 +10,7 @@ use std::time::{Duration, Instant};
 use anyhow::bail;
 use botw_recipe::cook::CookingPot;
 use botw_recipe::db::{Chunk, Database};
-use botw_recipe_generated::CookEffect;
+use botw_recipe_sys::CookEffect;
 
 use crate::util;
 

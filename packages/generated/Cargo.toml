@@ -1,5 +1,5 @@
 [package]
-name = "botw-recipe-generated"
+name = "botw-recipe-sys"
 version = "0.0.0"
 edition = "2021"
 publish = false
@@ -18,6 +18,7 @@ serde = { version = "1.0.217", optional = true }
 full = [
     "cook-item-full",
     "actor-full",
+    "actor-wmc-group",
     "tag-full",
     "actor-data",
     "multichoose"
@@ -69,6 +70,9 @@ actor-full = [
     "prompt-entanglement",
 ]
 
+## Actor Group feature for WMC purpose
+actor-wmc-group = ["actor"]
+
 ## Actor Tag features
 tag = []
 tag-enum-map = ["tag", "dep:enum-map"]
@@ -89,7 +93,7 @@ tag-full = [
 ]
 
 ## Actor Data (parameter) features
-actor-data = ["tag", "actor-enum-set", "dep:bit-iter"]
+actor-data = ["tag-enum-set", "dep:bit-iter"]
 
 multichoose = []
 

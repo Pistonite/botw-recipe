@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{BufReader, BufWriter};
 use std::path::{Path, PathBuf};
 
-use botw_recipe_generated::CookEffect;
+use botw_recipe_sys::CookEffect;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 

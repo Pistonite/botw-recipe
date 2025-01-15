@@ -5,27 +5,19 @@ mod gen;
 use crate::{RecipeSet, Actor, CookEffect, Tag};
 
 /// Actor data extracted from parameters and links
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, PartialEq, Eq)]
 pub struct ActorData {
     /// The actor corresponding to this data
     pub actor: Actor,
-    /// cureItemEffectType - the effect of the ingredient
-    pub effect: CookEffect,
     /// The actor's tag for recipe matching, or Tag::None
     /// if doesn't have one
     pub recipe_tag: Tag,
 
-    /// cookSpiceBoostEffectiveTime
-    pub boost_effect_time: i32,
-    /// cookSpiceBoostHitPointRecover
-    pub boost_hp: i32,
-    /// cookSpiceBoostMaxHeartLevel
-    pub boost_max_heart: i32,
-    /// cookSpiceBoostStaminaLevel
-    pub boost_stamina: i32,
-    /// cookSpiceBoostSuccessRate
-    pub boost_success_rate: i32,
+    /// cookSpiceBoost* parameters
+    pub boost: Boost,
 
+    /// cureItemEffectType - the effect of the ingredient
+    pub effect: CookEffect,
     /// cureItemEffectLevel
     pub effect_level: i32,
     /// cureItemEffectiveTime
@@ -42,6 +34,45 @@ pub struct ActorData {
 
     /// Indices of recipes that possible to be matched with this actor
     pub matchable_recipes: RecipeSet,
+}
+
+impl ActorData {
+    pub const fn empty() -> Self {
+        Self {
+            actor: Actor::None,
+            recipe_tag: Tag::None,
+            boost: Boost {
+                effective_time: 0,
+                hit_point_recover: 0,
+                max_heart_level: 0,
+                stamina_level: 0,
+                success_rate: 0,
+            },
+            effect: CookEffect::None,
+            effect_level: 0,
+            effect_time: 0,
+            hp: 0,
+            buy_price: 0,
+            sell_price: 0,
+            tags: EnumSet::new(),
+            matchable_recipes: RecipeSet::new(0,0,0),
+        }
+    }
+}
+
+/// The cookSpiceBoost parameters
+#[derive(Debug, Default, Clone, PartialEq, Eq)]
+pub struct Boost {
+    /// cookSpiceBoostEffectiveTime
+    pub effective_time: i32,
+    /// cookSpiceBoostHitPointRecover
+    pub hit_point_recover: i32,
+    /// cookSpiceBoostMaxHeartLevel
+    pub max_heart_level: i32,
+    /// cookSpiceBoostStaminaLevel
+    pub stamina_level: i32,
+    /// cookSpiceBoostSuccessRate
+    pub success_rate: i32,
 }
 
 impl Actor {

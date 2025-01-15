@@ -9,7 +9,7 @@ description = "Common data processing utilities for tools in the botwrdb project
 package = "botw-recipe-data"
 path = "../../app/data"
 
-[dependencies.botw-recipe-generated]
+[dependencies.botw-recipe-sys]
 path = "../generated"
 
 [dependencies]

@@ -20,7 +20,7 @@ static_assertions = "1.1.0"
 thiserror = "1.0.69"
 ts-rs = "9.0.1"
 
-[dependencies.botw-recipe-generated]
+[dependencies.botw-recipe-sys]
 path = "../../packages/generated"
 features = ["full"]
 

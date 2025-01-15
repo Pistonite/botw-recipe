@@ -1,8 +1,8 @@
 use super::{
-    CookData, CookResult, Error, Ingredient, Ingredients, RecipeData, Recipes,
+    CookData, CookResult, Error, RecipeData, Recipes,
 };
 
-use botw_recipe_generated::{num_ingr, Actor, Group, GroupMnr, Tag, CookEffect};
+use botw_recipe_sys::{num_ingr, Actor, ActorData, Group, GroupMnr, Tag, CookEffect};
 
 use crate::debugln;
 
@@ -14,7 +14,7 @@ macro_rules! reference {
 
 pub struct CookingPot {
     recipes: Recipes,
-    ingredients: Ingredients,
+    // ingredients: Ingredients,
 }
 
 /// Each item's hp is multipled by 2 in the result
@@ -27,11 +27,11 @@ static BASE_CRIT_CHANCES: [i32; 5] = [5, 10, 15, 20, 25];
 impl CookingPot {
     pub fn new() -> Result<Self, Error> {
         let recipes = super::read_recipes()?;
-        let ingredients = super::read_ingredients()?;
+        // let ingredients = super::read_ingredients()?;
 
         Ok(Self {
             recipes,
-            ingredients,
+            // ingredients,
         })
     }
     pub fn cook_by_name<A: IntoIterator<Item = T>, T: AsRef<str>>(
@@ -71,7 +71,7 @@ impl CookingPot {
             .into_iter()
             .filter_map(|x| {
                 let x = x.into();
-                (x != Actor::None).then_some(&self.ingredients[x])
+                (x != Actor::None).then_some(x.data())
             })
             .collect::<Vec<_>>();
         if ingrs.len() > 5 {
@@ -82,7 +82,7 @@ impl CookingPot {
         }
         let actors = ingrs.iter().map(|x| x.actor).collect::<Vec<_>>();
         let tags = ingrs.iter().map(|x| x.recipe_tag).collect::<Vec<_>>();
-        let mut unique_ingrs: Vec<&Ingredient> = Vec::with_capacity(5);
+        let mut unique_ingrs: Vec<&ActorData> = Vec::with_capacity(5);
         debugln!("Debug Ingredients:");
         for ingr in &ingrs {
             if !unique_ingrs.iter().any(|x| x.actor == ingr.actor) {
@@ -115,7 +115,7 @@ impl CookingPot {
                 let mut sell_price = 0;
                 let mut buy_price = 0;
                 for ingr in &ingrs {
-                    if ingr.tags.contains(&Tag::CookLowPrice) {
+                    if ingr.tags.contains(Tag::CookLowPrice) {
                         sell_price += 1;
                         buy_price += 1;
                     } else {
@@ -154,7 +154,7 @@ impl CookingPot {
                 uking::CookingMgr::cookCalcSpiceBoost(),
                 InfoData::hasTag
             );
-            if ingr.tags.contains(&Tag::CookEnemy) || !ingr.tags.contains(&Tag::CookSpice) {
+            if ingr.tags.contains(Tag::CookEnemy) || !ingr.tags.contains(Tag::CookSpice) {
                 continue;
             }
             reference!(
@@ -162,11 +162,11 @@ impl CookingPot {
                 uking::CookingMgr::cookCalcSpiceBoost(),
                 effect_time
             );
-            time_boost += ingr.boost_effect_time;
-            hp_boost += ingr.boost_hp;
+            time_boost += ingr.boost.effective_time;
+            hp_boost += ingr.boost.hit_point_recover;
             debugln!(
                 "adding {} hp_boost from {}, now {} ",
-                ingr.boost_hp,
+                ingr.boost.hit_point_recover,
                 ingr.actor,
                 hp_boost
             );
@@ -244,7 +244,7 @@ impl CookingPot {
     reference!(uking::CookingMgr::cookCalcIngredientsBoost);
     fn calc_ingredient_boost(
         &self,
-        ingrs: &[&Ingredient],
+        ingrs: &[&ActorData],
         recipe: &RecipeData,
         output: &mut CookData,
     ) -> Result<(CookEffect, bool), Error> {
@@ -294,10 +294,10 @@ impl CookingPot {
                 uking::CookingMgr::cookCalcIngredientsBoost(),
                 tags::CookEnemy
             );
-            if ingr.tags.contains(&Tag::CookEnemy) {
-                max_hp_boost += ingr.boost_max_heart;
-                time += ingr.boost_effect_time;
-                stam_boost += ingr.boost_stamina;
+            if ingr.tags.contains(Tag::CookEnemy) {
+                max_hp_boost += ingr.boost.max_heart_level;
+                time += ingr.boost.effective_time;
+                stam_boost += ingr.boost.stamina_level;
                 if effect.uses_time() {
                     // every ingredient adds 30s
                     time += 30;
@@ -452,13 +452,13 @@ impl CookingPot {
     // hearts are not added if guaranteed heart crit,
     // they are added when processing the raw db if crit_chance >= 100 and if crit_rng_hp is false
     fn calc_crit_boost(
-        unique_ingrs: &[&Ingredient],
+        unique_ingrs: &[&ActorData],
         effect: CookEffect,
         output: &mut CookData,
     ) -> bool {
         let mut crit_chance = unique_ingrs
             .iter()
-            .map(|x| x.boost_success_rate)
+            .map(|x| x.boost.success_rate)
             .max()
             .unwrap_or_default();
         // note that game doesn't cap crit_chance

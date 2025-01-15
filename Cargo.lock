@@ -224,7 +224,7 @@ name = "botw-recipe-data"
 version = "0.0.0"
 dependencies = [
  "base16ct",
- "botw-recipe-generated",
+ "botw-recipe-sys",
  "derivative",
  "derive_deref",
  "enum-map",
@@ -246,7 +246,7 @@ version = "0.0.0"
 dependencies = [
  "anyhow",
  "botw-recipe-data",
- "botw-recipe-generated",
+ "botw-recipe-sys",
  "clap",
  "num_cpus",
  "spp",
@@ -296,7 +296,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "botw-recipe-generated"
+name = "botw-recipe-sys"
 version = "0.0.0"
 dependencies = [
  "bit-iter",

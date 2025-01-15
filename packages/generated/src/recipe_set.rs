@@ -2,7 +2,7 @@
 use bit_iter::BitIter;
 /// No-alloc storage of set of recipes by their indices
 /// in the static recipe data
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Default ,Clone, PartialEq, Eq)]
 pub struct RecipeSet {
     /// Bit storage, from least significant to most significant,
     /// each digit is little-endian

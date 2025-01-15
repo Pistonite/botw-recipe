@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::io;
 
-use botw_recipe_generated::CookEffect;
+use botw_recipe_sys::CookEffect;
 
 /// This data mirrors uking::ui::PouchItem::CookData, with an extra crit_chance field
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]

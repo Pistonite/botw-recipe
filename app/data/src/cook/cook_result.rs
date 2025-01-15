@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use botw_recipe_generated::CookItem;
+use botw_recipe_sys::CookItem;
 
 use super::CookData;
 

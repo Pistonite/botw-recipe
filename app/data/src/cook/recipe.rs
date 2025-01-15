@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-use botw_recipe_generated::{num_ingr, Actor, CookItem, Tag};
+use botw_recipe_sys::{num_ingr, Actor, CookItem, Tag};
 
 use super::Error;
 

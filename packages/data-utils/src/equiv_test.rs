@@ -12,10 +12,7 @@ use std::time::Instant;
 
 use anyhow::bail;
 
-use botw_recipe_generated::actor_count;
-use botw_recipe_generated::group_count;
-use botw_recipe_generated::Group;
-use botw_recipe_generated::{Actor, ActorMnr};
+use botw_recipe_sys::{actor_count, group_count, Group, Actor, ActorMnr};
 use botw_recipe::cook::{CookResult, CookingPot};
 
 use crate::util;

@@ -1,6 +1,6 @@
 use std::io::Write;
 
-use botw_recipe_generated::{num_ingr, Group, GroupMnr, CookEffect};
+use botw_recipe_sys::{num_ingr, Group, GroupMnr, CookEffect};
 
 use crate::cook::{CookData, CookingPot};
 use crate::wmc::WeaponModifierSet;

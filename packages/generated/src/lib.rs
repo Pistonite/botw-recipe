@@ -14,13 +14,13 @@ mod actor_impl;
 #[cfg(all(feature = "actor", feature = "multichoose"))]
 pub use actor_impl::ActorMnr;
 
-#[cfg(feature = "actor")]
+#[cfg(feature = "actor-wmc-group")]
 mod group;
-#[cfg(feature = "actor")]
+#[cfg(feature = "actor-wmc-group")]
 pub use group::Group;
-#[cfg(feature = "actor")]
+#[cfg(feature = "actor-wmc-group")]
 mod group_impl;
-#[cfg(all(feature = "actor", feature = "multichoose"))]
+#[cfg(all(feature = "actor-wmc-group", feature = "multichoose"))]
 pub use group_impl::GroupMnr;
 
 #[cfg(feature = "multichoose")]
@@ -37,6 +37,8 @@ mod tag_impl;
 
 #[cfg(feature = "actor-data")]
 mod actor_data;
+#[cfg(feature = "actor-data")]
+pub use actor_data::{ActorData, Boost};
 
 mod recipe_set;
 pub use recipe_set::RecipeSet;
