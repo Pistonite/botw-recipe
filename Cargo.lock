@@ -228,6 +228,7 @@ dependencies = [
  "derivative",
  "derive_deref",
  "enum-map",
+ "enumset",
  "fs2",
  "log",
  "num",

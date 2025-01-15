@@ -47,7 +47,7 @@ pub use recipe_set::RecipeSet;
 #[cfg(feature = "recipe")]
 mod recipe;
 #[cfg(feature = "recipe")]
-pub use recipe::{Recipe, find_recipe};
+pub use recipe::{Recipe, find_recipe, IngrVec};
 
 /// Number of ingredients the cooking pot accepts
 #[macro_export]

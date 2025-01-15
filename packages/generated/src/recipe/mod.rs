@@ -241,6 +241,58 @@ fn find_first_and_remove<T: PartialEq + Copy>(to_find: &[T], input: &[T], remove
     false
 }
 
+/// Stack allocated vector of at most 5 ingredients
+pub struct IngrVec<T: Default + Copy> {
+    data: IngrArr<T>,
+    len: usize,
+}
+
+impl<T: Default + Copy> IngrVec<T> {
+    #[inline]
+    pub fn new() -> Self {
+        Self {
+            data: [T::default(); num_ingr!()],
+            len: 0,
+        }
+    }
+
+    /// Add value to vec, return Some(T) if the vec is full
+    #[inline]
+    #[must_use]
+    pub fn push(&mut self, value: T) -> Option<T> {
+        if self.len >= num_ingr!() {
+            return Some(value);
+        }
+        self.data[self.len] = value;
+        self.len += 1;
+        None
+    }
+
+    #[inline]
+    pub fn as_slice(&self) -> &[T] {
+        &self.data[..self.len]
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.len
+    }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.len == 0
+    }
+
+    #[inline]
+    pub fn map<U: Default + Copy, F: FnMut(T) -> U>(&self, mut f: F) -> IngrVec<U> {
+        let mut out = IngrVec { data: [U::default(); num_ingr!()], len: self.len };
+        for i in 0..self.len {
+            out.data[i] = f(self.data[i]);
+        }
+        out
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

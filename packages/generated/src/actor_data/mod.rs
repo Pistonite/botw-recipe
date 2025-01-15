@@ -37,6 +37,13 @@ pub struct ActorData {
     pub matchable_recipes: crate::RecipeSet,
 }
 
+static EMPTY_ACTOR_DATA: ActorData = ActorData::empty();
+impl Default for &ActorData {
+    fn default() -> Self {
+        &EMPTY_ACTOR_DATA
+    }
+}
+
 impl ActorData {
     pub const fn empty() -> Self {
         Self {
