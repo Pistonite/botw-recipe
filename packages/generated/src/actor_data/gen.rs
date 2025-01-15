@@ -3,7 +3,7 @@
 //! DO NOT EDIT. See packages/generated/README.md for more information.
 
 use super::{ActorData, Boost};
-use crate::{Actor, CookEffect, RecipeSet, Tag};
+use crate::{Actor, CookEffect, Tag};
 use enumset::{enum_set, EnumSet};
 
 pub(crate) static ACTOR_DATA: [ActorData; 234] = [
@@ -27,11 +27,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004000000081000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002000000040, 0x0404800440002000),
     },
     // Palm Fruit
     ActorData {
@@ -51,11 +48,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004000000081000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002000000040, 0x0404800440002000),
     },
     // Apple
     ActorData {
@@ -75,11 +69,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004200000081000,
-            0x9000880006040000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002100000040, 0x0404800440003020),
     },
     // Wildberry
     ActorData {
@@ -99,11 +90,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004040000081000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002020000040, 0x0404800440002000),
     },
     // Hydromelon
     ActorData {
@@ -123,11 +111,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004000004081000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002000002040, 0x0404800440002000),
     },
     // Spicy Pepper
     ActorData {
@@ -147,11 +132,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004000000001004,
-            0x9060880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002000000000, 0x0404830440002000),
     },
     // Voltfruit
     ActorData {
@@ -171,11 +153,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004000004081000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002000002040, 0x0404800440002000),
     },
     // Fleet-Lotus Seeds
     ActorData {
@@ -195,11 +174,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0004000000001000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000002000000000, 0x0404800440002000),
     },
     // Mighty Bananas
     ActorData {
@@ -219,11 +195,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookFruit },
-        matchable_recipes: RecipeSet::new(
-            0x0006000000081000,
-            0x9000880004000000,
-            0x0000000000000080,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000003000000040, 0x0404800440002000),
     },
     // Big Hearty Truffle
     ActorData {
@@ -243,11 +216,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Hearty Truffle
     ActorData {
@@ -267,11 +237,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Endura Shroom
     ActorData {
@@ -291,11 +258,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Hylian Shroom
     ActorData {
@@ -315,11 +279,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Stamella Shroom
     ActorData {
@@ -339,11 +300,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Chillshroom
     ActorData {
@@ -363,11 +321,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Sunshroom
     ActorData {
@@ -387,11 +342,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Zapshroom
     ActorData {
@@ -411,11 +363,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Rushroom
     ActorData {
@@ -435,11 +384,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Razorshroom
     ActorData {
@@ -459,11 +405,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Ironshroom
     ActorData {
@@ -483,11 +426,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Silent Shroom
     ActorData {
@@ -507,11 +447,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookMushroom },
-        matchable_recipes: RecipeSet::new(
-            0x0600000000000080,
-            0xe801110040410001,
-            0x0000000000000020,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0008300000000000, 0x0107400888020208),
     },
     // Big Hearty Radish
     ActorData {
@@ -531,11 +468,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000004000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000002000, 0x0200f01024040410),
     },
     // Hearty Radish
     ActorData {
@@ -555,11 +489,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 8,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000004000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000002000, 0x0200f01024040410),
     },
     // Endura Carrot
     ActorData {
@@ -579,11 +510,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 120,
         sell_price: 30,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0xfd00028000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0107e80014000000, 0x0200f01024040410),
     },
     // Hyrule Herb
     ActorData {
@@ -603,11 +531,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Swift Carrot
     ActorData {
@@ -627,11 +552,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0xfd00028000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0107e80014000000, 0x0200f01024040410),
     },
     // Fortified Pumpkin
     ActorData {
@@ -651,11 +573,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7d00018010000800,
-            0x1e020480808a0020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103e8000c008000, 0x0200f01024040450),
     },
     // Cool Safflina
     ActorData {
@@ -675,11 +594,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Warm Safflina
     ActorData {
@@ -699,11 +615,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Electric Safflina
     ActorData {
@@ -723,11 +636,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Swift Violet
     ActorData {
@@ -747,11 +657,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Mighty Thistle
     ActorData {
@@ -771,11 +678,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Armoranth
     ActorData {
@@ -795,11 +699,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Blue Nightshade
     ActorData {
@@ -819,11 +720,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Silent Princess
     ActorData {
@@ -843,11 +741,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 10,
         tags: enum_set! { Tag::CookPlant },
-        matchable_recipes: RecipeSet::new(
-            0x7400000000000800,
-            0x1e02048080820020,
-            0x0000000000000040,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0103a00000000000, 0x0200f01024040410),
     },
     // Raw Gourmet Meat
     ActorData {
@@ -867,11 +762,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! { Tag::CookMeat },
-        matchable_recipes: RecipeSet::new(
-            0x1008000122000010,
-            0x4234420108184400,
-            0x0000000000000001,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x2000804000091000, 0x000a11a2100840c2),
     },
     // Raw Whole Bird
     ActorData {
@@ -891,11 +783,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! { Tag::CookMeat },
-        matchable_recipes: RecipeSet::new(
-            0x1008000222000010,
-            0x4234420100184004,
-            0x0000000000000001,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0020804000111000, 0x000a11a2100800c2),
     },
     // Raw Prime Meat
     ActorData {
@@ -915,11 +804,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookMeat },
-        matchable_recipes: RecipeSet::new(
-            0x1008000442000010,
-            0x4238420210184800,
-            0x0000000000000001,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x4000804000221000, 0x000a11c2101080c2),
     },
     // Raw Bird Thigh
     ActorData {
@@ -939,11 +825,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookMeat },
-        matchable_recipes: RecipeSet::new(
-            0x1008000842000010,
-            0x4238420200184008,
-            0x0000000000000001,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0040804000421000, 0x000a11c2101000c2),
     },
     // Raw Meat
     ActorData {
@@ -963,11 +846,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 8,
         tags: enum_set! { Tag::CookMeat },
-        matchable_recipes: RecipeSet::new(
-            0x1008001082000010,
-            0x4230420420185000,
-            0x0000000000000001,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x8000804000841000, 0x000a1182102100c2),
     },
     // Raw Bird Drumstick
     ActorData {
@@ -987,11 +867,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 8,
         tags: enum_set! { Tag::CookMeat },
-        matchable_recipes: RecipeSet::new(
-            0x1008002082000010,
-            0x4230420400184010,
-            0x0000000000000001,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0080804001041000, 0x000a1182102000c2),
     },
     // Courser Bee Honey
     ActorData {
@@ -1011,11 +888,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000080000000100,
-            0x0000000006f00000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000040000000, 0x0000000000003780),
     },
     // Hylian Rice
     ActorData {
@@ -1035,11 +909,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x03c000ff00700000,
-            0x000000000103ff1e,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0xf8f01e0007f80380, 0x000000000000081f),
     },
     // Bird Egg
     ActorData {
@@ -1059,11 +930,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x00019c0000000008,
-            0x000000000000203f,
-            0x0000000000000008,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x01f8000ce0000000, 0x0040000000000001),
     },
     // Tabantha Wheat
     ActorData {
@@ -1083,11 +951,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x803eff00f9880000,
-            0x00000040000000c0,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x060401f7f807cc40, 0x0000000002000000),
     },
     // Fresh Milk
     ActorData {
@@ -1107,11 +972,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0xfc011c00fd000400,
-            0x0000000000000000,
-            0x0000000000000010,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0007e008e007e800, 0x0080000000000000),
     },
     // Acorn
     ActorData {
@@ -1131,11 +993,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 8,
         sell_price: 2,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000400000000200,
-            0x0000000000000000,
-            0x0000000000000100,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000200000000, 0x0800000000000000),
     },
     // Chickaloo Tree Nut
     ActorData {
@@ -1155,11 +1014,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000400000000200,
-            0x0000000000000000,
-            0x0000000000000100,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000200000000, 0x0800000000000000),
     },
     // Cane Sugar
     ActorData {
@@ -1179,11 +1035,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0007ff0000880000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000003ff8000440, 0x0000000000000000),
     },
     // Goat Butter
     ActorData {
@@ -1203,11 +1056,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x83fce300f9900000,
-            0x00000000000402fd,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x17ec1fe71807cc80, 0x0000000000000020),
     },
     // Goron Spice
     ActorData {
@@ -1227,11 +1077,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 16,
         sell_price: 4,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x000000ff00200000,
-            0x00000008f9000200,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x1000000007f80100, 0x000000000047c800),
     },
     // Rock Salt
     ActorData {
@@ -1251,11 +1098,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 2,
         tags: enum_set! { Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x7fd8000000500000,
-            0x000001f700001d23,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0xe91bfec000000280, 0x000000000fb80000),
     },
     // Star Fragment
     ActorData {
@@ -1275,11 +1119,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1500,
         sell_price: 300,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Dinraal's Scale
     ActorData {
@@ -1299,11 +1140,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 600,
         sell_price: 150,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Dinraal's Claw
     ActorData {
@@ -1323,11 +1161,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 720,
         sell_price: 180,
         tags: enum_set! { Tag::CookSpice|Tag::CookLowPrice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Shard of Dinraal's Fang
     ActorData {
@@ -1347,11 +1182,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1000,
         sell_price: 250,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Shard of Dinraal's Horn
     ActorData {
@@ -1371,11 +1203,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1200,
         sell_price: 300,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Naydra's Scale
     ActorData {
@@ -1395,11 +1224,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 600,
         sell_price: 150,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Naydra's Claw
     ActorData {
@@ -1419,11 +1245,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 720,
         sell_price: 180,
         tags: enum_set! { Tag::CookSpice|Tag::CookLowPrice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Shard of Naydra's Fang
     ActorData {
@@ -1443,11 +1266,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1000,
         sell_price: 250,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Shard of Naydra's Horn
     ActorData {
@@ -1467,11 +1287,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1200,
         sell_price: 300,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Farosh's Scale
     ActorData {
@@ -1491,11 +1308,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 600,
         sell_price: 150,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Farosh's Claw
     ActorData {
@@ -1515,11 +1329,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 720,
         sell_price: 180,
         tags: enum_set! { Tag::CookSpice|Tag::CookLowPrice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Shard of Farosh's Fang
     ActorData {
@@ -1539,11 +1350,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1000,
         sell_price: 250,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Shard of Farosh's Horn
     ActorData {
@@ -1563,11 +1371,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1200,
         sell_price: 300,
         tags: enum_set! { Tag::CookLowPrice|Tag::CookSpice },
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Hearty Salmon
     ActorData {
@@ -1587,11 +1392,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2070000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401038000001000, 0x00212ee101000104),
     },
     // Hearty Blueshell Snail
     ActorData {
@@ -1611,11 +1413,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x201000400a100060,
-            0x25dc202000208180,
-            0x0000000000000006,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0c01008002005080, 0x00312ee101000104),
     },
     // Hearty Bass
     ActorData {
@@ -1635,11 +1434,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 72,
         sell_price: 18,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Hyrule Bass
     ActorData {
@@ -1659,11 +1455,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Staminoka Bass
     ActorData {
@@ -1683,11 +1476,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 72,
         sell_price: 18,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Chillfin Trout
     ActorData {
@@ -1707,11 +1497,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Sizzlefin Trout
     ActorData {
@@ -1731,11 +1518,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Voltfin Trout
     ActorData {
@@ -1755,11 +1539,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Stealthfin Trout
     ActorData {
@@ -1779,11 +1560,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Mighty Carp
     ActorData {
@@ -1803,11 +1581,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Armored Carp
     ActorData {
@@ -1827,11 +1602,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Sanke Carp
     ActorData {
@@ -1851,11 +1623,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 80,
         sell_price: 20,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000040,
-            0x25dc202000208080,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00212ee101000104),
     },
     // Mighty Porgy
     ActorData {
@@ -1875,11 +1644,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010004002100040,
-            0x25dc2020002081c0,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0e01008002001080, 0x00212ee101000104),
     },
     // Armored Porgy
     ActorData {
@@ -1899,11 +1665,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010004002100040,
-            0x25dc2020002081c0,
-            0x0000000000000004,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0e01008002001080, 0x00212ee101000104),
     },
     // Sneaky River Snail
     ActorData {
@@ -1923,11 +1686,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2010000002000060,
-            0x25dc202000208080,
-            0x0000000000000006,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0401008000001000, 0x00312ee101000104),
     },
     // Razorclaw Crab
     ActorData {
@@ -1947,11 +1707,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 8,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2090000002000060,
-            0x25dc203800208082,
-            0x0000000000000006,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0411048000001000, 0x00312ee101c00104),
     },
     // Ironshell Crab
     ActorData {
@@ -1971,11 +1728,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 8,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2090000002000060,
-            0x25dc203800208082,
-            0x0000000000000006,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0411048000001000, 0x00312ee101c00104),
     },
     // Bright-Eyed Crab
     ActorData {
@@ -1995,11 +1749,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookFish },
-        matchable_recipes: RecipeSet::new(
-            0x2090000002000060,
-            0x25dc203800208082,
-            0x0000000000000006,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0411048000001000, 0x00312ee101c00104),
     },
     // Fairy
     ActorData {
@@ -2019,11 +1770,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x000000000000e001,
-            0x0000000000000000,
-            0x0000000000000200,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000007, 0x1000000000000000),
     },
     // Winterwing Butterfly
     ActorData {
@@ -2043,11 +1791,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Summerwing Butterfly
     ActorData {
@@ -2067,11 +1812,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Thunderwing Butterfly
     ActorData {
@@ -2091,11 +1833,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Smotherwing Butterfly
     ActorData {
@@ -2115,11 +1854,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Cold Darner
     ActorData {
@@ -2139,11 +1875,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Warm Darner
     ActorData {
@@ -2163,11 +1896,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Electric Darner
     ActorData {
@@ -2187,11 +1917,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Restless Cricket
     ActorData {
@@ -2211,11 +1938,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Bladed Rhino Beetle
     ActorData {
@@ -2235,11 +1959,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 4,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Rugged Rhino Beetle
     ActorData {
@@ -2259,11 +1980,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 4,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Energetic Rhino Beetle
     ActorData {
@@ -2283,11 +2001,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 150,
         sell_price: 30,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Sunset Firefly
     ActorData {
@@ -2307,11 +2022,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Hot-Footed Frog
     ActorData {
@@ -2331,11 +2043,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Tireless Frog
     ActorData {
@@ -2355,11 +2064,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: 20,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Hightail Lizard
     ActorData {
@@ -2379,11 +2085,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 10,
         sell_price: 2,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Hearty Lizard
     ActorData {
@@ -2403,11 +2106,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: 20,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Fireproof Lizard
     ActorData {
@@ -2427,11 +2127,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 25,
         sell_price: 5,
         tags: enum_set! { Tag::CookInsect },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Flint
     ActorData {
@@ -2451,11 +2148,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Amber
     ActorData {
@@ -2475,11 +2169,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 120,
         sell_price: 30,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Opal
     ActorData {
@@ -2499,11 +2190,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 240,
         sell_price: 60,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Luminous Stone
     ActorData {
@@ -2523,11 +2211,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 280,
         sell_price: 70,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Topaz
     ActorData {
@@ -2547,11 +2232,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 720,
         sell_price: 180,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Ruby
     ActorData {
@@ -2571,11 +2253,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 840,
         sell_price: 210,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Sapphire
     ActorData {
@@ -2595,11 +2274,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 1040,
         sell_price: 260,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Diamond
     ActorData {
@@ -2619,11 +2295,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 2000,
         sell_price: 500,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Bokoblin Horn
     ActorData {
@@ -2643,11 +2316,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Bokoblin Fang
     ActorData {
@@ -2667,11 +2337,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 8,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Bokoblin Guts
     ActorData {
@@ -2691,11 +2358,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 80,
         sell_price: 20,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Moblin Horn
     ActorData {
@@ -2715,11 +2379,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Moblin Fang
     ActorData {
@@ -2739,11 +2400,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 45,
         sell_price: 12,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Moblin Guts
     ActorData {
@@ -2763,11 +2421,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: 25,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Lizalfos Horn
     ActorData {
@@ -2787,11 +2442,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Lizalfos Talon
     ActorData {
@@ -2811,11 +2463,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Lizalfos Tail
     ActorData {
@@ -2835,11 +2484,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 112,
         sell_price: 28,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Icy Lizalfos Tail
     ActorData {
@@ -2859,11 +2505,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Red Lizalfos Tail
     ActorData {
@@ -2883,11 +2526,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Yellow Lizalfos Tail
     ActorData {
@@ -2907,11 +2547,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Lynel Horn
     ActorData {
@@ -2931,11 +2568,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 160,
         sell_price: 40,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Lynel Hoof
     ActorData {
@@ -2955,11 +2589,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 200,
         sell_price: 50,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Lynel Guts
     ActorData {
@@ -2979,11 +2610,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 800,
         sell_price: 200,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Chuchu Jelly
     ActorData {
@@ -3003,11 +2631,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // White Chuchu Jelly
     ActorData {
@@ -3027,11 +2652,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Red Chuchu Jelly
     ActorData {
@@ -3051,11 +2673,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Yellow Chuchu Jelly
     ActorData {
@@ -3075,11 +2694,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Keese Wing
     ActorData {
@@ -3099,11 +2715,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 8,
         sell_price: 2,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Ice Keese Wing
     ActorData {
@@ -3123,11 +2736,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Fire Keese Wing
     ActorData {
@@ -3147,11 +2757,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Electric Keese Wing
     ActorData {
@@ -3171,11 +2778,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 24,
         sell_price: 6,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Keese Eyeball
     ActorData {
@@ -3195,11 +2799,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 80,
         sell_price: 20,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Octorok Tentacle
     ActorData {
@@ -3219,11 +2820,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 10,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Octorok Eyeball
     ActorData {
@@ -3243,11 +2841,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: 25,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Octo Balloon
     ActorData {
@@ -3267,11 +2862,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Molduga Fin
     ActorData {
@@ -3291,11 +2883,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 120,
         sell_price: 30,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Molduga Guts
     ActorData {
@@ -3315,11 +2904,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 440,
         sell_price: 110,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Hinox Toenail
     ActorData {
@@ -3339,11 +2925,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 80,
         sell_price: 20,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Hinox Tooth
     ActorData {
@@ -3363,11 +2946,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Hinox Guts
     ActorData {
@@ -3387,11 +2967,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 320,
         sell_price: 80,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Ancient Screw
     ActorData {
@@ -3411,11 +2988,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 48,
         sell_price: 12,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Ancient Spring
     ActorData {
@@ -3435,11 +3009,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 15,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Ancient Gear
     ActorData {
@@ -3459,11 +3030,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 120,
         sell_price: 30,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Ancient Shaft
     ActorData {
@@ -3483,11 +3051,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 160,
         sell_price: 40,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Ancient Core
     ActorData {
@@ -3507,11 +3072,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 320,
         sell_price: 80,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Giant Ancient Core
     ActorData {
@@ -3531,11 +3093,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 800,
         sell_price: 200,
         tags: enum_set! { Tag::CookEnemy },
-        matchable_recipes: RecipeSet::new(
-            0x000000000006e000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000037, 0x0000000000000000),
     },
     // Wood
     ActorData {
@@ -3555,11 +3114,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 2,
         tags: enum_set! { Tag::CookOre },
-        matchable_recipes: RecipeSet::new(
-            0x000000000001a002,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x000000000000000d, 0x0000000000000000),
     },
     // Baked Apple
     ActorData {
@@ -3579,11 +3135,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 8,
         sell_price: 3,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Baked Palm Fruit
     ActorData {
@@ -3603,11 +3156,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 15,
         sell_price: 6,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Wildberry
     ActorData {
@@ -3627,11 +3177,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Acorn
     ActorData {
@@ -3651,11 +3198,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 5,
         sell_price: 2,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Tree Nut
     ActorData {
@@ -3675,11 +3219,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 5,
         sell_price: 2,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Hearty Durian
     ActorData {
@@ -3699,11 +3240,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 12,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Hydromelon
     ActorData {
@@ -3723,11 +3261,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Charred Pepper
     ActorData {
@@ -3747,11 +3282,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Voltfruit
     ActorData {
@@ -3771,11 +3303,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Lotus Seeds
     ActorData {
@@ -3795,11 +3324,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Mighty Bananas
     ActorData {
@@ -3819,11 +3345,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Hylian Shroom
     ActorData {
@@ -3843,11 +3366,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 12,
         sell_price: 3,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Stamella Shroom
     ActorData {
@@ -3867,11 +3387,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Endura Shroom
     ActorData {
@@ -3891,11 +3408,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasted Hearty Truffle
     ActorData {
@@ -3915,11 +3429,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasted Big Hearty Truffle
     ActorData {
@@ -3939,11 +3450,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 58,
         sell_price: 24,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Chillshroom
     ActorData {
@@ -3963,11 +3471,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 15,
         sell_price: 6,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Sunshroom
     ActorData {
@@ -3987,11 +3492,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 15,
         sell_price: 6,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Zapshroom
     ActorData {
@@ -4011,11 +3513,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 15,
         sell_price: 6,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Rushroom
     ActorData {
@@ -4035,11 +3534,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Razorshroom
     ActorData {
@@ -4059,11 +3555,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Ironshroom
     ActorData {
@@ -4083,11 +3576,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 13,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Toasty Silent Shroom
     ActorData {
@@ -4107,11 +3597,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 8,
         sell_price: 3,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Radish
     ActorData {
@@ -4131,11 +3618,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 12,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Big Radish
     ActorData {
@@ -4155,11 +3639,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 58,
         sell_price: 24,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Swift Carrot
     ActorData {
@@ -4179,11 +3660,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 15,
         sell_price: 6,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Endura Carrot
     ActorData {
@@ -4203,11 +3681,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 95,
         sell_price: 38,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Baked Fortified Pumpkin
     ActorData {
@@ -4227,11 +3702,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Mighty Thistle
     ActorData {
@@ -4251,11 +3723,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Armoranth
     ActorData {
@@ -4275,11 +3744,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 8,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Campfire Egg
     ActorData {
@@ -4299,11 +3765,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Hard-Boiled Egg
     ActorData {
@@ -4323,11 +3786,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: 5,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Seared Steak
     ActorData {
@@ -4347,11 +3807,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 12,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Seared Prime Steak
     ActorData {
@@ -4371,11 +3828,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 58,
         sell_price: 24,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Seared Gourmet Steak
     ActorData {
@@ -4395,11 +3849,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Bird Drumstick
     ActorData {
@@ -4419,11 +3870,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 12,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Bird Thigh
     ActorData {
@@ -4443,11 +3891,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 28,
         sell_price: 24,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Whole Bird
     ActorData {
@@ -4467,11 +3912,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 140,
         sell_price: 35,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Bass
     ActorData {
@@ -4491,11 +3933,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 23,
         sell_price: 9,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Hearty Bass
     ActorData {
@@ -4515,11 +3954,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 12,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Hearty Salmon
     ActorData {
@@ -4539,11 +3975,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 38,
         sell_price: 15,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Trout
     ActorData {
@@ -4563,11 +3996,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 23,
         sell_price: 9,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Carp
     ActorData {
@@ -4587,11 +4017,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 38,
         sell_price: 15,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Roasted Porgy
     ActorData {
@@ -4611,11 +4038,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 38,
         sell_price: 15,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Sneaky River Escargot
     ActorData {
@@ -4635,11 +4059,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 23,
         sell_price: 9,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Blueshell Escargot
     ActorData {
@@ -4659,11 +4080,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 38,
         sell_price: 15,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Blackened Crab
     ActorData {
@@ -4683,11 +4101,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 30,
         sell_price: 12,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Icy Meat
     ActorData {
@@ -4707,11 +4122,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 35,
         sell_price: 15,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Icy Prime Meat
     ActorData {
@@ -4731,11 +4143,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 28,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Icy Gourmet Meat
     ActorData {
@@ -4755,11 +4164,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 150,
         sell_price: 40,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Bird Drumstick
     ActorData {
@@ -4779,11 +4185,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 35,
         sell_price: 15,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Bird Thigh
     ActorData {
@@ -4803,11 +4206,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 60,
         sell_price: 28,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Whole Bird
     ActorData {
@@ -4827,11 +4227,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 150,
         sell_price: 40,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Bass
     ActorData {
@@ -4851,11 +4248,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 14,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Hearty Bass
     ActorData {
@@ -4875,11 +4269,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 14,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Hearty Salmon
     ActorData {
@@ -4899,11 +4290,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 18,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Trout
     ActorData {
@@ -4923,11 +4311,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 25,
         sell_price: 10,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Carp
     ActorData {
@@ -4947,11 +4332,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 18,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Porgy
     ActorData {
@@ -4971,11 +4353,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 18,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen Crab
     ActorData {
@@ -4995,11 +4374,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 32,
         sell_price: 14,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Frozen River Snail
     ActorData {
@@ -5019,11 +4395,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 25,
         sell_price: 10,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Icy Hearty Blueshell Snail
     ActorData {
@@ -5043,11 +4416,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 40,
         sell_price: 18,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Sheikah Slate
     ActorData {
@@ -5067,11 +4437,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: -1,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Dye
     ActorData {
@@ -5091,11 +4458,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Blue
     ActorData {
@@ -5115,11 +4479,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Red
     ActorData {
@@ -5139,11 +4500,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Yellow
     ActorData {
@@ -5163,11 +4521,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // White
     ActorData {
@@ -5187,11 +4542,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Black
     ActorData {
@@ -5211,11 +4563,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Purple
     ActorData {
@@ -5235,11 +4584,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Green
     ActorData {
@@ -5259,11 +4605,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Light Blue
     ActorData {
@@ -5283,11 +4626,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Navy
     ActorData {
@@ -5307,11 +4647,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Orange
     ActorData {
@@ -5331,11 +4668,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Peach
     ActorData {
@@ -5355,11 +4689,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Crimson
     ActorData {
@@ -5379,11 +4710,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Light Yellow
     ActorData {
@@ -5403,11 +4731,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Brown
     ActorData {
@@ -5427,11 +4752,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Gray
     ActorData {
@@ -5451,11 +4773,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 20,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Fauna Picture
     ActorData {
@@ -5475,11 +4794,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Elite Enemy Picture
     ActorData {
@@ -5499,11 +4815,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 500,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Enemy Picture
     ActorData {
@@ -5523,11 +4836,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Material Picture
     ActorData {
@@ -5547,11 +4857,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Other Picture
     ActorData {
@@ -5571,11 +4878,8 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
     // Weapon Picture
     ActorData {
@@ -5595,10 +4899,7 @@ pub(crate) static ACTOR_DATA: [ActorData; 234] = [
         buy_price: 100,
         sell_price: -1,
         tags: enum_set! {},
-        matchable_recipes: RecipeSet::new(
-            0x0000000000000000,
-            0x0000000000000000,
-            0x0000000000000000,
-        ),
+        #[cfg(feature = "recipe")]
+        matchable_recipes: crate::RecipeSet::new(0x0000000000000000, 0x0000000000000000),
     },
 ];

@@ -501,6 +501,16 @@ impl CookItem {
             Self::Item_Cook_P_05 => "Item_Cook_P_05",
         }
     }
+    /// Get the Dubious Food CookItem
+    #[inline]
+    pub const fn dubious_food() -> Self {
+        Self::Item_Cook_O_01
+    }
+    /// Get the Fairy Tonic CookItem
+    #[inline]
+    pub const fn fairy_tonic() -> Self {
+        Self::Item_Cook_C_16
+    }
     /// Get the cook item from an actor name
     #[cfg(feature = "cook-item-from-actor")]
     pub fn from_actor_name(name: &str) -> Option<Self> {

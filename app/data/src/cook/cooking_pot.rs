@@ -1,8 +1,6 @@
-use super::{
-    CookData, CookResult, Error, RecipeData, Recipes,
-};
+use super::{ CookData, CookResult, Error };
 
-use botw_recipe_sys::{num_ingr, Actor, ActorData, Group, GroupMnr, Tag, CookEffect};
+use botw_recipe_sys::{num_ingr, Actor, ActorData, CookEffect, Group, GroupMnr, Recipe, Tag};
 
 use crate::debugln;
 
@@ -13,7 +11,7 @@ macro_rules! reference {
 }
 
 pub struct CookingPot {
-    recipes: Recipes,
+    // recipes: Recipes,
     // ingredients: Ingredients,
 }
 
@@ -26,11 +24,11 @@ static BASE_CRIT_CHANCES: [i32; 5] = [5, 10, 15, 20, 25];
 
 impl CookingPot {
     pub fn new() -> Result<Self, Error> {
-        let recipes = super::read_recipes()?;
+        // let recipes = super::read_recipes()?;
         // let ingredients = super::read_ingredients()?;
 
         Ok(Self {
-            recipes,
+            // recipes,
             // ingredients,
         })
     }
@@ -67,31 +65,39 @@ impl CookingPot {
         &self,
         actors: A,
     ) -> Result<CookResult, Error> {
-        let ingrs = actors
-            .into_iter()
+        let actors: Vec<Actor> = actors.into_iter()
             .filter_map(|x| {
                 let x = x.into();
-                (x != Actor::None).then_some(x.data())
-            })
-            .collect::<Vec<_>>();
-        if ingrs.len() > 5 {
+                if x != Actor::None {
+                    Some(x)
+                } else {
+                    None
+                }
+            }).collect::<Vec<_>>();
+
+        if actors.len() > 5 {
             return Err(Error::TooManyIngr);
         }
-        if ingrs.is_empty() {
+        if actors.is_empty() {
             return Err(Error::TooFewIngr);
         }
-        let actors = ingrs.iter().map(|x| x.actor).collect::<Vec<_>>();
-        let tags = ingrs.iter().map(|x| x.recipe_tag).collect::<Vec<_>>();
         let mut unique_ingrs: Vec<&ActorData> = Vec::with_capacity(5);
         debugln!("Debug Ingredients:");
-        for ingr in &ingrs {
-            if !unique_ingrs.iter().any(|x| x.actor == ingr.actor) {
-                unique_ingrs.push(ingr);
-                debugln!("  - {:#?}", ingr);
+        for actor in &actors {
+            if !unique_ingrs.iter().any(|x| x.actor == *actor) {
+                unique_ingrs.push(actor.data());
+                debugln!("  - {:#?}", actor);
             }
         }
+        let ingrs = actors
+            .iter()
+            .map(|x| {
+                x.data()
+            })
+            .collect::<Vec<_>>();
 
-        let recipe = self.recipes.find(&actors, &tags, unique_ingrs.len())?;
+        let recipe = botw_recipe_sys::find_recipe(&actors, unique_ingrs.len() == 1);
+
         debugln!("Recipe: {:?}", recipe);
 
         let mut output = CookData::new();
@@ -182,10 +188,10 @@ impl CookingPot {
             uking::CookingMgr::cookCalcRecipeBoost(),
             life_recover
         );
-        output.health_recover += recipe.get_extra_hp();
+        output.health_recover += recipe.heart_bonus;
         debugln!(
             "recipe extra hp is {}, hp is now {}",
-            recipe.get_extra_hp(),
+            recipe.heart_bonus,
             output.health_recover
         );
 
@@ -232,7 +238,7 @@ impl CookingPot {
         let crit_rng_hp = Self::calc_crit_boost(&unique_ingrs, effect, &mut output);
 
         Ok(CookResult {
-            item: recipe.item(),
+            item: recipe.item,
             data: output,
             crit_rng_hp,
         })
@@ -245,7 +251,7 @@ impl CookingPot {
     fn calc_ingredient_boost(
         &self,
         ingrs: &[&ActorData],
-        recipe: &RecipeData,
+        recipe: &Recipe,
         output: &mut CookData,
     ) -> Result<(CookEffect, bool), Error> {
         // doesn't hurt if we calculate effect early

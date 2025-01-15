@@ -8,6 +8,7 @@ description = "Data binding generated from parameters"
 
 [dependencies]
 bit-iter = { version = "1.2.0", optional = true }
+derive_more = { version = "1.0.0", features = ["deref"], optional = true }
 enum-map = { version = "2.7.3", optional = true }
 enumset = { version = "1.1.5", optional = true }
 no-panic = "0.1.33"
@@ -21,6 +22,7 @@ full = [
     "actor-wmc-group",
     "tag-full",
     "actor-data",
+    "recipe",
     "multichoose"
 ]
 
@@ -94,6 +96,9 @@ tag-full = [
 
 ## Actor Data (parameter) features
 actor-data = ["tag-enum-set", "dep:bit-iter"]
+
+## Recipe Data
+recipe = ["actor", "tag", "cook-item", "dep:derive_more"]
 
 multichoose = []
 

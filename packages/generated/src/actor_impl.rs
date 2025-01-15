@@ -21,6 +21,9 @@ impl Actor {
     }
 }
 
+#[cfg(feature = "recipe")]
+impl crate::recipe::RecipeMatch for Actor {}
+
 #[cfg(all(feature = "actor-english", feature = "actor-to-actor"))]
 impl std::fmt::Debug for Actor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

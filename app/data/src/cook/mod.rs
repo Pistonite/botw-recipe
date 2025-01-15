@@ -10,6 +10,3 @@ pub use cooking_pot::*;
 
 mod error;
 pub use error::*;
-
-mod recipe;
-pub use recipe::*;

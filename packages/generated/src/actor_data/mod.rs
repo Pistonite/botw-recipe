@@ -2,7 +2,7 @@ use enumset::EnumSet;
 
 mod gen;
 
-use crate::{RecipeSet, Actor, CookEffect, Tag};
+use crate::{Actor, CookEffect, Tag};
 
 /// Actor data extracted from parameters and links
 #[derive(Debug, Default, Clone, PartialEq, Eq)]
@@ -33,7 +33,8 @@ pub struct ActorData {
     pub tags: EnumSet<Tag>,
 
     /// Indices of recipes that possible to be matched with this actor
-    pub matchable_recipes: RecipeSet,
+    #[cfg(feature = "recipe")]
+    pub matchable_recipes: crate::RecipeSet,
 }
 
 impl ActorData {
@@ -55,7 +56,8 @@ impl ActorData {
             buy_price: 0,
             sell_price: 0,
             tags: EnumSet::new(),
-            matchable_recipes: RecipeSet::new(0,0,0),
+            #[cfg(feature = "recipe")]
+            matchable_recipes: crate::RecipeSet::new(0,0),
         }
     }
 }

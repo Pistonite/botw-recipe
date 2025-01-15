@@ -40,8 +40,14 @@ mod actor_data;
 #[cfg(feature = "actor-data")]
 pub use actor_data::{ActorData, Boost};
 
+#[cfg(feature = "recipe")]
 mod recipe_set;
+#[cfg(feature = "recipe")]
 pub use recipe_set::RecipeSet;
+#[cfg(feature = "recipe")]
+mod recipe;
+#[cfg(feature = "recipe")]
+pub use recipe::{Recipe, find_recipe};
 
 /// Number of ingredients the cooking pot accepts
 #[macro_export]

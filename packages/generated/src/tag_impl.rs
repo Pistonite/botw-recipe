@@ -21,6 +21,9 @@ impl Tag {
     }
 }
 
+#[cfg(feature = "recipe")]
+impl crate::recipe::RecipeMatch for Tag {}
+
 #[cfg(feature = "tag-to-str")]
 impl std::fmt::Debug for Tag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -27,6 +27,7 @@ def main():
         generate_group(english_names, groups, pe_only_actors),
         generate_tags(tags),
         generate_actor_data(actors, english_names, actor_data),
+        generate_recipe_data(),
     ])
 
 
@@ -40,6 +41,109 @@ EXTRA_TAGS = [
     "CookEnemy",
     "CookSpice"
 ]
+
+def generate_recipe_data():
+    with open(output_file("recipes.yaml"), "r", encoding="utf-8") as f:
+        recipes = yaml.safe_load(f)
+    with open(output_file("recipe-meta.yaml"), "r", encoding="utf-8") as f:
+        recipe_meta = yaml.safe_load(f)
+
+    single_recipe_count = recipe_meta["single_recipe_count"]
+
+    single_recipe_lines = []
+    recipe_lines = []
+
+    progress = spp.printer(len(recipes), "Generate recipe data")
+
+    for (i, recipe) in enumerate(recipes[:single_recipe_count]):
+        cook_item = recipe["recipe"]
+        progress.print(i, cook_item)
+        heart_bonus = recipe["heart_bonus"]
+
+        actors = recipe["actors"]
+        for a in actors:
+            if isinstance(a, list):
+                raise ValueError(f"SingleRecipe {cook_item} has nested matcher: {a}")
+        tags = recipe["tags"]
+        for t in tags:
+            if isinstance(t, list):
+                raise ValueError(f"SingleRecipe {cook_item} has nested matcher: {t}")
+
+        single_recipe_lines += [
+            "SingleRecipeData {",
+            f"recipe: Recipe::new(CookItem::{cook_item}, {heart_bonus}),",
+            f"actors: SingleMatcher::new(&[",
+            ",".join(f"Actor::{actor}" for actor in actors),
+            "]),",
+            f"tags: SingleMatcher::new(&[",
+            ",".join(f"Tag::{tag}" for tag in tags),
+            "]),",
+            "},"
+        ]
+
+    def convert_multi_matcher_flat_list(x):
+        number_of_list_items = 0
+        for item in x:
+            if isinstance(item, list):
+                number_of_list_items += 1
+        if number_of_list_items == 0:
+            # flat list
+            return [ [x] for x in x ]
+        if number_of_list_items != len(x):
+            raise ValueError(f"Nested matcher not supported: {x}")
+        return x
+
+    def format_multi_matcher(enum_type: str, x):
+        out = []
+        for item in x:
+            # FIXME: exclude monster extract for now, they are harded coded
+            # to not match
+            out.append(f"&[{",".join(f"{enum_type}::{item}" for item in item if item != "Item_Material_08")}]")
+        return ",".join(out)
+                
+
+    for (i, recipe) in enumerate(recipes[single_recipe_count:]):
+        cook_item = recipe["recipe"]
+        progress.print(i + single_recipe_count, cook_item)
+        heart_bonus = recipe["heart_bonus"]
+
+        actors = convert_multi_matcher_flat_list(recipe["actors"])
+        tags = convert_multi_matcher_flat_list(recipe["tags"])
+
+        recipe_lines += [
+            "RecipeData {",
+            f"recipe: Recipe::new(CookItem::{cook_item}, {heart_bonus}),",
+            f"actors: MultiMatcher::new(&[",
+            format_multi_matcher("Actor", actors),
+            "]),",
+            f"tags: MultiMatcher::new(&[",
+            format_multi_matcher("Tag", tags),
+            "]),",
+            "},"
+        ]
+
+    progress.done()
+
+    dubious_index = recipe_meta["failure_actor_index"]
+    if dubious_index >= single_recipe_count:
+        dubious_line = f"&RECIPES[{dubious_index - single_recipe_count}]"
+    else:
+        raise ValueError(f"Dubious index {dubious_index} is not in the multi-recipe range")
+
+    lines = [
+        "use super::{SingleRecipeData, RecipeData, Recipe, SingleMatcher, MultiMatcher};",
+        "use crate::{Tag, Actor, CookItem};",
+        "",
+        f"pub(crate) static RECIPES: [RecipeData; {len(recipes) - single_recipe_count}] = [",
+    ] + recipe_lines + [
+        "];",
+        f"pub(crate) static SINGLE_RECIPES: [SingleRecipeData; {single_recipe_count}] = [",
+    ] + single_recipe_lines + [
+        "];",
+        f"pub(crate) static DUBIOUS_RECIPE: &RecipeData = {dubious_line};",
+    ] 
+
+    return write_rust_source(src_file("recipe", "gen.rs"), lines)
 
 @dataclass
 class ActorData:
@@ -56,7 +160,7 @@ class ActorData:
     buy_price: int
     sell_price: int
     tags: list[str]
-    matchable_recipes: tuple[int, int, int] # bitset
+    matchable_recipes: tuple[int, int] # bitset
 
 def generate_actor_data(
     actors: list[str],
@@ -73,7 +177,7 @@ def generate_actor_data(
         progress.print(i, actor)
         english = english_names[actor]
         data = actor_data[actor]
-        a1, a2, a3 = data.matchable_recipes
+        a1, a2 = data.matchable_recipes
         actor_data_lines += [
             "// " + english,
             "ActorData {",
@@ -93,7 +197,8 @@ def generate_actor_data(
             f"buy_price: {data.buy_price},",
             f"sell_price: {data.sell_price},",
             f"tags: enum_set! {{ {"|".join(f"Tag::{tag}" for tag in data.tags)} }},",
-            f"matchable_recipes: RecipeSet::new(0x{a1:016x}, 0x{a2:016x}, 0x{a3:016x}),",
+            "#[cfg(feature = \"recipe\")]",
+            f"matchable_recipes: crate::RecipeSet::new(0x{a1:016x}, 0x{a2:016x}),",
             "},",
         ]
 
@@ -102,7 +207,7 @@ def generate_actor_data(
     lines = [
         "use enumset::{EnumSet, enum_set};",
         "use super::{ActorData, Boost};",
-        "use crate::{Tag, Actor, CookEffect, RecipeSet};",
+        "use crate::{Tag, Actor, CookEffect};",
         "",
         # add 1 for the None variant
         f"pub(crate) static ACTOR_DATA: [ActorData; {len(actors) + 1}] = [",
@@ -346,6 +451,12 @@ def generate_actor(
 def generate_cook_item():
     with open(output_file("recipe-meta.yaml"), "r", encoding="utf-8") as f:
         recipe_meta = yaml.safe_load(f)
+    with open(output_file("cook-system.yaml"), "r", encoding="utf-8") as f:
+        cook_system = yaml.safe_load(f)
+
+    dubious_food = cook_system["failure_actor"]
+    fairy_tonic = cook_system["fairy_cook_actor"]
+
     output_actors = recipe_meta["output_actors"]
     enum_lines = []
     english_name_lines = []
@@ -394,6 +505,10 @@ def generate_cook_item():
         "match self {",
     ] + actor_name_lines + [
         "}}",
+        "/// Get the Dubious Food CookItem",
+        f"#[inline] pub const fn dubious_food() -> Self {{ Self::{dubious_food} }}",
+        "/// Get the Fairy Tonic CookItem",
+        f"#[inline] pub const fn fairy_tonic() -> Self {{ Self::{fairy_tonic} }}",
         "/// Get the cook item from an actor name",
         "#[cfg(feature = \"cook-item-from-actor\")]",
         "pub fn from_actor_name(name: &str) -> Option<Self> {",
@@ -473,7 +588,7 @@ def load_actor_data() -> tuple[
         else:
             raise ValueError(f"Actor {actor} has multiple recipe tags: {actor_recipe_tags}")
 
-        a1, a2, a3 = recipe_actor_index.get(actor, [0, 0, 0])
+        a1, a2 = recipe_actor_index.get(actor, [0, 0])
 
         gpl = data["gparamlist"]
         def gplget(key: str):
@@ -492,7 +607,7 @@ def load_actor_data() -> tuple[
             buy_price = gplget("itemBuyingPrice"),
             sell_price = gplget("itemSellingPrice"),
             tags = actor_impo_tags,
-            matchable_recipes = (a1, a2, a3)
+            matchable_recipes = (a1, a2)
         )
         actor_data[actor] = the_data
 

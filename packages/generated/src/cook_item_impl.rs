@@ -19,6 +19,44 @@ impl CookItem {
             None
         }
     }
+
+    /// Get the Rock-hard food CookItem
+    #[inline] 
+    pub const fn rock_hard() -> Self {
+        Self::Item_Cook_O_02
+    }
+
+    /// Check if this CookItem is a Rock-hard food
+    #[inline] 
+    pub fn is_rock_hard(self) -> bool {
+        self == Self::rock_hard()
+    }
+
+    /// Get the elixir CookItem
+    #[inline]
+    pub const fn elixir() -> Self {
+        Self::Item_Cook_C_17
+    }
+
+    /// Check if this CookItem is an Elixir
+    #[inline]
+    pub fn is_elixir(self) -> bool {
+        self == Self::elixir()
+    }
+
+    /// Check if this CookItem is a Dubious Food
+    #[inline]
+    pub fn is_dubious(self) -> bool {
+        self == Self::dubious_food()
+    }
+
+    /// Check if this CookItem is a Fairy Tonic
+    #[inline]
+    pub fn is_fairy_tonic(self) -> bool {
+        self == Self::fairy_tonic()
+    }
+
+
 }
 
 #[cfg(all(feature = "cook-item-english", feature = "cook-item-to-actor"))]
