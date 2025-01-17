@@ -16,6 +16,10 @@ import shutil
 import subprocess
 import sys
 
+COMMON_ENUM_DERIVES = [
+    "Copy", "Clone", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash"
+]
+
 def main():
     actors, groups, actor_to_group_idx = load_actors_and_groups()
     pe_only_actors, actor_data, english_names = load_actor_data()
@@ -28,12 +32,164 @@ def main():
         generate_tags(tags),
         generate_actor_data(actors, english_names, actor_data),
         generate_recipe_data(),
+        generate_cook_effect(),
     ])
 
+def generate_cook_effect():
+    files = os.listdir(output_file("CookEffect"))
 
-COMMON_ENUM_DERIVES = [
-    "Copy", "Clone", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash"
-]
+    enum_lines = [
+        "/// No effect",
+        "#[default]",
+        "None = 0,",
+    ]
+
+    str_lines = [
+        "Self::None => \"None\",",
+    ]
+
+    from_str_lines = [
+        "    \"None\" => CookEffect::None,",
+    ]
+
+    english_lines = [
+        "Self::None => \"\",",
+    ]
+
+    special_status_lines = [
+        "Self::None => None,",
+    ]
+
+    base_time_lines = [
+        "Self::None => 0,",
+    ]
+
+    max_level_lines = [
+        "Self::None => 0,",
+    ]
+
+    game_repr_lines = [
+        "Self::None => -1,",
+    ]
+    from_game_repr_lines = [
+        "-1. => Some(Self::None),",
+    ]
+
+    progress = spp.printer(len(files), "Generate CookEffect")
+    for (i, file) in enumerate(sorted(files)):
+        progress.print(i, file)
+        with open(output_file("CookEffect", file), "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        code_name = data["code_name"]
+        localization = data["localization"]
+        english_name = ""
+        if localization:
+            # remove the trailing space
+            english_name = localization["en-US"]["name"].strip();
+            enum_lines.append(f"/// {english_name}")
+            english_lines.append(f"Self::{code_name} => \"{english_name}\",")
+        else:
+            english_lines.append(f"Self::{code_name} => \"\",")
+
+        enum_lines.append(f"{code_name},")
+        str_lines.append(f"Self::{code_name} => \"{code_name}\",")
+        from_str_lines.append(f"    \"{code_name}\" => CookEffect::{code_name},")
+        special_status = data["special_status"]
+        if special_status:
+            special_status_lines.append(f"Self::{code_name} => Some(\"{special_status}\"),")
+        else:
+            special_status_lines.append(f"Self::{code_name} => None,")
+        value = data["value"]
+        game_repr_lines.append(f"Self::{code_name} => {value},")
+        from_game_repr_lines.append(f"{value}. => Some(Self::{code_name}),")
+
+        base_time = data["base_time"]
+        base_time_lines.append(f"Self::{code_name} => {base_time},")
+        max_level = data["max"]
+        max_level_lines.append(f"Self::{code_name} => {max_level},")
+
+    from_game_repr_lines.append("_ => None")
+
+    progress.done()
+
+    lines = [
+        "/// Effect of cooked food",
+        f"#[cfg_attr(feature = \"cook-effect-enum-map\", derive(enum_map::Enum))]",
+        f"#[cfg_attr(feature = \"cook-effect-enum-set\", derive(enumset::EnumSetType, PartialOrd, Ord, Hash))]",
+        f"#[cfg_attr(not(feature = \"cook-effect-enum-set\"), derive({",".join(COMMON_ENUM_DERIVES)}))]",
+        "#[derive(Default)]",
+        "#[repr(u8)]",
+        "pub enum CookEffect {",
+    ] + enum_lines + [
+        "}",
+        "impl CookEffect {",
+        "/// Get the string representation of the effect",
+        "#[cfg(feature = \"cook-effect-to-str\")]",
+        "pub const fn as_str(self) -> &'static str {",
+        "match self {",
+    ] + str_lines + [
+        "}}",
+
+        "/// Get the effect from string representation",
+        "#[cfg(feature = \"cook-effect-from-str\")]",
+        "pub fn from_str(name: &str) -> Option<Self> {",
+        "COOK_EFFECT_STR_MAP.get(name).copied()",
+        "}",
+
+        "/// Get the English name of the effect",
+        "#[cfg(feature = \"cook-effect-english\")]",
+        "pub const fn name(self) -> &'static str {",
+        "match self {",
+    ] + english_lines + [
+        "}}",
+
+        "/// Get the name of the SpecialStatus associated with this effect",
+        "///",
+        "/// This is usually the same as the string representation, except for:",
+        "/// - MovingSpeed -> AllSpeed",
+        "/// - LifeRecover -> (doesn't have one)"
+        "#[cfg(feature = \"cook-effect-special-status\")]",
+        "pub const fn special_status(self) -> Option<&'static str> {",
+        "match self {",
+    ] + special_status_lines + [
+        "}}",
+
+        "/// Get the base time of the effect",
+        "///",
+        "/// For effects that are not time based, this is 0",
+        "#[cfg(feature = \"cook-effect-data\")]",
+        "pub const fn base_time(self) -> u32 {",
+        "match self {",
+    ] + base_time_lines + [
+        "}}",
+
+        "/// Get the maximum level of the effect",
+        "#[cfg(feature = \"cook-effect-data\")]",
+        "pub const fn max_level(self) -> u32 {",
+        "match self {",
+    ] + max_level_lines + [
+        "}}",
+
+        "/// Convert the cook effect to the game enum value",
+        "pub const fn game_repr(self) -> i32 {",
+        "match self {",
+    ] + game_repr_lines + [
+        "}}",
+
+        "/// Convert game enum value to the cook effect",
+        "pub fn from_game_repr(value: f32) -> Option<Self> {",
+        "match value {",
+    ] + from_game_repr_lines + [
+        "}}",
+
+        "}",
+        "#[cfg(feature = \"cook-effect-from-str\")]",
+        "static COOK_EFFECT_STR_MAP: phf::Map<&'static str, CookEffect> = phf::phf_map! {",
+    ] + from_str_lines + [
+        "};",
+    ] + generate_rust_count_macro("cook_effect", len(files) + 1)
+
+    return write_rust_source(src_file("cook_effect.rs"), lines)
 
 # Tags referenced in the cooking code
 EXTRA_TAGS = [
@@ -248,7 +404,7 @@ def generate_tags(tags: list[str]):
         "impl Tag {",
         "/// Get the string representation of the tag",
         "#[cfg(feature = \"tag-to-str\")]",
-        "pub const fn as_str(&self) -> &'static str {",
+        "pub const fn as_str(self) -> &'static str {",
         "match self {",
         "Self::None => \"<none>\",",
     ] + tag_str_lines + [
@@ -256,7 +412,7 @@ def generate_tags(tags: list[str]):
         "/// Check if the tag is used in recipe matching",
         "///",
         "/// Each actor should have at most 1 of these tags",
-        "pub const fn is_used_in_recipe_matching(&self) -> bool {",
+        "pub const fn is_used_in_recipe_matching(self) -> bool {",
         "match self {",
     ] + used_in_matching_lines + [
         "}}",
@@ -269,7 +425,7 @@ def generate_tags(tags: list[str]):
         "static TAG_STR_MAP: phf::Map<&'static str, Tag> = phf::phf_map! {",
     ] + tag_from_str_lines + [
         "};",
-    ] + generate_rust_count_macro("tag", len(tags))
+    ] + generate_rust_count_macro("tag", len(tags) + 1)
 
     return write_rust_source(src_file("tag.rs"), lines)
 
@@ -334,19 +490,19 @@ def generate_group(
         "impl Group {",
     ] + [
         "/// Get the [`Actor`]s in the group",
-        "pub const fn actors(&self) -> &'static [Actor] {",
+        "pub const fn actors(self) -> &'static [Actor] {",
         "match self {",
     ] + actors_lines + [
         "}}",
         "/// Check if any actor in the group is only holdable with Prompt Entanglement (PE)",
         "#[cfg(feature = \"prompt-entanglement\")]",
-        "pub const fn any_pe_only(&self) -> bool {",
+        "pub const fn any_pe_only(self) -> bool {",
         "match self {",
     ] + any_pe_only_lines + [
         "}}",
         "/// Check if all actors in the group are only holdable with Prompt Entanglement (PE)",
         "#[cfg(feature = \"prompt-entanglement\")]",
-        "pub const fn all_pe_only(&self) -> bool {",
+        "pub const fn all_pe_only(self) -> bool {",
         "match self {",
     ] + all_pe_only_lines + [
         "}}}",
@@ -398,6 +554,7 @@ def generate_actor(
     actor_pe_only_lines.append("_ => false")
 
     lines = [
+        "#[cfg(feature = \"actor-wmc-group\")]",
         "use crate::Group;",
         "",
         "/// Cookable Item (Input of cooking pot)",
@@ -413,25 +570,26 @@ def generate_actor(
         "impl Actor {",
     ] + [
         "/// Get the [`Group`] of the actor",
-        "pub const fn group(&self) -> Group {",
+        "#[cfg(feature = \"actor-wmc-group\")]",
+        "pub const fn group(self) -> Group {",
         "match self {",
     ] + actor_to_group_lines + [
         "}}",
         "/// Check if the actor is only holdable with Prompt Entanglement (PE)",
         "#[cfg(feature = \"prompt-entanglement\")]",
-        "pub const fn pe_only(&self) -> bool {",
+        "pub const fn pe_only(self) -> bool {",
         "match self {",
     ] + actor_pe_only_lines + [
         "}}",
         "/// Get the English name of the input item actor",
         "#[cfg(feature = \"actor-english\")]",
-        "pub const fn name(&self) -> &'static str {",
+        "pub const fn name(self) -> &'static str {",
         "match self {",
     ] + english_name_lines + [
         "}}",
         "/// Get the actor name of the input item",
         "#[cfg(feature = \"actor-to-actor\")]",
-        "pub const fn actor_name(&self) -> &'static str {",
+        "pub const fn actor_name(self) -> &'static str {",
         "match self {",
     ] + actor_name_lines + [
         "}}",
@@ -495,13 +653,13 @@ def generate_cook_item():
     ] + [
         "/// Get the English name of the cook item actor",
         "#[cfg(feature = \"cook-item-english\")]",
-        "pub const fn name(&self) -> &'static str {",
+        "pub const fn name(self) -> &'static str {",
         "match self {",
     ] + english_name_lines + [
         "}}",
         "/// Get the actor name of the cook item",
         "#[cfg(feature = \"cook-item-to-actor\")]",
-        "pub const fn actor_name(&self) -> &'static str {",
+        "pub const fn actor_name(self) -> &'static str {",
         "match self {",
     ] + actor_name_lines + [
         "}}",

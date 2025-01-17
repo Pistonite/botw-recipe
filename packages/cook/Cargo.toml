@@ -1,0 +1,37 @@
+[package]
+name = "botw-recipe-cook"
+version = "0.0.0"
+edition = "2021"
+description = "Cooking simulator for BOTW"
+publish = false
+
+[dependencies]
+enumset = "1.1.5"
+num = { version = "0.4.3", features = ["num-bigint"] }
+serde = { version = "1.0.217", features = ["derive"], optional = true }
+
+[dependencies.botw-recipe-sys]
+path = "../generated"
+features = [
+    "actor-enum-set",
+    "actor-data",
+    "recipe",
+    "cook-effect-data"
+]
+
+[features]
+# enable assertions in release, which may panic
+assertions = []
+# enable cooking recipes by WMCDB group or id
+wmcdb = [
+    "botw-recipe-sys/actor-wmc-group",
+    "botw-recipe-sys/multichoose",
+]
+# enable serde on public data types
+serde = [
+    "dep:serde",
+    "botw-recipe-sys/cook-item-serde",
+]
+
+# enable printing steps while cooking
+print = []

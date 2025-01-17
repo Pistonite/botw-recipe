@@ -44,7 +44,8 @@ impl<const N: u32, const R: usize> Mnr<N, R> {
     }
 
     /// Get number of elements in the series
-    pub fn len(&self) -> u64 {
+    #[inline]
+    pub fn len(self) -> u64 {
         self.len
     }
 
@@ -55,7 +56,7 @@ impl<const N: u32, const R: usize> Mnr<N, R> {
     /// # Time Complexity
     /// Currently the implementation is O(NR)
     #[must_use]
-    pub fn serial_to_choices(&self, id: u64, out: &mut [u32; R]) -> bool {
+    pub fn serial_to_choices(self, id: u64, out: &mut [u32; R]) -> bool {
         if id >= self.len {
             return false;
         }
@@ -109,7 +110,7 @@ impl<const N: u32, const R: usize> Mnr<N, R> {
     ///
     /// The input must be sorted, otherwise the output is undefined.
     #[must_use]
-    pub fn choices_to_serial(&self, choices: &[u32; R]) -> Option<u64> {
+    pub fn choices_to_serial(self, choices: &[u32; R]) -> Option<u64> {
         // Bound check first
         for c in choices {
             if *c >= N {

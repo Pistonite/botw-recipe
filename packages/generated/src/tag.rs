@@ -34,7 +34,7 @@ pub enum Tag {
 impl Tag {
     /// Get the string representation of the tag
     #[cfg(feature = "tag-to-str")]
-    pub const fn as_str(&self) -> &'static str {
+    pub const fn as_str(self) -> &'static str {
         match self {
             Self::None => "<none>",
             Self::CookEnemy => "CookEnemy",
@@ -53,7 +53,7 @@ impl Tag {
     /// Check if the tag is used in recipe matching
     ///
     /// Each actor should have at most 1 of these tags
-    pub const fn is_used_in_recipe_matching(&self) -> bool {
+    pub const fn is_used_in_recipe_matching(self) -> bool {
         match self {
             Self::CookEnemy => true,
             Self::CookFish => true,
@@ -93,6 +93,6 @@ static TAG_STR_MAP: phf::Map<&'static str, Tag> = phf::phf_map! {
 #[macro_export]
 macro_rules! tag_count {
     () => {
-        11
+        12
     };
 }

@@ -19,8 +19,47 @@ To regenerate/update:
     ```
 
 ## Rust Crate
+If you are looking to integrate the cooking simulator, you are
+likely looking for [`botw-recipe`](../core-lib) instead of this crate.
 
-### Feature Flags
+However if you do need to use this, or if
+you need extra features not enabled, you can add it directly to your project
+```bash
+cargo add botw-recipe-sys --git https://github.com/Pistonite/botw-recipe --features full
+```
+
+Use `--features full` if compile speed or binary size is not a concern for you.
+Otherwise, you might want to only include the features you need
+
+### Feature Sets
+The feature are grouped into sets. Enabling a feature set will
+enable all feature flags in the set:
+
+- `full`: enable everything
+  - `cook-item-full`: enable `CookItem` enum and all its features
+  - `actor-full`: enable `Actor` enum and all its features
+  - `actor-wmc-group`: enable `Group` enum
+  - `tag-full`: enable `Tag` enum and all its features. Note only cooking-related tags are included
+  - `recipe`: enable `Recipe` struct and recipe data
+  - `actor-data`: enable actor data (parameters, tags, etc)
+  - `multichoose`: enable Multichoose utilities for WMC recipe database related function
+
+#### Enum features
+The `CookItem`, `Actor` and `Tag` enums have the following features
+(* can be either `cook-item`, `actor` or `tag`)
+- `*-enum-map`: Enable `EnumMap` implementation (enum as key in a map)
+- `*-enum-set`: Enable `EnumSetType` implementation (enum as key in as bitset)
+- `*-to-actor`/`tag-to-str`: Enable converting the enum to string representation
+- `*-from-actor`/`tag-from-str`: Enable converting string to enum
+- `*-serde`: Enable serializing/deserializing the enum as string.
+  - `*-serde-serialize` and `*-serde-deserialize` can be used to control serialize/deserialize separately
+- `*-english`: Enable english names for `CookItem` and `Actor`
+
+#### Addtional features
+
+- `prompt-entanglement`: Enable functions on `Actor` and `Group` to check if 
+  a material requires Prompt Entanglement to hold
+
 The feature sets of the generated data are broken down
 by type and by feature. The type and feature are combined
 to form a feature flag, for example `cook-item`(type) + `-to-actor`

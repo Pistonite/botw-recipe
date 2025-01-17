@@ -7,8 +7,8 @@ impl Actor {
     /// and it is not guaranteed to be the same as EnumMap/EnumSet
     /// implementation
     #[inline]
-    pub const fn as_u8(&self) -> u8 {
-        *self as u8
+    pub const fn as_u8(self) -> u8 {
+        self as u8
     }
 
     #[inline]
@@ -30,6 +30,13 @@ impl std::fmt::Debug for Actor {
         f.debug_tuple(self.actor_name())
             .field(&self.name())
             .finish()
+    }
+}
+
+#[cfg(all(feature = "actor-english", not(feature = "actor-to-actor")))]
+impl std::fmt::Debug for Actor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.name().fmt(f)
     }
 }
 
@@ -68,21 +75,14 @@ impl std::fmt::Display for Actor {
     }
 }
 
-#[cfg(feature = "actor-serde-serialize-value")]
-impl serde::Serialize for Actor {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        self.as_u8().serialize(serializer)
-    }
-}
-
-#[cfg(feature = "actor-serde-serialize-actor")]
+#[cfg(feature = "actor-serde-serialize")]
 impl serde::Serialize for Actor {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         self.actor_name().serialize(serializer)
     }
 }
 
-#[cfg(any(feature = "actor-serde-deserialize-actor", feature = "actor-serde-deserialize-value"))]
+#[cfg(feature = "actor-serde-deserialize")]
 impl<'de> serde::Deserialize<'de> for Actor {
     fn deserialize<D>(d: D) -> Result<Self, D::Error>
     where
@@ -91,98 +91,11 @@ impl<'de> serde::Deserialize<'de> for Actor {
         impl<'d> serde::de::Visitor<'d> for Visitor {
             type Value=Actor;
 
-            #[cfg(all(feature = "actor-serde-deserialize-actor", not(feature = "actor-serde-deserialize-value")))]
             fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
                 use std::fmt::Display;
                 "a valid recipe input actor name".fmt(formatter)
             }
 
-            #[cfg(all(not(feature = "actor-serde-deserialize-actor"), feature = "actor-serde-deserialize-value"))]
-            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
-                use std::fmt::Display;
-                "a valid integer representing an Actor enum".fmt(formatter)
-            }
-
-            #[cfg(all(feature = "actor-serde-deserialize-actor", feature = "actor-serde-deserialize-value"))]
-            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
-                use std::fmt::Display;
-                "a valid integer representing an Actor enum, or a valid recipe input actor name".fmt(formatter)
-            }
-
-            fn visit_i8<E>(self, v: i8) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_i16<E>(self, v: i16) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_i32<E>(self, v: i32) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_i128<E>(self, v: i128) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_u8<E>(self, v: u8) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match Actor::from_u8(v) {
-                    Some(item) => Ok(item),
-                    None => Err(serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v as u64), &self)),
-                }
-            }
-
-            fn visit_u16<E>(self, v: u16) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_u32<E>(self, v: u32) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            fn visit_u128<E>(self, v: u128) -> Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                self.visit_u8(v as u8)
-            }
-
-            #[cfg(feature = "actor-serde-deserialize-actor")]
             fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
             where
                 E: serde::de::Error,
@@ -217,7 +130,7 @@ impl<const R: usize> ActorMnr<R> {
     ///
     /// Returns false if the id is out of bound
     #[must_use]
-    pub fn to_actors(&self, id: u64, out: &mut [Actor; R]) -> bool {
+    pub fn to_actors(self, id: u64, out: &mut [Actor; R]) -> bool {
         let mut inner_out = [0u32; R];
         let res = self.inner.serial_to_choices(id, &mut inner_out);
         if !res {
@@ -235,7 +148,7 @@ impl<const R: usize> ActorMnr<R> {
     }
 
     /// Convert actor choices to serial ID.
-    pub fn to_serial(&self, actors: &[Actor; R]) -> Option<u64> {
+    pub fn to_serial(self, actors: &[Actor; R]) -> Option<u64> {
         let mut inner_actors = [0u32; R];
         for i in 0..R {
             inner_actors[i] = actors[i].as_u8() as u32;
@@ -244,7 +157,8 @@ impl<const R: usize> ActorMnr<R> {
         self.inner.choices_to_serial(&inner_actors)
     }
 
-    pub fn len(&self) -> u64 {
+    #[inline]
+    pub fn len(self) -> u64 {
         self.inner.len()
     }
 }

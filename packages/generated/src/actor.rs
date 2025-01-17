@@ -2,6 +2,7 @@
 //!
 //! DO NOT EDIT. See packages/generated/README.md for more information.
 
+#[cfg(feature = "actor-wmc-group")]
 use crate::Group;
 
 /// Cookable Item (Input of cooking pot)
@@ -490,7 +491,8 @@ pub enum Actor {
 }
 impl Actor {
     /// Get the [`Group`] of the actor
-    pub const fn group(&self) -> Group {
+    #[cfg(feature = "actor-wmc-group")]
+    pub const fn group(self) -> Group {
         match self {
             Self::None => Group::None,
             Self::Item_Fruit_D => Group::Item_Fruit_D,
@@ -730,7 +732,7 @@ impl Actor {
     }
     /// Check if the actor is only holdable with Prompt Entanglement (PE)
     #[cfg(feature = "prompt-entanglement")]
-    pub const fn pe_only(&self) -> bool {
+    pub const fn pe_only(self) -> bool {
         match self {
             Self::Item_Roast_03 => true,
             Self::Item_Roast_10 => true,
@@ -822,7 +824,7 @@ impl Actor {
     }
     /// Get the English name of the input item actor
     #[cfg(feature = "actor-english")]
-    pub const fn name(&self) -> &'static str {
+    pub const fn name(self) -> &'static str {
         match self {
             Self::None => "<none>",
             Self::Item_Fruit_D => "Hearty Durian",
@@ -1062,7 +1064,7 @@ impl Actor {
     }
     /// Get the actor name of the input item
     #[cfg(feature = "actor-to-actor")]
-    pub const fn actor_name(&self) -> &'static str {
+    pub const fn actor_name(self) -> &'static str {
         match self {
             Self::None => "",
             Self::Item_Fruit_D => "Item_Fruit_D",

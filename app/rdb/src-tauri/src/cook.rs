@@ -5,7 +5,7 @@ use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 
 use log::{error, info};
-use rdata::cook::{CookEffect, CookingPot};
+use botw_recipe::cook::{CookEffect};
 use rdata::db::TempResult;
 use rdata::{Actor, Group, RecipeId, RecipeInputs};
 use serde::Serialize;

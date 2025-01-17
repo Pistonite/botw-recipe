@@ -24,14 +24,12 @@ tasks:
   dump:
     desc: Dump the CompactDB using the simulator
     cmds:
-      - rm -rf compactdbvnext
       - cargo run --release --bin botw-recipe-data-utils -- dump compactdbvnext --compact
 
   dump-raw:
     desc: Dump the RawDB using the simulator
     cmds:
-      - rm -rf rawdbvnext
-      - cargo run --release --bin botw-recipe-data-utils -- dump rawdbvnext
+      - cargo run --release --bin botw-recipe-data-utils --features assertions -- dump rawdbvnext
 
   test:
     desc: Test the CompactDB using the Database API

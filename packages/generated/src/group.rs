@@ -375,7 +375,7 @@ pub enum Group {
 }
 impl Group {
     /// Get the [`Actor`]s in the group
-    pub const fn actors(&self) -> &'static [Actor] {
+    pub const fn actors(self) -> &'static [Actor] {
         match self {
             Self::None => &[],
             Self::Item_Fruit_D => &[Actor::Item_Fruit_D],
@@ -623,7 +623,7 @@ impl Group {
     }
     /// Check if any actor in the group is only holdable with Prompt Entanglement (PE)
     #[cfg(feature = "prompt-entanglement")]
-    pub const fn any_pe_only(&self) -> bool {
+    pub const fn any_pe_only(self) -> bool {
         match self {
             Self::Item_Roast_Grp_136 => true,
             Self::Item_Roast_10 => true,
@@ -669,7 +669,7 @@ impl Group {
     }
     /// Check if all actors in the group are only holdable with Prompt Entanglement (PE)
     #[cfg(feature = "prompt-entanglement")]
-    pub const fn all_pe_only(&self) -> bool {
+    pub const fn all_pe_only(self) -> bool {
         match self {
             Self::Item_Roast_Grp_136 => true,
             Self::Item_Roast_10 => true,

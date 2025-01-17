@@ -1,8 +1,9 @@
 [workspace]
 members = [
-    "app/data",
-    "app/rdb/src-tauri",
-    "dump/emulate",
+    "app/rdb/src-tauri", 
+    "packages/cook",
+    "packages/cook-cli",
+    "packages/wmcdb",
     "packages/data-utils",
     "packages/generated",
     "research",

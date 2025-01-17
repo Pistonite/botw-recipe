@@ -7,8 +7,8 @@ impl Group {
     /// and it is not guaranteed to be the same as EnumMap/EnumSet
     /// implementation
     #[inline]
-    pub const fn as_u8(&self) -> u8 {
-        *self as u8
+    pub const fn as_u8(self) -> u8 {
+        self as u8
     }
 
     #[inline]
@@ -22,7 +22,7 @@ impl Group {
 
     /// Get the first actor in the group
     #[inline]
-    pub const fn first_actor(&self) -> Actor {
+    pub const fn first_actor(self) -> Actor {
         match self {
             Self::None => Actor::None,
             _ => self.actors()[0]
@@ -49,7 +49,7 @@ impl<const R: usize> GroupMnr<R> {
     ///
     /// Returns false if the id is out of bound
     #[must_use]
-    pub fn to_groups(&self, id: u64, out: &mut [Group; R]) -> bool {
+    pub fn to_groups(self, id: u64, out: &mut [Group; R]) -> bool {
         let mut inner_out = [0u32; R];
         let res = self.inner.serial_to_choices(id, &mut inner_out);
         if !res {
@@ -69,7 +69,7 @@ impl<const R: usize> GroupMnr<R> {
     /// Convert the serial ID to the group choices, and then
     /// get the first actor in each group
     #[must_use]
-    pub fn to_first_actors(&self, id: u64, out: &mut [Actor; R]) -> bool {
+    pub fn to_first_actors(self, id: u64, out: &mut [Actor; R]) -> bool {
         let mut out_groups = [Group::None; R];
         if !self.to_groups(id, &mut out_groups) {
             return false;
@@ -82,7 +82,7 @@ impl<const R: usize> GroupMnr<R> {
     }
 
     /// Convert group choices to serial ID.
-    pub fn to_serial(&self, groups: &[Group; R]) -> Option<u64> {
+    pub fn to_serial(self, groups: &[Group; R]) -> Option<u64> {
         let mut inner_actors = [0u32; R];
         for i in 0..R {
             inner_actors[i] = groups[i].as_u8() as u32;
@@ -92,7 +92,7 @@ impl<const R: usize> GroupMnr<R> {
     }
 
     /// Convert group choices to serial ID, by using actor choices
-    pub fn to_serial_from_actors(&self, actors: &[Actor; R]) -> Option<u64> {
+    pub fn to_serial_from_actors(self, actors: &[Actor; R]) -> Option<u64> {
         let mut groups = [Group::None; R];
         for i in 0..R {
             groups[i] = actors[i].group();
@@ -101,7 +101,8 @@ impl<const R: usize> GroupMnr<R> {
         self.to_serial(&groups)
     }
 
-    pub fn len(&self) -> u64 {
+    #[inline]
+    pub fn len(self) -> u64 {
         self.inner.len()
     }
 }

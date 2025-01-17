@@ -255,7 +255,7 @@ pub enum CookItem {
 impl CookItem {
     /// Get the English name of the cook item actor
     #[cfg(feature = "cook-item-english")]
-    pub const fn name(&self) -> &'static str {
+    pub const fn name(self) -> &'static str {
         match self {
             Self::Item_Cook_A_01 => "Mushroom Skewer",
             Self::Item_Cook_A_02 => "Steamed Mushrooms",
@@ -379,7 +379,7 @@ impl CookItem {
     }
     /// Get the actor name of the cook item
     #[cfg(feature = "cook-item-to-actor")]
-    pub const fn actor_name(&self) -> &'static str {
+    pub const fn actor_name(self) -> &'static str {
         match self {
             Self::Item_Cook_A_01 => "Item_Cook_A_01",
             Self::Item_Cook_A_02 => "Item_Cook_A_02",

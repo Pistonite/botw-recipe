@@ -220,38 +220,30 @@ dependencies = [
 ]
 
 [[package]]
-name = "botw-recipe-data"
+name = "botw-recipe-cook"
 version = "0.0.0"
 dependencies = [
- "base16ct",
  "botw-recipe-sys",
- "derivative",
- "derive_deref",
- "enum-map",
  "enumset",
- "fs2",
- "log",
  "num",
- "rand 0.8.5",
  "serde",
- "serde_yaml_ng",
- "sha2",
- "static_assertions",
- "thiserror 1.0.69",
- "ts-rs",
 ]
+
+[[package]]
+name = "botw-recipe-cook-cli"
+version = "0.0.0"
 
 [[package]]
 name = "botw-recipe-data-utils"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "botw-recipe-data",
+ "botw-recipe-cook",
  "botw-recipe-sys",
+ "botw-recipe-wmcdb",
  "clap",
  "num_cpus",
  "spp",
- "terminal_size",
  "thiserror 2.0.11",
  "threadpool",
 ]
@@ -260,7 +252,7 @@ dependencies = [
 name = "botw-recipe-database"
 version = "0.1.4"
 dependencies = [
- "botw-recipe-data",
+ "botw-recipe-wmcdb",
  "derivative",
  "enum-map",
  "env_logger",
@@ -279,24 +271,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "botw-recipe-dump-emulate"
-version = "0.0.0"
-dependencies = [
- "anyhow",
- "botw-recipe-data",
- "clap",
- "distance",
- "enum-map",
- "filetime",
- "num_cpus",
- "serde",
- "serde_json",
- "serde_yaml_ng",
- "thiserror 1.0.69",
- "threadpool",
-]
-
-[[package]]
 name = "botw-recipe-sys"
 version = "0.0.0"
 dependencies = [
@@ -307,6 +281,27 @@ dependencies = [
  "no-panic",
  "phf 0.11.3",
  "serde",
+]
+
+[[package]]
+name = "botw-recipe-wmcdb"
+version = "0.0.0"
+dependencies = [
+ "base16ct",
+ "botw-recipe-cook",
+ "botw-recipe-sys",
+ "derivative",
+ "enum-map",
+ "enumset",
+ "fs2",
+ "log",
+ "rand 0.8.5",
+ "serde",
+ "serde_yaml_ng",
+ "sha2",
+ "static_assertions",
+ "thiserror 1.0.69",
+ "ts-rs",
 ]
 
 [[package]]
@@ -771,17 +766,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "derive_deref"
-version = "1.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dcdbcee2d9941369faba772587a565f4f534e42cb8d17e5295871de730163b2b"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.109",
-]
-
-[[package]]
 name = "derive_more"
 version = "0.99.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -850,12 +834,6 @@ name = "dispatch"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
-
-[[package]]
-name = "distance"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d9d8664cf849d7d0f3114a3a387d2f5e4303176d746d5a951aaddc66dfe9240"
 
 [[package]]
 name = "dtoa"

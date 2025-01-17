@@ -34,18 +34,14 @@ cook-item-enum-map = ["cook-item", "dep:enum-map"]
 cook-item-enum-set = ["cook-item", "dep:enumset"]
 cook-item-to-actor = ["cook-item"]
 cook-item-from-actor = ["cook-item", "dep:phf"]
-cook-item-serde-serialize-actor = ["dep:serde", "cook-item-to-actor"]
-cook-item-serde-deserialize-actor = ["dep:serde", "cook-item-from-actor"]
-cook-item-serde-serialize-value = ["dep:serde", "cook-item"]
-cook-item-serde-deserialize-value = ["dep:serde", "cook-item"]
+cook-item-serde-serialize = ["dep:serde", "cook-item-to-actor"]
+cook-item-serde-deserialize = ["dep:serde", "cook-item-from-actor"]
+cook-item-serde = ["cook-item-serde-serialize", "cook-item-serde-deserialize"]
 cook-item-english = ["cook-item"]
 cook-item-full = [
     "cook-item-enum-map",
     "cook-item-enum-set",
-    "cook-item-to-actor",
-    "cook-item-from-actor",
-    "cook-item-serde-serialize-actor",
-    "cook-item-serde-deserialize-actor",
+    "cook-item-serde",
     "cook-item-english",
 ]
 
@@ -55,19 +51,15 @@ actor-enum-map = ["actor", "dep:enum-map"]
 actor-enum-set = ["actor", "dep:enumset"]
 actor-to-actor = ["actor"]
 actor-from-actor = ["actor", "dep:phf"]
-actor-serde-serialize-actor = ["dep:serde", "actor-to-actor"]
-actor-serde-deserialize-actor = ["dep:serde", "actor-from-actor"]
-actor-serde-serialize-value = ["dep:serde", "actor"]
-actor-serde-deserialize-value = ["dep:serde", "actor"]
+actor-serde-serialize = ["dep:serde", "actor-to-actor"]
+actor-serde-deserialize = ["dep:serde", "actor-from-actor"]
+actor-serde = ["actor-serde-serialize", "actor-serde-deserialize"]
 actor-english = ["actor"]
 prompt-entanglement = ["actor"]
 actor-full = [
     "actor-enum-map",
     "actor-enum-set",
-    "actor-to-actor",
-    "actor-from-actor",
-    "actor-serde-serialize-actor",
-    "actor-serde-deserialize-actor",
+    "actor-serde",
     "actor-english",
     "prompt-entanglement",
 ]
@@ -81,24 +73,43 @@ tag-enum-map = ["tag", "dep:enum-map"]
 tag-enum-set = ["tag", "dep:enumset"]
 tag-to-str = ["tag"]
 tag-from-str = ["tag"]
-tag-serde-serialize-str = ["dep:serde", "tag-to-str"]
-tag-serde-deserialize-str = ["dep:serde", "tag-from-str"]
-tag-serde-serialize-value = ["dep:serde", "tag"]
-tag-serde-deserialize-value = ["dep:serde", "tag"]
+tag-serde-serialize = ["dep:serde", "tag-to-str"]
+tag-serde-deserialize = ["dep:serde", "tag-from-str"]
+tag-serde = ["tag-serde-serialize", "tag-serde-deserialize"]
 tag-full = [
     "tag-enum-map",
     "tag-enum-set",
-    "tag-to-str",
-    "tag-from-str",
-    "tag-serde-serialize-str",
-    "tag-serde-deserialize-str",
+    "tag-serde",
 ]
 
 ## Actor Data (parameter) features
 actor-data = ["tag-enum-set", "dep:bit-iter"]
 
+## CookEffect enum
+cook-effect = []
+cook-effect-enum-map = ["tag", "dep:enum-map"]
+cook-effect-enum-set = ["tag", "dep:enumset"]
+cook-effect-to-str = ["cook-effect"]
+cook-effect-from-str = ["cook-effect", "dep:phf"]
+cook-effect-special-status = ["cook-effect"]
+cook-effect-english = ["cook-effect"]
+cook-effect-data= ["cook-effect"]
+cook-effect-serde-serialize = ["dep:serde", "cook-effect-to-str"]
+cook-effect-serde-deserialize = ["dep:serde", "cook-effect-from-str"]
+cook-effect-serde = ["cook-effect-serde-serialize", "cook-effect-serde-deserialize"]
+cook-effect-full = [
+    "cook-effect-enum-map",
+    "cook-effect-enum-set",
+    "cook-effect-english",
+    "cook-effect-special-status",
+    "cook-effect-data",
+    "cook-effect-serde",
+]
+
 ## Recipe Data
-recipe = ["actor", "tag", "cook-item", "dep:derive_more"]
+recipe = ["actor", "tag", "cook-item", "cook-effect", "dep:derive_more"]
+
+
 
 multichoose = []
 

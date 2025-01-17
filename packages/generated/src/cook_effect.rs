@@ -1,217 +1,213 @@
-use serde::{Deserialize, Serialize};
+//! Automatically generated.
+//!
+//! DO NOT EDIT. See packages/generated/README.md for more information.
 
-/// Cook modifier that can be converted to uking::CookingMgr::CookEffect
-#[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq, Hash, Default, Deserialize)]
+/// Effect of cooked food
+#[cfg_attr(feature = "cook-effect-enum-map", derive(enum_map::Enum))]
+#[cfg_attr(
+    feature = "cook-effect-enum-set",
+    derive(enumset::EnumSetType, PartialOrd, Ord, Hash)
+)]
+#[cfg_attr(
+    not(feature = "cook-effect-enum-set"),
+    derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)
+)]
+#[derive(Default)]
 #[repr(u8)]
 pub enum CookEffect {
-    AttackUp,
-    DefenseUp,
-    ResistCold,
-    ResistHot,
-    ResistElectric,
-    Fireproof,
-    MovingSpeed,
-    Quietness,
-    LifeMaxUp,
-    GutsRecover,
-    ExGutsMaxUp,
-    LifeRecover, // Unused
+    /// No effect
     #[default]
-    None,
+    None = 0,
+    /// Hasty
+    MovingSpeed,
+    /// Mighty
+    AttackUp,
+    /// Tough
+    DefenseUp,
+    /// Enduring
+    ExGutsMaxUp,
+    /// Fireproof
+    Fireproof,
+    /// Energizing
+    GutsRecover,
+    /// Hearty
+    LifeMaxUp,
+    LifeRecover,
+    /// Sneaky
+    Quietness,
+    /// Spicy
+    ResistCold,
+    /// Electro
+    ResistElectric,
+    /// Chilly
+    ResistHot,
 }
-
 impl CookEffect {
-    /// Convert to enum values used in game
-    pub const fn game_repr(self) -> i32 {
+    /// Get the string representation of the effect
+    #[cfg(feature = "cook-effect-to-str")]
+    pub const fn as_str(self) -> &'static str {
         match self {
-            Self::AttackUp => 10,
-            Self::DefenseUp => 11,
-            Self::ResistCold => 5,
-            Self::ResistHot => 4,
-            Self::ResistElectric => 6,
-            Self::Fireproof => 16,
-            Self::MovingSpeed => 13,
-            Self::Quietness => 12,
-            Self::LifeMaxUp => 2,
-            Self::GutsRecover => 14,
-            Self::ExGutsMaxUp => 15,
-            Self::LifeRecover => 1,
-            Self::None => -1,
+            Self::None => "None",
+            Self::MovingSpeed => "MovingSpeed",
+            Self::AttackUp => "AttackUp",
+            Self::DefenseUp => "DefenseUp",
+            Self::ExGutsMaxUp => "ExGutsMaxUp",
+            Self::Fireproof => "Fireproof",
+            Self::GutsRecover => "GutsRecover",
+            Self::LifeMaxUp => "LifeMaxUp",
+            Self::LifeRecover => "LifeRecover",
+            Self::Quietness => "Quietness",
+            Self::ResistCold => "ResistCold",
+            Self::ResistElectric => "ResistElectric",
+            Self::ResistHot => "ResistHot",
         }
     }
-
-    pub fn from_game_repr(v: f32) -> Option<Self> {
-        match v {
+    /// Get the effect from string representation
+    #[cfg(feature = "cook-effect-from-str")]
+    pub fn from_str(name: &str) -> Option<Self> {
+        COOK_EFFECT_STR_MAP.get(name).copied()
+    }
+    /// Get the English name of the effect
+    #[cfg(feature = "cook-effect-english")]
+    pub const fn name(self) -> &'static str {
+        match self {
+            Self::None => "",
+            Self::MovingSpeed => "Hasty",
+            Self::AttackUp => "Mighty",
+            Self::DefenseUp => "Tough",
+            Self::ExGutsMaxUp => "Enduring",
+            Self::Fireproof => "Fireproof",
+            Self::GutsRecover => "Energizing",
+            Self::LifeMaxUp => "Hearty",
+            Self::LifeRecover => "",
+            Self::Quietness => "Sneaky",
+            Self::ResistCold => "Spicy",
+            Self::ResistElectric => "Electro",
+            Self::ResistHot => "Chilly",
+        }
+    }
+    /// Get the name of the SpecialStatus associated with this effect
+    ///
+    /// This is usually the same as the string representation, except for:
+    /// - MovingSpeed -> AllSpeed
+    /// - LifeRecover -> (doesn't have one)#[cfg(feature = "cook-effect-special-status")]
+    pub const fn special_status(self) -> Option<&'static str> {
+        match self {
+            Self::None => None,
+            Self::MovingSpeed => Some("AllSpeed"),
+            Self::AttackUp => Some("AttackUp"),
+            Self::DefenseUp => Some("DefenseUp"),
+            Self::ExGutsMaxUp => Some("ExGutsMaxUp"),
+            Self::Fireproof => Some("Fireproof"),
+            Self::GutsRecover => Some("GutsRecover"),
+            Self::LifeMaxUp => Some("LifeMaxUp"),
+            Self::LifeRecover => None,
+            Self::Quietness => Some("Quietness"),
+            Self::ResistCold => Some("ResistCold"),
+            Self::ResistElectric => Some("ResistElectric"),
+            Self::ResistHot => Some("ResistHot"),
+        }
+    }
+    /// Get the base time of the effect
+    ///
+    /// For effects that are not time based, this is 0
+    #[cfg(feature = "cook-effect-data")]
+    pub const fn base_time(self) -> u32 {
+        match self {
+            Self::None => 0,
+            Self::MovingSpeed => 30,
+            Self::AttackUp => 20,
+            Self::DefenseUp => 20,
+            Self::ExGutsMaxUp => 0,
+            Self::Fireproof => 120,
+            Self::GutsRecover => 0,
+            Self::LifeMaxUp => 0,
+            Self::LifeRecover => 0,
+            Self::Quietness => 90,
+            Self::ResistCold => 120,
+            Self::ResistElectric => 120,
+            Self::ResistHot => 120,
+        }
+    }
+    /// Get the maximum level of the effect
+    #[cfg(feature = "cook-effect-data")]
+    pub const fn max_level(self) -> u32 {
+        match self {
+            Self::None => 0,
+            Self::MovingSpeed => 3,
+            Self::AttackUp => 3,
+            Self::DefenseUp => 3,
+            Self::ExGutsMaxUp => 20,
+            Self::Fireproof => 2,
+            Self::GutsRecover => 15,
+            Self::LifeMaxUp => 108,
+            Self::LifeRecover => 120,
+            Self::Quietness => 3,
+            Self::ResistCold => 2,
+            Self::ResistElectric => 3,
+            Self::ResistHot => 2,
+        }
+    }
+    /// Convert the cook effect to the game enum value
+    pub const fn game_repr(self) -> i32 {
+        match self {
+            Self::None => -1,
+            Self::MovingSpeed => 13,
+            Self::AttackUp => 10,
+            Self::DefenseUp => 11,
+            Self::ExGutsMaxUp => 15,
+            Self::Fireproof => 16,
+            Self::GutsRecover => 14,
+            Self::LifeMaxUp => 2,
+            Self::LifeRecover => 1,
+            Self::Quietness => 12,
+            Self::ResistCold => 5,
+            Self::ResistElectric => 6,
+            Self::ResistHot => 4,
+        }
+    }
+    /// Convert game enum value to the cook effect
+    pub fn from_game_repr(value: f32) -> Option<Self> {
+        match value {
             -1. => Some(Self::None),
-            1. => Some(Self::LifeRecover),
-            2. => Some(Self::LifeMaxUp),
-            4. => Some(Self::ResistHot),
-            5. => Some(Self::ResistCold),
-            6. => Some(Self::ResistElectric),
+            13. => Some(Self::MovingSpeed),
             10. => Some(Self::AttackUp),
             11. => Some(Self::DefenseUp),
-            12. => Some(Self::Quietness),
-            13. => Some(Self::MovingSpeed),
-            14. => Some(Self::GutsRecover),
             15. => Some(Self::ExGutsMaxUp),
             16. => Some(Self::Fireproof),
+            14. => Some(Self::GutsRecover),
+            2. => Some(Self::LifeMaxUp),
+            1. => Some(Self::LifeRecover),
+            12. => Some(Self::Quietness),
+            5. => Some(Self::ResistCold),
+            6. => Some(Self::ResistElectric),
+            4. => Some(Self::ResistHot),
             _ => None,
         }
     }
-
-    /// Convert to enum values used in game
-    pub fn game_repr_f32(self) -> f32 {
-        self.game_repr() as f32
-    }
-
-    /// Get the data associated with this effect
-    pub fn data(self) -> &'static CookEffectData {
-        match self {
-            CookEffect::None => &NONE,
-            CookEffect::LifeRecover => &LIFE_RECOVER,
-            CookEffect::LifeMaxUp => &LIFE_MAX_UP,
-            CookEffect::ResistHot => &RESIST_HOT,
-            CookEffect::ResistCold => &RESIST_COLD,
-            CookEffect::ResistElectric => &RESIST_ELECTRIC,
-            CookEffect::AttackUp => &ATTACK_UP,
-            CookEffect::DefenseUp => &DEFENSE_UP,
-            CookEffect::Quietness => &QUIETNESS,
-            CookEffect::MovingSpeed => &MOVING_SPEED,
-            CookEffect::GutsRecover => &GUTS_RECOVER,
-            CookEffect::ExGutsMaxUp => &EX_GUTS_MAX_UP,
-            CookEffect::Fireproof => &FIREPROOF,
-        }
-    }
-
-    /// If effect_time is computed for this effect
-    pub fn uses_time(self) -> bool {
-        self.data().base_time != 0
-    }
 }
-
-impl std::fmt::Display for CookEffect {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self)
-    }
+#[cfg(feature = "cook-effect-from-str")]
+static COOK_EFFECT_STR_MAP: phf::Map<&'static str, CookEffect> = phf::phf_map! {
+    "None" => CookEffect::None,
+    "MovingSpeed" => CookEffect::MovingSpeed,
+    "AttackUp" => CookEffect::AttackUp,
+    "DefenseUp" => CookEffect::DefenseUp,
+    "ExGutsMaxUp" => CookEffect::ExGutsMaxUp,
+    "Fireproof" => CookEffect::Fireproof,
+    "GutsRecover" => CookEffect::GutsRecover,
+    "LifeMaxUp" => CookEffect::LifeMaxUp,
+    "LifeRecover" => CookEffect::LifeRecover,
+    "Quietness" => CookEffect::Quietness,
+    "ResistCold" => CookEffect::ResistCold,
+    "ResistElectric" => CookEffect::ResistElectric,
+    "ResistHot" => CookEffect::ResistHot,
+};
+/// Get the count of the cook_effect enum
+///
+/// `count - 1` is the last valid enum variant
+#[macro_export]
+macro_rules! cook_effect_count {
+    () => {
+        13
+    };
 }
-
-/// Data for a [`CookEffect`] used to compute effect duration, level, etc
-#[derive(Debug, Clone, Copy, PartialEq, Deserialize, Serialize)]
-pub struct CookEffectData {
-    /// The base effect time when the cooked result have this effect
-    /// 0 indicates that the cook effect doesn't use time, which
-    /// is important when computing the effect duration
-    pub base_time: i32,
-    /// The maximum level of the effect
-    pub max_level: i32,
-
-    /// The minimum potency needed for LV2 effect
-    pub potency_lv2: i32,
-    /// The minimum potency needed for LV3 effect
-    pub potency_lv3: i32,
-    /// English name of the effect
-    pub name: &'static str,
-}
-
-static NONE: CookEffectData = CookEffectData {
-    base_time: 0,
-    max_level: 0, // unused
-    potency_lv2: -1,
-    potency_lv3: -1,
-    name: "",
-};
-
-static EX_GUTS_MAX_UP: CookEffectData = CookEffectData {
-    base_time: 0,
-    max_level: 15,
-    potency_lv2: -1,
-    potency_lv3: -1,
-    name: "Enduring",
-};
-
-static GUTS_RECOVER: CookEffectData = CookEffectData {
-    base_time: 0,
-    max_level: 3000,
-    potency_lv2: -1,
-    potency_lv3: -1,
-    name: "Energizing",
-};
-
-static LIFE_RECOVER: CookEffectData = CookEffectData {
-    base_time: 0,
-    max_level: 120,
-    potency_lv2: -1,
-    potency_lv3: -1,
-    name: "",
-};
-
-static LIFE_MAX_UP: CookEffectData = CookEffectData {
-    base_time: 0,
-    max_level: 108,
-    potency_lv2: -1,
-    potency_lv3: -1,
-    name: "Hearty",
-};
-
-static RESIST_HOT: CookEffectData = CookEffectData {
-    base_time: 120,
-    max_level: 2,
-    potency_lv2: 6,
-    potency_lv3: 999,
-    name: "Chilly",
-};
-
-static RESIST_COLD: CookEffectData = CookEffectData {
-    base_time: 120,
-    max_level: 2,
-    potency_lv2: 6,
-    potency_lv3: 999,
-    name: "Spicy",
-};
-
-static RESIST_ELECTRIC: CookEffectData = CookEffectData {
-    base_time: 120,
-    max_level: 3,
-    potency_lv2: 4,
-    potency_lv3: 6,
-    name: "Electro",
-};
-static MOVING_SPEED: CookEffectData = CookEffectData {
-    base_time: 30,
-    max_level: 3,
-    potency_lv2: 5,
-    potency_lv3: 7,
-    name: "Hasty",
-};
-
-static ATTACK_UP: CookEffectData = CookEffectData {
-    base_time: 20,
-    max_level: 3,
-    potency_lv2: 5,
-    potency_lv3: 7,
-    name: "Mighty",
-};
-
-static DEFENSE_UP: CookEffectData = CookEffectData {
-    base_time: 20,
-    max_level: 3,
-    potency_lv2: 5,
-    potency_lv3: 7,
-    name: "Tough",
-};
-
-static QUIETNESS: CookEffectData = CookEffectData {
-    base_time: 90,
-    max_level: 3,
-    potency_lv2: 6,
-    potency_lv3: 9,
-    name: "Sneaky",
-};
-
-static FIREPROOF: CookEffectData = CookEffectData {
-    base_time: 120,
-    max_level: 2,
-    potency_lv2: 7,
-    potency_lv3: 999,
-    name: "Fireproof",
-};

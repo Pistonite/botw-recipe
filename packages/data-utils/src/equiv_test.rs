@@ -6,14 +6,13 @@
 //!
 //! .., when replacing the actor with the other
 
-use std::sync::Arc;
 use std::sync::mpsc;
 use std::time::Instant;
 
 use anyhow::bail;
 
 use botw_recipe_sys::{actor_count, group_count, Group, Actor, ActorMnr};
-use botw_recipe::cook::{CookResult, CookingPot};
+use botw_recipe_cook::CookResult;
 
 use crate::util;
 
@@ -35,7 +34,7 @@ pub fn check_all_groups() -> anyhow::Result<()> {
     let mut to_check = Vec::new();
     // skip 0 - the None group
     for i in 1u8..group_count!() {
-        let group: Group = unsafe { std::mem::transmute(i) };
+        let group = Group::from_u8(i).unwrap();
         let actors = group.actors();
         if actors.len() == 1 {
             continue;
@@ -68,7 +67,6 @@ pub fn check_equiv_actors(actors: &[Actor]) -> anyhow::Result<()> {
 }
 
 pub fn check_actor_pair(actor_a: Actor, actor_b: Actor) -> anyhow::Result<()> {
-    let pot = Arc::new(CookingPot::new()?);
     let mnr = ActorMnr::<4>::default();
     let pool = crate::thread_pool();
 
@@ -84,10 +82,9 @@ pub fn check_actor_pair(actor_a: Actor, actor_b: Actor) -> anyhow::Result<()> {
     let (send, recv) = mpsc::channel();
 
     {
-        let pot = Arc::clone(&pot);
         let send = send.clone();
         pool.execute(move || {
-            let result = check_actor_pair_in_321(actor_a, actor_b, &pot);
+            let result = check_actor_pair_in_321(actor_a, actor_b);
             let _ = send.send(result.map_err(|x|x.to_string()));
         });
     }
@@ -95,13 +92,10 @@ pub fn check_actor_pair(actor_a: Actor, actor_b: Actor) -> anyhow::Result<()> {
     while start < len {
         let end = (start + CHUNK_SIZE).min(len);
         let mnr = mnr.clone();
-        let pot = Arc::clone(&pot);
         let send = send.clone();
 
-        // println!("{} {}", start, end);
-
         pool.execute(move || {
-            let result = check_actor_pair_in_4(actor_a, actor_b, mnr, &pot, start, end);
+            let result = check_actor_pair_in_4(actor_a, actor_b, mnr, start, end);
             let _ = send.send(result.map_err(|x|x.to_string()));
         });
 
@@ -128,7 +122,6 @@ fn check_actor_pair_in_4(
     actor_a: Actor,
     actor_b: Actor,
     mnr: ActorMnr<4>,
-    pot: &CookingPot,
     start: u64,
     end: u64
 ) -> anyhow::Result<()> {
@@ -143,8 +136,8 @@ fn check_actor_pair_in_4(
         input_a[1..].copy_from_slice(&actors);
         input_b[1..].copy_from_slice(&actors);
 
-        let result_a = pot.cook(input_a)?;
-        let result_b = pot.cook(input_b)?;
+        let result_a = botw_recipe_cook::cook_actors_unchecked(&input_a);
+        let result_b = botw_recipe_cook::cook_actors_unchecked(&input_b);
         if let Err(e) = compare_cook_results(&result_a, &result_b) {
             return Err(e.context(format!("recipe: {:?}", input_a)));
         }
@@ -155,20 +148,18 @@ fn check_actor_pair_in_4(
 fn check_actor_pair_in_321(
     actor_a: Actor,
     actor_b: Actor,
-    pot: &CookingPot,
 ) -> anyhow::Result<()> {
     let mnr = ActorMnr::<3>::default();
-    check_actor_pair_in_3(actor_a, actor_b, mnr, pot, 0, mnr.len())?;
+    check_actor_pair_in_3(actor_a, actor_b, mnr, 0, mnr.len())?;
     let mnr = ActorMnr::<2>::default();
-    check_actor_pair_in_2(actor_a, actor_b, mnr, pot, 0, mnr.len())?;
-    check_actor_pair_in_1(actor_a, actor_b, pot)
+    check_actor_pair_in_2(actor_a, actor_b, mnr, 0, mnr.len())?;
+    check_actor_pair_in_1(actor_a, actor_b)
 }
 
 fn check_actor_pair_in_3(
     actor_a: Actor,
     actor_b: Actor,
     mnr: ActorMnr<3>,
-    pot: &CookingPot,
     start: u64,
     end: u64
 ) -> anyhow::Result<()> {
@@ -190,7 +181,7 @@ fn check_actor_pair_in_3(
 
         results.clear();
         for input in inputs.iter() {
-            results.push(pot.cook(*input)?);
+            results.push(botw_recipe_cook::cook_actors_unchecked(input));
         }
 
         if let Err(e) = compare_cook_results_slice(&results) {
@@ -205,7 +196,6 @@ fn check_actor_pair_in_2(
     actor_a: Actor,
     actor_b: Actor,
     mnr: ActorMnr<2>,
-    pot: &CookingPot,
     start: u64,
     end: u64
 ) -> anyhow::Result<()> {
@@ -228,7 +218,7 @@ fn check_actor_pair_in_2(
 
         results.clear();
         for input in inputs.iter() {
-            results.push(pot.cook(*input)?);
+            results.push(botw_recipe_cook::cook_actors_unchecked(input));
         }
 
         if let Err(e) = compare_cook_results_slice(&results) {
@@ -242,7 +232,6 @@ fn check_actor_pair_in_2(
 fn check_actor_pair_in_1(
     actor_a: Actor,
     actor_b: Actor,
-    pot: &CookingPot,
 ) -> anyhow::Result<()> {
     let mut inputs = [
         [actor_a, actor_a, actor_a, actor_a, Actor::None],
@@ -260,7 +249,7 @@ fn check_actor_pair_in_1(
 
         results.clear();
         for input in inputs.iter() {
-            results.push(pot.cook(*input)?);
+            results.push(botw_recipe_cook::cook_actors_unchecked(input));
         }
 
         if let Err(e) = compare_cook_results_slice(&results) {

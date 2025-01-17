@@ -4,12 +4,11 @@
 //! This is used to verify CompactDB is correctly generated
 
 use std::path::Path;
-use std::sync::{mpsc, Arc};
+use std::sync::mpsc;
 use std::time::{Duration, Instant};
 
 use anyhow::bail;
-use botw_recipe::cook::CookingPot;
-use botw_recipe::db::{Chunk, Database};
+use botw_recipe_wmcdb::{Chunk, Database};
 use botw_recipe_sys::CookEffect;
 
 use crate::util;
@@ -27,15 +26,13 @@ pub fn test_read_db(path: &Path) -> anyhow::Result<()> {
     progress.set_throttle_duration(Duration::from_secs(1));
 
     let pool = crate::thread_pool();
-    let pot = database.pot();
     let (send, recv) = mpsc::channel();
 
     for chunk_id in 0..chunk_count {
         let send = send.clone();
         let chunk = database.open_chunk(chunk_id)?;
-        let pot = Arc::clone(&pot);
 
-        pool.execute(move || match test_read_chunk(chunk, &pot) {
+        pool.execute(move || match test_read_chunk(chunk) {
             Ok(()) => {
                 let _ = send.send((chunk_id, Ok(())));
             }
@@ -60,10 +57,10 @@ pub fn test_read_db(path: &Path) -> anyhow::Result<()> {
     Ok(())
 }
 
-pub fn test_read_chunk(chunk: Chunk, pot: &CookingPot) -> anyhow::Result<()> {
+pub fn test_read_chunk(chunk: Chunk) -> anyhow::Result<()> {
     for record in chunk {
         let record = record?;
-        let cooked = pot.cook_id(record.recipe_id)?;
+        let cooked = botw_recipe_cook::cook_id_unchecked(record.recipe_id);
         let expected_value = cooked.data.sell_price & 0x1FF;
         if expected_value != record.record.modifier() as i32 {
             bail!(

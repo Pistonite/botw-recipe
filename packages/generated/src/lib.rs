@@ -49,6 +49,13 @@ mod recipe;
 #[cfg(feature = "recipe")]
 pub use recipe::{Recipe, find_recipe, IngrVec};
 
+#[cfg(feature = "cook-effect")]
+mod cook_effect;
+#[cfg(feature = "cook-effect")]
+pub use cook_effect::CookEffect;
+#[cfg(feature = "cook-effect")]
+mod cook_effect_impl;
+
 /// Number of ingredients the cooking pot accepts
 #[macro_export]
 macro_rules! num_ingr {
@@ -57,6 +64,3 @@ macro_rules! num_ingr {
     };
 }
 
-// TODO: generate these instead of hard code
-mod cook_effect;
-pub use cook_effect::CookEffect;
