@@ -5,15 +5,27 @@ edition = "2021"
 publish = false
 description = "Common data processing utilities for tools in the botwrdb project"
 
-[dependencies.botw-recipe]
-package = "botw-recipe-data"
-path = "../../app/data"
+[dependencies.botw-recipe-wmcdb]
+path = "../wmcdb"
+
+[dependencies.botw-recipe-cook]
+path = "../cook"
+features = ["wmcdb"]
+
+[dependencies.botw-recipe-sys]
+path = "../generated"
+features = [
+    "actor-from-actor",
+    "actor-english",
+]
 
 [dependencies]
 anyhow = "1.0.95"
 clap = { version = "4.5.26", features = ["derive"] }
 num_cpus = "1.16.0"
 spp = { git = "https://github.com/Pistonight/spp", branch = "main", version = "0.1.0" }
-terminal_size = "0.4.1"
 thiserror = "2.0.11"
 threadpool = "1.8.1"
+
+[features]
+assertions = ["botw-recipe-cook/assertions"]

@@ -15,12 +15,23 @@ includes:
     taskfile: ./dump/console
     dir: ./dump/console
 
-  # Recipe Dumper and Verifier
-  dump:
-    taskfile: ./dump/emulate
-    dir: ./dump/emulate
+  generated:
+    taskfile: ./packages/generated
+    dir: ./packages/generated
+    internal: true
+
+  known-good:
+    aliases: [kg]
+    taskfile: ./packages/known-good
+    dir: ./packages/known-good
 
 tasks:
+  install:
+    desc: Install dependencies
+    cmds:
+      - magoo install
+      # TODO: pnpm
+
   research:
     desc: Reproduce research (--clean to re-download data)
     dir: research
@@ -40,6 +51,7 @@ tasks:
 
   test-rs:
     cmds:
+      - task: generated:test
       - cargo test --package botw-recipe-data --all-targets --all-features --release
 
   check:

@@ -3,8 +3,15 @@
 //! DO NOT EDIT. See packages/generated/README.md for more information.
 
 /// Cooked Item (Output of cooking pot)
-#[derive(enum_map::Enum, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(serde::Serialize, serde::Deserialize)] // TODO: feature flag this
+#[cfg_attr(feature = "cook-item-enum-map", derive(enum_map::Enum))]
+#[cfg_attr(
+    feature = "cook-item-enum-set",
+    derive(enumset::EnumSetType, PartialOrd, Ord, Hash)
+)]
+#[cfg_attr(
+    not(feature = "cook-item-enum-set"),
+    derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)
+)]
 #[allow(non_camel_case_types)]
 #[repr(u8)]
 pub enum CookItem {
@@ -247,8 +254,8 @@ pub enum CookItem {
 }
 impl CookItem {
     /// Get the English name of the cook item actor
-    #[cfg(feature = "english-names")]
-    pub const fn name(&self) -> &'static str {
+    #[cfg(feature = "cook-item-english")]
+    pub const fn name(self) -> &'static str {
         match self {
             Self::Item_Cook_A_01 => "Mushroom Skewer",
             Self::Item_Cook_A_02 => "Steamed Mushrooms",
@@ -371,8 +378,8 @@ impl CookItem {
         }
     }
     /// Get the actor name of the cook item
-    #[cfg(feature = "actor-names")]
-    pub const fn actor_name(&self) -> &'static str {
+    #[cfg(feature = "cook-item-to-actor")]
+    pub const fn actor_name(self) -> &'static str {
         match self {
             Self::Item_Cook_A_01 => "Item_Cook_A_01",
             Self::Item_Cook_A_02 => "Item_Cook_A_02",
@@ -494,25 +501,149 @@ impl CookItem {
             Self::Item_Cook_P_05 => "Item_Cook_P_05",
         }
     }
-}
-
-#[cfg(all(feature = "english-names", feature = "actor-names"))]
-impl std::fmt::Debug for CookItem {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_tuple(self.actor_name())
-            .field(&self.name())
-            .finish()
+    /// Get the Dubious Food CookItem
+    #[inline]
+    pub const fn dubious_food() -> Self {
+        Self::Item_Cook_O_01
+    }
+    /// Get the Fairy Tonic CookItem
+    #[inline]
+    pub const fn fairy_tonic() -> Self {
+        Self::Item_Cook_C_16
+    }
+    /// Get the cook item from an actor name
+    #[cfg(feature = "cook-item-from-actor")]
+    pub fn from_actor_name(name: &str) -> Option<Self> {
+        ACTOR_NAME_MAP.get(name).copied()
     }
 }
-#[cfg(all(not(feature = "english-names"), feature = "actor-names"))]
-impl std::fmt::Debug for CookItem {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.actor_name().fmt(f)
-    }
-}
-#[cfg(feature = "actor-names")]
-impl std::fmt::Display for CookItem {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.actor_name().fmt(f)
-    }
+#[cfg(feature = "cook-item-from-actor")]
+static ACTOR_NAME_MAP: phf::Map<&'static str, CookItem> = phf::phf_map! {
+    "Item_Cook_A_01" => CookItem::Item_Cook_A_01,
+    "Item_Cook_A_02" => CookItem::Item_Cook_A_02,
+    "Item_Cook_A_03" => CookItem::Item_Cook_A_03,
+    "Item_Cook_A_04" => CookItem::Item_Cook_A_04,
+    "Item_Cook_A_05" => CookItem::Item_Cook_A_05,
+    "Item_Cook_A_07" => CookItem::Item_Cook_A_07,
+    "Item_Cook_A_08" => CookItem::Item_Cook_A_08,
+    "Item_Cook_A_09" => CookItem::Item_Cook_A_09,
+    "Item_Cook_A_10" => CookItem::Item_Cook_A_10,
+    "Item_Cook_A_11" => CookItem::Item_Cook_A_11,
+    "Item_Cook_A_12" => CookItem::Item_Cook_A_12,
+    "Item_Cook_A_13" => CookItem::Item_Cook_A_13,
+    "Item_Cook_A_14" => CookItem::Item_Cook_A_14,
+    "Item_Cook_B_01" => CookItem::Item_Cook_B_01,
+    "Item_Cook_B_02" => CookItem::Item_Cook_B_02,
+    "Item_Cook_B_05" => CookItem::Item_Cook_B_05,
+    "Item_Cook_B_06" => CookItem::Item_Cook_B_06,
+    "Item_Cook_B_11" => CookItem::Item_Cook_B_11,
+    "Item_Cook_B_12" => CookItem::Item_Cook_B_12,
+    "Item_Cook_B_13" => CookItem::Item_Cook_B_13,
+    "Item_Cook_B_15" => CookItem::Item_Cook_B_15,
+    "Item_Cook_B_16" => CookItem::Item_Cook_B_16,
+    "Item_Cook_B_17" => CookItem::Item_Cook_B_17,
+    "Item_Cook_B_18" => CookItem::Item_Cook_B_18,
+    "Item_Cook_B_19" => CookItem::Item_Cook_B_19,
+    "Item_Cook_B_20" => CookItem::Item_Cook_B_20,
+    "Item_Cook_B_21" => CookItem::Item_Cook_B_21,
+    "Item_Cook_B_22" => CookItem::Item_Cook_B_22,
+    "Item_Cook_B_23" => CookItem::Item_Cook_B_23,
+    "Item_Cook_C_16" => CookItem::Item_Cook_C_16,
+    "Item_Cook_C_17" => CookItem::Item_Cook_C_17,
+    "Item_Cook_D_01" => CookItem::Item_Cook_D_01,
+    "Item_Cook_D_02" => CookItem::Item_Cook_D_02,
+    "Item_Cook_D_03" => CookItem::Item_Cook_D_03,
+    "Item_Cook_D_04" => CookItem::Item_Cook_D_04,
+    "Item_Cook_D_05" => CookItem::Item_Cook_D_05,
+    "Item_Cook_D_06" => CookItem::Item_Cook_D_06,
+    "Item_Cook_D_07" => CookItem::Item_Cook_D_07,
+    "Item_Cook_D_08" => CookItem::Item_Cook_D_08,
+    "Item_Cook_D_09" => CookItem::Item_Cook_D_09,
+    "Item_Cook_D_10" => CookItem::Item_Cook_D_10,
+    "Item_Cook_E_01" => CookItem::Item_Cook_E_01,
+    "Item_Cook_E_02" => CookItem::Item_Cook_E_02,
+    "Item_Cook_E_03" => CookItem::Item_Cook_E_03,
+    "Item_Cook_E_04" => CookItem::Item_Cook_E_04,
+    "Item_Cook_F_01" => CookItem::Item_Cook_F_01,
+    "Item_Cook_F_02" => CookItem::Item_Cook_F_02,
+    "Item_Cook_F_03" => CookItem::Item_Cook_F_03,
+    "Item_Cook_F_04" => CookItem::Item_Cook_F_04,
+    "Item_Cook_G_02" => CookItem::Item_Cook_G_02,
+    "Item_Cook_G_03" => CookItem::Item_Cook_G_03,
+    "Item_Cook_G_04" => CookItem::Item_Cook_G_04,
+    "Item_Cook_G_05" => CookItem::Item_Cook_G_05,
+    "Item_Cook_G_06" => CookItem::Item_Cook_G_06,
+    "Item_Cook_G_09" => CookItem::Item_Cook_G_09,
+    "Item_Cook_G_10" => CookItem::Item_Cook_G_10,
+    "Item_Cook_G_11" => CookItem::Item_Cook_G_11,
+    "Item_Cook_G_12" => CookItem::Item_Cook_G_12,
+    "Item_Cook_G_13" => CookItem::Item_Cook_G_13,
+    "Item_Cook_G_14" => CookItem::Item_Cook_G_14,
+    "Item_Cook_G_15" => CookItem::Item_Cook_G_15,
+    "Item_Cook_G_16" => CookItem::Item_Cook_G_16,
+    "Item_Cook_G_17" => CookItem::Item_Cook_G_17,
+    "Item_Cook_H_01" => CookItem::Item_Cook_H_01,
+    "Item_Cook_H_02" => CookItem::Item_Cook_H_02,
+    "Item_Cook_H_03" => CookItem::Item_Cook_H_03,
+    "Item_Cook_I_01" => CookItem::Item_Cook_I_01,
+    "Item_Cook_I_02" => CookItem::Item_Cook_I_02,
+    "Item_Cook_I_03" => CookItem::Item_Cook_I_03,
+    "Item_Cook_I_04" => CookItem::Item_Cook_I_04,
+    "Item_Cook_I_05" => CookItem::Item_Cook_I_05,
+    "Item_Cook_I_06" => CookItem::Item_Cook_I_06,
+    "Item_Cook_I_07" => CookItem::Item_Cook_I_07,
+    "Item_Cook_I_08" => CookItem::Item_Cook_I_08,
+    "Item_Cook_I_09" => CookItem::Item_Cook_I_09,
+    "Item_Cook_I_10" => CookItem::Item_Cook_I_10,
+    "Item_Cook_I_11" => CookItem::Item_Cook_I_11,
+    "Item_Cook_I_12" => CookItem::Item_Cook_I_12,
+    "Item_Cook_I_13" => CookItem::Item_Cook_I_13,
+    "Item_Cook_I_14" => CookItem::Item_Cook_I_14,
+    "Item_Cook_I_15" => CookItem::Item_Cook_I_15,
+    "Item_Cook_I_16" => CookItem::Item_Cook_I_16,
+    "Item_Cook_I_17" => CookItem::Item_Cook_I_17,
+    "Item_Cook_J_01" => CookItem::Item_Cook_J_01,
+    "Item_Cook_J_02" => CookItem::Item_Cook_J_02,
+    "Item_Cook_J_03" => CookItem::Item_Cook_J_03,
+    "Item_Cook_J_04" => CookItem::Item_Cook_J_04,
+    "Item_Cook_J_05" => CookItem::Item_Cook_J_05,
+    "Item_Cook_J_06" => CookItem::Item_Cook_J_06,
+    "Item_Cook_J_07" => CookItem::Item_Cook_J_07,
+    "Item_Cook_J_08" => CookItem::Item_Cook_J_08,
+    "Item_Cook_J_09" => CookItem::Item_Cook_J_09,
+    "Item_Cook_K_01" => CookItem::Item_Cook_K_01,
+    "Item_Cook_K_02" => CookItem::Item_Cook_K_02,
+    "Item_Cook_K_03" => CookItem::Item_Cook_K_03,
+    "Item_Cook_K_04" => CookItem::Item_Cook_K_04,
+    "Item_Cook_K_05" => CookItem::Item_Cook_K_05,
+    "Item_Cook_K_06" => CookItem::Item_Cook_K_06,
+    "Item_Cook_K_07" => CookItem::Item_Cook_K_07,
+    "Item_Cook_K_08" => CookItem::Item_Cook_K_08,
+    "Item_Cook_K_09" => CookItem::Item_Cook_K_09,
+    "Item_Cook_L_01" => CookItem::Item_Cook_L_01,
+    "Item_Cook_L_02" => CookItem::Item_Cook_L_02,
+    "Item_Cook_L_03" => CookItem::Item_Cook_L_03,
+    "Item_Cook_L_04" => CookItem::Item_Cook_L_04,
+    "Item_Cook_L_05" => CookItem::Item_Cook_L_05,
+    "Item_Cook_M_01" => CookItem::Item_Cook_M_01,
+    "Item_Cook_N_01" => CookItem::Item_Cook_N_01,
+    "Item_Cook_N_02" => CookItem::Item_Cook_N_02,
+    "Item_Cook_N_03" => CookItem::Item_Cook_N_03,
+    "Item_Cook_N_04" => CookItem::Item_Cook_N_04,
+    "Item_Cook_O_01" => CookItem::Item_Cook_O_01,
+    "Item_Cook_O_02" => CookItem::Item_Cook_O_02,
+    "Item_Cook_P_01" => CookItem::Item_Cook_P_01,
+    "Item_Cook_P_02" => CookItem::Item_Cook_P_02,
+    "Item_Cook_P_03" => CookItem::Item_Cook_P_03,
+    "Item_Cook_P_04" => CookItem::Item_Cook_P_04,
+    "Item_Cook_P_05" => CookItem::Item_Cook_P_05,
+};
+/// Get the count of the cook_item enum
+///
+/// `count - 1` is the last valid enum variant
+#[macro_export]
+macro_rules! cook_item_count {
+    () => {
+        118
+    };
 }

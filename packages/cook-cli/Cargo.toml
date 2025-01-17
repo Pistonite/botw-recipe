@@ -1,0 +1,12 @@
+[package]
+name = "botw-recipe-cook-cli"
+version = "0.0.0"
+edition = "2021"
+publish = false
+description = "BOTW Cooking simulator CLI"
+
+[dependencies]
+
+[[bin]]
+name = "botw-cook"
+path = "src/main.rs"

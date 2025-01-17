@@ -5,26 +5,26 @@ use std::io::BufReader;
 use std::path::Path;
 use std::sync::mpsc;
 
-use botw_recipe::cook::CookData;
-use botw_recipe::fsdb;
+use botw_recipe_cook::CookData;
+use botw_recipe_wmcdb::meta;
 
 use crate::{util, Error};
 
 /// Check if RawDB in the database directory is valid using a thread pool
 pub fn check_raw_db(path: &Path) -> anyhow::Result<()> {
-    let meta = fsdb::meta::raw_v1();
+    let meta = meta::raw();
     let chunk_count = meta.chunk_count();
-    let progress = spp::printer(chunk_count, format!("Checking {}", path.display()));
+    let progress = spp::printer(chunk_count as usize, format!("Checking {}", path.display()));
     let mut errors = Vec::new();
     let pool = crate::thread_pool();
     let (send, recv) = mpsc::channel();
     for chunk_id in 0..chunk_count {
         let chunk_size = meta.chunk_size(chunk_id);
         let chunk_size_bytes = meta.chunk_size_bytes(chunk_id);
-        let chunk_path = fsdb::meta::raw_chunk_path(path, chunk_id);
+        let chunk_path = meta::raw_chunk_path(path, chunk_id);
         let send = send.clone();
         pool.execute(move || {
-            let result = check_raw_chunk(chunk_id, chunk_size, chunk_size_bytes, &chunk_path);
+            let result = check_raw_chunk(chunk_size, chunk_size_bytes, &chunk_path);
             let _ = send.send((chunk_id, result));
         });
     }
@@ -43,7 +43,6 @@ pub fn check_raw_db(path: &Path) -> anyhow::Result<()> {
 ///
 /// Returns the first invalid record if found
 pub fn check_raw_chunk(
-    id: usize,
     records: usize,
     size_bytes: usize,
     path: &Path,
@@ -56,13 +55,7 @@ pub fn check_raw_chunk(
 
     for i in 0..records {
         let data = CookData::read_from(&mut reader)?;
-        let invalid_reason = if id == 0 && i == 0 {
-            // first record in first chunk is always invalid
-            // since it correspond to cooking with 0 materials
-            data.is_invalid()
-        } else {
-            data.is_normal()
-        };
+        let invalid_reason = data.is_normal();
         if let Some(reason) = invalid_reason {
             return Err(Error::InvalidRecord(i, reason, data));
         }
@@ -72,10 +65,10 @@ pub fn check_raw_chunk(
 
 /// Check if 2 RawDBs are the same
 pub fn compare_raw_db(path_a: &Path, path_b: &Path) -> anyhow::Result<()> {
-    let meta = fsdb::meta::raw_v1();
+    let meta = meta::raw();
     let chunk_count = meta.chunk_count();
     let progress = spp::printer(
-        chunk_count,
+        chunk_count as usize,
         format!("Comparing {} and {}", path_a.display(), path_b.display()),
     );
     let mut errors = Vec::new();
@@ -83,8 +76,8 @@ pub fn compare_raw_db(path_a: &Path, path_b: &Path) -> anyhow::Result<()> {
     let (send, recv) = mpsc::channel();
     for chunk_id in 0..chunk_count {
         let chunk_size = meta.chunk_size(chunk_id);
-        let chunk_path_a = fsdb::meta::raw_chunk_path(path_a, chunk_id);
-        let chunk_path_b = fsdb::meta::raw_chunk_path(path_b, chunk_id);
+        let chunk_path_a = meta::raw_chunk_path(path_a, chunk_id);
+        let chunk_path_b = meta::raw_chunk_path(path_b, chunk_id);
         let send = send.clone();
         pool.execute(move || {
             let result = compare_raw_chunks(chunk_size, &chunk_path_a, &chunk_path_b);

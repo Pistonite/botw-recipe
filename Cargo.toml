@@ -1,8 +1,11 @@
 [workspace]
 members = [
-    "app/data",
-    "app/rdb/src-tauri",
-    "dump/emulate", "packages/data-utils", "packages/generated",
+    "app/rdb/src-tauri", 
+    "packages/cook",
+    "packages/cook-cli",
+    "packages/wmcdb",
+    "packages/data-utils",
+    "packages/generated",
     "research",
 ]
 resolver = "2"

@@ -1,5 +1,5 @@
 [package]
-name = "botw-recipe-generated"
+name = "botw-recipe-sys"
 version = "0.0.0"
 edition = "2021"
 publish = false
@@ -7,11 +7,109 @@ license = "MIT"
 description = "Data binding generated from parameters"
 
 [dependencies]
-enum-map = "2.7.3"
-serde = { version = "1.0.217", features = ["derive"] }
+bit-iter = { version = "1.2.0", optional = true }
+derive_more = { version = "1.0.0", features = ["deref"], optional = true }
+enum-map = { version = "2.7.3", optional = true }
+enumset = { version = "1.1.5", optional = true }
+no-panic = "0.1.33"
+phf = { version = "0.11.3", optional = true, features = ["macros"] }
+serde = { version = "1.0.217", optional = true }
 
 [features]
-# Enable getting the actor names for generated enums
-actor-names = []
-# Enable getting the english names for generated enums
-english-names = []
+full = [
+    "cook-item-full",
+    "actor-full",
+    "actor-wmc-group",
+    "tag-full",
+    "actor-data",
+    "recipe",
+    "multichoose"
+]
+
+# See README.md for feature descriptions
+
+## CookItem features
+cook-item = []
+cook-item-enum-map = ["cook-item", "dep:enum-map"]
+cook-item-enum-set = ["cook-item", "dep:enumset"]
+cook-item-to-actor = ["cook-item"]
+cook-item-from-actor = ["cook-item", "dep:phf"]
+cook-item-serde-serialize = ["dep:serde", "cook-item-to-actor"]
+cook-item-serde-deserialize = ["dep:serde", "cook-item-from-actor"]
+cook-item-serde = ["cook-item-serde-serialize", "cook-item-serde-deserialize"]
+cook-item-english = ["cook-item"]
+cook-item-full = [
+    "cook-item-enum-map",
+    "cook-item-enum-set",
+    "cook-item-serde",
+    "cook-item-english",
+]
+
+## Actor features
+actor = []
+actor-enum-map = ["actor", "dep:enum-map"]
+actor-enum-set = ["actor", "dep:enumset"]
+actor-to-actor = ["actor"]
+actor-from-actor = ["actor", "dep:phf"]
+actor-serde-serialize = ["dep:serde", "actor-to-actor"]
+actor-serde-deserialize = ["dep:serde", "actor-from-actor"]
+actor-serde = ["actor-serde-serialize", "actor-serde-deserialize"]
+actor-english = ["actor"]
+prompt-entanglement = ["actor"]
+actor-full = [
+    "actor-enum-map",
+    "actor-enum-set",
+    "actor-serde",
+    "actor-english",
+    "prompt-entanglement",
+]
+
+## Actor Group feature for WMC purpose
+actor-wmc-group = ["actor"]
+
+## Actor Tag features
+tag = []
+tag-enum-map = ["tag", "dep:enum-map"]
+tag-enum-set = ["tag", "dep:enumset"]
+tag-to-str = ["tag"]
+tag-from-str = ["tag"]
+tag-serde-serialize = ["dep:serde", "tag-to-str"]
+tag-serde-deserialize = ["dep:serde", "tag-from-str"]
+tag-serde = ["tag-serde-serialize", "tag-serde-deserialize"]
+tag-full = [
+    "tag-enum-map",
+    "tag-enum-set",
+    "tag-serde",
+]
+
+## Actor Data (parameter) features
+actor-data = ["tag-enum-set", "dep:bit-iter"]
+
+## CookEffect enum
+cook-effect = []
+cook-effect-enum-map = ["tag", "dep:enum-map"]
+cook-effect-enum-set = ["tag", "dep:enumset"]
+cook-effect-to-str = ["cook-effect"]
+cook-effect-from-str = ["cook-effect", "dep:phf"]
+cook-effect-special-status = ["cook-effect"]
+cook-effect-english = ["cook-effect"]
+cook-effect-data= ["cook-effect"]
+cook-effect-serde-serialize = ["dep:serde", "cook-effect-to-str"]
+cook-effect-serde-deserialize = ["dep:serde", "cook-effect-from-str"]
+cook-effect-serde = ["cook-effect-serde-serialize", "cook-effect-serde-deserialize"]
+cook-effect-full = [
+    "cook-effect-enum-map",
+    "cook-effect-enum-set",
+    "cook-effect-english",
+    "cook-effect-special-status",
+    "cook-effect-data",
+    "cook-effect-serde",
+]
+
+## Recipe Data
+recipe = ["actor", "tag", "cook-item", "cook-effect", "dep:derive_more"]
+
+
+
+multichoose = []
+

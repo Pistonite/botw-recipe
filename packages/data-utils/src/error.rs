@@ -1,4 +1,4 @@
-use botw_recipe::cook::{CookData, CookDataInvalidReason};
+use botw_recipe_cook::{CookData, CookDataInvalidReason};
 
 /// Enum for the data utils
 #[derive(Debug, thiserror::Error)]
