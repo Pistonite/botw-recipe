@@ -1,0 +1,13 @@
+{
+    "name": "botw-recipe-sys",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "description": "Data binding for BOTW recipes",
+    "exports": {
+        ".": "ts/index.ts"
+    },
+    "devDependencies": {
+        "prettier": "catalog:"
+    }
+}

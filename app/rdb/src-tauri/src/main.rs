@@ -14,123 +14,13 @@ use tauri::{AppHandle, Manager, RunEvent, State, WindowEvent};
 mod config;
 use config::Config;
 mod cook;
-mod error;
 mod events;
-mod executor;
-use executor::Executor;
 mod filter;
 mod search;
-mod tasks;
 
 use error::{Error, ResultInterop};
 
-/// Tauri app global state
-pub struct Global {
-    /// The config file
-    pub config: Config,
-    /// The task executor
-    pub executor: Arc<Executor>,
-    /// The database handle
-    pub db: Arc<LazyLock<Result<Database, Error>>>,
-    /// Handle for the result of the last search
-    pub search_result: Arc<Mutex<Option<TempResult>>>,
-    /// Abort handles for the current search
-    pub search_handles: Arc<Mutex<Vec<usize>>>,
-    pub filter_result: Arc<Mutex<Option<TempResult>>>,
-    pub last_included: Arc<Mutex<HashSet<Group>>>,
-    /// Abort handles for the current filter
-    pub filter_handles: Arc<Mutex<Vec<usize>>>,
-    /// Abort handle for the background cooking process
-    pub cooking_handle: Arc<Mutex<Option<usize>>>,
-}
 
-impl Global {
-    pub fn get_db(&self) -> Result<&Database, Error> {
-        let db = self.db.as_ref().deref();
-        match db {
-            Ok(db) => Ok(db),
-            Err(e) => Err(e.clone()),
-        }
-    }
-}
-
-////////////////////////////////// Commands //////////////////////////////////
-#[tauri::command]
-fn set_title(title: String, app: AppHandle) {
-    if let Some(window) = app.get_window("main") {
-        // showing window here because at this point, JS side has
-        // definitely finished initial rendering, so we don't
-        // get a white window in dark mode
-        info!("showing window");
-        if let Err(e) = window.show() {
-            log::error!("fail to show window: {}", e);
-        }
-        info!("setting window title to {}", title);
-        if let Err(e) = window.set_title(&title) {
-            log::error!("fail to set window title: {}", e);
-        }
-    } else {
-        log::error!("main window not found!!");
-    }
-}
-
-/// Run initialization in worker threads.
-///
-/// JS side should call this after UI load, and prevent calling other commands
-/// until the `initialized` event is received. Otherwise, accessing DB could
-/// block the main thread.
-#[tauri::command]
-fn initialize(app: AppHandle, state: State<Global>) {
-    info!("initializing state");
-    let db = Arc::clone(&state.db);
-    state.executor.pool().execute(move || {
-        LazyLock::force(&db);
-        events::emit_initialized(&app);
-    });
-}
-
-/// Starts a DB scan with the given filter.
-/// Returns a list of handles to abort the search by calling the abort command
-/// for each handle.
-///
-/// The search is optimized by skipping chunks that are filtered by index.
-/// The result is emitted through the `search-complete` event.
-///
-/// JS side should make sure to abort previous searches before starting a new one.
-///
-/// One or more `search-progress` event might be emitted during the search.
-/// The payload is a number between 0 and 100 indicating the progress percentage.
-#[tauri::command]
-fn search(filter: Filter, app: AppHandle, state: State<Global>) -> ResultInterop<()> {
-    search::run(&filter, app, state).into()
-}
-
-#[tauri::command]
-fn abort_search(state: State<Global>) -> ResultInterop<()> {
-    search::abort(state).into()
-}
-/// Execute filtering on the search result based on what actors should be included.
-/// The filter results are returned through the `filter-complete` event.
-///
-/// JS side should make sure to abort previous filter before starting a new one.
-///
-/// One or more `filter-progress` event might be emitted during the filter.
-/// The payload is a number between 0 and 100 indicating the progress percentage.
-#[tauri::command]
-fn filter(include: Vec<usize>, app: AppHandle, state: State<Global>) -> ResultInterop<()> {
-    let mut filter = include
-        .into_iter()
-        .map(Group::from_usize)
-        .collect::<HashSet<_>>();
-    // always include "none" i.e. the empty space
-    filter.insert(Group::None);
-    filter::run(&Arc::new(filter), app, state).into()
-}
-
-#[tauri::command]
-fn abort_filter(state: State<Global>) -> ResultInterop<()> {
-    filter::abort(state).into()
-}
 
 #[tauri::command]
 fn load_override_localization_json(state: State<Global>) -> String {
@@ -142,10 +32,6 @@ fn get_result_limit(state: State<Global>) -> usize {
     state.config.result_limit
 }
 
-#[tauri::command]
-fn cook(app: AppHandle, state: State<Global>) -> ResultInterop<()> {
-    cook::run(app, state).into()
-}
 
 fn main() {
     env_logger::init();

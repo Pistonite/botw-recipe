@@ -1,0 +1,5 @@
+packages:
+- packages/generated
+
+catalog:
+  prettier: ^3.4.2

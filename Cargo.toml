@@ -6,6 +6,7 @@ members = [
     "packages/wmcdb",
     "packages/data-utils",
     "packages/generated",
-    "research",
+    "packages/searcher-tauri",
+    "research", 
 ]
 resolver = "2"

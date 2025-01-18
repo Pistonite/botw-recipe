@@ -49,7 +49,7 @@ pub fn cook_id_unchecked(id: u64) -> CookResult {
         return CookResult::no_ingredients();
     }
     let mut groups = [Group::None; num_ingr!()];
-    if !GroupMnr::<{num_ingr!()}>::default().to_groups(id, &mut groups) {
+    if !GroupMnr::default().to_groups(id, &mut groups) {
         return CookResult::no_ingredients();
     }
     let mut actors = IngrVec::new();
