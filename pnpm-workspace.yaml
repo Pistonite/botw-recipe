@@ -1,5 +1,5 @@
 packages:
 - packages/generated
+- packages/mono-dev
 
 catalog:
-  prettier: ^3.4.2
