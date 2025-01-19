@@ -1,0 +1,237 @@
+
+# Automatically generated.
+# DO NOT EDIT. See packages/generated/README.md for more information.
+
+actor.Item_Fruit_D: Hearty Durian
+actor.Item_Fruit_G: Palm Fruit
+actor.Item_Fruit_A: Apple
+actor.Item_Fruit_B: Wildberry
+actor.Item_Fruit_F: Hydromelon
+actor.Item_Fruit_I: Spicy Pepper
+actor.Item_Fruit_C: Voltfruit
+actor.Item_Fruit_E: Fleet-Lotus Seeds
+actor.Item_Fruit_H: Mighty Bananas
+actor.Item_Mushroom_N: Big Hearty Truffle
+actor.Item_Mushroom_F: Hearty Truffle
+actor.Item_Mushroom_O: Endura Shroom
+actor.Item_Mushroom_E: Hylian Shroom
+actor.Item_Mushroom_A: Stamella Shroom
+actor.Item_Mushroom_B: Chillshroom
+actor.Item_Mushroom_C: Sunshroom
+actor.Item_Mushroom_H: Zapshroom
+actor.Item_MushroomGet_D: Rushroom
+actor.Item_Mushroom_L: Razorshroom
+actor.Item_Mushroom_M: Ironshroom
+actor.Item_Mushroom_J: Silent Shroom
+actor.Item_PlantGet_C: Big Hearty Radish
+actor.Item_PlantGet_B: Hearty Radish
+actor.Item_PlantGet_Q: Endura Carrot
+actor.Item_PlantGet_A: Hyrule Herb
+actor.Item_PlantGet_M: Swift Carrot
+actor.Item_Fruit_J: Fortified Pumpkin
+actor.Item_PlantGet_E: Cool Safflina
+actor.Item_PlantGet_F: Warm Safflina
+actor.Item_PlantGet_L: Electric Safflina
+actor.Item_PlantGet_O: Swift Violet
+actor.Item_PlantGet_G: Mighty Thistle
+actor.Item_PlantGet_H: Armoranth
+actor.Item_PlantGet_I: Blue Nightshade
+actor.Item_PlantGet_J: Silent Princess
+actor.Item_Meat_11: Raw Gourmet Meat
+actor.Item_Meat_12: Raw Whole Bird
+actor.Item_Meat_02: Raw Prime Meat
+actor.Item_Meat_07: Raw Bird Thigh
+actor.Item_Meat_01: Raw Meat
+actor.Item_Meat_06: Raw Bird Drumstick
+actor.BeeHome: Courser Bee Honey
+actor.Item_Material_03: Hylian Rice
+actor.Item_Material_04: Bird Egg
+actor.Item_Material_07: Tabantha Wheat
+actor.Item_Material_05: Fresh Milk
+actor.Item_Fruit_K: Acorn
+actor.Item_Fruit_L: Chickaloo Tree Nut
+actor.Item_Material_01: Cane Sugar
+actor.Item_Material_06: Goat Butter
+actor.Item_Material_02: Goron Spice
+actor.Item_Ore_H: Rock Salt
+actor.Item_Ore_J: Star Fragment
+actor.Item_Enemy_38: Dinraal's Scale
+actor.Item_Enemy_39: Dinraal's Claw
+actor.Item_Enemy_47: Shard of Dinraal's Fang
+actor.Item_Enemy_48: Shard of Dinraal's Horn
+actor.Item_Enemy_49: Naydra's Scale
+actor.Item_Enemy_50: Naydra's Claw
+actor.Item_Enemy_51: Shard of Naydra's Fang
+actor.Item_Enemy_52: Shard of Naydra's Horn
+actor.Item_Enemy_53: Farosh's Scale
+actor.Item_Enemy_54: Farosh's Claw
+actor.Item_Enemy_55: Shard of Farosh's Fang
+actor.Item_Enemy_56: Shard of Farosh's Horn
+actor.Item_FishGet_I: Hearty Salmon
+actor.Item_FishGet_K: Hearty Blueshell Snail
+actor.Item_FishGet_B: Hearty Bass
+actor.Item_FishGet_A: Hyrule Bass
+actor.Item_FishGet_L: Staminoka Bass
+actor.Item_FishGet_C: Chillfin Trout
+actor.Item_FishGet_J: Sizzlefin Trout
+actor.Item_FishGet_D: Voltfin Trout
+actor.Item_FishGet_X: Stealthfin Trout
+actor.Item_FishGet_E: Mighty Carp
+actor.Item_FishGet_H: Armored Carp
+actor.Item_FishGet_Z: Sanke Carp
+actor.Item_FishGet_F: Mighty Porgy
+actor.Item_FishGet_G: Armored Porgy
+actor.Item_FishGet_M: Sneaky River Snail
+actor.Item_InsectGet_K: Razorclaw Crab
+actor.Item_InsectGet_O: Ironshell Crab
+actor.Item_InsectGet_Z: Bright-Eyed Crab
+actor.Animal_Insect_F: Fairy
+actor.Animal_Insect_N: Winterwing Butterfly
+actor.Animal_Insect_Q: Summerwing Butterfly
+actor.Animal_Insect_R: Thunderwing Butterfly
+actor.Animal_Insect_AB: Smotherwing Butterfly
+actor.Animal_Insect_C: Cold Darner
+actor.Animal_Insect_T: Warm Darner
+actor.Animal_Insect_I: Electric Darner
+actor.Animal_Insect_H: Restless Cricket
+actor.Animal_Insect_G: Bladed Rhino Beetle
+actor.Animal_Insect_P: Rugged Rhino Beetle
+actor.Animal_Insect_AA: Energetic Rhino Beetle
+actor.Animal_Insect_E: Sunset Firefly
+actor.Animal_Insect_A: Hot-Footed Frog
+actor.Animal_Insect_B: Tireless Frog
+actor.Animal_Insect_S: Hightail Lizard
+actor.Animal_Insect_M: Hearty Lizard
+actor.Animal_Insect_X: Fireproof Lizard
+actor.Item_Ore_I: Flint
+actor.Item_Ore_F: Amber
+actor.Item_Ore_E: Opal
+actor.Item_Ore_G: Luminous Stone
+actor.Item_Ore_D: Topaz
+actor.Item_Ore_B: Ruby
+actor.Item_Ore_C: Sapphire
+actor.Item_Ore_A: Diamond
+actor.Item_Enemy_00: Bokoblin Horn
+actor.Item_Enemy_01: Bokoblin Fang
+actor.Item_Enemy_02: Bokoblin Guts
+actor.Item_Enemy_06: Moblin Horn
+actor.Item_Enemy_07: Moblin Fang
+actor.Item_Enemy_08: Moblin Guts
+actor.Item_Enemy_03: Lizalfos Horn
+actor.Item_Enemy_04: Lizalfos Talon
+actor.Item_Enemy_05: Lizalfos Tail
+actor.Item_Enemy_42: Icy Lizalfos Tail
+actor.Item_Enemy_41: Red Lizalfos Tail
+actor.Item_Enemy_43: Yellow Lizalfos Tail
+actor.Item_Enemy_12: Lynel Horn
+actor.Item_Enemy_13: Lynel Hoof
+actor.Item_Enemy_14: Lynel Guts
+actor.Item_Enemy_40: Chuchu Jelly
+actor.Item_Enemy_17: White Chuchu Jelly
+actor.Item_Enemy_15: Red Chuchu Jelly
+actor.Item_Enemy_16: Yellow Chuchu Jelly
+actor.Item_Enemy_18: Keese Wing
+actor.Item_Enemy_46: Ice Keese Wing
+actor.Item_Enemy_44: Fire Keese Wing
+actor.Item_Enemy_45: Electric Keese Wing
+actor.Item_Enemy_19: Keese Eyeball
+actor.Item_Enemy_20: Octorok Tentacle
+actor.Item_Enemy_21: Octorok Eyeball
+actor.Item_Enemy_57: Octo Balloon
+actor.Item_Enemy_24: Molduga Fin
+actor.Item_Enemy_25: Molduga Guts
+actor.Item_Enemy_32: Hinox Toenail
+actor.Item_Enemy_33: Hinox Tooth
+actor.Item_Enemy_34: Hinox Guts
+actor.Item_Enemy_27: Ancient Screw
+actor.Item_Enemy_28: Ancient Spring
+actor.Item_Enemy_26: Ancient Gear
+actor.Item_Enemy_29: Ancient Shaft
+actor.Item_Enemy_30: Ancient Core
+actor.Item_Enemy_31: Giant Ancient Core
+actor.Obj_FireWoodBundle: Wood
+actor.Item_Roast_03: Baked Apple
+actor.Item_Roast_10: Baked Palm Fruit
+actor.Item_Roast_07: Roasted Wildberry
+actor.Item_Roast_48: Roasted Acorn
+actor.Item_Roast_52: Roasted Tree Nut
+actor.Item_Roast_09: Roasted Hearty Durian
+actor.Item_Roast_12: Roasted Hydromelon
+actor.Item_Roast_13: Charred Pepper
+actor.Item_Roast_08: Roasted Voltfruit
+actor.Item_Roast_16: Roasted Lotus Seeds
+actor.Item_Roast_11: Roasted Mighty Bananas
+actor.Item_Roast_06: Toasty Hylian Shroom
+actor.Item_Roast_04: Toasty Stamella Shroom
+actor.Item_Roast_53: Toasty Endura Shroom
+actor.Item_Roast_05: Toasted Hearty Truffle
+actor.Item_Roast_49: Toasted Big Hearty Truffle
+actor.Item_Roast_31: Toasty Chillshroom
+actor.Item_Roast_32: Toasty Sunshroom
+actor.Item_Roast_33: Toasty Zapshroom
+actor.Item_Roast_36: Toasty Rushroom
+actor.Item_Roast_37: Toasty Razorshroom
+actor.Item_Roast_38: Toasty Ironshroom
+actor.Item_Roast_39: Toasty Silent Shroom
+actor.Item_Roast_18: Roasted Radish
+actor.Item_Roast_19: Roasted Big Radish
+actor.Item_Roast_24: Roasted Swift Carrot
+actor.Item_Roast_50: Roasted Endura Carrot
+actor.Item_Roast_15: Baked Fortified Pumpkin
+actor.Item_Roast_27: Roasted Mighty Thistle
+actor.Item_Roast_28: Roasted Armoranth
+actor.Item_Roast_51: Campfire Egg
+actor.Item_Boiled_01: Hard-Boiled Egg
+actor.Item_Roast_01: Seared Steak
+actor.Item_Roast_40: Seared Prime Steak
+actor.Item_Roast_45: Seared Gourmet Steak
+actor.Item_Roast_02: Roasted Bird Drumstick
+actor.Item_Roast_41: Roasted Bird Thigh
+actor.Item_Roast_46: Roasted Whole Bird
+actor.Item_RoastFish_01: Roasted Bass
+actor.Item_RoastFish_02: Roasted Hearty Bass
+actor.Item_RoastFish_04: Roasted Hearty Salmon
+actor.Item_RoastFish_03: Roasted Trout
+actor.Item_RoastFish_07: Roasted Carp
+actor.Item_RoastFish_09: Roasted Porgy
+actor.Item_RoastFish_13: Sneaky River Escargot
+actor.Item_RoastFish_11: Blueshell Escargot
+actor.Item_RoastFish_15: Blackened Crab
+actor.Item_Chilled_01: Icy Meat
+actor.Item_Chilled_02: Icy Prime Meat
+actor.Item_Chilled_03: Icy Gourmet Meat
+actor.Item_Chilled_04: Frozen Bird Drumstick
+actor.Item_Chilled_05: Frozen Bird Thigh
+actor.Item_Chilled_06: Frozen Whole Bird
+actor.Item_ChilledFish_01: Frozen Bass
+actor.Item_ChilledFish_06: Frozen Hearty Bass
+actor.Item_ChilledFish_02: Frozen Hearty Salmon
+actor.Item_ChilledFish_03: Frozen Trout
+actor.Item_ChilledFish_04: Frozen Carp
+actor.Item_ChilledFish_05: Frozen Porgy
+actor.Item_ChilledFish_07: Frozen Crab
+actor.Item_ChilledFish_08: Frozen River Snail
+actor.Item_ChilledFish_09: Icy Hearty Blueshell Snail
+actor.Obj_DRStone_Get: Sheikah Slate
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Blue
+actor.dyecolor_02: Red
+actor.dyecolor_03: Yellow
+actor.dyecolor_04: White
+actor.dyecolor_05: Black
+actor.dyecolor_06: Purple
+actor.dyecolor_07: Green
+actor.dyecolor_08: Light Blue
+actor.dyecolor_09: Navy
+actor.dyecolor_10: Orange
+actor.dyecolor_11: Peach
+actor.dyecolor_12: Crimson
+actor.dyecolor_13: Light Yellow
+actor.dyecolor_14: Brown
+actor.dyecolor_15: Gray
+actor.Obj_Photo_Animal: Fauna Picture
+actor.Obj_Photo_BossEnemy: Elite Enemy Picture
+actor.Obj_Photo_Enemy: Enemy Picture
+actor.Obj_Photo_Material: Material Picture
+actor.Obj_Photo_Other: Other Picture
+actor.Obj_Photo_Weapon: Weapon Picture

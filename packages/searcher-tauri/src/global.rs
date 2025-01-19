@@ -55,6 +55,16 @@ impl Global {
             Err(e) => Err(e.clone()),
         }
     }
+
+    /// Get a reference to the executor
+    pub fn get_executor(&self) -> Arc<Executor> {
+        Arc::clone(&self.executor)
+    }
+
+    /// Get a reference to the database handle
+    pub fn get_db_handle(&self) -> Arc<LazyLock<Result<Database, Error>>> {
+        Arc::clone(&self.db)
+    }
 }
 
 /// Create a lazy-loaded database handle

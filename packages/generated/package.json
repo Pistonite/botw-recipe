@@ -5,9 +5,13 @@
     "type": "module",
     "description": "Data binding for BOTW recipes",
     "exports": {
-        ".": "ts/index.ts"
+        ".": "./src/ts/index.ts",
+        "./i18n/*.yaml": "./src/ts/i18n/*.yaml"
     },
     "devDependencies": {
-        "prettier": "catalog:"
+        "eslint": "catalog:",
+        "mono-dev": "workspace:*",
+        "typescript": "catalog:",
+        "vite": "catalog:"
     }
 }

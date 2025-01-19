@@ -95,3 +95,9 @@ pub fn abort_filter(state: State<Global>) -> ResultInterop<()> {
 pub fn cook(app: AppHandle, state: State<Global>) -> ResultInterop<()> {
     stages::cook::run(app, state).into()
 }
+
+/// Get the limit to display in cook results (from config)
+#[tauri::command]
+pub fn get_result_limit(state: State<Global>) -> usize {
+    state.config.result_limit
+}

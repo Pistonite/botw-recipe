@@ -1,11 +1,29 @@
-version: '3'
+version: "3"
+
+includes:
+  ecma:
+    taskfile: ../mono-dev/task/ecma.yaml
+    internal: true
 
 tasks:
   run:
     desc: Run a script (from the scripts directory)
     dir: ./scripts
     cmds:
-      - python scripts/{{.CLI_ARGS}}.py
+      - python {{.CLI_ARGS}}.py
+      - task: ecma:prettier-fix
+
+  check:
+    desc: Check code issues
+    cmds:
+      - task: ecma:prettier-check
+      - task: ecma:eslint-check
+      - task: ecma:tsc-check
+
+  fix:
+    cmds:
+      - task: ecma:prettier-fix
+      - task: ecma:eslint-fix
 
   test:
     desc: Run tests
@@ -17,4 +35,3 @@ tasks:
     dir: ../..
     cmds:
       - cargo run --release --bin botw-recipe-data-utils -- equiv-test {{.CLI_ARGS}}
-    

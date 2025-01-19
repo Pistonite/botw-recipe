@@ -1,0 +1,27 @@
+{
+    "name": "botw-recipe-searcher-localization",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "description": "Localization for the recipe searcher app",
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "dependencies": {
+        "@pistonite/pure": "catalog:",
+        "botw-recipe-searcher-tauri": "workspace:*",
+        "botw-recipe-sys": "workspace:*",
+        "fuse.js": "^7.0.0",
+        "i18next": "^24.2.1",
+        "react": "catalog:",
+        "react-i18next": "^15.4.0"
+    },
+    "devDependencies": {
+        "@modyfi/vite-plugin-yaml": "catalog:",
+        "@types/react": "catalog:",
+        "eslint": "catalog:",
+        "mono-dev": "workspace:*",
+        "typescript": "catalog:",
+        "vite": "catalog:"
+    }
+}

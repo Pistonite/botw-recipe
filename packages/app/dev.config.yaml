@@ -1,0 +1,4 @@
+# development config
+database_path: ../known-good/compactdbvnext
+result_limit: 5000
+# localization_override: ../../../app/rdb/en-US.yaml

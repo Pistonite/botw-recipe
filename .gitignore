@@ -9,3 +9,4 @@ __pycache__
 *.nso
 out
 node_modules
+.eslintcache

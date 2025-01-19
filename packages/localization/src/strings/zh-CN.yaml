@@ -1,0 +1,112 @@
+# UI
+title: 旷野之息料理附魔数据库
+search.title: 附魔搜索
+search.desc: 枚举所有材料组合，并以数值和附魔种类为条件筛选
+search.value.title: 数值与材料
+search.value.min: 最低附魔数值
+search.value.max: 最高附魔数值
+search.value.rng: 包括随机心心暴击
+search.value.rng.desc: 搜索包含必须通过非必定的心心暴击达到最低数值要求的材料组合。此选项不会影响必定心心暴击的材料组合（注意必定暴击的材料组合不一定必定心心暴击）
+search.value.pe: 包括异常材料
+search.value.pe.desc: 搜索材料组合中包含需要通过选项纠缠（PE）手持，或无法获得或手持的材料。
+search.modifier.title: 附魔种类
+search.modifier.desc: 选 "+" 代表必须包含该种类， "-" 则代表必须不包含。
+search.modifier.name: 种类
+search.modifier.option: 选项
+search.modifier.option.include: 必须包含
+search.modifier.option.exclude: 必须不包含
+search.modifier.option.ignore: 忽略
+search.button: 搜索
+search.button.cancel: 取消
+search.progress: "搜索中 ({{progress}}%)"
+search.progress.initial: "搜索中..."
+search.progress.stat_group: 统计材料中
+search.result: "共找到{{count}}种组合，用时{{seconds}}秒"
+
+filter.title: 过滤物品
+filter.desc: 根据您所需要的材料来过滤找到的组合
+filter.list.title: 材料列表
+filter.list.desc: 请在以下列表中循序渐进地排除不想要的材料，直到结果数量足够低，可以进一步查看每一个结果。用星星按钮可以标记该材料。被标记物品在显示结果时将优先展示。
+filter.search.placeholder: "搜索支持拼音和首字母，如\"萝卜\"，\"luo bo\"或\"lb\""
+filter.search.desc: 由于所有重要道具料理用途相同，请使用“希卡之石”代替。不支持怪物精华。
+filter.hide_excluded: 仅显示结果中包含的材料
+filter.selection.actor: 材料 ({{count}})
+filter.selection.option: 选项
+filter.selection.option.favorite: 标记
+filter.selection.option.unfavorite: 去除标记
+filter.selection.option.include: 取消排除
+filter.selection.option.exclude: 排除
+filter.selection.subtitle.percentage: "{{percentage}}%的剩余组合包含"
+filter.selection.subtitle.percentage.to_exclude: "{{percentage}}%的剩余组合包含，刷新后排除"
+filter.selection.subtitle.no_percentage: 暂无统计数据
+filter.selection.subtitle.no_percentage.to_exclude: 暂无统计数据，刷新后排除
+filter.selection.subtitle.excluded: 已排除
+filter.selection.subtitle.excluded.to_include: 已排除，刷新后取消排除
+filter.favorited: 标记的物品
+filter.favorited.clear: 清空
+filter.prompt: 刷新列表以应用新条件
+filter.button: 刷新
+filter.button.cancel: 取消
+filter.button.reset: 重置
+filter.progress: "刷新中 ({{progress}}%)"
+filter.progress.initial: "刷新中..."
+filter.result: "剩余{{count}}种组合，刷新用时{{seconds}}秒"
+filter.not_ready.not_searched: 请先进行附魔搜索
+filter.not_ready.no_result: 没有找到符合附魔条件的组合。请调整条件后重试
+filter.not_ready.searching: 等待搜索结果中...
+
+result.title: 可用组合
+result.desc: 符合附魔条件，且仅包含未排除材料的组合
+result.progress: 正在制作料理
+result.error: "计算料理时发生错误: {{message}}"
+result.button.retry: 重试
+result.count: 合并后共有{{count}}种组合
+result.limited: 搜索结果数量超过了{{limit}}的限制，仅显示合并后的共{{count}}种。注意这并不是完整列表。请继续排除材料以缩小结果数量。
+result.list.note: （标"*"的数值表示必须触发随机的心心暴击）
+result.header.recipe: 组合
+result.header.recipe_desc: 组合（标记优先）
+result.header.recipe_asc: 组合（非标记优先）
+result.header.value: 数值
+result.header.modifier: 附魔
+result.nothing: 没有找到任何组合
+result.not_ready: 结果在搜索后才会显示
+result.any_of: "以下任一："
+
+error.title: 发生错误
+error.message.io: "IO错误: {{message}}"
+error.message.executor.unavailable: "没有可用的线程。请尝试重启本软件。"
+error.message.aborted:  已中止
+error.message.database.locked: "另一个实例正在使用数据库。如果没有其他的料理附魔数据库在运行，请手动删除`database/.lock`。"
+error.message.database.invalid: "验证数据库完整性失败。数据库可能损坏。请尝试重新安装本软件 (错误类型: {{errorType}})"
+error.internal: "内部错误: {{message}}"
+error.button: 哦
+
+confirm.title: 确认
+confirm.button.yes: 是
+confirm.button.no: 否
+confirm.message.search.abort: 确定取消搜索？
+confirm.message.search.redo: 开始新的搜索将删除之前搜索的结果，确定继续吗？
+confirm.message.filter.reset: 确定重置排除的物品和统计数据吗？下一次更新时将重新计算统计数据。标记物品列表不会被清空。
+confirm.message.filter.clear_favorites: 确定清空标记物品列表?
+confirm.message.filter.abort: 确定取消刷新材料列表？
+confirm.message.quick_shot: 您选择了包含“多连发”但是没有选择不包含“速射”。由于普通射速数值为1000，而附魔数值最高为120，速射附魔会导致弓射速非常慢。确定继续吗？
+
+# Modifiers
+modifier.1: 攻击力提升
+modifier.1.value: 攻击力提升 + {{value}}
+modifier.2: 耐力提升
+modifier.2.value: 耐力提升
+modifier.4: 结束暴击
+modifier.4.value: 结束暴击
+modifier.8: 远距离投掷
+modifier.8.value: 远距离投掷 x {{valueThousandth}}
+modifier.16: 多连发
+modifier.16.value: 最多{{valueMax10}}连发
+modifier.32: 倍镜
+modifier.32.value: 倍镜
+modifier.64: 速射
+modifier.64.value: 射速 x {{valueThousandth}}
+modifier.128: 盾滑行提升
+modifier.128.value: 滑行摩擦力 x {{valueThousandth}}
+modifier.256: 盾防护提升
+modifier.256.value: 盾防护提升 + {{value}}

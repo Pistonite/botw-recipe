@@ -1,0 +1,237 @@
+
+# Automatically generated.
+# DO NOT EDIT. See packages/generated/README.md for more information.
+
+actor.Item_Fruit_D: Durian vivax
+actor.Item_Fruit_G: Noce di palma
+actor.Item_Fruit_A: Mela
+actor.Item_Fruit_B: Fragola
+actor.Item_Fruit_F: Melone fresco
+actor.Item_Fruit_I: Caldoperone
+actor.Item_Fruit_C: Frutto shock
+actor.Item_Fruit_E: Slancioloto
+actor.Item_Fruit_H: Bananalame
+actor.Item_Mushroom_N: Cuortufo bianco
+actor.Item_Mushroom_F: Cuortufo nero
+actor.Item_Mushroom_O: Gagliardello
+actor.Item_Mushroom_E: Hyrulino
+actor.Item_Mushroom_A: Vigorino
+actor.Item_Mushroom_B: Ghiaccino
+actor.Item_Mushroom_C: Caldoncello
+actor.Item_Mushroom_H: Fulminaccio
+actor.Item_MushroomGet_D: Scattola
+actor.Item_Mushroom_L: Spadarolo
+actor.Item_Mushroom_M: Chiodone
+actor.Item_Mushroom_J: Furtivolo
+actor.Item_PlantGet_C: Cuoranello grande
+actor.Item_PlantGet_B: Cuoranello
+actor.Item_PlantGet_Q: Briocarota
+actor.Item_PlantGet_A: Erba di Hyrule
+actor.Item_PlantGet_M: Carota sprint
+actor.Item_Fruit_J: Corazzucca
+actor.Item_PlantGet_E: Erba del gelo
+actor.Item_PlantGet_F: Erba del sole
+actor.Item_PlantGet_L: Erba shock
+actor.Item_PlantGet_O: Viola sprint
+actor.Item_PlantGet_G: Spadacciofo
+actor.Item_PlantGet_H: Carapacciofo
+actor.Item_PlantGet_I: Silentella
+actor.Item_PlantGet_J: Principessa serena
+actor.Item_Meat_11: Carne XXL
+actor.Item_Meat_12: Pollame XXL
+actor.Item_Meat_02: Carne XL
+actor.Item_Meat_07: Pollame XL
+actor.Item_Meat_01: Carne
+actor.Item_Meat_06: Pollame
+actor.BeeHome: Miele di ape briosa
+actor.Item_Material_03: Riso di Hyrule
+actor.Item_Material_04: Uovo
+actor.Item_Material_07: Grano di Colbacco
+actor.Item_Material_05: Latte fresco
+actor.Item_Fruit_K: Ghianda
+actor.Item_Fruit_L: Nocciola degli uccellini
+actor.Item_Material_01: Canna da zucchero
+actor.Item_Material_06: Burro di capra
+actor.Item_Material_02: Spezie Goron
+actor.Item_Ore_H: Salgemma
+actor.Item_Ore_J: Scheggia di stella
+actor.Item_Enemy_38: Squama di Oldra
+actor.Item_Enemy_39: Artiglio di Oldra
+actor.Item_Enemy_47: Dente di Oldra
+actor.Item_Enemy_48: Pezzo di corno di Oldra
+actor.Item_Enemy_49: Squama di Neldra
+actor.Item_Enemy_50: Artiglio di Neldra
+actor.Item_Enemy_51: Dente di Neldra
+actor.Item_Enemy_52: Pezzo di corno di Neldra
+actor.Item_Enemy_53: Squama di Firodra
+actor.Item_Enemy_54: Artiglio di Firodra
+actor.Item_Enemy_55: Dente di Firodra
+actor.Item_Enemy_56: Pezzo di corno di Firodra
+actor.Item_FishGet_I: Salmone vivax
+actor.Item_FishGet_K: Lumaca vivax
+actor.Item_FishGet_B: Aspio vivax
+actor.Item_FishGet_A: Aspio Hyrule
+actor.Item_FishGet_L: Aspio vigor
+actor.Item_FishGet_C: Trota gelida
+actor.Item_FishGet_J: Trota ignea
+actor.Item_FishGet_D: Trota scossa
+actor.Item_FishGet_X: Trota fugace
+actor.Item_FishGet_E: Carpa spada
+actor.Item_FishGet_H: Carpa corazzata
+actor.Item_FishGet_Z: Carpa tricolore
+actor.Item_FishGet_F: Orata spada
+actor.Item_FishGet_G: Orata corazzata
+actor.Item_FishGet_M: Lumaca silente
+actor.Item_InsectGet_K: Granchio spadaccino
+actor.Item_InsectGet_O: Granchio corazzato
+actor.Item_InsectGet_Z: Granchio podista
+actor.Animal_Insect_F: Fata
+actor.Animal_Insect_N: Farfalla del gelo
+actor.Animal_Insect_Q: Farfalla del sole
+actor.Animal_Insect_R: Farfalla saetta
+actor.Animal_Insect_AB: Farfalla ignifuga
+actor.Animal_Insect_C: Libellula del gelo
+actor.Animal_Insect_T: Libellula del sole
+actor.Animal_Insect_I: Libellula saetta
+actor.Animal_Insect_H: Cavalletta vigor
+actor.Animal_Insect_G: Scarabeo spadaccino
+actor.Animal_Insect_P: Scarabeo corazzato
+actor.Animal_Insect_AA: Scarabeo aitante
+actor.Animal_Insect_E: Lucciola silente
+actor.Animal_Insect_A: Rana lesta
+actor.Animal_Insect_B: Rana tosta
+actor.Animal_Insect_S: Lucertola velox
+actor.Animal_Insect_M: Lucertola vivax
+actor.Animal_Insect_X: Lucertola focus
+actor.Item_Ore_I: Pietra focaia
+actor.Item_Ore_F: Ambra
+actor.Item_Ore_E: Opale
+actor.Item_Ore_G: Lumiserite
+actor.Item_Ore_D: Topazio
+actor.Item_Ore_B: Rubino
+actor.Item_Ore_C: Zaffiro
+actor.Item_Ore_A: Diamante
+actor.Item_Enemy_00: Corno di boblin
+actor.Item_Enemy_01: Zanna di boblin
+actor.Item_Enemy_02: Cuore di boblin
+actor.Item_Enemy_06: Corno di grublin
+actor.Item_Enemy_07: Zanna di grublin
+actor.Item_Enemy_08: Cuore di grublin
+actor.Item_Enemy_03: Corno di lizalfos
+actor.Item_Enemy_04: Artiglio di lizalfos
+actor.Item_Enemy_05: Coda di lizalfos
+actor.Item_Enemy_42: Coda di lizalfos glaciale
+actor.Item_Enemy_41: Coda di lizalfos igneo
+actor.Item_Enemy_43: Coda di lizalfos elettrico
+actor.Item_Enemy_12: Corno di lynel
+actor.Item_Enemy_13: Zoccolo di lynel
+actor.Item_Enemy_14: Cuore di lynel
+actor.Item_Enemy_40: Gelatina chuchu
+actor.Item_Enemy_17: Gelatina chuchu bianca
+actor.Item_Enemy_15: Gelatina chuchu rossa
+actor.Item_Enemy_16: Gelatina chuchu gialla
+actor.Item_Enemy_18: Ala di pipistrello
+actor.Item_Enemy_46: Ala di pipistrello glaciale
+actor.Item_Enemy_44: Ala di pipistrello igneo
+actor.Item_Enemy_45: Ala di pipistrello elettrico
+actor.Item_Enemy_19: Occhio di pipistrello
+actor.Item_Enemy_20: Tentacolo octo
+actor.Item_Enemy_21: Occhio octo
+actor.Item_Enemy_57: Octopallone
+actor.Item_Enemy_24: Pinna di moldenottera
+actor.Item_Enemy_25: Cuore di moldenottera
+actor.Item_Enemy_32: Unghia di hinox
+actor.Item_Enemy_33: Dente di hinox
+actor.Item_Enemy_34: Cuore di hinox
+actor.Item_Enemy_27: Vite ancestrale
+actor.Item_Enemy_28: Molla ancestrale
+actor.Item_Enemy_26: Ingranaggio ancestrale
+actor.Item_Enemy_29: Asse ancestrale
+actor.Item_Enemy_30: Nucleo ancestrale
+actor.Item_Enemy_31: Gran nucleo ancestrale
+actor.Obj_FireWoodBundle: Fascio di legna
+actor.Item_Roast_03: Mela cotta
+actor.Item_Roast_10: Noce di palma cotta
+actor.Item_Roast_07: Fragola cotta
+actor.Item_Roast_48: Ghianda cotta
+actor.Item_Roast_52: Nocciola cotta
+actor.Item_Roast_09: Durian vivax cotto
+actor.Item_Roast_12: Melone fresco cotto
+actor.Item_Roast_13: Caldoperone cotto
+actor.Item_Roast_08: Frutto shock cotto
+actor.Item_Roast_16: Slancioloto cotto
+actor.Item_Roast_11: Bananalame cotte
+actor.Item_Roast_06: Hyrulino cotto
+actor.Item_Roast_04: Vigorino cotto
+actor.Item_Roast_53: Gagliardello cotto
+actor.Item_Roast_05: Cuortufo nero cotto
+actor.Item_Roast_49: Cuortufo bianco cotto
+actor.Item_Roast_31: Ghiaccino cotto
+actor.Item_Roast_32: Caldoncello cotto
+actor.Item_Roast_33: Fulminaccio cotto
+actor.Item_Roast_36: Scattola cotta
+actor.Item_Roast_37: Spadarolo cotto
+actor.Item_Roast_38: Chiodone cotto
+actor.Item_Roast_39: Furtivolo cotto
+actor.Item_Roast_18: Cuoranello cotto
+actor.Item_Roast_19: Cuoranello grande cotto
+actor.Item_Roast_24: Carota sprint cotta
+actor.Item_Roast_50: Briocarota cotta
+actor.Item_Roast_15: Corazzucca cotta
+actor.Item_Roast_27: Spadacciofo cotto
+actor.Item_Roast_28: Carapacciofo cotto
+actor.Item_Roast_51: Uovo cotto
+actor.Item_Boiled_01: Uovo bollito
+actor.Item_Roast_01: Carne cotta
+actor.Item_Roast_40: Carne cotta XL
+actor.Item_Roast_45: Carne cotta XXL
+actor.Item_Roast_02: Pollame cotto
+actor.Item_Roast_41: Pollame cotto XL
+actor.Item_Roast_46: Pollame cotto XXL
+actor.Item_RoastFish_01: Aspio cotto
+actor.Item_RoastFish_02: Aspio vivax cotto
+actor.Item_RoastFish_04: Salmone vivax cotto
+actor.Item_RoastFish_03: Trota cotta
+actor.Item_RoastFish_07: Carpa cotta
+actor.Item_RoastFish_09: Orata cotta
+actor.Item_RoastFish_13: Lumaca silente cotta
+actor.Item_RoastFish_11: Lumaca vivax cotta
+actor.Item_RoastFish_15: Granchio cotto
+actor.Item_Chilled_01: Carne congelata
+actor.Item_Chilled_02: Carne congelata XL
+actor.Item_Chilled_03: Carne congelata XXL
+actor.Item_Chilled_04: Pollame congelato
+actor.Item_Chilled_05: Pollame congelato XL
+actor.Item_Chilled_06: Pollame congelato XXL
+actor.Item_ChilledFish_01: Aspio congelato
+actor.Item_ChilledFish_06: Aspio vivax congelato
+actor.Item_ChilledFish_02: Salmone vivax congelato
+actor.Item_ChilledFish_03: Trota congelata
+actor.Item_ChilledFish_04: Carpa congelata
+actor.Item_ChilledFish_05: Orata congelata
+actor.Item_ChilledFish_07: Granchio congelato
+actor.Item_ChilledFish_08: Lumaca silente congelata
+actor.Item_ChilledFish_09: Lumaca vivax congelata
+actor.Obj_DRStone_Get: Tavoletta Sheikah
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Blu
+actor.dyecolor_02: Rosso
+actor.dyecolor_03: Giallo
+actor.dyecolor_04: Bianco
+actor.dyecolor_05: Nero
+actor.dyecolor_06: Viola
+actor.dyecolor_07: Verde
+actor.dyecolor_08: Azzurro
+actor.dyecolor_09: Blu marino
+actor.dyecolor_10: Arancione
+actor.dyecolor_11: Rosa
+actor.dyecolor_12: Cremisi
+actor.dyecolor_13: Beige
+actor.dyecolor_14: Marrone
+actor.dyecolor_15: Grigio
+actor.Obj_Photo_Animal: Immagine di fauna
+actor.Obj_Photo_BossEnemy: Immagine di mostro forte
+actor.Obj_Photo_Enemy: Immagine di mostri
+actor.Obj_Photo_Material: Immagine di materiali
+actor.Obj_Photo_Other: Immagine di un tesoro
+actor.Obj_Photo_Weapon: Immagine di armi

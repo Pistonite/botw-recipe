@@ -5,9 +5,17 @@
     "type": "module",
     "description": "Tauri binding for the WMC recipe searcher",
     "exports": {
-        ".": "./ts/index.ts"
+        ".": "./src/ts/index.ts"
     },
     "dependencies": {
-        "@tauri-apps/api": "^1"
+        "@pistonite/pure": "catalog:",
+        "@tauri-apps/api": "^1",
+        "botw-recipe-sys": "workspace:*"
+    },
+    "devDependencies": {
+        "eslint": "catalog:",
+        "mono-dev": "workspace:*",
+        "typescript": "catalog:",
+        "vite": "catalog:"
     }
 }

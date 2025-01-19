@@ -249,28 +249,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "botw-recipe-database"
-version = "0.1.4"
-dependencies = [
- "botw-recipe-wmcdb",
- "derivative",
- "enum-map",
- "env_logger",
- "itertools",
- "log",
- "num_cpus",
- "oneshot",
- "serde",
- "serde_json",
- "serde_yaml_ng",
- "tauri",
- "tauri-build",
- "thiserror 1.0.69",
- "threadpool",
- "ts-rs",
-]
-
-[[package]]
 name = "botw-recipe-searcher-tauri"
 version = "0.1.0"
 dependencies = [
@@ -323,6 +301,17 @@ dependencies = [
  "static_assertions",
  "thiserror 1.0.69",
  "ts-rs",
+]
+
+[[package]]
+name = "botwrdb"
+version = "0.2.0"
+dependencies = [
+ "botw-recipe-searcher-tauri",
+ "env_logger",
+ "log",
+ "tauri",
+ "tauri-build",
 ]
 
 [[package]]

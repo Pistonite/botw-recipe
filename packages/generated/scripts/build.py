@@ -892,7 +892,7 @@ def script_home(*args):
 def project_file(*args):
     return os.path.join(os.path.dirname(os.path.dirname(__file__)), *args)
 
+sys.path.append(script_home("src"))
+import spp
 if __name__ == "__main__":
-    sys.path.append(script_home("src"))
-    import spp
     main()

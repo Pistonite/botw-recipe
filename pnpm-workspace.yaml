@@ -1,5 +1,18 @@
 packages:
-- packages/generated
-- packages/mono-dev
+  - packages/app
+  - packages/searcher-tauri
+  - packages/searcher-ui
+  - packages/generated
+  - packages/mono-dev
+  - packages/localization
 
 catalog:
+  "@modyfi/vite-plugin-yaml": ^1.1.0
+  "@pistonite/pure": ^0.0.18
+  "@types/react": ^18.3.18
+  "@types/react-dom": ^18.3.5
+  eslint: ^9
+  react: ^18.3.1
+  react-dom: ^18.3.1
+  typescript: ^5.7.2
+  vite: ^5.4.11

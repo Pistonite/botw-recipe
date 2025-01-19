@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "app/rdb/src-tauri", 
+    "packages/app/src-tauri", 
     "packages/cook",
     "packages/cook-cli",
     "packages/wmcdb",
