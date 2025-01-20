@@ -7,6 +7,5 @@ members = [
     "packages/data-utils",
     "packages/generated",
     "packages/searcher-tauri",
-    "research", 
 ]
 resolver = "2"

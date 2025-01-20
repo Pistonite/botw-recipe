@@ -1,8 +1,8 @@
 //! Module for simulating randomness in the cooking process
 
-use std::ops::{Range, Sub};
+use std::ops::Range;
 
-use num::{BigInt, BigUint, Integer, One, ToPrimitive};
+use num::{BigUint, Integer, One, ToPrimitive};
 
 /// Distr<T> is a discreate distribution of type T
 pub trait Distr: Sized {
@@ -164,7 +164,8 @@ impl<T> Distr for Always<T> {
 
 
 /// Discrete outcomes
-#[derive(Debug, Clone)]
+#[derive(Debug, PartialEq, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Discrete<T> {
     counts: Vec<(T, BigUint)>
 }
@@ -174,6 +175,13 @@ impl<T> Distr for Discrete<T> {
 
     fn into_counts(self) -> Vec<(Self::T, BigUint)> {
         self.counts
+    }
+}
+
+impl<T> Discrete<T> {
+    /// Iterate over the outcomes without worrying about the probabilities
+    pub fn iter(&self) -> impl Iterator<Item = &T> {
+        self.counts.iter().map(|(t, _)| t)
     }
 }
 
@@ -204,6 +212,7 @@ impl<T: PartialEq> Discrete<T> {
 /// The value is stored as a ratio. It must be between 0 (exclusive) and 1 (inclusive),
 /// and the numerator and denominator must be relatively prime.
 #[derive(Clone, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Prob {
     numerator: BigUint,
     denominator: BigUint

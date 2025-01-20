@@ -1,4 +1,4 @@
-# ![logo](app/rdb/src-tauri/icons/32x32.png) botw-recipe
+# ![logo](packages/app/src-tauri/icons/32x32.png) botw-recipe
 
 ![Build Badge](https://img.shields.io/github/check-runs/Pistonite/botw-recipe/main)
 ![License Badge](https://img.shields.io/github/license/Pistonite/botw-recipe)

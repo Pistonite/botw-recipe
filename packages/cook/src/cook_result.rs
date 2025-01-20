@@ -67,3 +67,14 @@ impl CookResult {
         return self.data.sell_price < 2
     }
 }
+
+pub enum HpCritRngType {
+    /// There is no randomness in the HP of the output
+    NoRng,
+    /// Regular (non-monster) crit RNG, where HP += 12
+    /// if not hearty and += 4 if hearty, when crit
+    Regular,
+
+    /// Monster crit mode, where hearty does not have crit RNG
+    Monster,
+}
