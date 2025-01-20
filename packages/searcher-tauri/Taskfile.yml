@@ -1,0 +1,31 @@
+version: '3'
+
+includes:
+  ecma:
+    taskfile: ../mono-dev/task/ecma.yaml
+    internal: true
+
+tasks:
+  build-ts:
+    desc: Build TS bindings
+    cmds:
+      - rm -rf src/ts/gen
+      - rm -rf ../wmcdb/bindings
+      - cargo test --package botw-recipe-wmcdb --lib --features __ts-binding
+      - cargo test --package botw-recipe-searcher-tauri --lib --features __ts-binding
+      - $(which mkdir) -p src/ts/gen
+      - cp -r ../wmcdb/bindings/*.ts src/ts/gen
+      - cp -r ./bindings/*.ts src/ts/gen
+      - task: ecma:prettier-fix
+
+  check:
+    desc: Check code issues
+    cmds:
+      - task: ecma:prettier-check
+      - task: ecma:eslint-check
+      - task: ecma:tsc-check
+
+  fix:
+    cmds:
+      - task: ecma:prettier-fix
+      - task: ecma:eslint-fix

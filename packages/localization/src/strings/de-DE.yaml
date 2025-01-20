@@ -1,0 +1,112 @@
+# UI
+title: BotW Gerichtdatenbank für WMC
+search.title: Suche
+search.desc: Suche alle Zutatenkombinationen und wähle die zutreffenden Kriterien
+search.value.title: Wert und Materialien
+search.value.min: Minimaler modifikator Wert (HP)
+search.value.max: Maximaler modifikator Wert (HP)
+search.value.rng: Erlaube kritisches Kochen (RNG)
+search.value.rng.desc: Inkludiere Gerichte welche einen nicht garantierten HP krit benötigen um dem minimalen HP Wert zu erfüllen. Garantiertes kritisches Kochen ist nicht beeinträchtigt. (Gerichte mit 100% kritisches Kochwarscheinlichkeit müssen nicht unbedingt immer einen HP-Krit bekommen.)
+search.value.pe: Erlaube ungewöhnliche Materialien
+search.value.pe.desc: Inkludiere Gerichte mit mindestens einer Zutat welche Prompt Entanglement benötigt oder nicht nicht kochbar ist oder unmöglich zum Erhalten ist.
+search.modifier.title: Modifikatoren
+search.modifier.desc: Wähle "+" für Modifikatoren welche inkludiert sein müssen, und "-" für ausgeschlossene Modifikatoren.
+search.modifier.name: Modifikator
+search.modifier.option: Option
+search.modifier.option.include: Inkludiert
+search.modifier.option.exclude: Exkludiert
+search.modifier.option.ignore: Ignoriert
+search.button: Suche
+search.button.cancel: Abbrechen
+search.progress: "Suche ({{progress}}%)"
+search.progress.initial: "Suchen..."
+search.progress.stat_group: Materialstatistiken berechnen
+search.result: "Hat {{count}} Gerichte in {{seconds}}s gefunden"
+
+filter.title: Filter
+filter.desc: Grenze die Scanergebnisse bassierend auf die bevorzugten Materialien
+filter.list.title: Wähle Items
+filter.list.desc: Nutzt die untere Liste um nach und nach ungewollte Items von den Suchergebnissen auszuschließen, bis die Anzahl der Ergebnisse niedrig genug ist für genauere Untersuchung. Bevorzugte Items haben Vorrang bei den angezeigten Ergebnissen. Nutze den Sternknopf in der Itemliste weiter oben um diese Items festzulegen.
+filter.search.placeholder: Suche für Items (z.B. "Apfel", "Holz")
+filter.search.desc: Nutze "Sheikah Tablet" für "wichtige Items" da diese alle gleich sind. Monster Extrakt ist nicht verfügbar.
+filter.hide_excluded: Zeige nur items welche in den Ergebnissen vorhanden sind
+filter.selection.actor: Item ({{count}})
+filter.selection.option: Optionen
+filter.selection.option.favorite: Favoriten
+filter.selection.option.unfavorite: Favorit
+filter.selection.option.include: Inkludiert
+filter.selection.option.exclude: Exkludiert
+filter.selection.subtitle.percentage: In {{percentage}}% von übrigen Gerichten
+filter.selection.subtitle.percentage.to_exclude: In {{percentage}}% von übrigen Gerichten, wird exkludiert
+filter.selection.subtitle.no_percentage: Statistiken nicht verfügbar
+filter.selection.subtitle.no_percentage.to_exclude: Statistiken nicht verfügbar, wird exkludiert
+filter.selection.subtitle.excluded: Exkludiert
+filter.selection.subtitle.excluded.to_include: Exkludiert, wird inkludiert
+filter.favorited: Bevorzugte Items
+filter.favorited.clear: Leeren
+filter.prompt: Drücke "Anwenden" um den Filter zu aktualisieren
+filter.button: Anwenden
+filter.button.cancel: Abbrechen
+filter.button.reset: Leeren
+filter.progress: "Filter anwenden ({{progress}}%)"
+filter.progress.initial: "filter anwenden..."
+filter.result: "In {{seconds}}s erledigt, {{count}} Gerichte übrig"
+filter.not_ready.not_searched: Keine Suchergebnisse gefunden. Bitte suche zuerst für Gerichte mit Modifikationskriterien.
+filter.not_ready.no_result: Keine Gerichte gefunden welche mit den Modifikatoren übereinstimmen. Bitte passe die Kriterien an und suche nochmal.
+filter.not_ready.searching: Warten bis die Suche beendet wird...
+
+result.title: Ergebnisse
+result.desc: Gerichte mit den gewünschten Modifikatoren, inkludiere nur die gewünschten Zutaten
+result.progress: Die Ergebnisse kochen
+result.error: "Ein Fehler ist aufgetreten während die Ergebnisse gekocht wurden: {{message}}"
+result.button.retry: Wiederhole
+result.count: Es werden {{count}} Gerichte nach Gruppierung angezeigt
+result.limited: Ergebnisse überschritten das Limit von {{limit}}, es werden nur die ersten {{count}} Gerichte nach Gruppierung angezeigt. Das ist nicht das komplette Suchergebnis. Filtere, um die Anzahl der Ergebnisse zu reduzieren.
+result.list.note: (Werte markiert mit * benötigen einen nicht garantierten HP Krit)
+result.header.recipe: Gericht
+result.header.recipe_desc: Gericht (Am meisten bevorzugt)
+result.header.recipe_asc: Gericht (am wenigsten bevorzugt)
+result.header.value: Wert
+result.header.modifier: Modifikator
+result.nothing: Kein Gericht gefunden
+result.not_ready: Ergebnis wird angezeigt sobald die Suche fertig ist
+result.any_of: "Egal:"
+
+error.title: Fehler
+error.message.io: "IO Fehler: {{message}}"
+error.message.executor.unavailable: "Ausführung ist nicht verfügbar. Falls das Problem weiterhin besteht, starte das Programm neu."
+error.message.aborted: Abgebrochen
+error.message.database.locked: "Es kann nicht auf die Datenbank zugegriffen werden. Eine weitere Instanz des Programms ist eventuell offen. Falls das nicht der Fall ist, ist das Programm eventuell abgestürzt. Bitte lösche in diesem Fall `database/.lock` manuell."
+error.message.database.invalid: "Die Integrität der Datenbank kann nicht überprüft werden. Sie ist möglicherweise beschädigt. Versuche die Anwendung neu zu installieren. (Fehler: {{errorType}})"
+error.generic: "Ein Fehler ist aufgetreten: {{message}}"
+error.internal: "Interner Fehler: {{message}}"
+error.button: OK
+
+confirm.title: Bestätigen
+confirm.button.yes: "Ja"
+confirm.button.no: "Nein"
+confirm.message.search.abort: Möchtest du die Suche abbrechen?
+confirm.message.search.redo: Eine neue Suche zu starten wird die vorherige Suche löschen. Fortsetzen?
+confirm.message.filter.reset: Leere exkludierte Items und Statistiken im Filter? Statistiken werden bei der nächsten Filteranwendung verfügbar sein. Bevorzugte Items werden nicht entfernt werden.
+confirm.message.filter.clear_favorites: Bist du dir sicher, dass du die bevorzugten Items zurücksetzen möchtest?
+confirm.message.filter.abort: Bist du dir sicher, dass du das Anwenden des Filters abbrechen möchtest?
+confirm.message.quick_shot: Du hast Mehrfachschuss gewählt ohne Schnellschuss abzuwählen. Dadurch schießt der Bogen sehr langsam, da der maximale Modifikatorwert 120 beträgt, während die normale Schussgeschwindigkeit 1000 beträgt. Fortfahren?
+
+modifier.1: Angriffskraft ↑
+modifier.1.value: Angriffskraft + {{value}}
+modifier.2: Haltbarkeit ↑
+modifier.2.value: Haltbarkeit ↑
+modifier.4: Gnadenstoß
+modifier.4.value: Gnadenstoß
+modifier.8: Weitwurf
+modifier.8.value: Wurfreichweite/Wurfgeschwindigkeit x {{valueThousandth}}
+modifier.16: Mehrfachschuss
+modifier.16.value: Maximal {{valueMax10}}-schuss
+modifier.32: Zoom
+modifier.32.value: Zoom
+modifier.64: Schnellfeuer
+modifier.64.value: Schussgeschwindigkeit x {{valueThousandth}}
+modifier.128: Schlittern ↑
+modifier.128.value: Surf Reibung x {{valueThousandth}}
+modifier.256: Schildblock ↑
+modifier.256.value: Schildblock + {{value}}

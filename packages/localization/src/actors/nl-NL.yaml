@@ -1,0 +1,237 @@
+
+# Automatically generated.
+# DO NOT EDIT. See packages/localization/README.md for more information.
+
+actor.Item_Fruit_D: Hartdoerian
+actor.Item_Fruit_G: Kokosnoot
+actor.Item_Fruit_A: Appel
+actor.Item_Fruit_B: Bes
+actor.Item_Fruit_F: Watermeloen
+actor.Item_Fruit_I: Peper
+actor.Item_Fruit_C: Schokvrucht
+actor.Item_Fruit_E: Looplotus
+actor.Item_Fruit_H: Knokbananen
+actor.Item_Mushroom_N: Harttruffel XL
+actor.Item_Mushroom_F: Harttruffel
+actor.Item_Mushroom_O: Boostzwam
+actor.Item_Mushroom_E: Hyrule-zwam
+actor.Item_Mushroom_A: Pepzwam
+actor.Item_Mushroom_B: Koelzwam
+actor.Item_Mushroom_C: Hittezwam
+actor.Item_Mushroom_H: Schokzwam
+actor.Item_MushroomGet_D: Sprintzwam
+actor.Item_Mushroom_L: Zwaardzwam
+actor.Item_Mushroom_M: Schildzwam
+actor.Item_Mushroom_J: Sluipzwam
+actor.Item_PlantGet_C: Hartradijs XL
+actor.Item_PlantGet_B: Hartradijs
+actor.Item_PlantGet_Q: Boostwortel
+actor.Item_PlantGet_A: Hyrule-kruid
+actor.Item_PlantGet_M: Sprintwortel
+actor.Item_Fruit_J: Pantserpompoen
+actor.Item_PlantGet_E: IJskruid
+actor.Item_PlantGet_F: Vuurkruid
+actor.Item_PlantGet_L: Elektrokruid
+actor.Item_PlantGet_O: Snelheidsviooltje
+actor.Item_PlantGet_G: Strijdkruid
+actor.Item_PlantGet_H: Schutkruid
+actor.Item_PlantGet_I: Fluisterkruid
+actor.Item_PlantGet_J: Stille prinses
+actor.Item_Meat_11: Wild XXL
+actor.Item_Meat_12: Gevogelte XXL
+actor.Item_Meat_02: Wild XL
+actor.Item_Meat_07: Gevogelte XL
+actor.Item_Meat_01: Wild
+actor.Item_Meat_06: Gevogelte
+actor.BeeHome: Krachthoning
+actor.Item_Material_03: Hyrule-rijst
+actor.Item_Material_04: Ei
+actor.Item_Material_07: Tabantha-tarwe
+actor.Item_Material_05: Melk
+actor.Item_Fruit_K: Eikel
+actor.Item_Fruit_L: Vogelzaad
+actor.Item_Material_01: Rietsuiker
+actor.Item_Material_06: Geitenboter
+actor.Item_Material_02: Goron-saus
+actor.Item_Ore_H: Zoutkristal
+actor.Item_Ore_J: Sterrenscherf
+actor.Item_Enemy_38: Dinraals schub
+actor.Item_Enemy_39: Dinraals klauw
+actor.Item_Enemy_47: Dinraals tandsplinter
+actor.Item_Enemy_48: Dinraals hoornsplinter
+actor.Item_Enemy_49: Naydra's schub
+actor.Item_Enemy_50: Naydra's klauw
+actor.Item_Enemy_51: Naydra's tandsplinter
+actor.Item_Enemy_52: Naydra's hoornsplinter
+actor.Item_Enemy_53: Farosh' schub
+actor.Item_Enemy_54: Farosh' klauw
+actor.Item_Enemy_55: Farosh' tandsplinter
+actor.Item_Enemy_56: Farosh' hoornsplinter
+actor.Item_FishGet_I: Hartenzalm
+actor.Item_FishGet_K: Hartenslak
+actor.Item_FishGet_B: Hartenbaars
+actor.Item_FishGet_A: Hyrule-baars
+actor.Item_FishGet_L: Energiebaars
+actor.Item_FishGet_C: IJsforel
+actor.Item_FishGet_J: Warmteforel
+actor.Item_FishGet_D: Schokforel
+actor.Item_FishGet_X: Schaduwforel
+actor.Item_FishGet_E: Steekkarper
+actor.Item_FishGet_H: Schildkarper
+actor.Item_FishGet_Z: Driekleurige karper
+actor.Item_FishGet_F: Zwaardsnapper
+actor.Item_FishGet_G: Schildsnapper
+actor.Item_FishGet_M: Sluipslak
+actor.Item_InsectGet_K: Wapenkrab
+actor.Item_InsectGet_O: Pantserkrab
+actor.Item_InsectGet_Z: Krachtkrab
+actor.Animal_Insect_F: Fee
+actor.Animal_Insect_N: Sneeuwvlinder
+actor.Animal_Insect_Q: Vlamvlinder
+actor.Animal_Insect_R: Bliksemvlinder
+actor.Animal_Insect_AB: Doofvlinder
+actor.Animal_Insect_C: Sneeuwlibel
+actor.Animal_Insect_T: Vuurlibel
+actor.Animal_Insect_I: Schoklibel
+actor.Animal_Insect_H: Energiesprinkhaan
+actor.Animal_Insect_G: Zwaardneushoornkever
+actor.Animal_Insect_P: Harnaskever
+actor.Animal_Insect_AA: Krachtkever
+actor.Animal_Insect_E: Stiltevuurvlieg
+actor.Animal_Insect_A: Sprintkikker
+actor.Animal_Insect_B: Boostkikker
+actor.Animal_Insect_S: Haasthagedis
+actor.Animal_Insect_M: Hartjeshagedis
+actor.Animal_Insect_X: Doofhagedis
+actor.Item_Ore_I: Vuursteen
+actor.Item_Ore_F: Barnsteen
+actor.Item_Ore_E: Opaal
+actor.Item_Ore_G: Lichtgevende steen
+actor.Item_Ore_D: Topaas
+actor.Item_Ore_B: Robijn
+actor.Item_Ore_C: Saffier
+actor.Item_Ore_A: Diamant
+actor.Item_Enemy_00: Bokoblin-hoorn
+actor.Item_Enemy_01: Bokoblin-tand
+actor.Item_Enemy_02: Bokoblin-hart
+actor.Item_Enemy_06: Moblin-hoorn
+actor.Item_Enemy_07: Moblin-tand
+actor.Item_Enemy_08: Moblin-hart
+actor.Item_Enemy_03: Lizalfos-hoorn
+actor.Item_Enemy_04: Lizalfos-klauw
+actor.Item_Enemy_05: Lizalfos-staart
+actor.Item_Enemy_42: Blauwe-Lizalfos-staart
+actor.Item_Enemy_41: Rode-Lizalfos-staart
+actor.Item_Enemy_43: Gele-Lizalfos-staart
+actor.Item_Enemy_12: Lynel-hoorn
+actor.Item_Enemy_13: Lynel-hoef
+actor.Item_Enemy_14: Lynel-hart
+actor.Item_Enemy_40: Chuchu-gelei
+actor.Item_Enemy_17: IJs-Chuchu-gelei
+actor.Item_Enemy_15: Vuur-Chuchu-gelei
+actor.Item_Enemy_16: Elektro-Chuchu-gelei
+actor.Item_Enemy_18: Keese-vleugel
+actor.Item_Enemy_46: IJs-Keese-vleugel
+actor.Item_Enemy_44: Vuur-Keese-vleugel
+actor.Item_Enemy_45: Elektro-Keese-vleugel
+actor.Item_Enemy_19: Keese-oog
+actor.Item_Enemy_20: Octorok-tentakel
+actor.Item_Enemy_21: Octorok-oog
+actor.Item_Enemy_57: Octorok-ballon
+actor.Item_Enemy_24: Molduga-vin
+actor.Item_Enemy_25: Molduga-hart
+actor.Item_Enemy_32: Hinox-nagel
+actor.Item_Enemy_33: Hinox-tand
+actor.Item_Enemy_34: Hinox-hart
+actor.Item_Enemy_27: Geavanceerde schroef
+actor.Item_Enemy_28: Geavanceerde veer
+actor.Item_Enemy_26: Geavanceerd tandwiel
+actor.Item_Enemy_29: Geavanceerde as
+actor.Item_Enemy_30: Geavanceerde kern
+actor.Item_Enemy_31: Geavanceerde reuzenkern
+actor.Obj_FireWoodBundle: Brandhout
+actor.Item_Roast_03: Geroosterde appel
+actor.Item_Roast_10: Geroosterde kokosnoot
+actor.Item_Roast_07: Geroosterde bes
+actor.Item_Roast_48: Geroosterde eikel
+actor.Item_Roast_52: Geroosterd vogelzaad
+actor.Item_Roast_09: Geroosterde hartdoerian
+actor.Item_Roast_12: Geroosterde watermeloen
+actor.Item_Roast_13: Geroosterde peper
+actor.Item_Roast_08: Geroosterde schokvrucht
+actor.Item_Roast_16: Geroosterde looplotus
+actor.Item_Roast_11: Geroosterde knokbanaan
+actor.Item_Roast_06: Geroosterde Hyrule-zwam
+actor.Item_Roast_04: Geroosterde pepzwam
+actor.Item_Roast_53: Geroosterde boostzwam
+actor.Item_Roast_05: Geroosterde harttruffel
+actor.Item_Roast_49: Geroosterde harttruffel XL
+actor.Item_Roast_31: Geroosterde koelzwam
+actor.Item_Roast_32: Geroosterde hittezwam
+actor.Item_Roast_33: Geroosterde schokzwam
+actor.Item_Roast_36: Geroosterde sprintzwam
+actor.Item_Roast_37: Geroosterde zwaardzwam
+actor.Item_Roast_38: Geroosterde schildzwam
+actor.Item_Roast_39: Geroosterde sluipzwam
+actor.Item_Roast_18: Geroosterde hartradijs
+actor.Item_Roast_19: Geroosterde hartradijs XL
+actor.Item_Roast_24: Geroosterde sprintwortel
+actor.Item_Roast_50: Geroosterde boostwortel
+actor.Item_Roast_15: Geroosterde pompoen
+actor.Item_Roast_27: Geroosterd strijdkruid
+actor.Item_Roast_28: Geroosterd schutkruid
+actor.Item_Roast_51: Geroosterd ei
+actor.Item_Boiled_01: Gekookt ei
+actor.Item_Roast_01: Gegrild wild
+actor.Item_Roast_40: Gegrild wild XL
+actor.Item_Roast_45: Gegrild wild XXL
+actor.Item_Roast_02: Gegrild gevogelte
+actor.Item_Roast_41: Gegrild gevogelte XL
+actor.Item_Roast_46: Gegrild gevogelte XXL
+actor.Item_RoastFish_01: Gegrilde baars
+actor.Item_RoastFish_02: Gegrilde hartenbaars
+actor.Item_RoastFish_04: Gegrilde hartenzalm
+actor.Item_RoastFish_03: Gegrilde forel
+actor.Item_RoastFish_07: Gegrilde karper
+actor.Item_RoastFish_09: Gegrilde brasem
+actor.Item_RoastFish_13: Geroosterde sluipslak
+actor.Item_RoastFish_11: Geroosterde hartenslak
+actor.Item_RoastFish_15: Geroosterde krab
+actor.Item_Chilled_01: Bevroren wild
+actor.Item_Chilled_02: Bevroren wild XL
+actor.Item_Chilled_03: Bevroren wild XXL
+actor.Item_Chilled_04: Bevroren gevogelte
+actor.Item_Chilled_05: Bevroren gevogelte XL
+actor.Item_Chilled_06: Bevroren gevogelte XXL
+actor.Item_ChilledFish_01: Bevroren baars
+actor.Item_ChilledFish_06: Bevroren hartenbaars
+actor.Item_ChilledFish_02: Bevroren hartenzalm
+actor.Item_ChilledFish_03: Bevroren forel
+actor.Item_ChilledFish_04: Bevroren karper
+actor.Item_ChilledFish_05: Bevroren brasem
+actor.Item_ChilledFish_07: Bevroren krab
+actor.Item_ChilledFish_08: Bevroren sluipslak
+actor.Item_ChilledFish_09: Bevroren hartenslak
+actor.Obj_DRStone_Get: Sheikah-steen
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Blauwe verf
+actor.dyecolor_02: Rode verf
+actor.dyecolor_03: Gele verf
+actor.dyecolor_04: Witte verf
+actor.dyecolor_05: Zwarte verf
+actor.dyecolor_06: Paarse verf
+actor.dyecolor_07: Groene verf
+actor.dyecolor_08: Lichtblauwe verf
+actor.dyecolor_09: Donkerblauwe verf
+actor.dyecolor_10: Oranje verf
+actor.dyecolor_11: Roze verf
+actor.dyecolor_12: Donkerrode verf
+actor.dyecolor_13: Beige verf
+actor.dyecolor_14: Donkergroene verf
+actor.dyecolor_15: Grijze verf
+actor.Obj_Photo_Animal: Collectie 'Dieren'
+actor.Obj_Photo_BossEnemy: Collectie 'Eindbazen'
+actor.Obj_Photo_Enemy: Collectie 'Vijanden'
+actor.Obj_Photo_Material: Collectie 'Ingrediënten'
+actor.Obj_Photo_Other: Collectie 'Diversen'
+actor.Obj_Photo_Weapon: Collectie 'Wapens'

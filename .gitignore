@@ -8,3 +8,5 @@ __pycache__
 *.bin
 *.nso
 out
+node_modules
+.eslintcache

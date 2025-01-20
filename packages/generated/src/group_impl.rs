@@ -30,9 +30,9 @@ impl Group {
     }
 }
 
-/// Actor multichoose series
+/// Group multichoose series
 ///
-/// `R` is the number of actors in the output. Must be <= 5
+/// `R` is the number of groups in the output. Must be <= 5
 #[cfg(feature = "multichoose")]
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub struct GroupMnr<const R: usize> {
@@ -40,9 +40,37 @@ pub struct GroupMnr<const R: usize> {
 }
 
 #[cfg(feature = "multichoose")]
+impl GroupMnr<{crate::num_ingr!()}> {
+    /// Create a multichoose series for the number of ingredients (5)
+    #[inline]
+    pub fn num_ingr() -> Self {
+        Self { inner: crate::multichoose::Mnr::new() }
+    }
+}
+
+#[cfg(feature = "multichoose")]
 impl<const R: usize> GroupMnr<R> {
     pub fn new() -> Self {
         Self { inner: crate::multichoose::Mnr::new() }
+    }
+
+    /// Convert serial ID to unique groups
+    #[cfg(feature = "actor-enum-set")]
+    pub fn to_unique_groups(self, id: u64) -> enumset::EnumSet<Group> {
+        let mut out = enumset::EnumSet::new();
+        let mut inner_out = [0u32; R];
+        let res = self.inner.serial_to_choices(id, &mut inner_out);
+        if !res {
+            return out;
+        }
+        for i in 0..R {
+            let Some(actor) = Group::from_u8(inner_out[i] as u8) else {
+                return enumset::EnumSet::new();
+            };
+            out.insert(actor);
+        }
+
+        out
     }
 
     /// Convert serial ID to the group choices.
@@ -101,8 +129,7 @@ impl<const R: usize> GroupMnr<R> {
         self.to_serial(&groups)
     }
 
-    #[inline]
-    pub fn len(self) -> u64 {
+    pub fn len(&self) -> u64 {
         self.inner.len()
     }
 }

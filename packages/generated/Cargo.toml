@@ -23,6 +23,7 @@ full = [
     "tag-full",
     "actor-data",
     "recipe",
+    "cook-effect-full",
     "multichoose"
 ]
 

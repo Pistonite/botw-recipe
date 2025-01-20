@@ -1,0 +1,21 @@
+{
+    "name": "botw-recipe-searcher-tauri",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "description": "Tauri binding for the WMC recipe searcher",
+    "exports": {
+        ".": "./src/ts/index.ts"
+    },
+    "dependencies": {
+        "@pistonite/pure": "catalog:",
+        "@tauri-apps/api": "^1",
+        "botw-recipe-sys": "workspace:*"
+    },
+    "devDependencies": {
+        "eslint": "catalog:",
+        "mono-dev": "workspace:*",
+        "typescript": "catalog:",
+        "vite": "catalog:"
+    }
+}

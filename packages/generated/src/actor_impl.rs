@@ -116,7 +116,7 @@ impl<'de> serde::Deserialize<'de> for Actor {
 /// `R` is the number of actors in the output. Must be <= 5
 #[cfg(feature = "multichoose")]
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
-pub struct ActorMnr<const R: usize> {
+pub struct ActorMnr<const R: usize={crate::num_ingr!()}> {
     inner: crate::multichoose::Mnr<{crate::actor_count!()}, R>
 }
 
@@ -124,6 +124,25 @@ pub struct ActorMnr<const R: usize> {
 impl<const R: usize> ActorMnr<R> {
     pub fn new() -> Self {
         Self { inner: crate::multichoose::Mnr::new() }
+    }
+
+    /// Convert serial ID to unique actors
+    #[cfg(feature = "actor-enum-set")]
+    pub fn to_unique_actors(self, id: u64) -> enumset::EnumSet<Actor> {
+        let mut out = enumset::EnumSet::new();
+        let mut inner_out = [0u32; R];
+        let res = self.inner.serial_to_choices(id, &mut inner_out);
+        if !res {
+            return out;
+        }
+        for i in 0..R {
+            let Some(actor) = Actor::from_u8(inner_out[i] as u8) else {
+                return enumset::EnumSet::new();
+            };
+            out.insert(actor);
+        }
+
+        out
     }
 
     /// Convert serial ID to the actor choices.
@@ -140,7 +159,6 @@ impl<const R: usize> ActorMnr<R> {
             let Some(actor) = Actor::from_u8(inner_out[i] as u8) else {
                 return false;
             };
-            // safety: serial_to_choices guarantees the value is valid
             out[i] = actor;
         }
 

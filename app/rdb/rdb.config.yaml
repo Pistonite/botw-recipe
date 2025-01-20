@@ -1,4 +1,0 @@
-# development config
-database_path: ../../../dump/emulate/compact
-result_limit: 5000
-# localization_override: ../../../app/rdb/en-US.yaml

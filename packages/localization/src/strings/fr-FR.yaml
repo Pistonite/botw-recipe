@@ -1,0 +1,112 @@
+# UI
+title: Base de données de recettes pour WMC de BotW
+search.title: Recherche
+search.desc: Scanner toutes les combinaisons de matériaux et sélectionner les recettes qui remplissent les conditions pour les bonus
+search.value.title: Valeurs et Matériaux
+search.value.min: Valeur min. des bonus (PV)
+search.value.max: Valeur max. des bonus (PV)
+search.value.rng: Autoriser la RNG des critiques de PV
+search.value.rng.desc: Inclure des recettes où un critique de PV non garanti est nécessaire afin d'atteindre la valeur min. des bonus. Les critiques de PV garantis ne sont pas affectés. (un critique n'est pas nécessairement un critique de PV)
+search.value.pe: Autoriser Matériaux Inhabituels
+search.value.pe.desc: Inclure des recettes où au moins un ingrédient nécessite le Prompt Entanglement ou est impossible à obtenir ou cuisiner normalement.
+search.modifier.title: Bonus
+search.modifier.desc: Sélectionner "+" pour les bonus à inclure, et "-" pour les bonus à exclure.
+search.modifier.name: Bonus
+search.modifier.option: Option
+search.modifier.option.include: Inclus
+search.modifier.option.exclude: Exclus
+search.modifier.option.ignore: Ignoré
+search.button: Chercher
+search.button.cancel: Annuler
+search.progress: "Recherche ({{progress}}%)"
+search.progress.initial: "Recherche..."
+search.progress.stat_group: Calcul des statistiques des inrgédients
+search.result: "{{count}} recette trouvées en {{seconds}}s"
+
+filter.title: Filtrer
+filter.desc: Affiner les résultats en fonction des matériaux qui vous conviennent
+filter.list.title: Selectionner les objets
+filter.list.desc: Utilisez la liste ci-dessous pour exclure petit à petit les objets non souhaités des résultats, jusqu'à ce qu'il y ait assez peu de résultats pour y voir clair. Les objets favoris sont priorisés lors de l'affichage des résultats. Utilisez le bouton étoile dans la liste d'objets pour marquer les objets favoris.
+filter.search.placeholder: Rechercher un objet (par exemple "Pomme", "Fish")
+filter.search.desc: Utilisez "Tablette sheikah" pour les objets-clés, comme ils sont équivalents. L'Extrait de monstre n'est pas disponible.
+filter.hide_excluded: Montrer uniquement les objets inclus dans les résultats
+filter.selection.actor: Objet ({{count}})
+filter.selection.option: Options
+filter.selection.option.favorite: Mettre en favori
+filter.selection.option.unfavorite: Favori
+filter.selection.option.include: Inclure
+filter.selection.option.exclude: Exclure
+filter.selection.subtitle.percentage:  En {{percentage}}% des recettes restantes
+filter.selection.subtitle.percentage.to_exclude: En {{percentage}}% des recettes restantes, sera exclus
+filter.selection.subtitle.no_percentage: Statistiques indisponibles
+filter.selection.subtitle.no_percentage.to_exclude: Statistiques indisponibles, sera exclus
+filter.selection.subtitle.excluded: Exclus
+filter.selection.subtitle.excluded.to_include: Exclus, sera inclus
+filter.favorited: Objets favoris
+filter.favorited.clear: Supprimer
+filter.prompt: Appuyez sur Appliquer pour mettre le filtre à jour
+filter.button: Appliquer
+filter.button.cancel: Annuler
+filter.button.reset: Supprimer
+filter.progress: "Application du filtre ({{progress}}%)"
+filter.progress.initial: "Application du filtre..."
+filter.result: "Fini en {{seconds}}s, {{count}} recettes restantes"
+filter.not_ready.not_searched: Aucun résultat. Veuillez renseigner des critères de bonus d'abord.
+filter.not_ready.no_result: Aucun résultat correspondant aux bonus renseignés. Réajustez les critères et cherchez à nouveau.
+filter.not_ready.searching: En attente des résultats...
+
+result.title: Résultats
+result.desc: Recette avec les bonus souhaités et qui incluent uniquement les objets attendus
+result.progress: Cuisine des résultats
+result.error: "Erreur pendant la cuisine des résultats: {{message}}"
+result.button.retry: Réessayer
+result.count: Affichage de {{count}} recettes après regroupement
+result.limited: Les résultats ont excédé la limite de {{limit}}, affichage des {{count}} premières recettes après regroupement. Ce n'est PAS la liste complète des résultats. Continuez à filtrer pour réduire le nombre de résultats.
+result.list.note: (Une valeur marquée par une * nécessite un critique de PV non garanti)
+result.header.recipe: Recette
+result.header.recipe_desc: Recette (Favoris)
+result.header.recipe_asc: Recette (Non favoris)
+result.header.value: Valeur
+result.header.modifier: Bonus
+result.nothing: Aucune recette trouvée
+result.not_ready: Les résultats seront affichés ici après la fin de la recherche
+result.any_of: "N'importe lequel parmi:"
+
+error.title: Erreur
+error.message.io: "Erreur IO: {{message}}"
+error.message.executor.unavailable: "Executor is unavailable. If the issue persists, try restarting the application."
+error.message.aborted: Interrompu
+error.message.database.locked: "Base de données verrouillée. Il pourrait y avoir une autre instance de l'application en cours d'accusation. Sinonv il se pourrait que l'application ait crash avant. Dans ce cas, supprimez `database/.lock` manuellement."
+error.message.database.invalid: "Intrégrité de la base de données invalide. Elle est peut-être corrompue. Essayez de réinstaller l'application. (Type d'erreur: {{errorType}})"
+error.internal: "Erreur interne: {{errorType}}"
+error.button: OK
+
+confirm.title: Confirmer
+confirm.button.yes: "Oui"
+confirm.button.no: "Non"
+confirm.message.search.abort: Voulez-vous vraiment annuler la recherche ?
+confirm.message.search.redo: Commencer une autre recherche supprimera les résultats précédents. Voulez-vous continuer ?
+confirm.message.filter.reset: Supprimer les objets exclus et les statistiques du filtre ? Les statistiques seront disponibles la prochaine fois que vous appliquerez le filtre. Les objets favoris ne seront pas supprimés.
+confirm.message.filter.clear_favorites: Voulez-vous vraiment supprimer vos objets favoris ?
+confirm.message.filter.abort: Voulez-vous vraiment annuler l'application du filtre ?
+confirm.message.quick_shot: Vous avez sélectionné Multitirs sans avoir exclu Visée rapide. Votre arc tirera extrêmement lentement parce que la valeur maximale du bonus est 120, alors que la vitesse de tir normale est de 1000. Êtes-vous sûr de vouloir continuer?
+
+# Modifiers
+modifier.1: Attaque ↑
+modifier.1.value: Attaque ↑ + {{value}}
+modifier.2: Durabilité ↑
+modifier.2.value: Durabilité ↑
+modifier.4: Coup de grâce
+modifier.4.value: Coup de grâce
+modifier.8: Distance lancers ↑
+modifier.8.value: Distance/Vitesse lancer x {{valueThousandth}}
+modifier.16: Multitirs
+modifier.16.value: Max {{valueMax10}} tirs
+modifier.32: Zoom
+modifier.32.value: Zoom
+modifier.64: Visée rapide
+modifier.64.value: Vitesse de tir x {{valueThousandth}}
+modifier.128: Glisse ↑
+modifier.128.value: Friction de glisse x {{valueThousandth}}
+modifier.256: Garde ↑
+modifier.256.value: Garde ↑ + {{value}}

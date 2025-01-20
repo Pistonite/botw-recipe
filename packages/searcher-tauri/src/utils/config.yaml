@@ -1,0 +1,5 @@
+# Path to the database folder
+database_path: database
+# Maximum result to compute and show in the result page
+# Warning: If this is too big, your computer may run out of memory
+result_limit: 5000

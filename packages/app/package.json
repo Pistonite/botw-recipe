@@ -1,0 +1,25 @@
+{
+    "name": "botwrdb",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "dependencies": {
+        "@pistonite/pure": "catalog:",
+        "botw-recipe-searcher-tauri": "workspace:*",
+        "botw-recipe-searcher-ui": "workspace:*",
+        "react": "catalog:",
+        "react-dom": "catalog:"
+    },
+    "devDependencies": {
+        "@modyfi/vite-plugin-yaml": "catalog:",
+        "@tauri-apps/cli": "1",
+        "@types/react": "catalog:",
+        "@types/react-dom": "catalog:",
+        "@vitejs/plugin-react": "^4.3.4",
+        "eslint": "catalog:",
+        "mono-dev": "workspace:*",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vite-tsconfig-paths": "^5.1.4"
+    }
+}

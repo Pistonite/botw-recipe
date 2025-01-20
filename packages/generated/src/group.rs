@@ -17,7 +17,7 @@ use crate::Actor;
     not(feature = "actor-enum-set"),
     derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)
 )]
-#[derive(Default)]
+#[derive(Debug, Default)]
 #[allow(non_camel_case_types)]
 #[repr(u8)]
 pub enum Group {

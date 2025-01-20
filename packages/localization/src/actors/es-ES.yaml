@@ -1,0 +1,237 @@
+
+# Automatically generated.
+# DO NOT EDIT. See packages/localization/README.md for more information.
+
+actor.Item_Fruit_D: Durián vivaz
+actor.Item_Fruit_G: Coco
+actor.Item_Fruit_A: Manzana
+actor.Item_Fruit_B: Frambuesa
+actor.Item_Fruit_F: Sandía gélida
+actor.Item_Fruit_I: Baya ígnea
+actor.Item_Fruit_C: Fruta electro
+actor.Item_Fruit_E: Semilla de loto rauda
+actor.Item_Fruit_H: Plátanos recios
+actor.Item_Mushroom_N: Trufón vivaz
+actor.Item_Mushroom_F: Trufa vivaz
+actor.Item_Mushroom_O: Seta briosa
+actor.Item_Mushroom_E: Seta de Hyrule
+actor.Item_Mushroom_A: Seta vigorosa
+actor.Item_Mushroom_B: Seta gélida
+actor.Item_Mushroom_C: Seta ígnea
+actor.Item_Mushroom_H: Seta electro
+actor.Item_MushroomGet_D: Seta rauda
+actor.Item_Mushroom_L: Seta recia
+actor.Item_Mushroom_M: Seta robusta
+actor.Item_Mushroom_J: Seta sigilosa
+actor.Item_PlantGet_C: Rábano vivaz grande
+actor.Item_PlantGet_B: Rábano vivaz
+actor.Item_PlantGet_Q: Zanahoria briosa
+actor.Item_PlantGet_A: Hierba de Hyrule
+actor.Item_PlantGet_M: Zanahoria rauda
+actor.Item_Fruit_J: Calabaza robusta
+actor.Item_PlantGet_E: Hierba gélida
+actor.Item_PlantGet_F: Hierba ígnea
+actor.Item_PlantGet_L: Hierba electro
+actor.Item_PlantGet_O: Violeta rauda
+actor.Item_PlantGet_G: Bulbo recio
+actor.Item_PlantGet_H: Bulbo robusto
+actor.Item_PlantGet_I: Flor sigilosa
+actor.Item_PlantGet_J: Princesa de la calma
+actor.Item_Meat_11: Carne de caza XXL
+actor.Item_Meat_12: Carne de ave XXL
+actor.Item_Meat_02: Carne de caza XL
+actor.Item_Meat_07: Carne de ave XL
+actor.Item_Meat_01: Carne de caza
+actor.Item_Meat_06: Carne de ave
+actor.BeeHome: Miel de vigor
+actor.Item_Material_03: Arroz de Hyrule
+actor.Item_Material_04: Huevo de ave
+actor.Item_Material_07: Trigo de Tabanta
+actor.Item_Material_05: Leche fresca
+actor.Item_Fruit_K: Bellota
+actor.Item_Fruit_L: Fruto de árbol
+actor.Item_Material_01: Caña de azúcar
+actor.Item_Material_06: Manteca de cabra
+actor.Item_Material_02: Especias goron
+actor.Item_Ore_H: Halita
+actor.Item_Ore_J: Fragmento de estrella
+actor.Item_Enemy_38: Escama de Elden
+actor.Item_Enemy_39: Garra de Elden
+actor.Item_Enemy_47: Colmillo de Elden
+actor.Item_Enemy_48: Cuerno de Elden
+actor.Item_Enemy_49: Escama de Nayen
+actor.Item_Enemy_50: Garra de Nayen
+actor.Item_Enemy_51: Colmillo de Nayen
+actor.Item_Enemy_52: Cuerno de Nayen
+actor.Item_Enemy_53: Escama de Faren
+actor.Item_Enemy_54: Garra de Faren
+actor.Item_Enemy_55: Colmillo de Faren
+actor.Item_Enemy_56: Cuerno de Faren
+actor.Item_FishGet_I: Salmón vivaz
+actor.Item_FishGet_K: Caracol vivaz
+actor.Item_FishGet_B: Lubina vivaz
+actor.Item_FishGet_A: Lubina de Hyrule
+actor.Item_FishGet_L: Lubina vigorosa
+actor.Item_FishGet_C: Trucha gélida
+actor.Item_FishGet_J: Trucha ígnea
+actor.Item_FishGet_D: Trucha electro
+actor.Item_FishGet_X: Trucha sigilosa
+actor.Item_FishGet_E: Carpa recia
+actor.Item_FishGet_H: Carpa robusta
+actor.Item_FishGet_Z: Carpa tricolor
+actor.Item_FishGet_F: Dorada recia
+actor.Item_FishGet_G: Dorada robusta
+actor.Item_FishGet_M: Caracol sigiloso
+actor.Item_InsectGet_K: Cangrejo recio
+actor.Item_InsectGet_O: Cangrejo robusto
+actor.Item_InsectGet_Z: Cangrejo vigoroso
+actor.Animal_Insect_F: Hada
+actor.Animal_Insect_N: Mariposa gélida
+actor.Animal_Insect_Q: Mariposa ígnea
+actor.Animal_Insect_R: Mariposa electro
+actor.Animal_Insect_AB: Mariposa ignífuga
+actor.Animal_Insect_C: Libélula gélida
+actor.Animal_Insect_T: Libélula ígnea
+actor.Animal_Insect_I: Libélula electro
+actor.Animal_Insect_H: Grillo vigoroso
+actor.Animal_Insect_G: Escarabajo recio
+actor.Animal_Insect_P: Escarabajo robusto
+actor.Animal_Insect_AA: Escarabajo vigoroso
+actor.Animal_Insect_E: Luciérnaga sigilosa
+actor.Animal_Insect_A: Rana rauda
+actor.Animal_Insect_B: Rana briosa
+actor.Animal_Insect_S: Lagarto raudo
+actor.Animal_Insect_M: Lagarto vivaz
+actor.Animal_Insect_X: Lagarto ignífugo
+actor.Item_Ore_I: Pedernal
+actor.Item_Ore_F: Ámbar
+actor.Item_Ore_E: Ópalo
+actor.Item_Ore_G: Gema luminosa
+actor.Item_Ore_D: Topacio
+actor.Item_Ore_B: Rubí
+actor.Item_Ore_C: Zafiro
+actor.Item_Ore_A: Diamante
+actor.Item_Enemy_00: Cuerno de bokoblin
+actor.Item_Enemy_01: Colmillo de bokoblin
+actor.Item_Enemy_02: Víscera de bokoblin
+actor.Item_Enemy_06: Cuerno de moblin
+actor.Item_Enemy_07: Colmillo de moblin
+actor.Item_Enemy_08: Víscera de moblin
+actor.Item_Enemy_03: Cuerno de lizalfos
+actor.Item_Enemy_04: Garra de lizalfos
+actor.Item_Enemy_05: Cola de lizalfos
+actor.Item_Enemy_42: Cola de lizalfos gélido
+actor.Item_Enemy_41: Cola de lizalfos ígneo
+actor.Item_Enemy_43: Cola de lizalfos eléctrico
+actor.Item_Enemy_12: Cuerno de centaleón
+actor.Item_Enemy_13: Pezuña de centaleón
+actor.Item_Enemy_14: Víscera de centaleón
+actor.Item_Enemy_40: Gelatina de chuchu
+actor.Item_Enemy_17: Gelatina gélida
+actor.Item_Enemy_15: Gelatina ígnea
+actor.Item_Enemy_16: Gelatina eléctrica
+actor.Item_Enemy_18: Ala de keese
+actor.Item_Enemy_46: Ala de keese de hielo
+actor.Item_Enemy_44: Ala de keese de fuego
+actor.Item_Enemy_45: Ala de keese eléctrico
+actor.Item_Enemy_19: Ojo de keese
+actor.Item_Enemy_20: Tentáculo de octorok
+actor.Item_Enemy_21: Ojo de octorok
+actor.Item_Enemy_57: Globo de octorok
+actor.Item_Enemy_24: Aleta de moldora
+actor.Item_Enemy_25: Víscera de moldora
+actor.Item_Enemy_32: Uña de hinox
+actor.Item_Enemy_33: Colmillo de hinox
+actor.Item_Enemy_34: Víscera de hinox
+actor.Item_Enemy_27: Tornillo ancestral
+actor.Item_Enemy_28: Resorte ancestral
+actor.Item_Enemy_26: Engranaje ancestral
+actor.Item_Enemy_29: Eje ancestral
+actor.Item_Enemy_30: Núcleo ancestral
+actor.Item_Enemy_31: Gran núcleo ancestral
+actor.Obj_FireWoodBundle: Montón de leña
+actor.Item_Roast_03: Manzana asada
+actor.Item_Roast_10: Coco asado
+actor.Item_Roast_07: Frambuesa asada
+actor.Item_Roast_48: Bellota asada
+actor.Item_Roast_52: Fruto de árbol asado
+actor.Item_Roast_09: Durián vivaz asado
+actor.Item_Roast_12: Sandía gélida asada
+actor.Item_Roast_13: Baya ígnea asada
+actor.Item_Roast_08: Fruta electro asada
+actor.Item_Roast_16: Semilla de loto asada
+actor.Item_Roast_11: Plátanos recios asados
+actor.Item_Roast_06: Seta de Hyrule asada
+actor.Item_Roast_04: Seta vigorosa asada
+actor.Item_Roast_53: Seta briosa asada
+actor.Item_Roast_05: Trufa vivaz asada
+actor.Item_Roast_49: Trufón vivaz asado
+actor.Item_Roast_31: Seta gélida asada
+actor.Item_Roast_32: Seta ígnea asada
+actor.Item_Roast_33: Seta electro asada
+actor.Item_Roast_36: Seta rauda asada
+actor.Item_Roast_37: Seta recia asada
+actor.Item_Roast_38: Seta robusta asada
+actor.Item_Roast_39: Seta sigilosa asada
+actor.Item_Roast_18: Rábano asado
+actor.Item_Roast_19: Rábano grande asado
+actor.Item_Roast_24: Zanahoria rauda asada
+actor.Item_Roast_50: Zanahoria briosa asada
+actor.Item_Roast_15: Calabaza robusta asada
+actor.Item_Roast_27: Bulbo recio asado
+actor.Item_Roast_28: Bulbo robusto asado
+actor.Item_Roast_51: Huevo frito
+actor.Item_Boiled_01: Huevo cocido
+actor.Item_Roast_01: Carne de caza asada
+actor.Item_Roast_40: Carne de caza XL asada
+actor.Item_Roast_45: Carne de caza XXL asada
+actor.Item_Roast_02: Carne de ave asada
+actor.Item_Roast_41: Carne de ave XL asada
+actor.Item_Roast_46: Carne de ave XXL asada
+actor.Item_RoastFish_01: Lubina de Hyrule asada
+actor.Item_RoastFish_02: Lubina vivaz asada
+actor.Item_RoastFish_04: Salmón vivaz asado
+actor.Item_RoastFish_03: Trucha asada
+actor.Item_RoastFish_07: Carpa asada
+actor.Item_RoastFish_09: Dorada asada
+actor.Item_RoastFish_13: Caracol sigiloso asado
+actor.Item_RoastFish_11: Caracol vivaz asado
+actor.Item_RoastFish_15: Cangrejo asado
+actor.Item_Chilled_01: Carne de caza helada
+actor.Item_Chilled_02: Carne de caza XL helada
+actor.Item_Chilled_03: Carne de caza XXL helada
+actor.Item_Chilled_04: Carne de ave helada
+actor.Item_Chilled_05: Carne de ave XL helada
+actor.Item_Chilled_06: Carne de ave XXL helada
+actor.Item_ChilledFish_01: Lubina helada
+actor.Item_ChilledFish_06: Lubina vivaz helada
+actor.Item_ChilledFish_02: Salmón vivaz helado
+actor.Item_ChilledFish_03: Trucha helada
+actor.Item_ChilledFish_04: Carpa helada
+actor.Item_ChilledFish_05: Dorada helada
+actor.Item_ChilledFish_07: Cangrejo helado
+actor.Item_ChilledFish_08: Caracol sigiloso helado
+actor.Item_ChilledFish_09: Caracol vivaz helado
+actor.Obj_DRStone_Get: Piedra sheikah
+actor.dyecolor_00: dyecolor_00
+actor.dyecolor_01: Tinte azul
+actor.dyecolor_02: Tinte rojo
+actor.dyecolor_03: Tinte amarillo
+actor.dyecolor_04: Tinte blanco
+actor.dyecolor_05: Tinte negro
+actor.dyecolor_06: Tinte morado
+actor.dyecolor_07: Tinte verde
+actor.dyecolor_08: Tinte azul claro
+actor.dyecolor_09: Tinte azul marino
+actor.dyecolor_10: Tinte naranja
+actor.dyecolor_11: Tinte rosa
+actor.dyecolor_12: Tinte granate
+actor.dyecolor_13: Tinte beige
+actor.dyecolor_14: Tinte marrón
+actor.dyecolor_15: Tinte gris
+actor.Obj_Photo_Animal: Foto de un animal
+actor.Obj_Photo_BossEnemy: Foto de un jefe
+actor.Obj_Photo_Enemy: Foto de un monstruo
+actor.Obj_Photo_Material: Foto de material
+actor.Obj_Photo_Other: Foto de un tesoro
+actor.Obj_Photo_Weapon: Foto de un arma

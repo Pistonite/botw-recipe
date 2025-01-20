@@ -1,0 +1,41 @@
+version: '3'
+
+includes:
+  ecma:
+    taskfile: ../mono-dev/task/ecma.yaml
+    internal: true
+
+tasks:
+  dev:
+    desc: Run RDB in dev (watch) mode
+    env:
+      RUST_LOG: info
+      # relative to cargo build dir
+      BOTWRDB_CONFIG_PATH: ../../../packages/app/dev.config.yaml
+    cmds:
+      - pnpm exec tauri dev --features devtools {{.CLI_ARGS}}
+
+  build:
+    desc: Build RDB (release) binary
+    cmds:
+      - pnpm exec tauri build {{.CLI_ARGS}}
+
+  dev-js:
+    cmds:
+      - pnpm exec vite
+
+  build-js:
+    cmds:
+      - pnpm exec vite build
+
+  check:
+    desc: Check code issues
+    cmds:
+      - task: ecma:prettier-check
+      - task: ecma:eslint-check
+      - task: ecma:tsc-check-build
+  
+  fix:
+    cmds:
+      - task: ecma:prettier-fix
+      - task: ecma:eslint-fix
