@@ -6,6 +6,7 @@ import {
 } from "react-i18next";
 import {
     addLocaleSubscriber,
+    connectI18next,
     convertToSupportedLocale,
     detectLocale,
     getLocale,
@@ -21,16 +22,15 @@ export const backend: BackendModule = {
         // no init needed
     },
     read: async (language: string, namespace: string) => {
-        if (namespace === "translation" || language === "dev") {
+        if (language === "dev") {
             // don't load the default translation namespace
             return undefined;
         }
         const locale = convertToSupportedLocale(language);
-        console.log(locale, namespace);
         if (namespace === "actor") {
             try {
                 const strings = await import(
-                    `botw-recipe-sys/i18n/${locale}.yaml`
+                    `./actors/${locale}.yaml`
                 );
                 return strings.default;
             } catch (e) {
@@ -69,7 +69,9 @@ export const initI18n = async (host: Host) => {
         persist: true,
     });
 
-    await i18next.use(detectLocale).use(backend).use(initReactI18next).init();
+    await i18next.use(detectLocale).use(backend).use(initReactI18next)
+    .use(connectI18next)
+    .init();
 
     initLocalizedItemSearch(getLocale());
     // Sync title to localized title

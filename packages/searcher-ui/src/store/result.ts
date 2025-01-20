@@ -1,13 +1,13 @@
 import type { Result } from "@pistonite/pure/result";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-import { type ResultData, toResultData } from "data/ResultData.ts";
 import type {
     HostError,
     OptimizedRecipeData,
     SearchFilter,
-} from "host/types.ts";
-import { WeaponModifier } from "data/WeaponModifier.ts";
+} from "botw-recipe-searcher-tauri";
+
+import { type ResultData, toResultData } from "util/ResultData.ts";
+import { WeaponModifier } from "util/WeaponModifier.ts";
 
 import type { State } from "./store.ts";
 

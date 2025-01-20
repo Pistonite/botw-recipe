@@ -43,7 +43,7 @@ import {
     Star20Filled,
     Star20Regular,
 } from "@fluentui/react-icons";
-import { useTranslation, useItemSearch } from "botw-recipe-searcher-localization";
+import { useTranslation, useItemSearch, useItemTranslation } from "botw-recipe-searcher-localization";
 import { Actor, ActorToName, getActors } from "botw-recipe-sys";
 
 const useStyles = makeStyles({
@@ -392,7 +392,7 @@ export const ItemActorLabel: React.FC<ItemActorProps & LabelProps> = ({
     actor,
     ...rest
 }) => {
-    const t = useTranslation();
+    const t = useItemTranslation();
     return <Label {...rest}>{tActor(t, actor)}</Label>;
 };
 
@@ -437,7 +437,7 @@ export const ItemActorIconWithTooltip: React.FC<ItemActorIconProps> = ({
 /** A component to display detail of the Actor */
 export const ItemActorDetail: React.FC<ItemActorProps> = ({ actor }) => {
     const styles = useStyles();
-    const t = useTranslation();
+    const t = useItemTranslation();
     return (
         <div className={styles.detailContainer}>
             <img className={styles.bigIcon} src={getIconUrl(actor)} />

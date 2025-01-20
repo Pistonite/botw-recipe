@@ -5,8 +5,7 @@
     "type": "module",
     "description": "Data binding for BOTW recipes",
     "exports": {
-        ".": "./src/ts/index.ts",
-        "./i18n/*.yaml": "./src/ts/i18n/*.yaml"
+        ".": "./src/ts/index.ts"
     },
     "devDependencies": {
         "eslint": "catalog:",

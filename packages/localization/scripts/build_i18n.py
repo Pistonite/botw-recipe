@@ -4,12 +4,24 @@ Generate the item localization
 
 import sys
 import yaml
-from build import script_home, project_file, output_file
+import os
 
 HEADER = """
 # Automatically generated.
-# DO NOT EDIT. See packages/generated/README.md for more information.
+# DO NOT EDIT. See packages/localization/README.md for more information.
 """
+
+def output_file(*args):
+    return script_home("output", *args)
+
+def script_home(*args):
+    return os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "research-scripts", *args)
+
+def project_file(*args):
+    return os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "generated", *args)
+
+def src_file(*args):
+    return os.path.join(os.path.dirname(os.path.dirname(__file__)), "src", *args)
 
 LOCALES = [
     "en-US",
@@ -50,7 +62,7 @@ def main():
     progress.done()
 
     for locale in LOCALES:
-        with open(project_file("src", "ts", "i18n", f"{locale}.yaml"), "w", encoding="utf-8") as f:
+        with open(src_file("actors", f"{locale}.yaml"), "w", encoding="utf-8") as f:
             f.write(HEADER + "\n")
             f.write("\n".join(locale_lines[locale]))
 

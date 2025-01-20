@@ -1,1 +1,1 @@
-export { boot } from "./boot.ts";
+export { boot } from "./boot.tsx";

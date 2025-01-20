@@ -3,9 +3,9 @@ import {
     createSlice,
     type PayloadAction,
 } from "@reduxjs/toolkit";
-import { WeaponModifier } from "data/WeaponModifier.ts";
+import type { Stats, SearchFilter, WeaponModifierSet } from "botw-recipe-searcher-tauri";
 
-import type { Stats, SearchFilter, WeaponModifierSet } from "host/types.ts";
+import { WeaponModifier } from "util/WeaponModifier.ts";
 import type { State } from "./store.ts";
 
 type SearchSlice = {

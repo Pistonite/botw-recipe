@@ -29,7 +29,7 @@ export const initLocalizedItemSearch = async (locale: string) => {
 
     // Searching item by its English name is always supported
     const { default: englishTranslation } = await import(
-        "botw-recipe-sys/i18n/en-US.yaml"
+        "./actors/en-US.yaml"
     );
 
     // Locale can have extra locale-specific keys.
@@ -37,7 +37,7 @@ export const initLocalizedItemSearch = async (locale: string) => {
     let extraKeys: Record<string, string> = {};
     if (locale === "zh-CN") {
         const { default: keys } = await import(
-            "botw-recipe-sys/i18n/zh-CN.pinyin.yaml"
+            "./actors/zh-CN.pinyin.yaml"
         );
         extraKeys = keys;
     }
