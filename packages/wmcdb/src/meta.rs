@@ -20,7 +20,7 @@ pub fn load_index(path: impl AsRef<Path>) -> Result<Vec<Index>, Error> {
         return Err(Error::MissingIndex);
     }
     let reader = BufReader::new(File::open(path)?);
-    let expected_size = compact_v2().chunk_count();
+    let expected_size = compact().chunk_count();
     let index: Vec<Index> = serde_yaml_ng::from_reader(reader)?;
     if index.len() != expected_size as usize {
         return Err(Error::InvalidIndexChunkCount(expected_size, index.len() as u32));
@@ -58,6 +58,12 @@ pub struct DbMeta {
 #[inline]
 pub fn raw_chunk_path(db_path: &Path, chunk_id: impl std::fmt::Display) -> PathBuf {
     db_path.join(format!("chunk_{}.rawdat", chunk_id))
+}
+
+/// Get the chunk path for CritDB for a given chunk ID in the database directory
+#[inline]
+pub fn crit_chunk_path(db_path: &Path, chunk_id: impl std::fmt::Display) -> PathBuf {
+    db_path.join(format!("chunk_{}.crit", chunk_id))
 }
 
 /// Get the compact chunk path for a given chunk ID in the database directory

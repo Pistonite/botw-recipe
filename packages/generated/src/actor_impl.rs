@@ -19,6 +19,11 @@ impl Actor {
             None
         }
     }
+
+    #[inline]
+    pub const fn is_monster_extract(self) -> bool {
+        false //# TODO
+    }
 }
 
 #[cfg(feature = "recipe")]

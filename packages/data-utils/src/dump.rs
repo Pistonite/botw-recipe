@@ -2,7 +2,7 @@
 //! in both compact and raw formats
 
 use std::fs::{self, File};
-use std::io::BufWriter;
+use std::io::{BufWriter, Write};
 use std::path::Path;
 use std::sync::mpsc;
 use std::time::{Duration, Instant};
@@ -14,7 +14,7 @@ use botw_recipe_wmcdb::{meta, Index, IndexBuilder, Record};
 
 use crate::util;
 
-/// Dump the RawDB to the given path
+/// Dump the RawDB and CritDB to the given path
 pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
     let start_time = Instant::now();
     let meta = meta::raw();
@@ -33,8 +33,9 @@ pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
         let send = send.clone();
         let (start, end) = meta.record_range(chunk_id);
         let chunk_path = meta::raw_chunk_path(path, chunk_id);
+        let crit_chunk_path = meta::crit_chunk_path(path, chunk_id);
         pool.execute(
-            move || match dump_raw_chunk(&chunk_path, start, end) {
+            move || match dump_raw_chunk(&chunk_path, &crit_chunk_path, start, end) {
                 Ok(_) => {
                     let _ = send.send((chunk_id, Ok(())));
                 }
@@ -63,13 +64,21 @@ pub fn dump_raw_db(path: &Path) -> anyhow::Result<()> {
 /// Cook recipes from start to end IDs and write them to a RawDB chunk file
 pub fn dump_raw_chunk(
     chunk_path: &Path,
+    crit_chunk_path: &Path,
     start: u64,
     end: u64,
 ) -> anyhow::Result<()> {
     let mut writer = BufWriter::new(File::create(chunk_path)?);
+    let mut crit_writer = BufWriter::new(File::create(crit_chunk_path)?);
     for id in start..end {
-        let data = botw_recipe_cook::cook_id_unchecked(id).data;
-        data.write_to(&mut writer)?;
+        let result = botw_recipe_cook::cook_id_unchecked(id);
+        result.data.write_to(&mut writer)?;
+        // old crit_rng_hp is 0 or 1 based on bool
+        if result.crit_rng_hp {
+            crit_writer.write_all(&[1])?;
+        } else {
+            crit_writer.write_all(&[0])?;
+        }
     }
 
     Ok(())

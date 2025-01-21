@@ -117,13 +117,9 @@ impl SingleRecipeData {
     /// Check if this recipe matches the input
     pub fn matches(&self, input: &MatchInput) -> bool {
         // TEMP: remove monster recipes for now
-        if matches!(self.recipe.item, 
-            CookItem::Item_Cook_L_01 | CookItem::Item_Cook_L_02 | CookItem::Item_Cook_L_03
-| CookItem::Item_Cook_L_04 | CookItem::Item_Cook_L_05
-        ) {
+        if self.recipe.is_monster_food() {
             return false;
         }
-
 
         let mut removed = [false; num_ingr!()];
         if !self.actors.try_match(input.actors(), &mut removed) {

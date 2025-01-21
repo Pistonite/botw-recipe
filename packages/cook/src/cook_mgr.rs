@@ -6,12 +6,12 @@ use botw_recipe_sys::{
 use botw_recipe_sys::{Group, GroupMnr, num_ingr};
 use enumset::EnumSet;
 
-use super::{CookData, CookResult};
+use super::{CookData, CookResult, CookDataConstPart, CookDataRngPart, Discrete};
 
 macro_rules! debugln {
     ($($arg:tt)*) => {
         #[cfg(feature = "print")]
-        println!($($arg)*);
+        eprintln!($($arg)*);
     }
 }
 
@@ -187,21 +187,24 @@ fn cook_internal(
 
     debugln!("Recipe: {:?}", recipe);
 
-    let mut output = CookData::new();
-    let (effect, is_dubious) = calc_ingredient_boost(ingrs.as_slice(), recipe, &mut output);
+    let mut output_const = CookDataConstPart::default();
+    let mut output_rng = CookDataRngPart::default();
+    let (effect, is_dubious) = calc_ingredient_boost(
+        ingrs.as_slice(), 
+        recipe, &mut output_const, &mut output_rng);
 
     reference!(uking::CookingMgr::isCookFailure());
     if is_dubious || recipe.is_rock_hard() {
         reference!(uking::CookingMgr::cookFail());
         if is_dubious {
-            return CookResult::new_dubious(output.health_recover);
+            return CookResult::new_dubious(output_rng.health_recover);
         } else {
             return CookResult::new_rock_hard();
         }
     }
 
     // handle sell price
-    output.sell_price = {
+    output_const.sell_price = {
         if recipe.is_fairy_tonic() {
             2
         } else {
@@ -226,6 +229,8 @@ fn cook_internal(
     };
 
     // Spice Boost
+    // In game code, this is after crit boost. we move it to before
+    // crit so the computation is less
 
     let mut time_boost = 0;
     let mut hp_boost = 0;
@@ -264,18 +269,18 @@ fn cook_internal(
             hp_boost
         );
     }
-    output.health_recover += hp_boost;
-    debugln!("hp+=hp_boost, now {}", output.health_recover);
-    output.effect_duration += time_boost;
+    output_rng.health_recover += hp_boost;
+    debugln!("hp+=hp_boost, now {}", output_rng.health_recover);
+    output_rng.effect_duration += time_boost;
 
-    // Recipe Boost
+    // Recipe Boost - also moved to before crit
 
     reference!(
         "recipe extra hp boost",
         uking::CookingMgr::cookCalcRecipeBoost(),
         life_recover
     );
-    output.health_recover += recipe.heart_bonus;
+    output_rng.health_recover += recipe.heart_bonus;
     debugln!(
         "recipe extra hp is {}, hp is now {}",
         recipe.heart_bonus,
@@ -338,7 +343,8 @@ reference!(uking::CookingMgr::cookCalcIngredientsBoost);
 fn calc_ingredient_boost(
     ingrs: &[&ActorData],
     recipe: &Recipe,
-    output: &mut CookData,
+    output_const: &mut CookDataConstPart,
+    output_rng: &mut CookDataRngPart
 ) -> (CookEffect, bool) {
     // doesn't hurt if we calculate effect early
     let (mut effect, has_multiple_effect) = {
@@ -433,7 +439,7 @@ fn calc_ingredient_boost(
         time
     );
 
-    output.effect_id = effect.game_repr_f32();
+    output_const.effect_id = effect.game_repr_f32();
 
     if has_multiple_effect {
         reference!(
@@ -441,11 +447,11 @@ fn calc_ingredient_boost(
             uking::CookingMgr::cookCalcIngredientsBoost(),
             effect_found
         );
-        output.effect_level = 0.0;
-        output.effect_duration = 0;
+        output_rng.effect_level = 0.0;
+        output_rng.effect_duration = 0;
     } else {
-        output.effect_level = if effect.uses_time() {
-            output.effect_duration = time;
+        output_rng.effect_level = if effect.uses_time() {
+            output_rng.effect_duration = time;
             let (potency_lv2, potency_lv3) = effect.get_potency_thresholds();
             if potency >= potency_lv3 {
                 3.0
@@ -465,7 +471,7 @@ fn calc_ingredient_boost(
                 // note that it's rounded down to nearest whole heart
                 // hp also becomes the value later in AdjustItem
                 let yellow_hearts = potency / 4;
-                output.effect_level = (yellow_hearts * 4 + max_hp_boost) as f32;
+                output_rng.effect_level = (yellow_hearts * 4 + max_hp_boost) as f32;
             }
             CookEffect::GutsRecover => {
                 // stamina - one wheel is 1000
@@ -476,7 +482,7 @@ fn calc_ingredient_boost(
                 } else {
                     table[p]
                 };
-                output.effect_level = wheels * 1000.0;
+                output_rng.effect_level = wheels * 1000.0;
                 #[cfg(feature = "assertions")]
                 {
                     assert!(stam_boost == 0, "GutsRecover shoult not have stamina boost")
@@ -484,7 +490,7 @@ fn calc_ingredient_boost(
             }
             CookEffect::ExGutsMaxUp => {
                 // endura - one wheel is 5
-                output.effect_level = match potency {
+                output_rng.effect_level = match potency {
                     0 => 0,
                     1..4 => 1,
                     4..6 => 2,
@@ -512,10 +518,10 @@ fn calc_ingredient_boost(
             uking::CookingMgr::cookCalcIngredientsBoost(),
             is_not_fairy_tonic
         );
-        output.effect_level = 0.0;
-        output.effect_id = CookEffect::None.game_repr_f32();
+        output_rng.effect_level = 0.0;
+        output_const.effect_id = CookEffect::None.game_repr_f32();
         effect = CookEffect::None;
-        output.effect_duration = 0;
+        output_rng.effect_duration = 0;
     }
 
     let mut dubious = recipe.is_dubious();
@@ -530,10 +536,10 @@ fn calc_ingredient_boost(
     }
 
     if dubious {
-        output.health_recover = hp;
+        output_rng.health_recover = hp;
         debugln!("result is dubious, hp*1, which is {}", hp);
     } else {
-        output.health_recover = hp * HP_MULTIPLIER;
+        output_rng.health_recover = hp * HP_MULTIPLIER;
         debugln!("result is not dubious, hp={hp}*2={}", output.health_recover);
     }
 
@@ -558,10 +564,29 @@ fn calc_ingredient_boost(
 
     (effect, dubious)
 }
+
+fn calc_crit_boost(
+    unique_ingrs: &[&ActorData], 
+    output_const: &mut CookDataConstPart, 
+    output_rng: CookDataRngPart) -> Discrete<CookDataRngPart>
+{
+    for ingr in unique_ingrs {
+        if ingr.actor.is_monster_extract() {
+            return calc_monster_extract();
+        }
+    }
+
+    todo!()
+}
+
+fn calc_monster_extract() -> Discrete<CookDataRngPart> {
+    todo!()
+}
+
 // returns crit_rng_hp, see /dump/README.md
 // hearts are not added if guaranteed heart crit,
 // they are added when processing the raw db if crit_chance >= 100 and if crit_rng_hp is false
-fn calc_crit_boost(
+fn calc_crit_boost_old(
     unique_ingrs: &[&ActorData],
     effect: CookEffect,
     output: &mut CookData,

@@ -1,5 +1,6 @@
 *.rawdat
 *.rdb
+*.crit
 *.7z
 *.zip
 /data

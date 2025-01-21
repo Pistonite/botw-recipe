@@ -1,6 +1,6 @@
 use std::io::Write;
 
-use botw_recipe_cook::CookData;
+use botw_recipe_cook::{WmcCookData, CookData, HpCritRngType};
 use botw_recipe_sys::{num_ingr, Group, GroupMnr, CookEffect};
 
 use super::{Filter, WeaponModifierSet};
@@ -66,7 +66,7 @@ impl PositionedRecord {
 }
 
 /// A record in the compact DB
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)]
 pub struct Record(u16);
 
@@ -85,22 +85,9 @@ impl From<Record> for u16 {
 }
 
 impl Record {
-    pub fn from_data(data: &CookData, crit_rng_hp: bool) -> Self {
-        let mut hp = data.health_recover;
-        if data.crit_chance >= 100 && !crit_rng_hp {
-            // guaranteed crit but no heart rng crit, which means guaranteed heart crit
-            if data.effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
-                // hearty adds 4
-                // technically this should go out of 112, because it's 108 + 4
-                // (max is 108 but game doesn't check the cap when crit)
-                hp += 4;
-            } else {
-                hp = (hp + 12).min(120);
-            }
-        }
-        let price = data.sell_price;
+    pub fn from_wmc_data(data: &WmcCookData) -> Self {
         // hhhh hhhp pppp pppp
-        let record = (hp << 9) as u16 | (price & 0x1FF) as u16;
+        let record = (data.hp << 9) as u16 | (data.price & 0x1FF) as u16;
         Self(record)
     }
     #[inline]

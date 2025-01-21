@@ -12,6 +12,7 @@ pub trait Distr: Sized {
     /// the count divided by the total count.
     fn into_counts(self) -> Vec<(Self::T, BigUint)>;
 
+    #[inline]
     fn into_discrete(self) -> Discrete<Self::T> {
         Discrete {
             counts: self.into_counts()
@@ -97,6 +98,7 @@ impl Distr for Binary {
     }
 }
 
+#[inline]
 pub fn uniform(r: Range<u32>) -> Unif32 {
     Unif32 {
         lo: r.start,
@@ -104,6 +106,7 @@ pub fn uniform(r: Range<u32>) -> Unif32 {
     }
 }
 
+#[inline]
 pub fn uniform_always(r: u32) -> Unif32 {
     Unif32 {
         lo: r,
@@ -149,8 +152,14 @@ impl Distr for Unif32 {
     }
 }
 
+#[inline]
 pub fn always<T>(t: T) -> Always<T> {
     Always(t)
+}
+
+#[inline]
+pub fn discrete_always<T>(t: T) -> Discrete<T> {
+    Always(t).into_discrete()
 }
 
 pub struct Always<T>(T);

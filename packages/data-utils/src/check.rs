@@ -1,11 +1,11 @@
 //! Utils for testing the correctness of the cooking simulator
 //! by checking the raw database dump against a known good dump
-use std::fs::File;
+use std::{fs::File, io::Read};
 use std::io::BufReader;
 use std::path::Path;
 use std::sync::mpsc;
 
-use botw_recipe_cook::CookData;
+use botw_recipe_cook::{CookData, HpCritRngType};
 use botw_recipe_wmcdb::meta;
 
 use crate::{util, Error};
@@ -78,10 +78,18 @@ pub fn compare_raw_db(path_a: &Path, path_b: &Path) -> anyhow::Result<()> {
         let chunk_size = meta.chunk_size(chunk_id);
         let chunk_path_a = meta::raw_chunk_path(path_a, chunk_id);
         let chunk_path_b = meta::raw_chunk_path(path_b, chunk_id);
+        let crit_chunk_path_a = meta::crit_chunk_path(path_a, chunk_id);
+        let crit_chunk_path_b = meta::crit_chunk_path(path_b, chunk_id);
         let send = send.clone();
         pool.execute(move || {
             let result = compare_raw_chunks(chunk_size, &chunk_path_a, &chunk_path_b);
+            // if result.is_err() {
+            //     let _ = send.send((chunk_id, result));
+            //     return;
+            // }
+            // let result = compare_crit_chunks(chunk_size, &crit_chunk_path_a, &crit_chunk_path_b);
             let _ = send.send((chunk_id, result));
+            
         });
     }
     drop(send);
@@ -129,6 +137,45 @@ pub fn compare_raw_chunks(records: usize, path_a: &Path, path_b: &Path) -> Resul
     }
     if let Some((i, data_a, data_b)) = mismatch {
         return Err(Error::Mismatch(i, data_a, data_b, matched_count));
+    }
+
+    Ok(matched_count)
+}
+
+pub fn compare_crit_chunks(records: usize, path_a: &Path, path_b: &Path) -> Result<usize, Error> {
+    if !path_a.exists() || !path_b.exists() {
+        return Err(Error::NotFound);
+    }
+    let mut reader_a = BufReader::new(File::open(path_a)?);
+    let mut reader_b = BufReader::new(File::open(path_b)?);
+
+    let mut mismatch = None;
+    let mut matched_count = 0;
+
+    for i in 0..records {
+        let mut buf = [0u8; 1];
+        reader_a.read_exact(&mut buf)?;
+        let data_a = HpCritRngType::from_u8(buf[0]);
+        reader_b.read_exact(&mut buf)?;
+        let data_b = HpCritRngType::from_u8(buf[0]);
+        match (data_a, data_b) {
+            (Some(a), Some(b)) => {
+                if a != b {
+                    if mismatch.is_none() {
+                        mismatch = Some((i, a, b));
+                    }
+                } else {
+                    matched_count += 1;
+                }
+            },
+            _ => {
+                return Err(Error::InvalidCritType(i, buf[0]));
+            }
+        }
+    }
+
+    if let Some((i, data_a, data_b)) = mismatch {
+        return Err(Error::CritMismatch(i, data_a, data_b, matched_count));
     }
 
     Ok(matched_count)

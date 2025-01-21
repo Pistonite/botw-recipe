@@ -5,16 +5,6 @@ env:
 dotenv: [".env"]
 
 includes:
-  # BOTW RDB App
-  rdb:
-    taskfile: ./app/rdb
-    dir: ./app/rdb
-
-  # Recipe Dumper Mod
-  console:
-    taskfile: ./dump/console
-    dir: ./dump/console
-
   generated:
     taskfile: ./packages/generated
     dir: ./packages/generated
@@ -31,19 +21,6 @@ tasks:
     cmds:
       - magoo install
       # TODO: pnpm
-
-  research:
-    desc: Reproduce research (--clean to re-download data)
-    dir: research
-    aliases: [re]
-    cmds:
-    - python main.py {{.CLI_ARGS}}
-
-  bfcrc32:
-    desc: Bruteforce CRC32 (-- <ARGS>)
-    dir: research
-    cmds:
-    - cargo run --release --bin bfcrc32 -- {{.CLI_ARGS}}
 
   # test:
   #   desc: Run tests

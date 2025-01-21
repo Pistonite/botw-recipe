@@ -56,6 +56,13 @@ impl CookItem {
         self == Self::fairy_tonic()
     }
 
+    /// Check if the CookItem is from a recipe with monster extract
+    #[inline]
+    pub fn is_monster_food(self) -> bool {
+            matches!(self, CookItem::Item_Cook_L_01 | CookItem::Item_Cook_L_02 | CookItem::Item_Cook_L_03
+| CookItem::Item_Cook_L_04 | CookItem::Item_Cook_L_05)
+    }
+
 
 }
 

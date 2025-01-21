@@ -18,7 +18,9 @@ pub struct CookData {
     pub sell_price: i32,
     /// Effect ID, but a float for some reason. -1 is None
     pub effect_id: f32,
-    /// Effect level, usually 0-3, higher for hearty
+    /// Effect level, usually 0-3, higher for hearty/stamina
+    ///
+    /// This is `vitality_boost` in decomp code
     pub effect_level: f32,
     /// crit chance, usually 0-100
     pub crit_chance: i32,
