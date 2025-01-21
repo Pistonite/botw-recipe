@@ -104,10 +104,13 @@ pub fn compare_raw_db(path_a: &Path, path_b: &Path) -> anyhow::Result<()> {
         }
     }
     progress.done();
-    util::check_errors(&errors)?;
+    let result = util::check_errors(&errors);
 
-    println!("Matched {} records", matched_count);
-    Ok(())
+    let match_percent = matched_count as f64 / meta.total_record() as f64 * 100.0;
+
+    println!("Matched {}/{} records ({:02}%)", matched_count, meta.total_record(), match_percent);
+
+    result
 }
 
 /// Compare if 2 raw chunks are the same
