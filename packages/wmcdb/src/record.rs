@@ -16,52 +16,53 @@ pub struct PositionedRecord {
 
 impl PositionedRecord {
     pub fn matches(&self, filter: &Filter) -> bool {
-        let value = self.record.value();
-        if value > filter.max_value {
-            return false;
-        }
-        let modifier = self.record.modifier_set();
-        if filter.includes_modifier.intersection(modifier) != filter.includes_modifier {
-            return false;
-        }
-        if filter.excludes_modifier.intersection(modifier) != WeaponModifierSet::new() {
-            return false;
-        }
-        if value < filter.min_value {
-            if !filter.include_crit_rng_hp {
-                return false;
-            }
-            if filter.min_value - value > 12 {
-                return false;
-            }
-            // if within 12, it's possible to crit to the min value
-            let result = botw_recipe_cook::cook_id_unchecked(self.recipe_id);
-            if !result.crit_rng_hp {
-                return false;
-            }
-            let value = if result.data.effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
-                (value + 4).min(112)
-            } else {
-                (value + 12).min(120)
-            };
-            if value < filter.min_value {
-                return false;
-            }
-        }
-        if !filter.include_pe_only {
-            let mut groups = [Group::None; num_ingr!()];
-            if !GroupMnr::<{num_ingr!()}>::new().to_groups(self.recipe_id, &mut groups) {
-                // invalid ID - shouldn't happen
-                return false;
-            }
-            for group in groups {
-                if group.all_pe_only() {
-                    return false;
-                }
-            }
-        }
-
-        true
+        todo!()
+        // let value = self.record.value();
+        // if value > filter.max_value {
+        //     return false;
+        // }
+        // let modifier = self.record.modifier_set();
+        // if filter.includes_modifier.intersection(modifier) != filter.includes_modifier {
+        //     return false;
+        // }
+        // if filter.excludes_modifier.intersection(modifier) != WeaponModifierSet::new() {
+        //     return false;
+        // }
+        // if value < filter.min_value {
+        //     if !filter.include_crit_rng_hp {
+        //         return false;
+        //     }
+        //     if filter.min_value - value > 12 {
+        //         return false;
+        //     }
+        //     // if within 12, it's possible to crit to the min value
+        //     let result = botw_recipe_cook::cook_id_unchecked(self.recipe_id);
+        //     if !result.crit_rng_hp {
+        //         return false;
+        //     }
+        //     let value = if result.data.effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
+        //         (value + 4).min(112)
+        //     } else {
+        //         (value + 12).min(120)
+        //     };
+        //     if value < filter.min_value {
+        //         return false;
+        //     }
+        // }
+        // if !filter.include_pe_only {
+        //     let mut groups = [Group::None; num_ingr!()];
+        //     if !GroupMnr::<{num_ingr!()}>::new().to_groups(self.recipe_id, &mut groups) {
+        //         // invalid ID - shouldn't happen
+        //         return false;
+        //     }
+        //     for group in groups {
+        //         if group.all_pe_only() {
+        //             return false;
+        //         }
+        //     }
+        // }
+        //
+        // true
     }
 }
 

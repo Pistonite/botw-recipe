@@ -22,7 +22,7 @@ impl CookResult {
             item: CookItem::rock_hard(),
             const_data: CookDataConstPart {
                 sell_price: 2,
-                effect_id: -1.0,
+                effect: CookEffect::None,
                 crit_chance: 0,
             },
             rng_data: distr::discrete_always(CookDataRngPart {
@@ -37,7 +37,7 @@ impl CookResult {
             item: CookItem::dubious_food(),
             const_data: CookDataConstPart {
                 sell_price: 2,
-                effect_id: -1.0,
+                effect: CookEffect::None,
                 crit_chance: 0,
             },
             rng_data: distr::discrete_always(CookDataRngPart {
@@ -55,7 +55,7 @@ impl CookResult {
             item: CookItem::dubious_food(),
             const_data: CookDataConstPart {
                 sell_price: 1,
-                effect_id: -1.0,
+                effect: CookEffect::None,
                 crit_chance: 0,
             },
             rng_data: distr::discrete_always(CookDataRngPart {
@@ -103,7 +103,7 @@ impl CookResult {
                     health_recover: 0,
                     effect_duration: 0,
                     sell_price: self.const_data.sell_price,
-                    effect_id: self.const_data.effect_id,
+                    effect_id: self.const_data.effect.game_repr_f32(),
                     effect_level: -1.0,
                     crit_chance: self.const_data.crit_chance,
                 }
@@ -113,7 +113,7 @@ impl CookResult {
                     health_recover: data.health_recover,
                     effect_duration: data.effect_duration,
                     sell_price: self.const_data.sell_price,
-                    effect_id: self.const_data.effect_id,
+                    effect_id: self.const_data.effect.game_repr_f32(),
                     effect_level: data.effect_level,
                     crit_chance: self.const_data.crit_chance,
                 }
@@ -173,7 +173,7 @@ impl CookResult {
                 if hps[0] > hps[1] {
                     hps.swap(0, 1);
                 }
-                let is_hearty = self.const_data.effect_id == CookEffect::LifeMaxUp.game_repr_f32();
+                let is_hearty = self.const_data.effect == CookEffect::LifeMaxUp;
                 let regular_diff = if is_hearty {
                     4
                 } else {
@@ -181,12 +181,18 @@ impl CookResult {
                 };
                 if hps[1] - hps[0] == regular_diff {
                     (hps[0], HpCritRngType::Regular)
-                } else {
+                } else if hps[0] == 1 && hps[1] == 12 {
+                    // this is possible if HP is 0 and food has no effect.
+                    // HP will be set to 1 if it's 0, but won't be added
+                    // if crit happened
+                    (hps[0], HpCritRngType::Regular)
+                }
+                else {
                     // special value for monster RNG
                     #[cfg(feature = "assertions")]
                     {
                         if !self.item.is_monster_food() {
-                            panic!("monster extract RNG detected for non-monster food");
+                            panic!("monster extract RNG detected for non-monster food: {:?}, is_hearty={}", hps, is_hearty);
                         }
                         if is_hearty {
                             if hps[0] != 4 {
@@ -215,7 +221,10 @@ impl CookResult {
                 {
                     panic!("0 or more than 3 unique HP values");
                 }
-                (0, HpCritRngType::NoRng)
+                #[cfg(not(feature = "assertions"))]
+                {
+                    (0, HpCritRngType::NoRng)
+                }
             }
         }
     }
@@ -226,7 +235,7 @@ impl CookResult {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct CookDataConstPart {
     pub sell_price: i32,
-    pub effect_id: f32,
+    pub effect: CookEffect,
     pub crit_chance: i32,
 }
 
@@ -267,7 +276,7 @@ pub enum HpCritRngType {
     /// There is no randomness in the HP of the output
     NoRng = 0,
     /// Regular (non-monster) crit RNG:
-    /// - Non-hearty: where HP += 12
+    /// - Non-hearty: where HP += 12 (for the most part)
     /// - Hearty: where HP += 4
     Regular = 1,
 

@@ -270,14 +270,16 @@ fn compare_cook_results_slice(s: &[CookResult]) -> anyhow::Result<()> {
 
 #[inline]
 fn compare_cook_results(a: &CookResult, b: &CookResult) -> anyhow::Result<()> {
-    if a.crit_rng_hp != b.crit_rng_hp {
-        bail!("crit_rng_hp mismatch: {:?} != {:?}", a.crit_rng_hp, b.crit_rng_hp);
+    let a = a.get_wmc_data();
+    let b = b.get_wmc_data();
+    if a.crit != b.crit {
+        bail!("crit type mismatch: {:?} != {:?}", a.crit, b.crit);
     }
-    if a.data.health_recover != b.data.health_recover {
-        bail!("health_recover mismatch: {:?} != {:?}", a.data.health_recover, b.data.health_recover);
+    if a.hp != b.hp {
+        bail!("hp mismatch: {:?} != {:?}", a.hp, b.hp);
     }
-    if a.data.sell_price != b.data.sell_price {
-        bail!("sell_price mismatch: {:?} != {:?}", a.data.sell_price, b.data.sell_price);
+    if a.price != b.price {
+        bail!("price mismatch: {:?} != {:?}", a.price, b.price);
     }
     Ok(())
 }

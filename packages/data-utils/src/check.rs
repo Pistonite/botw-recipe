@@ -83,11 +83,11 @@ pub fn compare_raw_db(path_a: &Path, path_b: &Path) -> anyhow::Result<()> {
         let send = send.clone();
         pool.execute(move || {
             let result = compare_raw_chunks(chunk_size, &chunk_path_a, &chunk_path_b);
-            // if result.is_err() {
-            //     let _ = send.send((chunk_id, result));
-            //     return;
-            // }
-            // let result = compare_crit_chunks(chunk_size, &crit_chunk_path_a, &crit_chunk_path_b);
+            if result.is_err() {
+                let _ = send.send((chunk_id, result));
+                return;
+            }
+            let result = compare_crit_chunks(chunk_size, &crit_chunk_path_a, &crit_chunk_path_b);
             let _ = send.send((chunk_id, result));
             
         });

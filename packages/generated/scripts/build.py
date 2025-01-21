@@ -68,6 +68,14 @@ def generate_cook_effect():
         "Self::None => 0,",
     ]
 
+    min_level_lines = [
+        "Self::None => 0,",
+    ]
+
+    ssa_lines = [
+        "Self::None => 0,",
+    ]
+
     game_repr_lines = [
         "Self::None => -1,",
     ]
@@ -103,10 +111,10 @@ def generate_cook_effect():
         game_repr_lines.append(f"Self::{code_name} => {value},")
         from_game_repr_lines.append(f"{value}. => Some(Self::{code_name}),")
 
-        base_time = data["base_time"]
-        base_time_lines.append(f"Self::{code_name} => {base_time},")
-        max_level = data["max"]
-        max_level_lines.append(f"Self::{code_name} => {max_level},")
+        base_time_lines.append(f"Self::{code_name} => {data["base_time"]},")
+        max_level_lines.append(f"Self::{code_name} => {data["max"]},")
+        min_level_lines.append(f"Self::{code_name} => {data["min"]},")
+        ssa_lines.append(f"Self::{code_name} => {data["super_success_amount"]},")
 
     from_game_repr_lines.append("_ => None")
 
@@ -168,6 +176,20 @@ def generate_cook_effect():
         "pub const fn max_level(self) -> u32 {",
         "match self {",
     ] + max_level_lines + [
+        "}}",
+
+        "/// Get the minimum level of the effect",
+        "#[cfg(feature = \"cook-effect-data\")]",
+        "pub const fn min_level(self) -> u32 {",
+        "match self {",
+    ] + min_level_lines + [
+        "}}",
+
+        "/// Get the super success amount (SSA) of the effect",
+        "#[cfg(feature = \"cook-effect-data\")]",
+        "pub const fn super_success_amount(self) -> u32 {",
+        "match self {",
+    ] + ssa_lines + [
         "}}",
 
         "/// Convert the cook effect to the game enum value",

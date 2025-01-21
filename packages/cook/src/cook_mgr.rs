@@ -2,11 +2,8 @@ use botw_recipe_sys::{
     Actor, ActorData, 
     CookEffect, 
     IngrVec, Recipe, Tag};
-#[cfg(feature = "wmcdb")]
-use botw_recipe_sys::{Group, GroupMnr, num_ingr};
-use enumset::EnumSet;
 
-use super::{CookData, CookResult, CookDataConstPart, CookDataRngPart, Discrete};
+use super::{CookResult, CookDataConstPart, CookDataRngPart, Discrete, Distr, distr};
 
 macro_rules! debugln {
     ($($arg:tt)*) => {
@@ -23,153 +20,9 @@ const HP_MULTIPLIER: i32 = 2;
 static PRICE_SCALE: [f32; 6] = [0.0, 1.5, 1.8, 2.1, 2.4, 2.8];
 /// Base crit chance for number of unique ingredients
 static BASE_CRIT_CHANCES: [i32; 5] = [5, 10, 15, 20, 25];
+/// Time boost for crit
+const SUPER_SUCCESS_ADD_EFFECT_TIME: i32 = 300;
 
-/// Cook using the recipe id in the recipe database.
-///
-/// Returns None if the id is invalid.
-///
-/// # Performance
-/// See [`cook_id_unchecked`] if the id is guaranteed to be valid, 
-/// By not wrapping the result in an Option, it's more performant
-/// in perf-sensitive code.
-#[cfg(feature = "wmcdb")]
-pub fn cook_id(id: u64) -> Option<CookResult> {
-    let result = cook_id_unchecked(id);
-    if result.is_from_invalid_input() {
-        None
-    } else {
-        Some(result)
-    }
-}
-
-/// Like [`cook_id`], but returns `CookResult::no_ingredients` if id is invalid.
-#[cfg(feature = "wmcdb")]
-pub fn cook_id_unchecked(id: u64) -> CookResult {
-    if id == 0 {
-        return CookResult::no_ingredients();
-    }
-    let mut groups = [Group::None; num_ingr!()];
-    if !GroupMnr::default().to_groups(id, &mut groups) {
-        return CookResult::no_ingredients();
-    }
-    let mut actors = IngrVec::new();
-    let mut ingrs = IngrVec::new();
-    let mut unique_actors = EnumSet::default();
-    for group in groups {
-        let actor = group.first_actor();
-        if actor == Actor::None {
-            continue;
-        }
-        unique_actors.insert(actor);
-        // max 5 because of the slice, so we don't need to check
-        // if it's full
-        let _ = actors.push(actor);
-        let _ = ingrs.push(actor.data());
-    }
-    let unique_ingrs = unique_actors_to_ingrs(unique_actors);
-    cook_internal(actors, ingrs, unique_ingrs)
-}
-
-/// Cook using WMC groups as ingredients.
-///
-/// The first actor in each group is used. `None` groups are skipped.
-/// Only the first 5 non-None groups are used if there are more.
-///
-/// If there are no non-None groups in the input, returns `None`
-///
-/// # Performance
-/// See [`cook_groups_unchecked`] if the input is guaranteed to be valid,
-/// By not wrapping the result in an Option, it's more performant
-/// in perf-sensitive code.
-#[cfg(feature = "wmcdb")]
-pub fn cook_groups(
-    groups: &[Group],
-) -> Option<CookResult> {
-    let result = cook_groups_unchecked(groups);
-    if result.is_from_invalid_input() {
-        None
-    } else {
-        Some(result)
-    }
-}
-
-/// Like [`cook_groups`], but returns `CookResult::no_ingredients` if there are no groups.
-#[cfg(feature = "wmcdb")]
-pub fn cook_groups_unchecked(
-    groups: &[Group],
-) -> CookResult {
-    let mut actors = IngrVec::new();
-    let mut ingrs = IngrVec::new();
-    let mut unique_actors = EnumSet::default();
-    for group in groups {
-        let actor = group.first_actor();
-        if actor == Actor::None {
-            continue;
-        }
-        unique_actors.insert(actor);
-        if actors.push(actor).is_some() {
-            break;
-        }
-        // checked with actors
-        let _ = ingrs.push(actor.data());
-    }
-    if actors.is_empty() {
-        return CookResult::no_ingredients();
-    }
-    let unique_ingrs = unique_actors_to_ingrs(unique_actors);
-    cook_internal(actors, ingrs, unique_ingrs)
-}
-
-/// Cook using actors (items) as input
-///
-/// Only the first 5 non-None actors are used if there are more.
-/// If there are no non-None actors in the input, returns `None`
-///
-/// # Performance
-/// See [`cook_actors_unchecked`] if the input is guaranteed to be valid,
-/// By not wrapping the result in an Option, it's more performant
-/// in perf-sensitive code.
-pub fn cook_actors(actors: &[Actor]) -> Option<CookResult> {
-    let result = cook_actors_unchecked(actors);
-    if result.is_from_invalid_input() {
-        None
-    } else {
-        Some(result)
-    }
-}
-
-/// Like [`cook_actors`], but returns `CookResult::no_ingredients` if there are no actors.
-pub fn cook_actors_unchecked(input_actors: &[Actor]) -> CookResult {
-    let mut actors = IngrVec::new();
-    let mut ingrs = IngrVec::new();
-    let mut unique_actors = enumset::EnumSet::default();
-    for actor in input_actors {
-        let actor = *actor;
-        if actor == Actor::None {
-            continue;
-        }
-        unique_actors.insert(actor);
-        if actors.push(actor).is_some() {
-            break;
-        }
-        // checked with actors
-        let _ = ingrs.push(actor.data());
-    }
-    if actors.is_empty() {
-        return CookResult::no_ingredients();
-    }
-    let unique_ingrs = unique_actors_to_ingrs(unique_actors);
-    cook_internal(actors, ingrs, unique_ingrs)
-}
-
-#[inline(always)]
-fn unique_actors_to_ingrs(unique_actors: EnumSet<Actor>) -> IngrVec<&'static ActorData> {
-    let mut unique_ingrs = IngrVec::new();
-    for actor in unique_actors {
-        let _ = unique_ingrs.push(actor.data());
-    }
-    unique_ingrs
-}
 
 macro_rules! reference {
     ($dummy:ty) => {};
@@ -177,7 +30,7 @@ macro_rules! reference {
     ($comment:literal, $dummy:ty, $name:ty) => {};
 }
 
-fn cook_internal(
+pub(crate) fn cook_internal(
     actors: IngrVec<Actor>, 
     ingrs: IngrVec<&ActorData>,
     unique_ingrs: IngrVec<&ActorData>,
@@ -189,7 +42,7 @@ fn cook_internal(
 
     let mut output_const = CookDataConstPart::default();
     let mut output_rng = CookDataRngPart::default();
-    let (effect, is_dubious) = calc_ingredient_boost(
+    let is_dubious = calc_ingredient_boost(
         ingrs.as_slice(), 
         recipe, &mut output_const, &mut output_rng);
 
@@ -203,7 +56,8 @@ fn cook_internal(
         }
     }
 
-    // handle sell price
+    // Sell price is independent of other properties
+    // so we calculate it first. (It's calculated last in game code)
     output_const.sell_price = {
         if recipe.is_fairy_tonic() {
             2
@@ -227,6 +81,15 @@ fn cook_internal(
             sell_price.max(2).min(buy_price)
         }
     };
+
+    // Even though it's inefficient to do crit first, we must do that,
+    // since crit RNG depends on if HP/effect is maxed BEFORE spice and recipe
+    // boost are applied.
+    //
+    // In other words, if a recipe has HP maxed after recipe/spice boost,
+    // but not before, it could still HP crit even though the crit doesn't do anything
+    let output_rng = calc_crit_boost(unique_ingrs.as_slice(), &mut output_const, output_rng);
+
 
     // Spice Boost
     // In game code, this is after crit boost. we move it to before
@@ -269,70 +132,75 @@ fn cook_internal(
             hp_boost
         );
     }
-    output_rng.health_recover += hp_boost;
-    debugln!("hp+=hp_boost, now {}", output_rng.health_recover);
-    output_rng.effect_duration += time_boost;
 
-    // Recipe Boost - also moved to before crit
+    let output_rng = output_rng.map(|mut output_rng| {
+        // Apply Spice Boost
+        output_rng.health_recover += hp_boost;
+        output_rng.effect_duration += time_boost;
 
-    reference!(
-        "recipe extra hp boost",
-        uking::CookingMgr::cookCalcRecipeBoost(),
-        life_recover
-    );
-    output_rng.health_recover += recipe.heart_bonus;
-    debugln!(
-        "recipe extra hp is {}, hp is now {}",
-        recipe.heart_bonus,
-        output.health_recover
-    );
+        // Recipe Boost
 
-    // Adjust Item
-
-    reference!(
-        "no effect min hp to ensure food does something",
-        uking::CookingMgr::cookAdjustItem(),
-        life_recover
-    );
-    if effect == CookEffect::None && output.health_recover == 0 {
-        output.health_recover = 1;
-        debugln!("hp is 0 and food has no effect, setting hp to 1");
-    }
-    reference!(
-        "max life recover",
-        uking::CookingMgr::cookAdjustItem(),
-        life_recover_max
-    );
-    debugln!("hp is {}, and will be capped at 120", output.health_recover);
-    output.health_recover = output.health_recover.min(120); // 30 hearts
-    reference!(
-        "max time",
-        uking::CookingMgr::cookAdjustItem(),
-        sead::Mathi::clamp
-    );
-    output.effect_duration = output.effect_duration.min(1800); // 30 minutes
-
-    if effect == CookEffect::LifeMaxUp {
         reference!(
-            "hearty effect",
+            "recipe extra hp boost",
+            uking::CookingMgr::cookCalcRecipeBoost(),
+            life_recover
+        );
+        output_rng.health_recover += recipe.heart_bonus;
+
+        // Adjust Item
+        reference!(
+            "no effect min hp to ensure food does something",
             uking::CookingMgr::cookAdjustItem(),
             life_recover
         );
-        output.health_recover = output.effect_level as i32;
-        debugln!(
-            "hearty effect, hp is set to number of yellow quarter-hearts, which is {}",
-            output.health_recover
-        );
-    }
+        if output_const.effect == CookEffect::None && output_rng.health_recover == 0 {
+            output_rng.health_recover = 1;
+            debugln!("hp is 0 and food has no effect, setting hp to 1");
+        }
 
-    // We handle crit at the end, so we can know what the final hp is
-    debugln!("Calculating if there is HP crit rng:");
-    let crit_rng_hp = calc_crit_boost(unique_ingrs.as_slice(), effect, &mut output);
+        reference!(
+            "max life recover",
+            uking::CookingMgr::cookAdjustItem(),
+            life_recover_max
+        );
+        debugln!("hp is {}, and will be capped at 120", output.health_recover);
+        output_rng.health_recover = output_rng.health_recover.min(120); // 30 hearts
+        reference!(
+            "max time",
+            uking::CookingMgr::cookAdjustItem(),
+            sead::Mathi::clamp
+        );
+        output_rng.effect_duration = output_rng.effect_duration.min(1800); // 30 minutes
+        
+        if output_const.effect != CookEffect::None {
+            // effect level could be too high due to crit, so it's capped here
+            let effect_max = output_const.effect.max_level();
+            if output_rng.effect_level > effect_max as f32 {
+                output_rng.effect_level = effect_max as f32;
+            }
+
+            if output_const.effect == CookEffect::GutsRecover {
+                output_rng.effect_level *= 200.0;
+            } else if output_const.effect == CookEffect::LifeMaxUp {
+                if (output_rng.effect_level as i32) % 4 != 0 {
+                    // round up to whole heart
+                    output_rng.effect_level = ((output_rng.effect_level as i32 + 4) & !3) as f32;
+                }
+                #[cfg(feature = "assertions")]
+                {
+                    assert!(output_rng.effect_level >= 4.0)
+                }
+                output_rng.health_recover = output_rng.effect_level as i32;
+            }
+        }
+
+        distr::always(output_rng)
+    });
 
     CookResult {
         item: recipe.item,
-        data: output,
-        crit_rng_hp,
+        const_data: output_const,
+        rng_data: output_rng,
     }
 }
 
@@ -345,7 +213,7 @@ fn calc_ingredient_boost(
     recipe: &Recipe,
     output_const: &mut CookDataConstPart,
     output_rng: &mut CookDataRngPart
-) -> (CookEffect, bool) {
+) -> bool {
     // doesn't hurt if we calculate effect early
     let (mut effect, has_multiple_effect) = {
         let mut effect = None;
@@ -439,7 +307,7 @@ fn calc_ingredient_boost(
         time
     );
 
-    output_const.effect_id = effect.game_repr_f32();
+    output_const.effect = effect;
 
     if has_multiple_effect {
         reference!(
@@ -468,13 +336,11 @@ fn calc_ingredient_boost(
             CookEffect::LifeMaxUp => {
                 // Hearty, effect_level is
                 // number of yellow quarter-heart = potency
-                // note that it's rounded down to nearest whole heart
                 // hp also becomes the value later in AdjustItem
-                let yellow_hearts = potency / 4;
-                output_rng.effect_level = (yellow_hearts * 4 + max_hp_boost) as f32;
+                output_rng.effect_level = (potency + max_hp_boost) as f32;
             }
             CookEffect::GutsRecover => {
-                // stamina - one wheel is 1000
+                // stamina table, in wheels
                 let table = [0.0, 0.2, 0.4, 0.8, 1.0, 1.4, 1.6, 1.8, 2.2, 2.4, 2.8, 3.0];
                 let p = potency as usize;
                 let wheels = if p >= table.len() {
@@ -482,7 +348,9 @@ fn calc_ingredient_boost(
                 } else {
                     table[p]
                 };
-                output_rng.effect_level = wheels * 1000.0;
+                // ultimately, one wheel is 1000. However, it's multiplied by 200
+                // in adjustItem, so here, one wheel is 5 just like endura
+                output_rng.effect_level = wheels * 5.0;
                 #[cfg(feature = "assertions")]
                 {
                     assert!(stam_boost == 0, "GutsRecover shoult not have stamina boost")
@@ -519,7 +387,7 @@ fn calc_ingredient_boost(
             is_not_fairy_tonic
         );
         output_rng.effect_level = 0.0;
-        output_const.effect_id = CookEffect::None.game_repr_f32();
+        output_const.effect = CookEffect::None;
         effect = CookEffect::None;
         output_rng.effect_duration = 0;
     }
@@ -543,26 +411,7 @@ fn calc_ingredient_boost(
         debugln!("result is not dubious, hp={hp}*2={}", output.health_recover);
     }
 
-    #[cfg(feature = "assertions")]
-    {
-        #[allow(clippy::collapsible_if)]
-        if output.effect_id != -1.0 {
-            let max = if output.effect_id == CookEffect::GutsRecover.game_repr_f32() {
-                effect.max_level() as f32 * 200.0f32
-            } else {
-                effect.max_level() as f32
-            };
-            if output.effect_level > max {
-                // game caps it, but it shouldn't happen
-                panic!(
-                    "Effect level {} is too high for effect {:?}",
-                    output.effect_level, effect
-                );
-            }
-        }
-    }
-
-    (effect, dubious)
+    dubious
 }
 
 fn calc_crit_boost(
@@ -570,27 +419,8 @@ fn calc_crit_boost(
     output_const: &mut CookDataConstPart, 
     output_rng: CookDataRngPart) -> Discrete<CookDataRngPart>
 {
-    for ingr in unique_ingrs {
-        if ingr.actor.is_monster_extract() {
-            return calc_monster_extract();
-        }
-    }
-
-    todo!()
-}
-
-fn calc_monster_extract() -> Discrete<CookDataRngPart> {
-    todo!()
-}
-
-// returns crit_rng_hp, see /dump/README.md
-// hearts are not added if guaranteed heart crit,
-// they are added when processing the raw db if crit_chance >= 100 and if crit_rng_hp is false
-fn calc_crit_boost_old(
-    unique_ingrs: &[&ActorData],
-    effect: CookEffect,
-    output: &mut CookData,
-) -> bool {
+    // crit_chance is not used for monster extract,
+    // but we calculate it anyway
     let mut crit_chance = unique_ingrs
         .iter()
         .map(|x| x.boost.success_rate)
@@ -598,76 +428,269 @@ fn calc_crit_boost_old(
         .unwrap_or_default();
     // note that game doesn't cap crit_chance
     crit_chance += BASE_CRIT_CHANCES[unique_ingrs.len() - 1];
-    output.crit_chance = crit_chance;
+    output_const.crit_chance = crit_chance;
 
-    if crit_chance == 0 {
-        debugln!("- No crit chance, no rng crit");
-        return false;
+    for ingr in unique_ingrs {
+        if ingr.actor.is_monster_extract() {
+            return calc_monster_extract(output_const, output_rng);
+        }
     }
 
-    let has_rng = crit_chance < 100;
+    // invoke rng
+    let is_crit = distr::uniform(0..100).less_than(crit_chance as u32);
+    is_crit.map(|is_crit| {
+        if !is_crit {
+            return distr::discrete_always(output_rng.clone());
+        }
 
-    if effect == CookEffect::None {
-        debugln!("- No effect, only heart crit is possible");
-        let hp_crit = (output.health_recover + 12).min(120);
-        if hp_crit == output.health_recover {
-            // hp is already max, so no rng involved
-            debugln!("- HP is already maxed, no rng crit");
-            return false;
+        #[derive(Debug, PartialEq, Eq, Clone, Copy)]
+        enum Bonus {
+            Life,
+            Level, // Vitality in decompe code
+            Time
         }
-        if has_rng {
-            debugln!("- Hp is not maxed and crit is not guaranteed, rng crit");
-            return true;
-        }
-        debugln!("- Hp is not maxed and crit is guaranteed, no rng crit");
-        return false;
-    }
 
-    let hp_maxed = output.health_recover >= 120;
-    if hp_maxed {
-        debugln!("- HP is already maxed, no rng crit");
-        // no rng if hp is alredy maxed
-        // fine for hearty, hearty in-game max is 100 with 5 big radish
-        return false;
-    }
-    // only consider cases where hp is not maxed
-    let effect_max = effect.max_level().max(1); // clampMin
-    let effect_maxed = output.effect_level >= effect_max as f32;
+        let bonus = if output_const.effect != CookEffect::None {
+            let hp = output_rng.health_recover;
+            let hp_max = CookEffect::LifeRecover.max_level(); // 120
+            let is_hp_maxed = hp >= hp_max as i32;
 
-    #[allow(clippy::needless_return)]
-    match effect {
-        CookEffect::None => unreachable!(),
-        CookEffect::LifeMaxUp => {
-            debugln!("- Hearty effect, always possible to rng crit");
-            // hearty food, when crit, adds 4
-            // because adjust item is after this, hp also adds 4
-            // looks like it's possible to get 112 max, over the max of 108
-            return true;
-        }
-        CookEffect::ExGutsMaxUp => {
-            // max is 15, but in-game you can only get 10 with 5 endura carrots,
-            // so we always can get effect boost.
-            debugln!("- Endura effect, always possible to rng crit");
-            return true;
-        }
-        CookEffect::GutsRecover => {
-            if effect_maxed {
-                debugln!("- Stamina effect is maxed, only possible for heart crit");
-                // if effect is maxed, we can only get heart boost
-                if has_rng {
-                    debugln!("- crit is not guaranteed, rng crit");
-                    return true;
+            let level = output_rng.effect_level;
+            let level_max = output_const.effect.max_level();
+            let is_level_maxed = level >= level_max as f32;
+
+            match output_const.effect {
+                CookEffect::LifeMaxUp => {
+                    distr::discrete_always(Bonus::Level)
                 }
-                debugln!("- crit is guaranteed, no rng crit");
-                return false;
+                CookEffect::GutsRecover | CookEffect::ExGutsMaxUp => {
+                    if is_level_maxed {
+                        distr::discrete_always(Bonus::Life)
+                    } else if is_hp_maxed {
+                        distr::discrete_always(Bonus::Level)
+                    } else {
+                        distr::coin_flip().map(|is_true| {
+                            if is_true {
+                                distr::always(Bonus::Level)
+                            } else {
+                                distr::always(Bonus::Life)
+                            }
+                        })
+                    }
+                }
+                _ => {
+                    match (is_level_maxed, is_hp_maxed) {
+                        (true, true) => {
+                            distr::discrete_always(Bonus::Time)
+                        },
+                        (true, false) => {
+                            distr::coin_flip().map(|is_true| {
+                                if is_true {
+                                    distr::always(Bonus::Time)
+                                } else {
+                                    distr::always(Bonus::Life)
+                                }
+                            })
+                        },
+                        (false, true) => {
+                            distr::coin_flip().map(|is_true| {
+                                if is_true {
+                                    distr::always(Bonus::Time)
+                                } else {
+                                    distr::always(Bonus::Level)
+                                }
+                            })
+                        },
+                        (false, false) => {
+                            distr::uniform(0..3).map(|x| {
+                                distr::always(match x {
+                                    0 => Bonus::Life,
+                                    1 => Bonus::Level,
+                                    _ => Bonus::Time
+                                })
+                            })
+                        }
+                    }
+                }
             }
-            debugln!("- It's possible to get stamina boost, rng crit");
-            return true;
-        }
-        _ => {
-            // it's always to time crit, even if time is maxed
-            debugln!("- It's possible to get time boost, rng crit");
-            return true;
-        }
-    }
+        } else {
+            distr::discrete_always(Bonus::Life)
+        };
+
+        bonus.map(|bonus| {
+            let mut output = output_rng.clone();
+            match bonus {
+                Bonus::Level => {
+                    #[cfg(feature = "assertions")]
+                    {
+                        assert!(output_const.effect != CookEffect::None);
+                        if !( output_rng.effect_level == 0.0 || output_rng.effect_level >= 1.0) {
+                            panic!("Invalid effect level: {}, effect: {:?}", output_rng.effect_level, output_const.effect);
+                        }
+                    }
+                    output.effect_level += output_const.effect.super_success_amount() as f32;
+                }
+                Bonus::Time => {
+                    output.effect_duration += SUPER_SUCCESS_ADD_EFFECT_TIME;
+                }
+                Bonus::Life => {
+                    output.health_recover += CookEffect::LifeRecover.super_success_amount() as i32; // 12
+                }
+            }
+            distr::always(output)
+        })
+    })
 }
+
+fn calc_monster_extract(
+    output_const: &mut CookDataConstPart,
+    output_rng: CookDataRngPart,
+) -> Discrete<CookDataRngPart> {
+    let effect_min = if output_rng.health_recover <= 0 || output_const.effect == CookEffect::LifeMaxUp {
+        2
+    } else {
+        0
+    };
+    let effect_max = if output_const.effect == CookEffect::None {
+        2
+    } else {
+        4
+    };
+    
+    distr::uniform(effect_min..effect_max).map(|x| {
+        let mut output = output_rng.clone();
+        match x {
+            0 => {
+                output.health_recover += CookEffect::LifeRecover.super_success_amount() as i32; // 12
+            }
+            1 => {
+                output.health_recover = CookEffect::LifeRecover.min_level() as i32; // 1
+            }
+            2 => {
+                #[cfg(feature = "assertions")]
+                {
+                    assert!(output_const.effect != CookEffect::None);
+                    assert!(output_rng.effect_level == 0.0 || output_rng.effect_level >= 1.0);
+                }
+                output.effect_level += output_const.effect.super_success_amount() as f32;
+            }
+            3 => {
+                #[cfg(feature = "assertions")]
+                {
+                    assert!(output_const.effect != CookEffect::None);
+                }
+                output.effect_level = output_const.effect.min_level() as f32;
+            }
+            _ => {
+                #[cfg(feature = "assertions")]
+                {
+                    panic!("Invalid monster extract effect")
+                }
+            }
+        }
+        distr::uniform(0..3).map(|x| {
+            let mut output = output.clone();
+            match x {
+                0 => {
+                    output.effect_duration = 60;
+                }
+                1 => {
+                    output.effect_duration = 600;
+                }
+                _ => {
+                    output.effect_duration = 1800;
+                }
+            }
+            distr::always(output)
+        })
+    })
+}
+
+// // returns crit_rng_hp, see /dump/README.md
+// // hearts are not added if guaranteed heart crit,
+// // they are added when processing the raw db if crit_chance >= 100 and if crit_rng_hp is false
+// fn calc_crit_boost_old(
+//     unique_ingrs: &[&ActorData],
+//     effect: CookEffect,
+//     output: &mut CookData,
+// ) -> bool {
+//     let mut crit_chance = unique_ingrs
+//         .iter()
+//         .map(|x| x.boost.success_rate)
+//         .max()
+//         .unwrap_or_default();
+//     // note that game doesn't cap crit_chance
+//     crit_chance += BASE_CRIT_CHANCES[unique_ingrs.len() - 1];
+//     output.crit_chance = crit_chance;
+//
+//     if crit_chance == 0 {
+//         debugln!("- No crit chance, no rng crit");
+//         return false;
+//     }
+//
+//     let has_rng = crit_chance < 100;
+//
+//     if effect == CookEffect::None {
+//         debugln!("- No effect, only heart crit is possible");
+//         let hp_crit = (output.health_recover + 12).min(120);
+//         if hp_crit == output.health_recover {
+//             // hp is already max, so no rng involved
+//             debugln!("- HP is already maxed, no rng crit");
+//             return false;
+//         }
+//         if has_rng {
+//             debugln!("- Hp is not maxed and crit is not guaranteed, rng crit");
+//             return true;
+//         }
+//         debugln!("- Hp is not maxed and crit is guaranteed, no rng crit");
+//         return false;
+//     }
+//
+//     let hp_maxed = output.health_recover >= 120;
+//     if hp_maxed {
+//         debugln!("- HP is already maxed, no rng crit");
+//         // no rng if hp is alredy maxed
+//         // fine for hearty, hearty in-game max is 100 with 5 big radish
+//         return false;
+//     }
+//     // only consider cases where hp is not maxed
+//     let effect_max = effect.max_level().max(1); // clampMin
+//     let effect_maxed = output.effect_level >= effect_max as f32;
+//
+//     #[allow(clippy::needless_return)]
+//     match effect {
+//         CookEffect::None => unreachable!(),
+//         CookEffect::LifeMaxUp => {
+//             debugln!("- Hearty effect, always possible to rng crit");
+//             // hearty food, when crit, adds 4
+//             // because adjust item is after this, hp also adds 4
+//             // looks like it's possible to get 112 max, over the max of 108
+//             return true;
+//         }
+//         CookEffect::ExGutsMaxUp => {
+//             // max is 15, but in-game you can only get 10 with 5 endura carrots,
+//             // so we always can get effect boost.
+//             debugln!("- Endura effect, always possible to rng crit");
+//             return true;
+//         }
+//         CookEffect::GutsRecover => {
+//             if effect_maxed {
+//                 debugln!("- Stamina effect is maxed, only possible for heart crit");
+//                 // if effect is maxed, we can only get heart boost
+//                 if has_rng {
+//                     debugln!("- crit is not guaranteed, rng crit");
+//                     return true;
+//                 }
+//                 debugln!("- crit is guaranteed, no rng crit");
+//                 return false;
+//             }
+//             debugln!("- It's possible to get stamina boost, rng crit");
+//             return true;
+//         }
+//         _ => {
+//             // it's always to time crit, even if time is maxed
+//             debugln!("- It's possible to get time boost, rng crit");
+//             return true;
+//         }
+//     }
+// }

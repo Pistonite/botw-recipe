@@ -148,6 +148,44 @@ impl CookEffect {
             Self::ResistHot => 2,
         }
     }
+    /// Get the minimum level of the effect
+    #[cfg(feature = "cook-effect-data")]
+    pub const fn min_level(self) -> u32 {
+        match self {
+            Self::None => 0,
+            Self::MovingSpeed => 1,
+            Self::AttackUp => 1,
+            Self::DefenseUp => 1,
+            Self::ExGutsMaxUp => 1,
+            Self::Fireproof => 1,
+            Self::GutsRecover => 1,
+            Self::LifeMaxUp => 4,
+            Self::LifeRecover => 1,
+            Self::Quietness => 1,
+            Self::ResistCold => 1,
+            Self::ResistElectric => 1,
+            Self::ResistHot => 1,
+        }
+    }
+    /// Get the super success amount (SSA) of the effect
+    #[cfg(feature = "cook-effect-data")]
+    pub const fn super_success_amount(self) -> u32 {
+        match self {
+            Self::None => 0,
+            Self::MovingSpeed => 1,
+            Self::AttackUp => 1,
+            Self::DefenseUp => 1,
+            Self::ExGutsMaxUp => 2,
+            Self::Fireproof => 1,
+            Self::GutsRecover => 2,
+            Self::LifeMaxUp => 4,
+            Self::LifeRecover => 12,
+            Self::Quietness => 1,
+            Self::ResistCold => 1,
+            Self::ResistElectric => 1,
+            Self::ResistHot => 1,
+        }
+    }
     /// Convert the cook effect to the game enum value
     pub const fn game_repr(self) -> i32 {
         match self {

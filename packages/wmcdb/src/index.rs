@@ -1,4 +1,4 @@
-use botw_recipe_cook::CookData;
+use botw_recipe_cook::{HpCritRngType, WmcCookData};
 use botw_recipe_sys::CookEffect;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -100,15 +100,15 @@ impl IndexBuilder {
     }
 
     /// Update the current state with data of a new record
-    pub fn update(&mut self, data: &CookData, crit_rng_hp: bool) {
-        let record = super::Record::from_data(data, crit_rng_hp);
+    pub fn update(&mut self, data: &WmcCookData ,effect_id: f32) {
+        let record = super::Record::from_wmc_data(data);
         self.hasher.update(u16::from(record).to_le_bytes());
 
         let value = record.value();
         self.max_value = self.max_value.max(value);
         self.min_value = self.min_value.min(value);
-        if crit_rng_hp {
-            let add = if data.effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
+        if data.crit == HpCritRngType::Regular {
+            let add = if effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
                 4
             } else {
                 12

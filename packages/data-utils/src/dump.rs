@@ -9,7 +9,6 @@ use std::time::{Duration, Instant};
 
 use anyhow::bail;
 
-use botw_recipe_cook::{self, CookResult};
 use botw_recipe_wmcdb::{meta, Index, IndexBuilder, Record};
 
 use crate::util;
@@ -72,13 +71,9 @@ pub fn dump_raw_chunk(
     let mut crit_writer = BufWriter::new(File::create(crit_chunk_path)?);
     for id in start..end {
         let result = botw_recipe_cook::cook_id_unchecked(id);
-        result.data.write_to(&mut writer)?;
-        // old crit_rng_hp is 0 or 1 based on bool
-        if result.crit_rng_hp {
-            crit_writer.write_all(&[1])?;
-        } else {
-            crit_writer.write_all(&[0])?;
-        }
+        let (data, crit) = result.get_base_data();
+        data.write_to(&mut writer)?;
+        crit_writer.write_all(&[crit.to_u8()])?;
     }
 
     Ok(())
@@ -159,11 +154,12 @@ pub fn dump_compact_chunk(
     let mut index = IndexBuilder::new(chunk_id as usize);
     let mut writer = BufWriter::new(File::create(chunk_path)?);
     for id in start..end {
-        let CookResult { data, crit_rng_hp, ..} = botw_recipe_cook::cook_id_unchecked(id);
+        let result = botw_recipe_cook::cook_id_unchecked(id);
+        let data = result.get_wmc_data();
 
-        let record = Record::from_data(&data, crit_rng_hp);
+        let record = Record::from_wmc_data(&data);
         record.write(&mut writer)?;
-        index.update(&data, crit_rng_hp);
+        index.update(&data, result.const_data.effect.game_repr_f32());
     }
 
     Ok(index.build())

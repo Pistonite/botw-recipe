@@ -81,6 +81,10 @@ impl Binary {
     }
 }
 
+pub fn coin_flip() -> Binary {
+    Binary::with_prob(Prob::half())
+}
+
 impl Distr for Binary {
     type T = bool;
     
@@ -252,6 +256,13 @@ impl Prob {
         Self {
             numerator: BigUint::one(),
             denominator: BigUint::one()
+        }
+    }
+
+    pub fn half() -> Self {
+        Self {
+            numerator: BigUint::one(),
+            denominator: BigUint::from(2u32)
         }
     }
 

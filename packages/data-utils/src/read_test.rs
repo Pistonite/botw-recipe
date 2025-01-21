@@ -9,7 +9,6 @@ use std::time::{Duration, Instant};
 
 use anyhow::bail;
 use botw_recipe_wmcdb::{Chunk, Database};
-use botw_recipe_sys::CookEffect;
 
 use crate::util;
 
@@ -61,7 +60,8 @@ pub fn test_read_chunk(chunk: Chunk) -> anyhow::Result<()> {
     for record in chunk {
         let record = record?;
         let cooked = botw_recipe_cook::cook_id_unchecked(record.recipe_id);
-        let expected_value = cooked.data.sell_price & 0x1FF;
+        let data = cooked.get_wmc_data();
+        let expected_value = data.price & 0x1FF;
         if expected_value != record.record.modifier() as i32 {
             bail!(
                 "Recipe {}, Mismatched modifier/price: expected {}, got {}",
@@ -70,20 +70,11 @@ pub fn test_read_chunk(chunk: Chunk) -> anyhow::Result<()> {
                 record.record.modifier()
             );
         }
-        let expected_hp = if !cooked.crit_rng_hp && cooked.data.crit_chance >= 100 {
-            if cooked.data.effect_id == CookEffect::LifeMaxUp.game_repr_f32() {
-                cooked.data.health_recover + 4
-            } else {
-                (cooked.data.health_recover + 12).min(120)
-            }
-        } else {
-            cooked.data.health_recover
-        };
-        if expected_hp != record.record.value() {
+        if data.hp != record.record.value() {
             bail!(
                 "Recipe {}, Mismatched value/hp: expected {}, got {}",
                 u64::from(record.recipe_id),
-                expected_hp,
+                data.hp,
                 record.record.value()
             );
         }
